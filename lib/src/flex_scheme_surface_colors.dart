@@ -136,7 +136,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   final Color scaffoldBackground;
 
   /// Create nuanced surface colors using pre-defined behavior via enum
-  /// [FlexSurfaceMode] property `surfaceMode` or make totally custom color
+  /// [FlexSurfaceMode] property [surfaceMode] or make totally custom color
   /// blended surfaces.
   ///
   /// This kind of surface branding is based on the Material-2 guide found
@@ -144,12 +144,72 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// https://material.io/design/color/dark-theme.html#properties
   /// for branded surfaces.
   ///
-  /// The [brightness] controls if we are creating surface colors for light or
-  /// dark surfaces.
-  ///
   /// The surface colors returned by this factory can also be used to make
   /// branded surface colors for Flutter's standard [ColorScheme], it does
   /// not have to be used exclusively by [FlexColorScheme].
+  /// Each parameter is documented below in parameter-list order.
+  ///
+  /// ## [brightness]
+  ///
+  /// Controls if we create surface colors for light or dark surfaces.
+  ///
+  /// ## [surfaceMode]
+  ///
+  /// The used surface mode to create different surface color blends.
+  ///
+  /// Defaults to highBackground.
+  ///
+  /// ## [blendLevel]
+  ///
+  /// The the blend level strength used for the mode.
+  ///
+  /// ## [surfaceVariantBlendDivide]
+  ///
+  /// An int divisor used to reduce blend strength.
+  ///
+  /// This was used as a divisor for surfaceVariant color in versions
+  /// before V8, but since surfaceVariant color is removed it is no longer
+  /// used internally. The default value 1 is always used. Might deprecate
+  /// this property later.
+  ///
+  /// ## [schemeColors]
+  ///
+  /// The colors used to blend into surfaces when using [surfaceMode] mode
+  /// based styles and modes.
+  ///
+  /// If null, default material light or dark scheme colors will be used as
+  /// fallback, depending on if we are making light or dark surfaces.
+  ///
+  /// If a blend color for a surface is provided in [blendColors], that color
+  /// color always overrides used color from [schemeColor] selected based on
+  /// [surfaceMode].
+  ///
+  /// ## [blendColors]
+  ///
+  /// Custom colors to be blended into each surface color.
+  ///
+  /// If provided, these colors will be blended into each equivalent surface
+  /// color.
+  ///
+  /// If it is null, then [schemeColors.primary] will be assigned to all
+  /// surfaces.
+  ///
+  /// ## [surfaceColors]
+  ///
+  /// The surface colors that we will mix the blend colors into.
+  ///
+  /// If null, then Material default surface colors will be used for all
+  /// surfaces, that we then mix in the [blendColors] into, unless the
+  /// [surfaceMode] defines surface starting colors otherwise.
+  ///
+  /// ## [scaffoldBaseColor]
+  ///
+  /// The base color for the scaffold background.
+  ///
+  /// ## [useMaterial3]
+  ///
+  /// Flag indicating if surface default starting colors are for
+  /// Material-3 or legacy Material-2.
   // ignore: sort_constructors_first
   factory FlexSchemeSurfaceColors.blend({
     /// Controls if we create surface colors for light or dark surfaces.
@@ -164,11 +224,6 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     int blendLevel = 0,
 
     /// An int divisor used to reduce blend strength.
-    ///
-    /// This was used as a divisor for surfaceVariant color in versions
-    /// before V8, but since surfaceVariant color is removed it is no longer
-    /// used internally. The default value 1 is always used. Might deprecate
-    /// this property later.
     int surfaceVariantBlendDivide = 1,
 
     /// The colors used to blend into surfaces when using `surfaceMode` mode
@@ -176,26 +231,12 @@ class FlexSchemeSurfaceColors with Diagnosticable {
     ///
     /// If null, default material light or dark scheme colors will be used as
     /// fallback, depending on if we are making light or dark surfaces.
-    ///
-    /// If a blend color for a surface is provided in `blendColors`, that color
-    /// color always overrides used color from `schemeColor` selected based on
-    /// `surfaceMode`.
     FlexSchemeColor? schemeColors,
 
     /// Custom colors to be blended into each surface color.
-    ///
-    /// If provided, these colors will be blended into each equivalent surface
-    /// color.
-    ///
-    /// If it is null, then `schemeColors.primary` will be assigned to all
-    /// surfaces.
     FlexSchemeSurfaceColors? blendColors,
 
     /// The surface colors that we will mix the blend colors into.
-    ///
-    /// If null, then Material default surface colors will be used for all
-    /// surfaces, that we then mix in the `blendColors` into, unless the
-    /// `surfaceMode` defines surface starting colors otherwise.
     FlexSchemeSurfaceColors? surfaceColors,
 
     /// The base color for the scaffold background.

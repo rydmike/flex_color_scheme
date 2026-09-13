@@ -6,46 +6,106 @@ part of '../flex_sub_themes.dart';
 /// [indicatorSchemeColor] plus its opacity [indicatorOpacity] and colors
 /// for selected and unselected items [selectedItemSchemeColor],
 /// [unselectedItemSchemeColor].
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also used for your [ThemeData].
+///
+/// ## [backgroundSchemeColor]
+///
+/// Defines which [Theme] based [ColorScheme] based background color
+/// of [NavigationDrawer].
+///
+/// If it is not defined, FCS uses [surfaceContainerLow] color as default in
+/// both M2 and M3 mode
+///
+/// Flutter SDK default uses [surfaceContainerLow] color as default in M3,
+/// and [ThemeData.canvasColor] in M2.
+///
+/// ## [indicatorWidth]
+///
+/// Defines the width of [NavigationDrawer]'s indicator.
+///
+/// If not defined, defaults to 336dp
+/// via Flutter SDK defaults for M3/M2. The 336dp width values is derived
+/// from the M3 padding spec of 12dp around both sides of the M3 drawers
+/// default width of 360dp.
+///
+/// ## [indicatorRadius]
+///
+/// Border radius of the selection indicator on the [NavigationDrawer].
+///
+/// If not defined, defaults to [StadiumBorder].
+///
+/// FCS default, follows the Material M3 guide:
+/// https://m3.material.io/components/navigation-drawer/specs
+///
+/// ## [textStyle]
+///
+/// The TextStyle of the labels.
+///
+/// You would pass in Theme.of(context).textTheme.labelLarge
+/// for correct M3 style.
+///
+/// ## [indicatorSchemeColor]
+///
+/// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
+/// uses as as its background color on the selection indicator.
+///
+/// If undefined, defaults to [SchemeColor.secondaryContainer].
+///
+/// ## [indicatorOpacity]
+///
+/// The opacity of the used indicator.
+///
+/// Defaults to 1, fully opaque if not defined.
+///
+/// ## [selectedItemSchemeColor]
+///
+/// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
+/// uses as as its selected item color.
+///
+/// If undefined, defaults to correct contrast color pair
+/// for [indicatorSchemeColor].
+///
+/// ## [unselectedItemSchemeColor]
+///
+/// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
+/// uses as as its unselected item color.
+///
+/// If undefined, defaults to correct contrast color pair for
+/// [backgroundSchemeColor].
+///
+/// ## [shadowColor]
+///
+/// Overrides the default value of [NavigationDrawer.shadowColor].
+///
+/// ## [surfaceTintColor]
+///
+/// Overrides the default value of [NavigationDrawer.surfaceTintColor].
 NavigationDrawerThemeData _navigationDrawerTheme({
-  /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+  /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
   required ColorScheme colorScheme,
 
-  /// Defines which [Theme] based [ColorScheme] based background color
-  /// of [NavigationDrawer].
-  ///
-  /// If it is not defined, FCS uses [surfaceContainerLow] color as default in
-  /// both M2 and M3 mode
-  ///
-  /// Flutter SDK default uses [surfaceContainerLow] color as default in M3,
-  /// and [ThemeData.canvasColor] in M2.
+  /// Defines which `Theme` based `ColorScheme` based background color
+  /// of `NavigationDrawer`.
   SchemeColor? backgroundSchemeColor,
 
-  /// Defines the width of [NavigationDrawer]'s indicator.
-  ///
-  /// If not defined, defaults to 336dp
-  /// via Flutter SDK defaults for M3/M2. The 336dp width values is derived
-  /// from the M3 padding spec of 12dp around both sides of the M3 drawers
-  /// default width of 360dp.
+  /// Defines the width of `NavigationDrawer`'s indicator.
   double? indicatorWidth,
 
-  /// Border radius of the selection indicator on the [NavigationDrawer].
+  /// Border radius of the selection indicator on the `NavigationDrawer`.
   ///
-  /// If not defined, defaults to [StadiumBorder].
-  ///
-  /// FCS default, follows the Material M3 guide:
-  /// https://m3.material.io/components/navigation-drawer/specs
+  /// If not defined, defaults to `StadiumBorder`.
   double? indicatorRadius,
 
   /// The TextStyle of the labels.
-  ///
-  /// You would pass in Theme.of(context).textTheme.labelLarge
-  /// for correct M3 style.
   TextStyle? textStyle,
 
-  /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
+  /// Defines which `Theme` based `ColorScheme` based color `NavigationDrawer`
   /// uses as as its background color on the selection indicator.
   ///
-  /// If undefined, defaults to [SchemeColor.secondaryContainer].
+  /// If undefined, defaults to `SchemeColor.secondaryContainer`.
   SchemeColor? indicatorSchemeColor,
 
   /// The opacity of the used indicator.
@@ -53,24 +113,24 @@ NavigationDrawerThemeData _navigationDrawerTheme({
   /// Defaults to 1, fully opaque if not defined.
   double? indicatorOpacity,
 
-  /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
+  /// Defines which `Theme` based `ColorScheme` based color `NavigationDrawer`
   /// uses as as its selected item color.
   ///
   /// If undefined, defaults to correct contrast color pair
-  /// for [indicatorSchemeColor].
+  /// for `indicatorSchemeColor`.
   SchemeColor? selectedItemSchemeColor,
 
-  /// Defines which [Theme] based [ColorScheme] based color [NavigationDrawer]
+  /// Defines which `Theme` based `ColorScheme` based color `NavigationDrawer`
   /// uses as as its unselected item color.
   ///
   /// If undefined, defaults to correct contrast color pair for
-  /// [backgroundSchemeColor].
+  /// `backgroundSchemeColor`.
   SchemeColor? unselectedItemSchemeColor,
 
-  /// Overrides the default value of [NavigationDrawer.shadowColor].
+  /// Overrides the default value of `NavigationDrawer.shadowColor`.
   Color? shadowColor,
 
-  /// Overrides the default value of [NavigationDrawer.surfaceTintColor].
+  /// Overrides the default value of `NavigationDrawer.surfaceTintColor`.
   Color? surfaceTintColor,
 }) {
   // TODO(rydmike): Drawer indicator tint effect, not supported in Flutter yet

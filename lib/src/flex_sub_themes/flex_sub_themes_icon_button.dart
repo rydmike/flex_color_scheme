@@ -4,6 +4,22 @@ part of '../flex_sub_themes.dart';
 ///
 /// Current only used to set tinted interaction and disable style on
 /// [IconButtonThemeData] when these feature are opted in on in FCS.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also used for your [ThemeData].
+///
+/// ## [useTintedInteraction]
+///
+/// Defines if the theme uses tinted interaction effects.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useTintedDisable]
+///
+/// Defines if the theme uses tinted disabled color.
+///
+/// If undefined, defaults to false.
 IconButtonThemeData _iconButtonTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
   required ColorScheme colorScheme,

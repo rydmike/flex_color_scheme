@@ -5,48 +5,134 @@ part of '../flex_sub_themes.dart';
 /// Requires a [ColorScheme] in [colorScheme]. The color scheme would
 /// typically be equal the color scheme also used to define the color scheme
 /// for your app theme.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also used for your [ThemeData].
+///
+/// ## [baseSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the main
+/// color for the Slider.
+///
+/// All colors in the color scheme are not good choices, but some work well.
+///
+/// If not defined, [colorScheme.primary] will be used.
+///
+/// ## [thumbSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the thumb
+/// color for the Slider.
+///
+/// If not defined, [baseSchemeColor] will be used.
+///
+/// ## [trackHeight]
+///
+/// The height of the [Slider] track.
+///
+/// If not defined, defaults to 4 via Flutter SDK defaults.
+///
+/// ## [showValueIndicator]
+///
+/// Whether the value indicator should be shown for different types of
+/// sliders.
+///
+/// By default, [showValueIndicator] is set to
+/// [ShowValueIndicator.onlyForDiscrete]. The value indicator is only shown
+/// when the thumb is being touched.
+///
+/// ## [valueIndicatorType]
+///
+/// Enum used to select the type of built-in value indicator used by
+/// [Slider].
+///
+/// The current two options included Material 2 default
+/// [RectangularSliderValueIndicatorShape] and Material 3 default
+/// [DropSliderValueIndicatorShape].
+///
+/// If not defined, the default for the M2/M3 mode is used.
+///
+/// ## [valueIndicatorColor]
+///
+/// The color given to the [valueIndicatorShape] to draw itself with.
+///
+/// If undefined, defaults to using Flutter SDK's logic for the color.
+///
+/// ## [valueIndicatorTextStyle]
+///
+/// The text style for the text on the value indicator.
+///
+/// If undefined, defaults to using Flutter SDK's logic for the TextStyle.
+///
+/// ## [useTintedInteraction]
+///
+/// Defines if the theme uses tinted interaction effects.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useTintedDisable]
+///
+/// Defines if the theme uses tinted disabled color.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useOldM3Design]
+///
+/// Overrides the default value of [Slider.year2023].
+///
+/// When true, the [Slider] will use the 2023 Material Design 3 appearance.
+///
+/// If this is set to false, the [Slider] will use the latest Material-3
+/// appearance, which was introduced in December 2023 and become common
+/// in 2024.
+///
+/// In Flutter Material SDK, this property is named [year2023].
+///
+/// If undefined, defaults to true, via Flutter Material's default behavior.
+/// If [useMaterial3] is false, then this property is ignored.
+///
+/// ## [useMaterial3]
+///
+/// A temporary flag used to disable Material-3 design and use legacy
+/// Material-2 design instead. Material-3 design is the default.
+/// Material-2 will be deprecated in Flutter.
+///
+/// If set to true, the theme will use Material3 default styles when
+/// properties are undefined, if false defaults will use FlexColorScheme's
+/// own opinionated default values.
+///
+/// The M2/M3 defaults will only be used for properties that are not
+/// defined, if defined they keep their defined values.
+///
+/// If undefined, defaults to true.
 SliderThemeData _sliderTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
   required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as the main
   /// color for the Slider.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// If not defined, [colorScheme.primary] will be used.
   SchemeColor? baseSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the thumb
   /// color for the Slider.
   ///
-  /// If not defined, [baseSchemeColor] will be used.
+  /// If not defined, `baseSchemeColor` will be used.
   SchemeColor? thumbSchemeColor,
 
-  /// The height of the [Slider] track.
+  /// The height of the `Slider` track.
   ///
   /// If not defined, defaults to 4 via Flutter SDK defaults.
   double? trackHeight,
 
   /// Whether the value indicator should be shown for different types of
   /// sliders.
-  ///
-  /// By default, [showValueIndicator] is set to
-  /// [ShowValueIndicator.onlyForDiscrete]. The value indicator is only shown
-  /// when the thumb is being touched.
   ShowValueIndicator? showValueIndicator,
 
   /// Enum used to select the type of built-in value indicator used by
-  /// [Slider].
-  ///
-  /// The current two options included Material 2 default
-  /// [RectangularSliderValueIndicatorShape] and Material 3 default
-  /// [DropSliderValueIndicatorShape].
-  ///
-  /// If not defined, the default for the M2/M3 mode is used.
+  /// `Slider`.
   FlexSliderIndicatorType? valueIndicatorType,
 
-  /// The color given to the [valueIndicatorShape] to draw itself with.
+  /// The color given to the `valueIndicatorShape` to draw itself with.
   ///
   /// If undefined, defaults to using Flutter SDK's logic for the color.
   Color? valueIndicatorColor,
@@ -66,32 +152,12 @@ SliderThemeData _sliderTheme({
   /// If undefined, defaults to false.
   bool? useTintedDisable,
 
-  /// Overrides the default value of [Slider.year2023].
-  ///
-  /// When true, the [Slider] will use the 2023 Material Design 3 appearance.
-  ///
-  /// If this is set to false, the [Slider] will use the latest Material-3
-  /// appearance, which was introduced in December 2023 and become common
-  /// in 2024.
-  ///
-  /// In Flutter Material SDK, this property is named `year2023`.
-  ///
-  /// If undefined, defaults to true, via Flutter Material's default behavior.
-  /// If [useMaterial3] is false, then this property is ignored.
+  /// Overrides the default value of `Slider.year2023`.
   bool? useOldM3Design,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
   /// Material-2 will be deprecated in Flutter.
-  ///
-  /// If set to true, the theme will use Material3 default styles when
-  /// properties are undefined, if false defaults will use FlexColorScheme's
-  /// own opinionated default values.
-  ///
-  /// The M2/M3 defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
   bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;

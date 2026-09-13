@@ -2,61 +2,147 @@ part of '../flex_sub_themes.dart';
 
 /// An opinionated [CardThemeData] for [Card] with custom
 /// corner radius and elevation.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also used for your [ThemeData].
+///
+/// If null, any provided [SchemeColor] values will be ignored and
+/// component theme color defaults will be used.
+///
+/// ## [backgroundSchemeColor]
+///
+/// Selects which color from the passed in [colorScheme] to use as the
+/// background color of Cards.
+///
+/// If not defined, defaults to:
+/// - M2: [ThemeData.cardColor]
+/// - M3: Card (elevated): [ColorScheme.surfaceContainerLow]
+/// - M3: Card.filled: [ColorScheme.surfaceContainerHighest]
+/// - M3: Card.outlined: [ColorScheme.surface]
+///
+/// Warning: The Card variants cannot be themed separately in Flutter, if
+/// you provide a color, all card variants will share the same color.
+/// See issue: https://github.com/flutter/flutter/issues/153912
+///
+/// ## [radius]
+///
+/// Corner radius
+///
+/// If not defined, defaults to [kCardRadius] 12dp,
+/// based on M3 Specification, this is also the opinionated
+/// default for M2 in this package.
+///
+/// ## [borderSchemeColor]
+///
+/// Selects which color from the passed in [colorScheme] to use as the
+/// border color for Cards.
+///
+/// If not defined, defaults to:
+/// - M2: no border
+/// - M3: Card (elevated): no border
+/// - M3: Card.filled: no border
+/// - M3: Card.outlined: [ColorScheme.outlineVariant]
+///
+/// Warning: The Card variants cannot be themed separately in Flutter, if
+/// you provide a color, all card variants will share the same color.
+/// See issue: https://github.com/flutter/flutter/issues/153912
+///
+/// ## [borderWidth]
+///
+/// Defines the border width of the border on Cards.
+///
+/// Only used if [borderSchemeColor] is also defined.
+///
+/// If not defined, defaults to:
+/// - M2: no border
+/// - M3: Card (elevated): no border
+/// - M3: Card.filled: no border
+/// - M3: Card.outlined: 1.0
+///
+/// Warning: The Card variants cannot be themed separately in Flutter, if
+/// you provide a color, all card variants will share the same color.
+/// See issue: https://github.com/flutter/flutter/issues/153912
+///
+/// ## [elevation]
+///
+/// Card elevation.
+///
+/// If not defined, defaults to:
+/// - M2: 1.0
+/// - M3: Card (elevated): 1.0
+/// - M3: Card.filled: 0.0
+/// - M3: Card.outlined: 0.0
+///
+/// Warning: The Card variants cannot be themed separately in Flutter, if
+/// you provide an elevation, all Card variants will get same elevation.
+/// See issue: https://github.com/flutter/flutter/issues/153912
+///
+/// ## [shadowColor]
+///
+/// Overrides the default value for [Card.shadowColor].
+///
+/// If null, [Card] defaults to fully opaque black.
+///
+/// ## [surfaceTintColor]
+///
+/// Overrides the default value for [Card.surfaceTintColor].
+///
+/// If null, [Card] will not display an overlay color.
+///
+/// See [Material.surfaceTintColor] for more details.
+///
+/// ## [clipBehavior]
+///
+/// The clipBehavior of the card theme, defaults to
+/// [Clip.antiAlias] for smooth clipping when using rounded corners.
+///
+/// There is no config property in [FlexSubThemesData] for [clipBehavior],
+/// if needed it can be exposed. Feel free to make a PR or submit an issue.
+///
+/// ## [useMaterial3]
+///
+/// A temporary flag used to disable Material-3 design and use legacy
+/// Material-2 design instead. Material-3 design is the default.
+/// Material-2 will be deprecated in Flutter.
+///
+/// If set to true, the theme will use Material3 default styles when
+/// properties are undefined, if false defaults will use FlexColorScheme's
+/// own opinionated default values.
+///
+/// The M2/M3 defaults will only be used for properties that are not
+/// defined, if defined they keep their defined values.
+///
+/// If undefined, defaults to true.
 CardThemeData _cardTheme({
-  /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+  /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
   ///
-  /// If null, any provided [SchemeColor] values will be ignored and
+  /// If null, any provided `SchemeColor` values will be ignored and
   /// component theme color defaults will be used.
   ColorScheme? colorScheme,
 
-  /// Selects which color from the passed in [colorScheme] to use as the
+  /// Selects which color from the passed in `colorScheme` to use as the
   /// background color of Cards.
-  ///
-  /// If not defined, defaults to:
-  /// - M2: [ThemeData.cardColor]
-  /// - M3: Card (elevated): [ColorScheme.surfaceContainerLow]
-  /// - M3: Card.filled: [ColorScheme.surfaceContainerHighest]
-  /// - M3: Card.outlined: [ColorScheme.surface]
-  ///
-  /// Warning: The Card variants cannot be themed separately in Flutter, if
-  /// you provide a color, all card variants will share the same color.
-  /// See issue: https://github.com/flutter/flutter/issues/153912
   SchemeColor? backgroundSchemeColor,
 
   /// Corner radius
   ///
-  /// If not defined, defaults to [kCardRadius] 12dp,
+  /// If not defined, defaults to `kCardRadius` 12dp,
   /// based on M3 Specification, this is also the opinionated
   /// default for M2 in this package.
   double? radius,
 
-  /// Selects which color from the passed in [colorScheme] to use as the
+  /// Selects which color from the passed in `colorScheme` to use as the
   /// border color for Cards.
   ///
   /// If not defined, defaults to:
   /// - M2: no border
   /// - M3: Card (elevated): no border
   /// - M3: Card.filled: no border
-  /// - M3: Card.outlined: [ColorScheme.outlineVariant]
-  ///
-  /// Warning: The Card variants cannot be themed separately in Flutter, if
-  /// you provide a color, all card variants will share the same color.
-  /// See issue: https://github.com/flutter/flutter/issues/153912
+  /// - M3: Card.outlined: `ColorScheme.outlineVariant`
   SchemeColor? borderSchemeColor,
 
   /// Defines the border width of the border on Cards.
-  ///
-  /// Only used if [borderSchemeColor] is also defined.
-  ///
-  /// If not defined, defaults to:
-  /// - M2: no border
-  /// - M3: Card (elevated): no border
-  /// - M3: Card.filled: no border
-  /// - M3: Card.outlined: 1.0
-  ///
-  /// Warning: The Card variants cannot be themed separately in Flutter, if
-  /// you provide a color, all card variants will share the same color.
-  /// See issue: https://github.com/flutter/flutter/issues/153912
   double? borderWidth,
 
   /// Card elevation.
@@ -66,43 +152,25 @@ CardThemeData _cardTheme({
   /// - M3: Card (elevated): 1.0
   /// - M3: Card.filled: 0.0
   /// - M3: Card.outlined: 0.0
-  ///
-  /// Warning: The Card variants cannot be themed separately in Flutter, if
-  /// you provide an elevation, all Card variants will get same elevation.
-  /// See issue: https://github.com/flutter/flutter/issues/153912
   double? elevation,
 
-  /// Overrides the default value for [Card.shadowColor].
+  /// Overrides the default value for `Card.shadowColor`.
   ///
-  /// If null, [Card] defaults to fully opaque black.
+  /// If null, `Card` defaults to fully opaque black.
   Color? shadowColor,
 
-  /// Overrides the default value for [Card.surfaceTintColor].
+  /// Overrides the default value for `Card.surfaceTintColor`.
   ///
-  /// If null, [Card] will not display an overlay color.
-  ///
-  /// See [Material.surfaceTintColor] for more details.
+  /// If null, `Card` will not display an overlay color.
   Color? surfaceTintColor,
 
   /// The clipBehavior of the card theme, defaults to
-  /// [Clip.antiAlias] for smooth clipping when using rounded corners.
-  ///
-  /// There is no config property in [FlexSubThemesData] for [clipBehavior],
-  /// if needed it can be exposed. Feel free to make a PR or submit an issue.
+  /// `Clip.antiAlias` for smooth clipping when using rounded corners.
   Clip clipBehavior = Clip.antiAlias,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
   /// Material-2 will be deprecated in Flutter.
-  ///
-  /// If set to true, the theme will use Material3 default styles when
-  /// properties are undefined, if false defaults will use FlexColorScheme's
-  /// own opinionated default values.
-  ///
-  /// The M2/M3 defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
   bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;

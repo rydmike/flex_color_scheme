@@ -27,21 +27,78 @@ part of '../flex_sub_themes.dart';
 /// obsolete in SDK docs though) still use this theme. It is thus kept around
 /// in FlexColorScheme package as long as it might have some use and exists
 /// in Flutter stable SDK.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also used for your [ThemeData].
+///
+/// ## [baseSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the main
+/// color for the button.
+///
+/// All colors in the color scheme are not good choices, but some work well.
+///
+/// If not defined, [colorScheme.primary] will be used.
+///
+/// ## [radius]
+///
+/// The button corner radius.
+///
+/// If not defined, defaults to [kButtonRadius] 40dp,
+/// based on earlier M3 specification, that was later changed to stadium.
+/// https://m3.material.io/components/buttons/specs
+///
+/// ## [padding]
+///
+/// Padding for legacy button.
+///
+/// If not defined,
+/// defaults to [kButtonPadding] = `EdgeInsets.symmetric(horizontal: 16)`.
+/// This makes the legacy buttons same size as default margin on new ones.
+///
+/// ## [minButtonSize]
+///
+/// Minimum button size.
+///
+/// If undefined, defaults to [kButtonMinSize] = Size(40, 40).
+///
+/// ## [alignedDropdown]
+///
+/// If true, then a [DropdownButton] menu's width will match the button's
+/// width.
+///
+/// If false (the default), then the dropdown's menu will be wider than
+/// its button. In either case the dropdown button will line up the leading
+/// edge of the menu's value with the leading edge of the values
+/// displayed by the menu items.
+///
+/// This property only affects [DropdownButton] and its menu.
+///
+/// If not defined default to false.
+///
+/// ## [useTintedInteraction]
+///
+/// Defines if the theme uses tinted interaction effects.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useTintedDisable]
+///
+/// Defines if the theme uses tinted disabled color.
+///
+/// If undefined, defaults to false.
 ButtonThemeData _buttonTheme({
-  /// Typically the same [ColorScheme] that is also used for your [ThemeData].
+  /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
   required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as the main
   /// color for the button.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// If not defined, [colorScheme.primary] will be used.
   SchemeColor? baseSchemeColor,
 
   /// The button corner radius.
   ///
-  /// If not defined, defaults to [kButtonRadius] 40dp,
+  /// If not defined, defaults to `kButtonRadius` 40dp,
   /// based on earlier M3 specification, that was later changed to stadium.
   /// https://m3.material.io/components/buttons/specs
   double? radius,
@@ -49,26 +106,17 @@ ButtonThemeData _buttonTheme({
   /// Padding for legacy button.
   ///
   /// If not defined,
-  /// defaults to [kButtonPadding] = `EdgeInsets.symmetric(horizontal: 16)`.
+  /// defaults to `kButtonPadding` = `EdgeInsets.symmetric(horizontal: 16)`.
   /// This makes the legacy buttons same size as default margin on new ones.
   EdgeInsetsGeometry? padding,
 
   /// Minimum button size.
   ///
-  /// If undefined, defaults to [kButtonMinSize] = Size(40, 40).
+  /// If undefined, defaults to `kButtonMinSize` = Size(40, 40).
   Size? minButtonSize,
 
-  /// If true, then a [DropdownButton] menu's width will match the button's
+  /// If true, then a `DropdownButton` menu's width will match the button's
   /// width.
-  ///
-  /// If false (the default), then the dropdown's menu will be wider than
-  /// its button. In either case the dropdown button will line up the leading
-  /// edge of the menu's value with the leading edge of the values
-  /// displayed by the menu items.
-  ///
-  /// This property only affects [DropdownButton] and its menu.
-  ///
-  /// If not defined default to false.
   bool? alignedDropdown,
 
   /// Defines if the theme uses tinted interaction effects.

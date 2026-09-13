@@ -1,33 +1,63 @@
 part of '../flex_sub_themes.dart';
 
 /// An opinionated [MenuBarThemeData] theme.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also used for your [ThemeData].
+///
+/// ## [backgroundSchemeColor]
+///
+/// Select which color from the passed in [colorScheme] parameter to use as
+/// the MenuBar background color.
+///
+/// If not defined, default to [colorScheme.surfaceContainer].
+///
+/// FlexColorScheme passes in
+/// [FlexSubThemesData.menuBarBackgroundSchemeColor] first, can be null, and
+/// uses [FlexSubThemesData.menuSchemeColor] as fallback, can also be null.
+///
+/// ## [shadowColor]
+///
+/// The shadow color of the MenuBar's [Material].
+///
+/// The material's elevation shadow can be difficult to see for dark themes,
+/// so by default the menu classes add a semi-transparent overlay to
+/// indicate elevation. See [ThemeData.applyElevationOverlayColor].
+///
+/// ## [surfaceTintColor]
+///
+/// The surface tint color of the MenuBar's [Material].
+///
+/// See [Material.surfaceTintColor] for more details.
+///
+/// ## [elevation]
+///
+/// The elevation of the MenuBar's [Material].
+///
+/// ## [radius]
+///
+/// MenuBar corner radius.
+///
+/// If not defined, defaults to 4, the M3 specification, via Flutter SDK
+/// widget default values.
 MenuBarThemeData _menuBarTheme({
-  // Typically the same [ColorScheme] that is also used for your [ThemeData].
+  /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
   required ColorScheme colorScheme,
 
-  /// Select which color from the passed in [colorScheme] parameter to use as
+  /// Select which color from the passed in `colorScheme` parameter to use as
   /// the MenuBar background color.
   ///
-  /// If not defined, default to [colorScheme.surfaceContainer].
-  ///
-  /// FlexColorScheme passes in
-  /// [FlexSubThemesData.menuBarBackgroundSchemeColor] first, can be null, and
-  /// uses [FlexSubThemesData.menuSchemeColor] as fallback, can also be null.
+  /// If not defined, default to `colorScheme.surfaceContainer`.
   SchemeColor? backgroundSchemeColor,
 
-  /// The shadow color of the MenuBar's [Material].
-  ///
-  /// The material's elevation shadow can be difficult to see for dark themes,
-  /// so by default the menu classes add a semi-transparent overlay to
-  /// indicate elevation. See [ThemeData.applyElevationOverlayColor].
+  /// The shadow color of the MenuBar's `Material`.
   Color? shadowColor,
 
-  /// The surface tint color of the MenuBar's [Material].
-  ///
-  /// See [Material.surfaceTintColor] for more details.
+  /// The surface tint color of the MenuBar's `Material`.
   Color? surfaceTintColor,
 
-  /// The elevation of the MenuBar's [Material].
+  /// The elevation of the MenuBar's `Material`.
   double? elevation,
 
   /// MenuBar corner radius.

@@ -1,23 +1,134 @@
 part of '../flex_sub_themes.dart';
 
 /// An opinionated [SegmentedButtonThemeData] theme for the [SegmentedButton].
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also use for your [ThemeData].
+///
+/// ## [selectedSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as background
+/// color for the selected button.
+///
+/// Defines the background color for selected button, and
+/// it's onColor pair defines the foreground for selected button.
+///
+/// If not defined, secondaryContainer will be used.
+///
+/// ## [selectedForegroundSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the
+/// foreground color for the selected [SegmentedButton].
+///
+/// If not defined, contrast color pair to [selectedSchemeColor]
+/// will be used.
+///
+/// ## [unselectedSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the
+/// background color for unselected segmented button.
+///
+/// If not defined, transparent will be used.
+///
+/// ## [unselectedForegroundSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the
+/// foreground color for unselected segmented button.
+///
+/// If not defined, contrast color pair to [unselectedSchemeColor]
+/// will be used, for transparent it is onSurface.
+///
+/// ## [borderSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the border
+/// color for the toggle buttons.
+///
+/// If not defined, [ColorScheme.outline] will be the effective result.
+///
+/// ## [radius]
+///
+/// The button corner radius.
+///
+/// If not defined, defaults to defaults to Stadium border.
+///
+/// ## [borderWidth]
+///
+/// The width of the borders around the segmented button.
+///
+/// If null, defaults to [kThinBorderWidth] = 1.0.
+///
+/// ## [padding]
+///
+/// Padding for the individual segment buttons.
+///
+/// Defaults to null and uses M3's default scaled padding function.
+///
+/// ## [minButtonSize]
+///
+/// Minimum button size.
+///
+/// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
+/// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
+/// [useMaterial3] is true, via M3 built in defaults.
+///
+/// ## [useTintedInteraction]
+///
+/// Defines if the theme uses tinted interaction effects.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useTintedDisable]
+///
+/// Defines if the theme uses tinted disabled color.
+///
+/// If undefined, defaults to false.
+///
+/// ## [splashFactory]
+///
+/// Creates the [InkWell] splash factory, which defines the appearance of
+/// "ink" splashes that occur in response to taps.
+///
+/// In M2 mode FlexColorScheme passes in the effective splashFactory
+/// from splashFactory override value or the result from
+/// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
+/// null and the default comes via ThemeData.splashFactory, that is has
+/// also defined.
+///
+/// ## [textStyle]
+///
+/// The style for the segmented button's [Text] widget descendants.
+///
+/// The color of the [textStyle] is typically not used directly, the
+/// [selectedSchemeColor] and [unselectedForegroundSchemeColor] are
+/// used instead.
+///
+/// ## [useMaterial3]
+///
+/// A temporary flag used to disable Material-3 design and use legacy
+/// Material-2 design instead. Material-3 design is the default.
+/// Material-2 will be deprecated in Flutter.
+///
+/// If set to true, the theme will use Material3 default styles when
+/// properties are undefined, if false defaults will use FlexColorScheme's
+/// own opinionated default values.
+///
+/// The M2/M3 defaults will only be used for properties that are not
+/// defined, if defined they keep their defined values.
+///
+/// If undefined, defaults to true.
 SegmentedButtonThemeData _segmentedButtonTheme({
-  /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+  /// Typically the same `ColorScheme` that is also use for your `ThemeData`.
   required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as background
   /// color for the selected button.
-  ///
-  /// Defines the background color for selected button, and
-  /// it's onColor pair defines the foreground for selected button.
-  ///
-  /// If not defined, secondaryContainer will be used.
   SchemeColor? selectedSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the
-  /// foreground color for the selected [SegmentedButton].
+  /// foreground color for the selected `SegmentedButton`.
   ///
-  /// If not defined, contrast color pair to [selectedSchemeColor]
+  /// If not defined, contrast color pair to `selectedSchemeColor`
   /// will be used.
   SchemeColor? selectedForegroundSchemeColor,
 
@@ -30,14 +141,14 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   /// Selects which color from the passed in colorScheme to use as the
   /// foreground color for unselected segmented button.
   ///
-  /// If not defined, contrast color pair to [unselectedSchemeColor]
+  /// If not defined, contrast color pair to `unselectedSchemeColor`
   /// will be used, for transparent it is onSurface.
   SchemeColor? unselectedForegroundSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the border
   /// color for the toggle buttons.
   ///
-  /// If not defined, [ColorScheme.outline] will be the effective result.
+  /// If not defined, `ColorScheme.outline` will be the effective result.
   SchemeColor? borderSchemeColor,
 
   /// The button corner radius.
@@ -47,7 +158,7 @@ SegmentedButtonThemeData _segmentedButtonTheme({
 
   /// The width of the borders around the segmented button.
   ///
-  /// If null, defaults to [kThinBorderWidth] = 1.0.
+  /// If null, defaults to `kThinBorderWidth` = 1.0.
   double? borderWidth,
 
   /// Padding for the individual segment buttons.
@@ -57,9 +168,9 @@ SegmentedButtonThemeData _segmentedButtonTheme({
 
   /// Minimum button size.
   ///
-  /// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
-  /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
-  /// [useMaterial3] is true, via M3 built in defaults.
+  /// If null, defaults to `kButtonMinSize` (`const Size(40.0, 40.0)`) when
+  /// `useMaterial3` is false and to `const Size(64.0, 40.0)` when
+  /// `useMaterial3` is true, via M3 built in defaults.
   Size? minButtonSize,
 
   /// Defines if the theme uses tinted interaction effects.
@@ -72,35 +183,16 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   /// If undefined, defaults to false.
   bool? useTintedDisable,
 
-  /// Creates the [InkWell] splash factory, which defines the appearance of
+  /// Creates the `InkWell` splash factory, which defines the appearance of
   /// "ink" splashes that occur in response to taps.
-  ///
-  /// In M2 mode FlexColorScheme passes in the effective splashFactory
-  /// from splashFactory override value or the result from
-  /// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
-  /// null and the default comes via ThemeData.splashFactory, that is has
-  /// also defined.
   InteractiveInkFeatureFactory? splashFactory,
 
-  /// The style for the segmented button's [Text] widget descendants.
-  ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [selectedSchemeColor] and [unselectedForegroundSchemeColor] are
-  /// used instead.
+  /// The style for the segmented button's `Text` widget descendants.
   WidgetStateProperty<TextStyle?>? textStyle,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
   /// Material-2 will be deprecated in Flutter.
-  ///
-  /// If set to true, the theme will use Material3 default styles when
-  /// properties are undefined, if false defaults will use FlexColorScheme's
-  /// own opinionated default values.
-  ///
-  /// The M2/M3 defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
   bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;

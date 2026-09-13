@@ -8,19 +8,99 @@ part of '../flex_sub_themes.dart';
 ///
 /// The adjustable button corner [radius] defaults to Stadium in M3, and FCS
 /// uses 20 in M2, where SDK M2 defaults to 4.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also used for your [ThemeData].
+///
+/// ## [backgroundSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the
+/// background  color for the filled button.
+///
+/// All colors in the color scheme are not good choices, but some work well.
+///
+/// The foreground color automatically uses the contrast complementary color
+/// from the SchemeColor.
+///
+/// If not defined, [colorScheme.primary] will be used.
+///
+/// ## [radius]
+///
+/// If not defined, defaults to Stadium border based on
+/// https://m3.material.io/components/buttons/specs
+///
+/// ## [padding]
+///
+/// Padding for the button theme.
+///
+/// Defaults to null and uses [styleFrom] constructors default padding.
+///
+/// M3 has more horizontal padding 24dp, but the tighter default padding
+/// in M2 that is 16dp looks fine as well when using stadium borders
+/// as in M3.
+///
+/// If null and [useMaterial3] is true in the context, the correct M3
+/// button theme default computed button padding for M3 will be used.
+///
+/// ## [minButtonSize]
+///
+/// Minimum button size.
+///
+/// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
+/// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
+/// [useMaterial3] is true, via M3 built in defaults.
+///
+/// ## [textStyle]
+///
+/// The style for the button's [Text] widget descendants.
+///
+/// The color of the [textStyle] is typically not used directly, the
+/// [foregroundColor] is used instead.
+///
+/// ## [useTintedInteraction]
+///
+/// Defines if the theme uses tinted interaction effects.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useTintedDisable]
+///
+/// Defines if the theme uses tinted disabled color.
+///
+/// If undefined, defaults to false.
+///
+/// ## [splashFactory]
+///
+/// Creates the [InkWell] splash factory, which defines the appearance of
+/// "ink" splashes that occur in response to taps.
+///
+/// In M2 mode FlexColorScheme passes in the effective splashFactory
+/// from splashFactory override value or the result from
+/// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
+/// null and the default comes via ThemeData.splashFactory, that is has
+/// also defined.
+///
+/// ## [useMaterial3]
+///
+/// A temporary flag used to disable Material-3 design and use legacy
+/// Material-2 design instead. Material-3 design is the default.
+/// Material-2 will be deprecated in Flutter.
+///
+/// If set to true, the theme will use Material3 default styles when
+/// properties are undefined, if false defaults will use FlexColorScheme's
+/// own opinionated default values.
+///
+/// The M2/M3 defaults will only be used for properties that are not
+/// defined, if defined they keep their defined values.
+///
+/// If undefined, defaults to true.
 FilledButtonThemeData _filledButtonTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
   required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as the
   /// background  color for the filled button.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// The foreground color automatically uses the contrast complementary color
-  /// from the SchemeColor.
-  ///
-  /// If not defined, [colorScheme.primary] will be used.
   SchemeColor? backgroundSchemeColor,
 
   /// If not defined, defaults to Stadium border based on
@@ -30,26 +110,16 @@ FilledButtonThemeData _filledButtonTheme({
   /// Padding for the button theme.
   ///
   /// Defaults to null and uses `styleFrom` constructors default padding.
-  ///
-  /// M3 has more horizontal padding 24dp, but the tighter default padding
-  /// in M2 that is 16dp looks fine as well when using stadium borders
-  /// as in M3.
-  ///
-  /// If null and [useMaterial3] is true in the context, the correct M3
-  /// button theme default computed button padding for M3 will be used.
   EdgeInsetsGeometry? padding,
 
   /// Minimum button size.
   ///
-  /// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
-  /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
-  /// [useMaterial3] is true, via M3 built in defaults.
+  /// If null, defaults to `kButtonMinSize` (`const Size(40.0, 40.0)`) when
+  /// `useMaterial3` is false and to `const Size(64.0, 40.0)` when
+  /// `useMaterial3` is true, via M3 built in defaults.
   Size? minButtonSize,
 
-  /// The style for the button's [Text] widget descendants.
-  ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [foregroundColor] is used instead.
+  /// The style for the button's `Text` widget descendants.
   WidgetStateProperty<TextStyle?>? textStyle,
 
   /// Defines if the theme uses tinted interaction effects.
@@ -62,28 +132,13 @@ FilledButtonThemeData _filledButtonTheme({
   /// If undefined, defaults to false.
   bool? useTintedDisable,
 
-  /// Creates the [InkWell] splash factory, which defines the appearance of
+  /// Creates the `InkWell` splash factory, which defines the appearance of
   /// "ink" splashes that occur in response to taps.
-  ///
-  /// In M2 mode FlexColorScheme passes in the effective splashFactory
-  /// from splashFactory override value or the result from
-  /// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
-  /// null and the default comes via ThemeData.splashFactory, that is has
-  /// also defined.
   InteractiveInkFeatureFactory? splashFactory,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
   /// Material-2 will be deprecated in Flutter.
-  ///
-  /// If set to true, the theme will use Material3 default styles when
-  /// properties are undefined, if false defaults will use FlexColorScheme's
-  /// own opinionated default values.
-  ///
-  /// The M2/M3 defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
   bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;

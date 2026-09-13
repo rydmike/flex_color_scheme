@@ -9,51 +9,131 @@ part of '../flex_sub_themes.dart';
 /// In the InputDecorator, if you pass it an input decoration style
 /// that matches the main input decoration style and corner rounding it
 /// will be used on the data entry elements in the picker.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also used for your [ThemeData].
+///
+/// ## [backgroundSchemeColor]
+///
+/// Dialog background color.
+///
+/// If null and [backgroundSchemeColor] is also null, then it
+/// gets default via Dialog's default null theme behavior.
+///
+/// If [backgroundSchemeColor] is defined, it will override any color
+/// passed in here.
+///
+/// Can be used to make a custom themed dialog with own background color,
+/// even after the [ThemeData.dialogBackgroundColor] property is
+/// is deprecated in Flutter SDK. See
+/// https://github.com/flutter/flutter/issues/91772)
+///
+/// ## [backgroundColor]
+///
+/// Dialog background color.
+///
+/// If null and [backgroundSchemeColor] is also null, then it
+/// gets default via Dialog's default null theme behavior.
+///
+/// If [backgroundSchemeColor] is defined, it will override any color
+/// passed in here.
+///
+/// Can be used to make a custom themed dialog with own background color,
+/// even after the [ThemeData.dialogBackgroundColor] property is
+/// is deprecated in Flutter SDK. See
+/// https://github.com/flutter/flutter/issues/91772)
+///
+/// ## [elevation]
+///
+/// Dialog elevation.
+///
+/// If not defined, defaults to [kDialogElevation] = 6.
+///
+/// ## [radius]
+///
+/// Corner radius of the [TimePickerDialog] dialog.
+///
+/// If not defined, defaults to [kDialogRadius] = 28.
+///
+/// ## [elementRadius]
+///
+/// Corner radius of the [TimePickerDialog] internal elements.
+///
+/// If not defined, defaults to [kTimeElementRadius] = 12.
+///
+/// ## [dayPeriodTextStyle]
+///
+/// The text style of the day period text.
+///
+/// ## [dialTextStyle]
+///
+/// The text style of the dial text.
+///
+/// ## [helpTextStyle]
+///
+/// The text style of the help text.
+///
+/// ## [hourMinuteTextStyle]
+///
+/// The text style of the hour/minute text.
+///
+/// ## [inputDecorationTheme]
+///
+/// A custom input decoration theme for the time picker's input fields.
+///
+/// ## [useInputDecoratorTheme]
+///
+/// Use the [inputDecorationTheme] if defined.
+///
+/// If this is false, the input decoration theme is not used, even if
+/// defined. If true, it is used if defined.
+///
+/// Defaults to false.
+///
+/// ## [useMaterial3]
+///
+/// A temporary flag used to disable Material-3 design and use legacy
+/// Material-2 design instead. Material-3 design is the default.
+/// Material-2 will be deprecated in Flutter.
+///
+/// If set to true, the theme will use Material3 default styles when
+/// properties are undefined, if false defaults will use FlexColorScheme's
+/// own opinionated default values.
+///
+/// The M2/M3 defaults will only be used for properties that are not
+/// defined, if defined they keep their defined values.
+///
+/// If undefined, defaults to true.
 TimePickerThemeData _timePickerTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
   required ColorScheme colorScheme,
 
   /// Dialog background color.
   ///
-  /// If null and [backgroundSchemeColor] is also null, then it
+  /// If null and `backgroundSchemeColor` is also null, then it
   /// gets default via Dialog's default null theme behavior.
-  ///
-  /// If [backgroundSchemeColor] is defined, it will override any color
-  /// passed in here.
-  ///
-  /// Can be used to make a custom themed dialog with own background color,
-  /// even after the [ThemeData.dialogBackgroundColor] property is
-  /// is deprecated in Flutter SDK. See
-  /// https://github.com/flutter/flutter/issues/91772)
   SchemeColor? backgroundSchemeColor,
 
   /// Dialog background color.
   ///
-  /// If null and [backgroundSchemeColor] is also null, then it
+  /// If null and `backgroundSchemeColor` is also null, then it
   /// gets default via Dialog's default null theme behavior.
-  ///
-  /// If [backgroundSchemeColor] is defined, it will override any color
-  /// passed in here.
-  ///
-  /// Can be used to make a custom themed dialog with own background color,
-  /// even after the [ThemeData.dialogBackgroundColor] property is
-  /// is deprecated in Flutter SDK. See
-  /// https://github.com/flutter/flutter/issues/91772)
   Color? backgroundColor,
 
   /// Dialog elevation.
   ///
-  /// If not defined, defaults to [kDialogElevation] = 6.
+  /// If not defined, defaults to `kDialogElevation` = 6.
   double? elevation,
 
-  /// Corner radius of the [TimePickerDialog] dialog.
+  /// Corner radius of the `TimePickerDialog` dialog.
   ///
-  /// If not defined, defaults to [kDialogRadius] = 28.
+  /// If not defined, defaults to `kDialogRadius` = 28.
   double? radius,
 
-  /// Corner radius of the [TimePickerDialog] internal elements.
+  /// Corner radius of the `TimePickerDialog` internal elements.
   ///
-  /// If not defined, defaults to [kTimeElementRadius] = 12.
+  /// If not defined, defaults to `kTimeElementRadius` = 12.
   double? elementRadius,
 
   /// The text style of the day period text.
@@ -71,26 +151,12 @@ TimePickerThemeData _timePickerTheme({
   /// A custom input decoration theme for the time picker's input fields.
   InputDecorationThemeData? inputDecorationTheme,
 
-  /// Use the [inputDecorationTheme] if defined.
-  ///
-  /// If this is false, the input decoration theme is not used, even if
-  /// defined. If true, it is used if defined.
-  ///
-  /// Defaults to false.
+  /// Use the `inputDecorationTheme` if defined.
   bool? useInputDecoratorTheme,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
   /// Material-2 will be deprecated in Flutter.
-  ///
-  /// If set to true, the theme will use Material3 default styles when
-  /// properties are undefined, if false defaults will use FlexColorScheme's
-  /// own opinionated default values.
-  ///
-  /// The M2/M3 defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
   bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;

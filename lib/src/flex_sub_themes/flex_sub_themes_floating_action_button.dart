@@ -14,65 +14,127 @@ part of '../flex_sub_themes.dart';
 /// You may want to continue to keep the FAB circular and extended FAB stadium
 /// (pill) shaped as before, despite otherwise using a rounder or M3 design.
 /// The circular M2 FAB goes well with those designs too and is more familiar.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also used for your [ThemeData].
+///
+/// ## [backgroundSchemeColor]
+///
+/// Select which color from the passed in [colorScheme] parameter to use as
+/// the floating action button background color.
+///
+/// If not defined, then if [useMaterial3] [colorScheme.secondary] will
+/// be. If [useMaterial3] is true, then [colorScheme.primaryContainer]
+/// will be used.
+///
+/// The foreground color automatically uses the selected background
+/// color's contrast color pair in the passed in [colorScheme] property.
+///
+/// ## [foregroundSchemeColor]
+///
+/// Select which color from the passed in [colorScheme] parameter to use as
+/// the floating action button foreground color.
+///
+/// If not defined, effective default is the complement color to used
+/// [backgroundSchemeColor].
+///
+/// ## [radius]
+///
+/// Corner radius of the [FloatingActionButton].
+///
+/// If not defined, defaults to [kFabRadius] 16dp,
+/// based on M3 Specification
+/// https://m3.material.io/components/floating-action-button/specs
+///
+/// ## [useShape]
+///
+/// Set to false to not apply any Shape theming to the FAB.
+///
+/// If set to false, the Shape property will be kept null, regardless
+/// of what border radius was given, also via [alwaysCircular] property.
+/// This results in that the FAB theme data, will use and implement its
+/// Flutter SDK default shape behavior. Other properties are still used.
+///
+/// Default to true.
+///
+/// ## [alwaysCircular]
+///
+/// Set to true to always use circular and stadium shapes on the FAB.
+///
+/// If set to true, it overrides [radius] and shape is always circular
+/// or stadium shaped.
+///
+/// Implementation is via [StadiumBorder] to be able
+/// to support the extended FAB as well. It looks same with Stadium on
+/// the circular cases as the actual Circular FAB using ones in M2, but
+/// implementation is different since we cannot use different themed
+/// shapes for different types of FAB, like the hard coded default
+/// none themed behavior does. See issue
+/// [#107946](https://github.com/flutter/flutter/issues/107946) for
+/// more information.
+///
+/// Has no impact if [useShape] is false.
+///
+/// Defaults to false.
+///
+/// ## [extendedTextStyle]
+///
+/// The text style for an extended [FloatingActionButton]'s label.
+///
+/// ## [useTintedInteraction]
+///
+/// Defines if the theme uses tinted interaction effects.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useMaterial3]
+///
+/// A temporary flag used to disable Material-3 design and use legacy
+/// Material-2 design instead. Material-3 design is the default.
+/// Material-2 will be deprecated in Flutter.
+///
+/// If set to true, the theme will use Material3 default styles when
+/// properties are undefined, if false defaults will use FlexColorScheme's
+/// own opinionated default values.
+///
+/// The M2/M3 defaults will only be used for properties that are not
+/// defined, if defined they keep their defined values.
+///
+/// If undefined, defaults to true.
 FloatingActionButtonThemeData _floatingActionButtonTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
   required ColorScheme colorScheme,
 
-  /// Select which color from the passed in [colorScheme] parameter to use as
+  /// Select which color from the passed in `colorScheme` parameter to use as
   /// the floating action button background color.
   ///
-  /// If not defined, then if [useMaterial3] `colorScheme.secondary` will
-  /// be. If [useMaterial3] is true, then `colorScheme.primaryContainer`
+  /// If not defined, then if `useMaterial3` `colorScheme.secondary` will
+  /// be. If `useMaterial3` is true, then `colorScheme.primaryContainer`
   /// will be used.
-  ///
-  /// The foreground color automatically uses the selected background
-  /// color's contrast color pair in the passed in [colorScheme] property.
   SchemeColor? backgroundSchemeColor,
 
-  /// Select which color from the passed in [colorScheme] parameter to use as
+  /// Select which color from the passed in `colorScheme` parameter to use as
   /// the floating action button foreground color.
   ///
   /// If not defined, effective default is the complement color to used
-  /// [backgroundSchemeColor].
+  /// `backgroundSchemeColor`.
   SchemeColor? foregroundSchemeColor,
 
-  /// Corner radius of the [FloatingActionButton].
+  /// Corner radius of the `FloatingActionButton`.
   ///
-  /// If not defined, defaults to [kFabRadius] 16dp,
+  /// If not defined, defaults to `kFabRadius` 16dp,
   /// based on M3 Specification
   /// https://m3.material.io/components/floating-action-button/specs
   double? radius,
 
   /// Set to false to not apply any Shape theming to the FAB.
-  ///
-  /// If set to false, the Shape property will be kept null, regardless
-  /// of what border radius was given, also via `alwaysCircular` property.
-  /// This results in that the FAB theme data, will use and implement its
-  /// Flutter SDK default shape behavior. Other properties are still used.
-  ///
-  /// Default to true.
   bool useShape = true,
 
   /// Set to true to always use circular and stadium shapes on the FAB.
-  ///
-  /// If set to true, it overrides `radius` and shape is always circular
-  /// or stadium shaped.
-  ///
-  /// Implementation is via `StadiumBorder` to be able
-  /// to support the extended FAB as well. It looks same with Stadium on
-  /// the circular cases as the actual Circular FAB using ones in M2, but
-  /// implementation is different since we cannot use different themed
-  /// shapes for different types of FAB, like the hard coded default
-  /// none themed behavior does. See issue
-  /// [#107946](https://github.com/flutter/flutter/issues/107946) for
-  /// more information.
-  ///
-  /// Has no impact if `useShape` is false.
-  ///
-  /// Defaults to false.
   bool alwaysCircular = false,
 
-  /// The text style for an extended [FloatingActionButton]'s label.
+  /// The text style for an extended `FloatingActionButton`'s label.
   TextStyle? extendedTextStyle,
 
   /// Defines if the theme uses tinted interaction effects.
@@ -83,15 +145,6 @@ FloatingActionButtonThemeData _floatingActionButtonTheme({
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
   /// Material-2 will be deprecated in Flutter.
-  ///
-  /// If set to true, the theme will use Material3 default styles when
-  /// properties are undefined, if false defaults will use FlexColorScheme's
-  /// own opinionated default values.
-  ///
-  /// The M2/M3 defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
   bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;

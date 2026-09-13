@@ -1,141 +1,242 @@
 part of '../flex_sub_themes.dart';
 
 /// An opinionated [ChipThemeData] theme.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also use for your [ThemeData].
+///
+/// ## [blendColors]
+///
+/// Defines if the [baseSchemeColor] and [selectedSchemeColor] are
+/// alpha blended with the surface color.
+///
+/// If not defined, defaults to false in Material-3 mode and to true
+/// in Material-2 mode.
+///
+/// When true, the [baseSchemeColor] is alpha blended with the surface
+/// color using [kChipBackgroundAlphaBlend] alpha blend value.
+/// The [selectedSchemeColor] is alpha blended with the surface color
+/// using [kChipSelectedBackgroundAlphaBlend] alpha blend value.
+///
+/// ## [baseSchemeColor]
+///
+/// Defines which [Theme] based [ColorScheme] based color the Chips
+/// use as their background base color.
+///
+/// If not defined and [useMaterial3] is true, it defaults
+/// [SchemeColor.surface].
+///
+/// If not defined and [useMaterial3] is false, it defaults
+/// [SchemeColor.primary] with a surface alpha blend of
+/// [kChipBackgroundAlphaBlend] applied, if [blendColors] is true,
+/// which it defaults to in Material-2 mode.
+///
+/// ## [selectedSchemeColor]
+///
+/// Defines which [Theme] based [ColorScheme] based color the selected Chips
+/// use as their selected state color.
+///
+/// The color scheme contrast pair color is used for text and icons, on the
+/// [selectedSchemeColor].
+///
+/// If not defined and [useMaterial3] is true, defaults to
+/// [SchemeColor.secondaryContainer].
+///
+/// If not defined and [useMaterial3] is false, defaults to
+/// [SchemeColor.secondaryContainer] if [blendColors] is false.
+/// If [blendColors] is true, defaults to [SchemeColor.primary] with
+/// a surface alpha blend of [kChipSelectedBackgroundAlphaBlend] applied.
+///
+/// ## [secondarySelectedSchemeColor]
+///
+/// Defines which [Theme] based [ColorScheme] based color the selected
+/// ChoiceChips use as their selected state color.
+///
+/// The color scheme contrast pair color is used for text and icons, on the
+/// [secondarySelectedSchemeColor]
+///
+/// If not defined and [useMaterial3] is true, defaults to
+/// [selectedSchemeColor].
+///
+/// ## [deleteIconSchemeColor]
+///
+/// Defines which [Theme] based [ColorScheme] based color the Chips
+/// use as color of the delete icon.
+///
+/// The selected color is only used as base for the [Chip] colors, it also
+/// uses alpha blend and opacity to create the effective Chip colors using
+/// the selected scheme color as base.
+///
+/// If not defined it defaults to effective theme based color from using
+/// [SchemeColor.onSurfaceVariant] same as Material-3 default.
+///
+/// ## [labelStyle]
+///
+/// Overrides the default for [ChipAttributes.labelStyle],
+/// the style of the [DefaultTextStyle] that contains the
+/// chip's label.
+///
+/// This only has an effect on label widgets that respect the
+/// [DefaultTextStyle], such as [Text].
+///
+/// This property applies to [ActionChip], [Chip],
+/// [FilterChip], [InputChip], [RawChip].
+///
+/// If not defined, the font size in the style defaults to 14.
+///
+/// ## [secondaryLabelStyle]
+///
+/// Overrides the default for [ChoiceChip.labelStyle],
+/// the style of the [DefaultTextStyle] that contains the
+/// chip's label.
+///
+/// This only has an effect on label widgets that respect the
+/// [DefaultTextStyle], such as [Text].
+///
+/// If not defined, the font size in the style defaults to 14.
+///
+/// ## [fontSize]
+///
+/// Font size of the [labelStyle].
+///
+/// If defined, overrides the default font size used by either the
+/// default font of the default [labelStyle] or the font size of the
+/// passed in [labelStyle].
+///
+/// If not defined the default text style font sizes are used, but if they
+/// did not have size defined, defaults 14.
+///
+/// ## [secondaryFontSize]
+///
+/// Font size of the [secondaryLabelStyle].
+///
+/// If defined, overrides the default font size used by either the
+/// default font of the default [secondaryLabelStyle] or the font size of
+/// the passed in [secondaryLabelStyle].
+///
+/// If not defined, defaults to [fontSize].
+///
+/// ## [iconSize]
+///
+/// Icon size used by the [IconTheme] used by [Chip]s.
+///
+/// If not defined defaults to 18.
+///
+/// ## [padding]
+///
+/// Overrides the default for [ChipAttributes.padding],
+/// the padding between the contents of the chip and the outside [shape].
+///
+/// This property applies to [ActionChip], [Chip], [ChoiceChip],
+/// [FilterChip], [InputChip], [RawChip].
+///
+/// If not defined, defaults to EdgeInsets.symmetric(horizontal: 8) in
+/// Material mode and to EdgeInsets.symmetric(horizontal: 4) in
+/// Material2 mode.
+///
+/// ## [radius]
+///
+/// Corner radius of the Chip.
+///
+/// If not defined, defaults to [kChipRadius] 8dp,
+/// based on M3 Specification
+/// https://m3.material.io/components/chips/specs
+///
+/// ## [surfaceTintColor]
+///
+/// Overrides the default for [ChipAttributes.surfaceTintColor], the
+/// Color of the chip's surface tint overlay when its elevation is
+/// greater than 0.
+///
+/// This property applies to [ActionChip], [Chip], [ChoiceChip],
+/// [FilterChip], [InputChip], [RawChip].
+///
+/// ## [useTintedDisable]
+///
+/// Defines if the theme uses tinted disabled color.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useMaterial3]
+///
+/// A temporary flag used to disable Material-3 design and use legacy
+/// Material-2 design instead. Material-3 design is the default.
+/// Material-2 will be deprecated in Flutter.
+///
+/// If set to true, the theme will use Material3 default styles when
+/// properties are undefined, if false defaults will use FlexColorScheme's
+/// own opinionated default values.
+///
+/// The M2/M3 defaults will only be used for properties that are not
+/// defined, if defined they keep their defined values.
+///
+/// If undefined, defaults to true.
 ChipThemeData _chipTheme({
-  /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+  /// Typically the same `ColorScheme` that is also use for your `ThemeData`.
   required ColorScheme colorScheme,
 
-  /// Defines if the [baseSchemeColor] and [selectedSchemeColor] are
+  /// Defines if the `baseSchemeColor` and `selectedSchemeColor` are
   /// alpha blended with the surface color.
   ///
   /// If not defined, defaults to false in Material-3 mode and to true
   /// in Material-2 mode.
-  ///
-  /// When true, the [baseSchemeColor] is alpha blended with the surface
-  /// color using [kChipBackgroundAlphaBlend] alpha blend value.
-  /// The [selectedSchemeColor] is alpha blended with the surface color
-  /// using [kChipSelectedBackgroundAlphaBlend] alpha blend value.
   bool? blendColors,
 
-  /// Defines which [Theme] based [ColorScheme] based color the Chips
+  /// Defines which `Theme` based `ColorScheme` based color the Chips
   /// use as their background base color.
   ///
-  /// If not defined and [useMaterial3] is true, it defaults
-  /// [SchemeColor.surface].
-  ///
-  /// If not defined and [useMaterial3] is false, it defaults
-  /// [SchemeColor.primary] with a surface alpha blend of
-  /// [kChipBackgroundAlphaBlend] applied, if [blendColors] is true,
-  /// which it defaults to in Material-2 mode.
+  /// If not defined and `useMaterial3` is true, it defaults
+  /// `SchemeColor.surface`.
   SchemeColor? baseSchemeColor,
 
-  /// Defines which [Theme] based [ColorScheme] based color the selected Chips
+  /// Defines which `Theme` based `ColorScheme` based color the selected Chips
   /// use as their selected state color.
-  ///
-  /// The color scheme contrast pair color is used for text and icons, on the
-  /// [selectedSchemeColor].
-  ///
-  /// If not defined and [useMaterial3] is true, defaults to
-  /// [SchemeColor.secondaryContainer].
-  ///
-  /// If not defined and [useMaterial3] is false, defaults to
-  /// [SchemeColor.secondaryContainer] if [blendColors] is false.
-  /// If [blendColors] is true, defaults to [SchemeColor.primary] with
-  /// a surface alpha blend of [kChipSelectedBackgroundAlphaBlend] applied.
   SchemeColor? selectedSchemeColor,
 
-  /// Defines which [Theme] based [ColorScheme] based color the selected
+  /// Defines which `Theme` based `ColorScheme` based color the selected
   /// ChoiceChips use as their selected state color.
-  ///
-  /// The color scheme contrast pair color is used for text and icons, on the
-  /// [secondarySelectedSchemeColor]
-  ///
-  /// If not defined and [useMaterial3] is true, defaults to
-  /// [selectedSchemeColor].
   SchemeColor? secondarySelectedSchemeColor,
 
-  /// Defines which [Theme] based [ColorScheme] based color the Chips
+  /// Defines which `Theme` based `ColorScheme` based color the Chips
   /// use as color of the delete icon.
-  ///
-  /// The selected color is only used as base for the [Chip] colors, it also
-  /// uses alpha blend and opacity to create the effective Chip colors using
-  /// the selected scheme color as base.
-  ///
-  /// If not defined it defaults to effective theme based color from using
-  /// [SchemeColor.onSurfaceVariant] same as Material-3 default.
   SchemeColor? deleteIconSchemeColor,
 
-  /// Overrides the default for [ChipAttributes.labelStyle],
-  /// the style of the [DefaultTextStyle] that contains the
+  /// Overrides the default for `ChipAttributes.labelStyle`,
+  /// the style of the `DefaultTextStyle` that contains the
   /// chip's label.
-  ///
-  /// This only has an effect on label widgets that respect the
-  /// [DefaultTextStyle], such as [Text].
-  ///
-  /// This property applies to [ActionChip], [Chip],
-  /// [FilterChip], [InputChip], [RawChip].
-  ///
-  /// If not defined, the font size in the style defaults to 14.
   TextStyle? labelStyle,
 
-  /// Overrides the default for [ChoiceChip.labelStyle],
-  /// the style of the [DefaultTextStyle] that contains the
+  /// Overrides the default for `ChoiceChip.labelStyle`,
+  /// the style of the `DefaultTextStyle` that contains the
   /// chip's label.
-  ///
-  /// This only has an effect on label widgets that respect the
-  /// [DefaultTextStyle], such as [Text].
-  ///
-  /// If not defined, the font size in the style defaults to 14.
   TextStyle? secondaryLabelStyle,
 
-  /// Font size of the [labelStyle].
-  ///
-  /// If defined, overrides the default font size used by either the
-  /// default font of the default [labelStyle] or the font size of the
-  /// passed in [labelStyle].
-  ///
-  /// If not defined the default text style font sizes are used, but if they
-  /// did not have size defined, defaults 14.
+  /// Font size of the `labelStyle`.
   double? fontSize,
 
-  /// Font size of the [secondaryLabelStyle].
-  ///
-  /// If defined, overrides the default font size used by either the
-  /// default font of the default [secondaryLabelStyle] or the font size of
-  /// the passed in [secondaryLabelStyle].
-  ///
-  /// If not defined, defaults to [fontSize].
+  /// Font size of the `secondaryLabelStyle`.
   double? secondaryFontSize,
 
-  /// Icon size used by the [IconTheme] used by [Chip]s.
+  /// Icon size used by the `IconTheme` used by `Chip`s.
   ///
   /// If not defined defaults to 18.
   double? iconSize,
 
-  /// Overrides the default for [ChipAttributes.padding],
-  /// the padding between the contents of the chip and the outside [shape].
-  ///
-  /// This property applies to [ActionChip], [Chip], [ChoiceChip],
-  /// [FilterChip], [InputChip], [RawChip].
-  ///
-  /// If not defined, defaults to EdgeInsets.symmetric(horizontal: 8) in
-  /// Material mode and to EdgeInsets.symmetric(horizontal: 4) in
-  /// Material2 mode.
+  /// Overrides the default for `ChipAttributes.padding`,
+  /// the padding between the contents of the chip and the outside `shape`.
   EdgeInsetsGeometry? padding,
 
   /// Corner radius of the Chip.
   ///
-  /// If not defined, defaults to [kChipRadius] 8dp,
+  /// If not defined, defaults to `kChipRadius` 8dp,
   /// based on M3 Specification
   /// https://m3.material.io/components/chips/specs
   double? radius,
 
-  /// Overrides the default for [ChipAttributes.surfaceTintColor], the
+  /// Overrides the default for `ChipAttributes.surfaceTintColor`, the
   /// Color of the chip's surface tint overlay when its elevation is
   /// greater than 0.
-  ///
-  /// This property applies to [ActionChip], [Chip], [ChoiceChip],
-  /// [FilterChip], [InputChip], [RawChip].
   Color? surfaceTintColor,
 
   /// Defines if the theme uses tinted disabled color.
@@ -146,15 +247,6 @@ ChipThemeData _chipTheme({
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
   /// Material-2 will be deprecated in Flutter.
-  ///
-  /// If set to true, the theme will use Material3 default styles when
-  /// properties are undefined, if false defaults will use FlexColorScheme's
-  /// own opinionated default values.
-  ///
-  /// The M2/M3 defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
   bool? useMaterial3,
 }) {
   // Used to toggle between different defaults from M2 and M3.

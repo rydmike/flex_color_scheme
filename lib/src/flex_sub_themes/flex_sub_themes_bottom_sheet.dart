@@ -6,14 +6,79 @@ part of '../flex_sub_themes.dart';
 /// Corner [radius] defaults to [kBottomSheetBorderRadius] = 28,
 /// [elevation] to [kBottomSheetElevation] = 4 and [modalElevation] to
 /// [kBottomSheetModalElevation] = 8.
+///
+/// ## [backgroundColor]
+///
+/// Default value for [BottomSheet.backgroundColor].
+///
+/// If null, defaults to Flutter's default, which is theme canvas color in
+/// M2 mode and surfaceContainerLow in M3 mode.
+///
+/// ## [modalBackgroundColor]
+///
+/// Value for [BottomSheet.backgroundColor] when the Bottom sheet is
+/// presented as a modal bottom sheet.
+///
+/// If null, defaults to Flutter's default, which is theme canvas color in
+/// M2 mode and surfaceContainerLow in M3 mode.
+///
+/// ## [elevation]
+///
+/// The none modal bottom sheet elevation.
+///
+/// If null, defaults to [kBottomSheetElevation] = 1.
+///
+/// ## [modalElevation]
+///
+/// The modal bottom sheet elevation.
+///
+/// If null, defaults to [kBottomSheetModalElevation] = 2.
+///
+/// ## [radius]
+///
+/// The corner radius of the top corners.
+///
+/// If not defined, defaults to [kBottomSheetBorderRadius] 28p.
+///
+/// Follows Material M3 guide as default value.
+/// https://m3.material.io/components/bottom-sheets/specs
+///
+/// ## [clipBehavior]
+///
+/// Defines the bottom sheet's [Material.clipBehavior]
+/// by overriding the default value for [BottomSheet.clipBehavior].
+///
+/// Use this property to enable clipping of content when the bottom sheet
+/// has a custom [shape] and the content can extend past this shape.
+/// For example, a bottom sheet with rounded corners and an edge-to-edge
+/// [Image] at the top.
+///
+/// If this property is null then then the behavior will be [Clip.none],
+/// via Flutter's default values.
+///
+/// ## [constraints]
+///
+/// Constrains the size of the [BottomSheet].
+///
+/// If null, the bottom sheet's size will be unconstrained.
+///
+/// ## [shadowColor]
+///
+/// Overrides the default value of [BottomSheet.shadowColor].
+///
+/// ## [surfaceTintColor]
+///
+/// Overrides the default value for surfaceTintColor.
+///
+/// See [Material.surfaceTintColor] for more details.
 BottomSheetThemeData _bottomSheetTheme({
-  /// Default value for [BottomSheet.backgroundColor].
+  /// Default value for `BottomSheet.backgroundColor`.
   ///
   /// If null, defaults to Flutter's default, which is theme canvas color in
   /// M2 mode and surfaceContainerLow in M3 mode.
   Color? backgroundColor,
 
-  /// Value for [BottomSheet.backgroundColor] when the Bottom sheet is
+  /// Value for `BottomSheet.backgroundColor` when the Bottom sheet is
   /// presented as a modal bottom sheet.
   ///
   /// If null, defaults to Flutter's default, which is theme canvas color in
@@ -22,45 +87,32 @@ BottomSheetThemeData _bottomSheetTheme({
 
   /// The none modal bottom sheet elevation.
   ///
-  /// If null, defaults to [kBottomSheetElevation] = 1.
+  /// If null, defaults to `kBottomSheetElevation` = 1.
   double? elevation,
 
   /// The modal bottom sheet elevation.
   ///
-  /// If null, defaults to [kBottomSheetModalElevation] = 2.
+  /// If null, defaults to `kBottomSheetModalElevation` = 2.
   double? modalElevation,
 
   /// The corner radius of the top corners.
   ///
-  /// If not defined, defaults to [kBottomSheetBorderRadius] 28p.
-  ///
-  /// Follows Material M3 guide as default value.
-  /// https://m3.material.io/components/bottom-sheets/specs
+  /// If not defined, defaults to `kBottomSheetBorderRadius` 28p.
   double? radius,
 
-  /// Defines the bottom sheet's [Material.clipBehavior]
-  /// by overriding the default value for [BottomSheet.clipBehavior].
-  ///
-  /// Use this property to enable clipping of content when the bottom sheet
-  /// has a custom [shape] and the content can extend past this shape.
-  /// For example, a bottom sheet with rounded corners and an edge-to-edge
-  /// [Image] at the top.
-  ///
-  /// If this property is null then then the behavior will be [Clip.none],
-  /// via Flutter's default values.
+  /// Defines the bottom sheet's `Material.clipBehavior`
+  /// by overriding the default value for `BottomSheet.clipBehavior`.
   Clip? clipBehavior,
 
-  /// Constrains the size of the [BottomSheet].
+  /// Constrains the size of the `BottomSheet`.
   ///
   /// If null, the bottom sheet's size will be unconstrained.
   BoxConstraints? constraints,
 
-  /// Overrides the default value of [BottomSheet.shadowColor].
+  /// Overrides the default value of `BottomSheet.shadowColor`.
   Color? shadowColor,
 
   /// Overrides the default value for surfaceTintColor.
-  ///
-  /// See [Material.surfaceTintColor] for more details.
   Color? surfaceTintColor,
 }) => BottomSheetThemeData(
   backgroundColor: backgroundColor,

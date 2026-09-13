@@ -3,71 +3,106 @@ part of '../flex_sub_themes.dart';
 /// An opinionated [SnackBarThemeData] with custom elevation.
 ///
 /// The [elevation] defaults to [kSnackBarElevation] (4).
+///
+/// ## [elevation]
+///
+/// SnackBar elevation
+///
+/// If undefined defaults to [kSnackBarElevation] = 4.
+///
+/// ## [radius]
+///
+/// Corner radius of the [SnackBar].
+///
+/// If not defined, defaults to 4 dp, but only when
+/// [SnackBar.behavior] style [SnackBarBehavior.floating] is used. This
+/// default is based on SDK widget default behavior and is  based on
+/// M3 Specification https://m3.material.io/components/snackbar/specs.
+///
+/// NOTE: If this theme property is set, both SnackBars with behavior
+/// fixed and floating will get the assigned radius. See issue:
+/// https://github.com/flutter/flutter/issues/108539
+///
+/// ## [backgroundColor]
+///
+/// The background color of the themed SnackBar. Typically one of inverse
+/// brightness compared to theme's surface color brightness.
+///
+/// If null then it default to Flutter SDK theme defaults below.
+/// When FlexColorScheme sub themes are used and [backgroundSchemeColor]
+/// has not been defined, it defaults to FCS default shown below:
+///
+/// * Default in light theme mode:
+///   * Via FCS: onSurface with primary blend at 45% opacity, with
+///     total opacity 95%
+///   * Flutter SDK M2 uses: colorScheme.onSurface with opacity 80%,
+///     alpha blended on top of colorScheme.surface.
+///   * Flutter SDK M3 uses: colorScheme.inverseSurface.
+///
+/// * In dark theme mode:
+///   * FCS: onSurface with primary blend at 39% opacity, with total
+///     opacity 93%
+///   * Flutter SDK M2 uses: colorScheme.onSurface
+///   * Flutter SDK M2 uses: colorScheme.inverseSurface
+///
+///  If a [colorScheme] is passed in and [backgroundSchemeColor] is defined,
+///  it will override [backgroundColor] and be used instead.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also use for your [ThemeData].
+///
+/// ## [backgroundSchemeColor]
+///
+/// Selects which color from the passed in [colorScheme] to use as
+/// [SnackBar] background color.
+///
+/// If not defined or [colorScheme] is not defined, then the passed in
+/// [backgroundColor] will be used, which may be null too and SnackBar then
+/// falls back Flutter SDK defaults, or to FCS default if this is used by
+/// FCS that passes in its one custom default.
+///
+/// ## [actionTextSchemeColor]
+///
+/// Overrides the default value for [SnackBarAction.textColor].
+///
+/// If null, [SnackBarAction] and [colorScheme] is defined, defaults to
+/// [ColorScheme.inversePrimary], if a [colorScheme] was not defined, then
+/// defaults to effective foreground color with alpha 0xDD.
+///
+/// ## [contentTextStyle]
+///
+/// Used to configure the [DefaultTextStyle] for the [SnackBar.content]
+/// widget.
+///
+/// If null, [SnackBar] defines its default using titleMedium
 SnackBarThemeData _snackBarTheme({
   /// SnackBar elevation
   ///
-  /// If undefined defaults to [kSnackBarElevation] = 4.
+  /// If undefined defaults to `kSnackBarElevation` = 4.
   double? elevation,
 
-  /// Corner radius of the [SnackBar].
-  ///
-  /// If not defined, defaults to 4 dp, but only when
-  /// [SnackBar.behavior] style [SnackBarBehavior.floating] is used. This
-  /// default is based on SDK widget default behavior and is  based on
-  /// M3 Specification https://m3.material.io/components/snackbar/specs.
-  ///
-  /// NOTE: If this theme property is set, both SnackBars with behavior
-  /// fixed and floating will get the assigned radius. See issue:
-  /// https://github.com/flutter/flutter/issues/108539
+  /// Corner radius of the `SnackBar`.
   double? radius,
 
   /// The background color of the themed SnackBar. Typically one of inverse
   /// brightness compared to theme's surface color brightness.
-  ///
-  /// If null then it default to Flutter SDK theme defaults below.
-  /// When FlexColorScheme sub themes are used and [backgroundSchemeColor]
-  /// has not been defined, it defaults to FCS default shown below:
-  ///
-  /// * Default in light theme mode:
-  ///   * Via FCS: onSurface with primary blend at 45% opacity, with
-  ///     total opacity 95%
-  ///   * Flutter SDK M2 uses: colorScheme.onSurface with opacity 80%,
-  ///     alpha blended on top of colorScheme.surface.
-  ///   * Flutter SDK M3 uses: colorScheme.inverseSurface.
-  ///
-  /// * In dark theme mode:
-  ///   * FCS: onSurface with primary blend at 39% opacity, with total
-  ///     opacity 93%
-  ///   * Flutter SDK M2 uses: colorScheme.onSurface
-  ///   * Flutter SDK M2 uses: colorScheme.inverseSurface
-  ///
-  ///  If a [colorScheme] is passed in and [backgroundSchemeColor] is defined,
-  ///  it will override [backgroundColor] and be used instead.
   Color? backgroundColor,
 
-  /// Typically the same [ColorScheme] that is also use for your [ThemeData].
+  /// Typically the same `ColorScheme` that is also use for your `ThemeData`.
   ColorScheme? colorScheme,
 
-  /// Selects which color from the passed in [colorScheme] to use as
-  /// [SnackBar] background color.
-  ///
-  /// If not defined or [colorScheme] is not defined, then the passed in
-  /// [backgroundColor] will be used, which may be null too and SnackBar then
-  /// falls back Flutter SDK defaults, or to FCS default if this is used by
-  /// FCS that passes in its one custom default.
+  /// Selects which color from the passed in `colorScheme` to use as
+  /// `SnackBar` background color.
   SchemeColor? backgroundSchemeColor,
 
-  /// Overrides the default value for [SnackBarAction.textColor].
-  ///
-  /// If null, [SnackBarAction] and [colorScheme] is defined, defaults to
-  /// [ColorScheme.inversePrimary], if a [colorScheme] was not defined, then
-  /// defaults to effective foreground color with alpha 0xDD.
+  /// Overrides the default value for `SnackBarAction.textColor`.
   SchemeColor? actionTextSchemeColor,
 
-  /// Used to configure the [DefaultTextStyle] for the [SnackBar.content]
+  /// Used to configure the `DefaultTextStyle` for the `SnackBar.content`
   /// widget.
   ///
-  /// If null, [SnackBar] defines its default using titleMedium
+  /// If null, `SnackBar` defines its default using titleMedium
   TextStyle? contentTextStyle,
 }) {
   final Color? background = (colorScheme == null || backgroundSchemeColor == null)
