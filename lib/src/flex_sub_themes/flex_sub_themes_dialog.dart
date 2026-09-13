@@ -23,7 +23,7 @@ part of '../flex_sub_themes.dart';
 /// passed in here.
 ///
 /// Can be used to make a custom themed dialog with own background color,
-/// even after the [ThemeData.dialogBackgroundColor] property is
+/// even after the `ThemeData.dialogBackgroundColor` property is
 /// is deprecated in Flutter SDK. See
 /// https://github.com/flutter/flutter/issues/91772)
 ///
@@ -38,7 +38,7 @@ part of '../flex_sub_themes.dart';
 /// passed in here.
 ///
 /// Can be used to make a custom themed dialog with own background color,
-/// even after the [ThemeData.dialogBackgroundColor] property is
+/// even after the `ThemeData.dialogBackgroundColor` property is
 /// is deprecated in Flutter SDK. See
 /// https://github.com/flutter/flutter/issues/91772)
 ///

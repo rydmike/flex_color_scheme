@@ -673,12 +673,8 @@ extension FlexThemeData on ThemeData {
   ///
   /// The background color used by [Dialog]s.
   ///
-  /// In FCS versions before 8.2.0 this color is applied to
-  /// [ThemeData.dialogBackgroundColor], a color that cannot be
-  /// controlled separately with only a [ThemeData.from] a [ColorScheme].
-  ///
   /// In FCS version 8.2.0 and later this color is no longer applied to
-  /// [ThemeData.dialogBackgroundColor], as the property is deprecated in
+  /// `ThemeData.dialogBackgroundColor`, as the property is deprecated in
   /// Flutter 3.29.0 and later. To get the given dialog color, sub-themes
   /// must now be enabled.
   ///
@@ -2438,12 +2434,8 @@ extension FlexThemeData on ThemeData {
   ///
   /// The background color used by [Dialog]s.
   ///
-  /// In FCS versions before 8.2.0 this color is applied to
-  /// [ThemeData.dialogBackgroundColor], a color that cannot be
-  /// controlled separately with only a [ThemeData.from] a [ColorScheme].
-  ///
   /// In FCS version 8.2.0 and later this color is no longer applied to
-  /// [ThemeData.dialogBackgroundColor], as the property is deprecated in
+  /// `ThemeData.dialogBackgroundColor`, as the property is deprecated in
   /// Flutter 3.29.0 and later. To get the given dialog color, sub-themes
   /// must now be enabled.
   ///
