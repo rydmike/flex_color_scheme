@@ -17,13 +17,13 @@ part of '../flex_sub_themes.dart';
 /// The cursor indicates the current location of text insertion point in
 /// the field.
 ///
-/// If not defined, [colorScheme.primary] is used.
+/// If not defined, [ColorScheme.primary] is used.
 ///
 /// ## [selectionSchemeColor]
 ///
 /// The [SchemeColor] based background color of selected text.
 ///
-/// If not defined, [colorScheme.primary] is used.
+/// If not defined, [ColorScheme.primary] is used.
 ///
 /// ## [selectionOpacity]
 ///
@@ -40,7 +40,7 @@ part of '../flex_sub_themes.dart';
 /// Selection handles are used to indicate the bounds of the selected text,
 /// or as a handle to drag the cursor to a new location in the text.
 ///
-/// If not defined, [colorScheme.primary] is used.
+/// If not defined, [ColorScheme.primary] is used.
 ///
 /// ## [selectionHandleCustomColor]
 ///

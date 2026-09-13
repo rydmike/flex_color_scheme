@@ -19,8 +19,8 @@ part of '../flex_sub_themes.dart';
 /// Selects which color from the passed in colorScheme to use as the
 /// background color for the [BottomAppBar].
 ///
-/// If not defined, [colorScheme.surfaceContainer] will be used via default
-/// widget behavior for M3 mode and explicitly set to [surface] for M2 mode.
+/// If not defined, [ColorScheme.surfaceContainer] will be used via default
+/// widget behavior for M3 mode and explicitly set to [ColorScheme.surface] for M2 mode.
 ///
 /// ## [elevation]
 ///

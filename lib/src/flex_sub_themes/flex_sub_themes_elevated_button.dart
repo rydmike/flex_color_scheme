@@ -28,7 +28,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// All colors in the color scheme are not good choices, but some work well.
 ///
-/// If not defined, [colorScheme.primary] will be used.
+/// If not defined, [ColorScheme.primary] will be used.
 ///
 /// ## [onBaseSchemeColor]
 ///
@@ -43,7 +43,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// If not defined, the [baseSchemeColor] on color will be used if
 /// [useMaterial3] is false, if it is true, then
-/// [colorScheme.surfaceContainerLow] will be used.
+/// [ColorScheme.surfaceContainerLow] will be used.
 ///
 /// ## [radius]
 ///
@@ -77,7 +77,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// Padding for the button theme.
 ///
-/// Defaults to null and uses [styleFrom] constructors default padding.
+/// Defaults to null and uses [ElevatedButton.styleFrom] constructors default padding.
 ///
 /// M3 has more horizontal padding 24dp, but the tighter default padding
 /// in M2 that is 16dp looks fine as well when using stadium borders
@@ -99,7 +99,7 @@ part of '../flex_sub_themes.dart';
 /// The style for the button's [Text] widget descendants.
 ///
 /// The color of the [textStyle] is typically not used directly, the
-/// [foregroundColor] is used instead.
+/// [ButtonStyle.foregroundColor] is used instead.
 ///
 /// ## [useTintedInteraction]
 ///

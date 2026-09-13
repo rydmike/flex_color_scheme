@@ -8,7 +8,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [textStyle]
 ///
-/// The [TextStyle] of the text entry in a [DropDownMenu].
+/// The [TextStyle] of the text entry in a [DropdownMenu].
 ///
 /// If not defined, defaults to Flutter SDK default via widget default
 /// [TextTheme.labelLarge].
@@ -16,14 +16,14 @@ part of '../flex_sub_themes.dart';
 /// ## [inputDecorationTheme]
 ///
 /// An [InputDecorationThemeData] for the text input part of
-/// the [DropDownMenu].
+/// the [DropdownMenu].
 ///
 /// Typically you want it to match the input decorator on your TextField.
 ///
 /// ## [surfaceTintColor]
 ///
 /// Overrides the default value for DropdownMenuThemeData
-/// [menuStyle.surfaceTintColor].
+/// [MenuStyle.surfaceTintColor].
 ///
 /// ## [maximumSize]
 ///
@@ -32,7 +32,7 @@ part of '../flex_sub_themes.dart';
 /// A [Size.infinite] or null value for this property means that the menu's
 /// maximum size is not constrained.
 ///
-/// This value must be greater than or equal to [minimumSize].
+/// This value must be greater than or equal to [MenuStyle.minimumSize].
 ///
 /// If not defined, this property temporarily defaults to
 /// `WidgetStatePropertyAll<Size>(Size.infinite)`. This default fallback is

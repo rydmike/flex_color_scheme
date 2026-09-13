@@ -20,7 +20,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// All colors in the color scheme are not good choices, but some work well.
 ///
-/// If not defined, [colorScheme.primary] will be used.
+/// If not defined, [ColorScheme.primary] will be used.
 ///
 /// ## [radius]
 ///
@@ -49,7 +49,7 @@ part of '../flex_sub_themes.dart';
 /// The style for the button's [Text] widget descendants.
 ///
 /// The color of the [textStyle] is typically not used directly, the
-/// [foregroundColor] is used instead.
+/// [ButtonStyle.foregroundColor] is used instead.
 ///
 /// ## [useTintedInteraction]
 ///

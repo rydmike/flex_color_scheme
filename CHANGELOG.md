@@ -29,6 +29,7 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 - Setup package for agentic development and usage use with git worktrees.
 - Added a skill for agents that consume this package, see `.agents/skills/flex-color-scheme/SKILL.md`.
 - Function and factory parameter documentation now lives in the callable body as `## [param]` sections so dartdoc links resolve. Parameter-level comments are short summaries that use backticks instead of `[Symbol]` references.
+- Remaining dartdoc `comment_references` are resolved with `@docImport` on library directives, `[Class.member]` qualification, and backticks for literals, GoogleFonts, and removed APIs such as `surfaceStyle` / `FlexSurface`.
 
 **CHORE**
 - Bump package version to 9.0.0.

@@ -126,7 +126,7 @@ part of '../flex_sub_themes.dart';
 /// ## [padding]
 ///
 /// Overrides the default for [ChipAttributes.padding],
-/// the padding between the contents of the chip and the outside [shape].
+/// the padding between the contents of the chip and the outside [ShapeBorder].
 ///
 /// This property applies to [ActionChip], [Chip], [ChoiceChip],
 /// [FilterChip], [InputChip], [RawChip].

@@ -2121,7 +2121,7 @@ abstract final class FlexSubThemes {
   /// gets default via Dialog's default null theme behavior,
   /// which is [ColorScheme.surfaceContainerHigh]
   /// in Material-3 mode and in Material-2 mode in light theme
-  /// [Colors.white] and in a dark theme `Colors.shade.grey800`.
+  /// [Colors.white] and in a dark theme `Colors.grey.shade800`.
   ///
   /// If [backgroundSchemeColor] is defined, it will override any color
   /// give to [backgroundColor].

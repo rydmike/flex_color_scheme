@@ -20,10 +20,10 @@ part of '../flex_sub_themes.dart';
 /// Provide info on which color from the passed in [colorScheme] parameter
 /// that is used as background color of menu containers defined by
 /// [FlexSubThemes.menuTheme] and [FlexSubThemes.menuBarTheme]. The menu
-/// container is used by [MenuAnchor], [DropDownMenu] and menus on
+/// container is used by [MenuAnchor], [DropdownMenu] and menus on
 /// [MenuBar].
 ///
-/// If not defined, defaults to [colorScheme.surfaceContainer].
+/// If not defined, defaults to [ColorScheme.surfaceContainer].
 ///
 /// ## [backgroundSchemeColor]
 ///

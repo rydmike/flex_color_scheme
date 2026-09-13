@@ -39,7 +39,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// All colors in the color scheme are not good choices, but some work well.
 ///
-/// If not defined, [colorScheme.primary] will be used.
+/// If not defined, [ColorScheme.primary] will be used.
 ///
 /// ## [radius]
 ///

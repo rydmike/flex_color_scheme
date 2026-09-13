@@ -10,7 +10,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// The search bar's background fill color.
 ///
-/// If null, the default value is [surfaceContainerHigh].
+/// If null, the default value is [ColorScheme.surfaceContainerHigh].
 ///
 /// ## [elevation]
 ///
@@ -40,14 +40,14 @@ part of '../flex_sub_themes.dart';
 ///
 /// The style to use for the text being edited.
 ///
-/// If null, defaults to the [bodyLarge] text style from the current
+/// If null, defaults to the [TextTheme.bodyLarge] text style from the current
 /// [Theme]. The default text color is [ColorScheme.onSurface].
 ///
 /// ## [hintStyle]
 ///
-/// The style to use for the [hintText].
+/// The style to use for the [SearchBar.hintText].
 ///
-/// If null, defaults to [bodyLarge] text style from the current [Theme].
+/// If null, defaults to [TextTheme.bodyLarge] text style from the current [Theme].
 /// The default text color is [ColorScheme.onSurfaceVariant].
 ///
 /// ## [constraints]

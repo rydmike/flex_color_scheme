@@ -17,7 +17,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// All colors in the color scheme are not good choices, but some work well.
 ///
-/// If not defined, [colorScheme.primary] will be used.
+/// If not defined, [ColorScheme.primary] will be used.
 ///
 /// ## [thumbSchemeColor]
 ///
@@ -54,7 +54,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [valueIndicatorColor]
 ///
-/// The color given to the [valueIndicatorShape] to draw itself with.
+/// The color given to the [SliderThemeData.valueIndicatorShape] to draw itself with.
 ///
 /// If undefined, defaults to using Flutter SDK's logic for the color.
 ///
@@ -86,7 +86,7 @@ part of '../flex_sub_themes.dart';
 /// appearance, which was introduced in December 2023 and become common
 /// in 2024.
 ///
-/// In Flutter Material SDK, this property is named [year2023].
+/// In Flutter Material SDK, this property is named [SliderThemeData.year2023].
 ///
 /// If undefined, defaults to true, via Flutter Material's default behavior.
 /// If [useMaterial3] is false, then this property is ignored.

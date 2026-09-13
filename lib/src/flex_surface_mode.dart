@@ -1,4 +1,5 @@
-import 'package:flex_color_scheme/src/flex_scheme_surface_colors.dart'; // For comment refs.
+/// @docImport 'package:flex_color_scheme/src/flex_scheme_surface_colors.dart';
+library;
 
 /// Enum for using predefined surface blend modes for all surfaces and scaffold
 /// background colors in FlexColorScheme based themes.

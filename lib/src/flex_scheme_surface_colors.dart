@@ -181,7 +181,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// fallback, depending on if we are making light or dark surfaces.
   ///
   /// If a blend color for a surface is provided in [blendColors], that color
-  /// color always overrides used color from [schemeColor] selected based on
+  /// color always overrides used color from [schemeColors] selected based on
   /// [surfaceMode].
   ///
   /// ## [blendColors]
@@ -191,7 +191,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   /// If provided, these colors will be blended into each equivalent surface
   /// color.
   ///
-  /// If it is null, then [schemeColors.primary] will be assigned to all
+  /// If it is null, then [FlexSchemeColor.primary] will be assigned to all
   /// surfaces.
   ///
   /// ## [surfaceColors]

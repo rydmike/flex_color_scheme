@@ -24,8 +24,8 @@ part of '../flex_sub_themes.dart';
 /// Select which color from the passed in [colorScheme] parameter to use as
 /// the floating action button background color.
 ///
-/// If not defined, then if [useMaterial3] [colorScheme.secondary] will
-/// be. If [useMaterial3] is true, then [colorScheme.primaryContainer]
+/// If not defined, then if [useMaterial3] [ColorScheme.secondary] will
+/// be. If [useMaterial3] is true, then [ColorScheme.primaryContainer]
 /// will be used.
 ///
 /// The foreground color automatically uses the selected background

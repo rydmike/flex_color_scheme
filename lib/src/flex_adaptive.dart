@@ -1,3 +1,9 @@
+/// @docImport 'package:cupertino_ui/cupertino_ui.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_color_scheme.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_sub_themes_data.dart';
+/// @docImport 'package:material_ui/material_ui.dart';
+library;
+
 import 'package:flutter/foundation.dart';
 
 /// The [FlexAdaptive] class is used to define on what platforms

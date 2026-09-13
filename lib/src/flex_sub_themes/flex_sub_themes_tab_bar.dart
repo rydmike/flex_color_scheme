@@ -41,10 +41,10 @@ part of '../flex_sub_themes.dart';
 /// Overrides the default value for [TabBar.tabAlignment].
 ///
 /// In M3 the default is [TabAlignment.startOffset] if [TabBar] property
-/// [isScrollable] is true, if false the default is [TabAlignment.fill].
+/// [TabBar.isScrollable] is true, if false the default is [TabAlignment.fill].
 ///
 /// In M2 the default is [TabAlignment.start] if [TabBar] property
-/// [isScrollable] is true, if false the default is [TabAlignment.fill].
+/// [TabBar.isScrollable] is true, if false the default is [TabAlignment.fill].
 ///
 /// **NOTE:**
 ///

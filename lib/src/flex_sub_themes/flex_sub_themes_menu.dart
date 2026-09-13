@@ -22,7 +22,7 @@ part of '../flex_sub_themes.dart';
 /// Menu background opacity.
 ///
 /// Used by FlexColorScheme to modify the opacity the themed [MenuBar],
-/// [MenuAnchor] and [DropDownMenu] background color.
+/// [MenuAnchor] and [DropdownMenu] background color.
 ///
 /// Defaults to undefined (null).
 /// If undefined, produced result is same as 1, fully opaque.
@@ -50,7 +50,7 @@ part of '../flex_sub_themes.dart';
 /// ## [surfaceTintColor]
 ///
 /// Overrides the default value for MenuThemeData
-/// [menuStyle.surfaceTintColor].
+/// [MenuStyle.surfaceTintColor].
 MenuThemeData _menuTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
   required ColorScheme colorScheme,

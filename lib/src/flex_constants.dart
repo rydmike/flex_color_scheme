@@ -1,3 +1,7 @@
+/// @docImport 'package:flex_color_scheme/src/flex_color_scheme.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_sub_themes.dart';
+library;
+
 import 'package:material_ui/material_ui.dart';
 
 // These constants are not exported by FlexColorScheme, they are only used

@@ -56,7 +56,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [padding]
 ///
-/// The amount of space by which to inset the tooltip's [child].
+/// The amount of space by which to inset the tooltip's `child`.
 ///
 /// On mobile,
 ///   defaults to 16.0 logical pixels horizontally and 4.0 vertically.

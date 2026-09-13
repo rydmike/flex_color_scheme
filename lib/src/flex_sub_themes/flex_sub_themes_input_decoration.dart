@@ -59,14 +59,14 @@ part of '../flex_sub_themes.dart';
 /// The padding for the input decoration's container.
 ///
 /// The decoration's container is the area which is filled if
-/// [InputDecoration.filled] is true and bordered per the [border].
+/// [InputDecoration.filled] is true and bordered per the [InputDecoration.border].
 /// It's the area adjacent to [InputDecoration.icon] and above the
 /// [InputDecoration.icon] and above the widgets that contain
 /// [InputDecoration.helperText], [InputDecoration.errorText], and
 /// [InputDecoration.counterText].
 ///
 /// By default the [contentPadding] reflects [isDense] and the type of the
-/// [border]. If [isCollapsed] is true then [contentPadding] is
+/// [InputDecoration.border]. If [InputDecoration.isCollapsed] is true then [contentPadding] is
 /// [EdgeInsets.zero].
 ///
 /// When [isDense] is true, the content padding can be made smaller and
@@ -87,12 +87,12 @@ part of '../flex_sub_themes.dart';
 ///
 /// If true the decoration's container is filled with [fillColor].
 ///
-/// Typically this field set to true if [border] is an
+/// Typically this field set to true if [InputDecoration.border] is an
 /// [UnderlineInputBorder].
 ///
 /// The decoration's container is the area, defined by the border's
 /// [InputBorder.getOuterPath], which is filled if [filled] is
-/// true and bordered per the [border].
+/// true and bordered per the [InputDecoration.border].
 ///
 /// Defaults to false, like Flutter SDK does. Filled is nicer, try it.
 ///
@@ -101,7 +101,7 @@ part of '../flex_sub_themes.dart';
 /// An optional totally custom fill color used to fill the
 /// [InputDecorator] background with, when [filled] is true.
 ///
-/// If null, defaults to color scheme color defined by [baseColor]
+/// If null, defaults to color scheme color defined by [baseSchemeColor]
 /// withAlpha(0x0D) (5%) if color scheme is light and withAlpha(0x14) (8%)
 /// if color scheme is dark.
 ///

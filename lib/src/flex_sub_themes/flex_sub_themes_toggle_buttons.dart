@@ -88,8 +88,8 @@ part of '../flex_sub_themes.dart';
 ///
 /// The default text style for [ToggleButtons.children].
 ///
-/// [TextStyle.color] will be ignored and substituted by [color],
-/// [selectedColor] or [disabledColor] depending on whether the buttons
+/// [TextStyle.color] will be ignored and substituted by [ToggleButtons.color],
+/// [ToggleButtons.selectedColor] or [ToggleButtons.disabledColor] depending on whether the buttons
 /// are active, selected, or disabled.
 ///
 /// ## [visualDensity]

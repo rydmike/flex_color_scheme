@@ -34,8 +34,8 @@ part of '../flex_sub_themes.dart';
 ///
 /// If not defined, and [color] is undefined, then it defaults via Flutter
 /// SDK defaults to:
-/// - [useMaterial3] = false : default theme.cardColor.
-/// - [useMaterial3] = true  : default theme.colorScheme.surfaceContainer.
+/// - [ThemeData.useMaterial3] = false : default theme.cardColor.
+/// - [ThemeData.useMaterial3] = true  : default theme.colorScheme.surfaceContainer.
 /// Usually they are the same.
 ///
 /// ## [foregroundSchemeColor]
@@ -54,15 +54,15 @@ part of '../flex_sub_themes.dart';
 ///
 /// If not defined, and [backgroundSchemeColor] is undefined, then it
 /// defaults via Flutter SDK defaults to:
-/// - [useMaterial3] = false : defaults theme.cardColor.
-/// - [useMaterial3] = true  : defaults theme.colorScheme.surfaceContainer.
+/// - [ThemeData.useMaterial3] = false : defaults theme.cardColor.
+/// - [ThemeData.useMaterial3] = true  : defaults theme.colorScheme.surfaceContainer.
 /// Usually they are the same.
 ///
 /// ## [textStyle]
 ///
 /// The TextStyle of the selectable items on the [PopupMenuButton].
 ///
-/// The default is [textTheme.labelLarge], via Flutter SDK defaults.
+/// The default is [TextTheme.labelLarge], via Flutter SDK defaults.
 ///
 /// ## [radius]
 ///
@@ -74,7 +74,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// The elevation of the [PopupMenuButton].
 ///
-/// If not defined, then if [useMaterial3] is:
+/// If not defined, then if [ThemeData.useMaterial3] is:
 /// - false : defaults to 8 dp
 /// - true  : defaults to 3 dp.
 /// via Flutter SDK widget default values.

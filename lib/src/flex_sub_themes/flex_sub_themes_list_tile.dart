@@ -15,9 +15,9 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [iconSchemeColor]
 ///
-/// Defines the default color for ListTile [leading] and [trailing] icons.
+/// Defines the default color for ListTile [ListTile.leading] and [ListTile.trailing] icons.
 ///
-/// If this property is null and [selected] is false then this color is
+/// If this property is null and [ListTile.selected] is false then this color is
 /// used.
 ///
 /// If null and [ThemeData.useMaterial3] is true,
@@ -25,21 +25,21 @@ part of '../flex_sub_themes.dart';
 /// [ThemeData.brightness] is [Brightness.light], [Colors.black54] is used,
 /// and if [ThemeData.brightness] is [Brightness.dark], the value is null.
 ///
-/// If [selected] is true then [selectedSchemeColor] is used. If
+/// If [ListTile.selected] is true then [selectedSchemeColor] is used. If
 /// it is null then [ColorScheme.primary] is used.
 ///
 /// ## [textSchemeColor]
 ///
-/// Defines the text color for the [title], [subtitle], [leading], and
-/// [trailing].
+/// Defines the text color for the [ListTile.title], [ListTile.subtitle], [ListTile.leading], and
+/// [ListTile.trailing].
 ///
-/// If this property is null and [selected] is false then
+/// If this property is null and [ListTile.selected] is false then
 /// [textSchemeColor] is used. If that is also null then
-/// default text color is used for the [title], [subtitle], [leading], and
-/// [trailing]. Except for [subtitle], if [ThemeData.useMaterial3] is false,
+/// default text color is used for the [ListTile.title], [ListTile.subtitle], [ListTile.leading], and
+/// [ListTile.trailing]. Except for [ListTile.subtitle], if [ThemeData.useMaterial3] is false,
 /// [TextTheme.bodySmall] is used.
 ///
-/// If this property is null and [selected] is true then
+/// If this property is null and [ListTile.selected] is true then
 /// [selectedSchemeColor is used. If that is also null
 /// then [ColorScheme.primary] is used.
 ///
@@ -48,7 +48,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [titleTextStyle]
 ///
-/// The text style for ListTile's [title].
+/// The text style for ListTile's [ListTile.title].
 ///
 /// If this property is null, then [ListTileThemeData.titleTextStyle] is
 /// used.
@@ -62,7 +62,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [subtitleTextStyle]
 ///
-/// The text style for ListTile's [subtitle].
+/// The text style for ListTile's [ListTile.subtitle].
 ///
 /// If this property is null, then [ListTileThemeData.subtitleTextStyle]
 /// is used.
@@ -74,7 +74,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [leadingAndTrailingTextStyle]
 ///
-/// The text style for ListTile's [leading] and [trailing].
+/// The text style for ListTile's [ListTile.leading] and [ListTile.trailing].
 ///
 /// If this property is null, then
 /// [ListTileThemeData.leadingAndTrailingTextStyle] is used.
@@ -85,20 +85,20 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [tileSchemeColor]
 ///
-/// Defines the background color of [ListTile] when [selected] is false.
+/// Defines the background color of [ListTile] when [ListTile.selected] is false.
 ///
-/// If this property is null and [selected] is false then
+/// If this property is null and [ListTile.selected] is false then
 /// [ListTileThemeData.tileColor] is used. If that is also null and
-/// [selected] is true, [selectedTileColor] is used.
+/// [ListTile.selected] is true, [ListTile.selectedTileColor] is used.
 ///
 /// When that is also null, the [ListTileTheme.selectedTileColor] is used,
 /// otherwise [Colors.transparent] is used.
 ///
 /// ## [selectedTileSchemeColor]
 ///
-/// Defines the background color of [ListTile] when [selected] is true.
+/// Defines the background color of [ListTile] when [ListTile.selected] is true.
 ///
-/// When the value if null, the [selectedTileColor] is set to
+/// When the value if null, the [ListTile.selectedTileColor] is set to
 /// [ListTileTheme.selectedTileColor] if it's not null and to
 /// [Colors.transparent] if it's null.
 ///
@@ -106,12 +106,12 @@ part of '../flex_sub_themes.dart';
 ///
 /// The tile's internal padding.
 ///
-/// Insets a [ListTile]'s contents: its [leading], [title], [subtitle],
-/// and [trailing] widgets.
+/// Insets a [ListTile]'s contents: its [ListTile.leading], [ListTile.title], [ListTile.subtitle],
+/// and [ListTile.trailing] widgets.
 ///
 ///
 /// If null, `EdgeInsets.symmetric(horizontal: 16.0)` is used, if
-/// [useMaterial3] is [false]. If [useMaterial3] is [true] then
+/// [ThemeData.useMaterial3] is false. If [ThemeData.useMaterial3] is true then
 /// `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` is used.
 ///
 /// ## [horizontalTitleGap]
@@ -129,7 +129,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [style]
 ///
-/// Defines the font used for the [title].
+/// Defines the font used for the [ListTile.title].
 ///
 /// If this property is null then [ListTileThemeData.style] is used. If that
 /// is also null then [ListTileStyle.list] is used.

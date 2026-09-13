@@ -16,10 +16,10 @@ part of '../flex_sub_themes.dart';
 /// Defines which [Theme] based [ColorScheme] based background color
 /// of [NavigationDrawer].
 ///
-/// If it is not defined, FCS uses [surfaceContainerLow] color as default in
+/// If it is not defined, FCS uses [ColorScheme.surfaceContainerLow] color as default in
 /// both M2 and M3 mode
 ///
-/// Flutter SDK default uses [surfaceContainerLow] color as default in M3,
+/// Flutter SDK default uses [ColorScheme.surfaceContainerLow] color as default in M3,
 /// and [ThemeData.canvasColor] in M2.
 ///
 /// ## [indicatorWidth]

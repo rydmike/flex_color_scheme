@@ -1,3 +1,6 @@
+/// @docImport 'package:flex_color_scheme/src/flex_color_scheme.dart';
+library;
+
 import 'package:flex_color_scheme/src/flex_instant_splash.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';

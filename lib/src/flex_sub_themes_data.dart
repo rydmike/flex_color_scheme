@@ -1,12 +1,13 @@
-// Cupertino only for comment refs.
-import 'package:cupertino_ui/cupertino_ui.dart' show CupertinoAlertDialog, CupertinoSwitch;
+/// @docImport 'package:cupertino_ui/cupertino_ui.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_color.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_theme_data_extensions.dart';
+library;
+
 import 'package:flex_color_scheme/src/flex_adaptive.dart';
-import 'package:flex_color_scheme/src/flex_color.dart' show FlexColor; // For comment refs.
 import 'package:flex_color_scheme/src/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
 import 'package:flex_color_scheme/src/flex_splash_type.dart';
 import 'package:flex_color_scheme/src/flex_sub_themes.dart';
-import 'package:flex_color_scheme/src/flex_theme_data_extensions.dart'; // For comment refs.
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 

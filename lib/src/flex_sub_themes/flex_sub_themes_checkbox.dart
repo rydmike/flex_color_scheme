@@ -19,7 +19,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// All colors in the color scheme are not good choices, but some work well.
 ///
-/// If not defined, [colorScheme.primary] will be used. This is more in-line
+/// If not defined, [ColorScheme.primary] will be used. This is more in-line
 /// with M3 design, but applied to M2 switch. The M3 color design
 /// specification for the secondary color, is a poor choice for toggles and
 /// switches, primary color works better.

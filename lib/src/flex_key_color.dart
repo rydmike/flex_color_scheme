@@ -1,5 +1,9 @@
+/// @docImport 'package:flex_color_scheme/src/flex_color_scheme.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_theme_data_extensions.dart';
+/// @docImport 'package:flex_seed_scheme/flex_seed_scheme.dart';
+library;
+
 import 'package:flex_color_scheme/src/flex_scheme.dart' show FlexScheme;
-import 'package:flex_seed_scheme/flex_seed_scheme.dart'; // For comment refs.
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 

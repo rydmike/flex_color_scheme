@@ -24,7 +24,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// Optional text style for the [BottomNavigationBar] labels.
 ///
-/// If not defined [bodyMedium] will be used as base style for the style.
+/// If not defined [TextTheme.bodyMedium] will be used as base style for the style.
 ///
 /// The size and colors defined in any of the text size and color properties
 /// are applied as overrides on the text style.
@@ -134,7 +134,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// If true, the unselected icon in the [BottomNavigationBar] use a more
 /// muted color version of the color defined by
-/// [bottomNavigationBarUnselectedIconSchemeColor].
+/// [unselectedIconSchemeColor].
 ///
 /// The muting is unselected color with
 /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
@@ -196,7 +196,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [landscapeLayout]
 ///
-/// The arrangement of the bar's [items] when the enclosing
+/// The arrangement of the bar's [BottomNavigationBar.items] when the enclosing
 /// [MediaQueryData.orientation] is [Orientation.landscape].
 ///
 /// The following alternatives are supported:

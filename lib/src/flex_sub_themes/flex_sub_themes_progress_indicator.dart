@@ -86,7 +86,7 @@ part of '../flex_sub_themes.dart';
 /// A value of 0 ([CircularProgressIndicator.strokeAlignCenter]) will center
 /// the border on the edge of the widget.
 ///
-/// If [progressIndicatorYear2023] is true, then the default value is
+/// If [year2023] is true, then the default value is
 /// [CircularProgressIndicator.strokeAlignCenter].
 /// Otherwise, the default value is
 /// [CircularProgressIndicator.strokeAlignInside].
@@ -105,7 +105,7 @@ part of '../flex_sub_themes.dart';
 /// Setting [strokeCap] to [StrokeCap.butt] with value == null will result
 /// in a slightly different indeterminate animation; the indicator
 /// completely disappears and reappears on its minimum value.
-/// Setting [strokeCap] to [StrokeCap.square] with [value] != null will
+/// Setting [strokeCap] to [StrokeCap.square] with `value` != null will
 /// result in a different display of value. The indicator will start
 /// drawing from slightly less than the start, and end slightly after
 /// the end. This will produce an alternative result, as the

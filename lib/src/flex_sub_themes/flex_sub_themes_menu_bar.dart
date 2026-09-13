@@ -11,7 +11,7 @@ part of '../flex_sub_themes.dart';
 /// Select which color from the passed in [colorScheme] parameter to use as
 /// the MenuBar background color.
 ///
-/// If not defined, default to [colorScheme.surfaceContainer].
+/// If not defined, default to [ColorScheme.surfaceContainer].
 ///
 /// FlexColorScheme passes in
 /// [FlexSubThemesData.menuBarBackgroundSchemeColor] first, can be null, and

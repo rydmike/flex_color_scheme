@@ -71,7 +71,7 @@ part of '../flex_sub_themes.dart';
 /// ## [unselectedLabelSchemeColor]
 ///
 /// Select which color from the theme's [ColorScheme] to use for
-/// the [NavigationRails]'s unselected label text color.
+/// the [NavigationRail]'s unselected label text color.
 ///
 /// When undefined, if [backgroundSchemeColor] is
 /// using any of the surface colors, the default on pair used will be
@@ -175,7 +175,7 @@ part of '../flex_sub_themes.dart';
 /// Whether or not the selected [NavigationRail] item should include a
 /// [NavigationIndicator].
 ///
-/// If [true], adds a rounded [NavigationIndicator] behind the selected
+/// If true, adds a rounded [NavigationIndicator] behind the selected
 /// destination's icon.
 ///
 /// Defaults to true.
@@ -185,7 +185,7 @@ part of '../flex_sub_themes.dart';
 /// ## [indicatorSchemeColor]
 ///
 /// Select which color from the theme [ColorScheme] to use as base for
-/// the selected [NavigationRails]'s highlighted item.
+/// the selected [NavigationRail]'s highlighted item.
 ///
 /// If undefined, defaults to [SchemeColor.secondaryContainer].
 ///
@@ -226,17 +226,17 @@ part of '../flex_sub_themes.dart';
 ///   rail item.
 /// * [NavigationRailLabelType.all] label is shown on all rail items.
 ///
-/// When a navigation rail is [extended], the labels are always shown.
+/// When a navigation rail is [NavigationRail.extended], the labels are always shown.
 ///
 /// If null, then the default behavior is [NavigationRailLabelType.none].
 ///
 /// ## [groupAlignment]
 ///
-/// The vertical alignment for the group of [destinations] within the
+/// The vertical alignment for the group of [NavigationRail.destinations] within the
 /// [NavigationRail].
 ///
 /// The [NavigationRailDestination]s are grouped together with the
-/// [trailing] widget, between the [leading] widget and the bottom
+/// [NavigationRail.trailing] widget, between the [NavigationRail.leading] widget and the bottom
 /// of the rail.
 ///
 /// The value must be between -1.0 and 1.0.

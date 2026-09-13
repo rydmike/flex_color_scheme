@@ -1,3 +1,7 @@
+/// @docImport 'package:flex_color_scheme/src/flex_color_scheme.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_scheme_data.dart';
+library;
+
 import 'package:flex_color_scheme/src/flex_color.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
 import 'package:flex_color_scheme/src/flex_extensions.dart';
@@ -224,7 +228,7 @@ class FlexSchemeColor with Diagnosticable {
   /// To actually make such [FlexSchemeColor] automatically swap secondary and
   /// tertiary colors when [FlexColorScheme.useMaterial3] is set to true,
   /// which it is by default, set the [FlexColorScheme.light] and
-  /// [FlexColorScheme.light] parameter `swapLegacyOnMaterial3`to true.
+  /// [FlexColorScheme.dark] parameter `swapLegacyOnMaterial3` to true.
   /// It defaults to false for backwards compatibility, but it is recommended
   /// to turn it on when using Material-3 color system. If you use seeded
   /// color schemes with Material-2, the [FlexColorScheme.useMaterial3] flag is

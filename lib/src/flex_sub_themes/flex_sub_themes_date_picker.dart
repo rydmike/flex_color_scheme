@@ -12,9 +12,9 @@ part of '../flex_sub_themes.dart';
 ///
 /// If null and [backgroundSchemeColor] is also null, then it
 /// gets default via Dialog's default null theme behavior,
-/// which is [surfaceContainerHigh]
+/// which is [ColorScheme.surfaceContainerHigh]
 /// in Material-3 mode and in Material-2 mode in light theme
-/// [Colors.white] and in a dark theme [Colors.grey800].
+/// [Colors.white] and in a dark theme `Colors.grey.shade800`.
 ///
 /// If [backgroundSchemeColor] is defined, it will override any color
 /// give to [backgroundColor].
@@ -31,9 +31,9 @@ part of '../flex_sub_themes.dart';
 ///
 /// If not defined, then the passed in [backgroundColor] will be used,
 /// which may be null too and dialog then falls back to Flutter SDK default
-/// value for DatePickerDialog, which is [surfaceContainerHigh]
+/// value for DatePickerDialog, which is [ColorScheme.surfaceContainerHigh]
 /// in Material-3 mode and in Material-2 mode in light theme
-/// [Colors.white] and in a dark theme [Colors.grey800].
+/// [Colors.white] and in a dark theme `Colors.grey.shade800`.
 ///
 /// ## [dividerSchemeColor]
 ///
@@ -51,8 +51,8 @@ part of '../flex_sub_themes.dart';
 ///
 /// The dialog's header displays the currently selected date.
 ///
-/// Defaults to [surfaceContainerHigh] in Material-3 and Material-2 mode
-/// to [primary] in light mode and to [surface] in dark mode.
+/// Defaults to [ColorScheme.surfaceContainerHigh] in Material-3 and Material-2 mode
+/// to [ColorScheme.primary] in light mode and to [ColorScheme.surface] in dark mode.
 ///
 /// ## [headerForegroundSchemeColor]
 ///
@@ -124,7 +124,7 @@ part of '../flex_sub_themes.dart';
 /// The dialog's header displays the currently selected date.
 ///
 /// The [TextStyle.color] of the [headerHeadlineStyle] is not used,
-/// [headerForegroundColor] is used instead.
+/// [DatePickerThemeData.headerForegroundColor] is used instead.
 ///
 /// ## [headerHelpStyle]
 ///
@@ -135,7 +135,7 @@ part of '../flex_sub_themes.dart';
 /// (i.e. 'Select date').
 ///
 /// The [TextStyle.color] of the [headerHelpStyle] is not used,
-/// [headerForegroundColor] is used instead.
+/// [DatePickerThemeData.headerForegroundColor] is used instead.
 ///
 /// See also:
 ///   [DatePickerDialog.helpText], which specifies the help text.

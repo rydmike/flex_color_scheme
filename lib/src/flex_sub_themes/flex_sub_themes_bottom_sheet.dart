@@ -49,7 +49,7 @@ part of '../flex_sub_themes.dart';
 /// by overriding the default value for [BottomSheet.clipBehavior].
 ///
 /// Use this property to enable clipping of content when the bottom sheet
-/// has a custom [shape] and the content can extend past this shape.
+/// has a custom [ShapeBorder] and the content can extend past this shape.
 /// For example, a bottom sheet with rounded corners and an edge-to-edge
 /// [Image] at the top.
 ///
