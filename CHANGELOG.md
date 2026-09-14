@@ -62,6 +62,7 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 - Bump version to 9.0.0.
 - Bump packages to latest versions.
 - Example iOS and macOS host projects (shared by all five example entrypoints) now use Swift Package Manager only. CocoaPods integration, Podfiles, and lockfiles were removed.
+- Example Android host project (shared by all five example entrypoints) now uses Flutter 3.47 Gradle 9.3.1, AGP 9.1.0, and Kotlin 2.4.0 so device and emulator builds succeed.
 
 ## 8.4.0
 
