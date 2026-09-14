@@ -1,12 +1,62 @@
 ---
 name: release
-description: Prepare or verify a FlexColorScheme release, version bump, pub.dev package contents, or Themes Playground deployment. Use when release work is requested; ordinary edits do not trigger publishing.
+description: Release FlexColorScheme to pub.dev and deploy the five web examples including Themes Playground. Use when publishing a new version, making a dev/prerelease, bumping the version, tagging a release, or verifying release readiness.
 ---
 
 # Release
 
-Read the [release checklist](references/release-checklist.md) for version sources, artifact contents, and actual deployment wiring. Inspect workflows before relying on their comments or on assumed CI coverage.
+Releases are manual and ordered. Publishing to pub.dev does NOT deploy the web examples — publishing a **GitHub release** does, via [.github/workflows/deploy.yml](../../../.github/workflows/deploy.yml).
 
-Separate readiness assessment from external actions. A request to check readiness does not authorize publishing, pushing tags, or creating a GitHub release. Execute external release steps only within the user's requested scope and preserve any authorization already given.
+A request to check readiness does not authorize publishing, pushing tags, or creating a GitHub release. Execute external release steps only within the user's requested scope.
 
-The repository is migrating to Flutter 3.47+. Do not present unfinished tests/lints or outdated generated code as release-ready, and do not expand a readiness review into fixing the migration unless requested. Record blockers and the checks actually performed.
+FCS-specific version sources, `.pubignore` notes, and workflow inventory: [release-checklist.md](references/release-checklist.md). Inspect workflows before relying on their comments or on assumed CI coverage.
+
+## Versioning
+
+- `version:` lives in [pubspec.yaml](../../../pubspec.yaml). CHANGELOG top section heading must match it, with a `**Mon DD, YYYY**` date line.
+- Keep [example/pubspec.yaml](../../../example/pubspec.yaml) and Playground [`App.version`](../../../example/lib/shared/const/app.dart) (`versionMajor` / `versionMinor` / `versionPatch` / `version`) in sync. Generated theme comments and exports use `App.version`.
+- Prereleases for testing on pub use `-dev.N` (example: `9.0.1-dev.1`), released with a `chore:` commit. The final version gets its own CHANGELOG heading; fold the dev-release notes into it.
+- Flutter's guidance: a bump of the required Flutter SDK is a **major** release even with no API changes — state that explicitly in the CHANGELOG (see 9.0.0).
+
+## Pre-flight (all must pass)
+
+```bash
+fvm flutter pub get
+(cd example && fvm flutter pub get)
+fvm dart analyze
+fvm dart format --output=none --set-exit-if-changed .
+fvm flutter test --coverage
+dart pub publish --dry-run
+```
+
+Also verify:
+
+- CHANGELOG top section: correct version, date, and tags (`BREAKING`, `FIX`, `CHANGE`, `NEW`, `CHORE`, `DOCS` under `Package` / `Test` / `Themes Playground`).
+- There is no 100% coverage gate; still do not ship with unexplained test failures or missing tests for the release's behavior changes.
+- README and `example/` updated for any user-facing change. Playground live path: `/flexcolorscheme/themesplayground-latest/`.
+- No dry-run warnings you cannot explain, and review the dry-run archive file tree. A multi-MB jump means `resources/` or other internal docs leaked in.
+- Smoke-test the Playground and copied generated setup when the release touches them. Generated output still emits `package:flutter/material.dart`; report that as a known consumer-import mismatch, not as a silent pass after you rewrote the string.
+
+## Publishing contents — .pubignore
+
+The root [.pubignore](../../../.pubignore) controls what is published. Details and screenshot rules: [release-checklist.md](references/release-checklist.md).
+
+## Publish
+
+1. Commit and push; PR to `master` if not already there. Do not treat workflows with `branches: [none]` as proof that CI ran.
+2. `dart pub publish` — manual, interactive; the user runs it or explicitly asks for it.
+3. Tag `X.Y.Z` and publish a **GitHub release** with the CHANGELOG section as body.
+4. The GitHub release triggers deploy.yml: analyze → format check → tests → Codecov → build all **five** web examples → push to `rydmike/rydmike.github.io`. Playground: `lib/example5_themes_playground/main.dart` with base href `/flexcolorscheme/themesplayground-latest/`.
+
+## Post-release
+
+- Check the pub.dev page: version, score, changelog rendering, screenshots.
+- Check the Playground URL serves the new build. Do not promise deploy succeeded just because a GitHub release was created.
+
+## Do not
+
+- Publish with failing package tests you introduced, or present unfinished generated-code imports as if they were already migrated.
+- Create the GitHub release before pub publish succeeded (the demos would advertise an unpublished version).
+- Edit released CHANGELOG sections later — corrections get a new entry.
+- Exclude `example/screenshots/` from `.pubignore`.
+- Expand a readiness review into fixing unrelated CI or generator work unless requested.

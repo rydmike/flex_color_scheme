@@ -18,6 +18,8 @@ Use the imports shown in the skill entrypoint. Global settings provide broad def
 
 Pass shared component configuration to both themes when their shapes and behavior should match. Use separate values when brightness-specific styling is intentional.
 
+`useMaterial3` defaults to true on the FCS factories. M2 vs M3 changes many component fallbacks; a Playground or docs label that says "M3 default" is not the same as a constructor `null`.
+
 ## Adaptive behavior
 
 Adaptive fields take `FlexAdaptive` configurations to select platforms; companion fields hold values such as the adaptive radius:
@@ -30,10 +32,14 @@ const FlexSubThemesData components = FlexSubThemesData(
 );
 ```
 
-Inspect `FlexAdaptive`'s web/platform behavior for the target app. Playground controls can simulate platform choices; they are not consumer APIs and must not be copied as controller references into the app.
+Inspect `FlexAdaptive`'s web/platform behavior for the target app. Playground controls can simulate platform choices via `AdaptiveResponse`; that enum is **not** a consumer API. Generated code should emit `FlexAdaptive.*()` factories, not Playground controller types.
 
 ## Further overrides
 
 Use the resulting `ThemeData.copyWith` for behavior outside the package's configuration. Copy an existing component theme when changing one field, rather than unintentionally replacing its other settings. A widget's explicit styling can override ThemeData, so inspect widget arguments and state-dependent colors when a setting appears ineffective.
 
 A ColorScheme-only export will not reproduce radii, typography, density, splash, or component behavior. Use generated theme setup or configure these separately. For Cupertino widgets in this API generation, use compatible `cupertino_ui` types and the documented Cupertino integration options; mixing old Flutter Material/Cupertino types with SDK-decoupled ones can cause type mismatches.
+
+## 9.0 component leftovers
+
+Removed from `FlexSubThemesData`: `useTextTheme`, `useFlutterDefaults`, `blendTextTheme`. Use `useMaterial3Typography` instead of `useTextTheme`. `FlexSubThemes.bottomNavigationBar` was a pass-through alias; call `bottomNavigationBarTheme`. `FlexColorScheme.createPrimarySwatch` moved to FlexColorPicker `ColorTools.createPrimarySwatch`.

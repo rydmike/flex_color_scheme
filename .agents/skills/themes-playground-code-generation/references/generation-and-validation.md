@@ -12,25 +12,52 @@ Paths below are relative to `example/lib/example5_themes_playground/` unless sta
 
 The preview configuration is in `theme/flex_theme_light.dart` / `flex_theme_dark.dart`. Their ThemeData wrappers add app-specific extensions and adjustments. `theme/theme_values.dart` and the shared adaptive models supply effective values. Decide whether output needs a portable adaptive rule or a fixed effective value; do not accidentally bake a simulator choice into a rule intended to adapt on the consumer's device.
 
-## Current output modes and migration limits
+## Current output modes and leftovers
 
-As inspected during the Flutter 3.47 migration, the enabled FlexColorScheme path emits an `AppTheme` class with static light/dark themes. The disabled path returns inline MaterialApp theme arguments for a plain M2/M3 starting point. It does not serialize all Playground configuration.
+The enabled FlexColorScheme path emits an `AppTheme` class with static light/dark themes. The disabled path returns inline MaterialApp theme arguments for a plain M2/M3 starting point. It does not serialize all Playground configuration.
 
 `generateCodeForOwnFile` is still stored in the controller and Store, but the generator and current callers do not read it. Do not document this flag as a working inline/own-file toggle. Test each output shape the code actually supports; implementing that toggle requires an explicit behavior change.
 
-The generator currently emits old `package:flutter/material.dart` and `package:flutter/cupertino.dart` imports, while this checkout uses `material_ui` and `cupertino_ui`. The ColorScheme generator also contains an older SDK-requirement comment. These are existing migration discrepancies, not authoritative consumer examples. Re-check them when working on output and remove this note once fixed. Documentation work must not fix the Dart generator incidentally.
+The generator currently emits old `package:flutter/material.dart` and `package:flutter/cupertino.dart` imports, while this checkout uses `material_ui` and `cupertino_ui`. The ColorScheme generator also contains an older SDK-requirement comment. These are existing discrepancies, not authoritative consumer examples. Re-check them when working on output and remove this note once fixed. Documentation work must not fix the Dart generator incidentally.
+
+## Fragment patterns (match nearby code)
+
+Nullable omit (most `double?` / enum? / `SchemeColor?`):
+
+```dart
+final String sliderTrackHeight = controller.sliderTrackHeight == null
+    ? ''
+    : '      sliderTrackHeight: ${controller.sliderTrackHeight},\n';
+final String listTileStyle = controller.listTileStyle != null
+    ? '      listTileStyle: ${controller.listTileStyle},\n'
+    : '';
+```
+
+Bool whose **package** default is true — omit null and true, emit false (`sliderYear2023` in the generator):
+
+```dart
+final String sliderYear2023 = controller.sliderYear2023 == null || (controller.sliderYear2023 ?? false)
+    ? ''
+    : '      sliderYear2023: ${controller.sliderYear2023},\n';
+```
+
+Do not assume "emit bools only when true". Read the package effective default.
+
+Doubles often use `toStringAsFixed(1)`. Colors use `toColorString()` (and `const` when the existing helper/site does). Adaptive Playground enums emit `.code` (`FlexAdaptive.off()` style), typically suppressed when null or `AdaptiveResponse.off`.
+
+Insert shared component fragments in **both** `lightSubTheme` and `darkSubTheme` interpolations. Insert brightness-specific fragments only in their matching branches. Direct factory arguments go in each relevant `FlexThemeData` call. Update section header conditions when needed so empty sections do not retain misleading headers.
 
 ## Adding an emitted argument
 
 1. Read the package parameter docs and effective fallback in the constructor/conversion/component builder. Compare with the controller's default and preview use. `Store` defaults control UI/reset behavior; they are not necessarily the omission condition for generated consumer code.
 2. Build a correctly typed fragment: enum identifier rather than a quoted display label, valid numeric literal, portable color formatting via the existing helper, and appropriate const placement. Null usually suppresses a nullable argument; preserve explicit false and zero when semantically distinct.
-3. Insert shared component fragments in both `lightSubTheme` and `darkSubTheme`; insert brightness-specific fragments only in their matching branches. Direct factory arguments go in each relevant `FlexThemeData` call. Update section header conditions when needed so empty sections do not retain misleading headers.
+3. Insert the fragment in every applicable assembly branch (see above).
 4. Check controlling flags such as `useSubThemes`, seeding, Material mode, or adaptive selections. A disabled option can remain stored without appearing in output. Re-enabling it should restore the intended configuration.
 5. Trace the output consumers and inspect the final string. Test the actual class or inline shape instead of assuming every return value is a complete Dart file.
 
 ## Validation recipe for future behavior changes
 
-Use the SDK and dependencies required by the current root/example pubspecs. Do not modify tracked migration files merely to construct a passing check.
+Use the SDK and dependencies required by the current root/example pubspecs. Do not modify tracked leftover files merely to construct a passing check.
 
 - Initialize a controller with an appropriate test service and await `loadAll()`. `ThemeServiceMem` suffices for default-based generation but not storage round trips; use a recording/persistent service when testing saved values.
 - Generate cases for defaults and non-defaults; nullable numbers include null and valid zero, nullable bools include null/true/false, and enums include null plus a non-default value. Use visibly different light/dark values to catch branch mix-ups.
