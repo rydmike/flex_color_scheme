@@ -62,6 +62,8 @@ Component themes use simple flat properties. You can skip verbose SDK `ShapeBord
 
 Requires Flutter **3.47** or later. FlexColorScheme depends on `material_ui` and `cupertino_ui`; your app still needs a direct `material_ui` import for `MaterialApp` and widgets.
 
+Version 9.0 allows any `material_ui` / `cupertino_ui` **1.x** (`^1.0.0`). It does not use APIs added after 1.0.0 of those packages. Later FlexColorScheme releases will raise that floor when they adopt new features from them.
+
 ```sh
 flutter pub add flex_color_scheme
 ```

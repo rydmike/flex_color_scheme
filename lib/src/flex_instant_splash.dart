@@ -129,12 +129,10 @@ class FlexInstantSplash extends InteractiveInkFeature {
     _alphaController!.forward();
   }
 
-  // coverage:ignore-start
   @override
   void cancel() {
     _alphaController?.forward();
   }
-  // coverage:ignore-end
 
   void _handleAlphaStatusChanged(AnimationStatus status) {
     if (status == AnimationStatus.completed) {
@@ -154,11 +152,9 @@ class FlexInstantSplash extends InteractiveInkFeature {
   void paintFeature(Canvas canvas, Matrix4 transform) {
     final Paint paint = Paint()..color = color.withAlpha(_alpha.value);
     Offset? center = _position;
-    // coverage:ignore-start
     if (_repositionToReferenceBox) {
       center = Offset.lerp(center, referenceBox.size.center(Offset.zero), _radiusController.value);
     }
-    // coverage:ignore-end
     paintInkCircle(
       canvas: canvas,
       transform: transform,
@@ -174,6 +170,9 @@ class FlexInstantSplash extends InteractiveInkFeature {
 }
 
 RectCallback? _getClipCallback(RenderBox referenceBox, bool containedInkWell, RectCallback? rectCallback) {
+  // InkWell and InkResponse normally pass a null `rectCallback` (`InkWell` does not
+  // override `getRectCallback`). A non-null callback is used by custom wells such as
+  // `TableRowInkWell`, or when `FlexInstantSplash` is constructed directly.
   if (rectCallback != null) {
     return rectCallback;
   }
@@ -185,6 +184,8 @@ RectCallback? _getClipCallback(RenderBox referenceBox, bool containedInkWell, Re
 
 double _getTargetRadius(RenderBox referenceBox, bool containedInkWell, RectCallback? rectCallback, Offset position) {
   if (containedInkWell) {
+    // Same split as `_getClipCallback`: a custom `rectCallback` sizes the splash to that
+    // rectangle; otherwise the splash is sized to the `referenceBox`.
     final Size size = rectCallback != null ? rectCallback().size : referenceBox.size;
     return _getSplashRadiusForPositionInSize(size, position);
   }

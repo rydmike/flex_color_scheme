@@ -5379,9 +5379,6 @@ abstract final class FlexColor {
     ),
   );
 
-  // The Shadcn features are still beta nd not included in test coverage.
-  // coverage:ignore-start
-
   /// English name of the Shadcn blue theme.
   static const String shadBlueName = 'Shadcn Blue';
 
@@ -5741,9 +5738,6 @@ abstract final class FlexColor {
       error: ShadZincColorScheme.destructiveDark,
     ),
   );
-
-  // The Shadcn features above are still beta nd not included in test coverage.
-  // coverage:ignore-end
 
   /// Starting values for custom color data.
   ///
