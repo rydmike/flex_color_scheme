@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 9.0.0
 
-**September 14, 2026**
+**September 15, 2026**
 
 The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled Material and Cupertino libraries.
 
@@ -44,6 +44,9 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 - Production web example deploys use a shared `WEB_VERSION` slug in `.github/web-deploy.env` (currently `v9-0`) instead of `-latest`. `deploy.yml` and `deploy_playground.yml` also publish the Themes Playground WASM GC build to Netlify.
 
 ### Test
+
+**CHORE**
+- Restored `lib/` coverage for `FlexAdaptive`, `FlexInstantSplash`, `FlexSubThemes.menuButtonTheme`, and the beta Shadcn palettes. Shadcn color tokens are now hex-locked like other built-in schemes; the feature remains beta.
 
 **FIX**
 - Temp test fix: Refactored `flex_color_scheme_to_theme_test.dart` use the new `textThemeFromGoogleFonts` adapter function from `google_fonts_text_theme.dart` file. Needed because`google_fonts` still types `TextTheme` against `package:flutter/material.dart`, which is a different class than `package:material_ui`'s `TextTheme`. The `TextStyle` is shared, so copying the styles is type-safe. This will be removed when `google_fonts` is updated to use `package:material_ui`'s `TextTheme`.

@@ -63,6 +63,10 @@ void main() {
         'EXPECT them to be unequal with operator', () {
       expect(m1 != m3, true);
     });
+    test('FA1.07b: GIVEN a FlexAdaptive compared to a different type '
+        'EXPECT them to be unequal', () {
+      expect(m1 == Object(), isFalse);
+    });
     //**************************************************************************
     // FlexAdaptive unit tests.
     //
@@ -494,6 +498,18 @@ void main() {
       expect(m.adapt(TargetPlatform.linux), true);
       expect(m.adapt(TargetPlatform.macOS), true);
       expect(m.adapt(TargetPlatform.windows), true);
+    });
+    test('FA1.023: GIVEN non-const FlexAdaptive factories '
+        'EXPECT they match the const definitions.', () {
+      // Named factories are const constructors. Call constructor tear-offs so coverage records the bodies without `prefer_const_constructors`.
+      expect(FlexAdaptive.off.call(), equals(const FlexAdaptive.off()));
+      expect(FlexAdaptive.all.call(), equals(const FlexAdaptive.all()));
+      expect(FlexAdaptive.apple.call(), equals(const FlexAdaptive.apple()));
+      expect(FlexAdaptive.appleWeb.call(), equals(const FlexAdaptive.appleWeb()));
+      expect(FlexAdaptive.desktop.call(), equals(const FlexAdaptive.desktop()));
+      expect(FlexAdaptive.iOSAndDesktop.call(), equals(const FlexAdaptive.iOSAndDesktop()));
+      expect(FlexAdaptive.excludeAndroidFuchsia.call(), equals(const FlexAdaptive.excludeAndroidFuchsia()));
+      expect(FlexAdaptive.excludeWebAndroidFuchsia.call(), equals(const FlexAdaptive.excludeWebAndroidFuchsia()));
     });
   });
 }
