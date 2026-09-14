@@ -8,6 +8,10 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled Material and Cupertino libraries.
 
+> Except for removing deprecated APIs that were no longer had any function in version 8.4, and fixing one package bug and one Themes Playground bug, this release is a maintenance release to bring the package up to date with the latest Flutter SDK and other packages. Most notably full support for the standalone `material_ui` and `cupertino_ui` packages. 
+> 
+> Now that Material UI development is no longer on hold and moving forward, development of new features and improvements to the package will resume. This version deliberately avoids any new features to ensure it is an easy upgrade from version 8.4, with main focus on support for the new standalone `material_ui` and `cupertino_ui` packages.
+
 ### Package
 
 **BREAKING**
@@ -30,6 +34,7 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 - Added a skill for agents that consume this package, see `.agents/skills/flex-color-scheme/SKILL.md`.
 - Function and factory parameter documentation now lives in the callable body as `## [param]` sections so dartdoc links resolve. Parameter-level comments are short summaries that use backticks instead of `[Symbol]` references.
 - Remaining dartdoc `comment_references` are resolved with `@docImport` on library directives, `[Class.member]` qualification, and backticks for literals, GoogleFonts, and removed APIs such as `surfaceStyle` / `FlexSurface`.
+- Reviewed and updated all docs.
 
 **CHORE**
 - Bump package version to 9.0.0.
