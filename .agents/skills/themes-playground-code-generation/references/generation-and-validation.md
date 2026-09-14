@@ -18,7 +18,7 @@ The enabled FlexColorScheme path emits an `AppTheme` class with static light/dar
 
 `generateCodeForOwnFile` is still stored in the controller and Store, but the generator and current callers do not read it. Do not document this flag as a working inline/own-file toggle. Test each output shape the code actually supports; implementing that toggle requires an explicit behavior change.
 
-The generator currently emits old `package:flutter/material.dart` and `package:flutter/cupertino.dart` imports, while this checkout uses `material_ui` and `cupertino_ui`. The ColorScheme generator also contains an older SDK-requirement comment. These are existing discrepancies, not authoritative consumer examples. Re-check them when working on output and remove this note once fixed. Documentation work must not fix the Dart generator incidentally.
+Emitted FlexColorScheme setup imports `package:cupertino_ui/cupertino_ui.dart`, `package:flex_color_scheme/flex_color_scheme.dart`, and `package:material_ui/material_ui.dart`. ColorScheme export comments require Flutter 3.47.0 or later. Do not silently rewrite those strings in a validation harness.
 
 ## Fragment patterns (match nearby code)
 
@@ -66,6 +66,6 @@ Use the SDK and dependencies required by the current root/example pubspecs. Do n
 - Resolve and analyze the fixture; run focused Flutter tests that import the emitted source. Compare affected fields in `AppTheme.light` / `.dark` to the corresponding preview configuration, accounting for Playground-only wrappers. For stateful component colors, resolve the relevant widget states. Compare emitted ColorScheme roles to `.toScheme` results separately.
 - Check the visible code/copy path and the live control in the Playground when feasible. A successful compile establishes valid symbols and types, not complete visual parity.
 
-Keep generated sources outside tracked package/example files unless the feature task intentionally adds a maintained test fixture. Report baseline failures faithfully. If old imports block compilation, preserve that failed result; any separately adapted experiment is diagnostic only and must not be reported as a successful test of the original output.
+Keep generated sources outside tracked package/example files unless the feature task intentionally adds a maintained test fixture. Report baseline failures faithfully. Compile the emitted source as written; do not rewrite imports or other strings in the harness and then report that adapted file as a successful test of the original output.
 
 There is currently no substantive example widget test suite (`example/test/widget_test.dart` is empty). This recipe describes meaningful future checks; it does not claim such tests already exist or request adding them during guidance-only changes.

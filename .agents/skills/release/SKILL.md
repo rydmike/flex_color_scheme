@@ -35,7 +35,7 @@ Also verify:
 - There is no 100% coverage gate; still do not ship with unexplained test failures or missing tests for the release's behavior changes.
 - README and `example/` updated for any user-facing change. Latest Playground is [https://playground.flexcolorscheme.com/](https://playground.flexcolorscheme.com/). GitHub Pages JS paths use the slug in [`.github/web-deploy.env`](../../../.github/web-deploy.env) (`WEB_VERSION`, currently `v9-0`).
 - No dry-run warnings you cannot explain, and review the dry-run archive file tree. A multi-MB jump means `resources/` or other internal docs leaked in.
-- Smoke-test the Playground and copied generated setup when the release touches them. Generated output still emits `package:flutter/material.dart`; report that as a known consumer-import mismatch, not as a silent pass after you rewrote the string.
+- Smoke-test the Playground and copied generated setup when the release touches them. Generated setup should import `material_ui` and `cupertino_ui`.
 
 ## Publishing contents — .pubignore
 

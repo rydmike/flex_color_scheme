@@ -2284,9 +2284,9 @@ String generateThemeDartCode(ThemeController controller) {
   // Compose the final FlexThemeData code string, from all above fragments.
   //
   final String code =
+      "import 'package:cupertino_ui/cupertino_ui.dart';\n"
       "import 'package:flex_color_scheme/flex_color_scheme.dart';\n"
-      "import 'package:flutter/cupertino.dart';\n"
-      "import 'package:flutter/material.dart';\n"
+      "import 'package:material_ui/material_ui.dart';\n"
       '/// The [AppTheme] defines light and dark themes for the app.\n'
       '///\n'
       '/// Theme setup for FlexColorScheme package v${App.versionMajor}.\n'

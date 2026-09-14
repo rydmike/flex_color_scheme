@@ -60,6 +60,7 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 
 **FIX**
 - Make cancel custom color selection work correctly.
+- Generated theme setup now imports `package:material_ui/material_ui.dart` and `package:cupertino_ui/cupertino_ui.dart` instead of `package:flutter/material.dart` and `package:flutter/cupertino.dart`.
 
 **DOCS**
 - Latest live Themes Playground is the WASM GC build at [https://playground.flexcolorscheme.com/](https://playground.flexcolorscheme.com/). GitHub Pages now hosts versioned JS builds (`themesplayground-v9-0` and older frozen paths). The `-latest` path is no longer used for new deploys.

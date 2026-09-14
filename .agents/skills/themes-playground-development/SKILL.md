@@ -59,4 +59,4 @@ Always-on controls are rare (general / Playground chrome). Preserve stored value
 
 For a behavior change: startup with missing storage, change/reload, reset, preset, non-default export/import, both brightness previews, and generated argument vs affected theme field. `ThemeServiceMem` cannot test persistence round trips. `example/test/widget_test.dart` is empty; it is not a Playground regression suite.
 
-Known leftovers (do not "fix" as a side effect): generated setup still emits `package:flutter/material.dart`; Hive box name is `flex_color_scheme_v8`; `generateCodeForOwnFile` is stored but unused.
+Known leftovers (do not "fix" as a side effect): Hive box name is `flex_color_scheme_v8`; `generateCodeForOwnFile` is stored but unused.

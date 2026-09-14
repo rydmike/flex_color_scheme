@@ -58,7 +58,7 @@ Classify by real impact (major / medium / minor).
 
 ### Flutter 3.47 / color values
 
-- Material/Cupertino widgets stay on `material_ui` / `cupertino_ui`. Rewriting to `package:flutter/material.dart` is major (Playground **generated consumer** strings currently still emit the old imports — do not "fix" them as part of an unrelated review unless that is the task).
+- Material/Cupertino widgets stay on `material_ui` / `cupertino_ui`. Rewriting them to `package:flutter/material.dart` is major. Playground generated consumer setup must keep the decoupled imports.
 - Do not reintroduce deprecated `Color.value` or `.red` / `.green` / `.blue` / `.alpha`. Use `value32bit` / `*8bit`.
 
 ### Playground

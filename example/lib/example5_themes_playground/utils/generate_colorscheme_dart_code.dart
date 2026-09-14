@@ -17,7 +17,7 @@ String generateColorSchemeDartCode(
   final String code =
       '''
 /// Light [ColorScheme] made with FlexColorScheme v${App.version}.
-/// Requires Flutter 3.22.0 or later.
+/// Requires Flutter 3.47.0 or later.
 const ColorScheme lightColorScheme = ColorScheme(
   brightness: ${lightScheme.brightness},
   primary: ${lightScheme.primary.toColorString()},
@@ -69,7 +69,7 @@ const ColorScheme lightColorScheme = ColorScheme(
 );
 
 /// Dark [ColorScheme] made with FlexColorScheme v${App.version}.
-/// Requires Flutter 3.22.0 or later.
+/// Requires Flutter 3.47.0 or later.
 const ColorScheme darkColorScheme = ColorScheme(
   brightness: ${darkScheme.brightness},
   primary: ${darkScheme.primary.toColorString()},

@@ -43,7 +43,7 @@ Use backticks for boolean literals, packages that are not `lib/` dependencies (f
 - Use simple, direct language. Avoid jargon that does not help.
 - Short `dart` snippets on `FlexThemeData`, `FlexKeyColors`, and `FlexSubThemesData` are welcome when they show a default, an interaction, or a migration. Do not paste the README.
 - README, skills, and `docs/` follow [AGENTS.md](../../../AGENTS.md) Markdown Style: one paragraph or bullet per line; do not hard-wrap prose. Leave fenced code, tables, and headings as they are.
-- Current 9.x examples use the SDK-decoupled UI packages. Do not copy stale generated Playground imports (`package:flutter/material.dart`) as authoritative API examples.
+- Current 9.x examples and Playground-generated setup use the SDK-decoupled UI packages (`material_ui` / `cupertino_ui`). Do not document `package:flutter/material.dart` as the consumer import.
 
 ### Magic numbers
 
@@ -72,7 +72,7 @@ Historic traps — claims that keep resurfacing stale:
 - `FlexColorScheme.createPrimarySwatch`: moved to FlexColorPicker `ColorTools.createPrimarySwatch`
 - `toTheme` / `toScheme` are getters, not methods
 - `useExpressiveOnContainerColors` defaults to **true** since 9.0 (light on-container tone 30)
-- Playground generated setup still emits `package:flutter/material.dart`; that is not the in-repo import style
+- Playground generated setup emits `material_ui` / `cupertino_ui`, matching in-repo consumer imports
 
 ## Public API docs
 

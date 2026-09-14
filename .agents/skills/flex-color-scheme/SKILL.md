@@ -54,7 +54,7 @@ A seed key sets **hue and chroma** of a tonal palette. It does not become `Color
 
 ## Playground-generated code
 
-Inspect copied Playground setup before integrating it: package version, UI imports, and referenced symbols, then compile it in the consuming app. Current Playground output still emits `package:flutter/material.dart` and `package:flutter/cupertino.dart`; this checkout uses `material_ui` / `cupertino_ui`. Adapt imports to the app.
+Inspect copied Playground setup before integrating it: package version, UI imports, and referenced symbols, then compile it in the consuming app. Current Playground output imports `material_ui` and `cupertino_ui`.
 
 A standalone ColorScheme export contains colors; it does not carry component styling or the complete `ThemeData` configuration.
 

@@ -15,4 +15,4 @@ For a new setting, also follow [Playground development](../themes-playground-dev
 - Compile the actual output and compare affected ThemeData/ColorScheme fields when the SDK baseline permits. String-presence checks alone do not prove correct behavior.
 - Keep simulator-only state, controller types, and Playground theme extensions out of consumer output unless explicitly required by the feature. Emit `FlexAdaptive.*()` via `AdaptiveResponse.code`, never `AdaptiveResponse` itself.
 
-The generator currently emits `package:flutter/material.dart` and `package:flutter/cupertino.dart` imports, while this checkout uses `material_ui` and `cupertino_ui`. Report that as a limit. Do not silently rewrite output in a validation harness and then report the emitted code as passing. Changing unrelated generator behavior is a separate task.
+Emitted FlexColorScheme setup imports `package:material_ui/material_ui.dart` and `package:cupertino_ui/cupertino_ui.dart`. Do not silently rewrite output in a validation harness and then report the emitted code as passing. Changing unrelated generator behavior is a separate task.
