@@ -11,7 +11,7 @@ copy in these constants into `main.dart` file.
 
 ```dart
 final MaterialColor flexSwatch =
-    FlexColorScheme.createPrimarySwatch(const Color(0xff6750a4));
+    ColorTools.createPrimarySwatch(const Color(0xff6750a4)); // from package flex_color_picker
 
 const ColorScheme flexSchemeLight = ColorScheme(
   brightness: Brightness.light,
@@ -253,7 +253,7 @@ theme: FlexThemeData.light(
   subThemesData: const FlexSubThemesData(
     defaultRadius: 4,
     fabUseShape: false,
-    useTextTheme: false,
+    useMaterial3Typography: false,
   ),
 ),
 darkTheme: FlexThemeData.dark(
@@ -262,7 +262,7 @@ darkTheme: FlexThemeData.dark(
   subThemesData: const FlexSubThemesData(
     defaultRadius: 4,
     fabUseShape: false,
-    useTextTheme: false,
+    useMaterial3Typography: false,
     interactionEffects: false,
   ),
 ),

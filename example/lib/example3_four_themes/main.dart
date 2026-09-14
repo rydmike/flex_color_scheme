@@ -50,7 +50,7 @@ Future<void> main() async {
   // the storage container name for each example. In these demos the
   // SharedPreferences service is only used for this example, but you can swap
   // in the Hive based one here as well if you want to try it.
-  // This also demonstrates how swap used persistence implementation.
+  // This also demonstrates how to swap the used persistence implementation.
   //
   // NOTE:
   // Earlier we used Hive here and SharedPrefs only for example 5. We switched
@@ -124,14 +124,14 @@ class DemoApp extends StatelessWidget {
                 ? _myFlexScheme.light
                 : FlexColor.schemes[themeController.usedScheme]!.light,
             // We use a surface color mode where Material surfaces use
-            // more primary color branding than background, and scaffold uses
+            // more primary color branding than other surfaces, and scaffold uses
             // even less.
             surfaceMode: FlexSurfaceMode.highSurfaceLowScaffold,
             // We set the blend level strength to 10.
             blendLevel: 10,
             appBarElevation: 0.5,
             // Opt-in/out on using the additional opinionated
-            // component sub-themes. You ca also use property `subThemesData`
+            // component sub-themes. You can also use property `subThemesData`
             // to pass in a `FlexSubThemesData()` data object that contains a
             // large number of easy to use configuration parameters that you
             // can use for quick styling of the sub-themes per component.
@@ -186,7 +186,7 @@ class DemoApp extends StatelessWidget {
                 : FlexColor.schemes[themeController.usedScheme]!.dark,
             // We don't have to use the same surface mode in dark mode, for an
             // interesting effect here we use a mode where scaffold background
-            // color gets a much higher blend value than surface and background.
+            // color gets a much higher blend value than the other surfaces.
             surfaceMode: FlexSurfaceMode.highScaffoldLowSurfaces,
             // You don't have to use same blend level or mode in light
             // and dark mode, here we use a lower value in dark mode, that

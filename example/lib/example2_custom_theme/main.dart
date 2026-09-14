@@ -50,7 +50,7 @@ Future<void> main() async {
   // SharedPreferences service is only used for example 3. You can swap in
   // the Hive based one here as well, if you want to try it and save settings
   // for this simple example as well.
-  // This also demonstrates how swap used persistence implementation.
+  // This also demonstrates how to swap the used persistence implementation.
   final ThemeService themeService = ThemeServiceMem();
   // To swap to hive use this instead:
   // final ThemeService themeService =
@@ -78,7 +78,7 @@ Future<void> main() async {
 // want to bundle your custom color values in a class as static const values.
 // In later examples 4 and 5 we do so.
 //
-// These colors were was just some colors I chose on a whim, but dang this
+// These colors were just some colors I chose on a whim, but dang this
 // theme actually looks pretty good! :)
 const FlexSchemeData _myFlexScheme = FlexSchemeData(
   name: 'Midnight blue',
@@ -144,7 +144,7 @@ class DemoApp extends StatelessWidget {
             // You can add a font via just a fontFamily from e.g. GoogleFonts.
             // For better results, prefer defining complete TextThemes,
             // using a font and its different styles, potentially even
-            // more then one font, and then assign the TextTheme to the
+            // more than one font, and then assign the TextTheme to the
             // textTheme and primaryTextTheme in FlexThemeData. This is
             // just how you would use it with ThemeData too.
             fontFamily: GoogleFonts.notoSans().fontFamily,

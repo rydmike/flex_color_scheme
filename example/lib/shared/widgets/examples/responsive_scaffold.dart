@@ -527,7 +527,7 @@ class _ResponsiveScaffoldState extends State<ResponsiveScaffold> {
               // animates the entire side menu from 0, to rail to menu width.
               // The default type, canvas, makes Material use theme.CanvasColor,
               // which in FlexThemeData and in ThemeData.from is set to
-              // theme.colorScheme.background. So our menu will be background
+              // theme.colorScheme.surface. So our menu will be surface
               // colored by default, including any color branding our theme
               // in FlexColorScheme has applied to it, just like a Drawer.
               child: AnimatedContainer(

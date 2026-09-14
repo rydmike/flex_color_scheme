@@ -1,3 +1,4 @@
+import 'package:flex_color_scheme/flex_color_scheme.dart' show FlexColorScheme;
 import 'package:flex_color_scheme_example/example5_themes_playground/theme/code_theme.dart';
 import 'package:flex_color_scheme_example/example5_themes_playground/theme/flex_theme_light.dart';
 import 'package:flex_color_scheme_example/example5_themes_playground/theme/topic_theme.dart';
@@ -16,12 +17,11 @@ import 'package:material_ui/material_ui.dart';
 /// so you can toggle FlexColorScheme on/off and see the differences.
 ///
 /// We use active [ColorScheme] by grabbing it from active FlexColorScheme
-/// using its toScheme method. Which gives us a standard ColorScheme that we
+/// using its [FlexColorScheme.toScheme] getter. Which gives us a standard ColorScheme that we
 /// can use with ThemeData to create the ThemeData from the exact same
 /// colors. The [ColorScheme] it creates also contains the blends, M3 seeded
-/// color etc, but since [ColorScheme], only contains surface and background
-/// colors and is missing `FlexColorScheme` custom Scaffold and dialog color,
-/// it cannot provide those colors.
+/// color etc, but since [ColorScheme] does not include FlexColorScheme custom
+/// Scaffold and dialog colors, it cannot provide those colors.
 ///
 /// NOTE:
 /// The normal use case for FlexColorScheme.toScheme would be that you define

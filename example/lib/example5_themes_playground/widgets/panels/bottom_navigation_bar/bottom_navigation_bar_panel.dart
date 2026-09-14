@@ -38,8 +38,8 @@ class BottomNavigationBarPanel extends StatelessWidget {
           title: Text('BottomNavigationBar colors and styles'),
           subtitleReveal: Text(
             'Default SDK background color is theme canvasColor via Material. '
-            'The canvasColor is typically colorScheme.background, elevation '
-            'is 8. FCS sub-theme default is colorScheme.background and '
+            'The canvasColor is typically colorScheme.surface, elevation '
+            'is 8. FCS sub-theme default is colorScheme.surface and '
             'elevation 0.\n',
           ),
         ),

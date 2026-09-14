@@ -551,7 +551,7 @@ const List<Topic> themeTopics = <Topic>[
         'navigation on tablets and sometimes also on desktops. It supports '
         'both Material 2 and 3, styles rails. Flutter default background '
         'color is colorScheme.surface. '
-        'FlexColorScheme sub-theme default is colorScheme.background.\n',
+        'FlexColorScheme sub-theme default is colorScheme.surface.\n',
   ),
   Topic(
     group: TopicGroup.navigation,

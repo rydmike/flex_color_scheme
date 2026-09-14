@@ -61,8 +61,8 @@ void main() => runApp(const DemoApp());
 // but no container or other colors.
 final FlexSchemeColor _schemeLight = FlexSchemeColor.from(
   primary: const Color(0xFF00296B),
-  // If you do not want to define secondary, primaryVariant and
-  // secondaryVariant, error and appBar colors you do not have to,
+  // If you do not want to define secondary, primaryContainer,
+  // secondaryContainer, tertiary, error and appBar colors you do not have to,
   // they will get defined automatically when using the FlexSchemeColor.from()
   // factory. When using FlexSchemeColor.from() you only have to define the
   // primary color, anything not defined will get derived automatically from
@@ -75,7 +75,7 @@ final FlexSchemeColor _schemeLight = FlexSchemeColor.from(
   //
   // Here we define a secondary color, but if you don't it will get a
   // default shade based on the primary color. When you do define a secondary
-  // color, but not a secondaryVariant color, the secondary container will get
+  // color, but not a secondaryContainer color, the secondary container will get
   // derived from the secondary color, instead of from the primary color.
   secondary: const Color(0xFFFF7B00),
   // New in version 5.
@@ -577,7 +577,7 @@ class _DemoAppState extends State<DemoApp> {
         // sub-theming with an existing `ColorScheme`. To use a`ColorScheme`
         // object as color sources for your `FlexColorscheme` just pass it to
         // the `colorScheme` property. The `surfaceMode` and `blendLevel` will
-        // still adjust surface and background colors on surfaces in passed
+        // still adjust surface colors on surfaces in passed
         // `ColorScheme` if they are used. This can be demonstrated here with
         // the default Flutter M2 based light ColorScheme set, if uncommented
         // below.
@@ -599,7 +599,6 @@ class _DemoAppState extends State<DemoApp> {
         // secondary: FlexColor.indigo.light.secondary,
         // secondaryContainer: FlexColor.indigo.light.secondaryContainer,
         // surface: FlexColor.lightSurface,
-        // background: FlexColor.lightBackground,
         // error: FlexColor.materialLightErrorHc,
         // scaffoldBackground: FlexColor.lightScaffoldBackground,
         // dialogBackground: FlexColor.lightSurface,
@@ -610,7 +609,7 @@ class _DemoAppState extends State<DemoApp> {
         // FlexAppBarStyle.primary, results in this too, and is the default in
         // light mode. You can also choose other themed styles. Like
         // FlexAppBarStyle.background, that gets active color blend from used
-        // surfaceMode or surfaceStyle, depending on which one is being used.
+        // surfaceMode.
         // You may often want a different style on the app bar in dark and
         // light theme mode, therefore it was not set via a shared value
         // above in this template.
@@ -691,9 +690,9 @@ class _DemoAppState extends State<DemoApp> {
         // appBarStyle FlexAppBarStyle.material results in the same color value.
         // It is also the default if you do not define the style.
         // You can also use other themed styles. Here we use background, that
-        // also gets active color blend from used SurfaceMode or SurfaceStyle.
+        // also gets active color blend from used SurfaceMode.
         // You may often want a different style on the AppBar in dark and light
-        // theme mode, therefore it was not set via a shared value value
+        // theme mode, therefore it was not set via a shared value
         // above in this template.
         appBarStyle: null, // Try styles like: FlexAppBarStyle.background,
         appBarElevation: _appBarElevation,

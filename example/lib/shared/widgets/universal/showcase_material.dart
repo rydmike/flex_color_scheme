@@ -3543,8 +3543,8 @@ class _BottomNavigationBarShowcaseState extends State<BottomNavigationBarShowcas
                 'Older Material 2 navigation bar, prefer using NavigationBar. '
                 'Flutter default background '
                 'color is theme canvasColor via Material. The canvasColor '
-                'typically equals colorScheme.background. Default elevation '
-                'is 8. FCS sub-theme default is colorScheme.background '
+                'typically equals colorScheme.surface. Default elevation '
+                'is 8. FCS sub-theme default is colorScheme.surface '
                 'and elevation 0.',
                 style: denseBody,
               ),
@@ -3775,7 +3775,7 @@ class _NavigationRailShowcaseState extends State<NavigationRailShowcase> {
               padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
               child: Text(
                 'Flutter default background color is colorScheme.surface. '
-                'FlexColorScheme sub-theme default is colorScheme.background.',
+                'FlexColorScheme sub-theme default is colorScheme.surface.',
                 style: denseBody,
               ),
             ),
@@ -4311,7 +4311,7 @@ class DrawerShowcase extends StatelessWidget {
               'Default Flutter background color in M3 is colorScheme.surface, '
               'with elevation tint and no shadow. In M2 it has shadow and '
               'uses color theme.canvasColor, that is typically set '
-              'to colorScheme.background.',
+              'to colorScheme.surface.',
               style: denseBody,
             ),
           ),

@@ -76,7 +76,7 @@ class NavigationDrawerPanel extends StatelessWidget {
             'Default background in Flutter SDK in M3 is colorScheme.surface, '
             'with elevation tint and no shadow. In M2 it has shadow and '
             'uses color theme.canvasColor, that is typically set '
-            'to colorScheme.background. FCS component sub-themes use '
+            'to colorScheme.surface. FCS component sub-themes use '
             'surface as default color in both M2 and M3 modes.\n',
           ),
         ),
