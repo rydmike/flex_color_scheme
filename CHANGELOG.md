@@ -39,6 +39,7 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 **CHORE**
 - Bump package version to 9.0.0.
 - Bump packages to latest versions.
+- Align `.gitignore` and `.pubignore` after adopting the shared Flex package ignore files: stop tracking Flutter-generated desktop plugin registrant files that those ignores already exclude, ignore Android `.kotlin/` compiler session files, and keep internal `docs/` out of the published archive so pub does not treat it as package documentation.
 
 ### Test
 

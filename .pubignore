@@ -18,6 +18,14 @@ coverage/
 *.iml
 *.lock
 !pubspec.lock
+*.class
+*.pyc
+*.swp
+flutter_*.png
+app.*.symbols
+app.*.map.json
+sentry.properties
+**/doc/api/
 
 # From .gitignore: generated Claude Code mirror files.
 CLAUDE.md
@@ -40,6 +48,12 @@ CLAUDE.local.md
 
 # Publish-only exclusions: internal repository documentation, agent
 # configuration masters and repo tooling scripts.
+#
+# `docs/` is internal architecture and worktree notes, not Dart package
+# documentation. Pub's layout convention uses `doc/` (singular) for that,
+# and warns on a top-level `docs/` directory if those files are in the
+# archive. `--dry-run` does not always surface the same checks as a real
+# upload, so keep this exclusion.
 AGENTS.md
 docs/
 scripts/

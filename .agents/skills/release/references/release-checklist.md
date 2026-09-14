@@ -15,7 +15,8 @@ Several push/PR workflow triggers use `branches: [none]`, and some commands may 
 Review `.pubignore` and the file list reported by `dart pub publish --dry-run` (or `fvm dart pub publish --dry-run`).
 
 - A `.pubignore` REPLACES the `.gitignore` in the same directory for publishing decisions. When adding publishing-relevant rules to the root `.gitignore`, mirror them in `.pubignore` — otherwise gitignored files reappear in the archive.
-- It excludes internal content from the archive: `AGENTS.md`, `docs/`, `scripts/`, and `resources/` (README images load from GitHub blob/`raw=true` URLs; pub.dev does not need them). Excluding `docs/` also avoids pub's "rename docs to doc" layout warning.
+- It excludes internal content from the archive: `AGENTS.md`, `docs/`, `scripts/`, and `resources/` (README images load from GitHub blob/`raw=true` URLs; pub.dev does not need them). Excluding `docs/` also avoids pub's "rename docs to doc" layout warning. That warning is easy to miss in `--dry-run`; a real upload is stricter.
+- Do not leave Flutter-generated example plugin registrant files (`example/{linux,macos,windows}/flutter/generated_plugin*`) tracked. They are gitignored and pubignored; checked-in copies make `dart pub publish` warn that gitignored files are in the index.
 - **Never exclude `example/screenshots/`**: those files are declared in the pubspec `screenshots:` section and MUST be in the archive. The pub.dev SERVER rejects the upload if one is missing ("Screenshot ... is missing from archive") — the local dry run does NOT check this.
 - Hidden dot-directories (`.agents/`, `.github/`, `.claude/`, …) are always excluded by pub; they need no rules. Canonical skills live in `.agents/` and are shared as skill folders, not as pub.dev content.
 - This package has no picker-style runtime `assets/` requirement. Avoid deleting assets or excluding whole folders based on another repository's publishing recipe.
