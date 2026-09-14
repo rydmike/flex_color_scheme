@@ -8,9 +8,9 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled Material and Cupertino libraries.
 
-> Except for removing deprecated APIs that were no longer had any function in version 8.4, and fixing one package bug and one Themes Playground bug, this release is a maintenance release to bring the package up to date with the latest Flutter SDK and other packages. Most notably full support for the standalone `material_ui` and `cupertino_ui` packages. 
-> 
-> Now that Material UI development is no longer on hold and moving forward, development of new features and improvements to the package will resume. This version deliberately avoids any new features to ensure it is an easy upgrade from version 8.4, with main focus on support for the new standalone `material_ui` and `cupertino_ui` packages.
+> Except for removing deprecated APIs that no longer had any function in version 8.4, and fixing one package bug and one Themes Playground bug, this release is a maintenance release to bring the package up to date with the latest Flutter SDK and other packages. Most notably full support for the standalone `material_ui` and `cupertino_ui` packages.
+>
+> Now that Material UI development is no longer on hold and moving forward, development of new features and improvements to the package will resume. This version deliberately avoids any new FlexColorScheme features to ensure it is an easy upgrade from version 8.4, with main focus on support for the new standalone `material_ui` and `cupertino_ui` packages. It depends on both at `^1.0.0` (any 1.x below 2.0.0) and does not use APIs added after 1.0.0; later FlexColorScheme releases will raise that floor when they adopt new features from those packages.
 
 ### Package
 
