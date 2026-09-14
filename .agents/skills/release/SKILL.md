@@ -43,7 +43,7 @@ The root [.pubignore](../../../.pubignore) controls what is published. Details a
 
 ## Publish
 
-1. Commit and push; PR to `master` if not already there. Do not treat workflows with `branches: [none]` as proof that CI ran.
+1. Commit and push; PR to `master` if not already there. The Test workflow is the active PR/push CI. Do not treat other workflows with `branches: [none]` as proof that CI ran.
 2. `dart pub publish` — manual, interactive; the user runs it or explicitly asks for it.
 3. Tag `X.Y.Z` and publish a **GitHub release** with the CHANGELOG section as body.
 4. The GitHub release triggers deploy.yml: analyze → format check → tests → Codecov → build all **five** web examples → push to `rydmike/rydmike.github.io`. Playground: `lib/example5_themes_playground/main.dart` with base href `/flexcolorscheme/themesplayground-latest/`.

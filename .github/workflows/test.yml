@@ -1,5 +1,6 @@
-# This GitHub action is configured to run "on" push to "master".
-# Currently, using the "validate" workflow instead, this is an older test CI/CD.
+# This GitHub action is configured to run on pull requests and pushes to "master".
+# This is the active test CI/CD workflow. The older "validate" workflow is
+# currently disabled (its triggers are set to branches: [none]).
 # This workflow:
 #  - Installs dart and flutter
 #  - Uses flutter stable channel.
@@ -15,11 +16,11 @@
 name: Test
 on:
   pull_request:
-    branches: [none]
+    branches: [master]
     paths-ignore:
       - "**.md"
   push:
-    branches: [none]
+    branches: [master]
     paths-ignore:
       - "**.md"
 jobs:
@@ -27,7 +28,7 @@ jobs:
     name: "Analyze and test package"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: "Install Flutter and Dart SDK"
         uses: subosito/flutter-action@v2
         with:
@@ -47,8 +48,9 @@ jobs:
       - name: "Test package FlexColorScheme with coverage"
         run: flutter test --coverage
       - name: Upload test coverage to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: coverage/lcov.info
-      
+          files: coverage/lcov.info
+          disable_search: true
+          fail_ci_if_error: true

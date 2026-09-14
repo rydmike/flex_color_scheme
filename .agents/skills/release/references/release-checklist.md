@@ -8,7 +8,7 @@ Check `pubspec.yaml`, `example/pubspec.yaml`, `example/lib/shared/const/app.dart
 
 Inspect SDK constraints and the selected SDK before dependency resolution. Resolve root and example packages separately. For an actual release, run the pre-flight commands in [SKILL.md](../SKILL.md). There is no established 100% coverage gate.
 
-Several push/PR workflow triggers use `branches: [none]`, and some commands may predate the current SDK (`flutter format` in `validate.yaml`). Read `.github/workflows/` before describing what runs. Changing CI is a separate task.
+The active PR/push CI is `.github/workflows/test.yml` (analyze, format check, tests with coverage → Codecov on pull requests and pushes to `master`). Other push/PR workflow triggers still use `branches: [none]`. Read `.github/workflows/` before describing what runs.
 
 ## Package contents
 
@@ -32,6 +32,6 @@ Review `.pubignore` and the file list reported by `dart pub publish --dry-run` (
 - example4 → `/flexcolorscheme/allthemes-latest/`
 - example5 Playground → `/flexcolorscheme/themesplayground-latest/` (`-t lib/example5_themes_playground/main.dart`)
 
-Also present: `deploy_dev.yml` (dev paths), `deploy_playground.yml` / `deploy_dev_playground.yml` (Playground only), `deploy_playground_netlify.yml`, `build.yml`, `test.yml`, `validate.yaml`. Inspect their triggers and destinations before selecting one; do not describe workflows restricted to branch `none` as normally running on master or as manually dispatchable without checking `workflow_dispatch`.
+Also present: `test.yml` (active PR/push CI and Codecov), `deploy_dev.yml` (dev paths), `deploy_playground.yml` / `deploy_dev_playground.yml` (Playground only), `deploy_playground_netlify.yml`, `build.yml`, `validate.yaml`. Inspect their triggers and destinations before selecting one; do not describe workflows restricted to branch `none` as normally running on master or as manually dispatchable without checking `workflow_dispatch`.
 
 When a full release is authorized, confirm the desired version and readiness, publish the package, then create the intended tag/GitHub release once package publication is confirmed. Check the resulting workflow and published package/Playground. No version bump, workflow edit, publishing, or deployment follows merely from installing this skill.

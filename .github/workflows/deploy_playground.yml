@@ -26,7 +26,7 @@ jobs:
     name: "Analyze and test package, then build and deploy Playground only"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Install Flutter and Dart SDK
         uses: subosito/flutter-action@v2
         with:
@@ -48,10 +48,13 @@ jobs:
       - name: "Test package FlexColorScheme with coverage"
         run: flutter test --coverage
       # - name: "Upload test coverage to Codecov"
-      #   uses: codecov/codecov-action@v3
+      #   uses: codecov/codecov-action@v5
       #   with:
       #     token: ${{ secrets.CODECOV_TOKEN }}
-      #     file: coverage/lcov.info
+      #     files: coverage/lcov.info
+      #     disable_search: true
+      #     fail_ci_if_error: true
+      #     override_branch: master
 
       # Example 5 Themes playground - Build and deploy
       - name: "EXAMPLE-5 START BUILD - Flutter clean before build"

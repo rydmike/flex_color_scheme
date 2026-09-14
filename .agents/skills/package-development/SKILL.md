@@ -115,7 +115,7 @@ The Playground is example 5, not FlexColorPicker's `example/lib/demo/`.
 
 User-facing API changes should show up in the Playground when the option is configurable, and in a simpler example when callers are expected to copy the pattern. A package parameter alone does **not** add a Playground control — follow [Playground development](../themes-playground-development/SKILL.md), including its code-generation handoff.
 
-CHANGELOG tags: `BREAKING`, `FIX`, `CHANGE`, `NEW`, `CHORE`, `DOCS` under `Package` / `Test` / `Themes Playground`. Web demos deploy from GitHub **release** via `.github/workflows/deploy.yml`, not from `dart pub publish`. Several other workflows still use `branches: [none]`; inspect triggers before describing CI. Publishing to pub.dev is manual.
+CHANGELOG tags: `BREAKING`, `FIX`, `CHANGE`, `NEW`, `CHORE`, `DOCS` under `Package` / `Test` / `Themes Playground`. Web demos deploy from GitHub **release** via `.github/workflows/deploy.yml`, not from `dart pub publish`. CI (pull requests and pushes to `master`): `dart analyze`, `dart format --output=none --set-exit-if-changed .`, `flutter test --coverage` → Codecov. Release deploys also upload coverage with `override_branch: master`. Other workflows still use `branches: [none]`; inspect triggers before describing them as running. Publishing to pub.dev is manual.
 
 ## Lint config is published externally
 

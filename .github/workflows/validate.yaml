@@ -12,7 +12,7 @@ jobs:
     name: "Analyze code style compliance"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: "Install Flutter"
@@ -31,14 +31,14 @@ jobs:
         run: dart analyze . --fatal-infos
       - name: "Formatting Check"
         run: |
-          flutter format .
+          dart format .
           ./.github/workflows/scripts/validate-formatting.sh
   test:
     runs-on: ubuntu-latest
     name: "Tests and coverage"
     timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
       - name: "Install Flutter"
@@ -48,7 +48,9 @@ jobs:
       - name: "Test package FlexColorScheme with coverage"
         run: flutter test --coverage
       - name: "Upload test coverage to Codecov"
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-          file: coverage/lcov.info
+          files: coverage/lcov.info
+          disable_search: true
+          fail_ci_if_error: true
