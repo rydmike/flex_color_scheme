@@ -52,48 +52,54 @@ class HomePage extends StatelessWidget {
       ),
       body: ResponsiveCenter(
         constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
-        child: ListView(
+        // Using a SingleChildScrollView and a Column here instead of a ListView
+        // because it performs better for this use case and simple example.
+        child: SingleChildScrollView(
           primary: true,
-          padding: EdgeInsets.all(margins),
-          children: <Widget>[
-            const Text(
-              'FlexColorScheme example 1 shows how to use a selected '
-              'predefined color scheme for light and dark theme mode, and '
-              'switch between the modes. The Widget showcase displays the '
-              'resulting theme using common Material widgets. Settings '
-              'are not persisted',
+          child: Padding(
+            padding: EdgeInsets.all(margins),
+            child: Column(
+              children: <Widget>[
+                const Text(
+                  'FlexColorScheme example 1 shows how to use a selected '
+                  'predefined color scheme for light and dark theme mode, and '
+                  'switch between the modes. The Widget showcase displays the '
+                  'resulting theme using common Material widgets. Settings '
+                  'are not persisted',
+                ),
+                const SizedBox(height: 8),
+                // A 3-way theme mode toggle switch that shows the color scheme.
+                FlexThemeModeSwitch(
+                  themeMode: themeMode,
+                  onThemeModeChanged: onThemeModeChanged,
+                  // The `FlexThemeModeSwitch` has a `FlexSchemeData` property that
+                  // it uses to set colors on the theme mode buttons and to
+                  // display theme name and description. Since we passed in our
+                  // custom scheme data, with name and all, from main here to
+                  // the HomePage , we just pass it on to the FlexThemeModeSwitch.
+                  flexSchemeData: flexSchemeData,
+                  buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
+                ),
+                // Show theme name and description.
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  title: Text('${flexSchemeData.name} theme'),
+                  subtitle: Text(flexSchemeData.description),
+                ),
+                // Show all active ColorScheme colors.
+                const ShowColorSchemeColors(),
+                const SizedBox(height: 8),
+                // Show all active colors in ThemeData, most of these will be
+                // deprecated in Flutter SDK, for more info see
+                // https://github.com/flutter/flutter/issues/91772
+                const ShowThemeDataColors(),
+                const SizedBox(height: 16),
+                Text('Widget Showcase', style: headlineMedium),
+                const SizedBox(height: 8),
+                const ShowcaseMaterial(),
+              ],
             ),
-            const SizedBox(height: 8),
-            // A 3-way theme mode toggle switch that shows the color scheme.
-            FlexThemeModeSwitch(
-              themeMode: themeMode,
-              onThemeModeChanged: onThemeModeChanged,
-              // The `FlexThemeModeSwitch` has a `FlexSchemeData` property that
-              // it uses to set colors on the theme mode buttons and to
-              // display theme name and description. Since we passed in our
-              // custom scheme data, with name and all, from main here to
-              // the HomePage , we just pass it on to the FlexThemeModeSwitch.
-              flexSchemeData: flexSchemeData,
-              buttonOrder: FlexThemeModeButtonOrder.lightSystemDark,
-            ),
-            // Show theme name and description.
-            ListTile(
-              contentPadding: EdgeInsets.zero,
-              title: Text('${flexSchemeData.name} theme'),
-              subtitle: Text(flexSchemeData.description),
-            ),
-            // Show all active ColorScheme colors.
-            const ShowColorSchemeColors(),
-            const SizedBox(height: 8),
-            // Show all active colors in ThemeData, most of these will be
-            // deprecated in Flutter SDK, for more info see
-            // https://github.com/flutter/flutter/issues/91772
-            const ShowThemeDataColors(),
-            const SizedBox(height: 16),
-            Text('Widget Showcase', style: headlineMedium),
-            const SizedBox(height: 8),
-            const ShowcaseMaterial(),
-          ],
+          ),
         ),
       ),
     );
