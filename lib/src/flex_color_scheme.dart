@@ -125,11 +125,10 @@ enum FlexSystemNavBarStyle {
   /// primary color blend that the surfaceContainerLow color has received will
   /// be used.
   ///
-  /// In FlexColorScheme versions before 8.0, this selection resulted in the
-  /// [ColorScheme] background color being used as the AppBar color. This was
-  /// deprecated in version 8.0.0 and replaced with
-  /// [ColorScheme.surfaceContainerLow] because Flutter 3.22 deprecated the
-  /// background color.
+  /// In FlexColorScheme versions before 8.0, this selection used the
+  /// deprecated [ColorScheme] background color. Version 8.0.0 replaced it
+  /// with [ColorScheme.surfaceContainerLow] because Flutter 3.22 deprecated
+  /// the background color.
   background,
 
   /// The system navigation bar will be the same color as active theme
@@ -153,7 +152,7 @@ enum FlexSystemNavBarStyle {
   ///
   /// * SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)
   ///
-  /// call has to be used. It is called automatically called by the
+  /// call has to be used. It is called automatically by the
   /// [FlexColorScheme.themedSystemNavigationBar] helper
   /// when opacity is < 1 or this transparent option is used.
   ///
@@ -194,7 +193,7 @@ enum FlexTabBarStyle {
   /// Indicator, text and icons contrast with background and surface colors
   /// using primary color.
   ///
-  /// If you intend to use your TabBar's only on surfaces, like Scaffold
+  /// If you intend to use your TabBars only on surfaces, like Scaffold
   /// or in cards using default theme background color, then use this style.
   /// If you use an AppBar theme that is surface colored in both light and dark
   /// theme, then this style will also work well when the TabBar is used
@@ -204,7 +203,7 @@ enum FlexTabBarStyle {
   /// Make a [TabBarThemeData] sub-theme that equals the style you get with
   /// ThemeData constructor and Widget default values in Flutter SDK.
   ///
-  /// This works well with default primary colored AppBar's in light
+  /// This works well with default primary colored AppBars in light
   /// theme and dark surface colored AppBars or other dark surfaces in dark
   /// theme. It does not work with all app bar styles supported by
   /// [FlexColorScheme], prefer using [forAppBar] for that.
@@ -267,7 +266,7 @@ enum FlexFixedColorStyle {
   /// colors and their on colors.
   ///
   /// The [FlexSchemeVariant.chroma] is used for the seed generation, as it best
-  /// matches the chromacity of target input color.
+  /// matches the chroma of the target input color.
   seeded,
 
   /// Seed generate the fixed colors, even when a seeded ColorScheme is not
@@ -277,7 +276,7 @@ enum FlexFixedColorStyle {
   /// colors and their on colors.
   ///
   /// The [FlexSchemeVariant.chroma] is used for the seed generation, as it best
-  /// matches the chromacity of target input color.
+  /// matches the chroma of the target input color.
   ///
   /// Additionally the [FlexTones] modifier [FlexTones.higherContrastFixed]
   /// is applied.
@@ -400,7 +399,7 @@ enum FlexScaffoldBaseColor {
 }
 
 /// Make beautiful Flutter themes using pre-designed color schemes or custom
-/// colors. Get the resulting [ThemeData] with the [toTheme] method.
+/// colors. Get the resulting [ThemeData] with the [toTheme] getter.
 ///
 /// Flutter's [ThemeData.from] is a good starting point for [ColorScheme] based
 /// themes. It has a some gaps leaving some properties in the theme
@@ -424,7 +423,7 @@ enum FlexScaffoldBaseColor {
 /// A more opinionated theme and style can be returned by passing in a default
 /// [FlexSubThemesData] constructor to [subThemesData].
 /// By default the sub-themes take inspiration from the Material 3 (M3) Design
-/// guide [specification](https://m3.material.io) and uses many f its values as
+/// guide [specification](https://m3.material.io) and uses many of its values as
 /// defaults when it is possible to do so in Flutter
 /// SDK theming, within any remaining Material 2 (M2) design limitations.
 ///
@@ -449,19 +448,22 @@ enum FlexScaffoldBaseColor {
 /// surfaces (backgrounds), that use alpha blend to mix in a varying degree
 /// of a color, typically the primary color, into surfaces and backgrounds.
 ///
-/// Branded surface are described in the Material design guide, but Flutter
-/// offers no out of the box help to make such themes. With [FlexColorScheme]
+/// Branded surfaces were introduced already the Material-2 design guide, but back then
+/// Flutter offered no out of the box help to make such themes. With [FlexColorScheme]
 /// you can use a varying degree of surface and background branding levels for
-/// any theme you make, both in light and dark mode. When you use Material 3
-/// color system matching [ColorScheme] its surface colors also include a hint
-/// of the primary color in surfaces and background. This is called surface tint
-/// in the Material 3 design guide. The name may be different and the algorithm
+/// any theme you make, both in light and dark mode, even in old legacy Material-2 themes.
+///
+/// When you use Material-3 color system matching [ColorScheme] its surface colors
+/// include a hint of the primary color in surfaces and background. This is called
+/// surface tint in the Material-3 design guide. The name may be different and the algorithm
 /// to generate the colors is also much more refined, but the design idea is the
 /// same. With the factory constructors [FlexColorScheme.light] and
-/// [FlexColorScheme.dark] you can also use the Material 3 color system and
-/// its tools to generate ColorScheme for it. The factories also provide
-/// more advanced and flexible key color generated [ColorScheme]'s, than what
-/// is offered in Flutter SDK via [ColorScheme.fromSeed].
+/// [FlexColorScheme.dark] you can use the Material-3 color system and
+/// its tools to generate ColorScheme for it. The factories provide a more advanced
+/// and flexible key color generated [ColorScheme]'s, than what is offered in
+/// Flutter SDK via [ColorScheme.fromSeed]. It gives you much more control over the
+/// generated colors and their on colors, and you can use separate key colors for
+/// each palette.
 ///
 /// [FlexColorScheme] makes it easy to adjust the [AppBar]'s themed background
 /// also to surface, background and scaffold background colors that also
@@ -479,11 +481,10 @@ enum FlexScaffoldBaseColor {
 class FlexColorScheme with Diagnosticable {
   /// Default constructor with no required properties.
   ///
-  /// Creates a a light theme by default using the M2 colors as its default
-  /// theme.
+  /// Creates a light theme by default. Material 3 is used unless [useMaterial3]
+  /// is set to false.
   ///
-  /// Typically you would define
-  /// requires [brightness] and four main color scheme
+  /// Typically you would define [brightness] and the four main color scheme
   /// color properties in order to make a fully defined color scheme for
   /// a [ThemeData] object.
   ///
@@ -568,7 +569,7 @@ class FlexColorScheme with Diagnosticable {
   /// The overall [ColorScheme] based colors for the theme.
   ///
   /// This property provides an alternative way to define custom colors for
-  /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
+  /// [FlexColorScheme]. It is useful if
   /// you already have a custom [ColorScheme] based color definition that
   /// you want to use with FlexColorScheme theming and its sub-theming
   /// capabilities, often used with Material 3 based design and its seed
@@ -589,7 +590,7 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
   /// [toScheme]. This will always get you a complete color scheme, including
-  /// calculated and derived color values,. This can be used when using the
+  /// calculated and derived color values. This can be used when using the
   /// [FlexColorScheme.light] and [FlexColorScheme.dark] factories to compute
   /// schemes with branded or tinted surface colors. The effective [ColorScheme]
   /// of your theme is often needed if you want to create component sub-themes
@@ -784,7 +785,7 @@ class FlexColorScheme with Diagnosticable {
   /// Flutter 3.29.0 and later. To get the given dialog color, sub-themes
   /// must now be enabled.
   ///
-  /// When using sub-themes,this color is applied to backgroundColor in
+  /// When using sub-themes, this color is applied to backgroundColor in
   /// dialog themes DatePickerThemeData, DialogThemeData and
   /// TimePickerThemeData, but only if
   /// [FlexSubThemesData.dialogBackgroundSchemeColor] has not been
@@ -1195,7 +1196,7 @@ class FlexColorScheme with Diagnosticable {
   /// defaults when it is possible to do so in Flutter SDK theming, within
   /// its current Material 2 (M2) design limitations.
   ///
-  /// Starting from version 5, by opting in via a default [subThemesData] you
+  /// By opting in via a default [subThemesData] you
   /// get an extensive set of widget component sub themes applied.
   /// They can be customized via the [subThemesData] property, that has
   /// quick and flat sub theme configuration values in the data class
@@ -1248,7 +1249,14 @@ class FlexColorScheme with Diagnosticable {
   ///   [FlexSubThemes.outlinedButtonTheme].
   /// * [PopupMenuThemeData] for [PopupMenuButton] via
   ///   [FlexSubThemes.popupMenuTheme].
+  /// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
+  ///   [LinearProgressIndicator] via [FlexSubThemes.progressIndicatorTheme].
   /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+  /// * [SearchBarThemeData] for [SearchBar] via [FlexSubThemes.searchBarTheme].
+  /// * [SearchViewThemeData] for [SearchBar] and its open view via
+  ///   [FlexSubThemes.searchViewTheme].
+  /// * [SegmentedButtonThemeData] for [SegmentedButton] via
+  ///   [FlexSubThemes.segmentedButtonTheme].
   /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
   /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
   /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
@@ -1410,8 +1418,9 @@ class FlexColorScheme with Diagnosticable {
   /// For using built-in color schemes, the convenience shortcut to select
   /// it with the [scheme] property is recommended and leaving [colors]
   /// undefined. If both are specified the scheme colors defined by [colors]
-  /// are used. If both are null then [scheme] defaults to
-  /// [FlexScheme.material], thus defining the resulting scheme.
+  /// are used. If both are null, then [scheme] defaults to
+  /// [FlexScheme.material] if [useMaterial3] is false, and to
+  /// [FlexScheme.materialBaseline] if [useMaterial3] is true.
   ///
   /// ## [scheme]
   ///
@@ -1424,14 +1433,14 @@ class FlexColorScheme with Diagnosticable {
   /// [colors] and [scheme] are specified, the scheme defined by
   /// [colors] is used. If both are null, then [scheme] defaults to
   /// [FlexScheme.material] if [useMaterial3] is false, and to
-  /// [FlexScheme.materialBaseline] [useMaterial3] is true.
+  /// [FlexScheme.materialBaseline] if [useMaterial3] is true.
   ///
   /// ## [colorScheme]
   ///
   /// The overall [ColorScheme] based colors for the theme.
   ///
-  /// This property provides a new way to define custom colors for
-  /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
+  /// This property provides a way to define custom colors for
+  /// [FlexColorScheme]. It is useful if
   /// you already have a custom [ColorScheme] based color definition that
   /// you want to use with FlexColorScheme theming and its sub-theming
   /// capabilities.
@@ -1974,9 +1983,8 @@ class FlexColorScheme with Diagnosticable {
   /// by all [Material] of type [MaterialType.card].
   ///
   /// When using the factory this is an override color for the color that
-  /// would be used based on mode defined by property
-  /// [surfaceMode] [FlexSurfaceMode] enum, or the removed pre-5.0.0
-  /// `surfaceStyle` / `FlexSurface` API, or if a [colorScheme] was provided it will override the
+  /// would be used based on the [surfaceMode] [FlexSurfaceMode] enum. If a
+  /// [colorScheme] was provided, this color property will override the
   /// same color in it as well.
   ///
   /// Defaults to null.
@@ -2023,7 +2031,7 @@ class FlexColorScheme with Diagnosticable {
   /// Flutter 3.29.0 and later. To get the selected dialog color sub-themes
   /// must now be enabled.
   ///
-  /// When using sub-themes,this color is applied to backgroundColor in
+  /// When using sub-themes, this color is applied to backgroundColor in
   /// dialog themes DatePickerThemeData, DialogThemeData and
   /// TimePickerThemeData,
   /// but only if [FlexSubThemesData.dialogBackgroundSchemeColor] has not been
@@ -2194,7 +2202,7 @@ class FlexColorScheme with Diagnosticable {
   /// defaults when it is possible to do so in Flutter SDK theming when using
   /// Material2 mode and via defaults also in Material 3 mode.
   ///
-  /// Starting from version 5, by opting in via a default [subThemesData] you
+  /// By opting in via a default [subThemesData] you
   /// get an extensive set of widget component sub themes applied.
   /// They can be customized via the [subThemesData] property, that has
   /// quick and flat sub theme configuration values in the data class
@@ -2247,7 +2255,14 @@ class FlexColorScheme with Diagnosticable {
   ///   [FlexSubThemes.outlinedButtonTheme].
   /// * [PopupMenuThemeData] for [PopupMenuButton] via
   ///   [FlexSubThemes.popupMenuTheme].
+  /// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
+  ///   [LinearProgressIndicator] via [FlexSubThemes.progressIndicatorTheme].
   /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+  /// * [SearchBarThemeData] for [SearchBar] via [FlexSubThemes.searchBarTheme].
+  /// * [SearchViewThemeData] for [SearchBar] and its open view via
+  ///   [FlexSubThemes.searchViewTheme].
+  /// * [SegmentedButtonThemeData] for [SegmentedButton] via
+  ///   [FlexSubThemes.segmentedButtonTheme].
   /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
   /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
   /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
@@ -3192,7 +3207,7 @@ class FlexColorScheme with Diagnosticable {
     if (onBlendLevel < 0 || onBlendLevel > 40) onBlendLevel = 0;
 
     // Get alpha blend values for used mode, on blend level and brightness,
-    // used for onContainers and onSurface and onBackground.
+    // used for onContainers and onSurface.
     final FlexAlphaValues alphaOnValue = useSubThemes
         ? FlexAlphaValues.getAlphas(surfaceMode ?? FlexSurfaceMode.level, onBlendLevel)
         : const FlexAlphaValues();
@@ -3541,8 +3556,9 @@ class FlexColorScheme with Diagnosticable {
   /// For using built-in color schemes, the convenience shortcut to select
   /// it with the [scheme] property is recommended and leaving [colors]
   /// undefined. If both are specified the scheme colors defined by [colors]
-  /// are used. If both are null then [scheme] defaults to
-  /// [FlexScheme.material], thus defining the resulting scheme.
+  /// are used. If both are null, then [scheme] defaults to
+  /// [FlexScheme.material] if [useMaterial3] is false, and to
+  /// [FlexScheme.materialBaseline] if [useMaterial3] is true.
   ///
   /// ## [scheme]
   ///
@@ -3555,14 +3571,14 @@ class FlexColorScheme with Diagnosticable {
   /// [colors] and [scheme] are specified, the scheme defined by
   /// [colors] is used. If both are null, then [scheme] defaults to
   /// [FlexScheme.material] if [useMaterial3] is false, and to
-  /// [FlexScheme.materialBaseline] [useMaterial3] is true.
+  /// [FlexScheme.materialBaseline] if [useMaterial3] is true.
   ///
   /// ## [colorScheme]
   ///
   /// The overall [ColorScheme] based colors for the theme.
   ///
-  /// This property provides a new way to define custom colors for
-  /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
+  /// This property provides a way to define custom colors for
+  /// [FlexColorScheme]. It is useful if
   /// you already have a custom [ColorScheme] based color definition that
   /// you want to use with FlexColorScheme theming and its sub-theming
   /// capabilities.
@@ -4203,9 +4219,8 @@ class FlexColorScheme with Diagnosticable {
   /// by all [Material] of type [MaterialType.card].
   ///
   /// When using the factory this is an override color for the color that
-  /// would be used based on mode defined by property
-  /// [surfaceMode] [FlexSurfaceMode] enum, or the removed pre-5.0.0
-  /// `surfaceStyle` / `FlexSurface` API, or if a [colorScheme] was provided it will override the
+  /// would be used based on the [surfaceMode] [FlexSurfaceMode] enum. If a
+  /// [colorScheme] was provided, this color property will override the
   /// same color in it as well.
   ///
   /// Defaults to null.
@@ -4252,7 +4267,7 @@ class FlexColorScheme with Diagnosticable {
   /// Flutter 3.29.0 and later. To get the selected dialog color sub-themes
   /// must now be enabled.
   ///
-  /// When using sub-themes,this color is applied to backgroundColor in
+  /// When using sub-themes, this color is applied to backgroundColor in
   /// dialog themes DatePickerThemeData, DialogThemeData and
   /// TimePickerThemeData, but only if
   /// [FlexSubThemesData.dialogBackgroundSchemeColor] has not been defined in
@@ -4423,7 +4438,7 @@ class FlexColorScheme with Diagnosticable {
   /// defaults when it is possible to do so in Flutter SDK theming when using
   /// Material2 mode and via defaults also in Material 3 mode.
   ///
-  /// Starting from version 5, by opting in via a default [subThemesData] you
+  /// By opting in via a default [subThemesData] you
   /// get an extensive set of widget component sub themes applied.
   /// They can be customized via the [subThemesData] property, that has
   /// quick and flat sub theme configuration values in the data class
@@ -4476,7 +4491,14 @@ class FlexColorScheme with Diagnosticable {
   ///   [FlexSubThemes.outlinedButtonTheme].
   /// * [PopupMenuThemeData] for [PopupMenuButton] via
   ///   [FlexSubThemes.popupMenuTheme].
+  /// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
+  ///   [LinearProgressIndicator] via [FlexSubThemes.progressIndicatorTheme].
   /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+  /// * [SearchBarThemeData] for [SearchBar] via [FlexSubThemes.searchBarTheme].
+  /// * [SearchViewThemeData] for [SearchBar] and its open view via
+  ///   [FlexSubThemes.searchViewTheme].
+  /// * [SegmentedButtonThemeData] for [SegmentedButton] via
+  ///   [FlexSubThemes.segmentedButtonTheme].
   /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
   /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
   /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
@@ -5495,7 +5517,7 @@ class FlexColorScheme with Diagnosticable {
     if (onBlendLevel < 0 || onBlendLevel > 40) onBlendLevel = 0;
 
     // Get alpha blend values for used mode, on blend level and brightness,
-    // used for onContainers and onSurface and onBackground.
+    // used for onContainers and onSurface.
     final FlexAlphaValues alphaOnValue = useSubThemes
         ? FlexAlphaValues.getAlphas(surfaceMode ?? FlexSurfaceMode.level, onBlendLevel)
         : const FlexAlphaValues();
@@ -6245,64 +6267,33 @@ class FlexColorScheme with Diagnosticable {
   /// The differences from the standard [ThemeData.from] factory are:
   ///
   /// * `ScaffoldBackgroundColor` has its own color property in FlexColorScheme
-  ///   and can if so desired differ from the `ColorScheme.background` color.
-  ///   When using primary color blended surfaces and backgrounds, it is
+  ///   and can if so desired differ from the `ColorScheme.surface` color.
+  ///   When using primary color blended surfaces, it is
   ///   important to be able to vary the very prominent ScaffoldBackgroundColor
-  ///   separately from other surfaces and backgrounds.
+  ///   separately from other surfaces.
   ///
-  /// * The `dialogBackgroundColor` in M2 uses the `ColorScheme.surface` color
-  ///   instead of the default `ColorScheme.background`. In order to preserve
-  ///   the `elevationOverlayColor` in dark mode when `ColorScheme.surface` and
-  ///   `ColorScheme.background` differs due to different surface blends, the
-  ///   `ColorScheme.surface` was used to ensure dialogs that are always
-  ///   elevated gets the overlay color applied in dark theme mode. For more
+  /// * The `dialogBackgroundColor` in M2 uses the `ColorScheme.surface` color.
+  ///   In M3 `ColorScheme.surface` is used by the SDK as well. For more
   ///   info see:
   ///   [issue #90353](https://github.com/flutter/flutter/issues/90353).
-  ///   In M3 `ColorScheme.surface` is used by the SDK as well.
   ///
   /// * The `indicatorColor` is same as `effectiveTabColor` which uses a
   ///   function with logic to determine its color based on if a TabBarThemeData
   ///   was selected that should work on current AppBar background color,
-  ///   or on surface/background colors.
+  ///   or on surface colors.
   ///
-  /// * Flutter themes created with `ThemeData.from` does not define any color
-  ///   scheme related color for the `primaryColorDark` color, FCS does.
-  ///   See issue: https:///github.com/flutter/flutter/issues/65782.
-  ///   The `ThemeData.from` leaves this color at `ThemeData` factory default,
-  ///   this may not match your scheme. Widgets seldom use this color, so the
-  ///   issue is rarely seen.
-  ///   This color property will be deprecated in Flutter, see issue
-  ///   [91772](https://github.com/flutter/flutter/issues/91772).
-  ///
-  /// * Flutter themes created with `ThemeData.from` does not define any color
-  ///   scheme related color for the `primaryColorDark` color, FCS does.
-  ///   See issue: https:///github.com/flutter/flutter/issues/65782.
-  ///   The `ThemeData.from` leaves this color at `ThemeData` factory default
-  ///   this may not match your scheme. Widgets seldom use this color, so the
-  ///   issue is rarely seen.
-  ///   This color property will be deprecated in Flutter, see issue
-  ///   [91772](https://github.com/flutter/flutter/issues/91772).
-  ///
-  /// * Flutter themes created with `ThemeData.from` does not define any color
-  ///   scheme related color for the `primaryColorDark` color, FCS does.
-  ///   See issue: https:///github.com/flutter/flutter/issues/65782.
-  ///   `ThemeData.from` leaves this color at `ThemeData` factory default this
-  ///   may not match your scheme. Widgets seldom use this color, so the issue
-  ///   is rarely seen.
-  ///   This color property will be deprecated in Flutter, see issue
+  /// * Flutter themes created with `ThemeData.from` do not define scheme-based
+  ///   colors for the legacy `primaryColorDark`, `primaryColorLight` and
+  ///   `secondaryHeaderColor` properties. FCS computes them from primary.
+  ///   Widgets seldom use these colors. They are on a deprecation path in
+  ///   Flutter, see issue
   ///   [91772](https://github.com/flutter/flutter/issues/91772).
   ///
   /// * Background color for `AppBarTheme` can use a custom color theme
   ///   in both light and dark themes, that is not dependent on theme
   ///   primary or surface color.
-  ///   In the versions prior to Flutter 2.0.0 doing this was difficult to do.
-  ///   As presented in https://github.com/flutter/flutter/issues/50606
-  ///   A new feature in Flutter 2.0.0 implemented via:
-  ///   https://github.com/flutter/flutter/pull/71184 makes this easy and
-  ///   better. FlexColorScheme's implementation has been changed to use this
-  ///   new AppBarTheme feature starting with version 2.0.0-nullsafety.2.
   ///
-  /// * The `AppBarTheme` M2 elevation defaults to 0, an iOs style influenced
+  /// * The `AppBarTheme` M2 elevation defaults to 0, an iOS style influenced
   ///   opinionated choice. It can easily be adjusted directly in the
   ///   `FlexColorScheme` definition with property value `appBarElevation`
   ///   without creating a sub theme or using `copyWith`.
@@ -6316,13 +6307,11 @@ class FlexColorScheme with Diagnosticable {
   ///   actually get a default `BottomAppBarTheme()` all null theme made by
   ///   `FlexSubThemes.bottomAppBarTheme`.
   ///
-  /// * A predefined slightly opinionated [InputDecorationThemeData] is used. It
-  ///   sets `filled` to `true` and fill color to color scheme primary color
-  ///   with opacity `0.035` in light mode and opacity `0.06` in dark-mode.
-  ///
-  /// * The property `fixTextFieldOutlineLabel` is set to `true` by default,
-  ///   it looks better. The only reason why it is not the default in Flutter,
-  ///   is for default backwards legacy design compatibility.
+  /// * When not using component sub-themes, Material 2 still gets a slightly
+  ///   opinionated [InputDecorationThemeData] with `filled` true and fill color
+  ///   set to the color scheme primary color at about 3.5% opacity in light
+  ///   mode and 6% in dark mode. Material 3 without sub-themes leaves the
+  ///   input decorator at Flutter SDK defaults.
   ///
   /// * For [ThemeData.buttonTheme] the entire color scheme is passed to its
   ///   `colorScheme` property and it uses `textTheme` set to
@@ -6340,7 +6329,7 @@ class FlexColorScheme with Diagnosticable {
   ///   design bug that makes the selected `ChoiceChip()` widget look
   ///   disabled in dark-mode, regardless of if it was created with `ThemeData`
   ///   or `ThemeData.from` factory. See issue:
-  ///   https:///github.com/flutter/flutter/issues/65663
+  ///   https://github.com/flutter/flutter/issues/65663
   ///   The [ChipThemeData] modification originally used in core
   ///   FlexColorScheme fixed the issue. The issue has been resolved but
   ///   same [ChipThemeData] is still in use for backward style compatibility.
@@ -6454,7 +6443,7 @@ class FlexColorScheme with Diagnosticable {
   ///   > area on Android transparent via a theme, but it does not work.
   ///   > The style is doable, but requires modifying Android config files, not
   ///   > possible from Flutter only (as per current information).
-  ///   > Related issue: https:///github.com/flutter/flutter/issues/69999.
+  ///   > Related issue: https://github.com/flutter/flutter/issues/69999.
   ///   >
   ///   > FlexColorScheme offers a static helper [themedSystemNavigationBar]
   ///   > that allows us to easily create an annotated region for the system
@@ -8079,19 +8068,19 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// After you have defined your [FlexColorScheme] with one of its recommended
   /// factories [FlexColorScheme.light], [FlexColorScheme.dark], you can use
-  /// the [toScheme] method to get the effective standard Flutter
+  /// the [toScheme] getter to get the effective standard Flutter
   /// [ColorScheme] object defined by your [FlexColorScheme] definition.
   ///
-  /// While you can use use this returned color scheme in a standard
+  /// While you can use this returned color scheme in a standard
   /// [ThemeData.from] color scheme based theme factory to create a theme from
   /// [FlexColorScheme], this is **NOT** the recommended way to make a
   /// fully [FlexColorScheme] based theme. Normally you want to use
   /// [FlexColorScheme.toTheme] to make your ThemeData when using
-  /// FlexColorScheme. The [FlexColorScheme.toTheme] method uses
+  /// FlexColorScheme. The [FlexColorScheme.toTheme] getter uses
   /// [FlexColorScheme.toScheme] internally when it creates its [ThemeData]
   /// object as well. It does however also apply a number of additional
-  /// theme properties, that you loose if you extract the [ColorScheme]
-  /// with [toScheme] and use it in a [ThemeData.from] from factory.
+  /// theme properties, that you lose if you extract the [ColorScheme]
+  /// with [toScheme] and use it in a [ThemeData.from] factory.
   ///
   /// The main usage of this method is to get the effective resulting
   /// [ColorScheme] from [FlexColorScheme] and use it when making sub-themes
@@ -8102,12 +8091,11 @@ class FlexColorScheme with Diagnosticable {
   /// If you use [ThemeData.from] and the [ColorScheme] returned by
   /// [FlexColorScheme.toScheme] to create your theme, this will work and
   /// result in a theme that is based on the color scheme defined in
-  /// [FlexColorScheme], including the surface and
-  /// background color branding, and e.g. true black for dark mode, if those
-  /// were used in its creation via the light and dark factories. The big
-  /// difference will be that Flutter's [ThemeData.from] theme creation
-  /// from this scheme will not include any of the theme improvements included
-  /// in the [FlexColorScheme.toTheme] method.
+  /// [FlexColorScheme], including the surface color branding, and e.g. true
+  /// black for dark mode, if those were used in its creation via the light
+  /// and dark factories. The big difference will be that Flutter's
+  /// [ThemeData.from] theme creation from this scheme will not include any of
+  /// the theme improvements included in the [FlexColorScheme.toTheme] getter.
   ColorScheme get toScheme {
     // Get effective scheme brightness. Passed in as a property value, or from
     // passed in colorScheme, if neither given, light is default fallback.
@@ -8234,10 +8222,10 @@ class FlexColorScheme with Diagnosticable {
     // The factories FlexColorScheme.light and FlexColorScheme.dark have their
     // own logic for making the ColorScheme and set a colorScheme as well as
     // all override properties to define their target ColorScheme when the
-    // toScheme methods is called.
+    // toScheme getter is called.
     //
-    // The toScheme method is used internally by the toTheme method to get
-    // the effective ColorScheme for the the defined FlexColorScheme instance.
+    // The toScheme getter is used internally by the toTheme getter to get
+    // the effective ColorScheme for the defined FlexColorScheme instance.
     return colorScheme?.copyWith(
           brightness: usedBrightness,
           primary: colors.primary,

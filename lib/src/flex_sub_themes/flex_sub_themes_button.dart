@@ -3,7 +3,7 @@ part of '../flex_sub_themes.dart';
 /// An opinionated [ButtonThemeData] theme.
 ///
 /// The `ButtonThemeData` is marked as **obsolete** in Flutter SDK
-/// documentation, but not yet deprecated in Flutter stable SDK 3.24.x.
+/// documentation, but not yet deprecated in Flutter SDK.
 ///
 /// This sub-theme will be removed in FCS when Flutter SDK deprecates
 /// [ButtonThemeData].

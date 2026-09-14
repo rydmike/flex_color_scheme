@@ -42,8 +42,8 @@ import 'package:material_ui/material_ui.dart';
 /// * [Scrollbar], rounding on edges of scrollbars are left to platform default.
 /// * The [AppBar] and [BottomAppBar] shape properties are left to defaults.
 /// * The floating [SnackBar] can be themed to also include border radius, but
-///   the none floating one should remain straight. This separation cannot
-///   can be done via current flutter theming features. If you use Material 3
+///   the non-floating one should remain straight. This separation cannot
+///   be done via current Flutter theming features. If you use Material 3
 ///   this may not be problem since an M3 app is not supposed to use the
 ///   fixed style [SnackBar], so if you only use the floating one, you can
 ///   modify its border radius. The M3 guide mentions it should never be
@@ -146,6 +146,11 @@ import 'package:material_ui/material_ui.dart';
 /// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
 ///   [LinearProgressIndicator] via [FlexSubThemes.progressIndicatorTheme].
 /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+/// * [SearchBarThemeData] for [SearchBar] via [FlexSubThemes.searchBarTheme].
+/// * [SearchViewThemeData] for [SearchBar] and its open view via
+///   [FlexSubThemes.searchViewTheme].
+/// * [SegmentedButtonThemeData] for [SegmentedButton] via
+///   [FlexSubThemes.segmentedButtonTheme].
 /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
 /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
@@ -1277,7 +1282,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [ToggleButtons] use as its base theme color.
   ///
   /// Always defines the background color for selected button, and
-  /// it's onColor pair defines the foreground for selected button.
+  /// its onColor pair defines the foreground for selected button.
   ///
   /// If [toggleButtonsUnselectedSchemeColor] is not defined,
   /// [toggleButtonsSchemeColor] is used as foreground color for unselected
@@ -1567,7 +1572,7 @@ class FlexSubThemesData with Diagnosticable {
   /// secondary color is still prominent, you can of course still use it.
   final SchemeColor? radioSchemeColor;
 
-  /// Defines is unselected [Switch], [Checkbox] and [Radio] also use their
+  /// Defines if unselected [Switch], [Checkbox] and [Radio] also use their
   /// themed color.
   ///
   /// Flutter SDK use neutral grey for switches, checkboxes and radio buttons
@@ -1576,9 +1581,9 @@ class FlexSubThemesData with Diagnosticable {
   /// use their themed color also in the unselected state.
   ///
   /// * The [Checkbox] and [Radio] use their theme color in the outline.
-  /// * The [Switch] has just a hint of its themed color in it inactive track.
+  /// * The [Switch] has just a hint of its themed color in its inactive track.
   ///
-  /// Defaults to false, set it to for slightly different style.
+  /// Defaults to false. Set it to true for a slightly different style.
   final bool unselectedToggleIsColored;
 
   /// The ColorScheme based color used on the [Slider] as its overall base
@@ -1771,7 +1776,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// To use the underline style set it to [FlexInputBorderType.underline].
   /// The top of the decorator is still rounded according to overall
-  /// [defaultRadius] also with underline borer type.
+  /// [defaultRadius] also with underline border type.
   ///
   /// To change input decorator's border radius separately define
   /// [inputDecoratorRadius] that will then override [defaultRadius].
@@ -2070,7 +2075,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Always use circular Shape on Floating Actions Button.
   ///
   /// If [fabUseShape] is false the [fabAlwaysCircular] has no effect, FAB will
-  /// be circular in in M2 and rounded with different radii depending on FAB
+  /// be circular in M2 and rounded with different radii depending on FAB
   /// size in M3.
   ///
   /// if [defaultRadius] or [fabRadius] is defined and [fabAlwaysCircular] is
@@ -2661,7 +2666,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Color of the track being filled by the linear indicator.
   ///
   /// If [progressIndicatorLinearTrackSchemeColor] is null then in M2 mode
-  /// the ambient theme's deprecated ColorScheme.background color is used
+  /// the ambient theme's [ColorScheme.surface] color is used.
   /// In M3 mode [ColorScheme.secondaryContainer] is used as default.
   final SchemeColor? progressIndicatorLinearTrackSchemeColor;
 
@@ -3373,7 +3378,7 @@ class FlexSubThemesData with Diagnosticable {
   final SchemeColor? drawerUnselectedItemSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color that the
-  /// [BottomSheet] uses as background color when presented as a none modal
+  /// [BottomSheet] uses as background color when presented as a non-modal
   /// bottom sheet.
   ///
   /// If not defined, defaults to Material 3 default ColorScheme.surface.
@@ -3401,7 +3406,7 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/text-fields/specs
   final double? bottomSheetRadius;
 
-  /// Elevation of none modal [BottomSheet].
+  /// Elevation of non-modal [BottomSheet].
   ///
   /// If null, defaults to [kBottomSheetElevation] = 1, if
   /// [FlexColorScheme.useMaterial3]

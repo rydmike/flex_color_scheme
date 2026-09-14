@@ -9,7 +9,7 @@ import 'package:material_ui/material_ui.dart' show ColorScheme;
 /// Enum that can be used to lookup predefined [FlexSchemeData] color theme
 /// definition objects.
 ///
-/// Contains 52 ready to use built-in matched light and dark color schemes.
+/// Contains built-in matched light and dark color schemes.
 enum FlexScheme {
   /// The example theme used in the Material Design guide.
   ///
@@ -134,7 +134,7 @@ enum FlexScheme {
   flutterDash,
 
   /// The Material 3 color scheme baseline for primary, secondary and tertiary
-  /// colors, used as an example in in the Material 3 design guide.
+  /// colors, used as an example in the Material 3 design guide.
   /// https://m3.material.io/styles/color/the-color-system/tokens
   materialBaseline,
 
@@ -148,46 +148,46 @@ enum FlexScheme {
   /// [here](https://m3.material.io/styles/color/the-color-system/color-roles).
   dellGenoa,
 
-  /// A red based Material-3 colorscheme.
+  /// A red based Material-3 color scheme.
   redM3,
 
-  /// A pink based Material-3 colorscheme.
+  /// A pink based Material-3 color scheme.
   pinkM3,
 
-  /// A purple based Material-3 colorscheme.
+  /// A purple based Material-3 color scheme.
   purpleM3,
 
-  /// An indigo based Material-3 colorscheme, with old lavender tertiary.
+  /// An indigo based Material-3 color scheme, with old lavender tertiary.
   indigoM3,
 
-  /// A blue based Material-3 colorscheme.
+  /// A blue based Material-3 color scheme.
   blueM3,
 
-  /// A cyan based Material-3 colorscheme.
+  /// A cyan based Material-3 color scheme.
   cyanM3,
 
-  /// A teal based Material-3 colorscheme, with azure blue tertiary.
+  /// A teal based Material-3 color scheme, with azure blue tertiary.
   tealM3,
 
-  /// A green based Material-3 colorscheme, with william blue-grey tertiary.
+  /// A green based Material-3 color scheme, with william blue-grey tertiary.
   greenM3,
 
-  /// A lime based Material-3 colorscheme.
+  /// A lime based Material-3 color scheme.
   limeM3,
 
-  /// A Yukon Gold based Material-3 colorscheme, with mineral green tertiary.
+  /// A Yukon Gold based Material-3 color scheme, with mineral green tertiary.
   yellowM3,
 
-  /// An orange based Material-3 colorscheme, with verdigris green tertiary.
+  /// An orange based Material-3 color scheme, with verdigris green tertiary.
   orangeM3,
 
-  /// A deep orange based Material-3 colorscheme.
+  /// A deep orange based Material-3 color scheme.
   deepOrangeM3,
 
-  /// A black and white based colorscheme, with monochrome greys.
+  /// A black and white based color scheme, with monochrome greys.
   blackWhite,
 
-  /// A monochrome grey scale based colorscheme.
+  /// A monochrome grey scale based color scheme.
   greys,
 
   /// Sepia, a warm slight brown yellow tinted neutral theme.

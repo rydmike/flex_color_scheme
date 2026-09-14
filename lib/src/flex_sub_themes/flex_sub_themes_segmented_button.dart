@@ -12,7 +12,7 @@ part of '../flex_sub_themes.dart';
 /// color for the selected button.
 ///
 /// Defines the background color for selected button, and
-/// it's onColor pair defines the foreground for selected button.
+/// its onColor pair defines the foreground for selected button.
 ///
 /// If not defined, secondaryContainer will be used.
 ///

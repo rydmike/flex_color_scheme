@@ -24,7 +24,7 @@ part of '../flex_sub_themes.dart';
 /// base color for the [ToggleButtons].
 ///
 /// Always defines the background color for selected button, and
-/// it's onColor pair defines the foreground for selected button.
+/// its onColor pair defines the foreground for selected button.
 ///
 /// If [unselectedSchemeColor] is not defined, [baseSchemeColor] is also
 /// used as foreground color for unselected buttons.

@@ -29,7 +29,7 @@ enum FlexThemeModeButtonOrder {
 /// will contain the scheme colors for both the light and dark theme
 /// included in the option toggle button for each theme mode.
 ///
-/// They scheme colors for each button will be in the order:
+/// The scheme colors for each button will be in the order:
 /// ```text
 /// | Primary           | Secondary       |
 /// | Primary container | Tertiary        |
@@ -39,7 +39,7 @@ enum FlexThemeModeButtonOrder {
 /// theme mode's color scheme.
 ///
 /// All other properties are optional, but it has extensive customization
-/// options in order create a theme mode switch widget with a customized look,
+/// options in order to create a theme mode switch widget with a customized look,
 /// see API reference for more info.
 class FlexThemeModeSwitch extends StatelessWidget {
   /// Default constructor.

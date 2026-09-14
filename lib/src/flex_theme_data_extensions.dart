@@ -15,7 +15,7 @@ import 'package:material_ui/material_ui.dart';
 
 /// A convenience extension on [ThemeData] to define a
 /// [FlexColorScheme] object and return the [ThemeData] object defined by
-/// its instance, using its [FlexColorScheme.toTheme] method in one go.
+/// its instance, using its [FlexColorScheme.toTheme] getter in one go.
 ///
 /// Provided convenience extensions are:
 ///
@@ -32,14 +32,14 @@ import 'package:material_ui/material_ui.dart';
 /// need access to the [ColorScheme] as defined by your [FlexColorScheme].
 /// Consider using [FlexColorScheme], then get the [ColorScheme] it defines
 /// with [FlexColorScheme.toScheme] and use
-/// colors from this scheme or the entire [ColorScheme] in you sub-themes,
+/// colors from this scheme or the entire [ColorScheme] in your sub-themes,
 /// that you then apply with [ThemeData.copyWith] to the
 /// [ThemeData] given by [FlexColorScheme.toTheme]. You can of course do
 /// this with these extensions too, but in that case you will need to store
 /// the theme in an intermediate [ThemeData] object.
 ///
 /// It would be nice if it was possible to also provide these as static
-/// extensions on ThemeData, in away that would enable a syntax like this:
+/// extensions on ThemeData, in a way that would enable a syntax like this:
 ///
 /// * ThemeData.flexLight(), *based on FlexColorScheme.light().toTheme*
 /// * ThemeData.flexDark(), *based on FlexColorScheme.dark().toTheme*
@@ -48,7 +48,7 @@ import 'package:material_ui/material_ui.dart';
 /// https://github.com/dart-lang/language/issues/723
 extension FlexThemeData on ThemeData {
   /// Returns a [ThemeData] object defined by factory [FlexColorScheme.light]
-  /// and its [FlexColorScheme.toTheme] method.
+  /// and its [FlexColorScheme.toTheme] getter.
   ///
   /// Parameters match [FlexColorScheme.light]. Each is documented below in
   /// parameter-list order.
@@ -65,8 +65,9 @@ extension FlexThemeData on ThemeData {
   /// For using built-in color schemes, the convenience shortcut to select
   /// it with the [scheme] property is recommended and leaving [colors]
   /// undefined. If both are specified the scheme colors defined by [colors]
-  /// are used. If both are null then [scheme] defaults to
-  /// [FlexScheme.material], thus defining the resulting scheme.
+  /// are used. If both are null, then [scheme] defaults to
+  /// [FlexScheme.material] if [useMaterial3] is false, and to
+  /// [FlexScheme.materialBaseline] if [useMaterial3] is true.
   ///
   /// ## [scheme]
   ///
@@ -79,14 +80,14 @@ extension FlexThemeData on ThemeData {
   /// [colors] and [scheme] are specified, the scheme defined by
   /// [colors] is used. If both are null, then [scheme] defaults to
   /// [FlexScheme.material] if [useMaterial3] is false, and to
-  /// [FlexScheme.materialBaseline] [useMaterial3] is true.
+  /// [FlexScheme.materialBaseline] if [useMaterial3] is true.
   ///
   /// ## [colorScheme]
   ///
   /// The overall [ColorScheme] based colors for the theme.
   ///
-  /// This property provides a new way to define custom colors for
-  /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
+  /// This property provides a way to define custom colors for
+  /// [FlexColorScheme]. It is useful if
   /// you already have a custom [ColorScheme] based color definition that
   /// you want to use with FlexColorScheme theming and its sub-theming
   /// capabilities.
@@ -629,9 +630,8 @@ extension FlexThemeData on ThemeData {
   /// by all [Material] of type [MaterialType.card].
   ///
   /// When using the factory this is an override color for the color that
-  /// would be used based on mode defined by property
-  /// [surfaceMode] [FlexSurfaceMode] enum, or the removed pre-5.0.0
-  /// `surfaceStyle` / `FlexSurface` API, or if a [colorScheme] was provided it will override the
+  /// would be used based on the [surfaceMode] [FlexSurfaceMode] enum. If a
+  /// [colorScheme] was provided, this color property will override the
   /// same color in it as well.
   ///
   /// Defaults to null.
@@ -678,7 +678,7 @@ extension FlexThemeData on ThemeData {
   /// Flutter 3.29.0 and later. To get the given dialog color, sub-themes
   /// must now be enabled.
   ///
-  /// When using sub-themes,this color is applied to backgroundColor in
+  /// When using sub-themes, this color is applied to backgroundColor in
   /// dialog themes DatePickerThemeData, DialogThemeData and
   /// TimePickerThemeData, but only if
   /// [FlexSubThemesData.dialogBackgroundSchemeColor] has not been defined in
@@ -849,7 +849,7 @@ extension FlexThemeData on ThemeData {
   /// defaults when it is possible to do so in Flutter SDK theming when using
   /// Material2 mode and via defaults also in Material 3 mode.
   ///
-  /// Starting from version 5, by opting in via a default [subThemesData] you
+  /// By opting in via a default [subThemesData] you
   /// get an extensive set of widget component sub themes applied.
   /// They can be customized via the [subThemesData] property, that has
   /// quick and flat sub theme configuration values in the data class
@@ -902,7 +902,14 @@ extension FlexThemeData on ThemeData {
   ///   [FlexSubThemes.outlinedButtonTheme].
   /// * [PopupMenuThemeData] for [PopupMenuButton] via
   ///   [FlexSubThemes.popupMenuTheme].
+  /// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
+  ///   [LinearProgressIndicator] via [FlexSubThemes.progressIndicatorTheme].
   /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+  /// * [SearchBarThemeData] for [SearchBar] via [FlexSubThemes.searchBarTheme].
+  /// * [SearchViewThemeData] for [SearchBar] and its open view via
+  ///   [FlexSubThemes.searchViewTheme].
+  /// * [SegmentedButtonThemeData] for [SegmentedButton] via
+  ///   [FlexSubThemes.segmentedButtonTheme].
   /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
   /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
   /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
@@ -1173,7 +1180,7 @@ extension FlexThemeData on ThemeData {
   /// https://github.com/flutter/flutter/issues/89947
   ///
   /// If you use a default light or
-  /// dark Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for
+  /// dark Flutter ThemeData() and a FlexColorScheme.toTheme ThemeData for
   /// the other mode, you must set either the default ThemeData to
   /// [Typography.material2018] OR the [FlexColorScheme.typography] to
   /// [Typography.material2014] to avoid this issue. It is not generally
@@ -1712,7 +1719,7 @@ extension FlexThemeData on ThemeData {
   ).toTheme;
 
   /// Returns a [ThemeData] object defined by factory [FlexColorScheme.dark]
-  /// and its [FlexColorScheme.toTheme] method.
+  /// and its [FlexColorScheme.toTheme] getter.
   ///
   /// Parameters match [FlexColorScheme.dark]. Each is documented below in
   /// parameter-list order.
@@ -1729,8 +1736,9 @@ extension FlexThemeData on ThemeData {
   /// For using built-in color schemes, the convenience shortcut to select
   /// it with the [scheme] property is recommended and leaving [colors]
   /// undefined. If both are specified the scheme colors defined by [colors]
-  /// are used. If both are null then [scheme] defaults to
-  /// [FlexScheme.material], thus defining the resulting scheme.
+  /// are used. If both are null, then [scheme] defaults to
+  /// [FlexScheme.material] if [useMaterial3] is false, and to
+  /// [FlexScheme.materialBaseline] if [useMaterial3] is true.
   ///
   /// ## [scheme]
   ///
@@ -1743,14 +1751,14 @@ extension FlexThemeData on ThemeData {
   /// [colors] and [scheme] are specified, the scheme defined by
   /// [colors] is used. If both are null, then [scheme] defaults to
   /// [FlexScheme.material] if [useMaterial3] is false, and to
-  /// [FlexScheme.materialBaseline] [useMaterial3] is true.
+  /// [FlexScheme.materialBaseline] if [useMaterial3] is true.
   ///
   /// ## [colorScheme]
   ///
   /// The overall [ColorScheme] based colors for the theme.
   ///
-  /// This property provides a new way to define custom colors for
-  /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
+  /// This property provides a way to define custom colors for
+  /// [FlexColorScheme]. It is useful if
   /// you already have a custom [ColorScheme] based color definition that
   /// you want to use with FlexColorScheme theming and its sub-theming
   /// capabilities.
@@ -2390,9 +2398,8 @@ extension FlexThemeData on ThemeData {
   /// by all [Material] of type [MaterialType.card].
   ///
   /// When using the factory this is an override color for the color that
-  /// would be used based on mode defined by property
-  /// [surfaceMode] [FlexSurfaceMode] enum, or the removed pre-5.0.0
-  /// `surfaceStyle` / `FlexSurface` API, or if a [colorScheme] was provided it will override the
+  /// would be used based on the [surfaceMode] [FlexSurfaceMode] enum. If a
+  /// [colorScheme] was provided, this color property will override the
   /// same color in it as well.
   ///
   /// Defaults to null.
@@ -2439,7 +2446,7 @@ extension FlexThemeData on ThemeData {
   /// Flutter 3.29.0 and later. To get the given dialog color, sub-themes
   /// must now be enabled.
   ///
-  /// When using sub-themes,this color is applied to backgroundColor in
+  /// When using sub-themes, this color is applied to backgroundColor in
   /// dialog themes DatePickerThemeData, DialogThemeData and
   /// TimePickerThemeData, but only if
   /// [FlexSubThemesData.dialogBackgroundSchemeColor] has not been defined in
@@ -2610,7 +2617,7 @@ extension FlexThemeData on ThemeData {
   /// defaults when it is possible to do so in Flutter SDK theming when using
   /// Material2 mode and via defaults also in Material 3 mode.
   ///
-  /// Starting from version 5, by opting in via a default [subThemesData] you
+  /// By opting in via a default [subThemesData] you
   /// get an extensive set of widget component sub themes applied.
   /// They can be customized via the [subThemesData] property, that has
   /// quick and flat sub theme configuration values in the data class
@@ -2663,7 +2670,14 @@ extension FlexThemeData on ThemeData {
   ///   [FlexSubThemes.outlinedButtonTheme].
   /// * [PopupMenuThemeData] for [PopupMenuButton] via
   ///   [FlexSubThemes.popupMenuTheme].
+  /// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
+  ///   [LinearProgressIndicator] via [FlexSubThemes.progressIndicatorTheme].
   /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+  /// * [SearchBarThemeData] for [SearchBar] via [FlexSubThemes.searchBarTheme].
+  /// * [SearchViewThemeData] for [SearchBar] and its open view via
+  ///   [FlexSubThemes.searchViewTheme].
+  /// * [SegmentedButtonThemeData] for [SegmentedButton] via
+  ///   [FlexSubThemes.segmentedButtonTheme].
   /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
   /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
   /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
@@ -2931,7 +2945,7 @@ extension FlexThemeData on ThemeData {
   /// https://github.com/flutter/flutter/issues/89947
   ///
   /// If you use a default light or
-  /// dark Flutter ThemeData() and a FlexColorScheme.toTheme() ThemeData for
+  /// dark Flutter ThemeData() and a FlexColorScheme.toTheme ThemeData for
   /// the other mode, you must set either the default ThemeData to
   /// [Typography.material2018] OR the [FlexColorScheme.typography] to
   /// [Typography.material2014] to avoid this issue. It is not generally

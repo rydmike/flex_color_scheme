@@ -20,7 +20,7 @@ import 'package:material_ui/material_ui.dart';
 /// color schemes from a light scheme.
 ///
 /// The [getShadeColor] extension is less frequently used and when used,
-/// typically used to color makes colors shades for gradient AppBars, with
+/// typically used to make color shades for gradient AppBars, with
 /// default setting to not change black and white.
 ///
 /// The color extension also include getting a color's RGB hex code as a string

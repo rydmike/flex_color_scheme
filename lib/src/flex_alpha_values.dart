@@ -16,7 +16,7 @@ class FlexAlphaValues {
   /// Default constructor to set alpha blend values for different colors in
   /// a Flutter ColorScheme.
   ///
-  /// FlexAlphaValues are normally only made via its factor
+  /// FlexAlphaValues are normally only made via its factory
   /// [FlexAlphaValues.getAlphas].
   const FlexAlphaValues({
     this.primaryAlpha = 0,

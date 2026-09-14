@@ -14,7 +14,7 @@ part of '../flex_sub_themes.dart';
 /// Defines which [Theme] based [ColorScheme] based background color
 /// of [PopupMenuButton].
 ///
-/// If not defined, will remains null and via Flutter SDK defaults get
+/// If not defined, will remain null and via Flutter SDK defaults get
 /// [ColorScheme.surfaceContainer] color.
 ///
 /// ## [opacity]
@@ -58,7 +58,7 @@ MenuThemeData _menuTheme({
   /// Defines which `Theme` based `ColorScheme` based background color
   /// of `PopupMenuButton`.
   ///
-  /// If not defined, will remains null and via Flutter SDK defaults get
+  /// If not defined, will remain null and via Flutter SDK defaults get
   /// `ColorScheme.surfaceContainer` color.
   SchemeColor? backgroundSchemeColor,
 

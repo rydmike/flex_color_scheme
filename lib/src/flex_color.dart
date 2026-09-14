@@ -220,7 +220,7 @@ abstract final class FlexColor {
   /// INFO: v0.1.5 of material_color_utilities changed this color.
   /// Before version 0.1.5. the color value was:
   /// static const Color material3LightError = Color(0xFFBA1B1B);
-  /// In version 0.1.5 and due to a small braking algo change, it is:
+  /// In version 0.1.5 and due to a small breaking algo change, it is:
   static const Color material3LightError = Color(0xFFBA1A1A);
 
   /// Material 3 standard light onError color.
@@ -231,7 +231,7 @@ abstract final class FlexColor {
   /// INFO: v0.1.5 of material_color_utilities changed this color.
   /// Before version 0.1.5. the color value was:
   /// static const Color material3LightErrorContainer = Color(0xFFFFDAD4);
-  /// In version 0.1.5 and due to a small braking algo change, it is:
+  /// In version 0.1.5 and due to a small breaking algo change, it is:
   static const Color material3LightErrorContainer = Color(0xFFFFDAD6);
 
   /// Material 3 standard light on error container color.
@@ -308,7 +308,7 @@ abstract final class FlexColor {
   /// Material 2 standard default color for light primary container color.
   static const Color materialLightPrimaryContainer = Color(0xffbb86fc);
 
-  /// Material 2 standard default color for light primary container color.
+  /// Material 2 standard default color for light primary variant color.
   ///
   /// Old Material 2 color system, prefer [materialLightPrimaryContainer].
   static const Color materialLightPrimaryVariant = Color(0xff3700b3);
@@ -322,7 +322,7 @@ abstract final class FlexColor {
   /// Material 2 standard default color for light tertiary color.
   static const Color materialLightTertiary = Color(0xff018786);
 
-  /// Material 2 standard default color for light tertiary color.
+  /// Material 2 standard default color for light tertiary container color.
   static const Color materialLightTertiaryContainer = Color(0xFFA4F1EF);
 
   /// Material 2 standard default color for light secondary variant color.
@@ -352,7 +352,7 @@ abstract final class FlexColor {
   /// color value is same as the light secondary color.
   static const Color materialDarkTertiary = Color(0xff03dac6);
 
-  /// Material 2 dark secondary container
+  /// Material 2 dark tertiary container.
   static const Color materialDarkTertiaryContainer = Color(0xFF003E3E);
 
   /// Material 2 standard default color for dark secondary variant color, the
@@ -409,7 +409,7 @@ abstract final class FlexColor {
   /// Old Material 2 color system, prefer [materialDarkPrimaryContainerHc].
   static const Color materialDarkPrimaryVariantHc = Color(0xffbe9eff);
 
-  ///Material 2 high contrast color for dark secondary color.
+  /// Material 2 high contrast color for dark secondary color.
   static const Color materialDarkSecondaryHc = Color(0xff66fff9);
 
   /// Material 2 high contrast color for dark secondary container color.

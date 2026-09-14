@@ -7,14 +7,14 @@ import 'package:flex_color_scheme/src/flex_surface_mode.dart';
 import 'package:flutter/foundation.dart';
 import 'package:material_ui/material_ui.dart';
 
-/// Immutable data class used to make the six different surface colors in a
+/// Immutable data class used to make surface colors in a
 /// [FlexColorScheme].
 ///
 /// [FlexSchemeSurfaceColors] is used primarily via the
 /// [FlexSchemeSurfaceColors.blend] factory.
 ///
-/// Included colors are [surface] and [inverseSurface] plus
-/// plus blended surface colors
+/// Included colors are [surface] and [inverseSurface], plus
+/// blended surface colors
 /// for [scaffoldBackground] and [dialogBackground], which are not a part
 /// of Flutter's standard [ColorScheme].
 ///
@@ -161,7 +161,7 @@ class FlexSchemeSurfaceColors with Diagnosticable {
   ///
   /// ## [blendLevel]
   ///
-  /// The the blend level strength used for the mode.
+  /// The blend level strength used for the mode.
   ///
   /// ## [surfaceVariantBlendDivide]
   ///

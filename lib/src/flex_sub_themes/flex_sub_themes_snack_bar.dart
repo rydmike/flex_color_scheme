@@ -16,7 +16,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// If not defined, defaults to 4 dp, but only when
 /// [SnackBar.behavior] style [SnackBarBehavior.floating] is used. This
-/// default is based on SDK widget default behavior and is  based on
+/// default is based on SDK widget default behavior and is based on
 /// M3 Specification https://m3.material.io/components/snackbar/specs.
 ///
 /// NOTE: If this theme property is set, both SnackBars with behavior
@@ -28,7 +28,7 @@ part of '../flex_sub_themes.dart';
 /// The background color of the themed SnackBar. Typically one of inverse
 /// brightness compared to theme's surface color brightness.
 ///
-/// If null then it default to Flutter SDK theme defaults below.
+/// If null then it defaults to Flutter SDK theme defaults below.
 /// When FlexColorScheme sub themes are used and [backgroundSchemeColor]
 /// has not been defined, it defaults to FCS default shown below:
 ///
@@ -59,7 +59,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// If not defined or [colorScheme] is not defined, then the passed in
 /// [backgroundColor] will be used, which may be null too and SnackBar then
-/// falls back Flutter SDK defaults, or to FCS default if this is used by
+/// falls back to Flutter SDK defaults, or to FCS default if this is used by
 /// FCS that passes in its one custom default.
 ///
 /// ## [actionTextSchemeColor]

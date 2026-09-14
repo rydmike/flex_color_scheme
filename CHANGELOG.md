@@ -4,7 +4,7 @@ All changes to the **FlexColorScheme** (FCS) package are documented here.
 
 ## 9.0.0
 
-**September 13, 2026**
+**September 14, 2026**
 
 The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled Material and Cupertino libraries.
 

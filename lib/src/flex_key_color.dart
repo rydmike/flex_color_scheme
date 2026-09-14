@@ -21,24 +21,24 @@ import 'package:material_ui/material_ui.dart';
 /// [FlexKeyColors.useKeyColors] set to true.
 ///
 /// By default `keyColors` is null and key colors are not used. To activate
-/// the feature pass you can in a default [FlexKeyColors] instance,
+/// the feature you can pass in a default [FlexKeyColors] instance,
 /// its [useKeyColors] defaults to true.
 ///
 /// The default constructor creates a setup that creates
 /// a seeded generated [ColorScheme] for the active [FlexColorScheme] using its
-/// current primary color as key in a [ColorScheme.fromSeed] equivalent.
+/// current primary color as key in a [SeedColorScheme.fromSeeds] equivalent.
 /// If the default [ColorScheme.fromSeed] result is suitable, no further
 /// configuration is required. You can however further customize its behavior
-/// by adjusting the properties/ in [FlexKeyColors].
+/// by adjusting the properties in [FlexKeyColors].
 ///
 /// Flutter standard [ColorScheme] only offers color scheme creation from one
 /// single input color using [ColorScheme.fromSeed]. With [FlexColorScheme]
 /// you can use its effective color value for primary, secondary, tertiary and
 /// error colors to generate the seeded [TonalPalette] for primary, secondary,
-/// tertiary and error colors in the [ColorScheme], by using wn key seed input
+/// tertiary and error colors in the [ColorScheme], by using own key seed input
 /// colors for them.
 /// To do so also set properties [useSecondary] and [useTertiary] to true.
-/// You will then get tonal palette's for secondary and tertiary colors that
+/// You will then get tonal palettes for secondary and tertiary colors that
 /// depend on these key colors and not on only the primary color.
 ///
 /// If you use factory [FlexColorScheme.light] and parameter `scheme`, to
@@ -50,7 +50,7 @@ import 'package:material_ui/material_ui.dart';
 /// colors from the light theme color definitions will be used as key color
 /// inputs to generate the tonal palettes for dark mode ColorScheme. This is
 /// because the light and dark theme mode colors should use
-/// the same [TonalPalette], and only use different in M3 guide standardized
+/// the same [TonalPalette], and only use different Material 3 standardized
 /// tones from the same [TonalPalette]. Hence, the same base color is used to
 /// generate the tonal palette for both light and dark theme to adhere to this
 /// design principle.
@@ -89,7 +89,7 @@ import 'package:material_ui/material_ui.dart';
 @immutable
 class FlexKeyColors with Diagnosticable {
   /// Used to configure how key colors are used when generating a key color
-  /// seeded [ColorScheme] for FlexColorScheme,
+  /// seeded [ColorScheme] for FlexColorScheme.
   ///
   /// Use [useKeyColors] to enable it (enabled by default), and [useSecondary],
   /// [useTertiary] and [useError] to define if secondary and tertiary colors in
@@ -99,7 +99,7 @@ class FlexKeyColors with Diagnosticable {
   /// The defaults in the unnamed constructor creates a setup that is
   /// equivalent to using [ColorScheme.fromSeed] with primary color as key.
   ///
-  /// Primary color is always used as a key for the seed generate tonal palettes
+  /// Primary color is always used as a key for the seed generated tonal palettes
   /// when seed generated [ColorScheme] is used in FlexColorScheme.
   ///
   /// You can also use the secondary, tertiary and error colors as key to
@@ -108,7 +108,7 @@ class FlexKeyColors with Diagnosticable {
   ///
   /// The property [useKeyColors] will if set to false disable using seed
   /// generated [ColorScheme], even if you pass a [FlexKeyColors] instance to
-  /// the `keyColors? parameter in [FlexColorScheme.light] or
+  /// the `keyColors` parameter in [FlexColorScheme.light] or
   /// [FlexColorScheme.dark] factories. The property is true by default, it
   /// exists mainly for debugging and to enable easier construction of
   /// configurable toggles to enable and disable using seed generated
@@ -506,7 +506,7 @@ class FlexKeyColors with Diagnosticable {
   /// where Red, Green and Blue values are all equal.
   ///
   /// If you require the old style seed result for monochrome seed colors,
-  /// set [useLegacyMonochromeSeedBehavior] to `true.
+  /// set [useLegacyMonochromeSeedBehavior] to `true`.
   ///
   /// Defaults to `false`.
   ///

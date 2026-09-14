@@ -60,7 +60,7 @@ class FlexSchemeColor with Diagnosticable {
   /// and components.
   final Color primary;
 
-  // A private color used for elements needing less emphasis than [primary],
+  // A private color used for elements needing less emphasis than `primary`,
   // set via constructor init list.
   final Color? _primaryContainer;
 
@@ -100,7 +100,7 @@ class FlexSchemeColor with Diagnosticable {
   /// same hue as primary, but does not have to be.
   final Color secondary;
 
-  // A private color used for elements needing less emphasis than [secondary],
+  // A private color used for elements needing less emphasis than `secondary`,
   // set via constructor initializer.
   final Color? _secondaryContainer;
 
@@ -136,8 +136,8 @@ class FlexSchemeColor with Diagnosticable {
   /// mode [FlexSchemeColor.secondary] for this color.
   final Color? secondaryLightRef;
 
-  // A private color used as a contrasting accent that can balance [primary]
-  // and [secondary] colors or bring heightened attention to an element,
+  // A private color used as a contrasting accent that can balance `primary`
+  // and `secondary` colors or bring heightened attention to an element,
   // such as an input field, set via constructor initializer.
   final Color? _tertiary;
 
@@ -146,11 +146,11 @@ class FlexSchemeColor with Diagnosticable {
   /// such as an input field.
   Color get tertiary => _tertiary ?? secondary;
 
-  // A private color used for elements needing less emphasis than [tertiary],
+  // A private color used for elements needing less emphasis than `tertiary`,
   // set via constructor initializer.
   final Color? _tertiaryContainer;
 
-  /// A private color used for elements needing less emphasis than [tertiary],
+  /// A color used for elements needing less emphasis than [tertiary].
   Color get tertiaryContainer => _tertiaryContainer ?? _tertiary ?? secondary;
 
   /// A reference to the tertiary color used in a light theme mode

@@ -20,7 +20,7 @@ import 'package:flutter/foundation.dart';
 /// use case is removing Material-3 design features that may be too opinionated
 /// on e.g. iOS and desktop platforms, but you want to keep them on Android.
 ///
-/// Each platform adaptive theming response can be configure to what platform it
+/// Each platform adaptive theming response can be configured to what platform it
 /// applies to. You can even define it so you get a different theme on the
 /// device native build and when using a web build of the same app, on the same
 /// device. The swapping between the default none adaptive theme and the
@@ -58,7 +58,7 @@ import 'package:flutter/foundation.dart';
 /// as the curvature of the border radius. It would then be possible to use it
 /// adaptively on desired platforms. When this adaptive feature is enabled
 /// all Material components that use [ShapeBorder] will use Squircle curvature
-/// instead of circular borer radius, on selected platforms. The Squircle is
+/// instead of circular border radius, on selected platforms. The Squircle is
 /// the border curvature shape used on Apple devices. Adding this feature
 /// is a bit on hold since there is currently no consensus or built-in support
 /// in Flutter to draw an iOS correct Squircle. See issue:

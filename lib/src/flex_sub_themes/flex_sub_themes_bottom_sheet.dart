@@ -24,7 +24,7 @@ part of '../flex_sub_themes.dart';
 ///
 /// ## [elevation]
 ///
-/// The none modal bottom sheet elevation.
+/// The non-modal bottom sheet elevation.
 ///
 /// If null, defaults to [kBottomSheetElevation] = 1.
 ///
@@ -85,7 +85,7 @@ BottomSheetThemeData _bottomSheetTheme({
   /// M2 mode and surfaceContainerLow in M3 mode.
   Color? modalBackgroundColor,
 
-  /// The none modal bottom sheet elevation.
+  /// The non-modal bottom sheet elevation.
   ///
   /// If null, defaults to `kBottomSheetElevation` = 1.
   double? elevation,

@@ -24,7 +24,7 @@ enum FlexSurfaceMode {
   /// > in FCS 8.0 and Flutter 3.22, sets surface and dialog blends to 2x
   /// > so that it represents the "high background" style as before, but done
   /// > via surface. Without this breaking change this mode would produce the
-  /// > same result [levelSurfacesLowScaffold] and be redundant.
+  /// > same result as [levelSurfacesLowScaffold] and be redundant.
   highBackgroundLowScaffold,
 
   /// Decreasing blend level in order high surface, low scaffold.
@@ -43,7 +43,7 @@ enum FlexSurfaceMode {
   /// * Surface & dialogs (1/2x)
   highScaffoldLowSurface,
 
-  /// Decreasing blend level in order very high scaffold, levl surface.
+  /// Decreasing blend level in order very high scaffold, level surface.
   ///
   /// The blend level decreases on surfaces in this order:
   ///

@@ -10,7 +10,7 @@ import 'package:flutter/foundation.dart';
 /// descriptions, [light] and [dark], [FlexSchemeColor] definitions.
 ///
 /// The [FlexSchemeData] bundles together a [FlexSchemeColor] pair suitable
-/// for light and dark theme mode, that can used by the FlexColorScheme.light
+/// for light and dark theme mode, that can be used by the FlexColorScheme.light
 /// and FlexColorScheme.dark factories to create a FlexColorScheme and
 /// corresponding [ThemeData] from it.
 ///

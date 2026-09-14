@@ -62,8 +62,8 @@ enum FlexInputBorderType {
   underline,
 }
 
-/// Enum used to described which color from the active theme's 46
-/// [ColorScheme] colors, should be used for by color properties available in
+/// Enum used to describe which color from the active theme's
+/// [ColorScheme] colors, should be used for color properties available in
 /// component sub-themes.
 ///
 /// Used when opting in on component themes. The opinionated component themes
@@ -366,13 +366,13 @@ enum FlexSliderIndicatorType {
 ///
 /// The [FlexSubThemes] may have more frequent breaking changes than
 /// [FlexColorScheme] and [FlexSubThemesData] as it is a more secondary level.
-/// It was decided to keep their APIs public as the may also be useful for
+/// It was decided to keep their APIs public as they may also be useful for
 /// other theming solutions.
 abstract final class FlexSubThemes {
   /// Returns the [Color] from passed in [ColorScheme] in [colorScheme]
   /// corresponding to the [SchemeColor] enum selection in [value].
   ///
-  /// This function is used to select a none default color available in the
+  /// This function is used to select a non-default color available in the
   /// theme's [ColorScheme] in opinionated sub-themes. While still intentionally
   /// restricting the selection to only colors available in the active
   /// theme's [ColorScheme].
@@ -1310,7 +1310,7 @@ abstract final class FlexSubThemes {
   ///
   /// ## [elevation]
   ///
-  /// The none modal bottom sheet elevation.
+  /// The non-modal bottom sheet elevation.
   ///
   /// If null, defaults to [kBottomSheetElevation] = 1.
   ///
@@ -1371,7 +1371,7 @@ abstract final class FlexSubThemes {
     /// M2 mode and surfaceContainerLow in M3 mode.
     Color? modalBackgroundColor,
 
-    /// The none modal bottom sheet elevation.
+    /// The non-modal bottom sheet elevation.
     ///
     /// If null, defaults to `kBottomSheetElevation` = 1.
     double? elevation,
@@ -4352,7 +4352,7 @@ abstract final class FlexSubThemes {
   /// Defines which [Theme] based [ColorScheme] based background color
   /// of [PopupMenuButton].
   ///
-  /// If not defined, will remains null and via Flutter SDK defaults get
+  /// If not defined, will remain null and via Flutter SDK defaults get
   /// [ColorScheme.surfaceContainer] color.
   ///
   /// ## [opacity]
@@ -4396,7 +4396,7 @@ abstract final class FlexSubThemes {
     /// Defines which `Theme` based `ColorScheme` based background color
     /// of `PopupMenuButton`.
     ///
-    /// If not defined, will remains null and via Flutter SDK defaults get
+    /// If not defined, will remain null and via Flutter SDK defaults get
     /// `ColorScheme.surfaceContainer` color.
     SchemeColor? backgroundSchemeColor,
 
@@ -5762,7 +5762,7 @@ abstract final class FlexSubThemes {
   /// Color of the track being filled by the linear indicator.
   ///
   /// If [linearTrackSchemeColor] is null then in M2 mode
-  /// the ambient theme's deprecated `ColorScheme.background` color is used
+  /// the ambient theme's [ColorScheme.surface] color is used.
   /// In M3 mode [ColorScheme.secondaryContainer] is used as default.
   ///
   /// ## [linearMinHeight]
@@ -6350,7 +6350,7 @@ abstract final class FlexSubThemes {
   /// color for the selected button.
   ///
   /// Defines the background color for selected button, and
-  /// it's onColor pair defines the foreground for selected button.
+  /// its onColor pair defines the foreground for selected button.
   ///
   /// If not defined, secondaryContainer will be used.
   ///
@@ -7618,7 +7618,7 @@ abstract final class FlexSubThemes {
   /// base color for the [ToggleButtons].
   ///
   /// Always defines the background color for selected button, and
-  /// it's onColor pair defines the foreground for selected button.
+  /// its onColor pair defines the foreground for selected button.
   ///
   /// If [unselectedSchemeColor] is not defined, [baseSchemeColor] is also
   /// used as foreground color for unselected buttons.

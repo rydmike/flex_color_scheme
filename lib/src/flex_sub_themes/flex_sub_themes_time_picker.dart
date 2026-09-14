@@ -324,7 +324,7 @@ TimePickerThemeData _timePickerTheme({
             return dayPeriodForegroundColor().resolve(states);
           })
         : null,
-    // M3 styling Flutter 3.7 does not do this yet, but we can du in M3 mode.
+    // M3 styling Flutter 3.7 does not do this yet, but we can do it in M3 mode.
     hourMinuteColor: useM3
         ? WidgetStateColor.resolveWith((Set<WidgetState> states) {
             if (states.contains(WidgetState.selected)) {
