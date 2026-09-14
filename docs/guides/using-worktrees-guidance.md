@@ -24,6 +24,6 @@ flutter run -d chrome lib/example5_themes_playground/main.dart
 
 Package tests do not require a simulator. If running several apps, use separate devices and available ports. Git worktrees do not isolate simulator state or persisted app settings; use disposable settings for import/reset experiments.
 
-The example currently contains iOS and macOS Podfiles. Do not assume a Swift Package Manager-only setup or blindly add/remove CocoaPods configuration; inspect the selected platform project when a native build is part of the task. Ordinary documentation work needs no native build.
+The example iOS and macOS host projects use Swift Package Manager only (no CocoaPods / Podfile). Ordinary documentation work needs no native build.
 
 During the ongoing SDK migration, successful worktree setup does not establish that tests, analysis, or example builds pass. Report checks actually run and keep unrelated migration failures out of the task.

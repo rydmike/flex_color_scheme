@@ -61,6 +61,7 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 **CHORE**
 - Bump version to 9.0.0.
 - Bump packages to latest versions.
+- Example iOS and macOS host projects (shared by all five example entrypoints) now use Swift Package Manager only. CocoaPods integration, Podfiles, and lockfiles were removed.
 
 ## 8.4.0
 
