@@ -56,11 +56,9 @@ abstract final class App {
   static const String author = 'Mike Rydstrom';
   static const String license = 'BSD 3-Clause License';
   static const String icon = 'assets/images/app_icon.png';
-  // URL for Netlify hosting build.
-  // This will be the only one later when WASM works OK.
-  // static const String playgroundURL = 'https://playground.flexcolorscheme.com/';
-  // URL for GitHub pages build.
-  static const String playgroundURL = 'https://rydmike.com/flexcolorscheme/themesplayground-latest/';
+  // Latest Themes Playground: Netlify WASM GC build (JS fallback in the browser).
+  // Versioned GitHub Pages JS builds use /flexcolorscheme/themesplayground-v{major}-{minor}/.
+  static const String playgroundURL = 'https://playground.flexcolorscheme.com/';
 
   static final Uri packageUri = Uri(
     scheme: 'https',

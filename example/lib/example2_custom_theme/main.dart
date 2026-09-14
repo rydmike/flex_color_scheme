@@ -26,7 +26,7 @@ import 'package:material_ui/material_ui.dart';
 // opting in and out of FlexColorScheme's opinionated sub-themes.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/customtheme-latest
+// https://rydmike.com/flexcolorscheme/customtheme-v9-0
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {

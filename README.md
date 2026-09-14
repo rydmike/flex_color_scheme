@@ -133,33 +133,27 @@ Complete generated package [**API documentation**](https://pub.dev/documentation
 
 ## Themes Playground
 
-To make it even easier to configure and setup **FlexColorScheme**, it comes with a WEB companion app called the [**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-latest).
+To make it even easier to configure and setup **FlexColorScheme**, it comes with a WEB companion app called the [**Themes Playground**](https://playground.flexcolorscheme.com/).
 
 The **Themes Playground** is a useful tool to find **FlexColorScheme** themes and settings you like. You can use it to discover what you can do with FlexColorScheme. The playground persists all its settings. You can reset settings back to their default values, so you can always start over if you get lost in all the configuration possibilities.
 
 The most useful and popular feature of the **Playground** is that it can generate **FlexColorScheme API** setup code needed to produce the shown active theme configuration. The themed style of the app itself, and the same styled demo apps shown in its theme simulator, is what you get when you copy the theme config code to your app, and use it with the **FlexColorScheme** package. 
 
-[<img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/themes_playground_7_2.png" alt="Themes Playround Image"/>](https://rydmike.com/flexcolorscheme/themesplayground-latest)
+[<img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/themes_playground_7_2.png" alt="Themes Playground Image"/>](https://playground.flexcolorscheme.com/)
 
-*In [Themes Playground](https://rydmike.com/flexcolorscheme/themesplayground-latest) you can visually configure your theme and copy its setup code.*
+*In [Themes Playground](https://playground.flexcolorscheme.com/) you can visually configure your theme and copy its setup code.*
 
 If you use the code view panel side-by-side, as you change settings, the Playground modifies the code as you change settings. This is a fun way to get familiar with the API.
 
-[<img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/themes_playground_7_2_dark_code.png" alt="Themes Playround Image"/>](https://rydmike.com/flexcolorscheme/themesplayground-latest)
+[<img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/themes_playground_7_2_dark_code.png" alt="Themes Playground Image"/>](https://playground.flexcolorscheme.com/)
 
-*Viewing API configuration and its updates as you change setting in [Themes Playground](https://rydmike.com/flexcolorscheme/themesplayground-latest).*
+*Viewing API configuration and its updates as you change setting in [Themes Playground](https://playground.flexcolorscheme.com/).*
 
-The latest **Themes Playground** build can be used as a [web app here](https://rydmike.com/flexcolorscheme/themesplayground-latest). For guidance on how to use the Themes Playground, please read the [Themes Playground chapter](https://docs.flexcolorscheme.com/playground) available in the documentation site.
+The latest **Themes Playground** is a WASM GC web build at [playground.flexcolorscheme.com](https://playground.flexcolorscheme.com/). It may run smoother than a JS build in Chromium-based browsers on desktops and Android. If your browser does not support WASM GC, it automatically falls back to the JS build. For guidance on how to use the Themes Playground, please read the [Themes Playground chapter](https://docs.flexcolorscheme.com/playground) available in the documentation site.
+
+Older matching JS builds, and a JS build of the current major.minor, are hosted on GitHub Pages and listed in the version table below.
 
 Beware, fiddling with all the different themes and settings can be quite fun and addictive, happy theming! 💙
-
-### Experimental Playground WASM GC build
-
-There is also an experimental version of the **Themes Playground** that uses a WASM GC build to run with WASM in the browser. It is available for the latest version of **FlexColorScheme**, you can find it here [WASM Playground](https://playground.flexcolorscheme.com/). This build may run smoother than the above JS build in Chromium-based browsers on desktops and Android. If your browser does not support WASM GC, it will automatically fall back to the JS build.
-
-The plan is to move the **Themes Playground** latest version link to this WASM GC build and offer older versions as JS builds.
-
-The WASM build was first publicly shared with the v8.3.0 release of **FlexColorScheme**.
 
 ### Open Source
 
@@ -169,23 +163,25 @@ The Playground app is also the last step in the package tutorial series. The [tu
 
 ### Available Themes Playground Versions
 
-There are **Theme Playground** version builds corresponding to the last major releases of the **FlexColorScheme** package available. For Version 7 there are also Playground builds for the different minor releases.
+There are **Theme Playground** version builds corresponding to the last major releases of the **FlexColorScheme** package available. For Version 7 and later there are also Playground builds for the different minor releases.
 
-You should use the same major version of **Themes Playground** as the `flex_color_scheme` package you are using. With version 7 and 8, you should prefer to match the minor version too.
+You should use the same major version of **Themes Playground** as the `flex_color_scheme` package you are using. With version 7, 8, and 9, you should prefer to match the minor version too.
 
-| Name        | Version        | Link                                                        |
-|-------------|----------------|-------------------------------------------------------------| 
-| V8.4        | V8.4.0         | https://rydmike.com/flexcolorscheme/themesplayground-latest |
-| V8.2 & V8.3 | V8.2.0, V8.3.x | https://rydmike.com/flexcolorscheme/themesplayground-v8-3   |
-| V8.1        | V8.1.1         | https://rydmike.com/flexcolorscheme/themesplayground-v8-1   |
-| V8.0        | V8.0.2         | https://rydmike.com/flexcolorscheme/themesplayground-v8-0   |
-| V7.3        | V7.3.1         | https://rydmike.com/flexcolorscheme/themesplayground-v7-3   |
-| V7.2        | V7.2.0         | https://rydmike.com/flexcolorscheme/themesplayground-v7-2   |
-| V7.1        | V7.1.2         | https://rydmike.com/flexcolorscheme/themesplayground-v7-1   |
-| V7.0        | V7.0.5         | https://rydmike.com/flexcolorscheme/themesplayground-v7     |
-| V6          | V6.1.1         | https://rydmike.com/flexcolorscheme/themesplayground-v6     |
-| V5          | V5.1.0         | https://rydmike.com/flexcolorscheme/themesplayground-v5     |
-| V4          | V4.2.0         | https://rydmike.com/flexcolorschemeV4Tut5                   |
+| Name         | Version        | Link                                                      |
+| ------------ | -------------- | --------------------------------------------------------- |
+| V9.0 WASM+JS | V9.0.0         | https://playground.flexcolorscheme.com/                   |
+| V9.0 JS      | V9.0.0         | https://rydmike.com/flexcolorscheme/themesplayground-v9-0 |
+| V8.4         | V8.4.0         | https://rydmike.com/flexcolorscheme/themesplayground-v8-4 |
+| V8.2 & V8.3  | V8.2.0, V8.3.x | https://rydmike.com/flexcolorscheme/themesplayground-v8-3 |
+| V8.1         | V8.1.1         | https://rydmike.com/flexcolorscheme/themesplayground-v8-1 |
+| V8.0         | V8.0.2         | https://rydmike.com/flexcolorscheme/themesplayground-v8-0 |
+| V7.3         | V7.3.1         | https://rydmike.com/flexcolorscheme/themesplayground-v7-3 |
+| V7.2         | V7.2.0         | https://rydmike.com/flexcolorscheme/themesplayground-v7-2 |
+| V7.1         | V7.1.2         | https://rydmike.com/flexcolorscheme/themesplayground-v7-1 |
+| V7.0         | V7.0.5         | https://rydmike.com/flexcolorscheme/themesplayground-v7   |
+| V6           | V6.1.1         | https://rydmike.com/flexcolorscheme/themesplayground-v6   |
+| V5           | V5.1.0         | https://rydmike.com/flexcolorscheme/themesplayground-v5   |
+| V4           | V4.2.0         | https://rydmike.com/flexcolorschemeV4Tut5                 |
 
 
 > **NOTE!**  

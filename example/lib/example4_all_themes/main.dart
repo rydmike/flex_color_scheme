@@ -42,7 +42,7 @@ import 'package:material_ui/material_ui.dart';
 // in AppColor.schemes.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/allthemes-latest
+// https://rydmike.com/flexcolorscheme/allthemes-v9-0
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {

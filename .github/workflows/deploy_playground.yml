@@ -1,4 +1,4 @@
-# This GitHub action runs on a release, when the GitHub repo is "published".
+# This GitHub action runs on configured demand (push trigger branch set to none).
 # This workflow:
 #  - Installs dart and flutter
 #  - Uses flutter stable channel.
@@ -10,11 +10,13 @@
 #  - Verify that dart format is used by all committed code, fails if not.
 #    Controversial but pub.dev penalizes you if dart format is not used.
 #  - Run all tests with coverage.
-#  - Upload code coverage output to Codecov for analysis.
 #  - Build Playground only, use these steps:
 #    - Flutter clean.
-#    - Flutter build web app, in release mode and with canvaskit renderer.
-#    - Deploy each built Web App to GitHub pages.
+#    - Flutter build web app, in release mode, to a versioned GitHub Pages path.
+#    - Deploy the JS build to GitHub pages.
+#    - Flutter clean, then WASM-GC release build, deploy to Netlify.
+# GitHub Pages destination slug comes from .github/web-deploy.env (WEB_VERSION).
+# For a Netlify-only Playground deploy, use deploy_playground_netlify.yml.
 name: Deploy_Playground
 on:
   push:
@@ -27,6 +29,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Load web deploy version
+        run: |
+          set -a
+          # shellcheck source=/dev/null
+          source .github/web-deploy.env
+          set +a
+          echo "WEB_VERSION=$WEB_VERSION" >> "$GITHUB_ENV"
       - name: Install Flutter and Dart SDK
         uses: subosito/flutter-action@v2
         with:
@@ -47,27 +56,49 @@ jobs:
         run: dart format --output=none --set-exit-if-changed .
       - name: "Test package FlexColorScheme with coverage"
         run: flutter test --coverage
-      # - name: "Upload test coverage to Codecov"
-      #   uses: codecov/codecov-action@v5
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
-      #     files: coverage/lcov.info
-      #     disable_search: true
-      #     fail_ci_if_error: true
-      #     override_branch: master
+      - name: "Upload test coverage to Codecov"
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage/lcov.info
+          disable_search: true
+          fail_ci_if_error: true
+          override_branch: master
 
-      # Example 5 Themes playground - Build and deploy
+      # Example 5 Themes playground - Build and deploy JS to GitHub Pages
       - name: "EXAMPLE-5 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-5 WEB release build"
-        run: cd example && flutter build web --base-href "/flexcolorscheme/themesplayground-latest/" --release -t lib/example5_themes_playground/main.dart
+        run: cd example && flutter build web --base-href "/flexcolorscheme/themesplayground-${{ env.WEB_VERSION }}/" --release -t lib/example5_themes_playground/main.dart
       - name: "EXAMPLE-5 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/themesplayground-latest'
+          destination_folder: 'flexcolorscheme/themesplayground-${{ env.WEB_VERSION }}'
           destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom@gmail.com'
           user_name: 'rydmike'
+
+      # Themes Playground WASM-GC - Build and deploy to Netlify
+      - name: "Themes playground WASM START BUILD - Flutter clean before build"
+        run: flutter clean && cd example && flutter clean
+      - name: "Themes playground WEB WASM-GC release build"
+        run: cd example && flutter build web --wasm --release -t lib/example5_themes_playground/main.dart
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: './example/build/web'
+          production-branch: master
+          production-deploy: true
+          netlify-config-path: './example/netlify.toml'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy to Netlify from GitHub Actions"
+          enable-pull-request-comment: true
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 10

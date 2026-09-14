@@ -41,6 +41,7 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 - Bump packages to latest versions.
 - Align `.gitignore` and `.pubignore` after adopting the shared Flex package ignore files: stop tracking Flutter-generated desktop plugin registrant files that those ignores already exclude, ignore Android `.kotlin/` compiler session files, and keep internal `docs/` out of the published archive so pub does not treat it as package documentation.
 - CI: bumped `actions/checkout` to v4 and `codecov/codecov-action` from end-of-life v3 to v5. Codecov now uses `files:` (the v3 `file:` input is ignored), `fail_ci_if_error: true`, and `disable_search: true`. The Test workflow runs on pull requests and pushes to `master`. The Deploy workflow sets `override_branch: master` so GitHub release uploads attach to the default branch.
+- Production web example deploys use a shared `WEB_VERSION` slug in `.github/web-deploy.env` (currently `v9-0`) instead of `-latest`. `deploy.yml` and `deploy_playground.yml` also publish the Themes Playground WASM GC build to Netlify.
 
 ### Test
 
@@ -59,6 +60,9 @@ The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled 
 
 **FIX**
 - Make cancel custom color selection work correctly.
+
+**DOCS**
+- Latest live Themes Playground is the WASM GC build at [https://playground.flexcolorscheme.com/](https://playground.flexcolorscheme.com/). GitHub Pages now hosts versioned JS builds (`themesplayground-v9-0` and older frozen paths). The `-latest` path is no longer used for new deploys.
 
 **CHORE**
 - Bump version to 9.0.0.

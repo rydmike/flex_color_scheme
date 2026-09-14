@@ -28,7 +28,7 @@ import 'package:material_ui/material_ui.dart';
 // with the enum related color scheme.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/fourthemes-latest
+// https://rydmike.com/flexcolorscheme/fourthemes-v9-0
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {

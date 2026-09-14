@@ -33,7 +33,7 @@ Also verify:
 
 - CHANGELOG top section: correct version, date, and tags (`BREAKING`, `FIX`, `CHANGE`, `NEW`, `CHORE`, `DOCS` under `Package` / `Test` / `Themes Playground`).
 - There is no 100% coverage gate; still do not ship with unexplained test failures or missing tests for the release's behavior changes.
-- README and `example/` updated for any user-facing change. Playground live path: `/flexcolorscheme/themesplayground-latest/`.
+- README and `example/` updated for any user-facing change. Latest Playground is [https://playground.flexcolorscheme.com/](https://playground.flexcolorscheme.com/). GitHub Pages JS paths use the slug in [`.github/web-deploy.env`](../../../.github/web-deploy.env) (`WEB_VERSION`, currently `v9-0`).
 - No dry-run warnings you cannot explain, and review the dry-run archive file tree. A multi-MB jump means `resources/` or other internal docs leaked in.
 - Smoke-test the Playground and copied generated setup when the release touches them. Generated output still emits `package:flutter/material.dart`; report that as a known consumer-import mismatch, not as a silent pass after you rewrote the string.
 
@@ -46,12 +46,14 @@ The root [.pubignore](../../../.pubignore) controls what is published. Details a
 1. Commit and push; PR to `master` if not already there. The Test workflow is the active PR/push CI. Do not treat other workflows with `branches: [none]` as proof that CI ran.
 2. `dart pub publish` — manual, interactive; the user runs it or explicitly asks for it.
 3. Tag `X.Y.Z` and publish a **GitHub release** with the CHANGELOG section as body.
-4. The GitHub release triggers deploy.yml: analyze → format check → tests → Codecov → build all **five** web examples → push to `rydmike/rydmike.github.io`. Playground: `lib/example5_themes_playground/main.dart` with base href `/flexcolorscheme/themesplayground-latest/`.
+4. The GitHub release triggers [deploy.yml](../../../.github/workflows/deploy.yml): analyze → format check → tests → Codecov → build all **five** web examples to versioned GitHub Pages paths from `WEB_VERSION` → WASM Playground to Netlify. Playground JS: `lib/example5_themes_playground/main.dart` with base href `/flexcolorscheme/themesplayground-${WEB_VERSION}/`. Latest communicated Playground URL is [https://playground.flexcolorscheme.com/](https://playground.flexcolorscheme.com/).
 
 ## Post-release
 
 - Check the pub.dev page: version, score, changelog rendering, screenshots.
-- Check the Playground URL serves the new build. Do not promise deploy succeeded just because a GitHub release was created.
+- Check the Netlify Playground URL serves the new WASM build, and the versioned GitHub Pages JS apps (`/flexcolorscheme/{app}-${WEB_VERSION}/`) boot. Do not promise deploy succeeded just because a GitHub release was created.
+- To freeze a minor/major, change `WEB_VERSION` in [`.github/web-deploy.env`](../../../.github/web-deploy.env) (for example `v9-0` → `v9-1`) before the next prod deploy. Previous path folders on `rydmike/rydmike.github.io` stay untouched. Do not copy from a `-latest` folder; that path is retired.
+- After the first 9.0 deploy to `-v9-0`, delete the five leftover `*-latest` folders on GitHub Pages. 8.4 was snapshotted to `*-v8-4` with rewritten `base href` before that deploy.
 
 ## Do not
 

@@ -24,14 +24,15 @@ Review `.pubignore` and the file list reported by `dart pub publish --dry-run` (
 
 ## Deployment wiring
 
-`.github/workflows/deploy.yml` declares a published GitHub release trigger (`release: types: [published]` on `master`) and also lists `push`/`pull_request` on `branches: [none]`. Only the release trigger is the normal deploy path. It builds all five web examples from `example/`:
+`.github/workflows/deploy.yml` declares a published GitHub release trigger (`release: types: [published]` on `master`) and also lists `push`/`pull_request` on `branches: [none]`. Only the release trigger is the normal deploy path. Production GitHub Pages path slug is `WEB_VERSION` in [`.github/web-deploy.env`](../../../.github/web-deploy.env) (currently `v9-0`). Change that file when starting a new frozen minor/major. It builds all five web examples from `example/` to versioned JS paths, then a WASM Playground to Netlify:
 
-- example1 → `/flexcolorscheme/basictheme-latest/`
-- example2 → `/flexcolorscheme/customtheme-latest/`
-- example3 → `/flexcolorscheme/fourthemes-latest/`
-- example4 → `/flexcolorscheme/allthemes-latest/`
-- example5 Playground → `/flexcolorscheme/themesplayground-latest/` (`-t lib/example5_themes_playground/main.dart`)
+- example1 → `/flexcolorscheme/basictheme-${WEB_VERSION}/`
+- example2 → `/flexcolorscheme/customtheme-${WEB_VERSION}/`
+- example3 → `/flexcolorscheme/fourthemes-${WEB_VERSION}/`
+- example4 → `/flexcolorscheme/allthemes-${WEB_VERSION}/`
+- example5 Playground JS → `/flexcolorscheme/themesplayground-${WEB_VERSION}/` (`-t lib/example5_themes_playground/main.dart`)
+- example5 Playground WASM → [https://playground.flexcolorscheme.com/](https://playground.flexcolorscheme.com/) (`flutter build web --wasm`, [example/netlify.toml](../../../example/netlify.toml))
 
-Also present: `test.yml` (active PR/push CI and Codecov), `deploy_dev.yml` (dev paths), `deploy_playground.yml` / `deploy_dev_playground.yml` (Playground only), `deploy_playground_netlify.yml`, `build.yml`, `validate.yaml`. Inspect their triggers and destinations before selecting one; do not describe workflows restricted to branch `none` as normally running on master or as manually dispatchable without checking `workflow_dispatch`.
+Also present: `test.yml` (active PR/push CI and Codecov), `deploy_dev.yml` / `deploy_dev_playground.yml` (dev paths, unchanged `*-dev`), `deploy_playground.yml` (Playground JS to `${WEB_VERSION}` plus Netlify WASM), `deploy_playground_netlify.yml` (Netlify-only Playground), `build.yml`, `validate.yaml`. Inspect their triggers and destinations before selecting one; do not describe workflows restricted to branch `none` as normally running on master or as manually dispatchable without checking `workflow_dispatch`.
 
 When a full release is authorized, confirm the desired version and readiness, publish the package, then create the intended tag/GitHub release once package publication is confirmed. Check the resulting workflow and published package/Playground. No version bump, workflow edit, publishing, or deployment follows merely from installing this skill.

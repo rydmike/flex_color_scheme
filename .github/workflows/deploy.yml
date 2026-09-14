@@ -14,8 +14,10 @@
 #  - Build 5 different WEB example apps using FlexColorScheme.
 #    All examples use these steps:
 #    - Flutter clean.
-#    - Flutter build web app, in release mode and with canvaskit renderer.
+#    - Flutter build web app, in release mode, to a versioned GitHub Pages path.
 #    - Deploy each built Web App to GitHub pages.
+#  - Additionally build Themes Playground with WASM GC and deploy to Netlify.
+# GitHub Pages destination slug comes from .github/web-deploy.env (WEB_VERSION).
 name: Deploy
 on:
   push:
@@ -36,6 +38,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Load web deploy version
+        run: |
+          set -a
+          # shellcheck source=/dev/null
+          source .github/web-deploy.env
+          set +a
+          echo "WEB_VERSION=$WEB_VERSION" >> "$GITHUB_ENV"
       - name: Install Flutter and Dart SDK
         uses: subosito/flutter-action@v2
         with:
@@ -69,14 +78,14 @@ jobs:
       - name: "EXAMPLE-1 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-1 WEB release build"
-        run: cd example && flutter build web --base-href "/flexcolorscheme/basictheme-latest/" --release -t lib/example1_basic_theme_usage/main.dart
+        run: cd example && flutter build web --base-href "/flexcolorscheme/basictheme-${{ env.WEB_VERSION }}/" --release -t lib/example1_basic_theme_usage/main.dart
       - name: "EXAMPLE-1 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/basictheme-latest'
+          destination_folder: 'flexcolorscheme/basictheme-${{ env.WEB_VERSION }}'
           destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom@gmail.com'
           user_name: 'rydmike'
@@ -85,14 +94,14 @@ jobs:
       - name: "EXAMPLE-2 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-2 WEB release build"
-        run: cd example && flutter build web --base-href "/flexcolorscheme/customtheme-latest/" --release -t lib/example2_custom_theme/main.dart
+        run: cd example && flutter build web --base-href "/flexcolorscheme/customtheme-${{ env.WEB_VERSION }}/" --release -t lib/example2_custom_theme/main.dart
       - name: "EXAMPLE-2 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/customtheme-latest'
+          destination_folder: 'flexcolorscheme/customtheme-${{ env.WEB_VERSION }}'
           destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom@gmail.com'
           user_name: 'rydmike'
@@ -101,14 +110,14 @@ jobs:
       - name: "EXAMPLE-3 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-3 WEB release build"
-        run: cd example && flutter build web --base-href "/flexcolorscheme/fourthemes-latest/" --release -t lib/example3_four_themes/main.dart
+        run: cd example && flutter build web --base-href "/flexcolorscheme/fourthemes-${{ env.WEB_VERSION }}/" --release -t lib/example3_four_themes/main.dart
       - name: "EXAMPLE-3 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/fourthemes-latest'
+          destination_folder: 'flexcolorscheme/fourthemes-${{ env.WEB_VERSION }}'
           destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom@gmail.com'
           user_name: 'rydmike'
@@ -117,30 +126,52 @@ jobs:
       - name: "EXAMPLE-4 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-4 WEB release build"
-        run: cd example && flutter build web --base-href "/flexcolorscheme/allthemes-latest/" --release -t lib/example4_all_themes/main.dart
+        run: cd example && flutter build web --base-href "/flexcolorscheme/allthemes-${{ env.WEB_VERSION }}/" --release -t lib/example4_all_themes/main.dart
       - name: "EXAMPLE-4 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/allthemes-latest'
+          destination_folder: 'flexcolorscheme/allthemes-${{ env.WEB_VERSION }}'
           destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom@gmail.com'
           user_name: 'rydmike'
 
-      # Example 5 Themes playground - Build and deploy
+      # Example 5 Themes playground - Build and deploy JS to GitHub Pages
       - name: "EXAMPLE-5 START BUILD - Flutter clean before build"
         run: flutter clean && cd example && flutter clean
       - name: "EXAMPLE-5 WEB release build"
-        run: cd example && flutter build web --base-href "/flexcolorscheme/themesplayground-latest/" --release -t lib/example5_themes_playground/main.dart
+        run: cd example && flutter build web --base-href "/flexcolorscheme/themesplayground-${{ env.WEB_VERSION }}/" --release -t lib/example5_themes_playground/main.dart
       - name: "EXAMPLE-5 DEPLOY to GitHub Pages repository, published on commit."
         uses: dmnemec/copy_file_to_another_repo_action@v1.0.4
         env:
           API_TOKEN_GITHUB: ${{ secrets.API_TOKEN_GITHUB }}
         with:
           source_file: 'example/build/web/.'
-          destination_folder: 'flexcolorscheme/themesplayground-latest'
+          destination_folder: 'flexcolorscheme/themesplayground-${{ env.WEB_VERSION }}'
           destination_repo: 'rydmike/rydmike.github.io'
           user_email: 'm.rydstrom@gmail.com'
           user_name: 'rydmike'
+
+      # Themes Playground WASM-GC - Build and deploy to Netlify
+      - name: "Themes playground WASM START BUILD - Flutter clean before build"
+        run: flutter clean && cd example && flutter clean
+      - name: "Themes playground WEB WASM-GC release build"
+        run: cd example && flutter build web --wasm --release -t lib/example5_themes_playground/main.dart
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v3.0
+        with:
+          publish-dir: './example/build/web'
+          production-branch: master
+          production-deploy: true
+          netlify-config-path: './example/netlify.toml'
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          deploy-message: "Deploy to Netlify from GitHub Actions"
+          enable-pull-request-comment: true
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 10

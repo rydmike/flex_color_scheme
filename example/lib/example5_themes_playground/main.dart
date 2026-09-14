@@ -37,7 +37,7 @@ import 'package:material_ui/material_ui.dart';
 /// in AppColor.schemesCustom and many other options.
 ///
 /// You can try this app as a web app at:
-/// https://rydmike.com/flexcolorscheme/themesplayground-latest
+/// https://playground.flexcolorscheme.com/
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // Use a ThemeController, which glues our theme settings to Flutter Widgets.

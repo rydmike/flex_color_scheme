@@ -11,7 +11,7 @@ import 'package:material_ui/material_ui.dart';
 // and then how to switch between the light and dark mode.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/basictheme-latest
+// https://rydmike.com/flexcolorscheme/basictheme-v9-0
 // -----------------------------------------------------------------------------
 void main() => runApp(const DemoApp());
 
