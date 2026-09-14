@@ -3,10 +3,9 @@ import 'dart:async';
 // import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
-
-import '../../../example5_themes_playground/widgets/shared/copy_color_to_clipboard.dart';
-import '../../const/app.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/copy_color_to_clipboard.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// This is just simple SizedBox in a Card, with a passed in label, background
 /// and text label color. Used to show the colors of a theme or scheme
@@ -74,11 +73,9 @@ class _ColorCardState extends State<ColorCard> {
   @override
   Widget build(BuildContext context) {
     final Size mediaSize = MediaQuery.sizeOf(context);
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint;
     final double fontSize = isPhone ? 10 : 11;
-    final Size effectiveSize =
-        widget.size ?? (isPhone ? const Size(74, 54) : const Size(86, 58));
+    final Size effectiveSize = widget.size ?? (isPhone ? const Size(74, 54) : const Size(86, 58));
 
     final String hexCode = widget.color.hexCode;
 
@@ -88,7 +85,8 @@ class _ColorCardState extends State<ColorCard> {
         height: effectiveSize.height,
         child: Tooltip(
           waitDuration: const Duration(milliseconds: 700),
-          message: 'Color #$hexCode $nameThatColor$space$materialName.'
+          message:
+              'Color #$hexCode $nameThatColor$space$materialName.'
               '\nTap to copy color to Clipboard.',
           child: Card(
             elevation: widget.elevation ?? 0,

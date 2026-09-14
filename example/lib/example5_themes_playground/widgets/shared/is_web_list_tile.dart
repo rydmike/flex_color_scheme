@@ -1,9 +1,8 @@
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/is_web_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/universal/is_web_toggle_buttons.dart';
-import '../../../shared/widgets/universal/list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 class IsWebListTile extends StatelessWidget {
   const IsWebListTile({
@@ -12,7 +11,7 @@ class IsWebListTile extends StatelessWidget {
   });
   final ThemeController controller;
 
-  String _explainLabelStyle(final bool? isWeb) {
+  String _explainLabelStyle(bool? isWeb) {
     switch (isWeb) {
       case true:
         return 'Mock "kIsWeb" set to true and used. '
@@ -33,9 +32,10 @@ class IsWebListTile extends StatelessWidget {
       title: const Text('Mock web'),
       subtitle: Text(_explainLabelStyle(controller.fakeIsWeb)),
       subtitleReveal: const Text(
-          'Use this setting to test what your adaptive theme looks '
-          'likes on web and none web platform, by mocking web or device usage '
-          'status here in the Playground.\n'),
+        'Use this setting to test what your adaptive theme looks '
+        'likes on web and none web platform, by mocking web or device usage '
+        'status here in the Playground.\n',
+      ),
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 5.0),
         child: IsWebToggleButtons(

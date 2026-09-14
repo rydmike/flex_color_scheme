@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Widget using [ToggleButtons) that can be used to toggle the label style
 /// of a [NavigationBar].
@@ -29,8 +29,7 @@ class NavigationBarLabelBehaviorToggleButtons extends StatelessWidget {
               if (index == 0) {
                 onChanged?.call(NavigationDestinationLabelBehavior.alwaysHide);
               } else if (index == 1) {
-                onChanged
-                    ?.call(NavigationDestinationLabelBehavior.onlyShowSelected);
+                onChanged?.call(NavigationDestinationLabelBehavior.onlyShowSelected);
               } else {
                 onChanged?.call(NavigationDestinationLabelBehavior.alwaysShow);
               }

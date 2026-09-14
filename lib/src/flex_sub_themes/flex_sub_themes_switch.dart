@@ -7,100 +7,150 @@ part of '../flex_sub_themes.dart';
 /// for your app theme.
 ///
 /// The splashRadius is not used by FlexColorScheme sub-themes.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also used for your [ThemeData].
+///
+/// ## [baseSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the main
+/// color for the switch.
+///
+/// All colors in the color scheme are not good choices, but some work well.
+///
+/// If not defined, [ColorScheme.primary] will be used. This is more in-line
+/// with M3 design, but applied to M2 switch. The M3 color design
+/// specification for the secondary color, is a poor choice for toggles and
+/// switches, if such colors are used in M2 mode, primary color works
+/// better.
+///
+/// ## [thumbSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the thumb
+/// color for the switch.
+///
+/// All colors in the color scheme are not good choices, but some work well.
+///
+/// If not defined, [ColorScheme.primary] will be used in M2 mode.
+/// This is more in-line
+/// with M3 design, but applied to M2 switch. The M3 color design
+/// specification for the secondary color, is a poor choice for toggles and
+/// switches, if such colors are used in M2 mode, primary color works
+/// better.
+///
+/// If not defined, defaults to:
+///
+/// - If useMaterial3 is false [baseSchemeColor].
+/// - If useMaterial3 is true [SchemeColor.primaryContainer].
+///
+/// ## [thumbFixedSize]
+///
+/// Set to true to keep the [Switch] thumb size fixed.
+///
+/// When true the [Switch] thumb size does not change from small size when
+/// OFF, to a larger size when ON. This makes the Material-3 Switch even
+/// more similar to the iOS style Switch.
+///
+/// This setting only applies to the Material-3 mode, it has no effect in
+/// Material-2 mode.
+///
+/// If undefined, defaults to false.
+///
+/// ## [splashRadius]
+///
+/// The splash radius of the circular Material ink response.
+///
+/// If null, default via SDK defaults to [kRadialReactionRadius] = 20.
+///
+/// ## [unselectedIsColored]
+///
+/// Defines if unselected [Switch] is also themed to be [baseSchemeColor].
+///
+/// If false, it is grey like in Flutter SDK.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useTintedInteraction]
+///
+/// Defines if the theme uses tinted interaction effects.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useTintedDisable]
+///
+/// Defines if the theme uses tinted disabled color.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useCupertinoStyle]
+///
+/// Defines if the theme uses Cupertino style switch.
+///
+/// This option only works when [useMaterial3] is true. If it is false
+/// the setting has no impact.
+///
+/// When used the Switch will be styled like a CupertinoSwitch, but with
+/// the colors defined by [baseSchemeColor]. The themed Switch is not
+/// an exact match for the CupertinoSwitch, but as close as you can
+/// get with the Material Switch theming features.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useMaterial3]
+///
+/// A temporary flag used to disable Material-3 design and use legacy
+/// Material-2 design instead. Material-3 design is the default.
+/// Material-2 will be deprecated in Flutter.
+///
+/// If set to true, the theme will use Material3 default styles when
+/// properties are undefined, if false defaults will use FlexColorScheme's
+/// own opinionated default values.
+///
+/// The M2/M3 defaults will only be used for properties that are not
+/// defined, if defined they keep their defined values.
+///
+/// If undefined, defaults to true.
 SwitchThemeData _switchTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as the main
   /// color for the switch.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// If not defined, [colorScheme.primary] will be used. This is more in-line
-  /// with M3 design, but applied to M2 switch. The M3 color design
-  /// specification for the secondary color, is a poor choice for toggles and
-  /// switches, if such colors are used in M2 mode, primary color works
-  /// better.
-  final SchemeColor? baseSchemeColor,
+  SchemeColor? baseSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the thumb
   /// color for the switch.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// If not defined, [colorScheme.primary] will be used in M2 mode.
-  /// This is more in-line
-  /// with M3 design, but applied to M2 switch. The M3 color design
-  /// specification for the secondary color, is a poor choice for toggles and
-  /// switches, if such colors are used in M2 mode, primary color works
-  /// better.
-  ///
-  /// If not defined, defaults to:
-  ///
-  /// - If useMaterial3 is false [baseSchemeColor].
-  /// - If useMaterial3 is true [SchemeColor.primaryContainer].
-  final SchemeColor? thumbSchemeColor,
+  SchemeColor? thumbSchemeColor,
 
-  /// Set to true to keep the [Switch] thumb size fixed.
-  ///
-  /// When true the [Switch] thumb size does not change from small size when
-  /// OFF, to a larger size when ON. This makes the Material-3 Switch even
-  /// more similar to the iOS style Switch.
-  ///
-  /// This setting only applies to the Material-3 mode, it has no effect in
-  /// Material-2 mode.
-  ///
-  /// If undefined, defaults to false.
-  final bool? thumbFixedSize,
+  /// Set to true to keep the `Switch` thumb size fixed.
+  bool? thumbFixedSize,
 
   /// The splash radius of the circular Material ink response.
   ///
-  /// If null, default via SDK defaults to [kRadialReactionRadius] = 20.
-  final double? splashRadius,
+  /// If null, default via SDK defaults to `kRadialReactionRadius` = 20.
+  double? splashRadius,
 
-  /// Defines if unselected [Switch] is also themed to be [baseSchemeColor].
-  ///
-  /// If false, it is grey like in Flutter SDK.
-  ///
-  /// If undefined, defaults to false.
-  final bool? unselectedIsColored,
+  /// Defines if unselected `Switch` is also themed to be `baseSchemeColor`.
+  bool? unselectedIsColored,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 
   /// Defines if the theme uses Cupertino style switch.
-  ///
-  /// This option only works when [useMaterial3] is true. If it is false
-  /// the setting has no impact.
-  ///
-  /// When used the Switch will be styled like a CupertinoSwitch, but with
-  /// the colors defined by [baseSchemeColor]. The themed Switch is not
-  /// an exact match for the CupertinoSwitch, but as close as you can
-  /// get with the Material Switch theming features.
-  ///
-  /// If undefined, defaults to false.
-  final bool? useCupertinoStyle,
+  bool? useCupertinoStyle,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
   /// Material-2 will be deprecated in Flutter.
-  ///
-  /// If set to true, the theme will use Material3 default styles when
-  /// properties are undefined, if false defaults will use FlexColorScheme's
-  /// own opinionated default values.
-  ///
-  /// The M2/M3 defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
 
@@ -130,17 +180,13 @@ SwitchThemeData _switchTheme({
   // reasoning and duplication.
   final Color overlay = colorScheme.surface;
   final Color tint = baseColor;
-  final double factor =
-      FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness, true);
+  final double factor = FlexSubThemes._tintAlphaFactor(tint, colorScheme.brightness, true);
 
   // Get selected thumb color, and its pair, defaults to
   // M2: primary and onPrimary.
   // M3: primaryContainer and onPrimaryContainer
   final Color thumbColor = FlexSubThemes.schemeColor(
-    thumbSchemeColor ??
-        (useM3
-            ? SchemeColor.primaryContainer
-            : baseSchemeColor ?? SchemeColor.primary),
+    thumbSchemeColor ?? (useM3 ? SchemeColor.primaryContainer : baseSchemeColor ?? SchemeColor.primary),
     colorScheme,
   );
 
@@ -154,8 +200,7 @@ SwitchThemeData _switchTheme({
         if (states.contains(WidgetState.disabled)) {
           if (states.contains(WidgetState.selected)) {
             if (tintDisable) {
-              return FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, baseColor);
+              return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
             }
             return isLight ? Colors.grey.shade400 : Colors.grey.shade800;
           }
@@ -192,9 +237,7 @@ SwitchThemeData _switchTheme({
         // Custom themed color on track when not selected
         if (unselectedColored) {
           return baseColor.withAlpha(
-            isLight
-                ? kAlphaM2SwitchUnselectTrackLight
-                : kAlphaM2SwitchUnselectTrackDark,
+            isLight ? kAlphaM2SwitchUnselectTrackLight : kAlphaM2SwitchUnselectTrackDark,
           );
         }
         // This is SDK default, yes that value is hard coded in SDK too.
@@ -346,8 +389,7 @@ SwitchThemeData _switchTheme({
               return colorScheme.surface;
             }
             if (tintDisable) {
-              return FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, baseColor);
+              return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
             }
             return colorScheme.onSurface.withAlpha(kAlphaDisabled);
           }
@@ -380,8 +422,7 @@ SwitchThemeData _switchTheme({
           if (states.contains(WidgetState.disabled)) {
             if (states.contains(WidgetState.selected)) {
               if (tintDisable) {
-                return FlexSubThemes.tintedDisable(
-                    colorScheme.onSurface, baseColor);
+                return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
               }
               return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
             }
@@ -404,35 +445,27 @@ SwitchThemeData _switchTheme({
           if (states.contains(WidgetState.pressed)) {
             return unselectedColored
                 ? baseColor.withAlpha(
-                    isLight
-                        ? kAlphaM3SwitchUnselectTrackLight
-                        : kAlphaM3SwitchUnselectTrackDark,
+                    isLight ? kAlphaM3SwitchUnselectTrackLight : kAlphaM3SwitchUnselectTrackDark,
                   )
                 : colorScheme.surfaceContainerHighest;
           }
           if (states.contains(WidgetState.hovered)) {
             return unselectedColored
                 ? baseColor.withAlpha(
-                    isLight
-                        ? kAlphaM3SwitchUnselectTrackLight
-                        : kAlphaM3SwitchUnselectTrackDark,
+                    isLight ? kAlphaM3SwitchUnselectTrackLight : kAlphaM3SwitchUnselectTrackDark,
                   )
                 : colorScheme.surfaceContainerHighest;
           }
           if (states.contains(WidgetState.focused)) {
             return unselectedColored
                 ? baseColor.withAlpha(
-                    isLight
-                        ? kAlphaM3SwitchUnselectTrackLight
-                        : kAlphaM3SwitchUnselectTrackDark,
+                    isLight ? kAlphaM3SwitchUnselectTrackLight : kAlphaM3SwitchUnselectTrackDark,
                   )
                 : colorScheme.surfaceContainerHighest;
           }
           return unselectedColored
               ? baseColor.withAlpha(
-                  isLight
-                      ? kAlphaM3SwitchUnselectTrackLight
-                      : kAlphaM3SwitchUnselectTrackDark,
+                  isLight ? kAlphaM3SwitchUnselectTrackLight : kAlphaM3SwitchUnselectTrackDark,
                 )
               : colorScheme.surfaceContainerHighest;
         }),
@@ -444,8 +477,7 @@ SwitchThemeData _switchTheme({
           }
           if (states.contains(WidgetState.disabled)) {
             if (tintDisable) {
-              return FlexSubThemes.tintedDisable(
-                  colorScheme.onSurface, baseColor);
+              return FlexSubThemes.tintedDisable(colorScheme.onSurface, baseColor);
             }
             return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
           }

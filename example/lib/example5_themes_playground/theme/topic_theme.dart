@@ -1,5 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A [ThemeExtension] for semantic theme topic group color properties.
 class TopicTheme extends ThemeExtension<TopicTheme> {
@@ -36,18 +36,17 @@ class TopicTheme extends ThemeExtension<TopicTheme> {
     Color? navigationColor,
     Color? surfacesColor,
     Color? textsColor,
-  }) =>
-      TopicTheme(
-        generalColor: generalColor ?? this.generalColor,
-        colorsColor: colorsColor ?? this.colorsColor,
-        componentsColor: componentsColor ?? this.componentsColor,
-        controlsColor: controlsColor ?? this.controlsColor,
-        inputsColor: inputsColor ?? this.inputsColor,
-        barsColor: barsColor ?? this.barsColor,
-        navigationColor: navigationColor ?? this.navigationColor,
-        surfacesColor: surfacesColor ?? this.surfacesColor,
-        textsColor: textsColor ?? this.textsColor,
-      );
+  }) => TopicTheme(
+    generalColor: generalColor ?? this.generalColor,
+    colorsColor: colorsColor ?? this.colorsColor,
+    componentsColor: componentsColor ?? this.componentsColor,
+    controlsColor: controlsColor ?? this.controlsColor,
+    inputsColor: inputsColor ?? this.inputsColor,
+    barsColor: barsColor ?? this.barsColor,
+    navigationColor: navigationColor ?? this.navigationColor,
+    surfacesColor: surfacesColor ?? this.surfacesColor,
+    textsColor: textsColor ?? this.textsColor,
+  );
 
   /// Must override the lerp method.
   @override

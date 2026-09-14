@@ -1,26 +1,28 @@
+/// @docImport 'dart:io';
+/// @docImport 'package:flex_color_scheme/src/flex_theme_data_extensions.dart';
+library;
+
 import 'dart:async';
 
+import 'package:cupertino_ui/cupertino_ui.dart';
+import 'package:flex_color_scheme/src/flex_adaptive.dart';
+import 'package:flex_color_scheme/src/flex_alpha_values.dart';
+import 'package:flex_color_scheme/src/flex_color.dart';
+import 'package:flex_color_scheme/src/flex_constants.dart';
+import 'package:flex_color_scheme/src/flex_extensions.dart';
+import 'package:flex_color_scheme/src/flex_key_color.dart';
+import 'package:flex_color_scheme/src/flex_scheme.dart';
+import 'package:flex_color_scheme/src/flex_scheme_color.dart';
+import 'package:flex_color_scheme/src/flex_scheme_on_colors.dart';
+import 'package:flex_color_scheme/src/flex_scheme_surface_colors.dart';
+import 'package:flex_color_scheme/src/flex_sub_themes.dart';
+import 'package:flex_color_scheme/src/flex_sub_themes_data.dart';
+import 'package:flex_color_scheme/src/flex_surface_mode.dart';
+import 'package:flex_color_scheme/src/flex_text_theme_color.dart';
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-import 'flex_adaptive.dart';
-import 'flex_alpha_values.dart';
-import 'flex_color.dart';
-import 'flex_constants.dart';
-import 'flex_extensions.dart';
-import 'flex_key_color.dart';
-import 'flex_scheme.dart';
-import 'flex_scheme_color.dart';
-import 'flex_scheme_on_colors.dart';
-import 'flex_scheme_surface_colors.dart';
-import 'flex_sub_themes.dart';
-import 'flex_sub_themes_data.dart';
-import 'flex_surface_mode.dart';
-import 'flex_text_theme_color.dart';
-import 'flex_theme_data_extensions.dart'; // For comment refs.
+import 'package:material_ui/material_ui.dart';
 
 // ignore_for_file: sort_constructors_first, we prefer factories before props.
 
@@ -123,11 +125,10 @@ enum FlexSystemNavBarStyle {
   /// primary color blend that the surfaceContainerLow color has received will
   /// be used.
   ///
-  /// In FlexColorScheme versions before 8.0, this selection resulted in the
-  /// [ColorScheme] background color being used as the AppBar color. This was
-  /// deprecated in version 8.0.0 and replaced with
-  /// [ColorScheme.surfaceContainerLow] because Flutter 3.22 deprecated the
-  /// background color.
+  /// In FlexColorScheme versions before 8.0, this selection used the
+  /// deprecated [ColorScheme] background color. Version 8.0.0 replaced it
+  /// with [ColorScheme.surfaceContainerLow] because Flutter 3.22 deprecated
+  /// the background color.
   background,
 
   /// The system navigation bar will be the same color as active theme
@@ -151,7 +152,7 @@ enum FlexSystemNavBarStyle {
   ///
   /// * SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)
   ///
-  /// call has to be used. It is called automatically called by the
+  /// call has to be used. It is called automatically by the
   /// [FlexColorScheme.themedSystemNavigationBar] helper
   /// when opacity is < 1 or this transparent option is used.
   ///
@@ -192,7 +193,7 @@ enum FlexTabBarStyle {
   /// Indicator, text and icons contrast with background and surface colors
   /// using primary color.
   ///
-  /// If you intend to use your TabBar's only on surfaces, like Scaffold
+  /// If you intend to use your TabBars only on surfaces, like Scaffold
   /// or in cards using default theme background color, then use this style.
   /// If you use an AppBar theme that is surface colored in both light and dark
   /// theme, then this style will also work well when the TabBar is used
@@ -202,7 +203,7 @@ enum FlexTabBarStyle {
   /// Make a [TabBarThemeData] sub-theme that equals the style you get with
   /// ThemeData constructor and Widget default values in Flutter SDK.
   ///
-  /// This works well with default primary colored AppBar's in light
+  /// This works well with default primary colored AppBars in light
   /// theme and dark surface colored AppBars or other dark surfaces in dark
   /// theme. It does not work with all app bar styles supported by
   /// [FlexColorScheme], prefer using [forAppBar] for that.
@@ -265,7 +266,7 @@ enum FlexFixedColorStyle {
   /// colors and their on colors.
   ///
   /// The [FlexSchemeVariant.chroma] is used for the seed generation, as it best
-  /// matches the chromacity of target input color.
+  /// matches the chroma of the target input color.
   seeded,
 
   /// Seed generate the fixed colors, even when a seeded ColorScheme is not
@@ -275,7 +276,7 @@ enum FlexFixedColorStyle {
   /// colors and their on colors.
   ///
   /// The [FlexSchemeVariant.chroma] is used for the seed generation, as it best
-  /// matches the chromacity of target input color.
+  /// matches the chroma of the target input color.
   ///
   /// Additionally the [FlexTones] modifier [FlexTones.higherContrastFixed]
   /// is applied.
@@ -336,9 +337,7 @@ enum FlexScaffoldBaseColor {
     Brightness brightness = Brightness.light,
     bool? useMaterial3,
   }) {
-    final bool isLight = scheme == null
-        ? brightness == Brightness.light
-        : scheme.brightness == Brightness.light;
+    final bool isLight = scheme == null ? brightness == Brightness.light : scheme.brightness == Brightness.light;
 
     switch (this) {
       case FlexScaffoldBaseColor.lowestBase:
@@ -347,46 +346,30 @@ enum FlexScaffoldBaseColor {
         return scheme?.surface ??
             (isLight
                 ? useMaterial3 ?? true
-                    ? FlexColor.lightFlexSurface
-                    : FlexColor.materialLightScaffoldBackground
+                      ? FlexColor.lightFlexSurface
+                      : FlexColor.materialLightScaffoldBackground
                 : useMaterial3 ?? true
-                    ? FlexColor.darkFlexSurface
-                    : FlexColor.materialDarkScaffoldBackground);
+                ? FlexColor.darkFlexSurface
+                : FlexColor.materialDarkScaffoldBackground);
       case FlexScaffoldBaseColor.surfaceDim:
-        return scheme?.surfaceDim ??
-            (isLight
-                ? FlexColor.lightFlexSurfaceDim
-                : FlexColor.darkFlexSurfaceDim);
+        return scheme?.surfaceDim ?? (isLight ? FlexColor.lightFlexSurfaceDim : FlexColor.darkFlexSurfaceDim);
       case FlexScaffoldBaseColor.surfaceBright:
-        return scheme?.surfaceBright ??
-            (isLight
-                ? FlexColor.lightFlexSurfaceBright
-                : FlexColor.darkFlexSurfaceBright);
+        return scheme?.surfaceBright ?? (isLight ? FlexColor.lightFlexSurfaceBright : FlexColor.darkFlexSurfaceBright);
       case FlexScaffoldBaseColor.surfaceContainerLowest:
         return scheme?.surfaceContainerLowest ??
-            (isLight
-                ? FlexColor.lightFlexSurfaceContainerLowest
-                : FlexColor.darkFlexSurfaceContainerLowest);
+            (isLight ? FlexColor.lightFlexSurfaceContainerLowest : FlexColor.darkFlexSurfaceContainerLowest);
       case FlexScaffoldBaseColor.surfaceContainerLow:
         return scheme?.surfaceContainerLow ??
-            (isLight
-                ? FlexColor.lightFlexSurfaceContainerLow
-                : FlexColor.darkFlexSurfaceContainerLow);
+            (isLight ? FlexColor.lightFlexSurfaceContainerLow : FlexColor.darkFlexSurfaceContainerLow);
       case FlexScaffoldBaseColor.surfaceContainer:
         return scheme?.surfaceContainer ??
-            (isLight
-                ? FlexColor.lightFlexSurfaceContainer
-                : FlexColor.darkFlexSurfaceContainer);
+            (isLight ? FlexColor.lightFlexSurfaceContainer : FlexColor.darkFlexSurfaceContainer);
       case FlexScaffoldBaseColor.surfaceContainerHigh:
         return scheme?.surfaceContainerHigh ??
-            (isLight
-                ? FlexColor.lightFlexSurfaceContainerHigh
-                : FlexColor.darkFlexSurfaceContainerHigh);
+            (isLight ? FlexColor.lightFlexSurfaceContainerHigh : FlexColor.darkFlexSurfaceContainerHigh);
       case FlexScaffoldBaseColor.surfaceContainerHighest:
         return scheme?.surfaceContainerHighest ??
-            (isLight
-                ? FlexColor.lightFlexSurfaceContainerHighest
-                : FlexColor.darkFlexSurfaceContainerHighest);
+            (isLight ? FlexColor.lightFlexSurfaceContainerHighest : FlexColor.darkFlexSurfaceContainerHighest);
     }
   }
 
@@ -416,7 +399,7 @@ enum FlexScaffoldBaseColor {
 }
 
 /// Make beautiful Flutter themes using pre-designed color schemes or custom
-/// colors. Get the resulting [ThemeData] with the [toTheme] method.
+/// colors. Get the resulting [ThemeData] with the [toTheme] getter.
 ///
 /// Flutter's [ThemeData.from] is a good starting point for [ColorScheme] based
 /// themes. It has a some gaps leaving some properties in the theme
@@ -440,7 +423,7 @@ enum FlexScaffoldBaseColor {
 /// A more opinionated theme and style can be returned by passing in a default
 /// [FlexSubThemesData] constructor to [subThemesData].
 /// By default the sub-themes take inspiration from the Material 3 (M3) Design
-/// guide [specification](https://m3.material.io) and uses many f its values as
+/// guide [specification](https://m3.material.io) and uses many of its values as
 /// defaults when it is possible to do so in Flutter
 /// SDK theming, within any remaining Material 2 (M2) design limitations.
 ///
@@ -465,19 +448,22 @@ enum FlexScaffoldBaseColor {
 /// surfaces (backgrounds), that use alpha blend to mix in a varying degree
 /// of a color, typically the primary color, into surfaces and backgrounds.
 ///
-/// Branded surface are described in the Material design guide, but Flutter
-/// offers no out of the box help to make such themes. With [FlexColorScheme]
+/// Branded surfaces were introduced already the Material-2 design guide, but back then
+/// Flutter offered no out of the box help to make such themes. With [FlexColorScheme]
 /// you can use a varying degree of surface and background branding levels for
-/// any theme you make, both in light and dark mode. When you use Material 3
-/// color system matching [ColorScheme] its surface colors also include a hint
-/// of the primary color in surfaces and background. This is called surface tint
-/// in the Material 3 design guide. The name may be different and the algorithm
+/// any theme you make, both in light and dark mode, even in old legacy Material-2 themes.
+///
+/// When you use Material-3 color system matching [ColorScheme] its surface colors
+/// include a hint of the primary color in surfaces and background. This is called
+/// surface tint in the Material-3 design guide. The name may be different and the algorithm
 /// to generate the colors is also much more refined, but the design idea is the
 /// same. With the factory constructors [FlexColorScheme.light] and
-/// [FlexColorScheme.dark] you can also use the Material 3 color system and
-/// its tools to generate ColorScheme for it. The factories also provide
-/// more advanced and flexible key color generated [ColorScheme]'s, than what
-/// is offered in Flutter SDK via [ColorScheme.fromSeed].
+/// [FlexColorScheme.dark] you can use the Material-3 color system and
+/// its tools to generate ColorScheme for it. The factories provide a more advanced
+/// and flexible key color generated [ColorScheme]'s, than what is offered in
+/// Flutter SDK via [ColorScheme.fromSeed]. It gives you much more control over the
+/// generated colors and their on colors, and you can use separate key colors for
+/// each palette.
 ///
 /// [FlexColorScheme] makes it easy to adjust the [AppBar]'s themed background
 /// also to surface, background and scaffold background colors that also
@@ -495,11 +481,10 @@ enum FlexScaffoldBaseColor {
 class FlexColorScheme with Diagnosticable {
   /// Default constructor with no required properties.
   ///
-  /// Creates a a light theme by default using the M2 colors as its default
-  /// theme.
+  /// Creates a light theme by default. Material 3 is used unless [useMaterial3]
+  /// is set to false.
   ///
-  /// Typically you would define
-  /// requires [brightness] and four main color scheme
+  /// Typically you would define [brightness] and the four main color scheme
   /// color properties in order to make a fully defined color scheme for
   /// a [ThemeData] object.
   ///
@@ -565,19 +550,11 @@ class FlexColorScheme with Diagnosticable {
     this.subThemesData,
     this.useMaterial3 = true,
     this.extensions,
-    //
-    @Deprecated('Use FlexColorScheme.surface instead. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
-    this.background,
-    @Deprecated('Use FlexColorScheme.onSurface instead. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
-    this.onBackground,
-  })  : assert(appBarElevation == null || appBarElevation >= 0.0,
-            'AppBar elevation must be >= 0 or null.'),
-        assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
-            'Bottom AppBar elevation must be >= 0 or null.');
+  }) : assert(appBarElevation == null || appBarElevation >= 0.0, 'AppBar elevation must be >= 0 or null.'),
+       assert(
+         bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
+         'Bottom AppBar elevation must be >= 0 or null.',
+       );
 
   /// The overall brightness of this color scheme.
   ///
@@ -592,7 +569,7 @@ class FlexColorScheme with Diagnosticable {
   /// The overall [ColorScheme] based colors for the theme.
   ///
   /// This property provides an alternative way to define custom colors for
-  /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
+  /// [FlexColorScheme]. It is useful if
   /// you already have a custom [ColorScheme] based color definition that
   /// you want to use with FlexColorScheme theming and its sub-theming
   /// capabilities, often used with Material 3 based design and its seed
@@ -613,7 +590,7 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
   /// [toScheme]. This will always get you a complete color scheme, including
-  /// calculated and derived color values,. This can be used when using the
+  /// calculated and derived color values. This can be used when using the
   /// [FlexColorScheme.light] and [FlexColorScheme.dark] factories to compute
   /// schemes with branded or tinted surface colors. The effective [ColorScheme]
   /// of your theme is often needed if you want to create component sub-themes
@@ -808,10 +785,10 @@ class FlexColorScheme with Diagnosticable {
   /// Flutter 3.29.0 and later. To get the given dialog color, sub-themes
   /// must now be enabled.
   ///
-  /// When using sub-themes,this color is applied to backgroundColor in
+  /// When using sub-themes, this color is applied to backgroundColor in
   /// dialog themes DatePickerThemeData, DialogThemeData and
   /// TimePickerThemeData, but only if
-  /// [FlexSubThemesData.dialogBackgroundSchemeColor] has not be
+  /// [FlexSubThemesData.dialogBackgroundSchemeColor] has not been
   /// defined in [subThemesData].
   ///
   /// If [FlexSubThemesData.dialogBackgroundSchemeColor] is defined, it is used
@@ -1219,7 +1196,7 @@ class FlexColorScheme with Diagnosticable {
   /// defaults when it is possible to do so in Flutter SDK theming, within
   /// its current Material 2 (M2) design limitations.
   ///
-  /// Starting from version 5, by opting in via a default [subThemesData] you
+  /// By opting in via a default [subThemesData] you
   /// get an extensive set of widget component sub themes applied.
   /// They can be customized via the [subThemesData] property, that has
   /// quick and flat sub theme configuration values in the data class
@@ -1272,7 +1249,14 @@ class FlexColorScheme with Diagnosticable {
   ///   [FlexSubThemes.outlinedButtonTheme].
   /// * [PopupMenuThemeData] for [PopupMenuButton] via
   ///   [FlexSubThemes.popupMenuTheme].
+  /// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
+  ///   [LinearProgressIndicator] via [FlexSubThemes.progressIndicatorTheme].
   /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+  /// * [SearchBarThemeData] for [SearchBar] via [FlexSubThemes.searchBarTheme].
+  /// * [SearchViewThemeData] for [SearchBar] and its open view via
+  ///   [FlexSubThemes.searchViewTheme].
+  /// * [SegmentedButtonThemeData] for [SegmentedButton] via
+  ///   [FlexSubThemes.segmentedButtonTheme].
   /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
   /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
   /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
@@ -1402,33 +1386,6 @@ class FlexColorScheme with Diagnosticable {
   /// To obtain an extension, use ThemeData.of(context).extension.
   final Iterable<ThemeExtension<dynamic>>? extensions;
 
-  /// A color that typically appears behind scrollable content.
-  ///
-  /// The color is applied to [ThemeData.canvasColor] and
-  /// ThemeData.backgroundColor, it is used eg by menu [Drawer] and by all
-  /// [Material] of type [MaterialType.canvas].
-  ///
-  /// If no value is given, and if there is no [colorScheme] defined, it
-  /// defaults to [FlexColor.materialLightBackground] if brightness is light,
-  /// and to [FlexColor.materialDarkBackground] if brightness is dark.
-  @Deprecated('Use FlexColorScheme.surface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.')
-  final Color? background;
-
-  /// A color that is clearly legible when drawn on background color.
-  ///
-  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-  /// background and onBackground is recommended. See
-  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-  ///
-  /// If null, the on color is derived from the brightness of the background
-  /// color, and will be be black if it is light and white if it is dark.
-  @Deprecated('Use FlexColorScheme.onSurface instead. It is deprecated '
-      'because Flutter 3.22 deprecated this ColorScheme color. '
-      'It no longer has any function in FCS v8 and will be removed in v9.')
-  final Color? onBackground;
-
   //****************************************************************************
   //
   // LIGHT COLOR SCHEME AND THEME DEFINITIONS
@@ -1439,1498 +1396,1623 @@ class FlexColorScheme with Diagnosticable {
 
   /// Creates a [FlexColorScheme] for light theme mode.
   ///
-  /// The factory has no required [FlexSchemeColor] properties, but typically
-  /// a [FlexScheme] enum [scheme] value would be provided to use a pre-defined
+  /// Typically pass a [FlexScheme] [scheme], custom [FlexSchemeColor] [colors],
+  /// or a complete [ColorScheme] in [colorScheme]. Direct color overrides and
+  /// surface blends can still change the effective scheme even when a
+  /// [colorScheme] is provided. Use [FlexColorScheme.toScheme] for the result
+  /// used by [FlexColorScheme.toTheme].
+  ///
+  /// Pass [subThemesData] to enable opinionated component themes. Pass
+  /// [keyColors] to opt in on Material 3 seed-generated palettes. Each
+  /// parameter is documented below in parameter-list order.
+  ///
+  /// ## [colors]
+  ///
+  /// The [FlexSchemeColor] that will be used to create the light
+  /// [FlexColorScheme].
+  ///
+  /// You can use predefined [FlexSchemeColor] values from [FlexColor] or
+  /// [FlexColor.schemes] map or define your own colors with
+  /// [FlexSchemeColor] or [FlexSchemeColor.from].
+  ///
+  /// For using built-in color schemes, the convenience shortcut to select
+  /// it with the [scheme] property is recommended and leaving [colors]
+  /// undefined. If both are specified the scheme colors defined by [colors]
+  /// are used. If both are null, then [scheme] defaults to
+  /// [FlexScheme.material] if [useMaterial3] is false, and to
+  /// [FlexScheme.materialBaseline] if [useMaterial3] is true.
+  ///
+  /// ## [scheme]
+  ///
+  /// Use one of the built-in color schemes defined by enum [FlexScheme].
+  ///
+  /// Give it one of the enum values to use the scheme, like eg.
+  /// [FlexScheme.mandyRed].
+  ///
+  /// To create custom color schemes use the [colors] property. If both
+  /// [colors] and [scheme] are specified, the scheme defined by
+  /// [colors] is used. If both are null, then [scheme] defaults to
+  /// [FlexScheme.material] if [useMaterial3] is false, and to
+  /// [FlexScheme.materialBaseline] if [useMaterial3] is true.
+  ///
+  /// ## [colorScheme]
+  ///
+  /// The overall [ColorScheme] based colors for the theme.
+  ///
+  /// This property provides a way to define custom colors for
+  /// [FlexColorScheme]. It is useful if
+  /// you already have a custom [ColorScheme] based color definition that
+  /// you want to use with FlexColorScheme theming and its sub-theming
+  /// capabilities.
+  ///
+  /// If you provide both a [ColorScheme] and some individual direct property
+  /// values that also exist in a [ColorScheme], the individual property
+  /// values will override the corresponding ones in your [ColorScheme].
+  ///
+  /// If you do not define a [colorScheme], the used colors will be determined
+  /// by the [colors] and [scheme] properties. However, when a [colorScheme]
+  /// is defined it takes precedence. The [brightness] in the provided
+  /// [colorScheme] is always ignored and set to [Brightness.light] since this
+  /// is the light theme mode factory. Make sure the colors used in your color
+  /// scheme are intended for a light theme.
+  ///
+  /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface]
+  /// and [ColorScheme.inverseSurface] colors in the
+  /// provided [colorScheme] will be overridden by the computed color branded
+  /// surfaces. If your [colorScheme] already contains branded surface colors,
+  /// then keep [blendLevel] = 0 to continue using them.
+  ///
+  /// If you use [lightIsWhite] factory feature, it will also override your
+  /// [colorScheme] based mentioned color properties above and make them
+  /// 5% lighter.
+  ///
+  /// If you opt in on using sub themes and have set
+  /// [FlexSubThemesData.blendOnColors] to true and have defined [surfaceMode]
+  /// and set [blendLevel] > 0, then the effective color scheme based on
+  /// colors onPrimary, onSecondary, onError and onSurface will
+  /// be changed accordingly too.
+  ///
+  /// The [colorScheme] colors are also included and affected by factory
+  /// properties [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
+  /// [toScheme]. This will always get you a complete color scheme, including
+  /// calculated and derived color values, which is particularly useful when
+  /// using the [FlexColorScheme.light] and [FlexColorScheme.dark] factories
+  /// to compute color scheme branded surface colors for you. The effective
+  /// [ColorScheme] for your theme is often needed if you want to create
+  /// custom sub-themes that should use the colors from the scheme using none
+  /// default color assignments from the color scheme.
+  ///
+  /// ## [usedColors]
+  ///
+  /// The selection of the six main scheme colors to be used when creating
+  /// effective [ColorScheme].
+  ///
+  /// This is a convenience property that allows you to vary which colors to
+  /// use of the primary, secondary and tertiary colors and their container
+  /// colors when FlexSchemeColor creates its effective [ColorScheme] from
+  /// the input colors. The integer number corresponds to using:
+  ///
+  /// * 1 = Only the primary color
+  /// * 2 = Primary & Secondary colors
+  /// * 3 = Primary + container & Secondary colors
+  /// * 4 = Primary + container & Secondary + container
+  /// * 5 = Primary + container & Secondary + container & tertiary colors
+  /// * 6 = Primary + container & Secondary + container & tertiary + container
+  /// * 7 = Primary, Secondary and tertiary, container colors computed.
+  ///
+  /// By default the value is 6 and all main scheme colors in
+  /// [FlexSchemeColor] are used.
+  ///
+  /// The integer value is not a very obvious property to use to configure
+  /// this feature. Future version may improve it. However, with the Themes
+  /// Playground you don't have to remember what number does what.
+  ///
+  /// When the value is 1, the result is the same as if we would have
+  /// created the colors with [FlexSchemeColor.from] by only giving it the
+  /// required primary color. With 2, it is equivalent to as if we would have
+  /// given it only the primary and secondary colors, and so on.
+  /// This property makes it possible to simulate and change the resulting
+  /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 7 of
+  /// the color selection. If your used [FlexColorScheme] [colors] was
+  /// actually created with [FlexSchemeColor.from] with only the primary
+  /// color defined, then changing the value from 7 ... 3, 2 or 1, will
+  /// all produce the same effective scheme as the computed values will be
+  /// the same as the [FlexSchemeColor.from] is using to compute any main
+  /// missing scheme color values.
+  ///
+  /// ## [surfaceMode]
+  ///
+  /// Blends surface tint color into all surface colors and
+  /// scaffold background color.
+  ///
+  /// The [surfaceMode] defines the relative strength of the alpha blend
+  /// value for different surfaces.
+  ///
+  /// If undefined, defaults to [FlexSurfaceMode.level].
+  ///
+  /// ## [blendLevel]
+  ///
+  /// Sets the blend level strength used by the surface mode.
+  ///
+  /// The blend level is the integer decimal value of the alpha value
+  /// used in the alpha blend function. It mixes one color with another
+  /// by using alpha opacity value in the color of a surface put on top of
+  /// another surface with opaque color and returns the result as one opaque
+  /// color.
+  ///
+  /// Defaults to 0.
+  ///
+  /// ## [fixedColorStyle]
+  ///
+  /// The style and method used to compute the fixed, fixedDim colors and
+  /// their on colors in a [ColorScheme] using the palettes provided main
+  /// light mode color.
+  ///
+  /// The main color should always be the light theme's [ColorScheme.primary],
+  /// [ColorScheme.secondary] or [ColorScheme.tertiary]. This means that a
+  /// dark mode theme needs to know what colors were used for the
+  /// light mode colors for [ColorScheme.primary], [ColorScheme.secondary] or
+  /// [ColorScheme.tertiary]. It is not a strict requirement, but necessary
+  /// if you want the fixed and fixedDim colors to follow the Material-3
+  /// guide's color system, where these colors are derived from the main light
+  /// color palette color and have same computed color values in dark mode.
+  ///
+  /// The two available options, offer different nuances for the fixed color
+  /// and fixedDim color generation.
+  ///
+  /// The computed [FlexFixedColorStyle.computed] is made with simpler color
+  /// math and uses same principles as [FlexSchemeColor.from] does when not
+  /// using seed generated ColorSchemes and it generates missing colors.
+  /// This version may fit better with the computed and not seed generated
+  /// ColorSchemes.
+  ///
+  /// The [FlexFixedColorStyle.seeded] version is bit more expensive as it
+  /// requires creating a seeded ColorScheme even when a seed generated
+  /// ColorScheme is not being used. This version may in some cases produce
+  /// visually more appealing results.
+  ///
+  /// If not defined, defaults to [FlexFixedColorStyle.computed].
+  ///
+  /// ## [appBarStyle]
+  ///
+  /// Style used to define the themed color of the AppBar background color.
+  ///
+  /// Defaults to null, which when [useMaterial3] is false results in
+  /// [FlexAppBarStyle.primary] which produces the same results
+  /// as a Flutter standard M2 light [ThemeData.from] by tying the app bar
+  /// color to the primary color. If [useMaterial3] is true it defaults
+  /// [FlexAppBarStyle.surface] which is the same as M3 default.
+  ///
+  /// If you enable component themes you can also control the themed
+  /// [AppBar] by selecting any active [ColorScheme] as its background color.
+  /// If you do so, the setting applied by this property is ignored.
+  ///
+  /// ## [appBarOpacity]
+  ///
+  /// Themed [AppBar] opacity.
+  ///
+  /// The opacity is applied to the effective AppBar color, which may be from
+  /// used [appBarStyle], that gets its color selection from used [scheme]
+  /// or [colors]. Or that color may have been overridden by AppBar sub-theme
+  /// and there selected [SchemeColor] based color.
+  /// Lastly and with highest priority it may be from here directly supplied
+  /// [appBarBackground] color.
+  ///
+  /// A useful opacity range is from 0.85 to 0.95 when using the [Scaffold]
+  /// property [Scaffold.extendBodyBehindAppBar] set to true, to partially show
+  /// scrolling content behind the app bar. To use more opacity, in a way
+  /// that the AppBar does not become too transparent, you also need to blur
+  /// the background to create a frosted glass effect. This cannot
+  /// be made with only theming, you need a custom AppBar Widget for that.
+  /// Frosted glass UI effect is thus beyond the scope of what
+  /// FlexColorScheme can do alone as it only affects ThemeData.
+  ///
+  /// If null, defaults to 1, fully opaque, no transparency.
+  /// If not null, must be from 0 to 1.
+  ///
+  /// ## [transparentStatusBar]
+  ///
+  /// When set to true, it makes the status bar on Android the same color as
+  /// the rest of the AppBar.
+  ///
+  /// Defaults to true.
+  ///
+  /// When true, the AppBar in Android mimics the look of one-toned AppBar's
+  /// typically used on iOS. Set to false, to revert back and use
+  /// Android's default two-toned look. If true the status bar area is
+  /// actually also transparent so that if the app bar is also translucent,
+  /// content that scrolls behind it, is also visible behind the status
+  /// bar area.
+  ///
+  /// In default Material-2 this would be false, FCS uses an opinionated
+  /// style and sets it true. In Material-3 the style you get when setting
+  /// this to true is used by default. In M3 mode FCS will thus not create
+  /// an AppBar sub theme to adjust this, if it is true and it is not needed
+  /// for any other direct AppBar impacting properties in FlexColorScheme
+  /// constructor. In M2 mode an AppBar theme will always be created, also
+  /// when not opting in on the actual sub-themes feature, this per its
+  /// opinionated and legacy styling for M2 mode.
+  ///
+  /// ## [appBarElevation]
+  ///
+  /// The themed elevation for the [AppBar].
+  ///
+  /// If not defined, defaults to 0 in M2 (FCS opinionated) and to 0 in (M3
+  /// spec default).
+  ///
+  /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
+  /// choice, it can easily be adjusted for the theme with this property.
+  ///
+  /// ## [bottomAppBarElevation]
+  ///
+  /// The themed elevation for the [BottomAppBar].
+  ///
+  /// If undefined (null), defaults to 3 in M3 mode and to 8 in M2 mode,
+  /// both via the defaults for the respective theme mode from Flutter's
+  /// default elevation behavior of [BottomAppBar].
+  ///
+  /// ## [tabBarStyle]
+  ///
+  /// Select preferred style for the default [TabBarThemeData].
+  ///
+  /// By default the TabBarThemeData is made to fit with the style of the
+  /// [AppBar].
+  /// In Material-2 mode that is done by defaulting to using
+  /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it is done by
+  /// defaulting to using [FlexTabBarStyle.flutterDefault].
+  ///
+  /// When setting this to [FlexTabBarStyle.forBackground], it will default
+  /// to a theme that uses the color scheme and fits on background color,
+  /// which typically also on works surface and scaffoldBackground color.
+  /// This TabBarThemeData style is useful if you primarily intended to use
+  /// the TabBar in a Scaffold, Dialog, Drawer or Side panel on their
+  /// background colors.
+  ///
+  /// ## [primary]
+  ///
+  /// The color displayed most frequently across your app’s screens and
+  /// components.
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// This override color is included and affected by factory
+  /// properties [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [onPrimary]
+  ///
+  /// A color that is clearly legible when drawn on [primary] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [primary] and [onPrimary] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [primaryContainer]
+  ///
+  /// A color used for elements needing less emphasis than [primary].
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// The override color is included and affected by factory
+  /// properties [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [onPrimaryContainer]
+  ///
+  /// A color that's clearly legible when drawn on [primaryContainer].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
+  /// is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [secondary]
+  ///
+  /// A support color to primary, with less emphasis than primary, often of
+  /// same hue as primary, but does not have to be.
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// The override color is included and affected by factory properties
+  /// [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [onSecondary]
+  ///
+  /// A color that is clearly legible when drawn on [secondary] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [secondary] and [onSecondary] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [secondaryContainer]
+  ///
+  /// A color used for elements needing less emphasis than [secondary].
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// The override color is included and affected by factory properties
+  /// [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [onSecondaryContainer]
+  ///
+  /// A color that's clearly legible when drawn on [secondaryContainer].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
+  /// is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [tertiary]
+  ///
+  /// A color used as a contrasting accent that can balance [primary]
+  /// and [secondary] colors or bring heightened attention to an element,
+  /// such as an input field.
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// The override color is included and affected by factory properties
+  /// [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [onTertiary]
+  ///
+  ///  A color that's clearly legible when drawn on [tertiary].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [secondary] and [onSecondary] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [tertiaryContainer]
+  ///
+  /// A color used for elements needing less emphasis than [tertiary].
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// The override color is included and affected by factory properties
+  /// [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [onTertiaryContainer]
+  ///
+  /// A color that's clearly legible when drawn on [tertiaryContainer].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
+  /// is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [error]
+  ///
+  /// The color to use for input validation errors, e.g. for
+  /// [InputDecoration.errorText].
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [onError]
+  ///
+  /// A color that is clearly legible when drawn on [error] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [error] and [onError] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [errorContainer]
+  ///
+  /// The color to use for input validation errors with less emphasis than
+  /// error.
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [onErrorContainer]
+  ///
+  /// A color that is clearly legible when drawn on [errorContainer] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [error] and [onError] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [surface]
+  ///
+  /// The surface (background) color for widgets like [Card] and
+  /// [BottomAppBar].
+  ///
+  /// The color is applied to [ThemeData.cardColor], [ThemeData.canvasColor]
+  /// and [ColorScheme.surface] in [ThemeData.colorScheme], it is also used
+  /// by all [Material] of type [MaterialType.card].
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the [surfaceMode] [FlexSurfaceMode] enum. If a
+  /// [colorScheme] was provided, this color property will override the
+  /// same color in it as well.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [onSurface]
+  ///
+  /// A color that is clearly legible when drawn on [surface] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [surface] and [onSurface] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [scaffoldBackground]
+  ///
+  /// The color of the [Scaffold] background.
+  ///
+  /// The color is applied to [ThemeData.scaffoldBackgroundColor].
+  ///
+  /// If [FlexSubThemesData.scaffoldBackgroundSchemeColor] is defined, it is used
+  /// instead of this [scaffoldBackground] color.
+  ///
+  /// If no value is given, and no
+  /// [FlexSubThemesData.scaffoldBackgroundSchemeColor]
+  /// is defined, default color is [ColorScheme.surface] in M2 mode and
+  /// [ColorScheme.surfaceContainerLowest] in M3 mode.
+  ///
+  /// ## [dialogBackground]
+  ///
+  /// The background color used by [Dialog]s.
+  ///
+  /// In FCS version 8.2.0 and later this color is no longer applied to
+  /// `ThemeData.dialogBackgroundColor`, as the property is deprecated in
+  /// Flutter 3.29.0 and later. To get the selected dialog color sub-themes
+  /// must now be enabled.
+  ///
+  /// When using sub-themes, this color is applied to backgroundColor in
+  /// dialog themes DatePickerThemeData, DialogThemeData and
+  /// TimePickerThemeData,
+  /// but only if [FlexSubThemesData.dialogBackgroundSchemeColor] has not been
+  /// defined in [subThemesData].
+  ///
+  /// If [FlexSubThemesData.dialogBackgroundSchemeColor] is defined, it is used
+  /// instead of this [dialogBackground] color.
+  ///
+  /// If no value is given, and no [FlexSubThemesData.dialogBackgroundSchemeColor]
+  /// is defined, default color is [ColorScheme.surface] in Material-2 mode
+  /// and [ColorScheme.surfaceContainerHigh] in Material-3 mode.
+  ///
+  /// ## [appBarBackground]
+  ///
+  /// Background theme color for the [AppBar].
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property and
+  /// the [FlexAppBarStyle] via the [appBarStyle] property.
+  ///
+  /// Thus custom color will also override any scheme color based selection
+  /// for the [AppBar] in active used sub-themes.
+  ///
+  /// ## [surfaceTint]
+  ///
+  /// A custom color used as an overlay on a surface color to indicate a
+  /// component's elevation and surface color branding or tinting.
+  ///
+  /// If a [colorScheme] was provided where this corresponding color is
+  /// defined, this color property will override the same color in it.
+  ///
+  /// This color is used by Material 3 for colored elevation, it is also used
+  /// as the blend color for FlexColorScheme surface blends. Additionally
+  /// this color is if provided used as key color for seeding
+  /// the neutral color palettes, when seed generated color schemes are used.
+  /// It is important that all these properties use the same color.
+  ///
+  /// Typically this color is not customized, most designs use the default
+  /// where the theme primary color is used for slightly mixing it into the
+  /// neutral background and surface colors, when seeding is used. As well as
+  /// using it for the the elevation tint in Material 3, plus for the
+  /// surface blends that can optionally be added with FlexColorScheme.
+  ///
+  /// If undefined, [primary] color is used.
+  ///
+  /// ## [lightIsWhite]
+  ///
+  /// Makes the light theme backgrounds lighter or even white.
+  ///
+  /// Scaffold background will become white and is no longer impacted by used
+  /// [blendLevel]. Other surfaces also become lighter, when using low blend
+  /// levels they may become fully white too, but are still impacted by the
+  /// blend level.
+  ///
+  /// ## [swapColors]
+  ///
+  /// When true, the primary and primaryContainer colors will be swapped with
+  /// their secondary counterparts.
+  ///
+  /// Set this flag to true if you want to make a theme where
+  /// your primary and secondary colors are swapped, compared to how they
+  /// are defined in the passed in color properties or used pre-defined
   /// color scheme.
   ///
-  /// As a second alternative the [FlexSchemeColor] class [colors] property
-  /// can be used to define custom scheme colors, that can be created with just
-  /// one color property by using the factory [FlexSchemeColor.from].
+  /// This is useful if you want to do this with the pre-defined
+  /// schemes. If you are explicitly defining all your theme colors you can
+  /// of course define them in any desired config. Even if you do
+  /// that, this feature will still swap whatever colors you defined
+  /// for primary and secondary. You can offer this feature as an easy end
+  /// user modifiable theme option if you like. One usage possibility is to
+  /// set [swapColors] to true only for the dark mode and use your color
+  /// scheme the other way around only in dark mode.
   ///
-  /// As a third option you can provide a complete [ColorScheme] in
-  /// [colorScheme] and the custom colors for the theme will be based on that
-  /// scheme. Since this is the light theme factory the brightness value in used
-  /// [colorScheme] is ignored and resulting effective theme and color scheme
-  /// will always be light. Make sure you use colors in your color scheme that
-  /// are actually colors for a light theme.
+  /// ## [tooltipsMatchBackground]
   ///
-  /// The factory can produce blended surface colors, and also has other
-  /// parameters that may impact the effective color scheme used by final theme,
-  /// even when a [colorScheme] are provided. The [FlexColorScheme.toScheme]
-  /// will give you the effective color scheme that will also be used
-  /// when producing [ThemeData] from [FlexColorScheme] and its factories
-  /// with [FlexColorScheme.toTheme].
+  /// When set to true, tooltip background color will match the brightness of
+  /// the theme's background color.
   ///
-  /// The factory contains a large number of other properties that can be used
-  /// to create beautiful themes by just adjusting a few behavior properties.
+  /// By default Flutter's Material tooltips use a theme where the tooltip
+  /// background color brightness is inverted in relation to the overall
+  /// theme's background color.
   ///
-  /// To activate using opinionated sub themes that further refines the produced
-  /// theme, pass in a default [FlexSubThemesData] to [subThemesData], or use
-  /// short cut properties to setup additional features in the sub-themes.
+  /// [FlexColorScheme] allows you to use a single toggle to invert this.
+  /// Light tooltips on light background is e.g. the default style on
+  /// Windows Desktop toggle. You can use this toggle to use this style,
+  /// or use it as a means to create a platform adaptive tooltip style, where
+  /// the Material and Flutter style is used on devices and Web, but the
+  /// inverted scheme is used on e.g. Windows platform.
   ///
-  /// Material 3 guide introduces a new color system with key colors and tonal
-  /// palettes, see
-  /// https://m3.material.io/styles/color/the-color-system/key-colors-tones.
+  /// Defaults to false, and uses same background style as Material Design
+  /// guide and Flutter.
   ///
-  /// You can opt-in on using this new M3 color system by creating your tonal
-  /// theme colors using the effective [primary], [secondary] and [tertiary]
-  /// colors in the factory, as key colors to create tonal palettes for
-  /// these main Material 3 color palettes.
-  /// Colors from these key color seed generated palettes will then be used as
-  /// color tones for the produce [ColorScheme], as defined by the Material 3
-  /// design guide. By studying the Flutter SDK [ColorScheme.fromSeed] factory
-  /// you can see which color tone from what key color is used where.
-  /// [FlexColorScheme] uses the same assignments for the tones to the
-  /// generated [ColorScheme] when you opt in using Material 3 tonal palettes.
+  /// Additional tooltip styles when NOT opting in on FlexColorScheme sub
+  /// themes are:
   ///
-  /// The [FlexColorScheme] light and dark factory offer more control over the
-  /// seed generation setup. With [ColorScheme.fromSeed] you can only generate
-  /// the [ColorScheme] from one key color, the primary color. With
-  /// [FlexColorScheme] factories  you can use separate key colors for
-  /// [secondary] and [tertiary] from the [primary] color, to make their
-  /// tonal palettes. The effective colors in your [FlexColorScheme] for these
-  /// color properties are used as key color inputs when you provide a
-  /// [FlexKeyColors] via [keyColors] and enable it by setting
-  /// [FlexKeyColors.useKeyColors] to true, which it is in its default
-  /// constructor, so to enable it you can just pass in a default
-  /// FlexKeyColors() to [keyColors].
+  /// - tooltipsMatchBackground: false
+  ///   - none
   ///
-  /// By setting [FlexKeyColors.useSecondary] or
-  /// [FlexKeyColors.useTertiary] to false, the corresponding effective colors
-  /// in [FlexColorScheme] will not be used as keys for corresponding
-  /// [TonalPalette]. If one is off, its tonal palette will instead be based on
-  /// the primary color as key. If both are false, the [FlexColorScheme.light]
-  /// seeding algorithm becomes the same as using [ColorScheme.fromSeed]. The
-  /// primary color is always used as seed color when key color seeding is
-  /// enabled with [FlexKeyColors.useKeyColors] set to true.
+  /// - tooltipsMatchBackground: true
+  ///   - light theme:
+  ///     - background: Color(0xF0FCFCFC),
+  ///     - text: black
+  ///   - Dark theme:
+  ///     - background: Color(0xED444444),
+  ///     - text: white
+  ///   - Border radius: 4 dp
+  ///   - Border: Yes, dividerColor
+  ///   - Desktop OS (macOS, Linux, Windows)
+  ///     - Font size : 12 dp
+  ///   - Mobile OS (iOS, Android, Fuchsia)
+  ///     - Font size : 14 dp
   ///
-  /// You can also opt to keep selected effective main colors, primary,
-  /// secondary, tertiary and their containers, in your [FlexColorScheme] as
-  /// their effective color, even when you enable key color based
-  /// seeded tonal palette based ColorScheme output. You do this by
-  /// setting [FlexKeyColors.keepPrimary], [FlexKeyColors.keepSecondary] etc to
-  /// true, for each color property where you want to keep its exact color value
-  /// as defined, but otherwise may be OK with using key seeded color values.
+  /// Additional styles when opting in on FlexColorScheme sub themes are:
   ///
-  /// You can use this feature if you for example want to use an exact
-  /// predefined primary brand color in light mode, but are OK with all other
-  /// colors using tones derived from its Material 3 tonal palette.
+  /// - Desktop OS (macOS, Linux, Windows)
+  ///   - Font size : 12 dp
+  /// - Mobile OS (iOS, Android, Fuchsia)
+  ///   - Font size : 14 dp
+  /// - Border radius: 8 dp
+  /// - Border: Yes, dividerColor
+  /// - tooltipsMatchBackground: false
+  ///   - light theme:
+  ///     - background: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%
+  ///     - text: white
+  ///   - Dark theme:
+  ///     - background: Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%
+  ///     - text: black
+  /// - tooltipsMatchBackground: true
+  ///   - light theme:
+  ///     - background:  Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%
+  ///     - text: black
+  ///   - Dark theme:
+  ///     - background: Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%
+  ///     - text: white
   ///
-  /// When you use key color based seeded theme generation, the used key inputs
-  /// for primary, secondary and tertiary are only used to set and generate the
-  /// tone of the palette used for each colors tonal palette. You will rarely
-  /// see the same color on that actual, primary, secondary and tertiary color
-  /// in the produced [ColorScheme], unless you lock them down with the "keep"
-  /// properties.
+  /// When using additional theming via sub-themes properties, its
+  /// properties will if used override background color, text color and
+  /// background opacity as well as border radius.
   ///
-  /// The same tonal palette should typically be used for both
-  /// light and dark mode colors. Under the hood [FlexColorScheme] selects the
-  /// right color tone from the tonal palette, which is different for light and
-  /// dark mode. For a matched light and dark theme, you should use the same
-  /// input key color. When you use [FlexColorScheme.light] and
-  /// [FlexColorScheme.dark] and the [FlexScheme] enum based [scheme] property,
-  /// to use a built-in color scheme, it automatically uses also its
-  /// predefined light theme mode defined colors as the key colors for
-  /// primary, secondary and tertiary in dark mode, to ensure that the produced
-  /// [ColorScheme] is using same tonal palette, but only different tones from
-  /// it  for light and dark mode.
+  /// ## [subThemesData]
   ///
-  /// When you use [colors], [colorScheme] or direct override color properties
-  /// [primary], [secondary] or [tertiary] in the factories, these effective
-  /// colors are used directly as key color inputs. It is then up to
-  /// you to decide and design if you use the same key color for tonal palette
-  /// generation in light and dark mode.
+  /// Activate using FlexColorScheme opinionated component sub-themes by
+  /// passing in a default `FlexSubThemesData()`.
   ///
-  /// If you use [colorScheme] or pass in [primary], [secondary] or
-  /// [tertiary], and enable using [keyColors] the generated scheme will first
-  /// use color from passed in direct color properties [primary], [secondary]
-  /// or [tertiary], as key colors, then the same ones from the passed in
-  /// [colorScheme] when it generates the output [ColorScheme] using the active
-  /// [FlexKeyColors] setup.
+  /// To further configure the sub-themes, change the simple flat value
+  /// properties as desired in `FlexSubThemesData()`.
   ///
-  /// The generated [ColorScheme]'s properties will override all color
-  /// properties that were passed in  via a [colorScheme], except those locked
-  /// via the `keep` properties in [FlexKeyColors].
+  /// By default [FlexThemeData.light], [FlexThemeData.dark] and
+  /// [FlexColorScheme.toTheme], do as little as they need to just
+  /// provide a consistent Material 2 color schemed theme. The additions they
+  /// do are described in [FlexColorScheme.toTheme].
   ///
-  /// If you assign override colors via direct color properties for the main
-  /// colors [primary], [secondary] or [tertiary] and their containers, they
-  /// will also only override the generated resulting [ColorScheme] if the
-  /// the `keep` properties are set in [FlexKeyColors]. Other color properties
-  /// that exist as both direct color properties and as a color in the
-  /// generated resulting [ColorScheme], will be overridden by the generated
-  /// colors scheme colors.
+  /// The original purpose of the opinionated sub-themes was to make it easy
+  /// to add themed corner radius to all Widgets that support it, and to
+  /// provide a consistent look on all buttons, including [ToggleButtons].
   ///
-  /// Normally if you provide an entire [colorScheme] to [FlexColorScheme] it
-  /// is typically because you already have a scheme that you want to use as is,
-  /// then don't enable [keyColors] or any blends. It is however possible to
-  /// apply both blends to passed in [colorScheme] surfaces or to just use
-  /// the [primary], [secondary] or [tertiary] colors in passed in [colorScheme]
-  /// as [keyColors] to generate an entirely new [ColorScheme] from the passed
-  /// in colors, using [primary], [secondary] or [tertiary] as keys.
+  /// Therefore the sub themes are a convenient way to opt-in on customized
+  /// corner radius on Widgets using above themes. By opting in you can set
+  /// corner radius for all covered Widgets to same corner radius in one go.
+  /// There are also properties to override the global default for each widget
+  /// to set different rounding per widget if so desired.
+  ///
+  /// By default, if a [FlexSubThemesData.defaultRadius] is not specified, each widgets corner
+  /// radius and some other styling take inspiration from the Material 3 (M3)
+  /// specification https://m3.material.io/ and uses its specifications as
+  /// defaults when it is possible to do so in Flutter SDK theming when using
+  /// Material2 mode and via defaults also in Material 3 mode.
+  ///
+  /// By opting in via a default [subThemesData] you
+  /// get an extensive set of widget component sub themes applied.
+  /// They can be customized via the [subThemesData] property, that has
+  /// quick and flat sub theme configuration values in the data class
+  /// [FlexSubThemesData].
+  ///
+  /// Customizable sub-themes are available for:
+  ///
+  /// * [AppBarTheme] for [AppBar] via [FlexSubThemes.appBarTheme].
+  /// * [BottomAppBarTheme] for [BottomAppBar] via
+  ///   [FlexSubThemes.bottomAppBarTheme].
+  /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
+  ///   [FlexSubThemes.bottomNavigationBarTheme].
+  /// * [BottomSheetThemeData] for [BottomSheet] via
+  ///   [FlexSubThemes.bottomSheetTheme].
+  /// * [ButtonThemeData] for old deprecated buttons, via
+  ///   [FlexSubThemes.buttonTheme].
+  /// * [CardThemeData] for [Card] via [FlexSubThemes.cardTheme].
+  /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
+  /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+  /// * [DatePickerThemeData] for [DatePickerDialog] via
+  ///   [FlexSubThemes.datePickerTheme].
+  /// * [DialogThemeData] for [Dialog] via [FlexSubThemes.dialogTheme].
+  /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
+  /// * [DropdownMenuThemeData] for [DropdownMenu] via
+  ///   [FlexSubThemes.dropdownMenuTheme].
+  /// * [ElevatedButtonThemeData] for [ElevatedButton] via
+  ///   [FlexSubThemes.elevatedButtonTheme].
+  /// * [FilledButtonThemeData] for [FilledButton] via
+  ///   [FlexSubThemes.filledButtonTheme].
+  /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
+  ///   [FlexSubThemes.floatingActionButtonTheme].
+  /// * [IconButtonThemeData] for [IconButton] via
+  ///   [FlexSubThemes.iconButtonTheme].
+  /// * [InputDecorationThemeData] for [InputDecoration] via
+  ///   [FlexSubThemes.inputDecorationTheme].
+  /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
+  /// * [MenuButtonThemeData] for [MenuItemButton] and [SubmenuButton] via
+  ///   [FlexSubThemes.menuButtonTheme].
+  /// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropdownMenu] via
+  ///   [FlexSubThemes.menuTheme].
+  /// * [ListTileThemeData] for [ListTile] via
+  ///   [FlexSubThemes.listTileTheme].
+  /// * [NavigationBarThemeData] for [NavigationBar] via
+  ///   [FlexSubThemes.navigationBarTheme].
+  /// * [NavigationDrawerThemeData] for [NavigationDrawer] via
+  ///   [FlexSubThemes.navigationDrawerTheme].
+  /// * [NavigationRailThemeData] for [NavigationRail] via
+  ///   [FlexSubThemes.navigationRailTheme].
+  /// * [OutlinedButtonThemeData] for [OutlinedButton] via
+  ///   [FlexSubThemes.outlinedButtonTheme].
+  /// * [PopupMenuThemeData] for [PopupMenuButton] via
+  ///   [FlexSubThemes.popupMenuTheme].
+  /// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
+  ///   [LinearProgressIndicator] via [FlexSubThemes.progressIndicatorTheme].
+  /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+  /// * [SearchBarThemeData] for [SearchBar] via [FlexSubThemes.searchBarTheme].
+  /// * [SearchViewThemeData] for [SearchBar] and its open view via
+  ///   [FlexSubThemes.searchViewTheme].
+  /// * [SegmentedButtonThemeData] for [SegmentedButton] via
+  ///   [FlexSubThemes.segmentedButtonTheme].
+  /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
+  /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
+  /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
+  /// * [TabBarThemeData] for [TabBar] via [FlexSubThemes.tabBarTheme].
+  /// * [TextButtonThemeData] for [TextButton] via
+  ///   [FlexSubThemes.textButtonTheme].
+  /// * [TextSelectionThemeData] for [TextField] via
+  ///   [FlexSubThemes.textSelectionTheme].
+  /// * [TimePickerThemeData] for [TimePickerDialog] via
+  ///   [FlexSubThemes.timePickerTheme].
+  /// * [ToggleButtonsThemeData] for [ToggleButtons] via
+  ///   [FlexSubThemes.toggleButtonsTheme].
+  /// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
+  ///
+  /// Defaults to null, resulting in FlexColorScheme not using any extra
+  /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
+  ///
+  /// ## [keyColors]
+  ///
+  /// To use and activate Material 3 color system based [ColorScheme]
+  /// defined via key colors for primary, secondary and tertiary colors and
+  /// the [TonalPalette] generated by these key color values, pass
+  /// in a [FlexKeyColors] to [keyColors].
+  ///
+  /// By default it is not defined (null), and a traditional manually
+  /// configured color scheme will be created based on input property values
+  /// or a passed in [colorScheme].
+  ///
+  /// If a [FlexKeyColors] instance is passed in, the key color seeding
+  /// behavior depends on properties defined in the [FlexKeyColors]
+  /// instance. The default constructor makes one where
+  /// [FlexKeyColors.useKeyColors] is true, it will automatically enable usage
+  /// of the used light scheme's primary color as key color and to seed
+  /// generated a color scheme. The result will by default be equal to using
+  /// Flutter SDK [ColorScheme.fromSeed]. With [FlexKeyColors] you can also
+  /// use [secondary] and [tertiary] colors as key colors. Currently Flutter
+  /// SDK does not support this.
+  ///
+  /// For more information on Material 3 color system and usage of key colors
+  /// to generate tonal palettes and tones, see:
+  /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
+  ///
+  /// ## [useMaterial3ErrorColors]
+  ///
+  /// Set to true, to use the new Material 3 error colors.
+  ///
+  /// If [useMaterial3ErrorColors] is false, the generated [ColorScheme]
+  /// and [ThemeData] will use Material 2 default error colors or
+  /// error colors as defined by the built in color schemes. Thus using same
+  /// error colors as in FlexColorScheme versions before version 5.
+  ///
+  /// If [useMaterial3ErrorColors] is true, the resulting [ColorScheme]
+  /// and [ThemeData] will use the Material 3 design guide error colors.
+  ///
+  /// Key color seed generated [ColorScheme]s always use the Material 3
+  /// design guide error colors, or error colors from its customized
+  /// [TonalPalette] generation setup.
+  ///
+  /// ## [tones]
+  ///
+  /// A configuration class enabling complete customization of
+  /// used chroma for [TonalPalette] generation for the used seed [keyColors],
+  /// as well as changing which tone in the tonal palettes is used
+  /// for which [ColorScheme] color.
+  ///
+  /// By default a [FlexTones] configuration [FlexTones.material] that
+  /// matches what Flutter SDK does with [ColorScheme.fromSeed] is used.
+  ///
+  /// There are six other built-in definitions that you can use, they can also
+  /// serve as an example of how you can make custom [FlexTones]
+  /// configurations.
+  ///
+  /// ## [variant]
+  ///
+  /// An optional way to select the used algorithm for seeded [ColorScheme]
+  /// generation, can be used instead of a [FlexTones] provided in [tones].
+  ///
+  /// The [variant] and [tones] are mutually exclusive, only one of them
+  /// can be used. If both are null, the default from [tones] is used.
+  ///
+  /// The [variant] selections includes all the Flutter SDK defined options
+  /// that will be available in the future in Flutter Stable after 3.22.x,
+  /// that are available in master channel now but did not land in Flutter
+  /// 3.22. Variant options that are identical to the Flutter SDK options
+  /// have [FlexSchemeVariant.isFlutterScheme] set to true. These
+  /// enum options will not respect and use any other seed generation keys
+  /// than the `primaryKey`, as they only support using one seed color.
+  ///
+  /// The [FlexSchemeVariant] also includes quick selections for all the
+  /// predefined [FlexTones] configurations. However, with [variant] you can
+  /// only select one of the predefined configurations, and not make custom
+  /// configurations like you can with [FlexTones]. Additionally you cannot
+  /// use the [FlexTones] modifiers [FlexTones.monochromeSurfaces], [FlexTones.onMainsUseBW],
+  /// [FlexTones.onSurfacesUseBW] and [FlexTones.surfacesUseBW], since they only operate on the
+  /// [FlexTones] configurations passed in to [tones].
+  ///
+  /// ## [visualDensity]
+  ///
+  /// The density value for specifying the compactness of various UI
+  /// components.
+  ///
+  /// Consider using [FlexColorScheme.comfortablePlatformDensity],
+  /// it is similar to [VisualDensity.adaptivePlatformDensity], but the
+  /// density for desktop and Web is less dense in order to offer a bit larger
+  /// touch friendly surfaces, but not quite as large as small touch devices.
+  ///
+  /// This is the same property as in [ThemeData] factory, it is just
+  /// passed along to it. Included for convenience, to avoid a copyWith
+  /// to change it.
+  ///
+  /// Density, in the context of a UI, is the vertical and horizontal
+  /// "compactness" of the elements in the UI. It is unit less, since it means
+  /// different things to different UI elements. For buttons, it affects the
+  /// spacing around the centered label of the button. For lists, it affects
+  /// the distance between baselines of entries in the list.
+  ///
+  /// Typically, density values are integral, but any value in range may be
+  /// used. The range includes values from [VisualDensity.minimumDensity]
+  /// (which is -4), to [VisualDensity.maximumDensity] (which is 4),
+  /// inclusive, where negative values indicate a denser, more compact, UI,
+  /// and positive values indicate a less dense, more expanded, UI. If a
+  /// component doesn't support the value given, it will clamp to the nearest
+  /// supported value.
+  ///
+  /// The default for visual densities is zero for both vertical and
+  /// horizontal densities, which corresponds to the default visual density of
+  /// components in the Material Design specification.
+  ///
+  /// As a rule of thumb, a change of 1 or -1 in density corresponds to 4
+  /// logical pixels. However, this is not a strict relationship since
+  /// components interpret the density values appropriately for their needs.
+  ///
+  /// A larger value translates to a spacing increase (less dense), and a
+  /// smaller value translates to a spacing decrease (more dense).
+  ///
+  /// Defaults to [VisualDensity.adaptivePlatformDensity].
+  ///
+  /// ## [textTheme]
+  ///
+  /// Text with a color that contrasts with background, surface, card and
+  /// canvas colors.
+  ///
+  /// If a default [TextTheme] from package GoogleFonts is passed.
+  /// FlexColorScheme will detect this and make the color in the passed
+  /// in `GoogleFonts` null for all its [TextStyle]s so that the correct
+  /// color for M2/M3 mode and contrast for light/dark mode is used.
+  ///
+  /// ## [primaryTextTheme]
+  ///
+  /// A text theme that contrasts with the primary color.
+  ///
+  /// If a default [TextTheme] from package GoogleFonts is passed.
+  /// FlexColorScheme will detect this and make the color in the passed
+  /// in `GoogleFonts` null for all its [TextStyle]s so that the correct
+  /// color for M2/M3 mode and contrast for primary color is used.
+  ///
+  /// ## [fontFamily]
+  ///
+  /// Name of the font family to use as default font for the text theme in
+  /// created theme.
+  ///
+  /// Same feature as in [ThemeData] factory. Used to apply the font family
+  /// name to default text theme and primary text theme, also passed along
+  /// to [ThemeData],
+  ///
+  /// ## [fontFamilyFallback]
+  ///
+  /// Name of the font families to use as fallback to main font family.
+  ///
+  /// Same feature as in [ThemeData] factory. Used to apply the font family
+  /// fallback to default text theme and primary text theme, also passed
+  /// along to [ThemeData],
+  ///
+  /// ## [package]
+  ///
+  /// Name of the font package to use with font fallback.
+  ///
+  /// Same feature as in [ThemeData] factory. Used to apply the font package
+  /// to default text theme and primary text theme, also passed along
+  /// to [ThemeData],
+  ///
+  /// ## [materialTapTargetSize]
+  ///
+  /// Configures the hit test size of certain Material widgets.
+  ///
+  /// Defaults to a [platform]-appropriate size: MaterialTapTargetSize.padded
+  /// on mobile platforms, MaterialTapTargetSize.shrinkWrap on desktop
+  /// platforms.
+  ///
+  /// ## [pageTransitionsTheme]
+  ///
+  /// Default [MaterialPageRoute] transitions per [TargetPlatform].
+  ///
+  /// [MaterialPageRoute.buildTransitions] delegates to a [platform] specific
+  /// [PageTransitionsBuilder]. If a matching builder is not found, a builder
+  /// whose platform is null is used.
+  ///
+  /// This is convenience pass through in FlexColorScheme to avoid a
+  /// [copyWith] on [ThemeData] produced by FlexColorScheme.
+  ///
+  /// ## [splashFactory]
+  ///
+  /// Defines the appearance of ink splashes produces by [InkWell]
+  /// and [InkResponse].
+  ///
+  /// Providing a [splashFactory] value will override the default one created
+  /// by [ThemeData], it will also override any splash settings in
+  /// [subThemesData].
+  ///
+  /// See also:
+  ///
+  ///  * [InkSplash.splashFactory], which defines the default splash.
+  ///  * [InkRipple.splashFactory], which defines a splash that spreads out
+  ///    more aggressively than the default.
+  ///  * [InkSparkle.splashFactory], which defines a more aggressive and
+  ///    organic splash with sparkle effects.
+  ///
+  /// ## [platform]
+  ///
+  /// The platform adaptive widgets adapt to defined target and mechanics,
+  /// like scrolling too.
+  ///
+  /// Same property as in [ThemeData] factory. Included for convenience to
+  /// avoid a copyWith to change it.
+  ///
+  /// Defaults to the current platform, as exposed by [defaultTargetPlatform].
+  /// This should be used in order to style UI elements according to platform
+  /// conventions.
+  ///
+  /// Widgets from the material library should use this getter (via
+  /// [Theme.of]) to determine the current platform for the purpose of
+  /// emulating the platform behavior (e.g. scrolling or haptic effects).
+  /// Widgets and render objects at lower layers that try to emulate the
+  /// underlying platform platform can depend on [defaultTargetPlatform]
+  /// directly, or may require that the target platform be provided as an
+  /// argument. The [Platform] object should only be used directly
+  /// when it's critical to actually know the current platform, without
+  /// any overrides possible, e.g. when a system API is about to be called.
+  ///
+  /// In a test environment, the platform returned is [TargetPlatform.android]
+  /// regardless of the host platform. (Android was chosen because the tests
+  /// were originally written assuming Android-like behavior, and we added
+  /// platform adaptations for other platforms later). Tests can check
+  /// behavior for other platforms by setting the [platform] of the [Theme]
+  /// explicitly to another [TargetPlatform] value, or by setting
+  /// [debugDefaultTargetPlatformOverride].
+  ///
+  /// When developing applications you can use this property to dynamically
+  /// in the application change the used platform and partially test and see
+  /// how adaptive widgets and scroll looks and feels on other platforms.
+  ///
+  /// ## [typography]
+  ///
+  /// The color and geometry [TextTheme] values used to configure [textTheme].
+  ///
+  /// Same property as in [ThemeData] factory.
+  /// Included for convenience to avoid a copyWith if it needs to be changed.
+  /// Default value deviates from the Flutter standard that uses the old
+  /// [Typography.material2014], in favor of newer [Typography.material2018]
+  /// as default typography if one is not provided.
+  ///
+  /// In M3 mode FCS default to [Typography.material2021] and in M2 mode to
+  /// older [Typography.material2018], which is correct for M2. Please note
+  /// that Flutter ThemeData defaults to even older Typography
+  /// [Typography.material2014] when not using M3. This is done for legacy
+  /// compatibility reasons, you should use 2018 with M2.
+  ///
+  /// ## [applyElevationOverlayColor]
+  ///
+  /// Apply a semi-transparent overlay color on Material surfaces to indicate
+  /// elevation for dark themes.
+  ///
+  /// Same property as in [ThemeData] factory. Included for convenience to
+  /// avoid a copyWith change it.
+  ///
+  /// In FlexColorScheme it defaults to true. In Flutter [ThemeData.from] it
+  /// also default to true, but in [ThemeData] factory it defaults to false.
+  ///
+  /// Material drop shadows can be difficult to see in a dark theme, so the
+  /// elevation of a surface should be portrayed with an "overlay" in addition
+  /// to the shadow. As the elevation of the component increases, the
+  /// overlay increases in opacity. The [applyElevationOverlayColor] turns the
+  /// application of this overlay on or off for dark themes.
+  ///
+  /// If true and [brightness] is [Brightness.dark], a
+  /// semi-transparent version of [ColorScheme.onSurface] will be
+  /// applied on top of [Material] widgets that have a [ColorScheme.surface]
+  /// color. The level of transparency is based on [Material.elevation] as
+  /// per the Material Dark theme specification.
+  ///
+  /// If false the surface color will be used unmodified.
+  ///
+  /// Defaults to false in order to maintain backwards compatibility with
+  /// apps that were built before the Material Dark theme specification
+  /// was published. New apps should set this to true for any themes
+  /// where [brightness] is [Brightness.dark].
+  ///
+  /// See also:
+  ///
+  ///  * [Material.elevation], which effects the level of transparency of the
+  ///    overlay color.
+  ///  * [ElevationOverlay.applyOverlay], which is used by [Material] to apply
+  ///    the overlay color to its surface color.
+  ///  * <https://material.io/design/color/dark-theme.html>, which specifies
+  ///    how the overlay should be applied.
+  ///
+  /// Known limitations:
+  ///
+  /// Because of how the overlay color application is implemented in Flutter
+  /// SDK, you will only get overlay color applied in dark mode when this
+  /// value  is true, if the [Material] surface color being elevated is equal
+  /// to [ThemeData.colorScheme] and its [ColorScheme.surface] color property.
+  ///
+  /// Thus when using color branded surfaces, if you want all [Material]
+  /// surfaces in your theme to get an overlay color in dark mode, you must
+  /// for dark themes only use background colors that are equal to the surface
+  /// color. When using [FlexColorScheme.dark], use a [FlexSurfaceMode]
+  /// where surfaces share the same blend as each other, such as
+  /// [FlexSurfaceMode.level]. That said, if using heavy color branding,
+  /// some surfaces may not need any overlay color, so the
+  /// lack of it might not be an issue with other modes in such themes.
+  /// For more information about this limitation see Flutter SDK issue:
+  /// https://github.com/flutter/flutter/issues/90353
+  ///
+  /// ## [cupertinoOverrideTheme]
+  ///
+  /// Components of the [CupertinoThemeData] to override from the Material
+  /// [ThemeData] adaptation.
+  ///
+  /// By default, [cupertinoOverrideTheme] is null and Cupertino widgets
+  /// descendant to the Material [Theme] will adhere to a [CupertinoTheme]
+  /// derived from the Material [ThemeData]. e.g. [ThemeData]'s [ColorScheme]
+  /// will also inform the [CupertinoThemeData.primaryColor] etc.
+  ///
+  /// This cascading effect for individual attributes of the
+  /// [CupertinoThemeData]
+  /// can be overridden using attributes of this [cupertinoOverrideTheme].
+  ///
+  /// ## [useMaterial3]
+  ///
+  /// A temporary flag used to disable Material-3 design and use legacy
+  /// Material-2 design instead. Material-3 design is the default.
+  /// Material-2 will be deprecated in Flutter.
+  ///
+  /// Flutter SDK [useMaterial3] documentation:
+  /// --------------------------------------------------------
+  /// A temporary flag that can be used to opt-out of Material 3 features.
+  ///
+  /// This flag is _true_ by default. If false, then components will
+  /// continue to use the colors, typography and other features of
+  /// Material 2.
+  ///
+  /// In the long run this flag will be deprecated and eventually
+  /// only Material 3 will be supported. We recommend that applications
+  /// migrate to Material 3 as soon as that's practical. Until that migration
+  /// is complete, this flag can be set to false.
+  ///
+  /// ## Defaults
+  ///
+  /// If a [ThemeData] is _constructed_ with [useMaterial3] set to true, then
+  /// some properties will get updated defaults. However, the
+  /// [ThemeData.copyWith] method with [useMaterial3] set to true will _not_
+  /// change any of these properties in the resulting [ThemeData].
+  ///
+  /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; } td { border: 1px solid }</style>
+  ///
+  /// | Property        | Material 3 default           | Material 2 default  |
+  /// | :-------------- | :--------------------------- | :------------------ |
+  /// | [colorScheme] | M3 baseline light scheme | M2 baseline light scheme |
+  /// | [typography] | [Typography.material2021] | [Typography.material2014] |
+  /// | [splashFactory] | [InkSparkle]* or [InkRipple]   | [InkSplash]    |
+  ///
+  /// \* if the target platform is Android and the app is not
+  /// running on the web, otherwise it will fallback to [InkRipple].
+  ///
+  /// If [brightness] is [Brightness.dark] then the default color scheme will
+  /// be either the M3 baseline dark color scheme or the M2 baseline dark
+  /// color scheme depending on [useMaterial3].
+  ///
+  /// ## Affected widgets
+  ///
+  /// This flag affects styles and components.
+  ///
+  /// ### Styles
+  ///   * Color: [ColorScheme], [Material] (see table above)
+  ///   * Shape: (see components below)
+  ///   * Typography: [Typography] (see table above)
+  ///
+  /// ### Components
+  ///   * Badges: [Badge]
+  ///   * Bottom app bar: [BottomAppBar]
+  ///   * Bottom sheets: [BottomSheet]
+  ///   * Buttons
+  ///     - Common buttons: [ElevatedButton], [FilledButton],
+  ///       [FilledButton.tonal], [OutlinedButton], [TextButton]
+  ///     - FAB: [FloatingActionButton], [FloatingActionButton.extended]
+  ///     - Icon buttons: [IconButton], [IconButton.filled] (*new*),
+  ///       [IconButton.filledTonal], [IconButton.outlined]
+  ///     - Segmented buttons: [SegmentedButton] (replacing [ToggleButtons])
+  ///   * Cards: [Card]
+  ///   * Checkbox: [Checkbox], [CheckboxListTile]
+  ///   * Chips:
+  ///     - [ActionChip] (used for Assist and Suggestion chips),
+  ///     - [FilterChip], [ChoiceChip] (used for selection filter chips),
+  ///     - [InputChip]
+  ///   * Date pickers: [showDatePicker], [showDateRangePicker],
+  ///     [DatePickerDialog], [DateRangePickerDialog],
+  ///     [InputDatePickerFormField]
+  ///   * Dialogs: [AlertDialog], [Dialog.fullscreen]
+  ///   * Divider: [Divider], [VerticalDivider]
+  ///   * Lists: [ListTile]
+  ///   * Menus: [MenuAnchor], [DropdownMenu], [MenuBar]
+  ///   * Navigation bar: [NavigationBar] (replacing [BottomNavigationBar])
+  ///   * Navigation drawer: [NavigationDrawer] (replacing [Drawer])
+  ///   * Navigation rail: [NavigationRail]
+  ///   * Progress indicators: [CircularProgressIndicator],
+  ///     [LinearProgressIndicator]
+  ///   * Radio button: [Radio], [RadioListTile]
+  ///   * Search: [SearchBar], [SearchAnchor],
+  ///   * Snack bar: [SnackBar]
+  ///   * Slider: [Slider], [RangeSlider]
+  ///   * Switch: [Switch], [SwitchListTile]
+  ///   * Tabs: [TabBar], [TabBar.secondary]
+  ///   * TextFields: [TextField] together with its [InputDecoration]
+  ///   * Time pickers: [showTimePicker], [TimePickerDialog]
+  ///   * Top app bar: [AppBar], [SliverAppBar], [SliverAppBar.medium],
+  ///     [SliverAppBar.large]
+  ///
+  /// In addition, this flag enables features introduced in Android 12.
+  ///   * Stretch overscroll: [MaterialScrollBehavior]
+  ///   * Ripple: [splashFactory] (see table above)
+  ///
+  /// See also:
+  ///
+  ///   * [Material 3 specification](https://m3.material.io/).
+  ///
+  /// ## [swapLegacyOnMaterial3]
+  ///
+  /// Set to true to automatically swap secondary and tertiary colors, on
+  /// built-in color schemes when [useMaterial3] is true, that benefit
+  /// from it to better match the Material 3 color system design intent.
+  ///
+  /// Starting with FlexColorScheme version 6.1.0, built-in color schemes,
+  /// defined via [FlexSchemeColor], have a flag [FlexSchemeColor.swapOnMaterial3]. When
+  /// defined to be true, the scheme will benefit if the [secondary] and
+  /// [tertiary] colors, including their containers, are swapped when using
+  /// Material 3. Most FlexColorScheme color schemes were designed with
+  /// M2 usage in mind, before M3 existed. They may often have their
+  /// [FlexSchemeColor.swapOnMaterial3] set to true. If this flag is false, it may mean
+  /// that its [FlexSchemeColor] was designed for M3 or that it won't
+  /// benefit from swapping its secondary and tertiary colors. In the
+  /// [Scheme Reference](https://docs.flexcolorscheme.com/scheme_reference),
+  /// you can see which schemes have the flag defined to true.
+  ///
+  /// Using a seed-generated color scheme based on built-in FlexSchemeColor
+  /// colors is another way to make them suitable for the M3 Color system.
+  /// However, in some cases, the secondary color in their design may not
+  /// be in-line with the M3 color system design intent, especially if you
+  /// use the config that also uses the hue from the secondary color to
+  /// make tonal palettes for it. In some legacy FlexSchemeColor color
+  /// designs this can be fixed if we swap the secondary and tertiary colors.
+  ///
+  /// To make FlexSchemeColor designs color designs that benefit from it
+  /// automatically swap secondary and tertiary colors when [useMaterial3]
+  /// is set to true, set [swapLegacyOnMaterial3] to true. It defaults to
+  /// false, for backward compatibility, but it is recommended to turn
+  /// it on when using Material 3 and its color system. If you use
+  /// seeded color schemes with Material 2, [useMaterial3] flag is false,
+  /// then it may be preferable to keep [FlexSchemeColor.swapOnMaterial3] false for more
+  /// prominent colors on secondaries.
+  ///
+  /// This color swap has higher priority than [swapColors], using it will
+  /// always happen on the effective result of [swapLegacyOnMaterial3] and
+  /// [useMaterial3], and value of [FlexSchemeColor.swapOnMaterial3] in currently used
+  /// built-in scheme [FlexSchemeColor].
+  ///
+  /// If a custom [colorScheme] is passed in, or any of the direct color
+  /// properties [secondary], [secondaryContainer], [tertiary] or
+  /// [tertiaryContainer], then it is assumed a custom scheme or overrides,
+  /// are being used and the [swapLegacyOnMaterial3] setting does nothing.
+  ///
+  /// The Themes Playground app defaults to setting [swapLegacyOnMaterial3]
+  /// to ON (true), but allows you to turn it OFF.
+  ///
+  /// Defaults to false, for backwards compatibility, but prefer setting it
+  /// to true if you also set [useMaterial3] to true.
+  ///
+  /// ## [extensions]
+  ///
+  /// Arbitrary additions to this theme.
+  ///
+  /// This is the same property as [extensions] in ThemeData, it is provided
+  /// as a convenience pass-through to ThemeData.
+  ///
+  /// To define extensions, pass an [Iterable] containing one or more
+  /// [ThemeExtension] subclasses to [ThemeData.new] or [copyWith].
+  ///
+  /// To obtain an extension, use ThemeData.of(context).extension.
   factory FlexColorScheme.light({
-    /// The [FlexSchemeColor] that will be used to create the light
-    /// [FlexColorScheme].
-    ///
-    /// You can use predefined [FlexSchemeColor] values from [FlexColor] or
-    /// [FlexColor.schemes] map or define your own colors with
-    /// [FlexSchemeColor] or [FlexSchemeColor.from].
-    ///
-    /// For using built-in color schemes, the convenience shortcut to select
-    /// it with the [scheme] property is recommended and leaving [colors]
-    /// undefined. If both are specified the scheme colors defined by [colors]
-    /// are used. If both are null then [scheme] defaults to
-    /// [FlexScheme.material], thus defining the resulting scheme.
-    final FlexSchemeColor? colors,
+    /// The `FlexSchemeColor` that will be used to create the light
+    /// `FlexColorScheme`.
+    FlexSchemeColor? colors,
 
-    /// Use one of the built-in color schemes defined by enum [FlexScheme].
-    ///
-    /// Give it one of the enum values to use the scheme, like eg.
-    /// [FlexScheme.mandyRed].
-    ///
-    /// To create custom color schemes use the [colors] property. If both
-    /// [colors] and [scheme] are specified, the scheme defined by
-    /// [colors] is used. If both are null, then [scheme] defaults to
-    /// [FlexScheme.material] if [useMaterial3] is false, and to
-    /// [FlexScheme.materialBaseline] [useMaterial3] is true.
-    final FlexScheme? scheme,
+    /// Use one of the built-in color schemes defined by enum `FlexScheme`.
+    FlexScheme? scheme,
 
-    /// The overall [ColorScheme] based colors for the theme.
-    ///
-    /// This property provides a new way to define custom colors for
-    /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
-    /// you already have a custom [ColorScheme] based color definition that
-    /// you want to use with FlexColorScheme theming and its sub-theming
-    /// capabilities.
-    ///
-    /// If you provide both a [ColorScheme] and some individual direct property
-    /// values that also exist in a [ColorScheme], the individual property
-    /// values will override the corresponding ones in your [ColorScheme].
-    ///
-    /// If you do not define a [colorScheme], the used colors will be determined
-    /// by the [colors] and [scheme] properties. However, when a [colorScheme]
-    /// is defined it takes precedence. The [brightness] in the provided
-    /// [colorScheme] is always ignored and set to [Brightness.light] since this
-    /// is the light theme mode factory. Make sure the colors used in your color
-    /// scheme are intended for a light theme.
-    ///
-    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface],
-    /// [surfaceVariant], [background] and [inverseSurface] colors in the
-    /// provided [colorScheme] will be overridden by the computed color branded
-    /// surfaces. If your [colorScheme] already contains branded surface colors,
-    /// then keep [blendLevel] = 0 to continue using them.
-    ///
-    /// If you use [lightIsWhite] factory feature, it will also override your
-    /// [colorScheme] based mentioned color properties above and make them
-    /// 5% lighter.
-    ///
-    /// If you opt in on using sub themes and have set
-    /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
-    /// and set [blendLevel] > 0, then the effective color scheme based on
-    /// colors onPrimary, onSecondary, onError, onSurface and onBackground will
-    /// be changed accordingly too.
-    ///
-    /// The [colorScheme] colors are also included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
-    /// [toScheme]. This will always get you a complete color scheme, including
-    /// calculated and derived color values, which is particularly useful when
-    /// using the [FlexColorScheme.light] and [FlexColorScheme.dark] factories
-    /// to compute color scheme branded surface colors for you. The effective
-    /// [ColorScheme] for your theme is often needed if you want to create
-    /// custom sub-themes that should use the colors from the scheme using none
-    /// default color assignments from the color scheme.
-    final ColorScheme? colorScheme,
+    /// The overall `ColorScheme` based colors for the theme.
+    ColorScheme? colorScheme,
 
     /// The selection of the six main scheme colors to be used when creating
-    /// effective [ColorScheme].
-    ///
-    /// This is a convenience property that allows you to vary which colors to
-    /// use of the primary, secondary and tertiary colors and their container
-    /// colors when FlexSchemeColor creates its effective [ColorScheme] from
-    /// the input colors. The integer number corresponds to using:
-    ///
-    /// * 1 = Only the primary color
-    /// * 2 = Primary & Secondary colors
-    /// * 3 = Primary + container & Secondary colors
-    /// * 4 = Primary + container & Secondary + container
-    /// * 5 = Primary + container & Secondary + container & tertiary colors
-    /// * 6 = Primary + container & Secondary + container & tertiary + container
-    /// * 7 = Primary, Secondary and tertiary, container colors computed.
-    ///
-    /// By default the value is 6 and all main scheme colors in
-    /// `FlexSchemeColor` are used.
-    ///
-    /// The integer value is not a very obvious property to use to configure
-    /// this feature. Future version may improve it. However, with the Themes
-    /// Playground you don't have to remember what number does what.
-    ///
-    /// When the value is 1, the result is the same as if we would have
-    /// created the colors with [FlexSchemeColor.from] by only giving it the
-    /// required primary color. With 2, it is equivalent to as if we would have
-    /// given it only the primary and secondary colors, and so on.
-    /// This property makes it possible to simulate and change the resulting
-    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 7 of
-    /// the color selection. If your used [FlexColorScheme] `colors` was
-    /// actually created with [FlexSchemeColor.from] with only the primary
-    /// color defined, then changing the value from 7 ... 3, 2 or 1, will
-    /// all produce the same effective scheme as the computed values will be
-    /// the same as the [FlexSchemeColor.from] is using to compute any main
-    /// missing scheme color values.
-    final int usedColors = 6,
+    /// effective `ColorScheme`.
+    int usedColors = 6,
 
     /// Blends surface tint color into all surface colors and
     /// scaffold background color.
-    ///
-    /// The [surfaceMode] defines the relative strength of the alpha blend
-    /// value for different surfaces.
-    ///
-    /// If undefined, defaults to [FlexSurfaceMode.level].
-    final FlexSurfaceMode? surfaceMode,
+    FlexSurfaceMode? surfaceMode,
 
     /// Sets the blend level strength used by the surface mode.
-    ///
-    /// The blend level is the integer decimal value of the alpha value
-    /// used in the alpha blend function. It mixes one color with another
-    /// by using alpha opacity value in the color of a surface put on top of
-    /// another surface with opaque color and returns the result as one opaque
-    /// color.
-    ///
-    /// Defaults to 0.
-    final int blendLevel = 0,
+    int blendLevel = 0,
 
     /// The style and method used to compute the fixed, fixedDim colors and
-    /// their on colors in a [ColorScheme] using the palettes provided main
+    /// their on colors in a `ColorScheme` using the palettes provided main
     /// light mode color.
-    ///
-    /// The main color should always be the light theme's [ColorScheme.primary],
-    /// [ColorScheme.secondary] or [ColorScheme.tertiary]. This means that a
-    /// dark mode theme needs to know what colors were used for the
-    /// light mode colors for [ColorScheme.primary], [ColorScheme.secondary] or
-    /// [ColorScheme.tertiary]. It is not a strict requirement, but necessary
-    /// if you want the fixed and fixedDim colors to follow the Material-3
-    /// guide's color system, where these colors are derived from the main light
-    /// color palette color and have same computed color values in dark mode.
-    ///
-    /// The two available options, offer different nuances for the fixed color
-    /// and fixedDim color generation.
-    ///
-    /// The computed [FlexFixedColorStyle.computed] is made with simpler color
-    /// math and uses same principles as [FlexSchemeColor.from] does when not
-    /// using seed generated ColorSchemes and it generates missing colors.
-    /// This version may fit better with the computed and not seed generated
-    /// ColorSchemes.
-    ///
-    /// The [FlexFixedColorStyle.seeded] version is bit more expensive as it
-    /// requires creating a seeded ColorScheme even when a seed generated
-    /// ColorScheme is not being used. This version may in some cases produce
-    /// visually more appealing results.
-    ///
-    /// If not defined, defaults to [FlexFixedColorStyle.computed].
-    final FlexFixedColorStyle? fixedColorStyle,
+    FlexFixedColorStyle? fixedColorStyle,
 
     /// Style used to define the themed color of the AppBar background color.
-    ///
-    /// Defaults to null, which when [useMaterial3] is false results in
-    /// [FlexAppBarStyle.primary] which produces the same results
-    /// as a Flutter standard M2 light [ThemeData.from] by tying the app bar
-    /// color to the primary color. If [useMaterial3] is true it defaults
-    /// [FlexAppBarStyle.surface] which is the same as M3 default.
-    ///
-    /// If you enable component themes you can also control the themed
-    /// [AppBar] by selecting any active [ColorScheme] as its background color.
-    /// If you do so, the setting applied by this property is ignored.
-    final FlexAppBarStyle? appBarStyle,
+    FlexAppBarStyle? appBarStyle,
 
-    /// Themed [AppBar] opacity.
-    ///
-    /// The opacity is applied to the effective AppBar color, which may be from
-    /// used [appBarStyle], that gets its color selection from used [scheme]
-    /// or [colors]. Or that color may have been overridden by AppBar sub-theme
-    /// and there selected [SchemeColor] based color.
-    /// Lastly and with highest priority it may be from here directly supplied
-    /// [appBarBackground] color.
-    ///
-    /// A useful opacity range is from 0.85 to 0.95 when using the [Scaffold]
-    /// property [extendBodyBehindAppBar] set to true, to partially show
-    /// scrolling content behind the app bar. To use more opacity, in a way
-    /// that the AppBar does not become too transparent, you also need to blur
-    /// the background to create a frosted glass effect. This cannot
-    /// be made with only theming, you need a custom AppBar Widget for that.
-    /// Frosted glass UI effect is thus beyond the scope of what
-    /// FlexColorScheme can do alone as it only affects ThemeData.
-    ///
-    /// If null, defaults to 1, fully opaque, no transparency.
-    /// If not null, must be from 0 to 1.
-    final double? appBarOpacity,
+    /// Themed `AppBar` opacity.
+    double? appBarOpacity,
 
     /// When set to `true`, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
     ///
     /// Defaults to true.
-    ///
-    /// When true, the AppBar in Android mimics the look of one-toned AppBar's
-    /// typically used on iOS. Set to `false`, to revert back and use
-    /// Android's default two-toned look. If true the status bar area is
-    /// actually also transparent so that if the app bar is also translucent,
-    /// content that scrolls behind it, is also visible behind the status
-    /// bar area.
-    ///
-    /// In default Material-2 this would be false, FCS uses an opinionated
-    /// style and sets it true. In Material-3 the style you get when setting
-    /// this to true is used by default. In M3 mode FCS will thus not create
-    /// an AppBar sub theme to adjust this, if it is true and it is not needed
-    /// for any other direct AppBar impacting properties in FlexColorScheme
-    /// constructor. In M2 mode an AppBar theme will always be created, also
-    /// when not opting in on the actual sub-themes feature, this per its
-    /// opinionated and legacy styling for M2 mode.
-    final bool transparentStatusBar = true,
+    bool transparentStatusBar = true,
 
-    /// The themed elevation for the [AppBar].
+    /// The themed elevation for the `AppBar`.
     ///
     /// If not defined, defaults to 0 in M2 (FCS opinionated) and to 0 in (M3
     /// spec default).
-    ///
-    /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
-    /// choice, it can easily be adjusted for the theme with this property.
-    final double? appBarElevation,
+    double? appBarElevation,
 
-    /// The themed elevation for the [BottomAppBar].
+    /// The themed elevation for the `BottomAppBar`.
     ///
     /// If undefined (null), defaults to 3 in M3 mode and to 8 in M2 mode,
     /// both via the defaults for the respective theme mode from Flutter's
-    /// default elevation behavior of [BottomAppBar].
-    final double? bottomAppBarElevation,
+    /// default elevation behavior of `BottomAppBar`.
+    double? bottomAppBarElevation,
 
-    /// Select preferred style for the default [TabBarThemeData].
-    ///
-    /// By default the TabBarThemeData is made to fit with the style of the
-    /// [AppBar].
-    /// In Material-2 mode that is done by defaulting to using
-    /// [FlexTabBarStyle.forAppBar] if not defined. In M3 mode it is done by
-    /// defaulting to using [FlexTabBarStyle.flutterDefault].
-    ///
-    /// When setting this to [FlexTabBarStyle.forBackground], it will default
-    /// to a theme that uses the color scheme and fits on background color,
-    /// which typically also on works surface and scaffoldBackground color.
-    /// This TabBarThemeData style is useful if you primarily intended to use
-    /// the TabBar in a Scaffold, Dialog, Drawer or Side panel on their
-    /// background colors.
-    final FlexTabBarStyle? tabBarStyle,
+    /// Select preferred style for the default `TabBarThemeData`.
+    FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// This override color is included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    final Color? primary,
+    Color? primary,
 
-    /// A color that is clearly legible when drawn on [primary] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [primary] and [onPrimary] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onPrimary,
+    /// A color that is clearly legible when drawn on `primary` color.
+    Color? onPrimary,
 
-    /// A color used for elements needing less emphasis than [primary].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    final Color? primaryContainer,
+    /// A color used for elements needing less emphasis than `primary`.
+    Color? primaryContainer,
 
-    /// A color that's clearly legible when drawn on [primaryContainer].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio between
-    /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
-    /// is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onPrimaryContainer,
+    /// A color that's clearly legible when drawn on `primaryContainer`.
+    Color? onPrimaryContainer,
 
     /// A support color to primary, with less emphasis than primary, often of
     /// same hue as primary, but does not have to be.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory properties
-    /// [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    final Color? secondary,
+    Color? secondary,
 
-    /// A color that is clearly legible when drawn on [secondary] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [secondary] and [onSecondary] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onSecondary,
+    /// A color that is clearly legible when drawn on `secondary` color.
+    Color? onSecondary,
 
-    /// A color used for elements needing less emphasis than [secondary].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory properties
-    /// [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    final Color? secondaryContainer,
+    /// A color used for elements needing less emphasis than `secondary`.
+    Color? secondaryContainer,
 
-    /// A color that's clearly legible when drawn on [secondaryContainer].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio between
-    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
-    /// is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onSecondaryContainer,
+    /// A color that's clearly legible when drawn on `secondaryContainer`.
+    Color? onSecondaryContainer,
 
-    /// A color used as a contrasting accent that can balance [primary]
-    /// and [secondary] colors or bring heightened attention to an element,
+    /// A color used as a contrasting accent that can balance `primary`
+    /// and `secondary` colors or bring heightened attention to an element,
     /// such as an input field.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory properties
-    /// [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    final Color? tertiary,
+    Color? tertiary,
 
-    ////  A color that's clearly legible when drawn on [tertiary].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [secondary] and [onSecondary] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onTertiary,
+    /// /  A color that's clearly legible when drawn on `tertiary`.
+    Color? onTertiary,
 
-    /// A color used for elements needing less emphasis than [tertiary].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory properties
-    /// [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    final Color? tertiaryContainer,
+    /// A color used for elements needing less emphasis than `tertiary`.
+    Color? tertiaryContainer,
 
-    /// A color that's clearly legible when drawn on [tertiaryContainer].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio between
-    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
-    /// is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onTertiaryContainer,
+    /// A color that's clearly legible when drawn on `tertiaryContainer`.
+    Color? onTertiaryContainer,
 
     /// The color to use for input validation errors, e.g. for
-    /// [InputDecoration.errorText].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? error,
+    /// `InputDecoration.errorText`.
+    Color? error,
 
-    /// A color that is clearly legible when drawn on [error] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [error] and [onError] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onError,
+    /// A color that is clearly legible when drawn on `error` color.
+    Color? onError,
 
     /// The color to use for input validation errors with less emphasis than
     /// error.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? errorContainer,
+    Color? errorContainer,
 
-    /// A color that is clearly legible when drawn on [errorContainer] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [error] and [onError] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onErrorContainer,
+    /// A color that is clearly legible when drawn on `errorContainer` color.
+    Color? onErrorContainer,
 
-    /// The surface (background) color for widgets like [Card] and
-    /// [BottomAppBar].
-    ///
-    /// The color is applied to [ThemeData.cardColor], [ThemeData.canvasColor]
-    /// and [ColorScheme.surface] in [ThemeData.colorScheme], it is also used
-    /// by all [Material] of type [MaterialType.card].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface], or if a [colorScheme] was provided it will override the
-    /// same color in it as well.
-    ///
-    /// Defaults to null.
-    final Color? surface,
+    /// The surface (background) color for widgets like `Card` and
+    /// `BottomAppBar`.
+    Color? surface,
 
-    /// A color that is clearly legible when drawn on [surface] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [surface] and [onSurface] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onSurface,
+    /// A color that is clearly legible when drawn on `surface` color.
+    Color? onSurface,
 
-    /// The color of the [Scaffold] background.
-    ///
-    /// The color is applied to [ThemeData.scaffoldBackgroundColor].
-    ///
-    /// If [subThemesData.scaffoldBackgroundSchemeColor] is defined, it is used
-    /// instead of this [scaffoldBackground] color.
-    ///
-    /// If no value is given, and no
-    /// [subThemesData.scaffoldBackgroundSchemeColor]
-    /// is defined, default color is [ColorScheme.surface] in M2 mode and
-    /// [ColorScheme.surfaceContainerLowest] in M3 mode.
-    final Color? scaffoldBackground,
+    /// The color of the `Scaffold` background.
+    Color? scaffoldBackground,
 
-    /// The background color used by [Dialog]s.
-    ///
-    /// In FCS versions before 8.2.0 this color is applied to
-    /// `ThemeData.dialogBackgroundColor`, a color that cannot be
-    /// controlled separately with only a [ThemeData.from] a [ColorScheme].
-    ///
-    /// In FCS version 8.2.0 and later this color is no longer applied to
-    /// `ThemeData.dialogBackgroundColor`, as the property is deprecated in
-    /// Flutter 3.29.0 and later. To get the selected dialog color sub-themes
-    /// must now be enabled.
-    ///
-    /// When using sub-themes,this color is applied to backgroundColor in
-    /// dialog themes DatePickerThemeData, DialogThemeData and
-    /// TimePickerThemeData,
-    /// but only if [subThemesData.dialogBackgroundSchemeColor] has not be
-    /// defined in [subThemesData].
-    ///
-    /// If [subThemesData.dialogBackgroundSchemeColor] is defined, it is used
-    /// instead of this [dialogBackground] color.
-    ///
-    /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
-    /// is defined, default color is [ColorScheme.surface] in Material-2 mode
-    /// and [ColorScheme.surfaceContainerHigh] in Material-3 mode.
-    final Color? dialogBackground,
+    /// The background color used by `Dialog`s.
+    Color? dialogBackground,
 
-    /// Background theme color for the [AppBar].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property and
-    /// the [FlexAppBarStyle] via the [appBarStyle] property.
-    ///
-    /// Thus custom color will also override any scheme color based selection
-    /// for the [AppBAr] in active used sub-themes.
-    final Color? appBarBackground,
+    /// Background theme color for the `AppBar`.
+    Color? appBarBackground,
 
     /// A custom color used as an overlay on a surface color to indicate a
     /// component's elevation and surface color branding or tinting.
-    ///
-    /// If a [colorScheme] was provided where this corresponding color is
-    /// defined, this color property will override the same color in it.
-    ///
-    /// This color is used by Material 3 for colored elevation, it is also used
-    /// as the blend color for FlexColorScheme surface blends. Additionally
-    /// this color is if provided used as key color for seeding
-    /// the neutral color palettes, when seed generated color schemes are used.
-    /// It is important that all these properties use the same color.
-    ///
-    /// Typically this color is not customized, most designs use the default
-    /// where the theme primary color is used for slightly mixing it into the
-    /// neutral background and surface colors, when seeding is used. As well as
-    /// using it for the the elevation tint in Material 3, plus for the
-    /// surface blends that can optionally be added with FlexColorScheme.
-    ///
-    /// If undefined, [primary] color is used.
-    final Color? surfaceTint,
+    Color? surfaceTint,
 
     /// Makes the light theme backgrounds lighter or even white.
-    ///
-    /// Scaffold background will become white and is no longer impacted by used
-    /// [blendLevel]. Other surfaces also become lighter, when using low blend
-    /// levels they may become fully white too, but are still impacted by the
-    /// blend level.
-    final bool lightIsWhite = false,
+    bool lightIsWhite = false,
 
     /// When true, the primary and primaryContainer colors will be swapped with
     /// their secondary counterparts.
-    ///
-    /// Set this flag to true if you want to make a theme where
-    /// your primary and secondary colors are swapped, compared to how they
-    /// are defined in the passed in color properties or used pre-defined
-    /// color scheme.
-    ///
-    /// This is useful if you want to do this with the pre-defined
-    /// schemes. If you are explicitly defining all your theme colors you can
-    /// of course define them in any desired config. Even if you do
-    /// that, this feature will still swap whatever colors you defined
-    /// for primary and secondary. You can offer this feature as an easy end
-    /// user modifiable theme option if you like. One usage possibility is to
-    /// set `swapColors` to true only for the dark modem and use your color
-    /// scheme the other way around only in dark mode.
-    final bool swapColors = false,
+    bool swapColors = false,
 
     /// When set to true, tooltip background color will match the brightness of
     /// the theme's background color.
-    ///
-    /// By default Flutter's Material tooltips use a theme where the tooltip
-    /// background color brightness is inverted in relation to the overall
-    /// theme's background color.
-    ///
-    /// [FlexColorScheme] allows you to use a single toggle to invert this.
-    /// Light tooltips on light background is e.g. the default style on
-    /// Windows Desktop toggle. You can use this toggle to use this style,
-    /// or use it as a means to create a platform adaptive tooltip style, where
-    /// the Material and Flutter style is used on devices and Web, but the
-    /// inverted scheme is used on e.g. Windows platform.
-    ///
-    /// Defaults to false, and uses same background style as Material Design
-    /// guide and Flutter.
-    ///
-    /// Additional tooltip styles when NOT opting in on FlexColorScheme sub
-    /// themes are:
-    ///
-    /// - tooltipsMatchBackground: false
-    ///   - none
-    ///
-    /// - tooltipsMatchBackground: true
-    ///   - light theme:
-    ///     - background: Color(0xF0FCFCFC),
-    ///     - text: black
-    ///   - Dark theme:
-    ///     - background: Color(0xED444444),
-    ///     - text: white
-    ///   - Border radius: 4 dp
-    ///   - Border: Yes, dividerColor
-    ///   - Desktop OS (macOS, Linux, Windows)
-    ///     - Font size : 12 dp
-    ///   - Mobile OS (iOS, Android, Fuchsia)
-    ///     - Font size : 14 dp
-    ///
-    /// Additional styles when opting in on FlexColorScheme sub themes are:
-    ///
-    /// - Desktop OS (macOS, Linux, Windows)
-    ///   - Font size : 12 dp
-    /// - Mobile OS (iOS, Android, Fuchsia)
-    ///   - Font size : 14 dp
-    /// - Border radius: 8 dp
-    /// - Border: Yes, dividerColor
-    /// - tooltipsMatchBackground: false
-    ///   - light theme:
-    ///     - background: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%
-    ///     - text: white
-    ///   - Dark theme:
-    ///     - background: Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%
-    ///     - text: black
-    /// - tooltipsMatchBackground: true
-    ///   - light theme:
-    ///     - background:  Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%
-    ///     - text: black
-    ///   - Dark theme:
-    ///     - background: Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%
-    ///     - text: white
-    ///
-    /// When using additional theming via sub-themes properties, its
-    /// properties will if used override background color, text color and
-    /// background opacity as well as border radius.
-    final bool tooltipsMatchBackground = false,
+    bool tooltipsMatchBackground = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
     /// passing in a default `FlexSubThemesData()`.
-    ///
-    /// To further configure the sub-themes, change the simple flat value
-    /// properties as desired in `FlexSubThemesData()`.
-    ///
-    /// By default [FlexThemeData.light], [FlexThemeData.dark] and
-    /// [FlexColorScheme.toTheme], do as little as they need to just
-    /// provide a consistent Material 2 color schemed theme. The additions they
-    /// do are described in [FlexColorScheme.toTheme].
-    ///
-    /// The original purpose of the opinionated sub-themes was to make it easy
-    /// to add themed corner radius to all Widgets that support it, and to
-    /// provide a consistent look on all buttons, including [ToggleButtons].
-    ///
-    /// Therefore the sub themes are a convenient way to opt-in on customized
-    /// corner radius on Widgets using above themes. By opting in you can set
-    /// corner radius for all covered Widgets to same corner radius in one go.
-    /// There are also properties to override the global default for each widget
-    /// to set different rounding per widget if so desired.
-    ///
-    /// By default, if a `defaultRadius` is not specified, each widgets corner
-    /// radius and some other styling take inspiration from the Material 3 (M3)
-    /// specification https://m3.material.io/ and uses its specifications as
-    /// defaults when it is possible to do so in Flutter SDK theming when using
-    /// Material2 mode and via defaults also in Material 3 mode.
-    ///
-    /// Starting from version 5, by opting in via a default [subThemesData] you
-    /// get an extensive set of widget component sub themes applied.
-    /// They can be customized via the [subThemesData] property, that has
-    /// quick and flat sub theme configuration values in the data class
-    /// [FlexSubThemesData].
-    ///
-    /// Customizable sub-themes are available for:
-    ///
-    /// * [AppBarTheme] for [AppBar] via [FlexSubThemes.appBarTheme].
-    /// * [BottomAppBarTheme] for [BottomAppBar] via
-    ///   [FlexSubThemes.bottomAppBarTheme].
-    /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
-    ///   [FlexSubThemes.bottomNavigationBar].
-    /// * [BottomSheetThemeData] for [BottomSheet] via
-    ///   [FlexSubThemes.bottomSheetTheme].
-    /// * [ButtonThemeData] for old deprecated buttons, via
-    ///   [FlexSubThemes.buttonTheme].
-    /// * [CardThemeData] for [Card] via [FlexSubThemes.cardTheme].
-    /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
-    /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
-    /// * [DatePickerThemeData] for [DatePicker] via
-    ///   [FlexSubThemes.datePickerTheme].
-    /// * [DialogThemeData] for [Dialog] via [FlexSubThemes.dialogTheme].
-    /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
-    /// * [DropdownMenuThemeData] for [DropDownMenu] via
-    ///   [FlexSubThemes.dropdownMenuTheme].
-    /// * [ElevatedButtonThemeData] for [ElevatedButton] via
-    ///   [FlexSubThemes.elevatedButtonTheme].
-    /// * [FilledButtonThemeData] for [FilledButton] via
-    ///   [FlexSubThemes.filledButtonTheme].
-    /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
-    ///   [FlexSubThemes.floatingActionButtonTheme].
-    /// * [IconButtonThemeData] for [IconButton] via
-    ///   [FlexSubThemes.iconButtonTheme].
-    /// * [InputDecorationThemeData] for [InputDecoration] via
-    ///   [FlexSubThemes.inputDecorationTheme].
-    /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
-    /// * [MenuButtonThemeData] for [MenuButton] via
-    ///   [FlexSubThemes.menuButtonTheme].
-    /// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
-    ///   [FlexSubThemes.menuTheme].
-    /// * [ListTileThemeData] for [ListTile] via
-    ///   [FlexSubThemes.listTileTheme].
-    /// * [NavigationBarThemeData] for [NavigationBar] via
-    ///   [FlexSubThemes.navigationBarTheme].
-    /// * [NavigationDrawerThemeData] for [NavigationDrawer] via
-    ///   [FlexSubThemes.navigationDrawerTheme].
-    /// * [NavigationRailThemeData] for [NavigationRail] via
-    ///   [FlexSubThemes.navigationRailTheme].
-    /// * [OutlinedButtonThemeData] for [OutlinedButton] via
-    ///   [FlexSubThemes.outlinedButtonTheme].
-    /// * [PopupMenuThemeData] for [PopupMenuButton] via
-    ///   [FlexSubThemes.popupMenuTheme].
-    /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
-    /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
-    /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
-    /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
-    /// * [TabBarThemeData] for [TabBar] via [FlexSubThemes.tabBarTheme].
-    /// * [TextButtonThemeData] for [TextButton] via
-    ///   [FlexSubThemes.textButtonTheme].
-    /// * [TextSelectionThemeData] for [TextField] via
-    ///   [FlexSubThemes.textSelectionTheme].
-    /// * [TimePickerThemeData] for [TimePickerDialog] via
-    ///   [FlexSubThemes.timePickerTheme].
-    /// * [ToggleButtonsThemeData] for [ToggleButtons] via
-    ///   [FlexSubThemes.toggleButtonsTheme].
-    /// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
-    ///
-    /// Defaults to null, resulting in FlexColorScheme not using any extra
-    /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
-    final FlexSubThemesData? subThemesData,
+    FlexSubThemesData? subThemesData,
 
-    /// To use and activate Material 3 color system based [ColorScheme]
+    /// To use and activate Material 3 color system based `ColorScheme`
     /// defined via key colors for primary, secondary and tertiary colors and
-    /// the [TonalPalette] generated by these key color values, pass
-    /// in a [FlexKeyColors] to [keyColors].
-    ///
-    /// By default it is not defined (null), and a traditional manually
-    /// configured color scheme will be created based on input property values
-    /// or a passed in [colorScheme].
-    ///
-    /// If a [FlexKeyColors] instance is passed in, the key color seeding
-    /// behavior depends on properties defined in the [FlexKeyColors]
-    /// instance. The default constructor makes one where
-    /// [FlexKyColors.useKeyColors] is true, it will automatically enable usage
-    /// of the used light scheme's primary color as key color and to seed
-    /// generated a color scheme. The result will by default be equal to using
-    /// Flutter SDK `ColorScheme.fromSeed`. With `FlexKeyColors` you can also
-    /// use `secondary` and `tertiary` colors as key colors. Currently Flutter
-    /// SDK does not support this.
-    ///
-    /// For more information on Material 3 color system and usage of key colors
-    /// to generate tonal palettes and tones, see:
-    /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
-    final FlexKeyColors? keyColors,
+    /// the `TonalPalette` generated by these key color values, pass
+    /// in a `FlexKeyColors` to `keyColors`.
+    FlexKeyColors? keyColors,
 
     /// Set to true, to use the new Material 3 error colors.
-    ///
-    /// If [useMaterial3ErrorColors] is false, the generated [ColorScheme]
-    /// and [ThemeData] will use Material 2 default error colors or
-    /// error colors as defined by the built in color schemes. Thus using same
-    /// error colors as in FlexColorScheme versions before version 5.
-    ///
-    /// If [useMaterial3ErrorColors] is true, the resulting [ColorScheme]
-    /// and [ThemeData] will use the Material 3 design guide error colors.
-    ///
-    /// Key color seed generated [ColorScheme]s always use the Material 3
-    /// design guide error colors, or error colors from its customized
-    /// [TonalPalette] generation setup.
-    final bool useMaterial3ErrorColors = false,
+    bool useMaterial3ErrorColors = false,
 
     /// A configuration class enabling complete customization of
-    /// used chroma for [TonalPalette] generation for the used seed [keyColors],
+    /// used chroma for `TonalPalette` generation for the used seed `keyColors`,
     /// as well as changing which tone in the tonal palettes is used
-    /// for which [ColorScheme] color.
-    ///
-    /// By default a `FlexTones` configuration `FlexTones.material` that
-    /// matches what Flutter SDK does with `ColorScheme.fromSeed` is used.
-    ///
-    /// There are six other built-in definitions that you can use, they can also
-    /// serve as an example of how you can make custom `FlexTones`
-    /// configurations.
-    final FlexTones? tones,
+    /// for which `ColorScheme` color.
+    FlexTones? tones,
 
-    /// An optional way to select the used algorithm for seeded [ColorScheme]
-    /// generation, can be used instead of a [FlexTones] provided in [tones].
-    ///
-    /// The [variant] and [tones] are mutually exclusive, only one of them
-    /// can be used. If both are null, the default from [tones] is used.
-    ///
-    /// The [variant] selections includes all the Flutter SDK defined options
-    /// that will be available in the future in Flutter Stable after 3.22.x,
-    /// that are available in master channel now but did not land in Flutter
-    /// 3.22. Variant options that are identical to the Flutter SDK options
-    /// have [FlexSchemeVariant.value], [isFlutterScheme] set to true. These
-    /// enum  options will not respect and use any other seed generation keys
-    /// than the [primaryKey], as they only support using one seed color.
-    ///
-    /// The [FlexSchemeVariant] also includes quick selections for all the
-    /// predefined [FlexTones] configurations. However, with [variant] you can
-    /// only select one of the predefined configurations, and not make custom
-    /// configurations like you can with [FlexTones]. Additionally you cannot
-    /// use the [FlexTones] modifiers [monochromeSurfaces], [onMainsUseBW],
-    /// [onSurfacesUseBW] and [surfacesUseBW], since the only operate on the
-    /// [FlexTones] configurations passed in to [tones].
-    final FlexSchemeVariant? variant,
+    /// An optional way to select the used algorithm for seeded `ColorScheme`
+    /// generation, can be used instead of a `FlexTones` provided in `tones`.
+    FlexSchemeVariant? variant,
 
     /// The density value for specifying the compactness of various UI
     /// components.
-    ///
-    /// Consider using [FlexColorScheme.comfortablePlatformDensity],
-    /// it is similar to [VisualDensity.adaptivePlatformDensity], but the
-    /// density for desktop and Web is less dense in order to offer a bit larger
-    /// touch friendly surfaces, but not quite as large as small touch devices.
-    ///
-    /// This is the same property as in [ThemeData] factory, it is just
-    /// passed along to it. Included for convenience, to avoid a copyWith
-    /// to change it.
-    ///
-    /// Density, in the context of a UI, is the vertical and horizontal
-    /// "compactness" of the elements in the UI. It is unit less, since it means
-    /// different things to different UI elements. For buttons, it affects the
-    /// spacing around the centered label of the button. For lists, it affects
-    /// the distance between baselines of entries in the list.
-    ///
-    /// Typically, density values are integral, but any value in range may be
-    /// used. The range includes values from [VisualDensity.minimumDensity]
-    /// (which is -4), to [VisualDensity.maximumDensity] (which is 4),
-    /// inclusive, where negative values indicate a denser, more compact, UI,
-    /// and positive values indicate a less dense, more expanded, UI. If a
-    /// component doesn't support the value given, it will clamp to the nearest
-    /// supported value.
-    ///
-    /// The default for visual densities is zero for both vertical and
-    /// horizontal densities, which corresponds to the default visual density of
-    /// components in the Material Design specification.
-    ///
-    /// As a rule of thumb, a change of 1 or -1 in density corresponds to 4
-    /// logical pixels. However, this is not a strict relationship since
-    /// components interpret the density values appropriately for their needs.
-    ///
-    /// A larger value translates to a spacing increase (less dense), and a
-    /// smaller value translates to a spacing decrease (more dense).
-    ///
-    /// Defaults to [VisualDensity.adaptivePlatformDensity].
-    final VisualDensity? visualDensity,
+    VisualDensity? visualDensity,
 
     /// Text with a color that contrasts with background, surface, card and
     /// canvas colors.
-    ///
-    /// If a default `TextTheme` from package GoogleFonts is passed.
-    /// FlexColorScheme will detect this and make the color in the passed
-    /// in `GoogleFonts` null for all its `TextStyle`s so that the correct
-    /// color for M2/M3 mode and contrast for light/dark mode is used.
-    final TextTheme? textTheme,
+    TextTheme? textTheme,
 
     /// A text theme that contrasts with the primary color.
-    ///
-    /// If a default `TextTheme` from package GoogleFonts is passed.
-    /// FlexColorScheme will detect this and make the color in the passed
-    /// in `GoogleFonts` null for all its `TextStyle`s so that the correct
-    /// color for M2/M3 mode and contrast for primary color is used.
-    final TextTheme? primaryTextTheme,
+    TextTheme? primaryTextTheme,
 
     /// Name of the font family to use as default font for the text theme in
     /// created theme.
-    ///
-    /// Same feature as in [ThemeData] factory. Used to apply the font family
-    /// name to default text theme and primary text theme, also passed along
-    /// to [ThemeData],
-    final String? fontFamily,
+    String? fontFamily,
 
     /// Name of the font families to use as fallback to main font family.
-    ///
-    /// Same feature as in [ThemeData] factory. Used to apply the font family
-    /// fallback to default text theme and primary text theme, also passed
-    /// along to [ThemeData],
-    final List<String>? fontFamilyFallback,
+    List<String>? fontFamilyFallback,
 
     /// Name of the font package to use with font fallback.
-    ///
-    /// Same feature as in [ThemeData] factory. Used to apply the font package
-    /// to default text theme and primary text theme, also passed along
-    /// to [ThemeData],
-    final String? package,
+    String? package,
 
     /// Configures the hit test size of certain Material widgets.
     ///
-    /// Defaults to a [platform]-appropriate size: MaterialTapTargetSize.padded
+    /// Defaults to a `platform`-appropriate size: MaterialTapTargetSize.padded
     /// on mobile platforms, MaterialTapTargetSize.shrinkWrap on desktop
     /// platforms.
-    final MaterialTapTargetSize? materialTapTargetSize,
+    MaterialTapTargetSize? materialTapTargetSize,
 
-    /// Default [MaterialPageRoute] transitions per [TargetPlatform].
-    ///
-    /// [MaterialPageRoute.buildTransitions] delegates to a [platform] specific
-    /// [PageTransitionsBuilder]. If a matching builder is not found, a builder
-    /// whose platform is null is used.
-    ///
-    /// This is convenience pass through in FlexColorScheme to avoid a
-    /// `copyWith` on `ThemeData` produced by FlexColorScheme.
-    final PageTransitionsTheme? pageTransitionsTheme,
+    /// Default `MaterialPageRoute` transitions per `TargetPlatform`.
+    PageTransitionsTheme? pageTransitionsTheme,
 
-    /// Defines the appearance of ink splashes produces by [InkWell]
-    /// and [InkResponse].
-    ///
-    /// Providing a [splashFactory] value will override the default one created
-    /// by [ThemeData], it will also override any splash settings in
-    /// [subThemesData].
-    ///
-    /// See also:
-    ///
-    ///  * [InkSplash.splashFactory], which defines the default splash.
-    ///  * [InkRipple.splashFactory], which defines a splash that spreads out
-    ///    more aggressively than the default.
-    ///  * [InkSparkle.splashFactory], which defines a more aggressive and
-    ///    organic splash with sparkle effects.
-    final InteractiveInkFeatureFactory? splashFactory,
+    /// Defines the appearance of ink splashes produces by `InkWell`
+    /// and `InkResponse`.
+    InteractiveInkFeatureFactory? splashFactory,
 
     /// The platform adaptive widgets adapt to defined target and mechanics,
     /// like scrolling too.
-    ///
-    /// Same property as in [ThemeData] factory. Included for convenience to
-    /// avoid a copyWith to change it.
-    ///
-    /// Defaults to the current platform, as exposed by [defaultTargetPlatform].
-    /// This should be used in order to style UI elements according to platform
-    /// conventions.
-    ///
-    /// Widgets from the material library should use this getter (via
-    /// [Theme.of]) to determine the current platform for the purpose of
-    /// emulating the platform behavior (e.g. scrolling or haptic effects).
-    /// Widgets and render objects at lower layers that try to emulate the
-    /// underlying platform platform can depend on [defaultTargetPlatform]
-    /// directly, or may require that the target platform be provided as an
-    /// argument. The `dart.io.Platform` object should only be used directly
-    /// when it's critical to actually know the current platform, without
-    /// any overrides possible, e.g. when a system API is about to be called.
-    ///
-    /// In a test environment, the platform returned is [TargetPlatform.android]
-    /// regardless of the host platform. (Android was chosen because the tests
-    /// were originally written assuming Android-like behavior, and we added
-    /// platform adaptations for other platforms later). Tests can check
-    /// behavior for other platforms by setting the [platform] of the [Theme]
-    /// explicitly to another [TargetPlatform] value, or by setting
-    /// [debugDefaultTargetPlatformOverride].
-    ///
-    /// When developing applications you can use this property to dynamically
-    /// in the application change the used platform and partially test and see
-    /// how adaptive widgets and scroll looks and feels on other platforms.
-    final TargetPlatform? platform,
+    TargetPlatform? platform,
 
-    /// The color and geometry [TextTheme] values used to configure [textTheme].
-    ///
-    /// Same property as in [ThemeData] factory.
-    /// Included for convenience to avoid a copyWith if it needs to be changed.
-    /// Default value deviates from the Flutter standard that uses the old
-    /// [Typography.material2014], in favor of newer [Typography.material2018]
-    /// as default typography if one is not provided.
-    ///
-    /// In M3 mode FCS default to [Typography.material2021] and in M2 mode to
-    /// older [Typography.material2018], which is correct for M2. Please note
-    /// that Flutter ThemeData defaults to even older Typography
-    /// [Typography.material2014] when not using M3. This is done for legacy
-    /// compatibility reasons, you should use 2018 with M2.
-    final Typography? typography,
+    /// The color and geometry `TextTheme` values used to configure `textTheme`.
+    Typography? typography,
 
     /// Apply a semi-transparent overlay color on Material surfaces to indicate
     /// elevation for dark themes.
-    ///
-    /// Same property as in [ThemeData] factory. Included for convenience to
-    /// avoid a copyWith change it.
-    ///
-    /// In FlexColorScheme it defaults to true. In Flutter [ThemeData.from] it
-    /// also default to true, but in [ThemeData] factory it defaults to false.
-    ///
-    /// Material drop shadows can be difficult to see in a dark theme, so the
-    /// elevation of a surface should be portrayed with an "overlay" in addition
-    /// to the shadow. As the elevation of the component increases, the
-    /// overlay increases in opacity. The [applyElevationOverlayColor] turns the
-    /// application of this overlay on or off for dark themes.
-    ///
-    /// If true and [brightness] is [Brightness.dark], a
-    /// semi-transparent version of [ColorScheme.onSurface] will be
-    /// applied on top of [Material] widgets that have a [ColorScheme.surface]
-    /// color. The level of transparency is based on [Material.elevation] as
-    /// per the Material Dark theme specification.
-    ///
-    /// If false the surface color will be used unmodified.
-    ///
-    /// Defaults to false in order to maintain backwards compatibility with
-    /// apps that were built before the Material Dark theme specification
-    /// was published. New apps should set this to true for any themes
-    /// where [brightness] is [Brightness.dark].
-    ///
-    /// See also:
-    ///
-    ///  * [Material.elevation], which effects the level of transparency of the
-    ///    overlay color.
-    ///  * [ElevationOverlay.applyOverlay], which is used by [Material] to apply
-    ///    the overlay color to its surface color.
-    ///  * <https://material.io/design/color/dark-theme.html>, which specifies
-    ///    how the overlay should be applied.
-    ///
-    /// Known limitations:
-    ///
-    /// Because of how the overlay color application is implemented in Flutter
-    /// SDK, you will only get overlay color applied in dark mode when this
-    /// value  is true, if the [Material] surface color being elevated is equal
-    /// to [ThemeData.colorScheme] and its [ColorScheme.surface] color property.
-    ///
-    /// Thus when using color branded surfaces, if you want all [Material]
-    /// surfaces in your theme to get an overlay color in dark mode, you must
-    /// for dark themes only use background colors that are equal to the surface
-    /// color. This when using [FlexColorScheme.dark] use a [FlexSurfaceMode]
-    /// that starts with `equal`. That said, if using heavy color branding,
-    /// some surfaces may not need any overlay color, so the
-    /// lack of it might not be an issue with other modes in such themes.
-    /// For more information about this limitation see Flutter SDK issue:
-    /// https://github.com/flutter/flutter/issues/90353
-    final bool applyElevationOverlayColor = true,
+    bool applyElevationOverlayColor = true,
 
-    /// Components of the [CupertinoThemeData] to override from the Material
-    /// [ThemeData] adaptation.
-    ///
-    /// By default, [cupertinoOverrideTheme] is null and Cupertino widgets
-    /// descendant to the Material [Theme] will adhere to a [CupertinoTheme]
-    /// derived from the Material [ThemeData]. e.g. [ThemeData]'s [ColorScheme]
-    /// will also inform the [CupertinoThemeData]'s `primaryColor` etc.
-    ///
-    /// This cascading effect for individual attributes of the
-    /// [CupertinoThemeData]
-    /// can be overridden using attributes of this [cupertinoOverrideTheme].
-    final NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
+    /// Components of the `CupertinoThemeData` to override from the Material
+    /// `ThemeData` adaptation.
+    NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
 
     /// A temporary flag used to disable Material-3 design and use legacy
     /// Material-2 design instead. Material-3 design is the default.
     /// Material-2 will be deprecated in Flutter.
-    ///
-    /// Flutter SDK [useMaterial3] documentation:
-    /// --------------------------------------------------------
-    /// A temporary flag that can be used to opt-out of Material 3 features.
-    ///
-    /// This flag is _true_ by default. If false, then components will
-    /// continue to use the colors, typography and other features of
-    /// Material 2.
-    ///
-    /// In the long run this flag will be deprecated and eventually
-    /// only Material 3 will be supported. We recommend that applications
-    /// migrate to Material 3 as soon as that's practical. Until that migration
-    /// is complete, this flag can be set to false.
-    ///
-    /// ## Defaults
-    ///
-    /// If a [ThemeData] is _constructed_ with [useMaterial3] set to true, then
-    /// some properties will get updated defaults. However, the
-    /// [ThemeData.copyWith] method with [useMaterial3] set to true will _not_
-    /// change any of these properties in the resulting [ThemeData].
-    ///
-    /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; } td { border: 1px solid }</style>
-    ///
-    /// | Property        | Material 3 default           | Material 2 default  |
-    /// | :-------------- | :--------------------------- | :------------------ |
-    /// | [colorScheme] | M3 baseline light scheme | M2 baseline light scheme |
-    /// | [typography] | [Typography.material2021] | [Typography.material2014] |
-    /// | [splashFactory] | [InkSparkle]* or [InkRipple]   | [InkSplash]    |
-    ///
-    /// \* if the target platform is Android and the app is not
-    /// running on the web, otherwise it will fallback to [InkRipple].
-    ///
-    /// If [brightness] is [Brightness.dark] then the default color scheme will
-    /// be either the M3 baseline dark color scheme or the M2 baseline dark
-    /// color scheme depending on [useMaterial3].
-    ///
-    /// ## Affected widgets
-    ///
-    /// This flag affects styles and components.
-    ///
-    /// ### Styles
-    ///   * Color: [ColorScheme], [Material] (see table above)
-    ///   * Shape: (see components below)
-    ///   * Typography: [Typography] (see table above)
-    ///
-    /// ### Components
-    ///   * Badges: [Badge]
-    ///   * Bottom app bar: [BottomAppBar]
-    ///   * Bottom sheets: [BottomSheet]
-    ///   * Buttons
-    ///     - Common buttons: [ElevatedButton], [FilledButton],
-    ///       [FilledButton.tonal], [OutlinedButton], [TextButton]
-    ///     - FAB: [FloatingActionButton], [FloatingActionButton.extended]
-    ///     - Icon buttons: [IconButton], [IconButton.filled] (*new*),
-    ///       [IconButton.filledTonal], [IconButton.outlined]
-    ///     - Segmented buttons: [SegmentedButton] (replacing [ToggleButtons])
-    ///   * Cards: [Card]
-    ///   * Checkbox: [Checkbox], [CheckboxListTile]
-    ///   * Chips:
-    ///     - [ActionChip] (used for Assist and Suggestion chips),
-    ///     - [FilterChip], [ChoiceChip] (used for selection filter chips),
-    ///     - [InputChip]
-    ///   * Date pickers: [showDatePicker], [showDateRangePicker],
-    ///     [DatePickerDialog], [DateRangePickerDialog],
-    ///     [InputDatePickerFormField]
-    ///   * Dialogs: [AlertDialog], [Dialog.fullscreen]
-    ///   * Divider: [Divider], [VerticalDivider]
-    ///   * Lists: [ListTile]
-    ///   * Menus: [MenuAnchor], [DropdownMenu], [MenuBar]
-    ///   * Navigation bar: [NavigationBar] (replacing [BottomNavigationBar])
-    ///   * Navigation drawer: [NavigationDrawer] (replacing [Drawer])
-    ///   * Navigation rail: [NavigationRail]
-    ///   * Progress indicators: [CircularProgressIndicator],
-    ///     [LinearProgressIndicator]
-    ///   * Radio button: [Radio], [RadioListTile]
-    ///   * Search: [SearchBar], [SearchAnchor],
-    ///   * Snack bar: [SnackBar]
-    ///   * Slider: [Slider], [RangeSlider]
-    ///   * Switch: [Switch], [SwitchListTile]
-    ///   * Tabs: [TabBar], [TabBar.secondary]
-    ///   * TextFields: [TextField] together with its [InputDecoration]
-    ///   * Time pickers: [showTimePicker], [TimePickerDialog]
-    ///   * Top app bar: [AppBar], [SliverAppBar], [SliverAppBar.medium],
-    ///     [SliverAppBar.large]
-    ///
-    /// In addition, this flag enables features introduced in Android 12.
-    ///   * Stretch overscroll: [MaterialScrollBehavior]
-    ///   * Ripple: `splashFactory` (see table above)
-    ///
-    /// See also:
-    ///
-    ///   * [Material 3 specification](https://m3.material.io/).
-    final bool useMaterial3 = true,
+    bool useMaterial3 = true,
 
     /// Set to true to automatically swap secondary and tertiary colors, on
-    /// built-in color schemes when [useMaterial3] is true, that benefit
+    /// built-in color schemes when `useMaterial3` is true, that benefit
     /// from it to better match the Material 3 color system design intent.
-    ///
-    /// Starting with FlexColorScheme version 6.1.0, built-in color schemes,
-    /// defined via [FlexSchemeColor], have a flag [swapOnMaterial3]. When
-    /// defined to be true, the scheme will benefit if the [secondary] and
-    /// [tertiary] colors, including their containers, are swapped when using
-    /// Material 3. Most FlexColorScheme color schemes were designed with
-    /// M2 usage in mind, before M3 existed. They may often have their
-    /// [swapOnMaterial3] set to true. If this flag is false, it may mean
-    /// that its `FlexSchemeColor` was designed for M3 or that it won't
-    /// benefit from swapping its secondary and tertiary colors. In the
-    /// [Scheme Reference](https://docs.flexcolorscheme.com/scheme_reference),
-    /// you can see which schemes have the flag defined to true.
-    ///
-    /// Using a seed-generated color scheme based on built-in FlexSchemeColor
-    /// colors is another way to make them suitable for the M3 Color system.
-    /// However, in some cases, the secondary color in their design may not
-    /// be in-line with the M3 color system design intent, especially if you
-    /// use the config that also uses the hue from the secondary color to
-    /// make tonal palettes for it. In some legacy FlexSchemeColor color
-    /// designs this can be fixed if we swap the secondary and tertiary colors.
-    ///
-    /// To make FlexSchemeColor designs color designs that benefit from it
-    /// automatically swap secondary and tertiary colors when [useMaterial3]
-    /// is set to true, set `swapLegacyOnMaterial3` to true. It defaults to
-    /// false, for backward compatibility, but it is recommended to turn
-    /// it on when using Material 3 and its color system. If you use
-    /// seeded color schemes with Material 2, [useMaterial3] flag is false,
-    /// then it may be preferable to keep [swapOnMaterial3] false for more
-    /// prominent colors on secondaries.
-    ///
-    /// This color swap has higher priority than [swapColor], using it will
-    /// always happen on the effective result of [swapLegacyOnMaterial3] and
-    /// [useMaterial3], and value of [swapOnMaterial3] in currently used
-    /// built-in scheme [FlexSchemeColor].
-    ///
-    /// If a custom [colorScheme] is passed in, or any of the direct color
-    /// properties [secondary], [secondaryContainer], [tertiary] or
-    /// [tertiaryContainer], then it is assumed a custom scheme or overrides,
-    /// are being used and the [swapLegacyOnMaterial3] setting does nothing.
-    ///
-    /// The Themes Playground app defaults to setting [swapLegacyOnMaterial3]
-    /// to ON (true), but allows you to turn it OFF.
-    ///
-    /// Defaults to false, for backwards compatibility, but prefer setting it
-    /// to true if you also set [useMaterial3] to true.
-    final bool swapLegacyOnMaterial3 = false,
+    bool swapLegacyOnMaterial3 = false,
 
     /// Arbitrary additions to this theme.
-    ///
-    /// This is the same property as [extensions] in ThemeData, it is provided
-    /// as a convenience pass-through to ThemeData.
-    ///
-    /// To define extensions, pass an [Iterable] containing one or more
-    /// [ThemeExtension] subclasses to [ThemeData.new] or [copyWith].
-    ///
-    /// To obtain an extension, use ThemeData.of(context).extension.
-    final Iterable<ThemeExtension<dynamic>>? extensions,
-
-    /// **Deprecated:**
-    /// A color that typically appears behind scrollable content.
-    ///
-    /// The color is applied to [ThemeData.canvasColor] and was also before
-    /// version 8 applied to `ThemeData.backgroundColor`, which was in the past
-    /// Material-2 used eg by menu [Drawer]. It was then also used by all
-    /// [Material] of type [MaterialType.canvas].
-    ///
-    /// When using the factory this was also an override color for the color
-    /// that would have been used based on mode defined by property
-    /// `surfaceMode` enum [FlexSurfaceMode] or if a [colorScheme] was provided,
-    /// it overrode the same color in it as well.
-    ///
-    /// Defaults to null.
-    @Deprecated('Use surface instead. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
-    final Color? background,
-
-    /// **Deprecated:**
-    /// A color that is clearly legible when drawn on `background` color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// `background` and `onBackground` is recommended.
-    ///
-    /// When using this factory, this was an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexColorScheme.light] and [FlexColorScheme.dark], `colors` property
-    /// or when using pre-defined color scheme based [FlexScheme] and its
-    /// `scheme` property, including any used blend logic. If a [colorScheme]
-    /// was provided with this corresponding color defined, this color property
-    /// also overrode the same color in it as well.
-    ///
-    /// You used this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    @Deprecated('Use onSurface instead. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
-    final Color? onBackground,
+    Iterable<ThemeExtension<dynamic>>? extensions,
   }) {
     // LIGHT: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7');
-    assert(appBarOpacity == null || appBarOpacity >= 0 && appBarOpacity <= 1,
-        'appBarOpacity must be 0 to 1, or null');
+    assert(appBarOpacity == null || appBarOpacity >= 0 && appBarOpacity <= 1, 'appBarOpacity must be 0 to 1, or null');
     assert(
       blendLevel >= 0 && blendLevel <= 40,
       'Only blend levels from 0 to 40 are allowed. Very high alpha values may '
       'not produce results that are visually very appealing or useful.',
     );
-    assert(appBarElevation == null || appBarElevation >= 0.0,
-        'AppBar elevation must be >= 0 or null.');
-    assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
-        'Bottom AppBar elevation must be null or must be >= 0.');
+    assert(appBarElevation == null || appBarElevation >= 0.0, 'AppBar elevation must be >= 0 or null.');
+    assert(
+      bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
+      'Bottom AppBar elevation must be null or must be >= 0.',
+    );
     // Use color seeding based on passed in keyColors or make one where
     // it is not used, if one was not defined, since we want that as default
     // behavior to match past default behavior.
-    final FlexKeyColors seed =
-        keyColors ?? const FlexKeyColors(useKeyColors: false);
+    final FlexKeyColors seed = keyColors ?? const FlexKeyColors(useKeyColors: false);
     // Fallback value for scheme is default material scheme, based on mode.
-    final FlexScheme flexScheme = scheme ??
-        (useMaterial3 ? FlexScheme.materialBaseline : FlexScheme.material);
+    final FlexScheme flexScheme = scheme ?? (useMaterial3 ? FlexScheme.materialBaseline : FlexScheme.material);
     // If colors was null, we used the scheme based value.
-    final FlexSchemeColor flexColors =
-        colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
+    final FlexSchemeColor flexColors = colors ?? FlexColor.schemesWithCustom[flexScheme]!.light;
 
     // Use sub-themes if a none null FlexSubThemesData was provided.
     final bool useSubThemes = subThemesData != null;
     // Use passed in sub-theme config data, or a default one, if none given.
-    final FlexSubThemesData subTheme =
-        subThemesData ?? const FlexSubThemesData();
+    final FlexSubThemesData subTheme = subThemesData ?? const FlexSubThemesData();
 
     // If the passed in property values are not null, or there was a colorScheme
     // provided, we will override the colors properties with them. Doing it here
@@ -2948,10 +3030,11 @@ class FlexColorScheme with Diagnosticable {
     );
     // Swap legacy secondary and tertiary color if we use Material 3 and
     // we have swapping of legacy colors on and if the colors in used built-in
-    // scheme has flag [swapOnMaterial3] set that tells it benefits from doing
+    // scheme has flag [FlexSchemeColor.swapOnMaterial3] set that tells it benefits from doing
     // this. Additionally we should only do this if we have not passed a custom
     // ColorScheme, nor secondary or tertiary colors directly.
-    final bool swapLegacy = useMaterial3 &&
+    final bool swapLegacy =
+        useMaterial3 &&
         swapLegacyOnMaterial3 &&
         flexColors.swapOnMaterial3 &&
         secondary == null &&
@@ -2979,27 +3062,23 @@ class FlexColorScheme with Diagnosticable {
     ColorScheme? seedScheme;
 
     // Compute a seeded scheme if we are using it or seeded fixed colors.
-    if ((fixedColorStyle ?? FlexFixedColorStyle.computed) !=
-            FlexFixedColorStyle.computed ||
-        seed.useKeyColors) {
+    if ((fixedColorStyle ?? FlexFixedColorStyle.computed) != FlexFixedColorStyle.computed || seed.useKeyColors) {
       // Create a complete ColorScheme from active and effective seed colors.
       // If config is not using key colors, we are only making this seed for
       // the fixed and fixedDim colors, they must always use all key colors.
       seedScheme = SeedColorScheme.fromSeeds(
         brightness: Brightness.light,
-        primaryKey: !seed.useKeyColors
-            ? effectiveColors.primary
-            : seed.keyPrimary ?? effectiveColors.primary,
+        primaryKey: !seed.useKeyColors ? effectiveColors.primary : seed.keyPrimary ?? effectiveColors.primary,
         secondaryKey: !seed.useKeyColors
             ? effectiveColors.secondary
             : seed.useSecondary
-                ? seed.keySecondary ?? effectiveColors.secondary
-                : null,
+            ? seed.keySecondary ?? effectiveColors.secondary
+            : null,
         tertiaryKey: !seed.useKeyColors
             ? effectiveColors.tertiary
             : seed.useTertiary
-                ? seed.keyTertiary ?? effectiveColors.tertiary
-                : null,
+            ? seed.keyTertiary ?? effectiveColors.tertiary
+            : null,
         // If use error seed, use it with fromSeeds, otherwise undefined.
         errorKey: seed.useError ? seed.keyError ?? effectiveColors.error : null,
         // If a custom surface tint is used, use it also as key for neutral and
@@ -3013,40 +3092,30 @@ class FlexColorScheme with Diagnosticable {
         // best with none seeded colors.
         tones: seed.useKeyColors
             ? tones
-            : FlexTones.chroma(Brightness.light).higherContrastFixed(
-                fixedColorStyle == FlexFixedColorStyle.seededHighContrast),
+            : FlexTones.chroma(Brightness.light)
+                  .higherContrastFixed(fixedColorStyle == FlexFixedColorStyle.seededHighContrast),
         variant: seed.useKeyColors ? variant : null,
         contrastLevel: seed.useKeyColors ? seed.contrastLevel : 0.0,
-        useExpressiveOnContainerColors:
-            seed.useExpressiveOnContainerColors ?? false,
+        useExpressiveOnContainerColors: seed.useExpressiveOnContainerColors ?? true,
         respectMonochromeSeed: !(seed.useLegacyMonochromeSeedBehavior ?? false),
       );
       // Update effective main colors to seed colors, keeping configured
       // effective main color values when so defined.
       if (seed.useKeyColors) {
         effectiveColors = FlexSchemeColor(
-          primary:
-              seed.keepPrimary ? effectiveColors.primary : seedScheme.primary,
-          primaryContainer: seed.keepPrimaryContainer
-              ? effectiveColors.primaryContainer
-              : seedScheme.primaryContainer,
-          secondary: seed.keepSecondary
-              ? effectiveColors.secondary
-              : seedScheme.secondary,
+          primary: seed.keepPrimary ? effectiveColors.primary : seedScheme.primary,
+          primaryContainer: seed.keepPrimaryContainer ? effectiveColors.primaryContainer : seedScheme.primaryContainer,
+          secondary: seed.keepSecondary ? effectiveColors.secondary : seedScheme.secondary,
           secondaryContainer: seed.keepSecondaryContainer
               ? effectiveColors.secondaryContainer
               : seedScheme.secondaryContainer,
-          tertiary: seed.keepTertiary
-              ? effectiveColors.tertiary
-              : seedScheme.tertiary,
+          tertiary: seed.keepTertiary ? effectiveColors.tertiary : seedScheme.tertiary,
           tertiaryContainer: seed.keepTertiaryContainer
               ? effectiveColors.tertiaryContainer
               : seedScheme.tertiaryContainer,
           appBarColor: effectiveColors.appBarColor,
           error: seed.keepError ? effectiveColors.error : seedScheme.error,
-          errorContainer: seed.keepErrorContainer
-              ? effectiveColors.errorContainer
-              : seedScheme.errorContainer,
+          errorContainer: seed.keepErrorContainer ? effectiveColors.errorContainer : seedScheme.errorContainer,
         );
       }
     }
@@ -3061,11 +3130,9 @@ class FlexColorScheme with Diagnosticable {
     }
 
     // Get effective surfaceTint color, also used as blend color for surfaces.
-    final Color blendColor =
-        surfaceTint ?? colorScheme?.surfaceTint ?? effectiveColors.primary;
+    final Color blendColor = surfaceTint ?? colorScheme?.surfaceTint ?? effectiveColors.primary;
     // Compute surface blends, they are also be added to seeded surfaces.
-    final FlexSchemeSurfaceColors surfaceSchemeColors =
-        FlexSchemeSurfaceColors.blend(
+    final FlexSchemeSurfaceColors surfaceSchemeColors = FlexSchemeSurfaceColors.blend(
       brightness: Brightness.light,
       useMaterial3: useMaterial3,
       surfaceMode: surfaceMode ?? FlexSurfaceMode.level,
@@ -3097,65 +3164,57 @@ class FlexColorScheme with Diagnosticable {
               surfaceContainerHigh: seedScheme.surfaceContainerHigh,
               surfaceContainerHighest: seedScheme.surfaceContainerHighest,
               inverseSurface: seedScheme.inverseSurface,
-              dialogBackground: useMaterial3
-                  ? seedScheme.surfaceContainerHigh
-                  : seedScheme.surface,
-              scaffoldBackground: subTheme.scaffoldBackgroundBaseColor?.color(
+              dialogBackground: useMaterial3 ? seedScheme.surfaceContainerHigh : seedScheme.surface,
+              scaffoldBackground:
+                  subTheme.scaffoldBackgroundBaseColor?.color(
                     seedScheme,
                     useMaterial3: useMaterial3,
                   ) ??
-                  (useMaterial3
-                      ? seedScheme.surfaceContainerLowest
-                      : seedScheme.surface),
+                  (useMaterial3 ? seedScheme.surfaceContainerLowest : seedScheme.surface),
             )
           // Colorscheme surfaces are used as starting point for blended ones.
           : colorScheme != null
-              ? FlexSchemeSurfaceColors(
-                  surface: colorScheme.surface,
-                  surfaceDim: colorScheme.surfaceDim,
-                  surfaceBright: colorScheme.surfaceBright,
-                  surfaceContainerLowest: colorScheme.surfaceContainerLowest,
-                  surfaceContainerLow: colorScheme.surfaceContainerLow,
-                  surfaceContainer: colorScheme.surfaceContainer,
-                  surfaceContainerHigh: colorScheme.surfaceContainerHigh,
-                  surfaceContainerHighest: colorScheme.surfaceContainerHighest,
-                  inverseSurface: colorScheme.inverseSurface,
-                  dialogBackground: useMaterial3
-                      ? colorScheme.surfaceContainerHigh
-                      : colorScheme.surface,
-                  scaffoldBackground:
-                      subTheme.scaffoldBackgroundBaseColor?.color(
-                            colorScheme,
-                            useMaterial3: useMaterial3,
-                          ) ??
-                          (useMaterial3
-                              ? colorScheme.surfaceContainerLowest
-                              : colorScheme.surface),
-                )
-              : null,
+          ? FlexSchemeSurfaceColors(
+              surface: colorScheme.surface,
+              surfaceDim: colorScheme.surfaceDim,
+              surfaceBright: colorScheme.surfaceBright,
+              surfaceContainerLowest: colorScheme.surfaceContainerLowest,
+              surfaceContainerLow: colorScheme.surfaceContainerLow,
+              surfaceContainer: colorScheme.surfaceContainer,
+              surfaceContainerHigh: colorScheme.surfaceContainerHigh,
+              surfaceContainerHighest: colorScheme.surfaceContainerHighest,
+              inverseSurface: colorScheme.inverseSurface,
+              dialogBackground: useMaterial3 ? colorScheme.surfaceContainerHigh : colorScheme.surface,
+              scaffoldBackground:
+                  subTheme.scaffoldBackgroundBaseColor?.color(
+                    colorScheme,
+                    useMaterial3: useMaterial3,
+                  ) ??
+                  (useMaterial3 ? colorScheme.surfaceContainerLowest : colorScheme.surface),
+            )
+          : null,
     );
 
     // Effective blend level for the onColors.
     int onBlendLevel = useSubThemes ? (subTheme.blendOnLevel ?? 0) : 0;
     assert(
-        onBlendLevel >= 0 && onBlendLevel <= 40,
-        'Only onBlendLevel:s from 0 to 40 '
-        'are allowed. Very high alpha blend levels may not produce results '
-        'that are visually very appealing or useful.');
+      onBlendLevel >= 0 && onBlendLevel <= 40,
+      'Only onBlendLevel:s from 0 to 40 '
+      'are allowed. Very high alpha blend levels may not produce results '
+      'that are visually very appealing or useful.',
+    );
     // If above happens in none debug mode, use 0, no blends.
     if (onBlendLevel < 0 || onBlendLevel > 40) onBlendLevel = 0;
 
     // Get alpha blend values for used mode, on blend level and brightness,
-    // used for onContainers and onSurface and onBackground.
+    // used for onContainers and onSurface.
     final FlexAlphaValues alphaOnValue = useSubThemes
-        ? FlexAlphaValues.getAlphas(
-            surfaceMode ?? FlexSurfaceMode.level, onBlendLevel)
+        ? FlexAlphaValues.getAlphas(surfaceMode ?? FlexSurfaceMode.level, onBlendLevel)
         : const FlexAlphaValues();
     // Get alpha blend values for used mode, on blend level and brightness,
     // used for onPrimary, onSecondary, onTertiary and onError.
     final FlexAlphaValues alphaOnMain = useSubThemes && subTheme.blendOnColors
-        ? FlexAlphaValues.getAlphas(
-            surfaceMode ?? FlexSurfaceMode.level, onBlendLevel)
+        ? FlexAlphaValues.getAlphas(surfaceMode ?? FlexSurfaceMode.level, onBlendLevel)
         : const FlexAlphaValues();
     // Determine the input surface.
     final Color inputSurface = surface ?? surfaceSchemeColors.surface;
@@ -3173,49 +3232,36 @@ class FlexColorScheme with Diagnosticable {
       inverseSurface: surfaceSchemeColors.inverseSurface,
       error: effectiveColors.error!,
       errorContainer: effectiveColors.errorContainer,
-      onPrimary: onPrimary ??
-          (seed.useKeyColors && seed.keepPrimary
-              ? null
-              : seedScheme?.onPrimary) ??
-          colorScheme?.onPrimary,
-      onPrimaryContainer: onPrimaryContainer ??
-          (seed.useKeyColors && seed.keepPrimaryContainer
-              ? null
-              : seedScheme?.onPrimaryContainer) ??
+      onPrimary:
+          onPrimary ?? (seed.useKeyColors && seed.keepPrimary ? null : seedScheme?.onPrimary) ?? colorScheme?.onPrimary,
+      onPrimaryContainer:
+          onPrimaryContainer ??
+          (seed.useKeyColors && seed.keepPrimaryContainer ? null : seedScheme?.onPrimaryContainer) ??
           colorScheme?.onPrimaryContainer,
-      onSecondary: onSecondary ??
-          (seed.useKeyColors && seed.keepSecondary
-              ? null
-              : seedScheme?.onSecondary) ??
+      onSecondary:
+          onSecondary ??
+          (seed.useKeyColors && seed.keepSecondary ? null : seedScheme?.onSecondary) ??
           colorScheme?.onSecondary,
-      onSecondaryContainer: onSecondaryContainer ??
-          (seed.useKeyColors && seed.keepSecondaryContainer
-              ? null
-              : seedScheme?.onSecondaryContainer) ??
+      onSecondaryContainer:
+          onSecondaryContainer ??
+          (seed.useKeyColors && seed.keepSecondaryContainer ? null : seedScheme?.onSecondaryContainer) ??
           colorScheme?.onSecondaryContainer,
-      onTertiary: onTertiary ??
-          (seed.useKeyColors && seed.keepTertiary
-              ? null
-              : seedScheme?.onTertiary) ??
+      onTertiary:
+          onTertiary ??
+          (seed.useKeyColors && seed.keepTertiary ? null : seedScheme?.onTertiary) ??
           colorScheme?.onTertiary,
-      onTertiaryContainer: onTertiaryContainer ??
-          (seed.useKeyColors && seed.keepTertiaryContainer
-              ? null
-              : seedScheme?.onTertiaryContainer) ??
+      onTertiaryContainer:
+          onTertiaryContainer ??
+          (seed.useKeyColors && seed.keepTertiaryContainer ? null : seedScheme?.onTertiaryContainer) ??
           colorScheme?.onTertiaryContainer,
-      onError: onError ??
-          (seed.useKeyColors && seed.keepError ? null : seedScheme?.onError) ??
-          colorScheme?.onError,
-      onErrorContainer: onErrorContainer ??
-          (seed.useKeyColors && seed.keepErrorContainer
-              ? null
-              : seedScheme?.onErrorContainer) ??
+      onError: onError ?? (seed.useKeyColors && seed.keepError ? null : seedScheme?.onError) ?? colorScheme?.onError,
+      onErrorContainer:
+          onErrorContainer ??
+          (seed.useKeyColors && seed.keepErrorContainer ? null : seedScheme?.onErrorContainer) ??
           colorScheme?.onErrorContainer,
       onSurface: onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceVariant:
-          seedScheme?.onSurfaceVariant ?? colorScheme?.onSurfaceVariant,
-      onInverseSurface:
-          seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
+      onSurfaceVariant: seedScheme?.onSurfaceVariant ?? colorScheme?.onSurfaceVariant,
+      onInverseSurface: seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
       primaryAlpha: alphaOnMain.primaryAlpha,
       primaryContainerAlpha: alphaOnValue.primaryContainerAlpha,
       secondaryAlpha: alphaOnMain.secondaryAlpha,
@@ -3231,8 +3277,7 @@ class FlexColorScheme with Diagnosticable {
     // Surface is used e.g. by Card and bottom appbar.
     // If light is white, we make a lighter than normal surface. If not
     // light is white, we use provided surface color, or computed one.
-    final Color effectiveSurfaceColor =
-        lightIsWhite ? inputSurface.lighten(5) : inputSurface;
+    final Color effectiveSurfaceColor = lightIsWhite ? inputSurface.lighten(5) : inputSurface;
     final Color effectiveSurfaceDimColor = lightIsWhite
         ? surfaceSchemeColors.surfaceDim.lighten(5)
         : surfaceSchemeColors.surfaceDim;
@@ -3263,20 +3308,17 @@ class FlexColorScheme with Diagnosticable {
     // The provided dialog background color overrides factory surface behavior,
     // but is impacted by plain white for a lighter effect.
     final Color effectiveDialogBackground = lightIsWhite
-        ? dialogBackground?.lighten(5) ??
-            surfaceSchemeColors.dialogBackground.lighten(5)
+        ? dialogBackground?.lighten(5) ?? surfaceSchemeColors.dialogBackground.lighten(5)
         : dialogBackground ?? surfaceSchemeColors.dialogBackground;
 
     // Get the effective light ref colors.
-    final Color effectivePrimaryLightRef =
-        effectiveColors.primaryLightRef ?? effectiveColors.primary;
-    final Color effectiveSecondaryLightRef =
-        effectiveColors.secondaryLightRef ?? effectiveColors.secondary;
-    final Color effectiveTertiaryLightRef =
-        effectiveColors.tertiaryLightRef ?? effectiveColors.tertiary;
+    final Color effectivePrimaryLightRef = effectiveColors.primaryLightRef ?? effectiveColors.primary;
+    final Color effectiveSecondaryLightRef = effectiveColors.secondaryLightRef ?? effectiveColors.secondary;
+    final Color effectiveTertiaryLightRef = effectiveColors.tertiaryLightRef ?? effectiveColors.tertiary;
 
     // Compute the effective ColorScheme based on all selection options.
-    final ColorScheme effectiveColorScheme = seedScheme?.copyWith(
+    final ColorScheme effectiveColorScheme =
+        seedScheme?.copyWith(
           // Add the locked effective colors back to our SeedScheme.
           // Fixes: https://github.com/rydmike/flex_color_scheme/issues/198
           primary: effectiveColors.primary,
@@ -3319,49 +3361,34 @@ class FlexColorScheme with Diagnosticable {
           onPrimary: onColors.onPrimary,
           primaryContainer: effectiveColors.primaryContainer,
           onPrimaryContainer: onColors.onPrimaryContainer,
-          primaryFixed: schemeForFixedColors?.primaryFixed ??
-              _fixedColor(effectivePrimaryLightRef),
-          primaryFixedDim: schemeForFixedColors?.primaryFixedDim ??
-              _fixedDimColor(effectivePrimaryLightRef),
-          onPrimaryFixed: schemeForFixedColors?.onPrimaryFixed ??
-              _onFixedColor(effectivePrimaryLightRef),
-          onPrimaryFixedVariant: schemeForFixedColors?.onPrimaryFixedVariant ??
-              _onFixedVariantColor(effectivePrimaryLightRef),
+          primaryFixed: schemeForFixedColors?.primaryFixed ?? _fixedColor(effectivePrimaryLightRef),
+          primaryFixedDim: schemeForFixedColors?.primaryFixedDim ?? _fixedDimColor(effectivePrimaryLightRef),
+          onPrimaryFixed: schemeForFixedColors?.onPrimaryFixed ?? _onFixedColor(effectivePrimaryLightRef),
+          onPrimaryFixedVariant:
+              schemeForFixedColors?.onPrimaryFixedVariant ?? _onFixedVariantColor(effectivePrimaryLightRef),
 
           secondary: effectiveColors.secondary,
           onSecondary: onColors.onSecondary,
           secondaryContainer: effectiveColors.secondaryContainer,
           onSecondaryContainer: onColors.onSecondaryContainer,
-          secondaryFixed: schemeForFixedColors?.secondaryFixed ??
-              _fixedColor(effectiveSecondaryLightRef),
-          secondaryFixedDim: schemeForFixedColors?.secondaryFixedDim ??
-              _fixedDimColor(effectiveSecondaryLightRef),
-          onSecondaryFixed: schemeForFixedColors?.onSecondaryFixed ??
-              _onFixedColor(effectiveSecondaryLightRef),
+          secondaryFixed: schemeForFixedColors?.secondaryFixed ?? _fixedColor(effectiveSecondaryLightRef),
+          secondaryFixedDim: schemeForFixedColors?.secondaryFixedDim ?? _fixedDimColor(effectiveSecondaryLightRef),
+          onSecondaryFixed: schemeForFixedColors?.onSecondaryFixed ?? _onFixedColor(effectiveSecondaryLightRef),
           onSecondaryFixedVariant:
-              schemeForFixedColors?.onSecondaryFixedVariant ??
-                  _onFixedVariantColor(effectiveSecondaryLightRef),
+              schemeForFixedColors?.onSecondaryFixedVariant ?? _onFixedVariantColor(effectiveSecondaryLightRef),
 
           tertiary: effectiveColors.tertiary,
           onTertiary: onColors.onTertiary,
           tertiaryContainer: effectiveColors.tertiaryContainer,
           onTertiaryContainer: onColors.onTertiaryContainer,
-          tertiaryFixed: schemeForFixedColors?.tertiaryFixed ??
-              _fixedColor(effectiveTertiaryLightRef),
-          tertiaryFixedDim: schemeForFixedColors?.tertiaryFixedDim ??
-              _fixedDimColor(effectiveTertiaryLightRef),
-          onTertiaryFixed: schemeForFixedColors?.onTertiaryFixed ??
-              _onFixedColor(effectiveTertiaryLightRef),
+          tertiaryFixed: schemeForFixedColors?.tertiaryFixed ?? _fixedColor(effectiveTertiaryLightRef),
+          tertiaryFixedDim: schemeForFixedColors?.tertiaryFixedDim ?? _fixedDimColor(effectiveTertiaryLightRef),
+          onTertiaryFixed: schemeForFixedColors?.onTertiaryFixed ?? _onFixedColor(effectiveTertiaryLightRef),
           onTertiaryFixedVariant:
-              schemeForFixedColors?.onTertiaryFixedVariant ??
-                  _onFixedVariantColor(effectiveTertiaryLightRef),
+              schemeForFixedColors?.onTertiaryFixedVariant ?? _onFixedVariantColor(effectiveTertiaryLightRef),
 
-          error: useMaterial3ErrorColors && !seed.useKeyColors
-              ? FlexColor.material3LightError
-              : effectiveColors.error!,
-          onError: useMaterial3ErrorColors && !seed.useKeyColors
-              ? FlexColor.material3LightOnError
-              : onColors.onError,
+          error: useMaterial3ErrorColors && !seed.useKeyColors ? FlexColor.material3LightError : effectiveColors.error!,
+          onError: useMaterial3ErrorColors && !seed.useKeyColors ? FlexColor.material3LightOnError : onColors.onError,
           errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3LightErrorContainer
               : effectiveColors.errorContainer!,
@@ -3380,24 +3407,20 @@ class FlexColorScheme with Diagnosticable {
           onSurface: onColors.onSurface,
           onSurfaceVariant: onColors.onSurfaceVariant,
           //
-          outline: _outlineColor(
-              Brightness.light, blendColor, alphaOnValue.surfaceAlpha),
-          outlineVariant: _outlineVariantColor(
-              Brightness.light, blendColor, alphaOnValue.surfaceAlpha),
+          outline: _outlineColor(Brightness.light, blendColor, alphaOnValue.surfaceAlpha),
+          outlineVariant: _outlineVariantColor(Brightness.light, blendColor, alphaOnValue.surfaceAlpha),
           shadow: Colors.black,
           scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
-          inversePrimary: _inversePrimary(
-              Brightness.light, effectiveColors.primary, effectiveSurfaceColor),
+          inversePrimary: _inversePrimary(Brightness.light, effectiveColors.primary, effectiveSurfaceColor),
           surfaceTint: surfaceTint ?? effectiveColors.primary,
         );
 
     // Determine the effective scaffold background color.
-    final Color effectiveScaffoldColor = (useSubThemes &&
-                subTheme.scaffoldBackgroundSchemeColor != null
-            ? FlexSubThemes.schemeColor(
-                subTheme.scaffoldBackgroundSchemeColor!, effectiveColorScheme)
+    final Color effectiveScaffoldColor =
+        (useSubThemes && subTheme.scaffoldBackgroundSchemeColor != null
+            ? FlexSubThemes.schemeColor(subTheme.scaffoldBackgroundSchemeColor!, effectiveColorScheme)
             : null) ??
         scaffoldBackground ??
         (lightIsWhite ? Colors.white : surfaceSchemeColors.scaffoldBackground);
@@ -3406,11 +3429,9 @@ class FlexColorScheme with Diagnosticable {
     // - First priority, passed in color value.
     Color? effectiveAppBarColor = appBarBackground;
     // - Second priority, sub-theme based scheme color.
-    effectiveAppBarColor ??=
-        useSubThemes && subTheme.appBarBackgroundSchemeColor != null
-            ? FlexSubThemes.schemeColor(
-                subTheme.appBarBackgroundSchemeColor!, effectiveColorScheme)
-            : null;
+    effectiveAppBarColor ??= useSubThemes && subTheme.appBarBackgroundSchemeColor != null
+        ? FlexSubThemes.schemeColor(subTheme.appBarBackgroundSchemeColor!, effectiveColorScheme)
+        : null;
     // Third priority [appBarStyle] based.
     if (effectiveAppBarColor == null) {
       switch (appBarStyle) {
@@ -3425,19 +3446,16 @@ class FlexColorScheme with Diagnosticable {
         case FlexAppBarStyle.scaffoldBackground:
           effectiveAppBarColor = effectiveScaffoldColor;
         case FlexAppBarStyle.custom:
-          effectiveAppBarColor =
-              effectiveColors.appBarColor ?? effectiveColors.primary;
+          effectiveAppBarColor = effectiveColors.appBarColor ?? effectiveColors.primary;
         case null:
-          effectiveAppBarColor =
-              useMaterial3 ? effectiveSurfaceColor : effectiveColors.primary;
+          effectiveAppBarColor = useMaterial3 ? effectiveSurfaceColor : effectiveColors.primary;
       }
     }
     // As last step apply the factory opacity parameter value.
     // The resulting effectiveAppBarColor is never null and always passed to the
     // raw FlexColorScheme constructor.
     if (appBarOpacity != null) {
-      effectiveAppBarColor =
-          effectiveAppBarColor.withValues(alpha: appBarOpacity);
+      effectiveAppBarColor = effectiveAppBarColor.withValues(alpha: appBarOpacity);
     }
     // The raw FlexColorScheme(), created by above complex .light factory.
     return FlexColorScheme(
@@ -3463,9 +3481,7 @@ class FlexColorScheme with Diagnosticable {
       error: useMaterial3ErrorColors && !seed.useKeyColors
           ? FlexColor.material3LightError
           : effectiveColors.error ?? FlexColor.materialLightError,
-      onError: useMaterial3ErrorColors && !seed.useKeyColors
-          ? FlexColor.material3LightOnError
-          : onColors.onError,
+      onError: useMaterial3ErrorColors && !seed.useKeyColors ? FlexColor.material3LightOnError : onColors.onError,
       errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
           ? FlexColor.material3LightErrorContainer
           : effectiveColors.errorContainer,
@@ -3516,1642 +3532,1786 @@ class FlexColorScheme with Diagnosticable {
 
   /// Creates a [FlexColorScheme] for dark theme mode.
   ///
-  /// The factory has no required [FlexSchemeColor] properties, but typically
-  /// a [FlexScheme] enum [scheme] value would be provided to use a pre-defined
+  /// Typically pass a [FlexScheme] [scheme], custom [FlexSchemeColor] [colors],
+  /// or a complete [ColorScheme] in [colorScheme]. Direct color overrides and
+  /// surface blends can still change the effective scheme even when a
+  /// [colorScheme] is provided. The brightness in a passed-in [colorScheme] is
+  /// ignored; the result is always dark. Use [FlexColorScheme.toScheme] for the
+  /// result used by [FlexColorScheme.toTheme].
+  ///
+  /// Pass [subThemesData] to enable opinionated component themes. Pass
+  /// [keyColors] to opt in on Material 3 seed-generated palettes. For a matched
+  /// light and dark theme, prefer the same key colors; built-in [scheme]
+  /// values automatically use their light-mode colors as dark-mode seed keys.
+  /// Each parameter is documented below in parameter-list order.
+  ///
+  /// ## [colors]
+  ///
+  /// The [FlexSchemeColor] used to create the dark [FlexColorScheme] from.
+  ///
+  /// You can use predefined [FlexSchemeColor] values from [FlexColor] or
+  /// [FlexColor.schemes] map or define your own colors with
+  /// [FlexSchemeColor] or [FlexSchemeColor.from].
+  ///
+  /// For using built-in color schemes, the convenience shortcut to select
+  /// it with the [scheme] property is recommended and leaving [colors]
+  /// undefined. If both are specified the scheme colors defined by [colors]
+  /// are used. If both are null, then [scheme] defaults to
+  /// [FlexScheme.material] if [useMaterial3] is false, and to
+  /// [FlexScheme.materialBaseline] if [useMaterial3] is true.
+  ///
+  /// ## [scheme]
+  ///
+  /// Use one of the built-in color schemes defined by enum [FlexScheme].
+  ///
+  /// Give it one of the enum values to use the scheme, like eg.
+  /// [FlexScheme.mandyRed].
+  ///
+  /// To create custom color schemes use the [colors] property. If both
+  /// [colors] and [scheme] are specified, the scheme defined by
+  /// [colors] is used. If both are null, then [scheme] defaults to
+  /// [FlexScheme.material] if [useMaterial3] is false, and to
+  /// [FlexScheme.materialBaseline] if [useMaterial3] is true.
+  ///
+  /// ## [colorScheme]
+  ///
+  /// The overall [ColorScheme] based colors for the theme.
+  ///
+  /// This property provides a way to define custom colors for
+  /// [FlexColorScheme]. It is useful if
+  /// you already have a custom [ColorScheme] based color definition that
+  /// you want to use with FlexColorScheme theming and its sub-theming
+  /// capabilities.
+  ///
+  /// If you provide both a [ColorScheme] and some individual direct property
+  /// values that also exist in a [ColorScheme], the individual property
+  /// values will override the corresponding ones in your [ColorScheme].
+  ///
+  /// If you do not define a [colorScheme], the used colors will be determined
+  /// by the [colors] and [scheme] properties. However, when a [colorScheme]
+  /// is defined it takes precedence. The [brightness] in the provided
+  /// [colorScheme] is always ignored and set to [Brightness.dark] since this
+  /// is the dark theme mode factory. Make sure the colors used in your color
+  /// scheme are intended for a dark theme.
+  ///
+  /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface]
+  /// and [ColorScheme.inverseSurface] colors in the
+  /// provided [colorScheme] will be overridden by the computed color branded
+  /// surfaces. If your [colorScheme] already contains branded surface colors,
+  /// then keep [blendLevel] = 0 to continue using them.
+  ///
+  /// If you use [darkIsTrueBlack] factory feature, it will also override your
+  /// [colorScheme] based mentioned color properties above and make them
+  /// 5% darker.
+  ///
+  /// If you opt in on using sub themes and have set
+  /// [FlexSubThemesData.blendOnColors] to true and have defined [surfaceMode]
+  /// and set [blendLevel] > 0, then the effective color scheme based on
+  /// colors onPrimary, onSecondary, onError and onSurface will
+  /// be changed accordingly too.
+  ///
+  /// The [colorScheme] colors are also included and affected by factory
+  /// properties [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
+  /// [toScheme]. This will always get you a complete color scheme, including
+  /// calculated and derived color values, which is particularly useful when
+  /// using the [FlexColorScheme.light] and [FlexColorScheme.dark] factories
+  /// to compute color scheme branded surface colors for you. The effective
+  /// [ColorScheme] for your theme is often needed if you want to create
+  /// custom sub-themes that should use the colors from the scheme using none
+  /// default color assignments from the color scheme.
+  ///
+  /// ## [usedColors]
+  ///
+  /// The selection of the six main scheme colors to be used when creating
+  /// effective [ColorScheme].
+  ///
+  /// This is a convenience property that allows you to vary which colors to
+  /// use of the primary, secondary and tertiary colors and their container
+  /// colors when FlexSchemeColor creates its effective [ColorScheme] from
+  /// the input colors. The integer number corresponds to using:
+  ///
+  /// * 1 = Only the primary color
+  /// * 2 = Primary & Secondary colors
+  /// * 3 = Primary + container & Secondary colors
+  /// * 4 = Primary + container & Secondary + container
+  /// * 5 = Primary + container & Secondary + container & tertiary colors
+  /// * 6 = Primary + container & Secondary + container & tertiary + container
+  /// * 7 = Primary, Secondary and tertiary, container colors computed.
+  ///
+  /// By default the value is 6 and all main scheme colors in
+  /// [FlexSchemeColor] are used.
+  ///
+  /// The integer value is not a very obvious property to use to configure
+  /// this feature. Future version may improve it. However with the Themes
+  /// Playground you don't have to remember what number does what.
+  ///
+  /// When the value is 1, the result is the same as if we would have
+  /// created the colors with [FlexSchemeColor.from] by only giving it the
+  /// required primary color. With 2, it is equivalent to as if we would have
+  /// given it only the primary and secondary colors, and so on.
+  /// This property makes it possible to simulate and change the resulting
+  /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 7 of
+  /// the color selection. If your used [FlexColorScheme] [colors] was
+  /// actually created with [FlexSchemeColor.from] with only the primary
+  /// color defined, then changing the value from 7 ... 3, 2 or 1, will
+  /// all produce the same effective scheme as the computed values will be
+  /// the same as the [FlexSchemeColor.from] is using to compute any main
+  /// missing scheme color values.
+  ///
+  /// ## [surfaceMode]
+  ///
+  /// Blends surface tint color into all surface colors and
+  /// scaffold background color.
+  ///
+  /// The [surfaceMode] defines the relative strength of the alpha blend
+  /// value for different surfaces.
+  ///
+  /// If undefined, defaults to [FlexSurfaceMode.level].
+  ///
+  /// ## [blendLevel]
+  ///
+  /// Sets the blend level strength used by the surface mode.
+  ///
+  /// The blend level is the integer decimal value of the alpha value
+  /// used in the alpha blend function. It mixes one color with another
+  /// by using alpha opacity value in the color of a surface put on top of
+  /// another surface with opaque color and returns the result as one opaque
+  /// color.
+  ///
+  /// Defaults to 0.
+  ///
+  /// ## [fixedColorStyle]
+  ///
+  /// The style and method used to compute the fixed, fixedDim colors and
+  /// their on colors in a [ColorScheme] using the palettes provided main
+  /// light mode color.
+  ///
+  /// The main color should always be the light theme's [ColorScheme.primary],
+  /// [ColorScheme.secondary] or [ColorScheme.tertiary]. This means that a
+  /// dark mode theme needs to know what colors were used for the
+  /// light mode colors for [ColorScheme.primary], [ColorScheme.secondary] or
+  /// [ColorScheme.tertiary]. It is not a strict requirement, but necessary
+  /// if you want the fixed and fixedDim colors to follow the Material-3
+  /// guide's color system, where these colors are derived from the main light
+  /// color palette color and have same computed color values in dark mode.
+  ///
+  /// The two available options, offer different nuances for the fixed color
+  /// and fixedDim color generation.
+  ///
+  /// The computed [FlexFixedColorStyle.computed] is made with simpler color
+  /// math and uses same principles as [FlexSchemeColor.from] does when not
+  /// using seed generated ColorSchemes and it generates missing colors.
+  /// This version may fit better with the computed and not seed generated
+  /// ColorSchemes.
+  ///
+  /// The [FlexFixedColorStyle.seeded] version is bit more expensive as it
+  /// requires creating a seeded ColorScheme even when a seed generated
+  /// ColorScheme is not being used. This version may in some cases produce
+  /// visually more appealing results.
+  ///
+  /// If not defined, defaults to [FlexFixedColorStyle.computed].
+  ///
+  /// ## [appBarStyle]
+  ///
+  /// Style used to define the themed color of the [AppBar] background color.
+  ///
+  /// Defaults to null, which when [useMaterial3] is false results in
+  /// [FlexAppBarStyle.material] which produces the same results
+  /// as a Flutter standard M2 dark [ThemeData.from] by tying the app bar
+  /// color to the M2 dark Material color. If [useMaterial3] is true it
+  /// defaults [FlexAppBarStyle.surface] which is the same as M3 default.
+  ///
+  /// If you enable component themes you can also control the themed
+  /// [AppBar] by selecting any active [ColorScheme] as its background color.
+  /// If you do so, the setting applied by this property is ignored.
+  ///
+  /// ## [appBarOpacity]
+  ///
+  /// Themed [AppBar] opacity.
+  ///
+  /// The opacity is applied to the effective AppBar color, which may be from
+  /// used [appBarStyle], that gets its color selection from used [scheme]
+  /// or [colors]. Or that color may have been overridden by AppBar sub-theme
+  /// and there selected [SchemeColor] based color.
+  /// Lastly and with highest priority it may be from here directly supplied
+  /// [appBarBackground] color.
+  ///
+  /// A useful opacity range is from 0.85 to 0.95 when using the [Scaffold]
+  /// property [Scaffold.extendBodyBehindAppBar] set to true, to partially show
+  /// scrolling content behind the app bar. To use more opacity, in a way
+  /// that the AppBar does not become too transparent, you also need to blur
+  /// the background to create a frosted glass effect. This cannot
+  /// be made with only theming, you need a custom AppBar Widget for that.
+  /// Frosted glass UI effect is thus beyond the scope of what
+  /// FlexColorScheme can do alone as it only affects ThemeData.
+  ///
+  /// If null, defaults to 1, fully opaque, no transparency.
+  /// If not null, must be from 0 to 1.
+  ///
+  /// ## [transparentStatusBar]
+  ///
+  /// When set to true, it makes the status bar on Android the same color as
+  /// the rest of the AppBar.
+  ///
+  /// Defaults to true.
+  ///
+  /// When true, the AppBar in Android mimics the look of one-toned AppBar's
+  /// typically used on iOS. Set to false, to revert back and use
+  /// Android's default two-toned look. If true the status bar area is
+  /// actually also transparent so that if the app bar is also translucent,
+  /// content that scrolls behind it, is also visible behind the status
+  /// bar area.
+  ///
+  /// In default Material-2 this would be false, FCS uses an opinionated
+  /// style and sets it true. In Material-3 the style you get when setting
+  /// this to true is used by default. In M3 mode FCS will thus not create
+  /// an AppBar sub theme to adjust this, if it is true and it is not needed
+  /// for any other direct AppBar impacting properties in FlexColorScheme
+  /// constructor. In M2 mode an AppBar theme will always be created, also
+  /// when not opting in on the actual sub-themes feature, this per its
+  /// opinionated and legacy styling for M2 mode.
+  ///
+  /// ## [appBarElevation]
+  ///
+  /// The themed elevation for the [AppBar].
+  ///
+  /// If not defined, defaults to 0 in M2 (FCS opinionated) and to 0 in (M3
+  /// spec default).
+  ///
+  /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
+  /// choice, it can easily be adjusted for the theme with this property.
+  ///
+  /// ## [bottomAppBarElevation]
+  ///
+  /// The themed elevation for the [BottomAppBar].
+  ///
+  /// If undefined (null), defaults to 3 in M3 mode and to 8 in M2 mode,
+  /// both via the defaults for the respective theme mode from Flutter's
+  /// default elevation behavior of [BottomAppBar].
+  ///
+  /// ## [tabBarStyle]
+  ///
+  /// Select preferred style for the default [TabBarThemeData].
+  ///
+  /// By default the TabBarThemeData is made to fit with the style of the
+  /// [AppBar].
+  /// In Material-2 mode that is done by defaulting to using
+  /// [FlexTabBarStyle.forAppBar] if not defined. In Material-3 mode it is
+  /// done by defaulting to using [FlexTabBarStyle.flutterDefault].
+  ///
+  /// When setting this to [FlexTabBarStyle.forBackground], it will default
+  /// to a theme that uses the color scheme and fits on background color,
+  /// which typically also on works surface and scaffoldBackground color.
+  /// This TabBarThemeData style is useful if you primarily intended to use
+  /// the TabBar in a Scaffold, Dialog, Drawer or Side panel on their
+  /// background colors.
+  ///
+  /// ## [primary]
+  ///
+  /// The color displayed most frequently across your app’s screens and
+  /// components.
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// This override color is included and affected by factory
+  /// properties [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// In dark mode, if you provide an override Color value for [primary] you
+  /// should also provide a value for [primaryLightRef] to ensure that the
+  /// fixed colors can be computed correctly when not using seed generated
+  /// ColorSchemes and setting [fixedColorStyle] to default.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [primaryLightRef]
+  ///
+  /// If you specify an override color for [primary], you should also specify
+  /// an override for the [primaryLightRef] color when not using a seed
+  /// generated ColorSchemes and setting [fixedColorStyle] to default.
+  ///
+  /// This color is used to compute the [ColorScheme.primaryFixed], [ColorScheme.primaryFixedDim],
+  /// [ColorScheme.onPrimaryFixed] and [ColorScheme.onPrimaryFixedVariant] colors, when not using
+  /// a seed generated [ColorScheme] and using setting [fixedColorStyle] with
+  /// the default [FlexFixedColorStyle.computed] value.
+  ///
+  /// The [primaryLightRef] should have the same color value as the
+  /// primary color has in your light theme, regardless of where it is
+  /// specified.
+  ///
+  /// If you are always using a seed generated ColorScheme, and your [primary]
+  /// override is already the key color your want to use, you do not need to
+  /// also specify a [primaryLightRef], but if you do, it will be used as
+  /// seed before the [primary] color. This gives you the option to use a
+  /// given color for dark none seeded primary and giving the light mode
+  /// primary color for [primaryLightRef], so that when you use seeding
+  /// the same seed color as in light mode is used and we get the same tonal
+  /// palette for the primary palette in both light and dark mode, you
+  /// typically want this. But if you always seed and use overrides, you
+  /// can give the light  mode primary color as the primary override in dark
+  /// mode too and skip the [primaryLightRef] override.
+  ///
+  /// ## [onPrimary]
+  ///
+  /// A color that is clearly legible when drawn on [primary] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [primary] and [onPrimary] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [primaryContainer]
+  ///
+  /// A color used for elements needing less emphasis than [primary].
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// The override color is included and affected by factory
+  /// properties [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [onPrimaryContainer]
+  ///
+  /// A color that's clearly legible when drawn on [primaryContainer].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
+  /// is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [secondary]
+  ///
+  /// A support color to primary, with less emphasis than primary, often of
+  /// same hue as primary, but does not have to be.
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// The override color is included and affected by factory properties
+  /// [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// In dark mode, if you provide an override Color value for [secondary] you
+  /// should also provide a value for [secondaryLightRef] to ensure that the
+  /// fixed colors can be computed correctly when not using seed generated
+  /// ColorSchemes and setting [fixedColorStyle] to default.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [secondaryLightRef]
+  ///
+  /// If you specify an override color for [secondary], you should also
+  /// specify an override for the [secondaryLightRef] color when not using a
+  /// seed generated ColorSchemes and setting [fixedColorStyle] to default.
+  ///
+  /// This color is used to compute the [ColorScheme.secondaryFixed], [ColorScheme.secondaryFixedDim],
+  /// [ColorScheme.onSecondaryFixed] and [ColorScheme.onSecondaryFixedVariant] colors, when not using
+  /// a seed generated [ColorScheme] and using setting [fixedColorStyle] with
+  /// the default [FlexFixedColorStyle.computed] value.
+  ///
+  /// The [secondaryLightRef] should have the same color value as the
+  /// secondary color has in your light theme, regardless of where it is
+  /// specified.
+  ///
+  /// If you are always using a seed generated ColorScheme, and your
+  /// [secondary] override is already the key color your want to use, you
+  /// do not need to also specify a [secondaryLightRef], but if you do, it
+  /// will be used as seed before the [secondary] color. This gives you
+  /// the option to use a given color for dark none seeded secondary
+  /// and giving the light mode secondary color for [secondaryLightRef],
+  /// so that when you use seeding the same seed color as in light mode
+  /// is used and we get the same tonal palette for the secondary palette
+  /// in both light and dark mode, you typically want this. But if you
+  /// always seed and use overrides, you can give the light mode
+  /// secondary color as the secondary override in dark
+  /// mode too and skip the [secondaryLightRef] override.
+  ///
+  /// ## [onSecondary]
+  ///
+  /// A color that is clearly legible when drawn on [secondary] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [secondary] and [onSecondary] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [secondaryContainer]
+  ///
+  /// A color used for elements needing less emphasis than [secondary].
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// The override color is included and affected by factory properties
+  /// [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [onSecondaryContainer]
+  ///
+  /// A color that's clearly legible when drawn on [secondaryContainer].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
+  /// is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [tertiary]
+  ///
+  /// A color used as a contrasting accent that can balance [primary]
+  /// and [secondary] colors or bring heightened attention to an element,
+  /// such as an input field.
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// The override color is included and affected by factory properties
+  /// [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// In dark mode, if you provide an override Color value for [tertiary] you
+  /// should also provide a value for [tertiaryLightRef] to ensure that the
+  /// fixed colors can be computed correctly when not using seed generated
+  /// ColorSchemes and setting [fixedColorStyle] to default.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [tertiaryLightRef]
+  ///
+  /// If you specify an override color for [tertiary], you should also
+  /// specify an override for the [tertiaryLightRef] color when not using a
+  /// seed generated ColorSchemes and setting [fixedColorStyle] to default.
+  ///
+  /// This color is used to compute the [ColorScheme.tertiaryFixed], [ColorScheme.tertiaryFixedDim],
+  /// [ColorScheme.onTertiaryFixed] and [ColorScheme.onTertiaryFixedVariant] colors, when not using
+  /// a seed generated [ColorScheme] and using setting [fixedColorStyle] with
+  /// the default [FlexFixedColorStyle.computed] value.
+  ///
+  /// The [tertiaryLightRef] should have the same color value as the
+  /// tertiary color has in your light theme, regardless of where it is
+  /// specified.
+  ///
+  /// If you are always using a seed generated ColorScheme, and your
+  /// [tertiary] override is already the key color your want to use, you
+  /// do not need to also specify a [tertiaryLightRef], but if you do, it
+  /// will be used as seed before the [tertiary] color. This gives you
+  /// the option to use a given color for dark none seeded tertiary
+  /// and giving the light mode tertiary color for [tertiaryLightRef],
+  /// so that when you use seeding the same seed color as in light mode
+  /// is used and we get the same tonal palette for the tertiary palette
+  /// in both light and dark mode, you typically want this. But if you
+  /// always seed and use overrides, you can give the light mode
+  /// tertiary color as the tertiary override in dark
+  /// mode too and skip the [tertiaryLightRef] override.
+  ///
+  /// ## [onTertiary]
+  ///
+  /// A color that's clearly legible when drawn on [tertiary].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [secondary] and [onSecondary] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [tertiaryContainer]
+  ///
+  /// A color used for elements needing less emphasis than [tertiary].
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// The override color is included and affected by factory properties
+  /// [usedColors] and [swapColors] and included in their behavior.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [onTertiaryContainer]
+  ///
+  /// A color that's clearly legible when drawn on [tertiaryContainer].
+  ///
+  /// To ensure that an app is accessible, a contrast ratio between
+  /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
+  /// is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [error]
+  ///
+  /// The color to use for input validation errors, e.g. for
+  /// [InputDecoration.errorText].
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [onError]
+  ///
+  /// A color that is clearly legible when drawn on [error] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [error] and [onError] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [errorContainer]
+  ///
+  /// The color to use for input validation errors with less emphasis than
+  /// error.
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
+  /// if a [colorScheme] was provided it will override the same color in it
+  /// as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [onErrorContainer]
+  ///
+  /// A color that is clearly legible when drawn on [errorContainer] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [error] and [onError] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [surface]
+  ///
+  /// The surface (background) color for widgets like [Card] and
+  /// [BottomAppBar].
+  ///
+  /// The color is applied to [ThemeData.cardColor], [ThemeData.canvasColor]
+  /// and [ColorScheme.surface] in [ThemeData.colorScheme], it is also used
+  /// by all [Material] of type [MaterialType.card].
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the [surfaceMode] [FlexSurfaceMode] enum. If a
+  /// [colorScheme] was provided, this color property will override the
+  /// same color in it as well.
+  ///
+  /// Defaults to null.
+  ///
+  /// ## [onSurface]
+  ///
+  /// A color that is clearly legible when drawn on [surface] color.
+  ///
+  /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
+  /// [surface] and [onSurface] is recommended. See
+  /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
+  ///
+  /// When using this factory, this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] property or when using pre-defined color
+  /// scheme based [FlexScheme] and its [scheme] property, including any
+  /// used blend logic. If a [colorScheme] was provided with this
+  /// corresponding color defined, this color property will override the
+  /// same color in it as well.
+  ///
+  /// You can use this property for convenience if you want to override the
+  /// color that this scheme color gets via the factory behavior.
+  ///
+  /// ## [scaffoldBackground]
+  ///
+  /// The color of the [Scaffold] background.
+  ///
+  /// The color is applied to [ThemeData.scaffoldBackgroundColor].
+  ///
+  /// If [FlexSubThemesData.scaffoldBackgroundSchemeColor] is defined, it is used
+  /// instead of this [scaffoldBackground] color.
+  ///
+  /// If no value is given, and no
+  /// [FlexSubThemesData.scaffoldBackgroundSchemeColor]
+  /// is defined, default color is [ColorScheme.surface] in M2 mode and
+  /// [ColorScheme.surfaceContainerLowest] in M3 mode.
+  ///
+  /// ## [dialogBackground]
+  ///
+  /// The background color used by [Dialog]s.
+  ///
+  /// In FCS version 8.2.0 and later this color is no longer applied to
+  /// `ThemeData.dialogBackgroundColor`, as the property is deprecated in
+  /// Flutter 3.29.0 and later. To get the selected dialog color sub-themes
+  /// must now be enabled.
+  ///
+  /// When using sub-themes, this color is applied to backgroundColor in
+  /// dialog themes DatePickerThemeData, DialogThemeData and
+  /// TimePickerThemeData, but only if
+  /// [FlexSubThemesData.dialogBackgroundSchemeColor] has not been defined in
+  /// [subThemesData].
+  ///
+  /// If [FlexSubThemesData.dialogBackgroundSchemeColor] is defined, it is used
+  /// instead of this [dialogBackground] color.
+  ///
+  /// If no value is given, and no [FlexSubThemesData.dialogBackgroundSchemeColor]
+  /// is defined, default color is [ColorScheme.surface] in Material-2 mode
+  /// and [ColorScheme.surfaceContainerHigh] in Material-3 mode.
+  ///
+  /// ## [appBarBackground]
+  ///
+  /// Background theme color for the [AppBar].
+  ///
+  /// When using the factory this is an override color for the color that
+  /// would be used based on the corresponding color property defined in
+  /// [FlexSchemeColor] [colors] or for this color defined when using a
+  /// pre-defined color scheme based on [FlexScheme] [scheme] property and
+  /// the [FlexAppBarStyle] and its [appBarStyle] property.
+  ///
+  /// Thus custom color will also override any scheme color based selection
+  /// for the [AppBar] in active used sub-themes.
+  ///
+  /// ## [surfaceTint]
+  ///
+  /// A custom color used as an overlay on a surface color to indicate a
+  /// component's elevation and surface color branding or tinting.
+  ///
+  /// If a [colorScheme] was provided where this corresponding color is
+  /// defined, this color property will override the same color in it.
+  ///
+  /// This color is used by Material 3 for colored elevation, it is also used
+  /// as the blend color for FlexColorScheme surface blends. Additionally
+  /// this color is if provided used as key color for seeding
+  /// the neutral color palettes, when seed generated color schemes are used.
+  /// It is important that all these properties use the same color.
+  ///
+  /// Typically this color is not customized, most designs use the default
+  /// where the theme primary color is used for slightly mixing it into the
+  /// neutral background and surface colors, when seeding is used. As well as
+  /// using it for the the elevation tint in Material 3, plus for the
+  /// surface blends that can optionally be added with FlexColorScheme.
+  ///
+  /// If undefined, [primary] color is used.
+  ///
+  /// ## [darkIsTrueBlack]
+  ///
+  /// Makes the dark theme backgrounds darker or even black.
+  ///
+  /// Scaffold background will become fully black and is no longer impacted
+  /// by used [blendLevel]. Other surfaces also become darker, when
+  /// using low blend levels they may become fully black too, but are still
+  /// impacted by the blend level.
+  ///
+  /// ## [swapColors]
+  ///
+  /// When true, the primary and primary container colors will be swapped with
+  /// their secondary counterparts.
+  ///
+  /// Set this flag to true if you want to make a theme where
+  /// your primary and secondary colors are swapped, compared to how they
+  /// are defined in the passed in color properties or used pre-defined
   /// color scheme.
   ///
-  /// As a second alternative the [FlexSchemeColor] class [colors] property
-  /// can be used to define custom scheme colors, that can be created with just
-  /// one color property by using the factory [FlexSchemeColor.from].
+  /// This is useful if you want to do this with the pre-defined
+  /// schemes. If you are explicitly defining all your theme colors you can
+  /// of course define them in any desired config. Even if you do
+  /// that, this feature will still swap whatever colors you defined
+  /// for primary and secondary. You can offer this feature as an easy end
+  /// user modifiable theme option if you like. One usage possibility is to
+  /// set [swapColors] to true only for the dark mode and use your color
+  /// scheme the other way around only in dark mode.
   ///
-  /// As a third option you can provide a complete [ColorScheme] in
-  /// [colorScheme] and the custom colors for the theme will be based on that
-  /// scheme. Since this is the light theme factory the brightness value in used
-  /// [colorScheme] is ignored and resulting effective theme and color scheme
-  /// will always be light. Make sure you use colors in your color scheme that
-  /// are actually colors for a light theme.
+  /// ## [tooltipsMatchBackground]
   ///
-  /// The factory can produce blended surface colors, and also has other
-  /// parameters that may impact the effective color scheme used by final theme,
-  /// even when a [colorScheme] are provided. The [FlexColorScheme.toScheme]
-  /// will give you the effective color scheme that will also be used
-  /// when producing [ThemeData] from [FlexColorScheme] and its factories
-  /// with [FlexColorScheme.toTheme].
+  /// When set to true, tooltip background color will match the brightness of
+  /// the theme's background color.
   ///
-  /// The factory contains a large number of other properties that can be used
-  /// to create beautiful themes by just adjusting a few behavior properties.
+  /// By default Flutter's Material tooltips use a theme where the tooltip
+  /// background color brightness is inverted in relation to the overall
+  /// theme's background color.
   ///
-  /// To activate using opinionated sub themes that further refines the produced
-  /// theme, pass in a [FlexSubThemesData] to [subThemesData], and define more
-  /// shortcut properties to setup additional features in the sub-themes.
+  /// [FlexColorScheme] allows you to use a single toggle to invert this.
+  /// Light tooltips on light background is e.g. the default style on
+  /// Windows Desktop toggle. You can use this toggle to use this style,
+  /// or use it as a means to create a platform adaptive tooltip style, where
+  /// the Material and Flutter style is used on devices and Web, but the
+  /// inverted scheme is used on e.g. Windows platform.
   ///
-  /// Material 3 guide introduces a new color system with key colors and tonal
-  /// palettes, see
-  /// https://m3.material.io/styles/color/the-color-system/key-colors-tones.
+  /// Defaults to false, and uses same background style as Material Design
+  /// guide and Flutter.
   ///
-  /// You can opt-in on using this new M3 color system by creating your tonal
-  /// theme colors using the effective [primary], [secondary] and [tertiary]
-  /// colors in the factory, as key colors to create tonal palettes for
-  /// these main Material 3 color palettes.
-  /// Colors from these key color seed generated palettes will then be used as
-  /// color tones for the produce [ColorScheme], as defined by the Material 3
-  /// design guide. By studying the Flutter SDK [ColorScheme.fromSeed] factory
-  /// you can see which color tone from what key color is used where.
-  /// [FlexColorScheme] uses the same assignments for the tones to the
-  /// generated [ColorScheme] when you opt in using Material 3 tonal palettes.
+  /// Additional tooltip styles when NOT opting in on FlexColorScheme sub
+  /// themes are:
   ///
-  /// The [FlexColorScheme] light and dark factory offer more control over the
-  /// seed generation setup. With [ColorScheme.fromSeed] you can only generate
-  /// the [ColorScheme] from one key color, the primary color. With
-  /// [FlexColorScheme] factories  you can use separate key colors for
-  /// [secondary] and [tertiary] from the [primary] color, to make their
-  /// tonal palettes. The effective colors in your [FlexColorScheme] for these
-  /// color properties are used as key color inputs when you provide a
-  /// [FlexKeyColors] via [keyColors] and enable it by setting
-  /// [FlexKeyColors.useKeyColors] to true, which it is in its default
-  /// constructor, so to enable it you can just pass in a default
-  /// FlexKeyColors() to [keyColors].
+  /// - tooltipsMatchBackground: false
+  ///   - none
   ///
-  /// By setting [FlexKeyColors.useSecondary] or
-  /// [FlexKeyColors.useTertiary] to false, the corresponding effective colors
-  /// in [FlexColorScheme] will not be used as keys for corresponding
-  /// [TonalPalette]. If one is off, its tonal palette will instead be based on
-  /// the primary color as key. If both are false, the [FlexColorScheme.light]
-  /// seeding algorithm becomes the same as using [ColorScheme.fromSeed]. The
-  /// primary color is always used as seed color when key color seeding is
-  /// enabled with [FlexKeyColors.useKeyColors] set to true.
+  /// - tooltipsMatchBackground: true
+  ///   - light theme:
+  ///     - background: Color(0xF0FCFCFC),
+  ///     - text: black
+  ///   - Dark theme:
+  ///     - background: Color(0xED444444),
+  ///     - text: white
+  ///   - Border radius: 4 dp
+  ///   - Border: Yes, dividerColor
+  ///   - Desktop OS (macOS, Linux, Windows)
+  ///     - Font size : 12 dp
+  ///   - Mobile OS (iOS, Android, Fuchsia)
+  ///     - Font size : 14 dp
   ///
-  /// You can also opt to keep selected effective main colors, primary,
-  /// secondary, tertiary and their containers, in your [FlexColorScheme] as
-  /// their effective color, even when you enable key color based
-  /// seeded tonal palette based ColorScheme output. You do this by
-  /// setting [FlexKeyColors.keepPrimary], [FlexKeyColors.keepSecondary] etc to
-  /// true, for each color property where you want to keep its exact color value
-  /// as defined, but otherwise may be OK with using key seeded color values.
+  /// Additional styles when opting in on FlexColorScheme sub themes are:
   ///
-  /// You can use this feature if you for example want to use an exact
-  /// predefined primary brand color in light mode, but are OK with all other
-  /// colors using tones derived from its Material 3 tonal palette.
+  /// - Desktop OS (macOS, Linux, Windows)
+  ///   - Font size : 12 dp
+  /// - Mobile OS (iOS, Android, Fuchsia)
+  ///   - Font size : 14 dp
+  /// - Border radius: 8 dp
+  /// - Border: Yes, dividerColor
+  /// - tooltipsMatchBackground: false
+  ///   - light theme:
+  ///     - background: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%
+  ///     - text: white
+  ///   - Dark theme:
+  ///     - background: Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%
+  ///     - text: black
+  /// - tooltipsMatchBackground: true
+  ///   - light theme:
+  ///     - background:  Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%
+  ///     - text: black
+  ///   - Dark theme:
+  ///     - background: Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%
+  ///     - text: white
   ///
-  /// When you use key color based seeded theme generation, the used key inputs
-  /// for primary, secondary and tertiary are only used to set and generate the
-  /// tone of the palette used for each colors tonal palette. You will rarely
-  /// see the same color on that actual, primary, secondary and tertiary color
-  /// in the produced [ColorScheme], unless you lock them down with the "keep"
-  /// properties.
+  /// When using additional theming via sub-themes properties, its
+  /// properties will if used override background color, text color and
+  /// background opacity as well as border radius.
   ///
-  /// The same tonal palette should typically be used for both
-  /// light and dark mode colors. Under the hood [FlexColorScheme] selects the
-  /// right color tone from the tonal palette, which is different for light and
-  /// dark mode. For a matched light and dark theme, you should use the same
-  /// input key color. When you use [FlexColorScheme.light] and
-  /// [FlexColorScheme.dark] and the [FlexScheme] enum based [scheme] property,
-  /// to use a built-in color scheme, it automatically uses also its
-  /// predefined light theme mode defined colors as the key colors for
-  /// primary, secondary and tertiary in dark mode, to ensure that the produced
-  /// [ColorScheme] is using same tonal palette, but only different tones from
-  /// it  for light and dark mode.
+  /// ## [subThemesData]
   ///
-  /// When you use [colors], [colorScheme] or direct override color properties
-  /// [primary], [secondary] or [tertiary] in the factories, these effective
-  /// colors are used directly as key color inputs. It is then up to
-  /// you to decide and design if you use the same key color for tonal palette
-  /// generation in light and dark mode.
+  /// Activate using FlexColorScheme opinionated component sub-themes by
+  /// passing in a default `FlexSubThemesData()`.
   ///
-  /// If you use [colorScheme] or pass in [primary], [secondary] or
-  /// [tertiary], and enable using [keyColors] the generated scheme will first
-  /// use color from passed in direct color properties [primary], [secondary]
-  /// or [tertiary], as key colors, then the same ones from the passed in
-  /// [colorScheme] when it generates the output [ColorScheme] using the active
-  /// [FlexKeyColors] setup.
+  /// To further configure the sub-themes, change the simple flat value
+  /// properties as desired in `FlexSubThemesData()`.
   ///
-  /// The generated [ColorScheme]'s properties will override all color
-  /// properties that were passed in  via a [colorScheme], except those locked
-  /// via the `keep` properties in [FlexKeyColors].
+  /// By default [FlexThemeData.light], [FlexThemeData.dark] and
+  /// [FlexColorScheme.toTheme], do as little as they need to just
+  /// provide a consistent Material 2 color schemed theme. The additions they
+  /// do are described in [FlexColorScheme.toTheme].
   ///
-  /// If you assign override colors via direct color properties for the main
-  /// colors [primary], [secondary] or [tertiary] and their containers, they
-  /// will also only override the generated resulting [ColorScheme] if the
-  /// the `keep` properties are set in [FlexKeyColors]. Other color properties
-  /// that exist as both direct color properties and as a color in the
-  /// generated resulting [ColorScheme], will be overridden by the generated
-  /// colors scheme colors.
+  /// The original purpose of the opinionated sub-themes was to make it easy
+  /// to add themed corner radius to all Widgets that support it, and to
+  /// provide a consistent look on all buttons, including [ToggleButtons].
   ///
-  /// Normally if you provide an entire [colorScheme] to [FlexColorScheme] it
-  /// is typically because you already have a scheme that you want to use as is,
-  /// then don't enable [keyColors] or any blends. It is however possible to
-  /// apply both blends to passed in [colorScheme] surfaces or to just use
-  /// the [primary], [secondary] or [tertiary] colors in passed in [colorScheme]
-  /// as [keyColors] to generate an entirely new [ColorScheme] from the passed
-  /// in colors, using [primary], [secondary] or [tertiary] as keys.
+  /// Therefore the sub themes are a convenient way to opt-in on customized
+  /// corner radius on Widgets using above themes. By opting in you can set
+  /// corner radius for all covered Widgets to same corner radius in one go.
+  /// There are also properties to override the global default for each widget
+  /// to set different rounding per widget if so desired.
+  ///
+  /// By default, if a [FlexSubThemesData.defaultRadius] is not specified, each widgets corner
+  /// radius and some other styling take inspiration from the Material 3 (M3)
+  /// specification https://m3.material.io/ and uses its specifications as
+  /// defaults when it is possible to do so in Flutter SDK theming when using
+  /// Material2 mode and via defaults also in Material 3 mode.
+  ///
+  /// By opting in via a default [subThemesData] you
+  /// get an extensive set of widget component sub themes applied.
+  /// They can be customized via the [subThemesData] property, that has
+  /// quick and flat sub theme configuration values in the data class
+  /// [FlexSubThemesData].
+  ///
+  /// Customizable sub-themes are available for:
+  ///
+  /// * [AppBarTheme] for [AppBar] via [FlexSubThemes.appBarTheme].
+  /// * [BottomAppBarTheme] for [BottomAppBar] via
+  ///   [FlexSubThemes.bottomAppBarTheme].
+  /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
+  ///   [FlexSubThemes.bottomNavigationBarTheme].
+  /// * [BottomSheetThemeData] for [BottomSheet] via
+  ///   [FlexSubThemes.bottomSheetTheme].
+  /// * [ButtonThemeData] for old deprecated buttons, via
+  ///   [FlexSubThemes.buttonTheme].
+  /// * [CardThemeData] for [Card] via [FlexSubThemes.cardTheme].
+  /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
+  /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
+  /// * [DatePickerThemeData] for [DatePickerDialog] via
+  ///   [FlexSubThemes.datePickerTheme].
+  /// * [DialogThemeData] for [Dialog] via [FlexSubThemes.dialogTheme].
+  /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
+  /// * [DropdownMenuThemeData] for [DropdownMenu] via
+  ///   [FlexSubThemes.dropdownMenuTheme].
+  /// * [ElevatedButtonThemeData] for [ElevatedButton] via
+  ///   [FlexSubThemes.elevatedButtonTheme].
+  /// * [FilledButtonThemeData] for [FilledButton] via
+  ///   [FlexSubThemes.filledButtonTheme].
+  /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
+  ///   [FlexSubThemes.floatingActionButtonTheme].
+  /// * [IconButtonThemeData] for [IconButton] via
+  ///   [FlexSubThemes.iconButtonTheme].
+  /// * [InputDecorationThemeData] for [InputDecoration] via
+  ///   [FlexSubThemes.inputDecorationTheme].
+  /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
+  /// * [MenuButtonThemeData] for [MenuItemButton] and [SubmenuButton] via
+  ///   [FlexSubThemes.menuButtonTheme].
+  /// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropdownMenu] via
+  ///   [FlexSubThemes.menuTheme].
+  /// * [ListTileThemeData] for [ListTile] via
+  ///   [FlexSubThemes.listTileTheme].
+  /// * [NavigationBarThemeData] for [NavigationBar] via
+  ///   [FlexSubThemes.navigationBarTheme].
+  /// * [NavigationDrawerThemeData] for [NavigationDrawer] via
+  ///   [FlexSubThemes.navigationDrawerTheme].
+  /// * [NavigationRailThemeData] for [NavigationRail] via
+  ///   [FlexSubThemes.navigationRailTheme].
+  /// * [OutlinedButtonThemeData] for [OutlinedButton] via
+  ///   [FlexSubThemes.outlinedButtonTheme].
+  /// * [PopupMenuThemeData] for [PopupMenuButton] via
+  ///   [FlexSubThemes.popupMenuTheme].
+  /// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
+  ///   [LinearProgressIndicator] via [FlexSubThemes.progressIndicatorTheme].
+  /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+  /// * [SearchBarThemeData] for [SearchBar] via [FlexSubThemes.searchBarTheme].
+  /// * [SearchViewThemeData] for [SearchBar] and its open view via
+  ///   [FlexSubThemes.searchViewTheme].
+  /// * [SegmentedButtonThemeData] for [SegmentedButton] via
+  ///   [FlexSubThemes.segmentedButtonTheme].
+  /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
+  /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
+  /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
+  /// * [TabBarThemeData] for [TabBar] via [FlexSubThemes.tabBarTheme].
+  /// * [TextButtonThemeData] for [TextButton] via
+  ///   [FlexSubThemes.textButtonTheme].
+  /// * [TextSelectionThemeData] for [TextField] via
+  ///   [FlexSubThemes.textSelectionTheme].
+  /// * [TimePickerThemeData] for [TimePickerDialog] via
+  ///   [FlexSubThemes.timePickerTheme].
+  /// * [ToggleButtonsThemeData] for [ToggleButtons] via
+  ///   [FlexSubThemes.toggleButtonsTheme].
+  /// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
+  ///
+  /// Defaults to null, resulting in FlexColorScheme not using any extra
+  /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
+  ///
+  /// ## [keyColors]
+  ///
+  /// To use and activate Material 3 color system based [ColorScheme]
+  /// defined via key colors for primary, secondary and tertiary colors and
+  /// the [TonalPalette] generated by these key color values, pass
+  /// in a [FlexKeyColors] to [keyColors].
+  ///
+  /// By default it is not defined (null), and a traditional manually
+  /// configured color scheme will be created based on input property values
+  /// or a passed in [colorScheme].
+  ///
+  /// If a [FlexKeyColors] instance is passed in, the key color seeding
+  /// behavior depends on properties defined in the [FlexKeyColors]
+  /// instance. The default constructor makes one where
+  /// [FlexKeyColors.useKeyColors] is true, it will automatically enable usage
+  /// of the used light scheme's primary color as key color and to seed
+  /// generated a color scheme. The result will by default be equal to using
+  /// Flutter SDK [ColorScheme.fromSeed]. With [FlexKeyColors] you can also
+  /// use [secondary] and [tertiary] colors as key colors. Currently Flutter
+  /// SDK does not support this.
+  ///
+  /// For more information on Material 3 color system and usage of key colors
+  /// to generate tonal palettes and tones, see:
+  /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
+  ///
+  /// ## [useMaterial3ErrorColors]
+  ///
+  /// Set to true, to use the new Material 3 error colors.
+  ///
+  /// If [useMaterial3ErrorColors] is false, the generated [ColorScheme]
+  /// and [ThemeData] will use Material 2 default error colors or
+  /// error colors as defined by the built in color schemes. Thus using same
+  /// error colors as in FlexColorScheme versions before version 5.
+  ///
+  /// If [useMaterial3ErrorColors] is true, the resulting [ColorScheme]
+  /// and [ThemeData] will use the Material 3 design guide error colors.
+  ///
+  /// Key color seed generated [ColorScheme]s always use the Material 3
+  /// design guide error colors, or error colors from its customized
+  /// [TonalPalette] generation setup.
+  ///
+  /// ## [tones]
+  ///
+  /// A configuration class enabling complete customization of
+  /// used chroma for [TonalPalette] generation for the used seed [keyColors],
+  /// as well as changing which tone in the tonal palettes is used
+  /// for which [ColorScheme] color.
+  ///
+  /// By default a [FlexTones] configuration [FlexTones.material] that
+  /// matches what Flutter SDK does with [ColorScheme.fromSeed] is used.
+  ///
+  /// There are six other built-in definitions that you can use, they can also
+  /// serve as an example of how you can make custom [FlexTones]
+  /// configurations.
+  ///
+  /// ## [variant]
+  ///
+  /// An optional way to select the used algorithm for seeded [ColorScheme]
+  /// generation, can be used instead of a [FlexTones] provided in [tones].
+  ///
+  /// The [variant] and [tones] are mutually exclusive, only one of them
+  /// can be used. If both are null, the default from [tones] is used.
+  ///
+  /// The [variant] selections includes all the Flutter SDK defined options
+  /// that will be available in the future in Flutter Stable after 3.22.x,
+  /// that are available in master channel now but did not land in Flutter
+  /// 3.22. Variant options that are identical to the Flutter SDK options
+  /// have [FlexSchemeVariant.isFlutterScheme] set to true. These
+  /// enum options will not respect and use any other seed generation keys
+  /// than the `primaryKey`, as they only support using one seed color.
+  ///
+  /// The [FlexSchemeVariant] also includes quick selections for all the
+  /// predefined [FlexTones] configurations. However, with [variant] you can
+  /// only select one of the predefined configurations, and not make custom
+  /// configurations like you can with [FlexTones]. Additionally you cannot
+  /// use the [FlexTones] modifiers [FlexTones.monochromeSurfaces], [FlexTones.onMainsUseBW],
+  /// [FlexTones.onSurfacesUseBW] and [FlexTones.surfacesUseBW], since they only operate on the
+  /// [FlexTones] configurations passed in to [tones].
+  ///
+  /// ## [visualDensity]
+  ///
+  /// The density value for specifying the compactness of various UI
+  /// components.
+  ///
+  /// Consider using [FlexColorScheme.comfortablePlatformDensity],
+  /// it is similar to [VisualDensity.adaptivePlatformDensity], but the
+  /// density for desktop and Web is less dense in order to offer a bit larger
+  /// touch friendly surfaces, but not quite as large as small touch devices.
+  ///
+  /// This is the same property as in [ThemeData] factory, it is just
+  /// passed along to it. Included for convenience to avoid a copyWith if
+  /// to change it.
+  ///
+  /// Density, in the context of a UI, is the vertical and horizontal
+  /// "compactness" of the elements in the UI. It is unit less, since it means
+  /// different things to different UI elements. For buttons, it affects the
+  /// spacing around the centered label of the button. For lists, it affects
+  /// the distance between baselines of entries in the list.
+  ///
+  /// Typically, density values are integral, but any value in range may be
+  /// used. The range includes values from [VisualDensity.minimumDensity]
+  /// (which is -4), to [VisualDensity.maximumDensity] (which is 4),
+  /// inclusive, where negative values indicate a denser, more compact, UI,
+  /// and positive values indicate a less dense, more expanded, UI. If a
+  /// component doesn't support the value given, it will clamp to the nearest
+  /// supported value.
+  ///
+  /// The default for visual densities is zero for both vertical and
+  /// horizontal densities, which corresponds to the default visual density of
+  /// components in the Material Design specification.
+  ///
+  /// As a rule of thumb, a change of 1 or -1 in density corresponds to 4
+  /// logical pixels. However, this is not a strict relationship since
+  /// components interpret the density values appropriately for their needs.
+  ///
+  /// A larger value translates to a spacing increase (less dense), and a
+  /// smaller value translates to a spacing decrease (more dense).
+  ///
+  /// Defaults to [VisualDensity.adaptivePlatformDensity].
+  ///
+  /// ## [textTheme]
+  ///
+  /// Text with a color that contrasts with background, surface, card and
+  /// canvas colors.
+  ///
+  /// If a default [TextTheme] from package GoogleFonts is passed.
+  /// FlexColorScheme will detect this and make the color in the passed
+  /// in `GoogleFonts` null for all its [TextStyle]s so that the correct
+  /// color for M2/M3 mode and contrast for light/dark mode is used.
+  ///
+  /// ## [primaryTextTheme]
+  ///
+  /// A text theme that contrasts with the primary color.
+  ///
+  /// If a default [TextTheme] from package GoogleFonts is passed.
+  /// FlexColorScheme will detect this and make the color in the passed
+  /// in `GoogleFonts` null for all its [TextStyle]s so that the correct
+  /// color for M2/M3 mode and contrast for primary color is used.
+  ///
+  /// ## [fontFamily]
+  ///
+  /// Name of the font family to use as default font for the text theme in
+  /// created theme.
+  ///
+  /// Same feature as in [ThemeData] factory. Used to apply the font family
+  /// name to default text theme and primary text theme, also passed along
+  /// to [ThemeData],
+  ///
+  /// ## [fontFamilyFallback]
+  ///
+  /// Name of the font families to use as fallback to main font family.
+  ///
+  /// Same feature as in [ThemeData] factory. Used to apply the font family
+  /// fallback to default text theme and primary text theme, also passed
+  /// along to [ThemeData],
+  ///
+  /// ## [package]
+  ///
+  /// Name of the font package to use with font fallback.
+  ///
+  /// Same feature as in [ThemeData] factory. Used to apply the font package
+  /// to default text theme and primary text theme, also passed along
+  /// to [ThemeData],
+  ///
+  /// ## [materialTapTargetSize]
+  ///
+  /// Configures the hit test size of certain Material widgets.
+  ///
+  /// Defaults to a [platform]-appropriate size: MaterialTapTargetSize.padded
+  /// on mobile platforms, MaterialTapTargetSize.shrinkWrap on desktop
+  /// platforms.
+  ///
+  /// ## [pageTransitionsTheme]
+  ///
+  /// Default [MaterialPageRoute] transitions per [TargetPlatform].
+  ///
+  /// [MaterialPageRoute.buildTransitions] delegates to a [platform] specific
+  /// [PageTransitionsBuilder]. If a matching builder is not found, a builder
+  /// whose platform is null is used.
+  ///
+  /// This is convenience pass through in FlexColorScheme to avoid a
+  /// [copyWith] on [ThemeData] produced by FlexColorScheme.
+  ///
+  /// ## [splashFactory]
+  ///
+  /// Defines the appearance of ink splashes produces by [InkWell]
+  /// and [InkResponse].
+  ///
+  /// Providing a [splashFactory] value will override the default one created
+  /// by [ThemeData], it will also override any splash settings in
+  /// [subThemesData].
+  ///
+  /// See also:
+  ///
+  ///  * [InkSplash.splashFactory], which defines the default splash.
+  ///  * [InkRipple.splashFactory], which defines a splash that spreads out
+  ///    more aggressively than the default.
+  ///  * [InkSparkle.splashFactory], which defines a more aggressive and
+  ///    organic splash with sparkle effects.
+  ///
+  /// ## [platform]
+  ///
+  /// The platform adaptive widgets adapt to defined target and mechanics,
+  /// like scrolling too.
+  ///
+  /// Same property as in [ThemeData] factory. Included for convenience to
+  /// avoid a copyWith to change it.
+  ///
+  /// Defaults to the current platform, as exposed by [defaultTargetPlatform].
+  /// This should be used in order to style UI elements according to platform
+  /// conventions.
+  ///
+  /// Widgets from the material library should use this getter (via
+  /// [Theme.of]) to determine the current platform for the purpose of
+  /// emulating the platform behavior (e.g. scrolling or haptic effects).
+  /// Widgets and render objects at lower layers that try to emulate the
+  /// underlying platform platform can depend on [defaultTargetPlatform]
+  /// directly, or may require that the target platform be provided as an
+  /// argument. The [Platform] object should only be used directly
+  /// when it's critical to actually know the current platform, without
+  /// any overrides possible, e.g. when a system API is about to be called.
+  ///
+  /// In a test environment, the platform returned is [TargetPlatform.android]
+  /// regardless of the host platform. (Android was chosen because the tests
+  /// were originally written assuming Android-like behavior, and we added
+  /// platform adaptations for other platforms later). Tests can check
+  /// behavior for other platforms by setting the [platform] of the [Theme]
+  /// explicitly to another [TargetPlatform] value, or by setting
+  /// [debugDefaultTargetPlatformOverride].
+  ///
+  /// When developing applications you can use this property to dynamically
+  /// in the application change the used platform and partially test and see
+  /// how adaptive widgets and scroll looks and feels on other platforms.
+  ///
+  /// ## [typography]
+  ///
+  /// The color and geometry [TextTheme] values used to configure [textTheme].
+  ///
+  /// Same property as in [ThemeData] factory.
+  /// Included for convenience to avoid a copyWith if it needs to be changed.
+  /// Default value deviates from the Flutter standard that uses the old
+  /// [Typography.material2014], in favor of newer [Typography.material2018]
+  /// as default typography if one is not provided.
+  ///
+  /// In M3 mode FCS default to [Typography.material2021] and in M2 mode to
+  /// older [Typography.material2018], which is correct for M2. Please note
+  /// that Flutter ThemeData defaults to even older Typography
+  /// [Typography.material2014] when not using M3. This is done for legacy
+  /// compatibility reasons, you should use 2018 with M2.
+  ///
+  /// ## [applyElevationOverlayColor]
+  ///
+  /// Apply a semi-transparent overlay color on Material surfaces to indicate
+  /// elevation for dark themes.
+  ///
+  /// Same property as in [ThemeData] factory. Included for convenience to
+  /// avoid a copyWith change it.
+  ///
+  /// In FlexColorScheme it defaults to true. In Flutter [ThemeData.from] it
+  /// also default to true, but in [ThemeData] factory it defaults to false.
+  ///
+  /// Material drop shadows can be difficult to see in a dark theme, so the
+  /// elevation of a surface should be portrayed with an "overlay" in addition
+  /// to the shadow. As the elevation of the component increases, the
+  /// overlay increases in opacity. The [applyElevationOverlayColor] turns the
+  /// application of this overlay on or off for dark themes.
+  ///
+  /// If true and [brightness] is [Brightness.dark], a
+  /// semi-transparent version of [ColorScheme.onSurface] will be
+  /// applied on top of [Material] widgets that have a [ColorScheme.surface]
+  /// color. The level of transparency is based on [Material.elevation] as
+  /// per the Material Dark theme specification.
+  ///
+  /// If false the surface color will be used unmodified.
+  ///
+  /// Defaults to false in order to maintain backwards compatibility with
+  /// apps that were built before the Material Dark theme specification
+  /// was published. New apps should set this to true for any themes
+  /// where [brightness] is [Brightness.dark].
+  ///
+  /// See also:
+  ///
+  ///  * [Material.elevation], which effects the level of transparency of the
+  ///    overlay color.
+  ///  * [ElevationOverlay.applyOverlay], which is used by [Material] to apply
+  ///    the overlay color to its surface color.
+  ///  * <https://material.io/design/color/dark-theme.html>, which specifies
+  ///    how the overlay should be applied.
+  ///
+  /// Known limitations:
+  ///
+  /// Because of how the overlay color application is implemented in Flutter
+  /// SDK, you will only get overlay color applied in dark mode when this
+  /// value  is true, if the [Material] surface color being elevated is equal
+  /// to [ThemeData.colorScheme] and its [ColorScheme.surface] color property.
+  ///
+  /// Thus when using color branded surfaces, if you want all [Material]
+  /// surfaces in your theme to get an overlay color in dark mode, you must
+  /// for dark themes only use background colors that are equal to the surface
+  /// color. When using [FlexColorScheme.dark], use a [FlexSurfaceMode]
+  /// where surfaces share the same blend as each other, such as
+  /// [FlexSurfaceMode.level]. That said, if using heavy color branding,
+  /// some surfaces may not need any overlay color, so the
+  /// lack of it might not be an issue with other modes in such themes.
+  /// For more information about this limitation see Flutter SDK issue:
+  /// https://github.com/flutter/flutter/issues/90353
+  ///
+  /// ## [cupertinoOverrideTheme]
+  ///
+  /// Components of the [CupertinoThemeData] to override from the Material
+  /// [ThemeData] adaptation.
+  ///
+  /// By default, [cupertinoOverrideTheme] is null and Cupertino widgets
+  /// descendant to the Material [Theme] will adhere to a [CupertinoTheme]
+  /// derived from the Material [ThemeData]. e.g. [ThemeData]'s [ColorScheme]
+  /// will also inform the [CupertinoThemeData.primaryColor] etc.
+  ///
+  /// This cascading effect for individual attributes of the
+  /// [CupertinoThemeData]
+  /// can be overridden using attributes of this [cupertinoOverrideTheme].
+  ///
+  /// ## [useMaterial3]
+  ///
+  /// A temporary flag used to disable Material-3 design and use legacy
+  /// Material-2 design instead. Material-3 design is the default.
+  /// Material-2 will be deprecated in Flutter.
+  ///
+  /// Flutter SDK [useMaterial3] documentation:
+  /// --------------------------------------------------------
+  /// A temporary flag that can be used to opt-out of Material 3 features.
+  ///
+  /// This flag is _true_ by default. If false, then components will
+  /// continue to use the colors, typography and other features of
+  /// Material 2.
+  ///
+  /// In the long run this flag will be deprecated and eventually
+  /// only Material 3 will be supported. We recommend that applications
+  /// migrate to Material 3 as soon as that's practical. Until that migration
+  /// is complete, this flag can be set to false.
+  ///
+  /// ## Defaults
+  ///
+  /// If a [ThemeData] is _constructed_ with [useMaterial3] set to true, then
+  /// some properties will get updated defaults. However, the
+  /// [ThemeData.copyWith] method with [useMaterial3] set to true will _not_
+  /// change any of these properties in the resulting [ThemeData].
+  ///
+  /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; } td { border: 1px solid }</style>
+  ///
+  /// | Property        | Material 3 default           | Material 2 default  |
+  /// | :-------------- | :--------------------------- | :------------------ |
+  /// | [colorScheme] | M3 baseline light scheme | M2 baseline light scheme |
+  /// | [typography] | [Typography.material2021] | [Typography.material2014] |
+  /// | [splashFactory] | [InkSparkle]* or [InkRipple]   | [InkSplash]    |
+  ///
+  /// \* if the target platform is Android and the app is not
+  /// running on the web, otherwise it will fallback to [InkRipple].
+  ///
+  /// If [brightness] is [Brightness.dark] then the default color scheme will
+  /// be either the M3 baseline dark color scheme or the M2 baseline dark
+  /// color scheme depending on [useMaterial3].
+  ///
+  /// ## Affected widgets
+  ///
+  /// This flag affects styles and components.
+  ///
+  /// ### Styles
+  ///   * Color: [ColorScheme], [Material] (see table above)
+  ///   * Shape: (see components below)
+  ///   * Typography: [Typography] (see table above)
+  ///
+  /// ### Components
+  ///   * Badges: [Badge]
+  ///   * Bottom app bar: [BottomAppBar]
+  ///   * Bottom sheets: [BottomSheet]
+  ///   * Buttons
+  ///     - Common buttons: [ElevatedButton], [FilledButton],
+  ///       [FilledButton.tonal], [OutlinedButton], [TextButton]
+  ///     - FAB: [FloatingActionButton], [FloatingActionButton.extended]
+  ///     - Icon buttons: [IconButton], [IconButton.filled] (*new*),
+  ///       [IconButton.filledTonal], [IconButton.outlined]
+  ///     - Segmented buttons: [SegmentedButton] (replacing [ToggleButtons])
+  ///   * Cards: [Card]
+  ///   * Checkbox: [Checkbox], [CheckboxListTile]
+  ///   * Chips:
+  ///     - [ActionChip] (used for Assist and Suggestion chips),
+  ///     - [FilterChip], [ChoiceChip] (used for selection filter chips),
+  ///     - [InputChip]
+  ///   * Date pickers: [showDatePicker], [showDateRangePicker],
+  ///     [DatePickerDialog], [DateRangePickerDialog],
+  ///     [InputDatePickerFormField]
+  ///   * Dialogs: [AlertDialog], [Dialog.fullscreen]
+  ///   * Divider: [Divider], [VerticalDivider]
+  ///   * Lists: [ListTile]
+  ///   * Menus: [MenuAnchor], [DropdownMenu], [MenuBar]
+  ///   * Navigation bar: [NavigationBar] (replacing [BottomNavigationBar])
+  ///   * Navigation drawer: [NavigationDrawer] (replacing [Drawer])
+  ///   * Navigation rail: [NavigationRail]
+  ///   * Progress indicators: [CircularProgressIndicator],
+  ///     [LinearProgressIndicator]
+  ///   * Radio button: [Radio], [RadioListTile]
+  ///   * Search: [SearchBar], [SearchAnchor],
+  ///   * Snack bar: [SnackBar]
+  ///   * Slider: [Slider], [RangeSlider]
+  ///   * Switch: [Switch], [SwitchListTile]
+  ///   * Tabs: [TabBar], [TabBar.secondary]
+  ///   * TextFields: [TextField] together with its [InputDecoration]
+  ///   * Time pickers: [showTimePicker], [TimePickerDialog]
+  ///   * Top app bar: [AppBar], [SliverAppBar], [SliverAppBar.medium],
+  ///     [SliverAppBar.large]
+  ///
+  /// In addition, this flag enables features introduced in Android 12.
+  ///   * Stretch overscroll: [MaterialScrollBehavior]
+  ///   * Ripple: [splashFactory] (see table above)
+  ///
+  /// See also:
+  ///
+  ///   * [Material 3 specification](https://m3.material.io/).
+  ///
+  /// ## [swapLegacyOnMaterial3]
+  ///
+  /// Set to true to automatically swap secondary and tertiary colors, on
+  /// built-in color schemes when [useMaterial3] is true, that benefit
+  /// from it to better match the Material 3 color system design intent.
+  ///
+  /// Starting with FlexColorScheme version 6.1.0, built-in color schemes,
+  /// defined via [FlexSchemeColor], have a flag [FlexSchemeColor.swapOnMaterial3]. When
+  /// defined to be true, the scheme will benefit if the [secondary] and
+  /// [tertiary] colors, including their containers, are swapped when using
+  /// Material 3. Most FlexColorScheme color schemes were designed with
+  /// M2 usage in mind, before M3 existed. They may often have their
+  /// [FlexSchemeColor.swapOnMaterial3] set to true. If this flag is false, it may mean
+  /// that its [FlexSchemeColor] was designed for M3 or that it won't
+  /// benefit from swapping its secondary and tertiary colors. In the
+  /// [Scheme Reference](https://docs.flexcolorscheme.com/scheme_reference),
+  /// you can see which schemes have the flag defined to true.
+  ///
+  /// Using a seed-generated color scheme based on built-in FlexSchemeColor
+  /// colors is another way to make them suitable for the M3 Color system.
+  /// However, in some cases, the secondary color in their design may not
+  /// be in-line with the M3 color system design intent, especially if you
+  /// use the config that also uses the hue from the secondary color to
+  /// make tonal palettes for it. In some legacy FlexSchemeColor color
+  /// designs this can be fixed if we swap the secondary and tertiary colors.
+  ///
+  /// To make FlexSchemeColor designs color designs that benefit from it
+  /// automatically swap secondary and tertiary colors when [useMaterial3]
+  /// is set to true, set [swapLegacyOnMaterial3] to true. It defaults to
+  /// false, for backward compatibility, but it is recommended to turn
+  /// it on when using Material 3 and its color system. If you use
+  /// seeded color schemes with Material 2, [useMaterial3] flag is false,
+  /// then it may be preferable to keep [FlexSchemeColor.swapOnMaterial3] false for more
+  /// prominent colors on secondaries.
+  ///
+  /// This color swap has higher priority than [swapColors], using it will
+  /// always happen on the effective result of [swapLegacyOnMaterial3] and
+  /// [useMaterial3], and value of [FlexSchemeColor.swapOnMaterial3] in currently used
+  /// built-in scheme [FlexSchemeColor].
+  ///
+  /// If a custom [colorScheme] is passed in, or any of the direct color
+  /// properties [secondary], [secondaryContainer], [tertiary] or
+  /// [tertiaryContainer], then it is assumed a custom scheme or overrides,
+  /// are being used and the [swapLegacyOnMaterial3] setting does nothing.
+  ///
+  /// The Themes Playground app defaults to setting [swapLegacyOnMaterial3]
+  /// to ON (true), but allows you to turn it OFF.
+  ///
+  /// Defaults to false, for backwards compatibility, but prefer setting it
+  /// to true if you also set [useMaterial3] to true.
+  ///
+  /// ## [extensions]
+  ///
+  /// Arbitrary additions to this theme.
+  ///
+  /// This is the same property as [extensions] in ThemeData, it is provided
+  /// as a convenience pass-through to ThemeData.
+  ///
+  /// To define extensions, pass an [Iterable] containing one or more
+  /// [ThemeExtension] subclasses to [ThemeData.new] or [copyWith].
+  ///
+  /// To obtain an extension, use ThemeData.of(context).extension.
   factory FlexColorScheme.dark({
-    /// The [FlexSchemeColor] used to create the dark [FlexColorScheme] from.
-    ///
-    /// You can use predefined [FlexSchemeColor] values from [FlexColor] or
-    /// [FlexColor.schemes] map or define your own colors with
-    /// [FlexSchemeColor] or [FlexSchemeColor.from].
-    ///
-    /// For using built-in color schemes, the convenience shortcut to select
-    /// it with the [scheme] property is recommended and leaving [colors]
-    /// undefined. If both are specified the scheme colors defined by [colors]
-    /// are used. If both are null then [scheme] defaults to
-    /// [FlexScheme.material], thus defining the resulting scheme.
-    final FlexSchemeColor? colors,
+    /// The `FlexSchemeColor` used to create the dark `FlexColorScheme` from.
+    FlexSchemeColor? colors,
 
-    /// Use one of the built-in color schemes defined by enum [FlexScheme].
-    ///
-    /// Give it one of the enum values to use the scheme, like eg.
-    /// [FlexScheme.mandyRed].
-    ///
-    /// To create custom color schemes use the [colors] property. If both
-    /// [colors] and [scheme] are specified, the scheme defined by
-    /// [colors] is used. If both are null, then [scheme] defaults to
-    /// [FlexScheme.material] if [useMaterial3] is false, and to
-    /// [FlexScheme.materialBaseline] [useMaterial3] is true.
-    final FlexScheme? scheme,
+    /// Use one of the built-in color schemes defined by enum `FlexScheme`.
+    FlexScheme? scheme,
 
-    /// The overall [ColorScheme] based colors for the theme.
-    ///
-    /// This property provides a new way to define custom colors for
-    /// [FlexColorScheme] and is available from version 4.2.0. It is useful if
-    /// you already have a custom [ColorScheme] based color definition that
-    /// you want to use with FlexColorScheme theming and its sub-theming
-    /// capabilities.
-    ///
-    /// If you provide both a [ColorScheme] and some individual direct property
-    /// values that also exist in a [ColorScheme], the individual property
-    /// values will override the corresponding ones in your [ColorScheme].
-    ///
-    /// If you do not define a [colorScheme], the used colors will be determined
-    /// by the [colors] and [scheme] properties. However, when a [colorScheme]
-    /// is defined it takes precedence. The [brightness] in the provided
-    /// [colorScheme] is always ignored and set to [Brightness.dark] since this
-    /// is the dark theme mode factory. Make sure the colors used in your color
-    /// scheme are intended for a dark theme.
-    ///
-    /// If you define a [surfaceMode] and set [blendLevel] > 0, then [surface],
-    /// [surfaceVariant], [background] and [inverseSurface] colors in the
-    /// provided [colorScheme] will be overridden by the computed color branded
-    /// surfaces. If your [colorScheme] already contains branded surface colors,
-    /// then keep [blendLevel] = 0 to continue using them.
-    ///
-    /// If you use [darkIsTrueBlack] factory feature, it will also override your
-    /// [colorScheme] based mentioned color properties above and make them
-    /// 5% darker.
-    ///
-    /// If you opt in on using sub themes and have set
-    /// [subThemesData.blendOnColors] to true and have defined [surfaceMode]
-    /// and set [blendLevel] > 0, then the effective color scheme based on
-    /// colors onPrimary, onSecondary, onError, onSurface and onBackground will
-    /// be changed accordingly too.
-    ///
-    /// The [colorScheme] colors are also included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// The [FlexColorScheme]'s effective [ColorScheme] can be returned with
-    /// [toScheme]. This will always get you a complete color scheme, including
-    /// calculated and derived color values, which is particularly useful when
-    /// using the [FlexColorScheme.light] and [FlexColorScheme.dark] factories
-    /// to compute color scheme branded surface colors for you. The effective
-    /// [ColorScheme] for your theme is often needed if you want to create
-    /// custom sub-themes that should use the colors from the scheme using none
-    /// default color assignments from the color scheme.
-    final ColorScheme? colorScheme,
+    /// The overall `ColorScheme` based colors for the theme.
+    ColorScheme? colorScheme,
 
     /// The selection of the six main scheme colors to be used when creating
-    /// effective [ColorScheme].
-    ///
-    /// This is a convenience property that allows you to vary which colors to
-    /// use of the primary, secondary and tertiary colors and their container
-    /// colors when FlexSchemeColor creates its effective [ColorScheme] from
-    /// the input colors. The integer number corresponds to using:
-    ///
-    /// * 1 = Only the primary color
-    /// * 2 = Primary & Secondary colors
-    /// * 3 = Primary + container & Secondary colors
-    /// * 4 = Primary + container & Secondary + container
-    /// * 5 = Primary + container & Secondary + container & tertiary colors
-    /// * 6 = Primary + container & Secondary + container & tertiary + container
-    /// * 7 = Primary, Secondary and tertiary, container colors computed.
-    ///
-    /// By default the value is 6 and all main scheme colors in
-    /// `FlexSchemeColor` are used.
-    ///
-    /// The integer value is not a very obvious property to use to configure
-    /// this feature. Future version may improve it. However with the Themes
-    /// Playground you don't have to remember what number does what.
-    ///
-    /// When the value is 1, the result is the same as if we would have
-    /// created the colors with [FlexSchemeColor.from] by only giving it the
-    /// required primary color. With 2, it is equivalent to as if we would have
-    /// given it only the primary and secondary colors, and so on.
-    /// This property makes it possible to simulate and change the resulting
-    /// [FlexColorScheme] to as if you would have specified 1, 2, 3 ... 7 of
-    /// the color selection. If your used [FlexColorScheme] `colors` was
-    /// actually created with [FlexSchemeColor.from] with only the primary
-    /// color defined, then changing the value from 7 ... 3, 2 or 1, will
-    /// all produce the same effective scheme as the computed values will be
-    /// the same as the [FlexSchemeColor.from] is using to compute any main
-    /// missing scheme color values.
-    final int usedColors = 6,
+    /// effective `ColorScheme`.
+    int usedColors = 6,
 
     /// Blends surface tint color into all surface colors and
     /// scaffold background color.
-    ///
-    /// The [surfaceMode] defines the relative strength of the alpha blend
-    /// value for different surfaces.
-    ///
-    /// If undefined, defaults to [FlexSurfaceMode.level].
-    final FlexSurfaceMode? surfaceMode,
+    FlexSurfaceMode? surfaceMode,
 
     /// Sets the blend level strength used by the surface mode.
-    ///
-    /// The blend level is the integer decimal value of the alpha value
-    /// used in the alpha blend function. It mixes one color with another
-    /// by using alpha opacity value in the color of a surface put on top of
-    /// another surface with opaque color and returns the result as one opaque
-    /// color.
-    ///
-    /// Defaults to 0.
-    final int blendLevel = 0,
+    int blendLevel = 0,
 
     /// The style and method used to compute the fixed, fixedDim colors and
-    /// their on colors in a [ColorScheme] using the palettes provided main
+    /// their on colors in a `ColorScheme` using the palettes provided main
     /// light mode color.
-    ///
-    /// The main color should always be the light theme's [ColorScheme.primary],
-    /// [ColorScheme.secondary] or [ColorScheme.tertiary]. This means that a
-    /// dark mode theme needs to know what colors were used for the
-    /// light mode colors for [ColorScheme.primary], [ColorScheme.secondary] or
-    /// [ColorScheme.tertiary]. It is not a strict requirement, but necessary
-    /// if you want the fixed and fixedDim colors to follow the Material-3
-    /// guide's color system, where these colors are derived from the main light
-    /// color palette color and have same computed color values in dark mode.
-    ///
-    /// The two available options, offer different nuances for the fixed color
-    /// and fixedDim color generation.
-    ///
-    /// The computed [FlexFixedColorStyle.computed] is made with simpler color
-    /// math and uses same principles as [FlexSchemeColor.from] does when not
-    /// using seed generated ColorSchemes and it generates missing colors.
-    /// This version may fit better with the computed and not seed generated
-    /// ColorSchemes.
-    ///
-    /// The [FlexFixedColorStyle.seeded] version is bit more expensive as it
-    /// requires creating a seeded ColorScheme even when a seed generated
-    /// ColorScheme is not being used. This version may in some cases produce
-    /// visually more appealing results.
-    ///
-    /// If not defined, defaults to [FlexFixedColorStyle.computed].
-    final FlexFixedColorStyle? fixedColorStyle,
+    FlexFixedColorStyle? fixedColorStyle,
 
-    /// Style used to define the themed color of the [AppBar] background color.
-    ///
-    /// Defaults to null, which when [useMaterial3] is false results in
-    /// [FlexAppBarStyle.material] which produces the same results
-    /// as a Flutter standard M2 dark [ThemeData.from] by tying the app bar
-    /// color to the M2 dark Material color. If [useMaterial3] is true it
-    /// defaults [FlexAppBarStyle.surface] which is the same as M3 default.
-    ///
-    /// If you enable component themes you can also control the themed
-    /// [AppBar] by selecting any active [ColorScheme] as its background color.
-    /// If you do so, the setting applied by this property is ignored.
-    final FlexAppBarStyle? appBarStyle,
+    /// Style used to define the themed color of the `AppBar` background color.
+    FlexAppBarStyle? appBarStyle,
 
-    /// Themed [AppBar] opacity.
-    ///
-    /// The opacity is applied to the effective AppBar color, which may be from
-    /// used [appBarStyle], that gets its color selection from used [scheme]
-    /// or [colors]. Or that color may have been overridden by AppBar sub-theme
-    /// and there selected [SchemeColor] based color.
-    /// Lastly and with highest priority it may be from here directly supplied
-    /// [appBarBackground] color.
-    ///
-    /// A useful opacity range is from 0.85 to 0.95 when using the [Scaffold]
-    /// property [extendBodyBehindAppBar] set to true, to partially show
-    /// scrolling content behind the app bar. To use more opacity, in a way
-    /// that the AppBar does not become too transparent, you also need to blur
-    /// the background to create a frosted glass effect. This cannot
-    /// be made with only theming, you need a custom AppBar Widget for that.
-    /// Frosted glass UI effect is thus beyond the scope of what
-    /// FlexColorScheme can do alone as it only affects ThemeData.
-    ///
-    /// If null, defaults to 1, fully opaque, no transparency.
-    /// If not null, must be from 0 to 1.
-    final double? appBarOpacity,
+    /// Themed `AppBar` opacity.
+    double? appBarOpacity,
 
     /// When set to `true`, it makes the status bar on Android the same color as
     /// the rest of the AppBar.
     ///
     /// Defaults to true.
-    ///
-    /// When true, the AppBar in Android mimics the look of one-toned AppBar's
-    /// typically used on iOS. Set to `false`, to revert back and use
-    /// Android's default two-toned look. If true the status bar area is
-    /// actually also transparent so that if the app bar is also translucent,
-    /// content that scrolls behind it, is also visible behind the status
-    /// bar area.
-    ///
-    /// In default Material-2 this would be false, FCS uses an opinionated
-    /// style and sets it true. In Material-3 the style you get when setting
-    /// this to true is used by default. In M3 mode FCS will thus not create
-    /// an AppBar sub theme to adjust this, if it is true and it is not needed
-    /// for any other direct AppBar impacting properties in FlexColorScheme
-    /// constructor. In M2 mode an AppBar theme will always be created, also
-    /// when not opting in on the actual sub-themes feature, this per its
-    /// opinionated and legacy styling for M2 mode.
-    final bool transparentStatusBar = true,
+    bool transparentStatusBar = true,
 
-    /// The themed elevation for the [AppBar].
+    /// The themed elevation for the `AppBar`.
     ///
     /// If not defined, defaults to 0 in M2 (FCS opinionated) and to 0 in (M3
     /// spec default).
-    ///
-    /// The FCS 0dp elevation in M2 is an iOS style influenced opinionated
-    /// choice, it can easily be adjusted for the theme with this property.
-    final double? appBarElevation,
+    double? appBarElevation,
 
-    /// The themed elevation for the [BottomAppBar].
+    /// The themed elevation for the `BottomAppBar`.
     ///
     /// If undefined (null), defaults to 3 in M3 mode and to 8 in M2 mode,
     /// both via the defaults for the respective theme mode from Flutter's
-    /// default elevation behavior of [BottomAppBar].
-    final double? bottomAppBarElevation,
+    /// default elevation behavior of `BottomAppBar`.
+    double? bottomAppBarElevation,
 
-    /// Select preferred style for the default [TabBarThemeData].
-    ///
-    /// By default the TabBarThemeData is made to fit with the style of the
-    /// [AppBar].
-    /// In Material-2 mode that is done by defaulting to using
-    /// [FlexTabBarStyle.forAppBar] if not defined. In Material-3 mode it is
-    /// done by defaulting to using [FlexTabBarStyle.flutterDefault].
-    ///
-    /// When setting this to [FlexTabBarStyle.forBackground], it will default
-    /// to a theme that uses the color scheme and fits on background color,
-    /// which typically also on works surface and scaffoldBackground color.
-    /// This TabBarThemeData style is useful if you primarily intended to use
-    /// the TabBar in a Scaffold, Dialog, Drawer or Side panel on their
-    /// background colors.
-    final FlexTabBarStyle? tabBarStyle,
+    /// Select preferred style for the default `TabBarThemeData`.
+    FlexTabBarStyle? tabBarStyle,
 
     /// The color displayed most frequently across your app’s screens and
     /// components.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// This override color is included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// In dark mode, if you provide an override Color value for [primary] you
-    /// should also provide a value for [primaryLightRef] to ensure that the
-    /// fixed colors can be computed correctly when not using seed generated
-    /// ColorSchemes and setting [fixedColorStyle] to default.
-    ///
-    /// Defaults to null.
-    final Color? primary,
+    Color? primary,
 
-    /// If you specify an override color for [primary], you should also specify
-    /// an override for the [primaryLightRef] color when not using a seed
-    /// generated ColorSchemes and setting [fixedColorStyle] to default.
-    ///
-    /// This color is used to compute the [primaryFixed], [primaryFixedDim],
-    /// [onPrimaryFixed] and [onPrimaryFixedVariant] colors, when not using
-    /// a seed generated [ColorScheme] and using setting [fixedColorStyle] with
-    /// the default [FlexFixedColorStyle.computed] value.
-    ///
-    /// The [primaryLightRef] should have the same color value as the
-    /// primary color has in your light theme, regardless of where it is
-    /// specified.
-    ///
-    /// If you are always using a seed generated ColorScheme, and your [primary]
-    /// override is already the key color your want to use, you do not need to
-    /// also specify a [primaryLightRef], but if you do, it will be used as
-    /// seed before the [primary] color. This gives you the option to use a
-    /// given color for dark none seeded primary and giving the light mode
-    /// primary color for [primaryLightRef], so that when you use seeding
-    /// the same seed color as in light mode is used and we get the same tonal
-    /// palette for the primary palette in both light and dark mode, you
-    /// typically want this. But if you always seed and use overrides, you
-    /// can give the light  mode primary color as the primary override in dark
-    /// mode too and skip the [primaryLightRef] override.
-    final Color? primaryLightRef,
+    /// If you specify an override color for `primary`, you should also specify
+    /// an override for the `primaryLightRef` color when not using a seed
+    /// generated ColorSchemes and setting `fixedColorStyle` to default.
+    Color? primaryLightRef,
 
-    /// A color that is clearly legible when drawn on [primary] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [primary] and [onPrimary] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onPrimary,
+    /// A color that is clearly legible when drawn on `primary` color.
+    Color? onPrimary,
 
-    /// A color used for elements needing less emphasis than [primary].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory
-    /// properties [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    final Color? primaryContainer,
+    /// A color used for elements needing less emphasis than `primary`.
+    Color? primaryContainer,
 
-    /// A color that's clearly legible when drawn on [primaryContainer.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio between
-    /// [primaryContainer] and [onPrimaryContainer] of at least 4.5:1
-    /// is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onPrimaryContainer,
+    /// A color that's clearly legible when drawn on `primaryContainer`.
+    Color? onPrimaryContainer,
 
     /// A support color to primary, with less emphasis than primary, often of
     /// same hue as primary, but does not have to be.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory properties
-    /// [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// In dark mode, if you provide an override Color value for [secondary] you
-    /// should also provide a value for [secondaryLightRef] to ensure that the
-    /// fixed colors can be computed correctly when not using seed generated
-    /// ColorSchemes and setting [fixedColorStyle] to default.
-    ///
-    /// Defaults to null.
-    final Color? secondary,
+    Color? secondary,
 
-    /// If you specify an override color for [secondary], you should also
-    /// specify an override for the [secondaryLightRef] color when not using a
-    /// seed generated ColorSchemes and setting [fixedColorStyle] to default.
-    ///
-    /// This color is used to compute the [secondaryFixed], [secondaryFixedDim],
-    /// [onPrimaryFixed] and [onPrimaryFixedVariant] colors, when not using
-    /// a seed generated [ColorScheme] and using setting [fixedColorStyle] with
-    /// the default [FlexFixedColorStyle.computed] value.
-    ///
-    /// The [secondaryLightRef] should have the same color value as the
-    /// secondary color has in your light theme, regardless of where it is
-    /// specified.
-    ///
-    /// If you are always using a seed generated ColorScheme, and your
-    /// [secondary] override is already the key color your want to use, you
-    /// do not need to also specify a [secondaryLightRef], but if you do, it
-    /// will be used as seed before the [secondary] color. This gives you
-    /// the option to use a given color for dark none seeded secondary
-    /// and giving the light mode secondary color for [secondaryLightRef],
-    /// so that when you use seeding the same seed color as in light mode
-    /// is used and we get the same tonal palette for the secondary palette
-    /// in both light and dark mode, you typically want this. But if you
-    /// always seed and use overrides, you can give the light mode
-    /// secondary color as the secondary override in dark
-    /// mode too and skip the [secondaryLightRef] override.
-    final Color? secondaryLightRef,
+    /// If you specify an override color for `secondary`, you should also
+    /// specify an override for the `secondaryLightRef` color when not using a
+    /// seed generated ColorSchemes and setting `fixedColorStyle` to default.
+    Color? secondaryLightRef,
 
-    /// A color that is clearly legible when drawn on [secondary] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [secondary] and [onSecondary] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onSecondary,
+    /// A color that is clearly legible when drawn on `secondary` color.
+    Color? onSecondary,
 
-    /// A color used for elements needing less emphasis than [secondary].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory properties
-    /// [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    final Color? secondaryContainer,
+    /// A color used for elements needing less emphasis than `secondary`.
+    Color? secondaryContainer,
 
-    /// A color that's clearly legible when drawn on [secondaryContainer].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio between
-    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
-    /// is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onSecondaryContainer,
+    /// A color that's clearly legible when drawn on `secondaryContainer`.
+    Color? onSecondaryContainer,
 
-    /// A color used as a contrasting accent that can balance [primary]
-    /// and [secondary] colors or bring heightened attention to an element,
+    /// A color used as a contrasting accent that can balance `primary`
+    /// and `secondary` colors or bring heightened attention to an element,
     /// such as an input field.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory properties
-    /// [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// In dark mode, if you provide an override Color value for [tertiary] you
-    /// should also provide a value for [tertiaryLightRef] to ensure that the
-    /// fixed colors can be computed correctly when not using seed generated
-    /// ColorSchemes and setting [fixedColorStyle] to default.
-    ///
-    /// Defaults to null.
-    final Color? tertiary,
+    Color? tertiary,
 
-    /// If you specify an override color for [tertiary], you should also
-    /// specify an override for the [tertiaryLightRef] color when not using a
-    /// seed generated ColorSchemes and setting [fixedColorStyle] to default.
-    ///
-    /// This color is used to compute the [tertiaryFixed], [tertiaryFixedDim],
-    /// [onPrimaryFixed] and [onPrimaryFixedVariant] colors, when not using
-    /// a seed generated [ColorScheme] and using setting [fixedColorStyle] with
-    /// the default [FlexFixedColorStyle.computed] value.
-    ///
-    /// The [tertiaryLightRef] should have the same color value as the
-    /// tertiary color has in your light theme, regardless of where it is
-    /// specified.
-    ///
-    /// If you are always using a seed generated ColorScheme, and your
-    /// [tertiary] override is already the key color your want to use, you
-    /// do not need to also specify a [tertiaryLightRef], but if you do, it
-    /// will be used as seed before the [tertiary] color. This gives you
-    /// the option to use a given color for dark none seeded tertiary
-    /// and giving the light mode tertiary color for [tertiaryLightRef],
-    /// so that when you use seeding the same seed color as in light mode
-    /// is used and we get the same tonal palette for the tertiary palette
-    /// in both light and dark mode, you typically want this. But if you
-    /// always seed and use overrides, you can give the light mode
-    /// tertiary color as the tertiary override in dark
-    /// mode too and skip the [tertiaryLightRef] override.
-    final Color? tertiaryLightRef,
+    /// If you specify an override color for `tertiary`, you should also
+    /// specify an override for the `tertiaryLightRef` color when not using a
+    /// seed generated ColorSchemes and setting `fixedColorStyle` to default.
+    Color? tertiaryLightRef,
 
-    /// A color that's clearly legible when drawn on [tertiary].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [secondary] and [onSecondary] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onTertiary,
+    /// A color that's clearly legible when drawn on `tertiary`.
+    Color? onTertiary,
 
-    /// A color used for elements needing less emphasis than [tertiary].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    ///
-    /// The override color is included and affected by factory properties
-    /// [usedColors] and [swapColors] and included in their behavior.
-    ///
-    /// Defaults to null.
-    final Color? tertiaryContainer,
+    /// A color used for elements needing less emphasis than `tertiary`.
+    Color? tertiaryContainer,
 
-    /// A color that's clearly legible when drawn on [tertiaryContainer].
-    ///
-    /// To ensure that an app is accessible, a contrast ratio between
-    /// [secondaryContainer] and [onSecondaryContainer] of at least 4.5:1
-    /// is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onTertiaryContainer,
+    /// A color that's clearly legible when drawn on `tertiaryContainer`.
+    Color? onTertiaryContainer,
 
     /// The color to use for input validation errors, e.g. for
-    /// [InputDecoration.errorText].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? error,
+    /// `InputDecoration.errorText`.
+    Color? error,
 
-    /// A color that is clearly legible when drawn on [error] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [error] and [onError] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onError,
+    /// A color that is clearly legible when drawn on `error` color.
+    Color? onError,
 
     /// The color to use for input validation errors with less emphasis than
     /// error.
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] [scheme] property, or
-    /// if a [colorScheme] was provided it will override the same color in it
-    /// as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? errorContainer,
+    Color? errorContainer,
 
-    /// A color that is clearly legible when drawn on [errorContainer] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [error] and [onError] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onErrorContainer,
+    /// A color that is clearly legible when drawn on `errorContainer` color.
+    Color? onErrorContainer,
 
-    /// The surface (background) color for widgets like [Card] and
-    /// [BottomAppBar].
-    ///
-    /// The color is applied to [ThemeData.cardColor], [ThemeData.canvasColor]
-    /// and [ColorScheme.surface] in [ThemeData.colorScheme], it is also used
-    /// by all [Material] of type [MaterialType.card].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on mode defined by property
-    /// [surfaceMode] [FlexSurfaceMode] enum or [surfaceStyle] enum
-    /// [FlexSurface], or if a [colorScheme] was provided it will override the
-    /// same color in it as well.
-    ///
-    /// Defaults to null.
-    final Color? surface,
+    /// The surface (background) color for widgets like `Card` and
+    /// `BottomAppBar`.
+    Color? surface,
 
-    /// A color that is clearly legible when drawn on [surface] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [surface] and [onSurface] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] property or when using pre-defined color
-    /// scheme based [FlexScheme] and its [scheme] property, including any
-    /// used blend logic. If a [colorScheme] was provided with this
-    /// corresponding color defined, this color property will override the
-    /// same color in it as well.
-    ///
-    /// You can use this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    final Color? onSurface,
+    /// A color that is clearly legible when drawn on `surface` color.
+    Color? onSurface,
 
-    /// The color of the [Scaffold] background.
-    ///
-    /// The color is applied to [ThemeData.scaffoldBackgroundColor].
-    ///
-    /// If [subThemesData.scaffoldBackgroundSchemeColor] is defined, it is used
-    /// instead of this [scaffoldBackground] color.
-    ///
-    /// If no value is given, and no
-    /// [subThemesData.scaffoldBackgroundSchemeColor]
-    /// is defined, default color is [ColorScheme.surface] in M2 mode and
-    /// [ColorScheme.surfaceContainerLowest] in M3 mode.
-    final Color? scaffoldBackground,
+    /// The color of the `Scaffold` background.
+    Color? scaffoldBackground,
 
-    /// The background color used by [Dialog]s.
-    ///
-    /// In FCS versions before 8.2.0 this color is applied to
-    /// `ThemeData.dialogBackgroundColor`, a color that cannot be
-    /// controlled separately with only a [ThemeData.from] a [ColorScheme].
-    ///
-    /// In FCS version 8.2.0 and later this color is no longer applied to
-    /// `ThemeData.dialogBackgroundColor`, as the property is deprecated in
-    /// Flutter 3.29.0 and later. To get the selected dialog color sub-themes
-    /// must now be enabled.
-    ///
-    /// When using sub-themes,this color is applied to backgroundColor in
-    /// dialog themes DatePickerThemeData, DialogThemeData and
-    /// TimePickerThemeData, but only if
-    /// [subThemesData.dialogBackgroundSchemeColor] has not be defined in
-    /// [subThemesData].
-    ///
-    /// If [subThemesData.dialogBackgroundSchemeColor] is defined, it is used
-    /// instead of this [dialogBackground] color.
-    ///
-    /// If no value is given, and no [subThemesData.dialogBackgroundSchemeColor]
-    /// is defined, default color is [ColorScheme.surface] in Material-2 mode
-    /// and [ColorScheme.surfaceContainerHigh] in Material-3 mode.
-    final Color? dialogBackground,
+    /// The background color used by `Dialog`s.
+    Color? dialogBackground,
 
-    /// Background theme color for the [AppBar].
-    ///
-    /// When using the factory this is an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexSchemeColor] [colors] or for this color defined when using a
-    /// pre-defined color scheme based on [FlexScheme] `scheme` property and
-    /// the [FlexAppBarStyle] and its [appBarStyle] property.
-    ///
-    /// Thus custom color will also override any scheme color based selection
-    /// for the [AppBAr] in active used sub-themes.
-    final Color? appBarBackground,
+    /// Background theme color for the `AppBar`.
+    Color? appBarBackground,
 
     /// A custom color used as an overlay on a surface color to indicate a
     /// component's elevation and surface color branding or tinting.
-    ///
-    /// If a [colorScheme] was provided where this corresponding color is
-    /// defined, this color property will override the same color in it.
-    ///
-    /// This color is used by Material 3 for colored elevation, it is also used
-    /// as the blend color for FlexColorScheme surface blends. Additionally
-    /// this color is if provided used as key color for seeding
-    /// the neutral color palettes, when seed generated color schemes are used.
-    /// It is important that all these properties use the same color.
-    ///
-    /// Typically this color is not customized, most designs use the default
-    /// where the theme primary color is used for slightly mixing it into the
-    /// neutral background and surface colors, when seeding is used. As well as
-    /// using it for the the elevation tint in Material 3, plus for the
-    /// surface blends that can optionally be added with FlexColorScheme.
-    ///
-    /// If undefined, [primary] color is used.
-    final Color? surfaceTint,
+    Color? surfaceTint,
 
     /// Makes the dark theme backgrounds darker or even black.
-    ///
-    /// Scaffold background will become fully black and is no longer impacted
-    /// by used [blendLevel]. Other surfaces also become darker, when
-    /// using low blend levels they may become fully black too, but are still
-    /// impacted by the blend level.
-    final bool darkIsTrueBlack = false,
+    bool darkIsTrueBlack = false,
 
     /// When true, the primary and primary container colors will be swapped with
     /// their secondary counterparts.
-    ///
-    /// Set this flag to true if you want to make a theme where
-    /// your primary and secondary colors are swapped, compared to how they
-    /// are defined in the passed in color properties or used pre-defined
-    /// color scheme.
-    ///
-    /// This is useful if you want to do this with the pre-defined
-    /// schemes. If you are explicitly defining all your theme colors you can
-    /// of course define them in any desired config. Even if you do
-    /// that, this feature will still swap whatever colors you defined
-    /// for primary and secondary. You can offer this feature as an easy end
-    /// user modifiable theme option if you like. One usage possibility is to
-    /// set `swapColors` to true only for the dark modem and use your color
-    /// scheme the other way around only in dark mode.
-    final bool swapColors = false,
+    bool swapColors = false,
 
     /// When set to true, tooltip background color will match the brightness of
     /// the theme's background color.
-    ///
-    /// By default Flutter's Material tooltips use a theme where the tooltip
-    /// background color brightness is inverted in relation to the overall
-    /// theme's background color.
-    ///
-    /// [FlexColorScheme] allows you to use a single toggle to invert this.
-    /// Light tooltips on light background is e.g. the default style on
-    /// Windows Desktop toggle. You can use this toggle to use this style,
-    /// or use it as a means to create a platform adaptive tooltip style, where
-    /// the Material and Flutter style is used on devices and Web, but the
-    /// inverted scheme is used on e.g. Windows platform.
-    ///
-    /// Defaults to false, and uses same background style as Material Design
-    /// guide and Flutter.
-    ///
-    /// Additional tooltip styles when NOT opting in on FlexColorScheme sub
-    /// themes are:
-    ///
-    /// - tooltipsMatchBackground: false
-    ///   - none
-    ///
-    /// - tooltipsMatchBackground: true
-    ///   - light theme:
-    ///     - background: Color(0xF0FCFCFC),
-    ///     - text: black
-    ///   - Dark theme:
-    ///     - background: Color(0xED444444),
-    ///     - text: white
-    ///   - Border radius: 4 dp
-    ///   - Border: Yes, dividerColor
-    ///   - Desktop OS (macOS, Linux, Windows)
-    ///     - Font size : 12 dp
-    ///   - Mobile OS (iOS, Android, Fuchsia)
-    ///     - Font size : 14 dp
-    ///
-    /// Additional styles when opting in on FlexColorScheme sub themes are:
-    ///
-    /// - Desktop OS (macOS, Linux, Windows)
-    ///   - Font size : 12 dp
-    /// - Mobile OS (iOS, Android, Fuchsia)
-    ///   - Font size : 14 dp
-    /// - Border radius: 8 dp
-    /// - Border: Yes, dividerColor
-    /// - tooltipsMatchBackground: false
-    ///   - light theme:
-    ///     - background: Color(0xFF111111).blendAlpha(primary, 45%) opacity 95%
-    ///     - text: white
-    ///   - Dark theme:
-    ///     - background: Color(0xFFFFFFFF).blendAlpha(primary, 39%) opacity 95%
-    ///     - text: black
-    /// - tooltipsMatchBackground: true
-    ///   - light theme:
-    ///     - background:  Color(0xFFFFFFFF).blendAlpha(primary, 4%) opacity 95%
-    ///     - text: black
-    ///   - Dark theme:
-    ///     - background: Color(0xFF111111).blendAlpha(primary, 16%) opacity 95%
-    ///     - text: white
-    ///
-    /// When using additional theming via sub-themes properties, its
-    /// properties will if used override background color, text color and
-    /// background opacity as well as border radius.
-    final bool tooltipsMatchBackground = false,
+    bool tooltipsMatchBackground = false,
 
     /// Activate using FlexColorScheme opinionated component sub-themes by
     /// passing in a default `FlexSubThemesData()`.
-    ///
-    /// To further configure the sub-themes, change the simple flat value
-    /// properties as desired in `FlexSubThemesData()`.
-    ///
-    /// By default [FlexThemeData.light], [FlexThemeData.dark] and
-    /// [FlexColorScheme.toTheme], do as little as they need to just
-    /// provide a consistent Material 2 color schemed theme. The additions they
-    /// do are described in [FlexColorScheme.toTheme].
-    ///
-    /// The original purpose of the opinionated sub-themes was to make it easy
-    /// to add themed corner radius to all Widgets that support it, and to
-    /// provide a consistent look on all buttons, including [ToggleButtons].
-    ///
-    /// Therefore the sub themes are a convenient way to opt-in on customized
-    /// corner radius on Widgets using above themes. By opting in you can set
-    /// corner radius for all covered Widgets to same corner radius in one go.
-    /// There are also properties to override the global default for each widget
-    /// to set different rounding per widget if so desired.
-    ///
-    /// By default, if a `defaultRadius` is not specified, each widgets corner
-    /// radius and some other styling take inspiration from the Material 3 (M3)
-    /// specification https://m3.material.io/ and uses its specifications as
-    /// defaults when it is possible to do so in Flutter SDK theming when using
-    /// Material2 mode and via defaults also in Material 3 mode.
-    ///
-    /// Starting from version 5, by opting in via a default [subThemesData] you
-    /// get an extensive set of widget component sub themes applied.
-    /// They can be customized via the [subThemesData] property, that has
-    /// quick and flat sub theme configuration values in the data class
-    /// [FlexSubThemesData].
-    ///
-    /// Customizable sub-themes are available for:
-    ///
-    /// * [AppBarTheme] for [AppBar] via [FlexSubThemes.appBarTheme].
-    /// * [BottomAppBarTheme] for [BottomAppBar] via
-    ///   [FlexSubThemes.bottomAppBarTheme].
-    /// * [BottomNavigationBarThemeData] for [BottomNavigationBar] via
-    ///   [FlexSubThemes.bottomNavigationBar].
-    /// * [BottomSheetThemeData] for [BottomSheet] via
-    ///   [FlexSubThemes.bottomSheetTheme].
-    /// * [ButtonThemeData] for old deprecated buttons, via
-    ///   [FlexSubThemes.buttonTheme].
-    /// * [CardThemeData] for [Card] via [FlexSubThemes.cardTheme].
-    /// * [CheckboxThemeData] for [Checkbox] via [FlexSubThemes.checkboxTheme].
-    /// * [ChipThemeData] for [Chip] via [FlexSubThemes.chipTheme].
-    /// * [DatePickerThemeData] for [DatePicker] via
-    ///   [FlexSubThemes.datePickerTheme].
-    /// * [DialogThemeData] for [Dialog] via [FlexSubThemes.dialogTheme].
-    /// * [DrawerThemeData] for [Drawer] via [FlexSubThemes.drawerTheme].
-    /// * [DropdownMenuThemeData] for [DropDownMenu] via
-    ///   [FlexSubThemes.dropdownMenuTheme].
-    /// * [ElevatedButtonThemeData] for [ElevatedButton] via
-    ///   [FlexSubThemes.elevatedButtonTheme].
-    /// * [FilledButtonThemeData] for [FilledButton] via
-    ///   [FlexSubThemes.filledButtonTheme].
-    /// * [FloatingActionButtonThemeData] for [FloatingActionButton] via
-    ///   [FlexSubThemes.floatingActionButtonTheme].
-    /// * [IconButtonThemeData] for [IconButton] via
-    ///   [FlexSubThemes.iconButtonTheme].
-    /// * [InputDecorationThemeData] for [InputDecoration] via
-    ///   [FlexSubThemes.inputDecorationTheme].
-    /// * [MenuBarThemeData] for [MenuBar] via [FlexSubThemes.menuBarTheme].
-    /// * [MenuButtonThemeData] for [MenuButton] via
-    ///   [FlexSubThemes.menuButtonTheme].
-    /// * [MenuThemeData] for [MenuBar], [MenuAnchor] and [DropDownMenu] via
-    ///   [FlexSubThemes.menuTheme].
-    /// * [ListTileThemeData] for [ListTile] via
-    ///   [FlexSubThemes.listTileTheme].
-    /// * [NavigationBarThemeData] for [NavigationBar] via
-    ///   [FlexSubThemes.navigationBarTheme].
-    /// * [NavigationDrawerThemeData] for [NavigationDrawer] via
-    ///   [FlexSubThemes.navigationDrawerTheme].
-    /// * [NavigationRailThemeData] for [NavigationRail] via
-    ///   [FlexSubThemes.navigationRailTheme].
-    /// * [OutlinedButtonThemeData] for [OutlinedButton] via
-    ///   [FlexSubThemes.outlinedButtonTheme].
-    /// * [PopupMenuThemeData] for [PopupMenuButton] via
-    ///   [FlexSubThemes.popupMenuTheme].
-    /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
-    /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
-    /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
-    /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
-    /// * [TabBarThemeData] for [TabBar] via [FlexSubThemes.tabBarTheme].
-    /// * [TextButtonThemeData] for [TextButton] via
-    ///   [FlexSubThemes.textButtonTheme].
-    /// * [TextSelectionThemeData] for [TextField] via
-    ///   [FlexSubThemes.textSelectionTheme].
-    /// * [TimePickerThemeData] for [TimePickerDialog] via
-    ///   [FlexSubThemes.timePickerTheme].
-    /// * [ToggleButtonsThemeData] for [ToggleButtons] via
-    ///   [FlexSubThemes.toggleButtonsTheme].
-    /// * [TooltipThemeData] for [Tooltip] via [FlexSubThemes.tooltipTheme].
-    ///
-    /// Defaults to null, resulting in FlexColorScheme not using any extra
-    /// sub-theming in addition to those described in [FlexColorScheme.toTheme].
-    final FlexSubThemesData? subThemesData,
+    FlexSubThemesData? subThemesData,
 
-    /// To use and activate Material 3 color system based [ColorScheme]
+    /// To use and activate Material 3 color system based `ColorScheme`
     /// defined via key colors for primary, secondary and tertiary colors and
-    /// the [TonalPalette] generated by these key color values, pass
-    /// in a [FlexKeyColors] to [keyColors].
-    ///
-    /// By default it is not defined (null), and a traditional manually
-    /// configured color scheme will be created based on input property values
-    /// or a passed in [colorScheme].
-    ///
-    /// If a [FlexKeyColors] instance is passed in, the key color seeding
-    /// behavior depends on properties defined in the [FlexKeyColors]
-    /// instance. The default constructor makes one where
-    /// [FlexKyColors.useKeyColors] is true, it will automatically enable usage
-    /// of the used light scheme's primary color as key color and to seed
-    /// generated a color scheme. The result will by default be equal to using
-    /// Flutter SDK `ColorScheme.fromSeed`. With `FlexKeyColors` you can also
-    /// use `secondary` and `tertiary` colors as key colors. Currently Flutter
-    /// SDK does not support this.
-    ///
-    /// For more information on Material 3 color system and usage of key colors
-    /// to generate tonal palettes and tones, see:
-    /// https://m3.material.io/styles/color/the-color-system/key-colors-tones
-    final FlexKeyColors? keyColors,
+    /// the `TonalPalette` generated by these key color values, pass
+    /// in a `FlexKeyColors` to `keyColors`.
+    FlexKeyColors? keyColors,
 
     /// Set to true, to use the new Material 3 error colors.
-    ///
-    /// If [useMaterial3ErrorColors] is false, the generated [ColorScheme]
-    /// and [ThemeData] will use Material 2 default error colors or
-    /// error colors as defined by the built in color schemes. Thus using same
-    /// error colors as in FlexColorScheme versions before version 5.
-    ///
-    /// If [useMaterial3ErrorColors] is true, the resulting [ColorScheme]
-    /// and [ThemeData] will use the Material 3 design guide error colors.
-    ///
-    /// Key color seed generated [ColorScheme]s always use the Material 3
-    /// design guide error colors, or error colors from its customized
-    /// [TonalPalette] generation setup.
-    final bool useMaterial3ErrorColors = false,
+    bool useMaterial3ErrorColors = false,
 
     /// A configuration class enabling complete customization of
-    /// used chroma for [TonalPalette] generation for the used seed [keyColors],
+    /// used chroma for `TonalPalette` generation for the used seed `keyColors`,
     /// as well as changing which tone in the tonal palettes is used
-    /// for which [ColorScheme] color.
-    ///
-    /// By default a `FlexTones` configuration `FlexTones.material` that
-    /// matches what Flutter SDK does with `ColorScheme.fromSeed` is used.
-    ///
-    /// There are six other built-in definitions that you can use, they can also
-    /// serve as an example of how you can make custom `FlexTones`
-    /// configurations.
-    final FlexTones? tones,
+    /// for which `ColorScheme` color.
+    FlexTones? tones,
 
-    /// An optional way to select the used algorithm for seeded [ColorScheme]
-    /// generation, can be used instead of a [FlexTones] provided in [tones].
-    ///
-    /// The [variant] and [tones] are mutually exclusive, only one of them
-    /// can be used. If both are null, the default from [tones] is used.
-    ///
-    /// The [variant] selections includes all the Flutter SDK defined options
-    /// that will be available in the future in Flutter Stable after 3.22.x,
-    /// that are available in master channel now but did not land in Flutter
-    /// 3.22. Variant options that are identical to the Flutter SDK options
-    /// have [FlexSchemeVariant.value], [isFlutterScheme] set to true. These
-    /// enum  options will not respect and use any other seed generation keys
-    /// than the [primaryKey], as they only support using one seed color.
-    ///
-    /// The [FlexSchemeVariant] also includes quick selections for all the
-    /// predefined [FlexTones] configurations. However, with [variant] you can
-    /// only select one of the predefined configurations, and not make custom
-    /// configurations like you can with [FlexTones]. Additionally you cannot
-    /// use the [FlexTones] modifiers [monochromeSurfaces], [onMainsUseBW],
-    /// [onSurfacesUseBW] and [surfacesUseBW], since the only operate on the
-    /// [FlexTones] configurations passed in to [tones].
-    final FlexSchemeVariant? variant,
+    /// An optional way to select the used algorithm for seeded `ColorScheme`
+    /// generation, can be used instead of a `FlexTones` provided in `tones`.
+    FlexSchemeVariant? variant,
 
     /// The density value for specifying the compactness of various UI
     /// components.
-    ///
-    /// Consider using [FlexColorScheme.comfortablePlatformDensity],
-    /// it is similar to [VisualDensity.adaptivePlatformDensity], but the
-    /// density for desktop and Web is less dense in order to offer a bit larger
-    /// touch friendly surfaces, but not quite as large as small touch devices.
-    ///
-    /// This is the same property as in [ThemeData] factory, it is just
-    /// passed along to it. Included for convenience to avoid a copyWith if
-    /// to change it.
-    ///
-    /// Density, in the context of a UI, is the vertical and horizontal
-    /// "compactness" of the elements in the UI. It is unit less, since it means
-    /// different things to different UI elements. For buttons, it affects the
-    /// spacing around the centered label of the button. For lists, it affects
-    /// the distance between baselines of entries in the list.
-    ///
-    /// Typically, density values are integral, but any value in range may be
-    /// used. The range includes values from [VisualDensity.minimumDensity]
-    /// (which is -4), to [VisualDensity.maximumDensity] (which is 4),
-    /// inclusive, where negative values indicate a denser, more compact, UI,
-    /// and positive values indicate a less dense, more expanded, UI. If a
-    /// component doesn't support the value given, it will clamp to the nearest
-    /// supported value.
-    ///
-    /// The default for visual densities is zero for both vertical and
-    /// horizontal densities, which corresponds to the default visual density of
-    /// components in the Material Design specification.
-    ///
-    /// As a rule of thumb, a change of 1 or -1 in density corresponds to 4
-    /// logical pixels. However, this is not a strict relationship since
-    /// components interpret the density values appropriately for their needs.
-    ///
-    /// A larger value translates to a spacing increase (less dense), and a
-    /// smaller value translates to a spacing decrease (more dense).
-    ///
-    /// Defaults to [VisualDensity.adaptivePlatformDensity].
-    final VisualDensity? visualDensity,
+    VisualDensity? visualDensity,
 
     /// Text with a color that contrasts with background, surface, card and
     /// canvas colors.
-    ///
-    /// If a default `TextTheme` from package GoogleFonts is passed.
-    /// FlexColorScheme will detect this and make the color in the passed
-    /// in `GoogleFonts` null for all its `TextStyle`s so that the correct
-    /// color for M2/M3 mode and contrast for light/dark mode is used.
-    final TextTheme? textTheme,
+    TextTheme? textTheme,
 
     /// A text theme that contrasts with the primary color.
-    ///
-    /// If a default `TextTheme` from package GoogleFonts is passed.
-    /// FlexColorScheme will detect this and make the color in the passed
-    /// in `GoogleFonts` null for all its `TextStyle`s so that the correct
-    /// color for M2/M3 mode and contrast for primary color is used.
-    final TextTheme? primaryTextTheme,
+    TextTheme? primaryTextTheme,
 
     /// Name of the font family to use as default font for the text theme in
     /// created theme.
-    ///
-    /// Same feature as in [ThemeData] factory. Used to apply the font family
-    /// name to default text theme and primary text theme, also passed along
-    /// to [ThemeData],
-    final String? fontFamily,
+    String? fontFamily,
 
     /// Name of the font families to use as fallback to main font family.
-    ///
-    /// Same feature as in [ThemeData] factory. Used to apply the font family
-    /// fallback to default text theme and primary text theme, also passed
-    /// along to [ThemeData],
-    final List<String>? fontFamilyFallback,
+    List<String>? fontFamilyFallback,
 
     /// Name of the font package to use with font fallback.
-    ///
-    /// Same feature as in [ThemeData] factory. Used to apply the font package
-    /// to default text theme and primary text theme, also passed along
-    /// to [ThemeData],
-    final String? package,
+    String? package,
 
     /// Configures the hit test size of certain Material widgets.
     ///
-    /// Defaults to a [platform]-appropriate size: MaterialTapTargetSize.padded
+    /// Defaults to a `platform`-appropriate size: MaterialTapTargetSize.padded
     /// on mobile platforms, MaterialTapTargetSize.shrinkWrap on desktop
     /// platforms.
-    final MaterialTapTargetSize? materialTapTargetSize,
+    MaterialTapTargetSize? materialTapTargetSize,
 
-    /// Default [MaterialPageRoute] transitions per [TargetPlatform].
-    ///
-    /// [MaterialPageRoute.buildTransitions] delegates to a [platform] specific
-    /// [PageTransitionsBuilder]. If a matching builder is not found, a builder
-    /// whose platform is null is used.
-    ///
-    /// This is convenience pass through in FlexColorScheme to avoid a
-    /// `copyWith` on `ThemeData` produced by FlexColorScheme.
-    final PageTransitionsTheme? pageTransitionsTheme,
+    /// Default `MaterialPageRoute` transitions per `TargetPlatform`.
+    PageTransitionsTheme? pageTransitionsTheme,
 
-    /// Defines the appearance of ink splashes produces by [InkWell]
-    /// and [InkResponse].
-    ///
-    /// Providing a [splashFactory] value will override the default one created
-    /// by [ThemeData], it will also override any splash settings in
-    /// [subThemesData].
-    ///
-    /// See also:
-    ///
-    ///  * [InkSplash.splashFactory], which defines the default splash.
-    ///  * [InkRipple.splashFactory], which defines a splash that spreads out
-    ///    more aggressively than the default.
-    ///  * [InkSparkle.splashFactory], which defines a more aggressive and
-    ///    organic splash with sparkle effects.
-    final InteractiveInkFeatureFactory? splashFactory,
+    /// Defines the appearance of ink splashes produces by `InkWell`
+    /// and `InkResponse`.
+    InteractiveInkFeatureFactory? splashFactory,
 
     /// The platform adaptive widgets adapt to defined target and mechanics,
     /// like scrolling too.
-    ///
-    /// Same property as in [ThemeData] factory. Included for convenience to
-    /// avoid a copyWith to change it.
-    ///
-    /// Defaults to the current platform, as exposed by [defaultTargetPlatform].
-    /// This should be used in order to style UI elements according to platform
-    /// conventions.
-    ///
-    /// Widgets from the material library should use this getter (via
-    /// [Theme.of]) to determine the current platform for the purpose of
-    /// emulating the platform behavior (e.g. scrolling or haptic effects).
-    /// Widgets and render objects at lower layers that try to emulate the
-    /// underlying platform platform can depend on [defaultTargetPlatform]
-    /// directly, or may require that the target platform be provided as an
-    /// argument. The `dart.io.Platform` object should only be used directly
-    /// when it's critical to actually know the current platform, without
-    /// any overrides possible, e.g. when a system API is about to be called.
-    ///
-    /// In a test environment, the platform returned is [TargetPlatform.android]
-    /// regardless of the host platform. (Android was chosen because the tests
-    /// were originally written assuming Android-like behavior, and we added
-    /// platform adaptations for other platforms later). Tests can check
-    /// behavior for other platforms by setting the [platform] of the [Theme]
-    /// explicitly to another [TargetPlatform] value, or by setting
-    /// [debugDefaultTargetPlatformOverride].
-    ///
-    /// When developing applications you can use this property to dynamically
-    /// in the application change the used platform and partially test and see
-    /// how adaptive widgets and scroll looks and feels on other platforms.
-    final TargetPlatform? platform,
+    TargetPlatform? platform,
 
-    /// The color and geometry [TextTheme] values used to configure [textTheme].
-    ///
-    /// Same property as in [ThemeData] factory.
-    /// Included for convenience to avoid a copyWith if it needs to be changed.
-    /// Default value deviates from the Flutter standard that uses the old
-    /// [Typography.material2014], in favor of newer [Typography.material2018]
-    /// as default typography if one is not provided.
-    ///
-    /// In M3 mode FCS default to [Typography.material2021] and in M2 mode to
-    /// older [Typography.material2018], which is correct for M2. Please note
-    /// that Flutter ThemeData defaults to even older Typography
-    /// [Typography.material2014] when not using M3. This is done for legacy
-    /// compatibility reasons, you should use 2018 with M2.
-    final Typography? typography,
+    /// The color and geometry `TextTheme` values used to configure `textTheme`.
+    Typography? typography,
 
     /// Apply a semi-transparent overlay color on Material surfaces to indicate
     /// elevation for dark themes.
-    ///
-    /// Same property as in [ThemeData] factory. Included for convenience to
-    /// avoid a copyWith change it.
-    ///
-    /// In FlexColorScheme it defaults to true. In Flutter [ThemeData.from] it
-    /// also default to true, but in [ThemeData] factory it defaults to false.
-    ///
-    /// Material drop shadows can be difficult to see in a dark theme, so the
-    /// elevation of a surface should be portrayed with an "overlay" in addition
-    /// to the shadow. As the elevation of the component increases, the
-    /// overlay increases in opacity. The [applyElevationOverlayColor] turns the
-    /// application of this overlay on or off for dark themes.
-    ///
-    /// If true and [brightness] is [Brightness.dark], a
-    /// semi-transparent version of [ColorScheme.onSurface] will be
-    /// applied on top of [Material] widgets that have a [ColorScheme.surface]
-    /// color. The level of transparency is based on [Material.elevation] as
-    /// per the Material Dark theme specification.
-    ///
-    /// If false the surface color will be used unmodified.
-    ///
-    /// Defaults to false in order to maintain backwards compatibility with
-    /// apps that were built before the Material Dark theme specification
-    /// was published. New apps should set this to true for any themes
-    /// where [brightness] is [Brightness.dark].
-    ///
-    /// See also:
-    ///
-    ///  * [Material.elevation], which effects the level of transparency of the
-    ///    overlay color.
-    ///  * [ElevationOverlay.applyOverlay], which is used by [Material] to apply
-    ///    the overlay color to its surface color.
-    ///  * <https://material.io/design/color/dark-theme.html>, which specifies
-    ///    how the overlay should be applied.
-    ///
-    /// Known limitations:
-    ///
-    /// Because of how the overlay color application is implemented in Flutter
-    /// SDK, you will only get overlay color applied in dark mode when this
-    /// value  is true, if the [Material] surface color being elevated is equal
-    /// to [ThemeData.colorScheme] and its [ColorScheme.surface] color property.
-    ///
-    /// Thus when using color branded surfaces, if you want all [Material]
-    /// surfaces in your theme to get an overlay color in dark mode, you must
-    /// for dark themes only use background colors that are equal to the surface
-    /// color. This when using [FlexColorScheme.dark] use a [FlexSurfaceMode]
-    /// that starts with `equal`. That said, if using heavy color branding,
-    /// some surfaces may not need any overlay color, so the
-    /// lack of it might not be an issue with other modes in such themes.
-    /// For more information about this limitation see Flutter SDK issue:
-    /// https://github.com/flutter/flutter/issues/90353
-    final bool applyElevationOverlayColor = true,
+    bool applyElevationOverlayColor = true,
 
-    /// Components of the [CupertinoThemeData] to override from the Material
-    /// [ThemeData] adaptation.
-    ///
-    /// By default, [cupertinoOverrideTheme] is null and Cupertino widgets
-    /// descendant to the Material [Theme] will adhere to a [CupertinoTheme]
-    /// derived from the Material [ThemeData]. e.g. [ThemeData]'s [ColorScheme]
-    /// will also inform the [CupertinoThemeData]'s `primaryColor` etc.
-    ///
-    /// This cascading effect for individual attributes of the
-    /// [CupertinoThemeData]
-    /// can be overridden using attributes of this [cupertinoOverrideTheme].
-    final NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
+    /// Components of the `CupertinoThemeData` to override from the Material
+    /// `ThemeData` adaptation.
+    NoDefaultCupertinoThemeData? cupertinoOverrideTheme,
 
     /// A temporary flag used to disable Material-3 design and use legacy
     /// Material-2 design instead. Material-3 design is the default.
     /// Material-2 will be deprecated in Flutter.
-    ///
-    /// Flutter SDK [useMaterial3] documentation:
-    /// --------------------------------------------------------
-    /// A temporary flag that can be used to opt-out of Material 3 features.
-    ///
-    /// This flag is _true_ by default. If false, then components will
-    /// continue to use the colors, typography and other features of
-    /// Material 2.
-    ///
-    /// In the long run this flag will be deprecated and eventually
-    /// only Material 3 will be supported. We recommend that applications
-    /// migrate to Material 3 as soon as that's practical. Until that migration
-    /// is complete, this flag can be set to false.
-    ///
-    /// ## Defaults
-    ///
-    /// If a [ThemeData] is _constructed_ with [useMaterial3] set to true, then
-    /// some properties will get updated defaults. However, the
-    /// [ThemeData.copyWith] method with [useMaterial3] set to true will _not_
-    /// change any of these properties in the resulting [ThemeData].
-    ///
-    /// <style>table,td,th { border-collapse: collapse; padding: 0.45em; } td { border: 1px solid }</style>
-    ///
-    /// | Property        | Material 3 default           | Material 2 default  |
-    /// | :-------------- | :--------------------------- | :------------------ |
-    /// | [colorScheme] | M3 baseline light scheme | M2 baseline light scheme |
-    /// | [typography] | [Typography.material2021] | [Typography.material2014] |
-    /// | [splashFactory] | [InkSparkle]* or [InkRipple]   | [InkSplash]    |
-    ///
-    /// \* if the target platform is Android and the app is not
-    /// running on the web, otherwise it will fallback to [InkRipple].
-    ///
-    /// If [brightness] is [Brightness.dark] then the default color scheme will
-    /// be either the M3 baseline dark color scheme or the M2 baseline dark
-    /// color scheme depending on [useMaterial3].
-    ///
-    /// ## Affected widgets
-    ///
-    /// This flag affects styles and components.
-    ///
-    /// ### Styles
-    ///   * Color: [ColorScheme], [Material] (see table above)
-    ///   * Shape: (see components below)
-    ///   * Typography: [Typography] (see table above)
-    ///
-    /// ### Components
-    ///   * Badges: [Badge]
-    ///   * Bottom app bar: [BottomAppBar]
-    ///   * Bottom sheets: [BottomSheet]
-    ///   * Buttons
-    ///     - Common buttons: [ElevatedButton], [FilledButton],
-    ///       [FilledButton.tonal], [OutlinedButton], [TextButton]
-    ///     - FAB: [FloatingActionButton], [FloatingActionButton.extended]
-    ///     - Icon buttons: [IconButton], [IconButton.filled] (*new*),
-    ///       [IconButton.filledTonal], [IconButton.outlined]
-    ///     - Segmented buttons: [SegmentedButton] (replacing [ToggleButtons])
-    ///   * Cards: [Card]
-    ///   * Checkbox: [Checkbox], [CheckboxListTile]
-    ///   * Chips:
-    ///     - [ActionChip] (used for Assist and Suggestion chips),
-    ///     - [FilterChip], [ChoiceChip] (used for selection filter chips),
-    ///     - [InputChip]
-    ///   * Date pickers: [showDatePicker], [showDateRangePicker],
-    ///     [DatePickerDialog], [DateRangePickerDialog],
-    ///     [InputDatePickerFormField]
-    ///   * Dialogs: [AlertDialog], [Dialog.fullscreen]
-    ///   * Divider: [Divider], [VerticalDivider]
-    ///   * Lists: [ListTile]
-    ///   * Menus: [MenuAnchor], [DropdownMenu], [MenuBar]
-    ///   * Navigation bar: [NavigationBar] (replacing [BottomNavigationBar])
-    ///   * Navigation drawer: [NavigationDrawer] (replacing [Drawer])
-    ///   * Navigation rail: [NavigationRail]
-    ///   * Progress indicators: [CircularProgressIndicator],
-    ///     [LinearProgressIndicator]
-    ///   * Radio button: [Radio], [RadioListTile]
-    ///   * Search: [SearchBar], [SearchAnchor],
-    ///   * Snack bar: [SnackBar]
-    ///   * Slider: [Slider], [RangeSlider]
-    ///   * Switch: [Switch], [SwitchListTile]
-    ///   * Tabs: [TabBar], [TabBar.secondary]
-    ///   * TextFields: [TextField] together with its [InputDecoration]
-    ///   * Time pickers: [showTimePicker], [TimePickerDialog]
-    ///   * Top app bar: [AppBar], [SliverAppBar], [SliverAppBar.medium],
-    ///     [SliverAppBar.large]
-    ///
-    /// In addition, this flag enables features introduced in Android 12.
-    ///   * Stretch overscroll: [MaterialScrollBehavior]
-    ///   * Ripple: `splashFactory` (see table above)
-    ///
-    /// See also:
-    ///
-    ///   * [Material 3 specification](https://m3.material.io/).
-    final bool useMaterial3 = true,
+    bool useMaterial3 = true,
 
     /// Set to true to automatically swap secondary and tertiary colors, on
-    /// built-in color schemes when [useMaterial3] is true, that benefit
+    /// built-in color schemes when `useMaterial3` is true, that benefit
     /// from it to better match the Material 3 color system design intent.
-    ///
-    /// Starting with FlexColorScheme version 6.1.0, built-in color schemes,
-    /// defined via [FlexSchemeColor], have a flag [swapOnMaterial3]. When
-    /// defined to be true, the scheme will benefit if the [secondary] and
-    /// [tertiary] colors, including their containers, are swapped when using
-    /// Material 3. Most FlexColorScheme color schemes were designed with
-    /// M2 usage in mind, before M3 existed. They may often have their
-    /// [swapOnMaterial3] set to true. If this flag is false, it may mean
-    /// that its `FlexSchemeColor` was designed for M3 or that it won't
-    /// benefit from swapping its secondary and tertiary colors. In the
-    /// [Scheme Reference](https://docs.flexcolorscheme.com/scheme_reference),
-    /// you can see which schemes have the flag defined to true.
-    ///
-    /// Using a seed-generated color scheme based on built-in FlexSchemeColor
-    /// colors is another way to make them suitable for the M3 Color system.
-    /// However, in some cases, the secondary color in their design may not
-    /// be in-line with the M3 color system design intent, especially if you
-    /// use the config that also uses the hue from the secondary color to
-    /// make tonal palettes for it. In some legacy FlexSchemeColor color
-    /// designs this can be fixed if we swap the secondary and tertiary colors.
-    ///
-    /// To make FlexSchemeColor designs color designs that benefit from it
-    /// automatically swap secondary and tertiary colors when [useMaterial3]
-    /// is set to true, set `swapLegacyOnMaterial3` to true. It defaults to
-    /// false, for backward compatibility, but it is recommended to turn
-    /// it on when using Material 3 and its color system. If you use
-    /// seeded color schemes with Material 2, [useMaterial3] flag is false,
-    /// then it may be preferable to keep [swapOnMaterial3] false for more
-    /// prominent colors on secondaries.
-    ///
-    /// This color swap has higher priority than [swapColor], using it will
-    /// always happen on the effective result of [swapLegacyOnMaterial3] and
-    /// [useMaterial3], and value of [swapOnMaterial3] in currently used
-    /// built-in scheme [FlexSchemeColor].
-    ///
-    /// If a custom [colorScheme] is passed in, or any of the direct color
-    /// properties [secondary], [secondaryContainer], [tertiary] or
-    /// [tertiaryContainer], then it is assumed a custom scheme or overrides,
-    /// are being used and the [swapLegacyOnMaterial3] setting does nothing.
-    ///
-    /// The Themes Playground app defaults to setting [swapLegacyOnMaterial3]
-    /// to ON (true), but allows you to turn it OFF.
-    ///
-    /// Defaults to false, for backwards compatibility, but prefer setting it
-    /// to true if you also set [useMaterial3] to true.
-    final bool swapLegacyOnMaterial3 = false,
+    bool swapLegacyOnMaterial3 = false,
 
     /// Arbitrary additions to this theme.
-    ///
-    /// This is the same property as [extensions] in ThemeData, it is provided
-    /// as a convenience pass-through to ThemeData.
-    ///
-    /// To define extensions, pass an [Iterable] containing one or more
-    /// [ThemeExtension] subclasses to [ThemeData.new] or [copyWith].
-    ///
-    /// To obtain an extension, use ThemeData.of(context).extension.
-    final Iterable<ThemeExtension<dynamic>>? extensions,
-
-    /// **Deprecated:**
-    /// A color that typically appears behind scrollable content.
-    ///
-    /// The color is applied to [ThemeData.canvasColor] and was also before
-    /// version 8 applied to `ThemeData.backgroundColor`, which was in the past
-    /// Material-2 used eg by menu [Drawer]. It was then also used by all
-    /// [Material] of type [MaterialType.canvas].
-    ///
-    /// When using the factory this was also an override color for the color
-    /// that would have been used based on mode defined by property
-    /// `surfaceMode` enum [FlexSurfaceMode] or if a [colorScheme] was provided,
-    /// it overrode the same color in it as well.
-    ///
-    /// Defaults to null.
-    @Deprecated('Use surface instead. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
-    final Color? background,
-
-    /// **Deprecated:**
-    /// A color that is clearly legible when drawn on [background] color.
-    ///
-    /// To ensure that an app is accessible, a contrast ratio of 4.5:1 for
-    /// [background] and [onBackground] is recommended. See
-    /// <https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html>.
-    ///
-    /// When using this factory, this was an override color for the color that
-    /// would be used based on the corresponding color property defined in
-    /// [FlexColorScheme.light] and [FlexColorScheme.dark], `colors` property
-    /// or when using pre-defined color scheme based [FlexScheme] and its
-    /// `scheme` property, including any used blend logic. If a [colorScheme]
-    /// was provided with this corresponding color defined, this color property
-    /// also overrode the same color in it as well.
-    ///
-    /// You used this property for convenience if you want to override the
-    /// color that this scheme color gets via the factory behavior.
-    @Deprecated('Use onSurface instead. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
-    final Color? onBackground,
+    Iterable<ThemeExtension<dynamic>>? extensions,
   }) {
     // DARK: Check valid inputs
     assert(usedColors >= 1 && usedColors <= 7, 'usedColors must be 1 to 7.');
-    assert(appBarOpacity == null || appBarOpacity >= 0 && appBarOpacity <= 1,
-        'appBarOpacity must be 0 to 1, or null');
+    assert(appBarOpacity == null || appBarOpacity >= 0 && appBarOpacity <= 1, 'appBarOpacity must be 0 to 1, or null');
     assert(
       blendLevel >= 0 && blendLevel <= 40,
       'Only blend levels from 0 to 40 are allowed. Very high alpha values may '
       'not produce results that are visually very appealing or useful.',
     );
-    assert(appBarElevation == null || appBarElevation >= 0.0,
-        'AppBar elevation must be >= 0 or null.');
-    assert(bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
-        'Bottom AppBar elevation must be null or must be >= 0.');
+    assert(appBarElevation == null || appBarElevation >= 0.0, 'AppBar elevation must be >= 0 or null.');
+    assert(
+      bottomAppBarElevation == null || bottomAppBarElevation >= 0.0,
+      'Bottom AppBar elevation must be null or must be >= 0.',
+    );
 
     // Use color seeding based on passed in keyColors or make one where
     // it is not used, if one was not defined, since we want that as default
     // behavior to match past default behavior.
-    final FlexKeyColors seed =
-        keyColors ?? const FlexKeyColors(useKeyColors: false);
+    final FlexKeyColors seed = keyColors ?? const FlexKeyColors(useKeyColors: false);
     // Fallback value for scheme is default material scheme, based on mode.
-    final FlexScheme flexScheme = scheme ??
-        (useMaterial3 ? FlexScheme.materialBaseline : FlexScheme.material);
+    final FlexScheme flexScheme = scheme ?? (useMaterial3 ? FlexScheme.materialBaseline : FlexScheme.material);
     // If colors was null, we used the scheme based value.
-    final FlexSchemeColor flexColors =
-        colors ?? FlexColor.schemesWithCustom[flexScheme]!.dark;
+    final FlexSchemeColor flexColors = colors ?? FlexColor.schemesWithCustom[flexScheme]!.dark;
 
     // Use subThemes if a none null FlexSubThemesData was passed in.
     final bool useSubThemes = subThemesData != null;
     // Use passed in sub-theme config data, or a default one, if none given.
-    final FlexSubThemesData subTheme =
-        subThemesData ?? const FlexSubThemesData();
+    final FlexSubThemesData subTheme = subThemesData ?? const FlexSubThemesData();
 
     // In debug mode warn to console about missing LightRef colors when they
     // are used in a combo that may require them.
     if (kDebugMode) {
       if (primary != null &&
           primaryLightRef == null &&
-          ((!seed.useKeyColors &&
-                  (fixedColorStyle ?? FlexFixedColorStyle.computed) ==
-                      FlexFixedColorStyle.computed) ||
+          ((!seed.useKeyColors && (fixedColorStyle ?? FlexFixedColorStyle.computed) == FlexFixedColorStyle.computed) ||
               seed.useKeyColors)) {
-        debugPrint('FlexColorScheme WARNING: primaryLightRef is null, but '
-            'primary is defined, primaryLightRef may be needed. '
-            'Set primaryLightRef to the same color '
-            'as primary in your LIGHT theme mode setup to get correct values '
-            'for "fixed" colors for your dark ColorScheme or to seed with '
-            'same color as your light theme primary. If primary is already '
-            'set to same color as light mode primary and it is only used as '
-            'seed in dark mode, defining primaryLightRef is not necessary.');
+        debugPrint(
+          'FlexColorScheme WARNING: primaryLightRef is null, but '
+          'primary is defined, primaryLightRef may be needed. '
+          'Set primaryLightRef to the same color '
+          'as primary in your LIGHT theme mode setup to get correct values '
+          'for "fixed" colors for your dark ColorScheme or to seed with '
+          'same color as your light theme primary. If primary is already '
+          'set to same color as light mode primary and it is only used as '
+          'seed in dark mode, defining primaryLightRef is not necessary.',
+        );
       }
       if (secondary != null &&
           secondaryLightRef == null &&
-          ((!seed.useKeyColors &&
-                  (fixedColorStyle ?? FlexFixedColorStyle.computed) ==
-                      FlexFixedColorStyle.computed) ||
+          ((!seed.useKeyColors && (fixedColorStyle ?? FlexFixedColorStyle.computed) == FlexFixedColorStyle.computed) ||
               seed.useKeyColors)) {
-        debugPrint('FlexColorScheme WARNING: secondaryLightRef is null, but '
-            'secondary is defined, secondaryLightRef may be needed. '
-            'Set secondaryLightRef to the same color '
-            'as secondary in your LIGHT theme mode setup to get correct values '
-            'for "fixed" colors for your dark ColorScheme or to seed with '
-            'same color as your light theme secondary. If secondary is already '
-            'set to same color as light mode secondary and it is only used as '
-            'seed in dark mode, defining secondaryLightRef is not necessary.');
+        debugPrint(
+          'FlexColorScheme WARNING: secondaryLightRef is null, but '
+          'secondary is defined, secondaryLightRef may be needed. '
+          'Set secondaryLightRef to the same color '
+          'as secondary in your LIGHT theme mode setup to get correct values '
+          'for "fixed" colors for your dark ColorScheme or to seed with '
+          'same color as your light theme secondary. If secondary is already '
+          'set to same color as light mode secondary and it is only used as '
+          'seed in dark mode, defining secondaryLightRef is not necessary.',
+        );
       }
       if (tertiary != null &&
           tertiaryLightRef == null &&
-          ((!seed.useKeyColors &&
-                  (fixedColorStyle ?? FlexFixedColorStyle.computed) ==
-                      FlexFixedColorStyle.computed) ||
+          ((!seed.useKeyColors && (fixedColorStyle ?? FlexFixedColorStyle.computed) == FlexFixedColorStyle.computed) ||
               seed.useKeyColors)) {
-        debugPrint('FlexColorScheme WARNING: tertiaryLightRef is null, but '
-            'tertiary is defined, tertiaryLightRef may be needed. '
-            'Set tertiaryLightRef to the same color '
-            'as tertiary in your LIGHT theme mode setup to get correct values '
-            'for "fixed" colors for your dark ColorScheme or to seed with '
-            'same color as your light theme tertiary. If tertiary is already '
-            'set to same color as light mode tertiary and it is only used as '
-            'seed in dark mode, defining tertiaryLightRef is not necessary.');
+        debugPrint(
+          'FlexColorScheme WARNING: tertiaryLightRef is null, but '
+          'tertiary is defined, tertiaryLightRef may be needed. '
+          'Set tertiaryLightRef to the same color '
+          'as tertiary in your LIGHT theme mode setup to get correct values '
+          'for "fixed" colors for your dark ColorScheme or to seed with '
+          'same color as your light theme tertiary. If tertiary is already '
+          'set to same color as light mode tertiary and it is only used as '
+          'seed in dark mode, defining tertiaryLightRef is not necessary.',
+        );
       }
     }
 
@@ -5174,10 +5334,11 @@ class FlexColorScheme with Diagnosticable {
     );
     // Swap legacy secondary and tertiary color if we use Material-3 and
     // we have swapping of legacy colors ON and if the colors in used built-in
-    // scheme has flag [swapOnMaterial3] set that tells it benefits from doing
+    // scheme has flag [FlexSchemeColor.swapOnMaterial3] set that tells it benefits from doing
     // this. Additionally, we should only do this if we have not passed a custom
     // ColorScheme, nor secondary or tertiary colors directly.
-    final bool swapLegacy = useMaterial3 &&
+    final bool swapLegacy =
+        useMaterial3 &&
         swapLegacyOnMaterial3 &&
         flexColors.swapOnMaterial3 &&
         secondary == null &&
@@ -5206,9 +5367,7 @@ class FlexColorScheme with Diagnosticable {
     ColorScheme? seedScheme;
 
     // Compute a seeded scheme if we are using it or seeded fixed colors.
-    if ((fixedColorStyle ?? FlexFixedColorStyle.computed) !=
-            FlexFixedColorStyle.computed ||
-        seed.useKeyColors) {
+    if ((fixedColorStyle ?? FlexFixedColorStyle.computed) != FlexFixedColorStyle.computed || seed.useKeyColors) {
       // Create a ColorScheme from active and effective seed key colors.
       // If config is not using key colors, we are only making this seed for
       // the fixed and fixedDim colors, then we must always use all key colors.
@@ -5216,26 +5375,19 @@ class FlexColorScheme with Diagnosticable {
         brightness: Brightness.dark,
         primaryKey: !seed.useKeyColors
             ? effectiveColors.primaryLightRef ?? effectiveColors.primary
-            : seed.keyPrimary ??
-                effectiveColors.primaryLightRef ??
-                effectiveColors.primary,
+            : seed.keyPrimary ?? effectiveColors.primaryLightRef ?? effectiveColors.primary,
         secondaryKey: !seed.useKeyColors
             ? effectiveColors.secondaryLightRef ?? effectiveColors.secondary
             : seed.useSecondary
-                ? seed.keySecondary ??
-                    effectiveColors.secondaryLightRef ??
-                    effectiveColors.secondary
-                : null,
+            ? seed.keySecondary ?? effectiveColors.secondaryLightRef ?? effectiveColors.secondary
+            : null,
         tertiaryKey: !seed.useKeyColors
             ? effectiveColors.tertiaryLightRef ?? effectiveColors.tertiary
             : seed.useTertiary
-                ? seed.keyTertiary ??
-                    effectiveColors.tertiaryLightRef ??
-                    effectiveColors.tertiary
-                : null,
+            ? seed.keyTertiary ?? effectiveColors.tertiaryLightRef ?? effectiveColors.tertiary
+            : null,
         // If use error seed, use it with fromSeeds, otherwise undefined.
-        errorKey:
-            seed.useError ? (seed.keyError ?? effectiveColors.error) : null,
+        errorKey: seed.useError ? (seed.keyError ?? effectiveColors.error) : null,
         // If a custom surface tint is used, use it also as key for neutral and
         // neutral variant tonal palette generation.
         neutralKey: surfaceTint,
@@ -5247,14 +5399,13 @@ class FlexColorScheme with Diagnosticable {
         // best with none seeded colors.
         tones: seed.useKeyColors
             ? tones
-            : FlexTones.chroma(Brightness.dark).higherContrastFixed(
-                fixedColorStyle == FlexFixedColorStyle.seededHighContrast),
+            : FlexTones.chroma(Brightness.dark)
+                  .higherContrastFixed(fixedColorStyle == FlexFixedColorStyle.seededHighContrast),
         variant: seed.useKeyColors ? variant : null,
         contrastLevel: seed.useKeyColors ? seed.contrastLevel : 0.0,
-        // This API only has any impact in light mode, as intended, we could
-        // call it with a true value, but result will be same as false,
-        // only more compute, so it is always set to false.
-        useExpressiveOnContainerColors: false,
+        // Forwarded for API consistency with light. Dark on-container tones
+        // are already 90 either way; this flag only changes light 10 vs 30.
+        useExpressiveOnContainerColors: seed.useExpressiveOnContainerColors ?? true,
         respectMonochromeSeed: !(seed.useLegacyMonochromeSeedBehavior ?? false),
       );
       // Update effective main colors to seed colors, keeping configured
@@ -5262,28 +5413,19 @@ class FlexColorScheme with Diagnosticable {
       // are the ones from the effective normal dark scheme, not the key colors.
       if (seed.useKeyColors) {
         effectiveColors = FlexSchemeColor(
-          primary:
-              seed.keepPrimary ? effectiveColors.primary : seedScheme.primary,
-          primaryContainer: seed.keepPrimaryContainer
-              ? effectiveColors.primaryContainer
-              : seedScheme.primaryContainer,
-          secondary: seed.keepSecondary
-              ? effectiveColors.secondary
-              : seedScheme.secondary,
+          primary: seed.keepPrimary ? effectiveColors.primary : seedScheme.primary,
+          primaryContainer: seed.keepPrimaryContainer ? effectiveColors.primaryContainer : seedScheme.primaryContainer,
+          secondary: seed.keepSecondary ? effectiveColors.secondary : seedScheme.secondary,
           secondaryContainer: seed.keepSecondaryContainer
               ? effectiveColors.secondaryContainer
               : seedScheme.secondaryContainer,
-          tertiary: seed.keepTertiary
-              ? effectiveColors.tertiary
-              : seedScheme.tertiary,
+          tertiary: seed.keepTertiary ? effectiveColors.tertiary : seedScheme.tertiary,
           tertiaryContainer: seed.keepTertiaryContainer
               ? effectiveColors.tertiaryContainer
               : seedScheme.tertiaryContainer,
           appBarColor: effectiveColors.appBarColor,
           error: seed.keepError ? effectiveColors.error : seedScheme.error,
-          errorContainer: seed.keepErrorContainer
-              ? effectiveColors.errorContainer
-              : seedScheme.errorContainer,
+          errorContainer: seed.keepErrorContainer ? effectiveColors.errorContainer : seedScheme.errorContainer,
         );
       }
     }
@@ -5298,11 +5440,9 @@ class FlexColorScheme with Diagnosticable {
     }
 
     // Get effective surfaceTint color, also used as blend color for surfaces.
-    final Color blendColor =
-        surfaceTint ?? colorScheme?.surfaceTint ?? effectiveColors.primary;
+    final Color blendColor = surfaceTint ?? colorScheme?.surfaceTint ?? effectiveColors.primary;
     // Compute surface blends, they may also be added on seeded surfaces.
-    final FlexSchemeSurfaceColors surfaceSchemeColors =
-        FlexSchemeSurfaceColors.blend(
+    final FlexSchemeSurfaceColors surfaceSchemeColors = FlexSchemeSurfaceColors.blend(
       useMaterial3: useMaterial3,
       brightness: Brightness.dark,
       surfaceMode: surfaceMode ?? FlexSurfaceMode.level,
@@ -5334,65 +5474,57 @@ class FlexColorScheme with Diagnosticable {
               surfaceContainer: seedScheme.surfaceContainer,
               surfaceContainerHigh: seedScheme.surfaceContainerHigh,
               surfaceContainerHighest: seedScheme.surfaceContainerHighest,
-              dialogBackground: useMaterial3
-                  ? seedScheme.surfaceContainerHigh
-                  : seedScheme.surface,
-              scaffoldBackground: subTheme.scaffoldBackgroundBaseColor?.color(
+              dialogBackground: useMaterial3 ? seedScheme.surfaceContainerHigh : seedScheme.surface,
+              scaffoldBackground:
+                  subTheme.scaffoldBackgroundBaseColor?.color(
                     seedScheme,
                     useMaterial3: useMaterial3,
                   ) ??
-                  (useMaterial3
-                      ? seedScheme.surfaceContainerLowest
-                      : seedScheme.surface),
+                  (useMaterial3 ? seedScheme.surfaceContainerLowest : seedScheme.surface),
             )
           // Colorscheme surfaces are used as starting point for blended ones.
           : colorScheme != null
-              ? FlexSchemeSurfaceColors(
-                  surface: colorScheme.surface,
-                  surfaceDim: colorScheme.surfaceDim,
-                  surfaceBright: colorScheme.surfaceBright,
-                  surfaceContainerLowest: colorScheme.surfaceContainerLowest,
-                  surfaceContainerLow: colorScheme.surfaceContainerLow,
-                  surfaceContainer: colorScheme.surfaceContainer,
-                  surfaceContainerHigh: colorScheme.surfaceContainerHigh,
-                  surfaceContainerHighest: colorScheme.surfaceContainerHighest,
-                  inverseSurface: colorScheme.inverseSurface,
-                  dialogBackground: useMaterial3
-                      ? colorScheme.surfaceContainerHigh
-                      : colorScheme.surface,
-                  scaffoldBackground:
-                      subTheme.scaffoldBackgroundBaseColor?.color(
-                            colorScheme,
-                            useMaterial3: useMaterial3,
-                          ) ??
-                          (useMaterial3
-                              ? colorScheme.surfaceContainerLowest
-                              : colorScheme.surface),
-                )
-              : null,
+          ? FlexSchemeSurfaceColors(
+              surface: colorScheme.surface,
+              surfaceDim: colorScheme.surfaceDim,
+              surfaceBright: colorScheme.surfaceBright,
+              surfaceContainerLowest: colorScheme.surfaceContainerLowest,
+              surfaceContainerLow: colorScheme.surfaceContainerLow,
+              surfaceContainer: colorScheme.surfaceContainer,
+              surfaceContainerHigh: colorScheme.surfaceContainerHigh,
+              surfaceContainerHighest: colorScheme.surfaceContainerHighest,
+              inverseSurface: colorScheme.inverseSurface,
+              dialogBackground: useMaterial3 ? colorScheme.surfaceContainerHigh : colorScheme.surface,
+              scaffoldBackground:
+                  subTheme.scaffoldBackgroundBaseColor?.color(
+                    colorScheme,
+                    useMaterial3: useMaterial3,
+                  ) ??
+                  (useMaterial3 ? colorScheme.surfaceContainerLowest : colorScheme.surface),
+            )
+          : null,
     );
 
     // Effective blend level for the onColors.
     int onBlendLevel = useSubThemes ? (subTheme.blendOnLevel ?? 0) : 0;
     assert(
-        onBlendLevel >= 0 && onBlendLevel <= 40,
-        'Only onBlendLevel:s from 0 to 40 '
-        'are allowed. Very high alpha blend levels may not produce results '
-        'that are visually very appealing or useful.');
+      onBlendLevel >= 0 && onBlendLevel <= 40,
+      'Only onBlendLevel:s from 0 to 40 '
+      'are allowed. Very high alpha blend levels may not produce results '
+      'that are visually very appealing or useful.',
+    );
     // If above happens in none debug mode, use 0, no blends.
     if (onBlendLevel < 0 || onBlendLevel > 40) onBlendLevel = 0;
 
     // Get alpha blend values for used mode, on blend level and brightness,
-    // used for onContainers and onSurface and onBackground.
+    // used for onContainers and onSurface.
     final FlexAlphaValues alphaOnValue = useSubThemes
-        ? FlexAlphaValues.getAlphas(
-            surfaceMode ?? FlexSurfaceMode.level, onBlendLevel)
+        ? FlexAlphaValues.getAlphas(surfaceMode ?? FlexSurfaceMode.level, onBlendLevel)
         : const FlexAlphaValues();
     // Get alpha blend values for used mode, on blend level and brightness,
     // used for onPrimary, onSecondary, onTertiary and onError.
     final FlexAlphaValues alphaOnMain = useSubThemes && subTheme.blendOnColors
-        ? FlexAlphaValues.getAlphas(
-            surfaceMode ?? FlexSurfaceMode.level, onBlendLevel)
+        ? FlexAlphaValues.getAlphas(surfaceMode ?? FlexSurfaceMode.level, onBlendLevel)
         : const FlexAlphaValues();
     // Determine the input surface:
     final Color inputSurface = surface ?? surfaceSchemeColors.surface;
@@ -5409,49 +5541,36 @@ class FlexColorScheme with Diagnosticable {
       surfaceTint: blendColor,
       error: effectiveColors.error!,
       errorContainer: effectiveColors.errorContainer,
-      onPrimary: onPrimary ??
-          (seed.useKeyColors && seed.keepPrimary
-              ? null
-              : seedScheme?.onPrimary) ??
-          colorScheme?.onPrimary,
-      onPrimaryContainer: onPrimaryContainer ??
-          (seed.useKeyColors && seed.keepPrimaryContainer
-              ? null
-              : seedScheme?.onPrimaryContainer) ??
+      onPrimary:
+          onPrimary ?? (seed.useKeyColors && seed.keepPrimary ? null : seedScheme?.onPrimary) ?? colorScheme?.onPrimary,
+      onPrimaryContainer:
+          onPrimaryContainer ??
+          (seed.useKeyColors && seed.keepPrimaryContainer ? null : seedScheme?.onPrimaryContainer) ??
           colorScheme?.onPrimaryContainer,
-      onSecondary: onSecondary ??
-          (seed.useKeyColors && seed.keepSecondary
-              ? null
-              : seedScheme?.onSecondary) ??
+      onSecondary:
+          onSecondary ??
+          (seed.useKeyColors && seed.keepSecondary ? null : seedScheme?.onSecondary) ??
           colorScheme?.onSecondary,
-      onSecondaryContainer: onSecondaryContainer ??
-          (seed.useKeyColors && seed.keepSecondaryContainer
-              ? null
-              : seedScheme?.onSecondaryContainer) ??
+      onSecondaryContainer:
+          onSecondaryContainer ??
+          (seed.useKeyColors && seed.keepSecondaryContainer ? null : seedScheme?.onSecondaryContainer) ??
           colorScheme?.onSecondaryContainer,
-      onTertiary: onTertiary ??
-          (seed.useKeyColors && seed.keepTertiary
-              ? null
-              : seedScheme?.onTertiary) ??
+      onTertiary:
+          onTertiary ??
+          (seed.useKeyColors && seed.keepTertiary ? null : seedScheme?.onTertiary) ??
           colorScheme?.onTertiary,
-      onTertiaryContainer: onTertiaryContainer ??
-          (seed.useKeyColors && seed.keepTertiaryContainer
-              ? null
-              : seedScheme?.onTertiaryContainer) ??
+      onTertiaryContainer:
+          onTertiaryContainer ??
+          (seed.useKeyColors && seed.keepTertiaryContainer ? null : seedScheme?.onTertiaryContainer) ??
           colorScheme?.onTertiaryContainer,
-      onError: onError ??
-          (seed.useKeyColors && seed.keepError ? null : seedScheme?.onError) ??
-          colorScheme?.onError,
-      onErrorContainer: onErrorContainer ??
-          (seed.useKeyColors && seed.keepErrorContainer
-              ? null
-              : seedScheme?.onErrorContainer) ??
+      onError: onError ?? (seed.useKeyColors && seed.keepError ? null : seedScheme?.onError) ?? colorScheme?.onError,
+      onErrorContainer:
+          onErrorContainer ??
+          (seed.useKeyColors && seed.keepErrorContainer ? null : seedScheme?.onErrorContainer) ??
           colorScheme?.onErrorContainer,
       onSurface: onSurface ?? seedScheme?.onSurface ?? colorScheme?.onSurface,
-      onSurfaceVariant:
-          seedScheme?.onSurfaceVariant ?? colorScheme?.onSurfaceVariant,
-      onInverseSurface:
-          seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
+      onSurfaceVariant: seedScheme?.onSurfaceVariant ?? colorScheme?.onSurfaceVariant,
+      onInverseSurface: seedScheme?.onInverseSurface ?? colorScheme?.onInverseSurface,
       primaryAlpha: alphaOnMain.primaryAlpha,
       primaryContainerAlpha: alphaOnValue.primaryContainerAlpha,
       secondaryAlpha: alphaOnMain.secondaryAlpha,
@@ -5467,8 +5586,7 @@ class FlexColorScheme with Diagnosticable {
     // Surface is used e.g. by Card and bottom appbar.
     // If true black, we make a darker than normal surface. If not
     // true black, we use provided surface color, or computed one.
-    final Color effectiveSurfaceColor =
-        darkIsTrueBlack ? inputSurface.darken(5) : inputSurface;
+    final Color effectiveSurfaceColor = darkIsTrueBlack ? inputSurface.darken(5) : inputSurface;
     final Color effectiveSurfaceDimColor = darkIsTrueBlack
         ? surfaceSchemeColors.surfaceDim.darken(5)
         : surfaceSchemeColors.surfaceDim;
@@ -5500,20 +5618,17 @@ class FlexColorScheme with Diagnosticable {
     // The provided dialog background color overrides factory surface behavior,
     // but is impacted by true black mode for a darker effect.
     final Color effectiveDialogBackground = darkIsTrueBlack
-        ? dialogBackground?.darken(5) ??
-            surfaceSchemeColors.dialogBackground.darken(5)
+        ? dialogBackground?.darken(5) ?? surfaceSchemeColors.dialogBackground.darken(5)
         : dialogBackground ?? surfaceSchemeColors.dialogBackground;
 
     // Get the effective light ref colors.
-    final Color effectivePrimaryLightRef =
-        effectiveColors.primaryLightRef ?? effectiveColors.primary;
-    final Color effectiveSecondaryLightRef =
-        effectiveColors.secondaryLightRef ?? effectiveColors.secondary;
-    final Color effectiveTertiaryLightRef =
-        effectiveColors.tertiaryLightRef ?? effectiveColors.tertiary;
+    final Color effectivePrimaryLightRef = effectiveColors.primaryLightRef ?? effectiveColors.primary;
+    final Color effectiveSecondaryLightRef = effectiveColors.secondaryLightRef ?? effectiveColors.secondary;
+    final Color effectiveTertiaryLightRef = effectiveColors.tertiaryLightRef ?? effectiveColors.tertiary;
 
     // Compute the effective ColorScheme based on all selection options.
-    final ColorScheme effectiveColorScheme = seedScheme?.copyWith(
+    final ColorScheme effectiveColorScheme =
+        seedScheme?.copyWith(
           // Add the locked effective colors back to our SeedScheme.
           // Fixes: https://github.com/rydmike/flex_color_scheme/issues/198
           primary: effectiveColors.primary,
@@ -5555,49 +5670,36 @@ class FlexColorScheme with Diagnosticable {
           onPrimary: onColors.onPrimary,
           primaryContainer: effectiveColors.primaryContainer,
           onPrimaryContainer: onColors.onPrimaryContainer,
-          primaryFixed: schemeForFixedColors?.primaryFixed ??
-              _fixedColor(effectivePrimaryLightRef),
-          primaryFixedDim: schemeForFixedColors?.primaryFixedDim ??
-              _fixedDimColor(effectivePrimaryLightRef),
-          onPrimaryFixed: schemeForFixedColors?.onPrimaryFixed ??
-              _onFixedColor(effectivePrimaryLightRef),
-          onPrimaryFixedVariant: schemeForFixedColors?.onPrimaryFixedVariant ??
-              _onFixedVariantColor(effectivePrimaryLightRef),
+          primaryFixed: schemeForFixedColors?.primaryFixed ?? _fixedColor(effectivePrimaryLightRef),
+          primaryFixedDim: schemeForFixedColors?.primaryFixedDim ?? _fixedDimColor(effectivePrimaryLightRef),
+          onPrimaryFixed: schemeForFixedColors?.onPrimaryFixed ?? _onFixedColor(effectivePrimaryLightRef),
+          onPrimaryFixedVariant:
+              schemeForFixedColors?.onPrimaryFixedVariant ?? _onFixedVariantColor(effectivePrimaryLightRef),
           //
           secondary: effectiveColors.secondary,
           onSecondary: onColors.onSecondary,
           secondaryContainer: effectiveColors.secondaryContainer,
           onSecondaryContainer: onColors.onSecondaryContainer,
-          secondaryFixed: schemeForFixedColors?.secondaryFixed ??
-              _fixedColor(effectiveSecondaryLightRef),
-          secondaryFixedDim: schemeForFixedColors?.secondaryFixedDim ??
-              _fixedDimColor(effectiveSecondaryLightRef),
-          onSecondaryFixed: schemeForFixedColors?.onSecondaryFixed ??
-              _onFixedColor(effectiveSecondaryLightRef),
+          secondaryFixed: schemeForFixedColors?.secondaryFixed ?? _fixedColor(effectiveSecondaryLightRef),
+          secondaryFixedDim: schemeForFixedColors?.secondaryFixedDim ?? _fixedDimColor(effectiveSecondaryLightRef),
+          onSecondaryFixed: schemeForFixedColors?.onSecondaryFixed ?? _onFixedColor(effectiveSecondaryLightRef),
           onSecondaryFixedVariant:
-              schemeForFixedColors?.onSecondaryFixedVariant ??
-                  _onFixedVariantColor(effectiveSecondaryLightRef),
+              schemeForFixedColors?.onSecondaryFixedVariant ?? _onFixedVariantColor(effectiveSecondaryLightRef),
           //
           tertiary: effectiveColors.tertiary,
           onTertiary: onColors.onTertiary,
           tertiaryContainer: effectiveColors.tertiaryContainer,
           onTertiaryContainer: onColors.onTertiaryContainer,
-          tertiaryFixed: schemeForFixedColors?.tertiaryFixed ??
-              _fixedColor(effectiveTertiaryLightRef),
-          tertiaryFixedDim: schemeForFixedColors?.tertiaryFixedDim ??
-              _fixedDimColor(effectiveTertiaryLightRef),
-          onTertiaryFixed: schemeForFixedColors?.onTertiaryFixed ??
-              _onFixedColor(effectiveTertiaryLightRef),
+          tertiaryFixed: schemeForFixedColors?.tertiaryFixed ?? _fixedColor(effectiveTertiaryLightRef),
+          tertiaryFixedDim: schemeForFixedColors?.tertiaryFixedDim ?? _fixedDimColor(effectiveTertiaryLightRef),
+          onTertiaryFixed: schemeForFixedColors?.onTertiaryFixed ?? _onFixedColor(effectiveTertiaryLightRef),
           onTertiaryFixedVariant:
-              schemeForFixedColors?.onTertiaryFixedVariant ??
-                  _onFixedVariantColor(effectiveTertiaryLightRef),
+              schemeForFixedColors?.onTertiaryFixedVariant ?? _onFixedVariantColor(effectiveTertiaryLightRef),
           //
           error: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3DarkError
               : effectiveColors.error ?? FlexColor.materialDarkError,
-          onError: useMaterial3ErrorColors && !seed.useKeyColors
-              ? FlexColor.material3DarkOnError
-              : onColors.onError,
+          onError: useMaterial3ErrorColors && !seed.useKeyColors ? FlexColor.material3DarkOnError : onColors.onError,
           errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
               ? FlexColor.material3DarkErrorContainer
               : effectiveColors.errorContainer,
@@ -5616,40 +5718,32 @@ class FlexColorScheme with Diagnosticable {
           onSurface: onColors.onSurface,
           onSurfaceVariant: onColors.onSurfaceVariant,
           //
-          outline: _outlineColor(
-              Brightness.dark, blendColor, alphaOnValue.surfaceAlpha),
-          outlineVariant: _outlineVariantColor(
-              Brightness.dark, blendColor, alphaOnValue.surfaceAlpha),
+          outline: _outlineColor(Brightness.dark, blendColor, alphaOnValue.surfaceAlpha),
+          outlineVariant: _outlineVariantColor(Brightness.dark, blendColor, alphaOnValue.surfaceAlpha),
           shadow: Colors.black,
           scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
-          inversePrimary: _inversePrimary(
-              Brightness.dark, effectiveColors.primary, effectiveSurfaceColor),
+          inversePrimary: _inversePrimary(Brightness.dark, effectiveColors.primary, effectiveSurfaceColor),
           surfaceTint: surfaceTint ?? effectiveColors.primary,
         );
 
     // If darkIsTrueBlack is set, we use black as default scaffold background,
     // otherwise provided value or if null effective scheme background.
-    final Color effectiveScaffoldColor = (useSubThemes &&
-                subTheme.scaffoldBackgroundSchemeColor != null
-            ? FlexSubThemes.schemeColor(
-                subTheme.scaffoldBackgroundSchemeColor!, effectiveColorScheme)
+    final Color effectiveScaffoldColor =
+        (useSubThemes && subTheme.scaffoldBackgroundSchemeColor != null
+            ? FlexSubThemes.schemeColor(subTheme.scaffoldBackgroundSchemeColor!, effectiveColorScheme)
             : null) ??
         scaffoldBackground ??
-        (darkIsTrueBlack
-            ? Colors.black
-            : surfaceSchemeColors.scaffoldBackground);
+        (darkIsTrueBlack ? Colors.black : surfaceSchemeColors.scaffoldBackground);
 
     // Determine the effective AppBar color:
     // - First priority, passed in color value.
     Color? effectiveAppBarColor = appBarBackground;
     // - Second priority, sub-theme based scheme color.
-    effectiveAppBarColor ??=
-        useSubThemes && subTheme.appBarBackgroundSchemeColor != null
-            ? FlexSubThemes.schemeColor(
-                subTheme.appBarBackgroundSchemeColor!, effectiveColorScheme)
-            : null;
+    effectiveAppBarColor ??= useSubThemes && subTheme.appBarBackgroundSchemeColor != null
+        ? FlexSubThemes.schemeColor(subTheme.appBarBackgroundSchemeColor!, effectiveColorScheme)
+        : null;
     // Third priority [appBarStyle] based.
     if (effectiveAppBarColor == null) {
       switch (appBarStyle) {
@@ -5664,20 +5758,16 @@ class FlexColorScheme with Diagnosticable {
         case FlexAppBarStyle.scaffoldBackground:
           effectiveAppBarColor = effectiveScaffoldColor;
         case FlexAppBarStyle.custom:
-          effectiveAppBarColor =
-              effectiveColors.appBarColor ?? effectiveColors.primary;
+          effectiveAppBarColor = effectiveColors.appBarColor ?? effectiveColors.primary;
         case null:
-          effectiveAppBarColor = useMaterial3
-              ? effectiveSurfaceColor
-              : FlexColor.materialDarkSurface;
+          effectiveAppBarColor = useMaterial3 ? effectiveSurfaceColor : FlexColor.materialDarkSurface;
       }
     }
     // As last step apply the factory opacity parameter value.
     // The resulting effectiveAppBarColor is never null and always passed to the
     // raw FlexColorScheme constructor.
     if (appBarOpacity != null) {
-      effectiveAppBarColor =
-          effectiveAppBarColor.withValues(alpha: appBarOpacity);
+      effectiveAppBarColor = effectiveAppBarColor.withValues(alpha: appBarOpacity);
     }
     // The raw FlexColorScheme(), created by above complex .dark factory.
     return FlexColorScheme(
@@ -5703,9 +5793,7 @@ class FlexColorScheme with Diagnosticable {
       error: useMaterial3ErrorColors && !seed.useKeyColors
           ? FlexColor.material3DarkError
           : effectiveColors.error ?? FlexColor.materialDarkError,
-      onError: useMaterial3ErrorColors && !seed.useKeyColors
-          ? FlexColor.material3DarkOnError
-          : onColors.onError,
+      onError: useMaterial3ErrorColors && !seed.useKeyColors ? FlexColor.material3DarkOnError : onColors.onError,
       errorContainer: useMaterial3ErrorColors && !seed.useKeyColors
           ? FlexColor.material3DarkErrorContainer
           : effectiveColors.errorContainer,
@@ -5752,7 +5840,6 @@ class FlexColorScheme with Diagnosticable {
   //
   //  * comfortablePlatformDensity
   //  * themedSystemNavigationBar
-  //  * createPrimarySwatch
   //
   //****************************************************************************
 
@@ -5768,8 +5855,7 @@ class FlexColorScheme with Diagnosticable {
   /// The comfortable visual density is useful on desktop and desktop web
   /// laptops that have touch screens, as it keeps touch targets a bit larger
   /// than when using compact.
-  static VisualDensity get comfortablePlatformDensity =>
-      defaultComfortablePlatformDensity(defaultTargetPlatform);
+  static VisualDensity get comfortablePlatformDensity => defaultComfortablePlatformDensity(defaultTargetPlatform);
 
   /// Returns a [VisualDensity] that is adaptive based on the given [platform].
   ///
@@ -5780,8 +5866,7 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// * [comfortablePlatformDensity] which returns a [VisualDensity] that is
   ///   adaptive based on [defaultTargetPlatform].
-  static VisualDensity defaultComfortablePlatformDensity(
-      TargetPlatform platform) {
+  static VisualDensity defaultComfortablePlatformDensity(TargetPlatform platform) {
     switch (platform) {
       case TargetPlatform.android:
       case TargetPlatform.iOS:
@@ -5808,214 +5893,222 @@ class FlexColorScheme with Diagnosticable {
   /// current theme's [ColorScheme.surface] as its background color and
   /// icon colors that match this background, without any divider.
   ///
-  /// The background color can be modified with [systemNavBarStyle] that
-  /// can use: system, surface, background, scaffoldBackground or transparent
-  /// options as background color options. It defaults to background.
-  /// See [FlexSystemNavBarStyle] for more info.
-  ///
-  /// In default Flutter M2 themes, the surface, background, scaffoldBackground
-  /// and in light theme, even system are all the same color. For such themes
-  /// this convenience property does not make so much sense. However, if you use
-  /// FlexColorScheme and its primary color surface blending, or M3 kye color
-  /// seed generated ColorSchemes, these colors may not be the same. This
-  /// offers a convenient way to switch the background color of your system
-  /// navigation bar in a way that matches your theme's surface branded
-  /// background color and to choose which one of them to use.
-  ///
   /// This helper always sets
   /// [SystemUiOverlayStyle.systemNavigationBarContrastEnforced] to false,
   /// to try to avoid the system scrim on Android version where it is supported.
   /// This is done because the selected background color is the scrim itself
   /// when used with the opacity parameter and we never want an extra scrim.
-  /// If we set opacity very low and loose contrast due to that, it is because
-  /// it is the usage intent.
-  ///
-  /// An optional divider on the navigation bar is also available.
-  /// Based on Flutter SDK docs, the divider on the navigation bar, is only
-  /// respected on Android P (= Pie = SDK API 28 = Android 9) or higher. The
-  /// divider can be turned on by setting [useDivider] to true.
-  /// This produces a divider on top of the system navigation bar that in
-  /// light theme mode uses color 0xFF2C2C2C and in dark mode and 0xFFDDDDDD.
-  ///
-  /// You can modify the default color of the divider with the optional
-  /// [systemNavigationBarDividerColor]. The call to set and use the divider
-  /// color is only made once a none null or true value has been given to
-  /// [useDivider].
-  ///
-  /// Android SDK < 29 does not respect provided alpha value on the color of
-  /// the divider color, and calling it with null again will not remove it.
-  ///
-  /// Be aware that once you have enabled the divider by setting it to true that
-  /// there is no convenient way to get rid of it. You can set the value
-  /// to false, but that will just make the divider same color as your current
-  /// nav bar background color to make it invisible, it is still there, but
-  /// this implementation trick works well.
-  ///
-  /// Important: The divider is actually a layer behind the system navigation
-  /// bar background, that is 1 dp higher. When using colors with opacity on
-  /// the background and the divider, one have to consider the sum of the
-  /// opacity for both colors to get the effective translucent color.
-  ///
-  /// Use and support for the [opacity] value on the system navigation bar
-  /// is supported starting from Flutter 2.5.
   ///
   /// By default [themedSystemNavigationBar] does not set any system overlay
   /// for the status bar. In Flutter SDK the top status bar has its own built in
   /// [SystemUiOverlayStyle] as a part of [AppBar] and [AppBarTheme].
-  ///
   /// [FlexColorScheme] also manages the [SystemUiOverlayStyle] for the status
-  /// bar via it. However, if your screen has no [AppBar] you can use the
-  /// property [noAppBar] and [invertStatusIcons] to affect the look of the
-  /// status icons when there is no [AppBar] present on the page, this is
-  /// useful e.g. for splash and intro screens.
+  /// bar via it. Each parameter is documented below in parameter-list order.
+  ///
+  /// ## [context]
+  ///
+  /// Build context used to read the current theme. May be null in tests, in
+  /// which case [nullContextBrightness] is used. When null, background color
+  /// falls back to white in light mode and black in dark mode unless
+  /// [systemNavigationBarColor] is provided.
+  ///
+  /// ## [useDivider]
+  ///
+  /// Use a divider line on the top edge of the system navigation bar.
+  ///
+  /// On Android 11 (SDK30) there was an issue when using the system
+  /// divider, see: https://github.com/flutter/flutter/issues/100027
+  /// This issue was found to be resolved on in tests onFlutter 3.7.7
+  /// 15.3.2023. Keeping this references around to the issue in case some
+  /// related issues appear. The system navigation bar on different Android
+  /// versions is a complicated topic.
+  ///
+  /// Based on Flutter SDK docs, the divider on the navigation bar, is on
+  /// respected on Android P (= Pie = SDK API 28 = Android 9) or higher. But
+  /// based on our findings it does not work until Android 10 (SDK29 or
+  /// higher.
+  ///
+  /// Important: The divider is actually a layer behind the system navigation
+  /// bar background, that is 1dp higher. When using colors with opacity on
+  /// the background and the divider, one have to consider the sum of the
+  /// opacity for both colors to get the effective translucent color.
+  ///
+  /// Defaults to null.
+  ///
+  /// Keeping it null, by omission or passing null, always  omits the call
+  /// to set any divider color in the created [SystemUiOverlayStyle].
+  ///
+  /// ## [opacity]
+  ///
+  /// Opacity value for the system navigation bar.
+  ///
+  /// The opacity value is applied to the provided [systemNavigationBarColor]
+  /// or if it is null, to the color determined by [systemNavBarStyle].
+  ///
+  /// Defaults to 1, fully opaque.
+  ///
+  /// This feature is supported starting from Flutter 2.5.
+  /// Be aware that it only works on Android SDK >= 29. Earlier there were
+  /// some issues on Android SDK < 29 before this PR landed in stable:
+  /// https://github.com/flutter/engine/pull/28616
+  ///
+  /// This issue is a good source for more information on current state
+  /// of transparent navigation bars in Flutter on Android:
+  /// https://github.com/flutter/flutter/issues/90098.
+  ///
+  /// To see the effect of the opacity the:
+  ///
+  /// SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)
+  ///
+  /// call has to be used. It is called automatically called by this helper
+  /// when opacity is < 1. Do note that this UI mode may require layout
+  /// changes in the Flutter app in some use cases. A SafeArea can often be
+  /// used to add some padding back.
+  ///
+  /// ## [noAppBar]
+  ///
+  /// Set this to true if you do not use a Material AppBar and want
+  /// a uniform background where the status bar's icon region is.
+  ///
+  /// If your page does not have an [AppBar] you can also use this
+  /// [AnnotatedRegion] helper to remove the top status bar scrim color
+  /// on the top icon status bar, set [noAppBar] to true to do so.
+  ///
+  /// A typical use case would be pages like splash screens and intro
+  /// screens that don't use an AppBar. The Material AppBar uses its own
+  /// [SystemUiOverlayStyle] so don't use this with an AppBar, set the style
+  /// on the AppBar or its theme instead. However, if you don't have an
+  /// [AppBar] on screen, this is a convenient way of to remove the top
+  /// system icon scrim for a more clean full screen look on Android.
+  ///
+  /// ## [invertStatusIcons]
+  ///
+  /// Set to true to invert top status bar icons like, battery, network,
+  /// wifi icons etc. in relation to their normal theme brightness related
+  /// color.
+  ///
+  /// Defaults to false.
+  ///
+  /// This setting works well together with the [noAppBar] flag to make an
+  /// even cleaner looking splash screen by making the
+  /// top status bar icons less visible or even invisible.
+  ///
+  /// On a white background the status icons will be invisible, and if a
+  /// fully black background is used in dark mode, they will be invisible
+  /// in dark mode too. This can be used to create clean screen with no
+  /// app bar and no status icons.
+  ///
+  /// For no status bar and and system navigation bar, you can also try using:
+  /// `SystemChrome.setEnabledSystemUIOverlays(<SystemUiOverlay>[]);` to
+  /// remove the top status bar and bottom navigation bar completely. When
+  /// using that method there are however issues with them showing up again
+  /// on navigation and when keyboard becomes visible, or app is restored
+  /// from being in the background while using another app. You
+  /// also have to manage putting the overlays back yourself manually with
+  /// `SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values)` when
+  /// moving away from the screen that had removed them. Using an
+  /// [AnnotatedRegion] with [themedSystemNavigationBar] and both [noAppBar]
+  /// and [invertStatusIcons] set to true, you can avoid these issues. You are
+  /// however limited to using background white, in light mode and black in
+  /// dark mode, if you want the status bar to be totally invisible and
+  /// navigation bar to blend in with the background completely.
+  ///
+  /// ## [systemNavBarStyle]
+  ///
+  /// The [FlexSystemNavBarStyle] used to determine the background color
+  /// for the system navigation bar. Used when systemNavigationBarColor
+  /// is null and context is not null, so theme colors corresponding to it
+  /// can be used for the background color.
+  ///
+  /// Defaults to [FlexSystemNavBarStyle.surface].
+  ///
+  /// ## [systemNavigationBarColor]
+  ///
+  /// Background color of the system navigation bar. If null the theme of
+  /// context [ColorScheme.surface] will be used as background color.
+  ///
+  /// The point with this static helper is to give you a background color
+  /// themed system navigation bar automatically. If you for some reason
+  /// want a different color you can still override it this property.
+  ///
+  /// If [context] is null, [nullContextBrightness] will be used as brightness
+  /// value and it will determine if the background is white (for
+  /// Brightness.light) or black (for Brightness.dark) if this property is
+  /// also null. The null context is mostly used for simple unit testing
+  /// with no context, but can also be used to make a [SystemUiOverlayStyle]
+  /// with this helper without having a context.
+  ///
+  /// ## [systemNavigationBarDividerColor]
+  ///
+  /// Optional color for the system navigation bar divider. A divider will
+  /// only be present if [useDivider] is true and in this color if a
+  /// value was given to it.
+  ///
+  /// If a color is not given the `Color(0xFF2C2C2C)` will be used in
+  /// dark mode and the color `Color(0xFFDDDDDD)` will be used in light mode,
+  /// as the divider color for the system navigation bar.
+  ///
+  /// Based on Flutter SDK docs, the divider on the navigation bar, is on
+  /// respected on Android P (= Pie = SDK API 28 = Android 9) or higher. But
+  /// based on our findings it does not work until Android 10 (SDK29 or
+  /// higher.
+  ///
+  /// Important: The divider is actually a layer behind the system navigation
+  /// bar background, that is 1dp higher. When using colors with opacity on
+  /// the background and the divider, one have to consider the sum of the
+  /// opacity for both colors to get the effective translucent color.
+  ///
+  /// ## [nullContextBrightness]
+  ///
+  /// Brightness used if context is null, mostly used for simple unit testing,
+  /// with no context present. However, it can also be used to make a
+  /// [SystemUiOverlayStyle] without having a context.
+  ///
+  /// Defaults to Brightness.light.
   static SystemUiOverlayStyle themedSystemNavigationBar(
+    /// Build context used to read the current theme. May be null in tests.
     BuildContext? context, {
+
     /// Use a divider line on the top edge of the system navigation bar.
-    ///
-    /// On Android 11 (SDK30) there was an issue when using the system
-    /// divider, see: https://github.com/flutter/flutter/issues/100027
-    /// This issue was found to be resolved on in tests onFlutter 3.7.7
-    /// 15.3.2023. Keeping this references around to the issue in case some
-    /// related issues appear. The system navigation bar on different Android
-    /// versions is a complicated topic.
-    ///
-    /// Based on Flutter SDK docs, the divider on the navigation bar, is on
-    /// respected on Android P (= Pie = SDK API 28 = Android 9) or higher. But
-    /// based on our findings it does not work until Android 10 (SDK29 or
-    /// higher.
-    ///
-    /// Important: The divider is actually a layer behind the system navigation
-    /// bar background, that is 1dp higher. When using colors with opacity on
-    /// the background and the divider, one have to consider the sum of the
-    /// opacity for both colors to get the effective translucent color.
-    ///
-    /// Defaults to null.
-    ///
-    /// Keeping it null, by omission or passing null, always  omits the call
-    /// to set any divider color in the created [SystemUiOverlayStyle].
-    final bool? useDivider,
+    bool? useDivider,
 
     /// Opacity value for the system navigation bar.
-    ///
-    /// The opacity value is applied to the provided `systemNavigationBarColor`
-    /// or if it is null, to the color determined by `systemNavBarStyle`.
-    ///
-    /// Defaults to 1, fully opaque.
-    ///
-    /// This feature is supported starting from Flutter 2.5.
-    /// Be aware that it only works on Android SDK >= 29. Earlier there were
-    /// some issues on Android SDK < 29 before this PR landed in stable:
-    /// https://github.com/flutter/engine/pull/28616
-    ///
-    /// This issue is a good source for more information on current state
-    /// of transparent navigation bars in Flutter on Android:
-    /// https://github.com/flutter/flutter/issues/90098.
-    ///
-    /// To see the effect of the opacity the:
-    ///
-    /// SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge)
-    ///
-    /// call has to be used. It is called automatically called by this helper
-    /// when opacity is < 1. Do note that this UI mode may require layout
-    /// changes in the Flutter app in some use cases. A SafeArea can often be
-    /// used to add some padding back.
-    final double opacity = 1,
+    double opacity = 1,
 
     /// Set this to true if you do not use a Material AppBar and want
     /// a uniform background where the status bar's icon region is.
-    ///
-    /// If your page does not have an [AppBar] you can also use this
-    /// [AnnotatedRegion] helper to remove the top status bar scrim color
-    /// on the top icon status bar, set [noAppBar] to true to do so.
-    ///
-    /// A typical use case would be pages like splash screens and intro
-    /// screens that don't use an AppBar. The Material AppBar uses its own
-    /// [SystemUiOverlayStyle] so don't use this with an AppBar, set the style
-    /// on the AppBar or its theme instead. However, if you don't have an
-    /// [AppBar] on screen, this is a convenient way of to remove the top
-    /// system icon scrim for a more clean full screen look on Android.
-    final bool noAppBar = false,
+    bool noAppBar = false,
 
     /// Set to true to invert top status bar icons like, battery, network,
     /// wifi icons etc. in relation to their normal theme brightness related
     /// color.
     ///
     /// Defaults to false.
-    ///
-    /// This setting works well together with the [noAppBar] flag to make an
-    /// even cleaner looking splash screen by making the
-    /// top status bar icons less visible or even invisible.
-    ///
-    /// On a white background the status icons will be invisible, and if a
-    /// fully black background is used in dark mode, they will be invisible
-    /// in dark mode too. This can be used to create clean screen with no
-    /// app bar and no status icons.
-    ///
-    /// For no status bar and and system navigation bar, you can also try using:
-    /// `SystemChrome.setEnabledSystemUIOverlays(<SystemUiOverlay>[]);` to
-    /// remove the top status bar and bottom navigation bar completely. When
-    /// using that method there are however issues with them showing up again
-    /// on navigation and when keyboard becomes visible, or app is restored
-    /// from being in the background while using another app. You
-    /// also have to manage putting the overlays back yourself manually with
-    /// `SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values)` when
-    /// moving away from the screen that had removed them. Using an
-    /// `AnnotatedRegion` with `themedSystemNavigationBar` and both `noAppBar`
-    /// and `invertStatusIcons` set to true, you can avoid these issues. You are
-    /// however limited to using background white, in light mode and black in
-    /// dark mode, if you want the status bar to be totally invisible and
-    /// navigation bar to blend in with the background completely.
-    final bool invertStatusIcons = false,
+    bool invertStatusIcons = false,
 
-    /// The [FlexSystemNavBarStyle] used to determine the background color
+    /// The `FlexSystemNavBarStyle` used to determine the background color
     /// for the system navigation bar. Used when systemNavigationBarColor
     /// is null and context is not null, so theme colors corresponding to it
     /// can be used for the background color.
     ///
-    /// Defaults to [FlexSystemNavBarStyle.surface].
-    final FlexSystemNavBarStyle systemNavBarStyle =
-        FlexSystemNavBarStyle.surface,
+    /// Defaults to `FlexSystemNavBarStyle.surface`.
+    FlexSystemNavBarStyle systemNavBarStyle = FlexSystemNavBarStyle.surface,
 
     /// Background color of the system navigation bar. If null the theme of
-    /// context `colorScheme.background` will be used as background color.
-    ///
-    /// The point with this static helper is to give you a background color
-    /// themed system navigation bar automatically. If you for some reason
-    /// want a different color you can still override it this property.
-    ///
-    /// If `context` is null, `nullContextBrightness` will be used as brightness
-    /// value and it will determine if the background is white (for
-    /// Brightness.light) or black (for Brightness.dark) if this property is
-    /// also null. The null context is mostly used for simple unit testing
-    /// with no context, but can also be used to make a `SystemUiOverlayStyle`
-    /// with this helper without having a context.
-    final Color? systemNavigationBarColor,
+    /// context `colorScheme.surface` will be used as background color.
+    Color? systemNavigationBarColor,
 
     /// Optional color for the system navigation bar divider. A divider will
     /// only be present if `useDivider` is true and in this color if a
     /// value was given to it.
-    ///
-    /// If a color is not given the `Color(0xFF2C2C2C)` will be used in
-    /// dark mode and the color `Color(0xFFDDDDDD)` will be used in light mode,
-    /// as the divider color for the system navigation bar.
-    ///
-    /// Based on Flutter SDK docs, the divider on the navigation bar, is on
-    /// respected on Android P (= Pie = SDK API 28 = Android 9) or higher. But
-    /// based on our findings it does not work until Android 10 (SDK29 or
-    /// higher.
-    ///
-    /// Important: The divider is actually a layer behind the system navigation
-    /// bar background, that is 1dp higher. When using colors with opacity on
-    /// the background and the divider, one have to consider the sum of the
-    /// opacity for both colors to get the effective translucent color.
-    final Color? systemNavigationBarDividerColor,
+    Color? systemNavigationBarDividerColor,
 
     /// Brightness used if context is null, mostly used for simple unit testing,
     /// with no context present. However, it can also be used to make a
     /// `SystemUiOverlayStyle` without having a context.
     ///
     /// Defaults to Brightness.light.
-    final Brightness nullContextBrightness = Brightness.light,
+    Brightness nullContextBrightness = Brightness.light,
   }) {
     double usedOpacity = opacity;
     if (usedOpacity < 0) usedOpacity = 0;
@@ -6039,19 +6132,13 @@ class FlexColorScheme with Diagnosticable {
     // Get the defined effective background color for the used style.
     final Color flexBackground = (context != null)
         ? switch (systemNavBarStyle) {
-            FlexSystemNavBarStyle.system =>
-              isDark ? Colors.black : Colors.white,
-            FlexSystemNavBarStyle.background =>
-              Theme.of(context).colorScheme.surfaceContainerLow,
-            FlexSystemNavBarStyle.surface =>
-              Theme.of(context).colorScheme.surface,
-            FlexSystemNavBarStyle.scaffoldBackground =>
-              Theme.of(context).scaffoldBackgroundColor,
-            FlexSystemNavBarStyle.transparent =>
-              Theme.of(context).scaffoldBackgroundColor,
+            FlexSystemNavBarStyle.system => isDark ? Colors.black : Colors.white,
+            FlexSystemNavBarStyle.background => Theme.of(context).colorScheme.surfaceContainerLow,
+            FlexSystemNavBarStyle.surface => Theme.of(context).colorScheme.surface,
+            FlexSystemNavBarStyle.scaffoldBackground => Theme.of(context).scaffoldBackgroundColor,
+            FlexSystemNavBarStyle.transparent => Theme.of(context).scaffoldBackgroundColor,
             FlexSystemNavBarStyle.navigationBar =>
-              Theme.of(context).navigationBarTheme.backgroundColor ??
-                  Theme.of(context).colorScheme.surfaceContainer,
+              Theme.of(context).navigationBarTheme.backgroundColor ?? Theme.of(context).colorScheme.surfaceContainer,
           }
         : (isDark ? Colors.black : Colors.white);
     // If a systemNavigationBarColor color is given, it will always be used,
@@ -6095,8 +6182,7 @@ class FlexColorScheme with Diagnosticable {
             : const Color(0xFFDDDDDD).withValues(alpha: dividerOpacity);
       } // We should have a divider, with a given color.
       else {
-        dividerColor =
-            systemNavigationBarDividerColor.withValues(alpha: dividerOpacity);
+        dividerColor = systemNavigationBarDividerColor.withValues(alpha: dividerOpacity);
       }
     }
 
@@ -6112,13 +6198,11 @@ class FlexColorScheme with Diagnosticable {
       final ThemeData theme = Theme.of(context);
       final ColorScheme colorScheme = theme.colorScheme;
       final AppBarThemeData appBarTheme = AppBarTheme.of(context);
-      appBarColor = appBarTheme.backgroundColor ??
-          (colorScheme.brightness == Brightness.dark
-              ? colorScheme.surface
-              : colorScheme.primary);
+      appBarColor =
+          appBarTheme.backgroundColor ??
+          (colorScheme.brightness == Brightness.dark ? colorScheme.surface : colorScheme.primary);
     }
-    final Brightness appBarBrightness =
-        ThemeData.estimateBrightnessForColor(appBarColor);
+    final Brightness appBarBrightness = ThemeData.estimateBrightnessForColor(appBarColor);
 
     // Making finals for each SystemUiOverlayStyle property, these were used
     // to modify the logic when needed to experiment with work around for:
@@ -6128,19 +6212,16 @@ class FlexColorScheme with Diagnosticable {
     // as intended on Android 9 to 13 in tests 15.3.20222 on Flutter 3.7.7.
     // Also it makes the returned SystemUiOverlayStyle call look very clean.
     final Color? statusBarColor = noAppBar ? Colors.transparent : null;
-    final Brightness? statusBarBrightness =
-        noAppBar ? (isDark ? Brightness.dark : Brightness.light) : null;
+    final Brightness? statusBarBrightness = noAppBar ? (isDark ? Brightness.dark : Brightness.light) : null;
     final Brightness? statusBarIconBrightness = noAppBar
         ? invertStatusIcons
-            ? (isDark ? Brightness.dark : Brightness.light)
-            : (isDark ? Brightness.light : Brightness.dark)
+              ? (isDark ? Brightness.dark : Brightness.light)
+              : (isDark ? Brightness.light : Brightness.dark)
         : invertStatusIcons
-            ? appBarBrightness
-            : null;
-    final Color sysNavigationBarColor =
-        background.withValues(alpha: usedOpacity);
-    final Color sysNavigationBarDividerColor =
-        invertStatusIcons ? Colors.transparent : dividerColor;
+        ? appBarBrightness
+        : null;
+    final Color sysNavigationBarColor = background.withValues(alpha: usedOpacity);
+    final Color sysNavigationBarDividerColor = invertStatusIcons ? Colors.transparent : dividerColor;
     final Brightness systemNavigationBarIconBrightness = invertStatusIcons
         ? (isDark ? Brightness.dark : Brightness.light)
         : (isDark ? Brightness.light : Brightness.dark);
@@ -6159,89 +6240,6 @@ class FlexColorScheme with Diagnosticable {
       // Bottom system navigation bar icon or swipe bar navigator color.
       systemNavigationBarIconBrightness: systemNavigationBarIconBrightness,
     );
-  }
-
-  /// Create a primary Material color swatch from a given [color].
-  ///
-  /// This function is since version 5.0.0 no longer used by FlexColorScheme.
-  /// In previous version it was used by [FlexColorScheme.toTheme] to provide
-  /// [ColorScheme.primary] matching colors for [ThemeData.primaryColorLight],
-  /// [ThemeData.primaryColorDark] and [ThemeData.secondaryHeaderColor].
-  ///
-  /// Since algorithm does not produce a correct [MaterialColor], it did not
-  /// work so well if the provided color was not of roughly a mid point 500
-  /// index equivalent. So it worked well for light theme mode, but not so well
-  /// for dark theme mode themes were [ColorScheme.primary] is typically much
-  /// lighter than then [MaterialColor] 500 index. FlexColorScheme moved to
-  /// using alpha blends to provide primary color matching colors to
-  /// above mentioned colors. Since the colors are very rarely used and on a
-  /// deprecation path in Flutter SDK they are not so critical.
-  ///
-  /// Since this function is no longer need by this library, it may be
-  /// deprecated and removed. Deprecation could e.g. happen in FlexColorScheme
-  /// version 6, and removal in version 7.
-  ///
-  /// There reason why it is not deprecated already is because I would like to
-  /// replace it with the correct Material 2 [MaterialColor] algorithm, which
-  /// is not available in Dart.
-  /// There are reversed engineered JS versions of the official Material Color
-  /// algorithm made from the Material Guide web tools. If anybody has the
-  /// energy to make a Dart version of it, that would be fabulous.
-  /// SO discussion here:
-  /// https://stackoverflow.com/questions/32942503/material-design-color-palette
-  ///
-  /// Starting points here:
-  ///
-  /// - https://github.com/mbitson/mcg/issues/19
-  /// - Good candidate: https://github.com/eugeneford/material-palette-generator
-  /// - https://github.com/edelstone/material-palette-generator
-  ///
-  /// Old documentation for using [createPrimarySwatch].
-  ///
-  /// The provided [color] is used as the Material swatch default color 500
-  /// in the returned swatch, with lighter hues for lower indexes and darker
-  /// shades for higher index values.
-  ///
-  /// If you give this function a standard Material color index 500 value,
-  /// eg `Colors.red[500]` it will not return the same swatch as `Colors.red`.
-  /// This function is an approximation and gives an automated way of creating
-  /// a Material like primary swatch.
-  ///
-  /// The used algorithm is identical to the same named function
-  /// found in ColorTools in FlexColorPicker at
-  /// https://pub.dev/packages/flex_color_picker.
-  @Deprecated('This function is no longer used by FlexColorScheme and will be '
-      'removed in FCS v9. You can still find this function in ColorTools '
-      'in package FlexColorPicker.')
-  static MaterialColor createPrimarySwatch(final Color? color) {
-    // Null default fallback is default material primary light color.
-    final Color usedColor = color ?? FlexColor.materialLightPrimary;
-    const List<double> strengths = <double> //
-        [0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9];
-    final Map<int, Color> swatch = <int, Color>{};
-    final int r = usedColor.red8bit;
-    final int g = usedColor.green8bit;
-    final int b = usedColor.blue8bit;
-    for (final double strength in strengths) {
-      final double ds = 0.5 - strength;
-      swatch[(strength * 1000).round()] = Color.fromRGBO(
-        r + ((ds < 0 ? r : (255 - r)) * ds).round(),
-        g + ((ds < 0 ? g : (255 - g)) * ds).round(),
-        b + ((ds < 0 ? b : (255 - b)) * ds).round(),
-        1,
-      );
-    }
-    // The above gives a starting point, this tunes it a bit better, still far
-    // from the real algorithm.
-    swatch[50] = swatch[50]!.lighten(18);
-    swatch[100] = swatch[100]!.lighten(16);
-    swatch[200] = swatch[200]!.lighten(14);
-    swatch[300] = swatch[300]!.lighten(10);
-    swatch[400] = swatch[400]!.lighten(6);
-    swatch[700] = swatch[700]!.darken(2);
-    swatch[800] = swatch[800]!.darken(3);
-    swatch[900] = swatch[900]!.darken(4);
-    return MaterialColor(usedColor.value, swatch);
   }
 
   //****************************************************************************
@@ -6269,64 +6267,33 @@ class FlexColorScheme with Diagnosticable {
   /// The differences from the standard [ThemeData.from] factory are:
   ///
   /// * `ScaffoldBackgroundColor` has its own color property in FlexColorScheme
-  ///   and can if so desired differ from the `ColorScheme.background` color.
-  ///   When using primary color blended surfaces and backgrounds, it is
+  ///   and can if so desired differ from the `ColorScheme.surface` color.
+  ///   When using primary color blended surfaces, it is
   ///   important to be able to vary the very prominent ScaffoldBackgroundColor
-  ///   separately from other surfaces and backgrounds.
+  ///   separately from other surfaces.
   ///
-  /// * The `dialogBackgroundColor` in M2 uses the `ColorScheme.surface` color
-  ///   instead of the default `ColorScheme.background`. In order to preserve
-  ///   the `elevationOverlayColor` in dark mode when `ColorScheme.surface` and
-  ///   `ColorScheme.background` differs due to different surface blends, the
-  ///   `ColorScheme.surface` was used to ensure dialogs that are always
-  ///   elevated gets the overlay color applied in dark theme mode. For more
+  /// * The `dialogBackgroundColor` in M2 uses the `ColorScheme.surface` color.
+  ///   In M3 `ColorScheme.surface` is used by the SDK as well. For more
   ///   info see:
   ///   [issue #90353](https://github.com/flutter/flutter/issues/90353).
-  ///   In M3 `ColorScheme.surface` is used by the SDK as well.
   ///
   /// * The `indicatorColor` is same as `effectiveTabColor` which uses a
   ///   function with logic to determine its color based on if a TabBarThemeData
   ///   was selected that should work on current AppBar background color,
-  ///   or on surface/background colors.
+  ///   or on surface colors.
   ///
-  /// * Flutter themes created with `ThemeData.from` does not define any color
-  ///   scheme related color for the `primaryColorDark` color, FCS does.
-  ///   See issue: https:///github.com/flutter/flutter/issues/65782.
-  ///   The `ThemeData.from` leaves this color at `ThemeData` factory default,
-  ///   this may not match your scheme. Widgets seldom use this color, so the
-  ///   issue is rarely seen.
-  ///   This color property will be deprecated in Flutter, see issue
-  ///   [91772](https://github.com/flutter/flutter/issues/91772).
-  ///
-  /// * Flutter themes created with `ThemeData.from` does not define any color
-  ///   scheme related color for the `primaryColorDark` color, FCS does.
-  ///   See issue: https:///github.com/flutter/flutter/issues/65782.
-  ///   The `ThemeData.from` leaves this color at `ThemeData` factory default
-  ///   this may not match your scheme. Widgets seldom use this color, so the
-  ///   issue is rarely seen.
-  ///   This color property will be deprecated in Flutter, see issue
-  ///   [91772](https://github.com/flutter/flutter/issues/91772).
-  ///
-  /// * Flutter themes created with `ThemeData.from` does not define any color
-  ///   scheme related color for the `primaryColorDark` color, FCS does.
-  ///   See issue: https:///github.com/flutter/flutter/issues/65782.
-  ///   `ThemeData.from` leaves this color at `ThemeData` factory default this
-  ///   may not match your scheme. Widgets seldom use this color, so the issue
-  ///   is rarely seen.
-  ///   This color property will be deprecated in Flutter, see issue
+  /// * Flutter themes created with `ThemeData.from` do not define scheme-based
+  ///   colors for the legacy `primaryColorDark`, `primaryColorLight` and
+  ///   `secondaryHeaderColor` properties. FCS computes them from primary.
+  ///   Widgets seldom use these colors. They are on a deprecation path in
+  ///   Flutter, see issue
   ///   [91772](https://github.com/flutter/flutter/issues/91772).
   ///
   /// * Background color for `AppBarTheme` can use a custom color theme
   ///   in both light and dark themes, that is not dependent on theme
   ///   primary or surface color.
-  ///   In the versions prior to Flutter 2.0.0 doing this was difficult to do.
-  ///   As presented in https://github.com/flutter/flutter/issues/50606
-  ///   A new feature in Flutter 2.0.0 implemented via:
-  ///   https://github.com/flutter/flutter/pull/71184 makes this easy and
-  ///   better. FlexColorScheme's implementation has been changed to use this
-  ///   new AppBarTheme feature starting with version 2.0.0-nullsafety.2.
   ///
-  /// * The `AppBarTheme` M2 elevation defaults to 0, an iOs style influenced
+  /// * The `AppBarTheme` M2 elevation defaults to 0, an iOS style influenced
   ///   opinionated choice. It can easily be adjusted directly in the
   ///   `FlexColorScheme` definition with property value `appBarElevation`
   ///   without creating a sub theme or using `copyWith`.
@@ -6340,13 +6307,11 @@ class FlexColorScheme with Diagnosticable {
   ///   actually get a default `BottomAppBarTheme()` all null theme made by
   ///   `FlexSubThemes.bottomAppBarTheme`.
   ///
-  /// * A predefined slightly opinionated [InputDecorationThemeData] is used. It
-  ///   sets `filled` to `true` and fill color to color scheme primary color
-  ///   with opacity `0.035` in light mode and opacity `0.06` in dark-mode.
-  ///
-  /// * The property `fixTextFieldOutlineLabel` is set to `true` by default,
-  ///   it looks better. The only reason why it is not the default in Flutter,
-  ///   is for default backwards legacy design compatibility.
+  /// * When not using component sub-themes, Material 2 still gets a slightly
+  ///   opinionated [InputDecorationThemeData] with `filled` true and fill color
+  ///   set to the color scheme primary color at about 3.5% opacity in light
+  ///   mode and 6% in dark mode. Material 3 without sub-themes leaves the
+  ///   input decorator at Flutter SDK defaults.
   ///
   /// * For [ThemeData.buttonTheme] the entire color scheme is passed to its
   ///   `colorScheme` property and it uses `textTheme` set to
@@ -6364,7 +6329,7 @@ class FlexColorScheme with Diagnosticable {
   ///   design bug that makes the selected `ChoiceChip()` widget look
   ///   disabled in dark-mode, regardless of if it was created with `ThemeData`
   ///   or `ThemeData.from` factory. See issue:
-  ///   https:///github.com/flutter/flutter/issues/65663
+  ///   https://github.com/flutter/flutter/issues/65663
   ///   The [ChipThemeData] modification originally used in core
   ///   FlexColorScheme fixed the issue. The issue has been resolved but
   ///   same [ChipThemeData] is still in use for backward style compatibility.
@@ -6478,7 +6443,7 @@ class FlexColorScheme with Diagnosticable {
   ///   > area on Android transparent via a theme, but it does not work.
   ///   > The style is doable, but requires modifying Android config files, not
   ///   > possible from Flutter only (as per current information).
-  ///   > Related issue: https:///github.com/flutter/flutter/issues/69999.
+  ///   > Related issue: https://github.com/flutter/flutter/issues/69999.
   ///   >
   ///   > FlexColorScheme offers a static helper [themedSystemNavigationBar]
   ///   > that allows us to easily create an annotated region for the system
@@ -6488,20 +6453,17 @@ class FlexColorScheme with Diagnosticable {
   ///   > See example 5 for a demo on how to use this.
   ThemeData get toTheme {
     // Returns true if the color is dark, it needs light text for contrast.
-    bool isColorDark(final Color color) =>
-        ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
+    bool isColorDark(Color color) => ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
 
     // On color used when a color property does not have a theme onColor.
-    Color onColor(final Color color) =>
-        isColorDark(color) ? Colors.white : Colors.black;
+    Color onColor(Color color) => isColorDark(color) ? Colors.white : Colors.black;
 
     // Use sub-themes if a none null FlexSubThemesData was passed in.
     final bool useSubThemes = subThemesData != null;
     // If we did not have any sub-theme data, we make one instead that cannot
     // be null. It makes the logic easier to deal with when we create
     // sub-themes, when it cannot be nullable.
-    final FlexSubThemesData subTheme =
-        subThemesData ?? const FlexSubThemesData();
+    final FlexSubThemesData subTheme = subThemesData ?? const FlexSubThemesData();
 
     // Get the effective ColorScheme from the provided brightness and
     // provided or computed or default colors.
@@ -6514,61 +6476,48 @@ class FlexColorScheme with Diagnosticable {
     final TargetPlatform effectivePlatform = platform ?? defaultTargetPlatform;
 
     // Remove elevation tint in M3?
-    final FlexAdaptive subTint =
-        subTheme.adaptiveRemoveElevationTint ?? const FlexAdaptive.off();
+    final FlexAdaptive subTint = subTheme.adaptiveRemoveElevationTint ?? const FlexAdaptive.off();
     final bool removeTint = useMaterial3 && subTint.adapt(effectivePlatform);
 
     // Use adaptive iOS style themed Switch?
-    final FlexAdaptive subUseCupertino =
-        subTheme.switchAdaptiveCupertinoLike ?? const FlexAdaptive.off();
-    final bool useCupertinoStyle =
-        useMaterial3 && subUseCupertino.adapt(effectivePlatform);
+    final FlexAdaptive subUseCupertino = subTheme.switchAdaptiveCupertinoLike ?? const FlexAdaptive.off();
+    final bool useCupertinoStyle = useMaterial3 && subUseCupertino.adapt(effectivePlatform);
 
     // Remove NavigationBar elevation tint in M3?
-    final FlexAdaptive navBarTint =
-        subTheme.adaptiveRemoveNavigationBarTint ?? const FlexAdaptive.off();
-    final bool removeNavBarTint =
-        useMaterial3 && navBarTint.adapt(effectivePlatform);
+    final FlexAdaptive navBarTint = subTheme.adaptiveRemoveNavigationBarTint ?? const FlexAdaptive.off();
+    final bool removeNavBarTint = useMaterial3 && navBarTint.adapt(effectivePlatform);
 
     // Use elevation shadow in M3?
-    final FlexAdaptive subShadow =
-        subTheme.adaptiveElevationShadowsBack ?? const FlexAdaptive.off();
+    final FlexAdaptive subShadow = subTheme.adaptiveElevationShadowsBack ?? const FlexAdaptive.off();
     final bool useShadow = useMaterial3 && subShadow.adapt(effectivePlatform);
 
     // No AppBar scroll under elevation tint
-    final FlexAdaptive scrollUnderOff =
-        subTheme.adaptiveAppBarScrollUnderOff ?? const FlexAdaptive.off();
-    final bool noScrollUnder =
-        useMaterial3 && scrollUnderOff.adapt(effectivePlatform);
+    final FlexAdaptive scrollUnderOff = subTheme.adaptiveAppBarScrollUnderOff ?? const FlexAdaptive.off();
+    final bool noScrollUnder = useMaterial3 && scrollUnderOff.adapt(effectivePlatform);
 
     // Use defaultRadiusAdaptive instead of defaultRadius?
-    final FlexAdaptive adaptiveRadius =
-        subTheme.adaptiveRadius ?? const FlexAdaptive.off();
+    final FlexAdaptive adaptiveRadius = subTheme.adaptiveRadius ?? const FlexAdaptive.off();
     // Get the correct platform default radius.
     final double? platformRadius = adaptiveRadius.adapt(effectivePlatform)
         ? subTheme.defaultRadiusAdaptive
         : subTheme.defaultRadius;
 
     // Use adaptive dialog radius?
-    final FlexAdaptive adaptiveDialogRadius =
-        subTheme.adaptiveDialogRadius ?? const FlexAdaptive.off();
+    final FlexAdaptive adaptiveDialogRadius = subTheme.adaptiveDialogRadius ?? const FlexAdaptive.off();
     // Get the effective used adaptive dialog default radius.
     final double? platformDialogRadius =
-        adaptiveDialogRadius == const FlexAdaptive.off() &&
-                subTheme.dialogRadius == null
-            ? null
-            : adaptiveDialogRadius.adapt(effectivePlatform)
-                ? subTheme.dialogRadiusAdaptive ?? kDialogRadius
-                : subTheme.dialogRadius ?? kDialogRadius;
+        adaptiveDialogRadius == const FlexAdaptive.off() && subTheme.dialogRadius == null
+        ? null
+        : adaptiveDialogRadius.adapt(effectivePlatform)
+        ? subTheme.dialogRadiusAdaptive ?? kDialogRadius
+        : subTheme.dialogRadius ?? kDialogRadius;
 
     // Use adaptive splash?
-    final FlexAdaptive adaptiveSplashType =
-        subTheme.adaptiveSplash ?? const FlexAdaptive.off();
+    final FlexAdaptive adaptiveSplashType = subTheme.adaptiveSplash ?? const FlexAdaptive.off();
     // Get the effective used platform adaptive ink feature.
-    final InteractiveInkFeatureFactory? platformSplash =
-        adaptiveSplashType.adapt(effectivePlatform)
-            ? subTheme.splashTypeAdaptive?.splashFactory(useMaterial3)
-            : subTheme.splashType?.splashFactory(useMaterial3);
+    final InteractiveInkFeatureFactory? platformSplash = adaptiveSplashType.adapt(effectivePlatform)
+        ? subTheme.splashTypeAdaptive?.splashFactory(useMaterial3)
+        : subTheme.splashType?.splashFactory(useMaterial3);
 
     // We need to make a special case for component splash factories,
     // if we are using Material2 we need to override the platformSplash factory
@@ -6578,8 +6527,9 @@ class FlexColorScheme with Diagnosticable {
     // In M2 mode we also need to fall back to InkSplash.splashFactory, since
     // in M2 mode FilledButton gets InkRipple by default, but other buttons
     // get InkSplash by default in M2 mode, Flutter inconsistencies, sigh.
-    final InteractiveInkFeatureFactory? buttonsSplashFactory =
-        useMaterial3 ? null : platformSplash ?? InkSplash.splashFactory;
+    final InteractiveInkFeatureFactory? buttonsSplashFactory = useMaterial3
+        ? null
+        : platformSplash ?? InkSplash.splashFactory;
 
     // Logic to determine the default Typography to use.
     //
@@ -6594,18 +6544,13 @@ class FlexColorScheme with Diagnosticable {
     // M3 colorscheme for a correct style.
     Typography defaultTypography() {
       if (useSubThemes && (subTheme.useMaterial3Typography ?? false)) {
-        return Typography.material2021(
-            platform: effectivePlatform, colorScheme: colorScheme);
+        return Typography.material2021(platform: effectivePlatform, colorScheme: colorScheme);
       }
-      if (useSubThemes &&
-          subTheme.useMaterial3Typography == null &&
-          useMaterial3) {
-        return Typography.material2021(
-            platform: effectivePlatform, colorScheme: colorScheme);
+      if (useSubThemes && subTheme.useMaterial3Typography == null && useMaterial3) {
+        return Typography.material2021(platform: effectivePlatform, colorScheme: colorScheme);
       }
       if (!useSubThemes && useMaterial3) {
-        return Typography.material2021(
-            platform: effectivePlatform, colorScheme: colorScheme);
+        return Typography.material2021(platform: effectivePlatform, colorScheme: colorScheme);
       }
       return Typography.material2018(platform: effectivePlatform);
     }
@@ -6613,11 +6558,9 @@ class FlexColorScheme with Diagnosticable {
     final Typography effectiveTypography = typography ?? defaultTypography();
     // We need the text themes locally for the theming, so we must form them
     // fully using the same process that the ThemeData() factory uses.
-    TextTheme defText =
-        isDark ? effectiveTypography.white : effectiveTypography.black;
+    TextTheme defText = isDark ? effectiveTypography.white : effectiveTypography.black;
     final bool primaryIsDark = isColorDark(colorScheme.primary);
-    TextTheme defPrimaryText =
-        primaryIsDark ? effectiveTypography.white : effectiveTypography.black;
+    TextTheme defPrimaryText = primaryIsDark ? effectiveTypography.white : effectiveTypography.black;
 
     // ThemeData uses this to apply a font from fontFamily, fontFamilyFallback
     // and package in this order to default text theme and primary text theme.
@@ -6635,8 +6578,7 @@ class FlexColorScheme with Diagnosticable {
     }
     if (fontFamilyFallback != null) {
       defText = defText.apply(fontFamilyFallback: fontFamilyFallback);
-      defPrimaryText =
-          defPrimaryText.apply(fontFamilyFallback: fontFamilyFallback);
+      defPrimaryText = defPrimaryText.apply(fontFamilyFallback: fontFamilyFallback);
     }
     if (package != null) {
       defText = defText.apply(package: package);
@@ -6694,261 +6636,6 @@ class FlexColorScheme with Diagnosticable {
     // always get correct contrast color to be used on primary color.
     defPrimaryText = defPrimaryText.merge(pPrimTextTheme);
 
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    //  Keeping it around for a while in case we can bring it back later.
-    //
-    // We are using sub themes and blend colors on text themes. If surfaces and
-    // background are not set to use blends, the effect will be slightly
-    // different, a bit less colorful, but only very marginally.
-    //
-    // if (useSubThemes && subTheme.blendTextTheme) {
-    //   // Calculate colors for the different TextStyles, color blend strength are
-    //   // inline with opacities on the 2014/2018 typographies.
-    //   // For main text theme we are using surface tint instead of primary,
-    //   // normally it defaults to primary, but if it is customized we should base
-    //   // tinted text theme on it instead.
-    //   Color blendText(Color? color, int blend, int alpha) {
-    //  final Color baseColor = color ?? (isDark ? Colors.white : Colors.black);
-    //  return baseColor.blend(colorScheme.surfaceTint, blend).withAlpha(alpha);
-    //   }
-    //
-    //   // The tinted text theme is based of white/black, but if a custom color
-    //   // was provided, it is based of it and tinted with surfaceTint.
-    //   final Color cDisplayLarge = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.displayLarge?.color, kHiDarkTextBlend,
-    //           kHiDarkTextAlpha) // 92%
-    //       : blendText(pTextTheme?.displayLarge?.color, kHiLightTextBlend,
-    //           kHiLightTextAlpha); // 85%
-    //   final Color cDisplayMedium = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.displayMedium?.color, kHiDarkTextBlend,
-    //           kHiDarkTextAlpha) // 92%
-    //       : blendText(pTextTheme?.displayMedium?.color, kHiLightTextBlend,
-    //           kHiLightTextAlpha); // 85%
-    //   final Color cDisplaySmall = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.displaySmall?.color, kHiDarkTextBlend,
-    //           kHiDarkTextAlpha) // 92%
-    //       : blendText(pTextTheme?.displaySmall?.color, kHiLightTextBlend,
-    //           kHiLightTextAlpha); // 85%
-    //   //
-    //   final Color cHeadlineLarge = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.headlineLarge?.color, kHiDarkTextBlend,
-    //           kHiDarkTextAlpha) // 92%
-    //       : blendText(pTextTheme?.headlineLarge?.color, kHiLightTextBlend,
-    //           kHiLightTextAlpha); // 85%
-    //   final Color cHeadlineMedium = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.headlineMedium?.color, kHiDarkTextBlend,
-    //           kHiDarkTextAlpha) // 92%
-    //       : blendText(pTextTheme?.headlineMedium?.color, kHiLightTextBlend,
-    //           kHiLightTextAlpha); // 85%
-    //   final Color cHeadlineSmall = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.headlineSmall?.color, kMedDarkTextBlend,
-    //           kMedDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.headlineSmall?.color, kMedLightTextBlend,
-    //           kMedLightTextAlpha); // 96%
-    //   //
-    //   final Color cTitleLarge = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.titleLarge?.color, kMedDarkTextBlend,
-    //           kMedDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.titleLarge?.color, kMedLightTextBlend,
-    //           kMedLightTextAlpha); // 96%
-    //   final Color cTitleMedium = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.titleMedium?.color, kMedDarkTextBlend,
-    //           kMedDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.titleMedium?.color, kMedLightTextBlend,
-    //           kMedLightTextAlpha); // 96%
-    //   final Color cTitleSmall = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.titleSmall?.color, kLoDarkTextBlend,
-    //           kLoDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.titleSmall?.color, kLoLightTextBlend,
-    //           kLoLightTextAlpha); // 100%
-    //   //
-    //   final Color cBodyLarge = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.bodyLarge?.color, kMedDarkTextBlend,
-    //           kMedDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.bodyLarge?.color, kMedLightTextBlend,
-    //           kMedLightTextAlpha); // 96%
-    //   final Color cBodyMedium = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.bodyMedium?.color, kMedDarkTextBlend,
-    //           kMedDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.bodyMedium?.color, kMedLightTextBlend,
-    //           kMedLightTextAlpha); // 96%
-    //   final Color cBodySmall = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.bodySmall?.color, kHiDarkTextBlend,
-    //           kHiDarkTextAlpha) // 92%
-    //       : blendText(pTextTheme?.bodySmall?.color, kHiLightTextBlend,
-    //           kHiLightTextAlpha); // 85%
-    //   //
-    //   final Color cLabelLarge = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.labelLarge?.color, kMedDarkTextBlend,
-    //           kMedDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.labelLarge?.color, kMedLightTextBlend,
-    //           kMedLightTextAlpha); // 96%
-    //   final Color cLabelMedium = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.labelMedium?.color, kLoDarkTextBlend,
-    //           kLoDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.labelMedium?.color, kLoLightTextBlend,
-    //           kLoLightTextAlpha); // 100%
-    //   final Color cLabelSmall = isDark // SDK dark 70%, light 54%
-    //       ? blendText(pTextTheme?.labelSmall?.color, kLoDarkTextBlend,
-    //           kLoDarkTextAlpha) // 100%
-    //       : blendText(pTextTheme?.labelSmall?.color, kLoLightTextBlend,
-    //           kLoLightTextAlpha); // 100%
-    //
-    //   // Apply the computed colors. With this opt-in style, text gets a hint
-    //   // of primary and less opacity than defaults. The primary tint may
-    //   // not work so well if you need to put text on a completely different
-    //   // colored container than the background color. Which is why this
-    //   // feature can be opted out of.
-    //   // M3 has separate on colors for all colorscheme colors that can also
-    //   // be used for color matched text on each container color.
-    //   // This slightly primary colored default text works very well for the
-    // //slight primary colored M3 "neutral" surface colors that by default have
-    //   // a primary tint too.
-    //   defText = defText.copyWith(
-    //     // The textHiOpacity color style group.
-    //     displayLarge: defText.displayLarge!.copyWith(color: cDisplayLarge),
-    //   displayMedium: defText.displayMedium!.copyWith(color: cDisplayMedium),
-    //     displaySmall: defText.displaySmall!.copyWith(color: cDisplaySmall),
-    //   headlineLarge: defText.headlineLarge!.copyWith(color: cHeadlineLarge),
-    //     headlineMedium:
-    //         defText.headlineMedium!.copyWith(color: cHeadlineMedium),
-    //     bodySmall: defText.bodySmall!.copyWith(color: cBodySmall),
-    //     // The textMediumOpacity color style group.
-    //   headlineSmall: defText.headlineSmall!.copyWith(color: cHeadlineSmall),
-    //     titleLarge: defText.titleLarge!.copyWith(color: cTitleLarge),
-    //     titleMedium: defText.titleMedium!.copyWith(color: cTitleMedium),
-    //     bodyLarge: defText.bodyLarge!.copyWith(color: cBodyLarge),
-    //     bodyMedium: defText.bodyMedium!.copyWith(color: cBodyMedium),
-    //     labelLarge: defText.labelLarge!.copyWith(color: cLabelLarge),
-    //     // The textNoOpacity color style group.
-    //     titleSmall: defText.titleSmall!.copyWith(color: cTitleSmall),
-    //     labelMedium: defText.labelMedium!.copyWith(color: cLabelMedium),
-    //     labelSmall: defText.labelSmall!.copyWith(color: cLabelSmall),
-    //   );
-
-    // // Calculate colors for different TextStyles, color blend strength are
-    //   // inline with opacities on the 2014/2018 typographies.
-    //   // For main text theme we are using surface tint instead of primary,
-    // // normally it defaults to primary, but if customized we should base
-    //   // tinted text theme on it instead.
-    //   Color blendPrimText(Color? color, int blend, int alpha) {
-    //     final Color baseColor =
-    //         color ?? (primaryIsDark ? Colors.white : Colors.black);
-    //     return baseColor.blend(colorScheme.primary, blend).withAlpha(alpha);
-    //   }
-    //
-    //   // The tinted text theme is based of white/black, but if a custom color
-    //   // was provided, it is based of it and tinted with surfaceTint.
-    //   final Color cPrimDisplayLarge = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.displayLarge?.color,
-    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-    //       : blendPrimText(pPrimTextTheme?.displayLarge?.color,
-    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-    //   final Color cPrimDisplayMedium = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.displayMedium?.color,
-    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-    //       : blendPrimText(pPrimTextTheme?.displayMedium?.color,
-    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-    //   final Color cPrimDisplaySmall = primaryIsDark // SDK dark70%, light54%
-    //       ? blendPrimText(pPrimTextTheme?.displaySmall?.color,
-    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-    //       : blendPrimText(pPrimTextTheme?.displaySmall?.color,
-    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-    //   //
-    //   final Color cPrimHeadlineLarge = primaryIsDark //SDK dark70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.headlineLarge?.color,
-    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-    //       : blendPrimText(pPrimTextTheme?.headlineLarge?.color,
-    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-    //   final Color cPrimHeadlineMedium = primaryIsDark //SDK dark70%, light54%
-    //       ? blendPrimText(pPrimTextTheme?.headlineMedium?.color,
-    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 90%
-    //       : blendPrimText(pPrimTextTheme?.headlineMedium?.color,
-    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-    //   final Color cPrimHeadlineSmall = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.headlineSmall?.color,
-    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.headlineSmall?.color,
-    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-    //   //
-    //   final Color cPrimTitleLarge = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.titleLarge?.color,
-    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.titleLarge?.color,
-    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-    //   final Color cPrimTitleMedium = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.titleMedium?.color,
-    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.titleMedium?.color,
-    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-    //   final Color cPrimTitleSmall = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.titleSmall?.color,
-    //           kLoDarkPrimTextBlend, kLoDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.titleSmall?.color,
-    //           kLoLightPrimTextBlend, kLoLightPrimTextAlpha); // 100%
-    //   //
-    //   final Color cPrimBodyLarge = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.bodyLarge?.color,
-    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.bodyLarge?.color,
-    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-    //   final Color cPrimBodyMedium = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.bodyMedium?.color,
-    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.bodyMedium?.color,
-    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-    //   final Color cPrimBodySmall = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.bodySmall?.color,
-    //           kHiDarkPrimTextBlend, kHiDarkPrimTextAlpha) // 92%
-    //       : blendPrimText(pPrimTextTheme?.bodySmall?.color,
-    //           kHiLightPrimTextBlend, kHiLightPrimTextAlpha); // 85%
-    //   //
-    //   final Color cPrimLabelLarge = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.labelLarge?.color,
-    //           kMedDarkPrimTextBlend, kMedDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.labelLarge?.color,
-    //           kMedLightPrimTextBlend, kMedLightPrimTextAlpha); // 95%
-    //   final Color cPrimLabelMedium = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.labelMedium?.color,
-    //           kLoDarkPrimTextBlend, kLoDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.labelMedium?.color,
-    //           kLoLightPrimTextBlend, kLoLightPrimTextAlpha); // 100%
-    //   final Color cPrimLabelSmall = primaryIsDark // SDK dark 70%, light 54%
-    //       ? blendPrimText(pPrimTextTheme?.labelSmall?.color,
-    //           kLoDarkPrimTextBlend, kLoDarkPrimTextAlpha) // 100%
-    //       : blendPrimText(pPrimTextTheme?.labelSmall?.color,
-    //           kLoLightPrimTextBlend, kLoLightPrimTextAlpha); // 100%
-    //   // Equivalent blend text styles for primary text theme.
-    //   defPrimaryText = defPrimaryText.copyWith(
-    //     // The primeHiOpacity color style group.
-    //     displayLarge:
-    //         defPrimaryText.displayLarge!.copyWith(color: cPrimDisplayLarge),
-    //     displayMedium:
-    //       defPrimaryText.displayMedium!.copyWith(color: cPrimDisplayMedium),
-    //     displaySmall:
-    //         defPrimaryText.displaySmall!.copyWith(color: cPrimDisplaySmall),
-    //     headlineLarge:
-    //       defPrimaryText.headlineLarge!.copyWith(color: cPrimHeadlineLarge),
-    //     headlineMedium:
-    //      defPrimaryText.headlineMedium!.copyWith(color: cPrimHeadlineMedium),
-    //     bodySmall: defPrimaryText.bodySmall!.copyWith(color: cPrimBodySmall),
-    //     // The primeMediumOpacity color style group.
-    //     headlineSmall:
-    //        defPrimaryText.headlineSmall!.copyWith(color: cPrimHeadlineSmall),
-    //  titleLarge: defPrimaryText.titleLarge!.copyWith(color: cPrimTitleLarge),
-    //     titleMedium:
-    //         defPrimaryText.titleMedium!.copyWith(color: cPrimTitleMedium),
-    //     bodyLarge: defPrimaryText.bodyLarge!.copyWith(color: cPrimBodyLarge),
-    //  bodyMedium: defPrimaryText.bodyMedium!.copyWith(color: cPrimBodyMedium),
-    //  labelLarge: defPrimaryText.labelLarge!.copyWith(color: cPrimLabelLarge),
-    //     // The primeNoOpacity color style group.
-    //  titleSmall: defPrimaryText.titleSmall!.copyWith(color: cPrimTitleSmall),
-    //     labelMedium:
-    //         defPrimaryText.labelMedium!.copyWith(color: cPrimLabelMedium),
-    //  labelSmall: defPrimaryText.labelSmall!.copyWith(color: cPrimLabelSmall),
-    //   );
-    // }
-
     // Assigning results to effective text themes. In older versions a merge
     // of original text themes were done here, but that is incorrect. It should
     // be earlier above, where it is now. In principle we could use the "def"
@@ -6956,57 +6643,6 @@ class FlexColorScheme with Diagnosticable {
     // for now to indicate nothing more can or should be done to them.
     final TextTheme effectiveTextTheme = defText;
     final TextTheme effectivePrimaryTextTheme = defPrimaryText;
-
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    // TODO(rydmike): In M3 we need to tint via onSurface and onSurfaceVariant!
-    // The text theme tinting has changed in M3, default theme sets text colors
-    // via onSurface and onSurfaceVariant, overriding the default colors the
-    // used text style from the text theme has! This is not done in M2 mode.
-    // Need to think about how to address this so we still get tinted fonts
-    // when so requested in FCS. Most likely have to pass the correctly tinted
-    // text style to each component theme. BIG changes needed!
-    //
-    // Color? onSurfaceBlendedTextStyle;
-    // Color? onSurfaceVariantBlendedTextStyle;
-    // final bool blendTT = useSubThemes && subTheme.blendTextTheme;
-    // if (blendTT) {
-    //   onSurfaceBlendedTextStyle = effectiveTextTheme.titleLarge?.color;
-    //   onSurfaceVariantBlendedTextStyle =
-    //     effectiveTextTheme.displayLarge?.color;
-    // }
-
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    // These text style are made to be passed in to component, or so called
-    // sub-themes to force them to use the blended text theme. See issue:
-    // TODO(rydmike): Add link to issue when I have created it.
-    // final TextStyle subBodyLarge = blendTT
-    //     ? effectiveTextTheme.bodyLarge!
-    //         .copyWith(color: onSurfaceBlendedTextStyle, fontSize: 16)
-    //     : effectiveTextTheme.bodyLarge!.copyWith(fontSize: 16);
-    // final TextStyle subBodyLargeV = blendTT
-    //     ? effectiveTextTheme.bodyLarge!
-    //         .copyWith(color: onSurfaceVariantBlendedTextStyle, fontSize: 16)
-    //     : effectiveTextTheme.bodyLarge!.copyWith(fontSize: 16);
-    // final WidgetStateProperty<TextStyle> subBodyLargeWSP = blendTT
-    //     ? WidgetStatePropertyAll<TextStyle>(effectiveTextTheme.bodyLarge!
-    //         .copyWith(color: onSurfaceBlendedTextStyle, fontSize: 16))
-    //     : WidgetStatePropertyAll<TextStyle>(
-    //         effectiveTextTheme.bodyLarge!.copyWith(fontSize: 16));
-    // final WidgetStateProperty<TextStyle> subBodyLargeWSPV = blendTT
-    //     ? WidgetStatePropertyAll<TextStyle>(effectiveTextTheme.bodyLarge!
-    //         .copyWith(color: onSurfaceVariantBlendedTextStyle, fontSize: 16))
-    //     : WidgetStatePropertyAll<TextStyle>(
-    //         effectiveTextTheme.bodyLarge!.copyWith(fontSize: 16));
-    // final TextStyle subBodyMediumV = blendTT
-    //     ? effectiveTextTheme.bodyMedium!
-    //         .copyWith(color: onSurfaceVariantBlendedTextStyle, fontSize: 14)
-    //     : effectiveTextTheme.bodyMedium!.copyWith(fontSize: 14);
-    // final TextStyle subLabelSmallV = blendTT
-    //     ? effectiveTextTheme.labelSmall!.copyWith(
-    //         color: onSurfaceVariantBlendedTextStyle,
-    //         fontSize: useMaterial3 ? 11 : 10)
-    //     : effectiveTextTheme.labelSmall!
-    //         .copyWith(fontSize: useMaterial3 ? 11 : 10);
 
     // Custom computed shades from primary color using alpha blends works well
     // for these rarely used colors that are on deprecation path in Flutter SDK.
@@ -7042,18 +6678,17 @@ class FlexColorScheme with Diagnosticable {
     //   primary color in light mode, the same logic that Flutter SDK
     //   ThemeData.from factory sets the AppBar background color in M2, in
     //   M3 we always use surface color.
-    final Color effectiveAppBarColor = appBarBackground ??
+    final Color effectiveAppBarColor =
+        appBarBackground ??
         (useSubThemes && subTheme.appBarBackgroundSchemeColor != null
-            ? FlexSubThemes.schemeColor(
-                subTheme.appBarBackgroundSchemeColor!, colorScheme)
+            ? FlexSubThemes.schemeColor(subTheme.appBarBackgroundSchemeColor!, colorScheme)
             : useMaterial3
-                ? colorScheme.surface
-                : isDark
-                    ? colorScheme.surface
-                    : colorScheme.primary);
+            ? colorScheme.surface
+            : isDark
+            ? colorScheme.surface
+            : colorScheme.primary);
 
-    final Brightness appBarBrightness =
-        ThemeData.estimateBrightnessForColor(effectiveAppBarColor);
+    final Brightness appBarBrightness = ThemeData.estimateBrightnessForColor(effectiveAppBarColor);
     final bool appBarNeedsLight = appBarBrightness == Brightness.dark;
 
     // AppBar foreground get its scheme color if sub-themes are used, if no
@@ -7066,11 +6701,9 @@ class FlexColorScheme with Diagnosticable {
     // ternary operator, so it got rewritten as a logic function.
     Color appBarForegroundColor() {
       if (useSubThemes && subTheme.appBarForegroundSchemeColor != null) {
-        return FlexSubThemes.schemeColor(
-            subTheme.appBarForegroundSchemeColor!, colorScheme);
+        return FlexSubThemes.schemeColor(subTheme.appBarForegroundSchemeColor!, colorScheme);
       } else if (useSubThemes && subTheme.appBarBackgroundSchemeColor != null) {
-        return FlexSubThemes.schemeColorPair(
-            subTheme.appBarBackgroundSchemeColor!, colorScheme);
+        return FlexSubThemes.schemeColorPair(subTheme.appBarBackgroundSchemeColor!, colorScheme);
       } else if (effectiveAppBarColor.withAlpha(0xFF) == colorScheme.primary) {
         return colorScheme.onPrimary;
       } else if (isDark && appBarNeedsLight) {
@@ -7089,17 +6722,14 @@ class FlexColorScheme with Diagnosticable {
     // M2 Icons are slightly black transparent in light mode!
     // But white in dark mode. This per SDK, the constants are from Flutter.
     Color appBarIconColor = colorScheme.onSurface;
-    Color appBarActionIconColor =
-        useMaterial3 ? colorScheme.onSurfaceVariant : colorScheme.onSurface;
+    Color appBarActionIconColor = useMaterial3 ? colorScheme.onSurfaceVariant : colorScheme.onSurface;
 
     // If the appBarForeground color is NOT using the default colors
     // then appBarIconColor and appBarActionIconColor should use them as well
     // if they are not customized, otherwise they use default colors set above.
     if (effectiveAppBarColor.withAlpha(0xFF) == colorScheme.primary ||
         appBarForeground.withAlpha(0xFF) == colorScheme.surface ||
-        (useSubThemes &&
-            subTheme.appBarBackgroundSchemeColor != null &&
-            subTheme.appBarIconSchemeColor == null)) {
+        (useSubThemes && subTheme.appBarBackgroundSchemeColor != null && subTheme.appBarIconSchemeColor == null)) {
       appBarIconColor = appBarForeground;
     }
     if (effectiveAppBarColor.withAlpha(0xFF) == colorScheme.primary ||
@@ -7113,12 +6743,10 @@ class FlexColorScheme with Diagnosticable {
     // appBarIconSchemeColor and appBarActionsIconSchemeColor, then they should
     // get those given colors.
     if (useSubThemes && subTheme.appBarIconSchemeColor != null) {
-      appBarIconColor = FlexSubThemes.schemeColor(
-          subTheme.appBarIconSchemeColor!, colorScheme);
+      appBarIconColor = FlexSubThemes.schemeColor(subTheme.appBarIconSchemeColor!, colorScheme);
     }
     if (useSubThemes && subTheme.appBarActionsIconSchemeColor != null) {
-      appBarActionIconColor = FlexSubThemes.schemeColor(
-          subTheme.appBarActionsIconSchemeColor!, colorScheme);
+      appBarActionIconColor = FlexSubThemes.schemeColor(subTheme.appBarActionsIconSchemeColor!, colorScheme);
     }
     // The FlexColorScheme AppBar's customizable system UI overlay style.
     // This refers to the top status bar on Android and iOS. Some features
@@ -7136,8 +6764,7 @@ class FlexColorScheme with Diagnosticable {
           // removed earlier.
           : const Color(0x40000000),
       statusBarBrightness: appBarBrightness,
-      statusBarIconBrightness:
-          appBarNeedsLight ? Brightness.light : Brightness.dark,
+      statusBarIconBrightness: appBarNeedsLight ? Brightness.light : Brightness.dark,
 
       // TODO(rydmike): Monitor sys-nav AppBar systemOverlayStyle issues.
       // It would be useful if we could set system navbar properties too and not
@@ -7159,8 +6786,7 @@ class FlexColorScheme with Diagnosticable {
       // We try to match it to the color of our scheme background, but we
       // always get the light ones anyway, which is fine, as long as the
       // system navbar remains black anyway.
-      systemNavigationBarIconBrightness:
-          isDark ? Brightness.light : Brightness.dark,
+      systemNavigationBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
       // Keeping the above system navbar changes, even if they up to at
       // least Flutter 2.10.3 did not do anything, maybe they start to
       // work one day, then we do not not need an AnnotatedRegion for it
@@ -7180,18 +6806,16 @@ class FlexColorScheme with Diagnosticable {
     // The `flutterDefault` sets values corresponding to SDK Default behavior,
     // it can be used, but is not as useful as the `forAppBar` version which
     // is the default here.
-    final FlexTabBarStyle effectiveTabBarStyle = tabBarStyle ??
-        (useMaterial3
-            ? FlexTabBarStyle.flutterDefault
-            : FlexTabBarStyle.forAppBar);
+    final FlexTabBarStyle effectiveTabBarStyle =
+        tabBarStyle ?? (useMaterial3 ? FlexTabBarStyle.flutterDefault : FlexTabBarStyle.forAppBar);
     Color tabBarStyleColor() {
       switch (effectiveTabBarStyle) {
         case FlexTabBarStyle.flutterDefault:
           return useMaterial3
               ? colorScheme.primary
               : isDark
-                  ? Colors.white
-                  : colorScheme.onPrimary;
+              ? Colors.white
+              : colorScheme.onPrimary;
         case FlexTabBarStyle.forBackground:
           return colorScheme.primary;
         case FlexTabBarStyle.forAppBar:
@@ -7214,9 +6838,9 @@ class FlexColorScheme with Diagnosticable {
     // TabBar unselected alpha based opacity, effective value;
     final int? tabUnselected = subTheme.tabBarUnselectedItemOpacity == null
         ? null
-        : Color.getAlphaFromOpacity(useMaterial3
-            ? subTheme.tabBarUnselectedItemOpacity ?? 1
-            : subTheme.tabBarUnselectedItemOpacity ?? 0.7);
+        : Color.getAlphaFromOpacity(
+            useMaterial3 ? subTheme.tabBarUnselectedItemOpacity ?? 1 : subTheme.tabBarUnselectedItemOpacity ?? 0.7,
+          );
 
     // Unselected TabBar color is based on FexTabBarStyle tabBarStyle.
     // The `flutterDefault` sets values corresponding to SDK Default behavior.
@@ -7229,9 +6853,8 @@ class FlexColorScheme with Diagnosticable {
         case FlexTabBarStyle.forBackground:
           return useSubThemes
               ? colorScheme.onSurface
-                  .blendAlpha(colorScheme.primary,
-                      kUnselectedBackgroundPrimaryAlphaBlend)
-                  .withAlpha(tabUnselected ?? kUnselectedAlphaBlend)
+                    .blendAlpha(colorScheme.primary, kUnselectedBackgroundPrimaryAlphaBlend)
+                    .withAlpha(tabUnselected ?? kUnselectedAlphaBlend)
               : colorScheme.onSurface.withAlpha(tabUnselected ?? 0x99); // 60%
         case FlexTabBarStyle.forAppBar:
           return (appBarBrightness == Brightness.light &&
@@ -7239,23 +6862,20 @@ class FlexColorScheme with Diagnosticable {
                       effectiveAppBarColor == colorScheme.surface ||
                       effectiveAppBarColor == colorScheme.surfaceContainerLow))
               ? colorScheme.onSurface.withAlpha(tabUnselected ?? 0x99) // 60%
-              : tabBarStyleColor()
-                  .withAlpha(tabUnselected ?? 0xB2); // 70% alpha
+              : tabBarStyleColor().withAlpha(tabUnselected ?? 0xB2); // 70% alpha
         case FlexTabBarStyle.universal:
           return isDark
               ? colorScheme.primary
-                  .blendAlpha(Colors.white, 0xE6) // 90%
-                  .withAlpha(tabUnselected ?? 0xB2) // 70% alpha
-              : colorScheme.primary
-                  .blendAlpha(Colors.white, 0x7F)
-                  .withAlpha(tabUnselected ?? 0x7F); // 50%
+                    .blendAlpha(Colors.white, 0xE6) // 90%
+                    .withAlpha(tabUnselected ?? 0xB2) // 70% alpha
+              : colorScheme.primary.blendAlpha(Colors.white, 0x7F).withAlpha(tabUnselected ?? 0x7F); // 50%
       }
     }
 
     // TabBar unselected alpha based opacity, effective value;
-    final int tabBarUnselectedAlpha = Color.getAlphaFromOpacity(useMaterial3
-        ? subTheme.tabBarUnselectedItemOpacity ?? 1
-        : subTheme.tabBarUnselectedItemOpacity ?? 0.7);
+    final int tabBarUnselectedAlpha = Color.getAlphaFromOpacity(
+      useMaterial3 ? subTheme.tabBarUnselectedItemOpacity ?? 1 : subTheme.tabBarUnselectedItemOpacity ?? 0.7,
+    );
 
     // Platform adjusting font size for tooltips.
     double tooltipFontSize() {
@@ -7315,8 +6935,7 @@ class FlexColorScheme with Diagnosticable {
         return Color.getAlphaFromOpacity(subTheme.tooltipOpacity ?? 1);
       }
       if (useSubThemes && tooltipsMatchBackground) {
-        return Color.getAlphaFromOpacity(
-            subTheme.tooltipOpacity ?? 0.95); // 95% 0xF2
+        return Color.getAlphaFromOpacity(subTheme.tooltipOpacity ?? 0.95); // 95% 0xF2
       }
       if (!useSubThemes && tooltipsMatchBackground) {
         if (isDark) {
@@ -7341,41 +6960,41 @@ class FlexColorScheme with Diagnosticable {
       required Color background,
       required Color blend,
       required Brightness brightness,
-    }) =>
-        brightness == Brightness.dark
-            ? background
-                .blendAlpha(blend, 0x63) // 39%
-                .withAlpha(0xF2) // 95%
-            : background
-                .blendAlpha(blend, 0x72) // 45%
-                .withAlpha(0xED); // 93%
+    }) => brightness == Brightness.dark
+        ? background
+              .blendAlpha(blend, 0x63) // 39%
+              .withAlpha(0xF2) // 95%
+        : background
+              .blendAlpha(blend, 0x72) // 45%
+              .withAlpha(0xED); // 93%
 
     // Effective and opinionated sliderValueIndicator color for themed Slider.
     final Color sliderValueIndicator = subTheme.sliderValueTinted
         ? tintedBackground(
             background: colorScheme.onSurface,
             blend: FlexSubThemes.schemeColor(
-                subTheme.sliderIndicatorSchemeColor ??
-                    subTheme.sliderThumbSchemeColor ??
-                    subTheme.sliderBaseSchemeColor ??
-                    SchemeColor.primary,
-                colorScheme),
-            brightness: colorScheme.brightness)
+              subTheme.sliderIndicatorSchemeColor ??
+                  subTheme.sliderThumbSchemeColor ??
+                  subTheme.sliderBaseSchemeColor ??
+                  SchemeColor.primary,
+              colorScheme,
+            ),
+            brightness: colorScheme.brightness,
+          )
         : FlexSubThemes.schemeColor(
             subTheme.sliderIndicatorSchemeColor ??
                 subTheme.sliderThumbSchemeColor ??
                 subTheme.sliderBaseSchemeColor ??
                 SchemeColor.primary,
-            colorScheme);
-    final Color sliderValueStyleOnColor =
-        onColor(sliderValueIndicator.withAlpha(0xFF));
+            colorScheme,
+          );
+    final Color sliderValueStyleOnColor = onColor(sliderValueIndicator.withAlpha(0xFF));
     final TextStyle? sliderValueStyle =
         subTheme.sliderIndicatorSchemeColor != null ||
-                subTheme.sliderThumbSchemeColor != null ||
-                subTheme.sliderBaseSchemeColor != null
-            ? effectiveTextTheme.labelMedium!
-                .copyWith(color: sliderValueStyleOnColor)
-            : null;
+            subTheme.sliderThumbSchemeColor != null ||
+            subTheme.sliderBaseSchemeColor != null
+        ? effectiveTextTheme.labelMedium!.copyWith(color: sliderValueStyleOnColor)
+        : null;
 
     // In M3 mode we use the new dividerColor colorScheme.outlineVariant,
     // unless useM2StyleDividerInM3 is set to true, if it is true
@@ -7385,12 +7004,11 @@ class FlexColorScheme with Diagnosticable {
     // the newer DividerTheme. The tooltip theme also uses it for a discrete
     // outline border color.
     final Color dividerColor =
-        (useMaterial3 && (useSubThemes && !subTheme.useM2StyleDividerInM3)) ||
-                (useMaterial3 && !useSubThemes)
-            ? colorScheme.outlineVariant
-            : isDark
-                ? const Color(0x1FFFFFFF) // White 12%
-                : const Color(0x1F000000); // Black 12%
+        (useMaterial3 && (useSubThemes && !subTheme.useM2StyleDividerInM3)) || (useMaterial3 && !useSubThemes)
+        ? colorScheme.outlineVariant
+        : isDark
+        ? const Color(0x1FFFFFFF) // White 12%
+        : const Color(0x1F000000); // Black 12%
 
     // Use tinted interaction effects on hover, focus, highlight and splash?
     final bool tintedInteractions = useSubThemes && subTheme.interactionEffects;
@@ -7398,19 +7016,16 @@ class FlexColorScheme with Diagnosticable {
     final bool tintedDisabled = useSubThemes && subTheme.tintedDisabledControls;
 
     // Default decorator radius.
-    final double defaultDecoratorRadius =
-        useMaterial3 ? kInputDecoratorM3Radius : kInputDecoratorRadius;
+    final double defaultDecoratorRadius = useMaterial3 ? kInputDecoratorM3Radius : kInputDecoratorRadius;
     // Use adaptive dialog radius?
-    final FlexAdaptive adaptiveInputDecoratorRadius =
-        subTheme.adaptiveInputDecoratorRadius ?? const FlexAdaptive.off();
+    final FlexAdaptive adaptiveInputDecoratorRadius = subTheme.adaptiveInputDecoratorRadius ?? const FlexAdaptive.off();
     // Get the effective used adaptive dialog default radius.
-    final double? platformInputDecoratorRadius = adaptiveInputDecoratorRadius ==
-                const FlexAdaptive.off() &&
-            subTheme.inputDecoratorRadius == null
+    final double? platformInputDecoratorRadius =
+        adaptiveInputDecoratorRadius == const FlexAdaptive.off() && subTheme.inputDecoratorRadius == null
         ? null
         : adaptiveInputDecoratorRadius.adapt(effectivePlatform)
-            ? subTheme.inputDecoratorRadiusAdaptive ?? defaultDecoratorRadius
-            : subTheme.inputDecoratorRadius ?? defaultDecoratorRadius;
+        ? subTheme.inputDecoratorRadiusAdaptive ?? defaultDecoratorRadius
+        : subTheme.inputDecoratorRadius ?? defaultDecoratorRadius;
 
     // Make the effective input decoration theme, by using FCS sub themes
     // if opted in, otherwise use pre FCS v4 variant as before. This decoration
@@ -7431,71 +7046,61 @@ class FlexColorScheme with Diagnosticable {
             backgroundAlpha: subTheme.inputDecoratorBackgroundAlpha,
             prefixIconSchemeColor: subTheme.inputDecoratorPrefixIconSchemeColor,
             suffixIconSchemeColor: subTheme.inputDecoratorSuffixIconSchemeColor,
-            focusedBorderWidth: subTheme.inputDecoratorFocusedBorderWidth ??
-                subTheme.thickBorderWidth,
+            focusedBorderWidth: subTheme.inputDecoratorFocusedBorderWidth ?? subTheme.thickBorderWidth,
             focusedHasBorder: subTheme.inputDecoratorFocusedHasBorder,
-            unfocusedBorderWidth:
-                subTheme.inputDecoratorBorderWidth ?? subTheme.thinBorderWidth,
+            unfocusedBorderWidth: subTheme.inputDecoratorBorderWidth ?? subTheme.thinBorderWidth,
             unfocusedHasBorder: subTheme.inputDecoratorUnfocusedHasBorder,
-            unfocusedBorderIsColored:
-                subTheme.inputDecoratorUnfocusedBorderIsColored,
+            unfocusedBorderIsColored: subTheme.inputDecoratorUnfocusedBorderIsColored,
             tintedInteractions: tintedInteractions,
             tintedDisabled: tintedDisabled,
             useMaterial3: useMaterial3,
           )
         : useMaterial3
-            // In M3 if not using sub themes,
-            // use default InputDecorationThemeData.
-            ? null
-            // Default decorator in M2 is a bit opinionated, this is the legacy
-            // FCS default one in all previous versions before version 4.0.0.
-            // Kept for backwards defaults compatibility. Only used when not
-            // using opinionated component sub-themes in M2 mode.
-            : InputDecorationThemeData(
-                filled: subTheme.inputDecoratorIsFilled ?? true,
-                fillColor: isDark
-                    ? colorScheme.primary.withAlpha(0x0F) // 6%
-                    : colorScheme.primary.withAlpha(0x09), // 3.5%
-              );
+        // In M3 if not using sub themes,
+        // use default InputDecorationThemeData.
+        ? null
+        // Default decorator in M2 is a bit opinionated, this is the legacy
+        // FCS default one in all previous versions before version 4.0.0.
+        // Kept for backwards defaults compatibility. Only used when not
+        // using opinionated component sub-themes in M2 mode.
+        : InputDecorationThemeData(
+            filled: subTheme.inputDecoratorIsFilled ?? true,
+            fillColor: isDark
+                ? colorScheme.primary.withAlpha(0x0F) // 6%
+                : colorScheme.primary.withAlpha(0x09), // 3.5%
+          );
 
     // BottomSheet Colors and elevations.
     final Color bottomSheetColor = subTheme.bottomSheetBackgroundColor != null
-        ? FlexSubThemes.schemeColor(
-            subTheme.bottomSheetBackgroundColor!, colorScheme)
+        ? FlexSubThemes.schemeColor(subTheme.bottomSheetBackgroundColor!, colorScheme)
         : colorScheme.surfaceContainerLow;
-    final Color bottomSheetModalColor =
-        subTheme.bottomSheetModalBackgroundColor != null
-            ? FlexSubThemes.schemeColor(
-                subTheme.bottomSheetModalBackgroundColor!, colorScheme)
-            : colorScheme.surfaceContainerLow;
-    final double bottomSheetElevation = subTheme.bottomSheetElevation ??
-        (useMaterial3 ? kBottomSheetElevation : kBottomSheetElevationM2);
+    final Color bottomSheetModalColor = subTheme.bottomSheetModalBackgroundColor != null
+        ? FlexSubThemes.schemeColor(subTheme.bottomSheetModalBackgroundColor!, colorScheme)
+        : colorScheme.surfaceContainerLow;
+    final double bottomSheetElevation =
+        subTheme.bottomSheetElevation ?? (useMaterial3 ? kBottomSheetElevation : kBottomSheetElevationM2);
     final double bottomSheetModalElevation =
         subTheme.bottomSheetModalElevation ??
-            (useMaterial3
-                ? kBottomSheetModalElevation
-                : kBottomSheetModalElevationM2);
+        (useMaterial3 ? kBottomSheetModalElevation : kBottomSheetModalElevationM2);
 
     // PopupMenu menu background Color and elevation.
-    final double popupMenuElevation = subTheme.popupMenuElevation ??
-        (useMaterial3 ? kPopupMenuM3Elevation : kPopupMenuM2Elevation);
+    final double popupMenuElevation =
+        subTheme.popupMenuElevation ?? (useMaterial3 ? kPopupMenuM3Elevation : kPopupMenuM2Elevation);
     final Color? popupMenuBackgroundColor = subTheme.popupMenuOpacity == null
         ? subTheme.popupMenuSchemeColor == null
-            ? null
-            : FlexSubThemes.schemeColor(
-                subTheme.popupMenuSchemeColor!,
-                colorScheme,
-              )
+              ? null
+              : FlexSubThemes.schemeColor(
+                  subTheme.popupMenuSchemeColor!,
+                  colorScheme,
+                )
         : subTheme.popupMenuSchemeColor == null
-            ? useMaterial3
-                ? colorScheme.surfaceContainer
-                    .withValues(alpha: subTheme.popupMenuOpacity)
-                : colorScheme.surface
-                    .withValues(alpha: subTheme.popupMenuOpacity)
-            : FlexSubThemes.schemeColor(
-                subTheme.popupMenuSchemeColor!,
-                colorScheme,
-              ).withValues(alpha: subTheme.popupMenuOpacity);
+        ? useMaterial3
+              ? colorScheme.surfaceContainer.withValues(alpha: subTheme.popupMenuOpacity)
+              : colorScheme.surface.withValues(alpha: subTheme.popupMenuOpacity)
+        : FlexSubThemes.schemeColor(
+            subTheme.popupMenuSchemeColor!,
+            colorScheme,
+          ).withValues(alpha: subTheme.popupMenuOpacity);
 
     // Return the ThemeData object defined by the FlexColorScheme
     // properties and its opinionated theme design choices.
@@ -7542,13 +7147,11 @@ class FlexColorScheme with Diagnosticable {
       // TODO(rydmike): Monitor Flutter SDK deprecation of legacy cardColor.
       // In V8 we use surfaceContainerLow in M3 mode so it matches new cardTheme
       // default after Flutter 3.22.0.
-      cardColor:
-          useMaterial3 ? colorScheme.surfaceContainerLow : colorScheme.surface,
+      cardColor: useMaterial3 ? colorScheme.surfaceContainerLow : colorScheme.surface,
       // Disabled color uses a different style when using tinted disabled.
       // effects, if not opted in same as before v4.0.0 = ThemeData default.
       disabledColor: tintedDisabled
-          ? FlexSubThemes.tintedDisable(
-              isDark ? Colors.white : Colors.black, colorScheme.primary)
+          ? FlexSubThemes.tintedDisable(isDark ? Colors.white : Colors.black, colorScheme.primary)
           : null,
       // TODO(rydmike): Monitor Flutter SDK deprecation of dividerColor.
       dividerColor: dividerColor,
@@ -7562,20 +7165,16 @@ class FlexColorScheme with Diagnosticable {
       // disabledColor are not on an imminent deprecation path, but they may be
       // added to it later.
       focusColor: tintedInteractions
-          ? FlexSubThemes.tintedFocused(
-              isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
+          ? FlexSubThemes.tintedFocused(isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
       highlightColor: tintedInteractions
-          ? FlexSubThemes.tintedHighlight(
-              isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
+          ? FlexSubThemes.tintedHighlight(isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
       hoverColor: tintedInteractions
-          ? FlexSubThemes.tintedHovered(
-              isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
+          ? FlexSubThemes.tintedHovered(isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
       splashColor: tintedInteractions
-          ? FlexSubThemes.tintedSplash(
-              isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
+          ? FlexSubThemes.tintedSplash(isDark ? Colors.white : Colors.black, colorScheme.surfaceTint)
           : null,
 
       // TODO(rydmike): Monitor Flutter SDK deprecation of primaryColor.
@@ -7613,12 +7212,8 @@ class FlexColorScheme with Diagnosticable {
       // to it. If nothing was give to raw constructor's scaffoldBackground,
       // the defaults depend on used Material mode M2 or M3.
       scaffoldBackgroundColor: subTheme.scaffoldBackgroundSchemeColor != null
-          ? FlexSubThemes.schemeColor(
-              subTheme.scaffoldBackgroundSchemeColor!, colorScheme)
-          : scaffoldBackground ??
-              (useMaterial3
-                  ? colorScheme.surfaceContainerLowest
-                  : colorScheme.surface),
+          ? FlexSubThemes.schemeColor(subTheme.scaffoldBackgroundSchemeColor!, colorScheme)
+          : scaffoldBackground ?? (useMaterial3 ? colorScheme.surfaceContainerLowest : colorScheme.surface),
 
       // TODO(rydmike): Monitor Flutter SDK deprecation of secondaryHeaderColor
       // See: https://github.com/flutter/flutter/issues/91772
@@ -7722,56 +7317,42 @@ class FlexColorScheme with Diagnosticable {
       bottomNavigationBarTheme: useSubThemes
           ? FlexSubThemes.bottomNavigationBarTheme(
               colorScheme: colorScheme,
-              labelTextStyle: subTheme.bottomNavigationBarLabelTextStyle ??
-                  effectiveTextTheme.bodyMedium,
+              labelTextStyle: subTheme.bottomNavigationBarLabelTextStyle ?? effectiveTextTheme.bodyMedium,
               selectedLabelSize: subTheme.bottomNavigationBarSelectedLabelSize,
-              unselectedLabelSize:
-                  subTheme.bottomNavigationBarUnselectedLabelSize,
-              selectedLabelSchemeColor:
-                  subTheme.bottomNavigationBarSelectedLabelSchemeColor,
-              unselectedLabelSchemeColor:
-                  subTheme.bottomNavigationBarUnselectedLabelSchemeColor,
-              mutedUnselectedLabel:
-                  subTheme.bottomNavigationBarMutedUnselectedLabel,
+              unselectedLabelSize: subTheme.bottomNavigationBarUnselectedLabelSize,
+              selectedLabelSchemeColor: subTheme.bottomNavigationBarSelectedLabelSchemeColor,
+              unselectedLabelSchemeColor: subTheme.bottomNavigationBarUnselectedLabelSchemeColor,
+              mutedUnselectedLabel: subTheme.bottomNavigationBarMutedUnselectedLabel,
               selectedIconSize: subTheme.bottomNavigationBarSelectedIconSize,
-              unselectedIconSize:
-                  subTheme.bottomNavigationBarUnselectedIconSize,
-              selectedIconSchemeColor:
-                  subTheme.bottomNavigationBarSelectedIconSchemeColor,
-              unselectedIconSchemeColor:
-                  subTheme.bottomNavigationBarUnselectedIconSchemeColor,
-              mutedUnselectedIcon:
-                  subTheme.bottomNavigationBarMutedUnselectedIcon,
-              backgroundSchemeColor:
-                  subTheme.bottomNavigationBarBackgroundSchemeColor,
+              unselectedIconSize: subTheme.bottomNavigationBarUnselectedIconSize,
+              selectedIconSchemeColor: subTheme.bottomNavigationBarSelectedIconSchemeColor,
+              unselectedIconSchemeColor: subTheme.bottomNavigationBarUnselectedIconSchemeColor,
+              mutedUnselectedIcon: subTheme.bottomNavigationBarMutedUnselectedIcon,
+              backgroundSchemeColor: subTheme.bottomNavigationBarBackgroundSchemeColor,
               opacity: subTheme.bottomNavigationBarOpacity,
               elevation: subTheme.bottomNavigationBarElevation,
               type: subTheme.bottomNavigationBarType,
-              showSelectedLabels:
-                  subTheme.bottomNavigationBarShowSelectedLabels,
-              showUnselectedLabels:
-                  subTheme.bottomNavigationBarShowUnselectedLabels,
+              showSelectedLabels: subTheme.bottomNavigationBarShowSelectedLabels,
+              showUnselectedLabels: subTheme.bottomNavigationBarShowUnselectedLabels,
               landscapeLayout: subTheme.bottomNavigationBarLandscapeLayout,
-              // TODO(rydmike): Part of deprecation of blendTextTheme.
-              // altUnselectedColor: onSurfaceVariantBlendedTextStyle,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
               useMaterial3: useMaterial3,
             )
           : useMaterial3
-              ? null
-              // Opinionated FCS M2 legacy style sub-theme for
-              // BottomNavigationBarThemeData that we get without
-              // opting in on sub-themes. This is a nice fix for dark mode
-              // BottomNavigationBar, but decided to not do it in M3 when not
-              // opting in on sub-themes. If you opt-in, you get the "fix",
-              // You are supposed to use the NavigationBar in M3 anyway.
-              : BottomNavigationBarThemeData(
-                  selectedIconTheme: IconThemeData(
-                    color: colorScheme.primary,
-                  ),
-                  selectedItemColor: colorScheme.primary,
-                ),
+          ? null
+          // Opinionated FCS M2 legacy style sub-theme for
+          // BottomNavigationBarThemeData that we get without
+          // opting in on sub-themes. This is a nice fix for dark mode
+          // BottomNavigationBar, but decided to not do it in M3 when not
+          // opting in on sub-themes. If you opt-in, you get the "fix",
+          // You are supposed to use the NavigationBar in M3 anyway.
+          : BottomNavigationBarThemeData(
+              selectedIconTheme: IconThemeData(
+                color: colorScheme.primary,
+              ),
+              selectedItemColor: colorScheme.primary,
+            ),
       //
       // BottomSheet Theme.
       bottomSheetTheme: useSubThemes
@@ -7820,17 +7401,17 @@ class FlexColorScheme with Diagnosticable {
               padding: subTheme.buttonPadding,
             )
           : useMaterial3
-              ? null
-              // Opinionated FCS M2 legacy style sub-theme for ButtonThemeData,
-              // that we get without opting in on sub-themes. In M3 mode you
-              // get these fixes only when you opt-in on sub-themes. This
-              // theme may soon be deprecated in Flutter SDK.
-              : ButtonThemeData(
-                  colorScheme: colorScheme,
-                  textTheme: ButtonTextTheme.primary,
-                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                ),
+          ? null
+          // Opinionated FCS M2 legacy style sub-theme for ButtonThemeData,
+          // that we get without opting in on sub-themes. In M3 mode you
+          // get these fixes only when you opt-in on sub-themes. This
+          // theme may soon be deprecated in Flutter SDK.
+          : ButtonThemeData(
+              colorScheme: colorScheme,
+              textTheme: ButtonTextTheme.primary,
+              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+            ),
       //
       // Card Theme.
       cardTheme: useSubThemes
@@ -7872,14 +7453,11 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.chipSchemeColor,
               selectedSchemeColor: subTheme.chipSelectedSchemeColor,
-              secondarySelectedSchemeColor:
-                  subTheme.chipSecondarySelectedSchemeColor,
+              secondarySelectedSchemeColor: subTheme.chipSecondarySelectedSchemeColor,
               deleteIconSchemeColor: subTheme.chipDeleteIconSchemeColor,
               blendColors: subTheme.chipBlendColors,
-              labelStyle:
-                  subTheme.chipLabelStyle ?? effectiveTextTheme.labelLarge,
-              secondaryLabelStyle: subTheme.chipSecondaryLabelStyle ??
-                  effectiveTextTheme.labelLarge,
+              labelStyle: subTheme.chipLabelStyle ?? effectiveTextTheme.labelLarge,
+              secondaryLabelStyle: subTheme.chipSecondaryLabelStyle ?? effectiveTextTheme.labelLarge,
               fontSize: subTheme.chipFontSize,
               secondaryFontSize: subTheme.chipSecondaryFontSize,
               iconSize: subTheme.chipIconSize,
@@ -7890,14 +7468,14 @@ class FlexColorScheme with Diagnosticable {
               useMaterial3: useMaterial3,
             )
           : useMaterial3
-              ? null
-              // Opinionated FCS M2 legacy style sub-theme for Chips,
-              // that we get without opting in on sub-themes.
-              : ChipThemeData.fromDefaults(
-                  secondaryColor: colorScheme.primary,
-                  brightness: colorScheme.brightness,
-                  labelStyle: effectiveTextTheme.bodyLarge!,
-                ),
+          ? null
+          // Opinionated FCS M2 legacy style sub-theme for Chips,
+          // that we get without opting in on sub-themes.
+          : ChipThemeData.fromDefaults(
+              secondaryColor: colorScheme.primary,
+              brightness: colorScheme.brightness,
+              labelStyle: effectiveTextTheme.bodyLarge!,
+            ),
       //
       // Data Table Theme: NOT YET DEFINED BY FCS. USE: .copyWith to modify.
       dataTableTheme: useSubThemes ? const DataTableThemeData() : null,
@@ -7908,15 +7486,11 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               backgroundColor: dialogBackground,
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
-              headerBackgroundSchemeColor:
-                  subTheme.datePickerHeaderBackgroundSchemeColor,
-              headerForegroundSchemeColor:
-                  subTheme.datePickerHeaderForegroundSchemeColor,
+              headerBackgroundSchemeColor: subTheme.datePickerHeaderBackgroundSchemeColor,
+              headerForegroundSchemeColor: subTheme.datePickerHeaderForegroundSchemeColor,
               dividerSchemeColor: subTheme.datePickerDividerSchemeColor,
               elevation: subTheme.dialogElevation,
-              radius: subTheme.datePickerDialogRadius ??
-                  platformDialogRadius ??
-                  platformRadius,
+              radius: subTheme.datePickerDialogRadius ?? platformDialogRadius ?? platformRadius,
               inputDecorationTheme: effectiveInputDecorationTheme,
               useInputDecoratorTheme: subTheme.useInputDecoratorThemeInDialogs,
               shadowColor: useShadow ? colorScheme.shadow : null,
@@ -7927,10 +7501,8 @@ class FlexColorScheme with Diagnosticable {
               weekdayStyle: subTheme.datePickerWeekdayStyle,
               dayStyle: subTheme.datePickerDayStyle,
               yearStyle: subTheme.datePickerYearStyle,
-              rangePickerHeaderHeadlineStyle:
-                  subTheme.datePickerRangePickerHeaderHeadlineStyle,
-              rangePickerHeaderHelpStyle:
-                  subTheme.datePickerRangePickerHeaderHelpStyle,
+              rangePickerHeaderHeadlineStyle: subTheme.datePickerRangePickerHeaderHeadlineStyle,
+              rangePickerHeaderHelpStyle: subTheme.datePickerRangePickerHeaderHelpStyle,
             )
           : null,
       //
@@ -7952,10 +7524,9 @@ class FlexColorScheme with Diagnosticable {
       // Divider Theme.
       // Create a Divider theme only when sub themes is used and we want M2
       // style in M3. Otherwise we keep the theme as default, with null props.
-      dividerTheme:
-          useMaterial3 && (useSubThemes && subTheme.useM2StyleDividerInM3)
-              ? DividerThemeData(color: dividerColor)
-              : null,
+      dividerTheme: useMaterial3 && (useSubThemes && subTheme.useM2StyleDividerInM3)
+          ? DividerThemeData(color: dividerColor)
+          : null,
       //
       // Drawer Theme.
       drawerTheme: useSubThemes
@@ -7963,10 +7534,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.drawerBackgroundSchemeColor,
               radius: subTheme.drawerRadius ?? platformRadius,
-              width: subTheme.drawerWidth ??
-                  (useMaterial3
-                      ? kNavigationDrawerM3Width
-                      : kNavigationDrawerM2Width),
+              width: subTheme.drawerWidth ?? (useMaterial3 ? kNavigationDrawerM3Width : kNavigationDrawerM2Width),
               elevation: subTheme.drawerElevation,
               shadowColor: useShadow ? colorScheme.shadow : null,
               surfaceTintColor: removeTint ? Colors.transparent : null,
@@ -7978,8 +7546,7 @@ class FlexColorScheme with Diagnosticable {
       dropdownMenuTheme: useSubThemes
           ? FlexSubThemes.dropdownMenuTheme(
               colorScheme: colorScheme,
-              textStyle: subTheme.dropdownMenuTextStyle ??
-                  effectiveTextTheme.bodyLarge,
+              textStyle: subTheme.dropdownMenuTextStyle ?? effectiveTextTheme.bodyLarge,
               // Style match its InputDecoration to same as TextField.
               inputDecorationTheme: effectiveInputDecorationTheme,
               surfaceTintColor: removeTint ? Colors.transparent : null,
@@ -8065,8 +7632,7 @@ class FlexColorScheme with Diagnosticable {
               //
               titleTextStyle: subTheme.listTileTitleTextStyle,
               subtitleTextStyle: subTheme.listTileSubtitleTextStyle,
-              leadingAndTrailingTextStyle:
-                  subTheme.listTileLeadingAndTrailingTextStyle,
+              leadingAndTrailingTextStyle: subTheme.listTileLeadingAndTrailingTextStyle,
               //
               tileSchemeColor: subTheme.listTileTileSchemeColor,
               selectedTileSchemeColor: subTheme.listTileSelectedTileSchemeColor,
@@ -8083,8 +7649,7 @@ class FlexColorScheme with Diagnosticable {
       menuBarTheme: useSubThemes
           ? FlexSubThemes.menuBarTheme(
               colorScheme: colorScheme,
-              backgroundSchemeColor: subTheme.menuBarBackgroundSchemeColor ??
-                  subTheme.menuSchemeColor,
+              backgroundSchemeColor: subTheme.menuBarBackgroundSchemeColor ?? subTheme.menuSchemeColor,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               shadowColor: subTheme.menuBarShadowColor,
               radius: subTheme.menuBarRadius,
@@ -8099,10 +7664,8 @@ class FlexColorScheme with Diagnosticable {
               menuBackgroundSchemeColor: subTheme.menuSchemeColor,
               backgroundSchemeColor: subTheme.menuItemBackgroundSchemeColor,
               foregroundSchemeColor: subTheme.menuItemForegroundSchemeColor,
-              indicatorBackgroundSchemeColor:
-                  subTheme.menuIndicatorBackgroundSchemeColor,
-              indicatorForegroundSchemeColor:
-                  subTheme.menuIndicatorForegroundSchemeColor,
+              indicatorBackgroundSchemeColor: subTheme.menuIndicatorBackgroundSchemeColor,
+              indicatorForegroundSchemeColor: subTheme.menuIndicatorForegroundSchemeColor,
               radius: subTheme.menuIndicatorRadius,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
@@ -8128,35 +7691,26 @@ class FlexColorScheme with Diagnosticable {
       navigationBarTheme: useSubThemes
           ? FlexSubThemes.navigationBarTheme(
               colorScheme: colorScheme,
-              labelTextStyle: subTheme.navigationBarLabelTextStyle ??
-                  effectiveTextTheme.labelMedium,
+              labelTextStyle: subTheme.navigationBarLabelTextStyle ?? effectiveTextTheme.labelMedium,
               selectedLabelSize: subTheme.navigationBarSelectedLabelSize,
               unselectedLabelSize: subTheme.navigationBarUnselectedLabelSize,
-              selectedLabelSchemeColor:
-                  subTheme.navigationBarSelectedLabelSchemeColor,
-              unselectedLabelSchemeColor:
-                  subTheme.navigationBarUnselectedLabelSchemeColor,
-              // TODO(rydmike): Part of deprecation of blendTextTheme.
-              // altUnselectedColor: onSurfaceVariantBlendedTextStyle,
+              selectedLabelSchemeColor: subTheme.navigationBarSelectedLabelSchemeColor,
+              unselectedLabelSchemeColor: subTheme.navigationBarUnselectedLabelSchemeColor,
               mutedUnselectedLabel: subTheme.navigationBarMutedUnselectedLabel,
               selectedIconSize: subTheme.navigationBarSelectedIconSize,
               unselectedIconSize: subTheme.navigationBarUnselectedIconSize,
-              selectedIconSchemeColor:
-                  subTheme.navigationBarSelectedIconSchemeColor,
-              unselectedIconSchemeColor:
-                  subTheme.navigationBarUnselectedIconSchemeColor,
+              selectedIconSchemeColor: subTheme.navigationBarSelectedIconSchemeColor,
+              unselectedIconSchemeColor: subTheme.navigationBarUnselectedIconSchemeColor,
               mutedUnselectedIcon: subTheme.navigationBarMutedUnselectedIcon,
               indicatorSchemeColor: subTheme.navigationBarIndicatorSchemeColor,
-              backgroundSchemeColor:
-                  subTheme.navigationBarBackgroundSchemeColor,
+              backgroundSchemeColor: subTheme.navigationBarBackgroundSchemeColor,
               opacity: subTheme.navigationBarOpacity,
               elevation: subTheme.navigationBarElevation,
               height: subTheme.navigationBarHeight,
               labelBehavior: subTheme.navigationBarLabelBehavior,
               indicatorRadius: subTheme.navigationBarIndicatorRadius,
               indicatorAlpha: subTheme.navigationBarIndicatorOpacity != null
-                  ? Color.getAlphaFromOpacity(
-                      subTheme.navigationBarIndicatorOpacity!)
+                  ? Color.getAlphaFromOpacity(subTheme.navigationBarIndicatorOpacity!)
                   : null,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
               unselectedAlpha: kUnselectedAlphaBlend,
@@ -8170,20 +7724,15 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.navigationDrawerTheme(
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.drawerBackgroundSchemeColor,
-              indicatorWidth: subTheme.drawerIndicatorWidth ??
-                  ((subTheme.drawerWidth ??
-                          (useMaterial3
-                              ? kNavigationDrawerM3Width
-                              : kNavigationDrawerM2Width)) -
+              indicatorWidth:
+                  subTheme.drawerIndicatorWidth ??
+                  ((subTheme.drawerWidth ?? (useMaterial3 ? kNavigationDrawerM3Width : kNavigationDrawerM2Width)) -
                       2 * kNavigationDrawerIndicatorPadding),
               indicatorRadius: subTheme.drawerIndicatorRadius ?? platformRadius,
               indicatorSchemeColor: subTheme.drawerIndicatorSchemeColor,
               indicatorOpacity: subTheme.drawerIndicatorOpacity,
               selectedItemSchemeColor: subTheme.drawerSelectedItemSchemeColor,
-              unselectedItemSchemeColor:
-                  subTheme.drawerUnselectedItemSchemeColor,
-              // TODO(rydmike): Part of deprecation of blendTextTheme.
-              // altUnselectedColor: onSurfaceVariantBlendedTextStyle,
+              unselectedItemSchemeColor: subTheme.drawerUnselectedItemSchemeColor,
               textStyle: effectiveTextTheme.bodyLarge,
               surfaceTintColor: removeTint ? Colors.transparent : null,
               shadowColor: useShadow ? colorScheme.shadow : null,
@@ -8194,28 +7743,20 @@ class FlexColorScheme with Diagnosticable {
       navigationRailTheme: useSubThemes
           ? FlexSubThemes.navigationRailTheme(
               colorScheme: colorScheme,
-              labelTextStyle: subTheme.navigationRailLabelTextStyle ??
-                  effectiveTextTheme.labelMedium,
+              labelTextStyle: subTheme.navigationRailLabelTextStyle ?? effectiveTextTheme.labelMedium,
               selectedLabelSize: subTheme.navigationRailSelectedLabelSize,
               unselectedLabelSize: subTheme.navigationRailUnselectedLabelSize,
-              selectedLabelSchemeColor:
-                  subTheme.navigationRailSelectedLabelSchemeColor,
-              unselectedLabelSchemeColor:
-                  subTheme.navigationRailUnselectedLabelSchemeColor,
+              selectedLabelSchemeColor: subTheme.navigationRailSelectedLabelSchemeColor,
+              unselectedLabelSchemeColor: subTheme.navigationRailUnselectedLabelSchemeColor,
               mutedUnselectedLabel: subTheme.navigationRailMutedUnselectedLabel,
               selectedIconSize: subTheme.navigationRailSelectedIconSize,
               unselectedIconSize: subTheme.navigationRailUnselectedIconSize,
-              selectedIconSchemeColor:
-                  subTheme.navigationRailSelectedIconSchemeColor,
-              unselectedIconSchemeColor:
-                  subTheme.navigationRailUnselectedIconSchemeColor,
-              // TODO(rydmike): Part of deprecation of blendTextTheme.
-              // altUnselectedColor: onSurfaceVariantBlendedTextStyle,
+              selectedIconSchemeColor: subTheme.navigationRailSelectedIconSchemeColor,
+              unselectedIconSchemeColor: subTheme.navigationRailUnselectedIconSchemeColor,
               mutedUnselectedIcon: subTheme.navigationRailMutedUnselectedIcon,
               useIndicator: subTheme.navigationRailUseIndicator,
               indicatorSchemeColor: subTheme.navigationRailIndicatorSchemeColor,
-              backgroundSchemeColor:
-                  subTheme.navigationRailBackgroundSchemeColor,
+              backgroundSchemeColor: subTheme.navigationRailBackgroundSchemeColor,
               opacity: subTheme.navigationRailOpacity,
               elevation: subTheme.navigationRailElevation,
               labelType: subTheme.navigationRailLabelType,
@@ -8223,8 +7764,7 @@ class FlexColorScheme with Diagnosticable {
               minWidth: subTheme.navigationRailMinWidth,
               minExtendedWidth: subTheme.navigationRailMinExtendedWidth,
               indicatorAlpha: subTheme.navigationRailIndicatorOpacity != null
-                  ? Color.getAlphaFromOpacity(
-                      subTheme.navigationRailIndicatorOpacity!)
+                  ? Color.getAlphaFromOpacity(subTheme.navigationRailIndicatorOpacity!)
                   : null,
               indicatorRadius: subTheme.navigationRailIndicatorRadius,
               unselectedAlphaBlend: kUnselectedBackgroundPrimaryAlphaBlend,
@@ -8239,10 +7779,8 @@ class FlexColorScheme with Diagnosticable {
               baseSchemeColor: subTheme.outlinedButtonSchemeColor,
               outlineSchemeColor: subTheme.outlinedButtonOutlineSchemeColor,
               radius: subTheme.outlinedButtonRadius ?? platformRadius,
-              pressedOutlineWidth: subTheme.outlinedButtonPressedBorderWidth ??
-                  subTheme.thickBorderWidth,
-              outlineWidth: subTheme.outlinedButtonBorderWidth ??
-                  subTheme.thinBorderWidth,
+              pressedOutlineWidth: subTheme.outlinedButtonPressedBorderWidth ?? subTheme.thickBorderWidth,
+              outlineWidth: subTheme.outlinedButtonBorderWidth ?? subTheme.thinBorderWidth,
               padding: subTheme.buttonPadding,
               minButtonSize: subTheme.buttonMinSize,
               textStyle: subTheme.outlinedButtonTextStyle,
@@ -8270,25 +7808,19 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.progressIndicatorTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.progressIndicatorBaseSchemeColor,
-              linearTrackSchemeColor:
-                  subTheme.progressIndicatorLinearTrackSchemeColor,
+              linearTrackSchemeColor: subTheme.progressIndicatorLinearTrackSchemeColor,
               linearMinHeight: subTheme.progressIndicatorLinearMinHeight,
-              circularTrackSchemeColor:
-                  subTheme.progressIndicatorCircularTrackSchemeColor,
-              refreshBackgroundSchemeColor:
-                  subTheme.progressIndicatorRefreshBackgroundSchemeColor,
+              circularTrackSchemeColor: subTheme.progressIndicatorCircularTrackSchemeColor,
+              refreshBackgroundSchemeColor: subTheme.progressIndicatorRefreshBackgroundSchemeColor,
               linearRadius: subTheme.progressIndicatorLinearRadius,
-              stopIndicatorSchemeColor:
-                  subTheme.progressIndicatorStopIndicatorSchemeColor,
-              stopIndicatorRadius:
-                  subTheme.progressIndicatorStopIndicatorRadius,
+              stopIndicatorSchemeColor: subTheme.progressIndicatorStopIndicatorSchemeColor,
+              stopIndicatorRadius: subTheme.progressIndicatorStopIndicatorRadius,
               strokeWidth: subTheme.progressIndicatorStrokeWidth,
               strokeAlign: subTheme.progressIndicatorStrokeAlign,
               strokeCap: subTheme.progressIndicatorStrokeCap,
               constraints: subTheme.progressIndicatorConstraints,
               trackGap: subTheme.progressIndicatorTrackGap,
-              circularTrackPadding:
-                  subTheme.progressIndicatorCircularTrackPadding,
+              circularTrackPadding: subTheme.progressIndicatorCircularTrackPadding,
               year2023: subTheme.progressIndicatorYear2023,
             )
           : null,
@@ -8312,8 +7844,7 @@ class FlexColorScheme with Diagnosticable {
               backgroundSchemeColor: subTheme.searchBarBackgroundSchemeColor,
               elevation: subTheme.searchBarElevation,
               shadowColor: subTheme.searchBarShadowColor,
-              radius: subTheme.searchBarRadius ??
-                  (subTheme.searchUseGlobalShape ? platformRadius : null),
+              radius: subTheme.searchBarRadius ?? (subTheme.searchUseGlobalShape ? platformRadius : null),
               padding: subTheme.searchBarPadding,
               textStyle: subTheme.searchBarTextStyle,
               hintStyle: subTheme.searchBarHintStyle,
@@ -8330,8 +7861,7 @@ class FlexColorScheme with Diagnosticable {
               colorScheme: colorScheme,
               backgroundSchemeColor: subTheme.searchViewBackgroundSchemeColor,
               elevation: subTheme.searchViewElevation,
-              radius: subTheme.searchViewRadius ??
-                  (subTheme.searchUseGlobalShape ? platformRadius : null),
+              radius: subTheme.searchViewRadius ?? (subTheme.searchUseGlobalShape ? platformRadius : null),
               headerHeight: subTheme.searchViewHeaderHeight,
               dividerColor: subTheme.searchViewDividerColor,
               headerTextStyle: subTheme.searchViewHeaderTextStyle,
@@ -8345,15 +7875,11 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.segmentedButtonTheme(
               colorScheme: colorScheme,
               selectedSchemeColor: subTheme.segmentedButtonSchemeColor,
-              selectedForegroundSchemeColor:
-                  subTheme.segmentedButtonSelectedForegroundSchemeColor,
-              unselectedSchemeColor:
-                  subTheme.segmentedButtonUnselectedSchemeColor,
-              unselectedForegroundSchemeColor:
-                  subTheme.segmentedButtonUnselectedForegroundSchemeColor,
+              selectedForegroundSchemeColor: subTheme.segmentedButtonSelectedForegroundSchemeColor,
+              unselectedSchemeColor: subTheme.segmentedButtonUnselectedSchemeColor,
+              unselectedForegroundSchemeColor: subTheme.segmentedButtonUnselectedForegroundSchemeColor,
               borderSchemeColor: subTheme.segmentedButtonBorderSchemeColor,
-              borderWidth: subTheme.segmentedButtonBorderWidth ??
-                  subTheme.thinBorderWidth,
+              borderWidth: subTheme.segmentedButtonBorderWidth ?? subTheme.thinBorderWidth,
               radius: subTheme.segmentedButtonRadius ?? platformRadius,
               useTintedInteraction: subTheme.interactionEffects,
               useTintedDisable: subTheme.tintedDisabledControls,
@@ -8417,27 +7943,28 @@ class FlexColorScheme with Diagnosticable {
         colorScheme: colorScheme,
         indicatorColor: subTheme.tabBarIndicatorSchemeColor == null
             ? tabBarStyleColor()
-            : FlexSubThemes.schemeColor(
-                subTheme.tabBarIndicatorSchemeColor!, colorScheme),
+            : FlexSubThemes.schemeColor(subTheme.tabBarIndicatorSchemeColor!, colorScheme),
         labelStyle: effectiveTextTheme.bodyLarge,
         labelColor: subTheme.tabBarItemSchemeColor == null
             ? tabBarStyleColor()
-            : FlexSubThemes.schemeColor(
-                subTheme.tabBarItemSchemeColor!, colorScheme),
+            : FlexSubThemes.schemeColor(subTheme.tabBarItemSchemeColor!, colorScheme),
         unselectedLabelStyle: effectiveTextTheme.bodyLarge,
         unselectedLabelColor: subTheme.tabBarItemSchemeColor == null
             ? unselectedTabColor()
             : subTheme.tabBarUnselectedItemSchemeColor == null
-                ? useMaterial3
-                    ? FlexSubThemes.schemeColor(
-                            SchemeColor.onSurfaceVariant, colorScheme)
-                        .withAlpha(tabBarUnselectedAlpha)
-                    : FlexSubThemes.schemeColor(
-                            subTheme.tabBarItemSchemeColor!, colorScheme)
-                        .withAlpha(tabBarUnselectedAlpha)
-                : FlexSubThemes.schemeColor(
-                        subTheme.tabBarUnselectedItemSchemeColor!, colorScheme)
-                    .withAlpha(tabBarUnselectedAlpha),
+            ? useMaterial3
+                  ? FlexSubThemes.schemeColor(
+                      SchemeColor.onSurfaceVariant,
+                      colorScheme,
+                    ).withAlpha(tabBarUnselectedAlpha)
+                  : FlexSubThemes.schemeColor(
+                      subTheme.tabBarItemSchemeColor!,
+                      colorScheme,
+                    ).withAlpha(tabBarUnselectedAlpha)
+            : FlexSubThemes.schemeColor(
+                subTheme.tabBarUnselectedItemSchemeColor!,
+                colorScheme,
+              ).withAlpha(tabBarUnselectedAlpha),
         indicatorSize: subTheme.tabBarIndicatorSize,
         indicatorWeight: subTheme.tabBarIndicatorWeight,
         indicatorTopRadius: subTheme.tabBarIndicatorTopRadius,
@@ -8468,17 +7995,12 @@ class FlexColorScheme with Diagnosticable {
       textSelectionTheme: useSubThemes
           ? FlexSubThemes.textSelectionTheme(
               colorScheme: colorScheme,
-              cursorSchemeColor: subTheme.inputCursorSchemeColor ??
-                  subTheme.inputDecoratorSchemeColor,
-              selectionSchemeColor: subTheme.inputSelectionSchemeColor ??
-                  subTheme.inputDecoratorSchemeColor,
-              selectionOpacity: subTheme.inputSelectionOpacity ??
-                  (isDark
-                      ? kTextSelectionDarkOpacity
-                      : kTextSelectionLightOpacity),
+              cursorSchemeColor: subTheme.inputCursorSchemeColor ?? subTheme.inputDecoratorSchemeColor,
+              selectionSchemeColor: subTheme.inputSelectionSchemeColor ?? subTheme.inputDecoratorSchemeColor,
+              selectionOpacity:
+                  subTheme.inputSelectionOpacity ?? (isDark ? kTextSelectionDarkOpacity : kTextSelectionLightOpacity),
               selectionHandleSchemeColor:
-                  subTheme.inputSelectionHandleSchemeColor ??
-                      subTheme.inputDecoratorSchemeColor,
+                  subTheme.inputSelectionHandleSchemeColor ?? subTheme.inputDecoratorSchemeColor,
             )
           : null,
       //
@@ -8489,9 +8011,7 @@ class FlexColorScheme with Diagnosticable {
               backgroundColor: dialogBackground,
               backgroundSchemeColor: subTheme.dialogBackgroundSchemeColor,
               elevation: subTheme.dialogElevation,
-              radius: subTheme.timePickerDialogRadius ??
-                  platformDialogRadius ??
-                  platformRadius,
+              radius: subTheme.timePickerDialogRadius ?? platformDialogRadius ?? platformRadius,
               elementRadius: subTheme.timePickerElementRadius,
               inputDecorationTheme: effectiveInputDecorationTheme,
               useInputDecoratorTheme: subTheme.useInputDecoratorThemeInDialogs,
@@ -8508,13 +8028,10 @@ class FlexColorScheme with Diagnosticable {
           ? FlexSubThemes.toggleButtonsTheme(
               colorScheme: colorScheme,
               baseSchemeColor: subTheme.toggleButtonsSchemeColor,
-              selectedForegroundSchemeColor:
-                  subTheme.toggleButtonsSelectedForegroundSchemeColor,
-              unselectedSchemeColor:
-                  subTheme.toggleButtonsUnselectedSchemeColor,
+              selectedForegroundSchemeColor: subTheme.toggleButtonsSelectedForegroundSchemeColor,
+              unselectedSchemeColor: subTheme.toggleButtonsUnselectedSchemeColor,
               borderSchemeColor: subTheme.toggleButtonsBorderSchemeColor,
-              borderWidth:
-                  subTheme.toggleButtonsBorderWidth ?? subTheme.thinBorderWidth,
+              borderWidth: subTheme.toggleButtonsBorderWidth ?? subTheme.thinBorderWidth,
               radius: subTheme.toggleButtonsRadius ?? platformRadius,
               minButtonSize: subTheme.buttonMinSize,
               visualDensity: visualDensity,
@@ -8551,19 +8068,19 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// After you have defined your [FlexColorScheme] with one of its recommended
   /// factories [FlexColorScheme.light], [FlexColorScheme.dark], you can use
-  /// the [toScheme] method to get the effective standard Flutter
+  /// the [toScheme] getter to get the effective standard Flutter
   /// [ColorScheme] object defined by your [FlexColorScheme] definition.
   ///
-  /// While you can use use this returned color scheme in a standard
+  /// While you can use this returned color scheme in a standard
   /// [ThemeData.from] color scheme based theme factory to create a theme from
   /// [FlexColorScheme], this is **NOT** the recommended way to make a
   /// fully [FlexColorScheme] based theme. Normally you want to use
   /// [FlexColorScheme.toTheme] to make your ThemeData when using
-  /// FlexColorScheme. The [FlexColorScheme.toTheme] method uses
+  /// FlexColorScheme. The [FlexColorScheme.toTheme] getter uses
   /// [FlexColorScheme.toScheme] internally when it creates its [ThemeData]
   /// object as well. It does however also apply a number of additional
-  /// theme properties, that you loose if you extract the [ColorScheme]
-  /// with [toScheme] and use it in a [ThemeData.from] from factory.
+  /// theme properties, that you lose if you extract the [ColorScheme]
+  /// with [toScheme] and use it in a [ThemeData.from] factory.
   ///
   /// The main usage of this method is to get the effective resulting
   /// [ColorScheme] from [FlexColorScheme] and use it when making sub-themes
@@ -8574,56 +8091,51 @@ class FlexColorScheme with Diagnosticable {
   /// If you use [ThemeData.from] and the [ColorScheme] returned by
   /// [FlexColorScheme.toScheme] to create your theme, this will work and
   /// result in a theme that is based on the color scheme defined in
-  /// [FlexColorScheme], including the surface and
-  /// background color branding, and e.g. true black for dark mode, if those
-  /// were used in its creation via the light and dark factories. The big
-  /// difference will be that Flutter's [ThemeData.from] theme creation
-  /// from this scheme will not include any of the theme improvements included
-  /// in the [FlexColorScheme.toTheme] method.
+  /// [FlexColorScheme], including the surface color branding, and e.g. true
+  /// black for dark mode, if those were used in its creation via the light
+  /// and dark factories. The big difference will be that Flutter's
+  /// [ThemeData.from] theme creation from this scheme will not include any of
+  /// the theme improvements included in the [FlexColorScheme.toTheme] getter.
   ColorScheme get toScheme {
     // Get effective scheme brightness. Passed in as a property value, or from
     // passed in colorScheme, if neither given, light is default fallback.
-    final Brightness usedBrightness =
-        brightness ?? colorScheme?.brightness ?? Brightness.light;
+    final Brightness usedBrightness = brightness ?? colorScheme?.brightness ?? Brightness.light;
     final bool isDark = usedBrightness == Brightness.dark;
     // Get effective primary color. Passed in a as property, if not, then maybe
     // from colorScheme, if neither given, fallback color is light or dark mode
     // Material 2 guide default light and dark primary color.
-    final Color usedPrimary = primary ??
-        colorScheme?.primary ??
-        (isDark
-            ? FlexColor.materialDarkPrimary
-            : FlexColor.materialLightPrimary);
+    final Color usedPrimary =
+        primary ?? colorScheme?.primary ?? (isDark ? FlexColor.materialDarkPrimary : FlexColor.materialLightPrimary);
 
     // Get default fallback error colors.
     final Color errorFallback = isDark
         ? useMaterial3
-            ? FlexColor.material3DarkError
-            : FlexColor.materialDarkError
+              ? FlexColor.material3DarkError
+              : FlexColor.materialDarkError
         : useMaterial3
-            ? FlexColor.material3LightError
-            : FlexColor.materialLightError;
+        ? FlexColor.material3LightError
+        : FlexColor.materialLightError;
     final Color onErrorFallback = isDark
         ? useMaterial3
-            ? FlexColor.material3DarkOnError
-            : FlexColor.materialDarkOnError
+              ? FlexColor.material3DarkOnError
+              : FlexColor.materialDarkOnError
         : useMaterial3
-            ? FlexColor.material3LightOnError
-            : FlexColor.materialLightOnError;
+        ? FlexColor.material3LightOnError
+        : FlexColor.materialLightOnError;
     final Color errorContainerFallback = isDark
         ? useMaterial3
-            ? FlexColor.material3DarkErrorContainer
-            : FlexColor.darkErrorContainer(FlexColor.materialDarkError)
+              ? FlexColor.material3DarkErrorContainer
+              : FlexColor.darkErrorContainer(FlexColor.materialDarkError)
         : useMaterial3
-            ? FlexColor.material3LightErrorContainer
-            : FlexColor.lightErrorContainer(FlexColor.materialLightError);
+        ? FlexColor.material3LightErrorContainer
+        : FlexColor.lightErrorContainer(FlexColor.materialLightError);
     final Color onErrorContainerFallback = isDark
         ? useMaterial3
-            ? FlexColor.material3DarkErrorContainer
-            : FlexColor.materialDarkOnErrorContainer
+              ? FlexColor.material3DarkErrorContainer
+              : FlexColor.materialDarkOnErrorContainer
         : useMaterial3
-            ? FlexColor.material3LightOnErrorContainer
-            : FlexColor.materialLightOnErrorContainer;
+        ? FlexColor.material3LightOnErrorContainer
+        : FlexColor.materialLightOnErrorContainer;
 
     // Determine effective primary, secondary and tertiary colors, depending
     // on passed in properties as highest priority, then colorScheme values.
@@ -8631,20 +8143,13 @@ class FlexColorScheme with Diagnosticable {
     // All falls back to primary, if nothing else is available before that.
     final FlexSchemeColor colors = FlexSchemeColor.from(
       primary: usedPrimary,
-      primaryContainer:
-          primaryContainer ?? colorScheme?.primaryContainer ?? usedPrimary,
+      primaryContainer: primaryContainer ?? colorScheme?.primaryContainer ?? usedPrimary,
       secondary: secondary ?? colorScheme?.secondary ?? usedPrimary,
-      secondaryContainer: secondaryContainer ??
-          colorScheme?.secondaryContainer ??
-          secondary ??
-          colorScheme?.secondary ??
-          usedPrimary,
-      tertiary: tertiary ??
-          colorScheme?.tertiary ??
-          secondary ??
-          colorScheme?.secondary ??
-          usedPrimary,
-      tertiaryContainer: tertiaryContainer ??
+      secondaryContainer:
+          secondaryContainer ?? colorScheme?.secondaryContainer ?? secondary ?? colorScheme?.secondary ?? usedPrimary,
+      tertiary: tertiary ?? colorScheme?.tertiary ?? secondary ?? colorScheme?.secondary ?? usedPrimary,
+      tertiaryContainer:
+          tertiaryContainer ??
           colorScheme?.tertiaryContainer ??
           tertiary ??
           colorScheme?.tertiary ??
@@ -8652,28 +8157,28 @@ class FlexColorScheme with Diagnosticable {
           colorScheme?.secondary ??
           usedPrimary,
       error: error ?? colorScheme?.error ?? errorFallback,
-      errorContainer: errorContainer ??
-          colorScheme?.errorContainer ??
-          errorContainerFallback,
+      errorContainer: errorContainer ?? colorScheme?.errorContainer ?? errorContainerFallback,
     );
     // Determine effective surface surface colors.
-    final Color effectiveSurfaceColor = surface ??
+    final Color effectiveSurfaceColor =
+        surface ??
         colorScheme?.surface ??
         (isDark
             ? useMaterial3
-                ? FlexColor.darkFlexSurface
-                : FlexColor.materialDarkSurface
+                  ? FlexColor.darkFlexSurface
+                  : FlexColor.materialDarkSurface
             : useMaterial3
-                ? FlexColor.lightFlexSurface
-                : FlexColor.materialLightSurface);
-    final Color effectiveInverseSurfaceColor = colorScheme?.inverseSurface ??
+            ? FlexColor.lightFlexSurface
+            : FlexColor.materialLightSurface);
+    final Color effectiveInverseSurfaceColor =
+        colorScheme?.inverseSurface ??
         (isDark
             ? useMaterial3
-                ? FlexColor.darkFlexInverseSurface
-                : FlexColor.materialLightSurface
+                  ? FlexColor.darkFlexInverseSurface
+                  : FlexColor.materialLightSurface
             : useMaterial3
-                ? FlexColor.lightFlexInverseSurface
-                : FlexColor.materialDarkSurface);
+            ? FlexColor.lightFlexInverseSurface
+            : FlexColor.materialDarkSurface);
     // Check brightness of primary, secondary, error, surface and background
     // colors, and returns appropriate computed colors for their onColors if an
     // onColor for it was was not passed in, or no colorScheme with them were
@@ -8693,18 +8198,14 @@ class FlexColorScheme with Diagnosticable {
       error: colors.error ?? errorFallback,
       onError: onError ?? colorScheme?.onError ?? onErrorFallback,
       errorContainer: colors.errorContainer ?? errorContainerFallback,
-      onErrorContainer: onErrorContainer ??
-          colorScheme?.onErrorContainer ??
-          onErrorContainerFallback,
+      onErrorContainer: onErrorContainer ?? colorScheme?.onErrorContainer ?? onErrorContainerFallback,
       //
       onPrimary: onPrimary ?? colorScheme?.onPrimary,
       onPrimaryContainer: onPrimaryContainer ?? colorScheme?.onPrimaryContainer,
       onSecondary: onSecondary ?? colorScheme?.onSecondary,
-      onSecondaryContainer:
-          onSecondaryContainer ?? colorScheme?.onSecondaryContainer,
+      onSecondaryContainer: onSecondaryContainer ?? colorScheme?.onSecondaryContainer,
       onTertiary: onTertiary ?? colorScheme?.onTertiary,
-      onTertiaryContainer:
-          onTertiaryContainer ?? colorScheme?.onTertiaryContainer,
+      onTertiaryContainer: onTertiaryContainer ?? colorScheme?.onTertiaryContainer,
       onSurface: onSurface ?? colorScheme?.onSurface,
       onSurfaceVariant: colorScheme?.onSurfaceVariant,
       onInverseSurface: colorScheme?.onInverseSurface,
@@ -8721,10 +8222,10 @@ class FlexColorScheme with Diagnosticable {
     // The factories FlexColorScheme.light and FlexColorScheme.dark have their
     // own logic for making the ColorScheme and set a colorScheme as well as
     // all override properties to define their target ColorScheme when the
-    // toScheme methods is called.
+    // toScheme getter is called.
     //
-    // The toScheme method is used internally by the toTheme method to get
-    // the effective ColorScheme for the the defined FlexColorScheme instance.
+    // The toScheme getter is used internally by the toTheme getter to get
+    // the effective ColorScheme for the defined FlexColorScheme instance.
     return colorScheme?.copyWith(
           brightness: usedBrightness,
           primary: colors.primary,
@@ -8753,8 +8254,7 @@ class FlexColorScheme with Diagnosticable {
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
           inversePrimary: colorScheme?.inversePrimary,
-          surfaceTint:
-              surfaceTint ?? colorScheme?.surfaceTint ?? colors.primary,
+          surfaceTint: surfaceTint ?? colorScheme?.surfaceTint ?? colors.primary,
         ) ??
         // No passed in ColorScheme, we create one with the effective
         // override properties, plus FlexColorScheme ColorScheme defaults.
@@ -8794,8 +8294,7 @@ class FlexColorScheme with Diagnosticable {
           scrim: Colors.black,
           inverseSurface: effectiveInverseSurfaceColor,
           onInverseSurface: onColors.onInverseSurface,
-          inversePrimary: _inversePrimary(
-              usedBrightness, colors.primary, effectiveSurfaceColor),
+          inversePrimary: _inversePrimary(usedBrightness, colors.primary, effectiveSurfaceColor),
           surfaceTint: surfaceTint ?? usedPrimary,
         );
   }
@@ -8806,8 +8305,7 @@ class FlexColorScheme with Diagnosticable {
   ///
   /// Not the best algo in the world, but simple and works fairly well for light
   /// Brightness, but should be better for dark.
-  static Color _inversePrimary(
-      Brightness brightness, Color primary, Color surface) {
+  static Color _inversePrimary(Brightness brightness, Color primary, Color surface) {
     if (brightness == Brightness.light) {
       return primary.brighten(40).lighten(10);
     } else {
@@ -8816,8 +8314,7 @@ class FlexColorScheme with Diagnosticable {
   }
 
   /// FlexColorScheme default for outline color, when not using M3 seeds.
-  static Color _outlineColor(
-      Brightness brightness, Color blendColor, int alpha) {
+  static Color _outlineColor(Brightness brightness, Color blendColor, int alpha) {
     if (brightness == Brightness.light) {
       return FlexColor.lightFlexOutline.blendAlpha(blendColor, alpha);
     } else {
@@ -8826,8 +8323,7 @@ class FlexColorScheme with Diagnosticable {
   }
 
   /// FlexColorScheme default for outlineVariant color, when not using M3 seeds.
-  static Color _outlineVariantColor(
-      Brightness brightness, Color blendColor, int alpha) {
+  static Color _outlineVariantColor(Brightness brightness, Color blendColor, int alpha) {
     if (brightness == Brightness.light) {
       return FlexColor.lightFlexOutlineVariant.blendAlpha(blendColor, alpha);
     } else {
@@ -8836,8 +8332,7 @@ class FlexColorScheme with Diagnosticable {
   }
 
   /// Return true if the color is light, and should use dark contrast color.
-  static bool _isLight(final Color color) =>
-      FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
+  static bool _isLight(Color color) => FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
 
   /// FlexColorScheme default for "fixed" colors that are supposed
   /// to be same in light and dark mode.
@@ -8870,9 +8365,7 @@ class FlexColorScheme with Diagnosticable {
   /// ColorScheme and [FlexColorScheme.light] or [FlexColorScheme.light]
   /// `fixedColorStyle` is null or equal to [FlexFixedColorStyle.computed].
   static Color _onFixedColor(Color color) {
-    return _isLight(color)
-        ? color.darken(60).blend(Colors.black, 20)
-        : color.darken(19).blend(Colors.black, 30);
+    return _isLight(color) ? color.darken(60).blend(Colors.black, 20) : color.darken(19).blend(Colors.black, 30);
   }
 
   /// FlexColorScheme default for "onFixedVariant" colors that are supposed
@@ -8882,9 +8375,7 @@ class FlexColorScheme with Diagnosticable {
   /// ColorScheme and [FlexColorScheme.light] or [FlexColorScheme.light]
   /// `fixedColorStyle` is null or equal to [FlexFixedColorStyle.computed].
   static Color _onFixedVariantColor(Color color) {
-    return _isLight(color)
-        ? color.darken(50).blend(Colors.black, 10)
-        : color.darken(14).blend(Colors.black, 30);
+    return _isLight(color) ? color.darken(50).blend(Colors.black, 10) : color.darken(14).blend(Colors.black, 30);
   }
 
   /// Copy the object with one or more provided properties changed.
@@ -8939,15 +8430,6 @@ class FlexColorScheme with Diagnosticable {
     FlexSubThemesData? subThemesData,
     bool? useMaterial3,
     Iterable<ThemeExtension<dynamic>>? extensions,
-    //
-    @Deprecated('Use FlexColorScheme.surface instead. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
-    Color? background,
-    @Deprecated('Use FlexColorScheme.onSurface instead. It is deprecated '
-        'because Flutter 3.22 deprecated this ColorScheme color. '
-        'It no longer has any function in FCS v8 and will be removed in v9.')
-    Color? onBackground,
   }) {
     return FlexColorScheme(
       brightness: brightness ?? this.brightness,
@@ -8982,10 +8464,8 @@ class FlexColorScheme with Diagnosticable {
       //
       tabBarStyle: tabBarStyle ?? this.tabBarStyle,
       appBarElevation: appBarElevation ?? this.appBarElevation,
-      bottomAppBarElevation:
-          bottomAppBarElevation ?? this.bottomAppBarElevation,
-      tooltipsMatchBackground:
-          tooltipsMatchBackground ?? this.tooltipsMatchBackground,
+      bottomAppBarElevation: bottomAppBarElevation ?? this.bottomAppBarElevation,
+      tooltipsMatchBackground: tooltipsMatchBackground ?? this.tooltipsMatchBackground,
       transparentStatusBar: transparentStatusBar ?? this.transparentStatusBar,
       visualDensity: visualDensity ?? this.visualDensity,
       textTheme: textTheme ?? this.textTheme,
@@ -8993,15 +8473,12 @@ class FlexColorScheme with Diagnosticable {
       fontFamily: fontFamily ?? this.fontFamily,
       fontFamilyFallback: fontFamilyFallback ?? this.fontFamilyFallback,
       package: package ?? this.package,
-      materialTapTargetSize:
-          materialTapTargetSize ?? this.materialTapTargetSize,
+      materialTapTargetSize: materialTapTargetSize ?? this.materialTapTargetSize,
       pageTransitionsTheme: pageTransitionsTheme ?? this.pageTransitionsTheme,
       platform: platform ?? this.platform,
       typography: typography ?? this.typography,
-      applyElevationOverlayColor:
-          applyElevationOverlayColor ?? this.applyElevationOverlayColor,
-      cupertinoOverrideTheme:
-          cupertinoOverrideTheme ?? this.cupertinoOverrideTheme,
+      applyElevationOverlayColor: applyElevationOverlayColor ?? this.applyElevationOverlayColor,
+      cupertinoOverrideTheme: cupertinoOverrideTheme ?? this.cupertinoOverrideTheme,
       subThemesData: subThemesData ?? this.subThemesData,
       useMaterial3: useMaterial3 ?? this.useMaterial3,
       extensions: extensions ?? this.extensions,
@@ -9069,65 +8546,64 @@ class FlexColorScheme with Diagnosticable {
   /// Override for hashcode, dart.ui Jenkins based.
   @override
   int get hashCode => Object.hashAll(<Object?>[
-        brightness,
-        colorScheme,
-        //
-        primary,
-        onPrimary,
-        primaryContainer,
-        onPrimaryContainer,
-        //
-        secondary,
-        onSecondary,
-        secondaryContainer,
-        onSecondaryContainer,
-        //
-        tertiary,
-        onTertiary,
-        tertiaryContainer,
-        onTertiaryContainer,
-        //
-        error,
-        onError,
-        errorContainer,
-        onErrorContainer,
-        //
-        surface,
-        onSurface,
-        scaffoldBackground,
-        dialogBackground,
-        appBarBackground,
-        surfaceTint,
-        //
-        tabBarStyle,
-        appBarElevation,
-        bottomAppBarElevation,
-        tooltipsMatchBackground,
-        transparentStatusBar,
-        visualDensity,
-        textTheme,
-        primaryTextTheme,
-        fontFamily,
-        fontFamilyFallback,
-        package,
-        materialTapTargetSize,
-        pageTransitionsTheme,
-        platform,
-        typography,
-        applyElevationOverlayColor,
-        cupertinoOverrideTheme,
-        subThemesData,
-        useMaterial3,
-        extensions,
-      ]);
+    brightness,
+    colorScheme,
+    //
+    primary,
+    onPrimary,
+    primaryContainer,
+    onPrimaryContainer,
+    //
+    secondary,
+    onSecondary,
+    secondaryContainer,
+    onSecondaryContainer,
+    //
+    tertiary,
+    onTertiary,
+    tertiaryContainer,
+    onTertiaryContainer,
+    //
+    error,
+    onError,
+    errorContainer,
+    onErrorContainer,
+    //
+    surface,
+    onSurface,
+    scaffoldBackground,
+    dialogBackground,
+    appBarBackground,
+    surfaceTint,
+    //
+    tabBarStyle,
+    appBarElevation,
+    bottomAppBarElevation,
+    tooltipsMatchBackground,
+    transparentStatusBar,
+    visualDensity,
+    textTheme,
+    primaryTextTheme,
+    fontFamily,
+    fontFamilyFallback,
+    package,
+    materialTapTargetSize,
+    pageTransitionsTheme,
+    platform,
+    typography,
+    applyElevationOverlayColor,
+    cupertinoOverrideTheme,
+    subThemesData,
+    useMaterial3,
+    extensions,
+  ]);
 
   /// Flutter debug properties override, includes toString.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(EnumProperty<Brightness>('brightness', brightness));
-    properties
-        .add(DiagnosticsProperty<ColorScheme>('colorScheme', colorScheme));
+    properties.add(DiagnosticsProperty<ColorScheme>('colorScheme', colorScheme));
     //
     properties.add(ColorProperty('primary', primary));
     properties.add(ColorProperty('onPrimary', onPrimary));
@@ -9157,37 +8633,24 @@ class FlexColorScheme with Diagnosticable {
     properties.add(ColorProperty('surfaceTint', surfaceTint));
     //
     properties.add(EnumProperty<FlexTabBarStyle>('tabBarStyle', tabBarStyle));
-    properties
-        .add(DiagnosticsProperty<double>('appBarElevation', appBarElevation));
-    properties.add(DiagnosticsProperty<double>(
-        'bottomAppBarElevation', bottomAppBarElevation));
-    properties.add(DiagnosticsProperty<bool>(
-        'tooltipsMatchBackground', tooltipsMatchBackground));
-    properties.add(DiagnosticsProperty<bool>(
-        'transparentStatusBar', transparentStatusBar));
-    properties.add(
-        DiagnosticsProperty<VisualDensity>('visualDensity', visualDensity));
+    properties.add(DiagnosticsProperty<double>('appBarElevation', appBarElevation));
+    properties.add(DiagnosticsProperty<double>('bottomAppBarElevation', bottomAppBarElevation));
+    properties.add(DiagnosticsProperty<bool>('tooltipsMatchBackground', tooltipsMatchBackground));
+    properties.add(DiagnosticsProperty<bool>('transparentStatusBar', transparentStatusBar));
+    properties.add(DiagnosticsProperty<VisualDensity>('visualDensity', visualDensity));
     properties.add(DiagnosticsProperty<TextTheme>('textTheme', textTheme));
-    properties.add(
-        DiagnosticsProperty<TextTheme>('primaryTextTheme', primaryTextTheme));
+    properties.add(DiagnosticsProperty<TextTheme>('primaryTextTheme', primaryTextTheme));
     properties.add(DiagnosticsProperty<String>('fontFamily', fontFamily));
-    properties.add(DiagnosticsProperty<List<String>>(
-        'fontFamilyFallback', fontFamilyFallback));
+    properties.add(DiagnosticsProperty<List<String>>('fontFamilyFallback', fontFamilyFallback));
     properties.add(DiagnosticsProperty<String>('package', package));
-    properties.add(EnumProperty<MaterialTapTargetSize>(
-        'materialTapTargetSize', materialTapTargetSize));
-    properties.add(DiagnosticsProperty<PageTransitionsTheme>(
-        'pageTransitionsTheme', pageTransitionsTheme));
+    properties.add(EnumProperty<MaterialTapTargetSize>('materialTapTargetSize', materialTapTargetSize));
+    properties.add(DiagnosticsProperty<PageTransitionsTheme>('pageTransitionsTheme', pageTransitionsTheme));
     properties.add(EnumProperty<TargetPlatform>('platform', platform));
     properties.add(DiagnosticsProperty<Typography>('typography', typography));
-    properties.add(DiagnosticsProperty<bool>(
-        'applyElevationOverlayColor', applyElevationOverlayColor));
-    properties.add(DiagnosticsProperty<NoDefaultCupertinoThemeData>(
-        'cupertinoOverrideTheme', cupertinoOverrideTheme));
-    properties.add(
-        DiagnosticsProperty<FlexSubThemesData>('subThemesData', subThemesData));
+    properties.add(DiagnosticsProperty<bool>('applyElevationOverlayColor', applyElevationOverlayColor));
+    properties.add(DiagnosticsProperty<NoDefaultCupertinoThemeData>('cupertinoOverrideTheme', cupertinoOverrideTheme));
+    properties.add(DiagnosticsProperty<FlexSubThemesData>('subThemesData', subThemesData));
     properties.add(DiagnosticsProperty<bool>('useMaterial3', useMaterial3));
-    properties.add(
-        IterableProperty<ThemeExtension<dynamic>>('extensions', extensions));
+    properties.add(IterableProperty<ThemeExtension<dynamic>>('extensions', extensions));
   }
 }

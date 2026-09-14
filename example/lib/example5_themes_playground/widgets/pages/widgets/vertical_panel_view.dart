@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/header_card.dart';
-import '../../panels/panel.dart';
-import '../model/theme_topic.dart';
-import 'topic_selector.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/model/theme_topic.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/widgets/topic_selector.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/panel.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/header_card.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A [Panel] wrapper that puts the content of our panels in a [Row]
 /// with a [TopicSelectorVertical] on the left or right of a [Panel]
@@ -32,8 +31,7 @@ class VerticalPanelView extends StatefulWidget {
   State<VerticalPanelView> createState() => _VerticalPanelViewState();
 }
 
-class _VerticalPanelViewState extends State<VerticalPanelView>
-    with TickerProviderStateMixin {
+class _VerticalPanelViewState extends State<VerticalPanelView> with TickerProviderStateMixin {
   late final ScrollController scrollController;
 
   late final AnimationController scaleController = AnimationController(
@@ -83,18 +81,15 @@ class _VerticalPanelViewState extends State<VerticalPanelView>
     final bool isLight = theme.brightness == Brightness.light;
 
     final Color iconColor = isLight
-        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onSurface)
-        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onSurface);
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
 
     final Size mediaSize = MediaQuery.sizeOf(context);
     final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
     final bool isCompact = widget.controller.compactMode;
     final double margins = App.responsiveInsets(mediaSize.width, isCompact);
     final double bottomPadding = mediaPadding.bottom;
-    final double topPadding =
-        widget.addTopPadding ? mediaPadding.top + margins : 0;
+    final double topPadding = widget.addTopPadding ? mediaPadding.top + margins : 0;
 
     return Expanded(
       child: Row(
@@ -142,8 +137,7 @@ class _VerticalPanelViewState extends State<VerticalPanelView>
                   opacity: fadeAnimation,
                   child: HeaderCard(
                     title: Text(themeTopics[widget.panel].heading),
-                    leading:
-                        Icon(themeTopics[widget.panel].icon, color: iconColor),
+                    leading: Icon(themeTopics[widget.panel].icon, color: iconColor),
                     info: themeTopics[widget.panel].info,
                     child: Panel(widget.panel, widget.controller),
                   ),

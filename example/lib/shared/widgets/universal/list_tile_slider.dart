@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A [ListTile] with a [Slider] either in [title] or in [subtitle]
 /// position that can never return null.
@@ -106,14 +106,14 @@ class ListTileSlider extends StatelessWidget {
       subtitle: (title != null && subtitle == null)
           ? slider
           : (subtitle != null)
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    subtitle!,
-                    slider,
-                  ],
-                )
-              : null,
+          ? Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                subtitle!,
+                slider,
+              ],
+            )
+          : null,
       trailing: Padding(
         // For now using hard coded padding for sliderLabel.
         padding: const EdgeInsets.only(right: 8),

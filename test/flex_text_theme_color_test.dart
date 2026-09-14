@@ -1,6 +1,6 @@
 import 'package:flex_color_scheme/src/flex_text_theme_color.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 //****************************************************************************
 // These simple FlexColor unit test just monitors that the used color values
@@ -32,11 +32,9 @@ void main() {
       expect(font.labelMedium?.color, isNotNull);
       expect(font.labelSmall?.color, isNotNull);
     });
-    test(
-        'FTTC01.02: GIVEN a font with colors, and apply null FontColor, '
+    test('FTTC01.02: GIVEN a font with colors, and apply null FontColor, '
         'test all style has NULL color', () {
-      final TextTheme font =
-          TextThemeColor.nullFontColor(ThemeData.light().textTheme);
+      final TextTheme font = TextThemeColor.nullFontColor(ThemeData.light().textTheme);
       expect(font.displayLarge?.color, isNull);
       expect(font.displayMedium?.color, isNull);
       expect(font.displaySmall?.color, isNull);

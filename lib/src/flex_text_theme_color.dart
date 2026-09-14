@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A utility class to set the color of the font color to null in all
 /// [TextStyle]s in a [TextTheme].

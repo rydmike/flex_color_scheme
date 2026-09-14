@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   // These tests are really for the Flutter SDK gap in the
@@ -11,14 +11,10 @@ void main() {
   group('ThemeData Equality Check basics', () {
     final ThemeData themeA = ThemeData.from(
       colorScheme: const ColorScheme.dark(),
-    ).copyWith(
-        focusColor: Colors.black.withValues(alpha: 0.3),
-        hoverColor: Colors.black.withValues(alpha: 0.5));
+    ).copyWith(focusColor: Colors.black.withValues(alpha: 0.3), hoverColor: Colors.black.withValues(alpha: 0.5));
     final ThemeData themeB = ThemeData.from(
       colorScheme: const ColorScheme.dark(),
-    ).copyWith(
-        focusColor: Colors.black.withValues(alpha: 0.3),
-        hoverColor: Colors.black.withValues(alpha: 0.5));
+    ).copyWith(focusColor: Colors.black.withValues(alpha: 0.3), hoverColor: Colors.black.withValues(alpha: 0.5));
     test('Expect equal ThemeData to have toString equality', () {
       expect(
         themeA.toString(),
@@ -53,8 +49,7 @@ void main() {
     // Related issue: https://github.com/flutter/flutter/issues/89127
     // And new feature PR: https://github.com/flutter/flutter/pull/154695
     // Time to start exploring this fromMap feature in all FCS component themes!
-    test('Same ThemeData with TextButtonThemeData styleFrom theme is equal',
-        () {
+    test('Same ThemeData with TextButtonThemeData styleFrom theme is equal', () {
       final ThemeData td1 = ThemeData(
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(elevation: 1),

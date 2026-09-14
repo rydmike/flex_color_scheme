@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_instant_splash.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   //****************************************************************************
@@ -14,17 +14,12 @@ void main() {
       expect(FlexSplashType.inkSplash.splashFactory(), InkSplash.splashFactory);
       expect(FlexSplashType.inkRipple.splashFactory(), InkRipple.splashFactory);
       expect(FlexSplashType.noSplash.splashFactory(), NoSplash.splashFactory);
-      expect(FlexSplashType.instantSplash.splashFactory(),
-          FlexInstantSplash.splashFactory);
+      expect(FlexSplashType.instantSplash.splashFactory(), FlexInstantSplash.splashFactory);
       //
-      expect(
-          FlexSplashType.inkSparkle.splashFactory(), InkSparkle.splashFactory);
-      expect(FlexSplashType.inkSparkle.splashFactory(false, true),
-          InkSplash.splashFactory);
-      expect(FlexSplashType.inkSparkle.splashFactory(true, true),
-          InkRipple.splashFactory);
-      expect(FlexSplashType.inkSparkle.splashFactory(false, false),
-          InkSparkle.splashFactory);
+      expect(FlexSplashType.inkSparkle.splashFactory(), InkSparkle.splashFactory);
+      expect(FlexSplashType.inkSparkle.splashFactory(false, true), InkSplash.splashFactory);
+      expect(FlexSplashType.inkSparkle.splashFactory(true, true), InkRipple.splashFactory);
+      expect(FlexSplashType.inkSparkle.splashFactory(false, false), InkSparkle.splashFactory);
     });
   });
 }

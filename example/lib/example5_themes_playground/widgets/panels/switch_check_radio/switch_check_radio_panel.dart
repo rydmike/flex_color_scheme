@@ -1,14 +1,13 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/model/adaptive_response.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/color_scheme_popup_menu.dart';
-import '../../shared/enum_popup_menu.dart';
-import '../../shared/test_adaptive_response.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/enum_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/test_adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/model/adaptive_response.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Panel used to configure sub themes on Switch, Checkbox and Radio widgets.
 class SwitchCheckRadioPanel extends StatelessWidget {
@@ -25,16 +24,14 @@ class SwitchCheckRadioPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     final String explainThumb = useMaterial3 ? ' pressed/hovered/focused' : '';
 
@@ -44,15 +41,14 @@ class SwitchCheckRadioPanel extends StatelessWidget {
         const SizedBox(height: 8),
         SwitchListTileReveal(
           title: const Text('Unselected toggle is colored'),
-          subtitleReveal:
-              const Text('Applies to OFF state of Switch and unselected '
-                  'state on checkbox and Radio.\n'
-                  '\n'
-                  'ON: Use main color on unselected toggle\n'
-                  'OFF: Use default grey/surface style on unselected toggle\n'),
-          value: controller.unselectedToggleIsColored &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
+          subtitleReveal: const Text(
+            'Applies to OFF state of Switch and unselected '
+            'state on checkbox and Radio.\n'
+            '\n'
+            'ON: Use main color on unselected toggle\n'
+            'OFF: Use default grey/surface style on unselected toggle\n',
+          ),
+          value: controller.unselectedToggleIsColored && controller.useSubThemes && controller.useFlexColorScheme,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? controller.setUnselectedToggleIsColored
               : null,
@@ -82,17 +78,17 @@ class SwitchCheckRadioPanel extends StatelessWidget {
         ),
         SwitchListTileReveal(
           title: const Text('Thumb size is fixed'),
-          subtitleReveal:
-              const Text('Turn ON to keep the Switch thumb the same '
-                  'size when Switch is ON or OFF. Only available in Material-3 '
-                  'mode.\n'),
-          value: controller.switchThumbFixedSize &&
+          subtitleReveal: const Text(
+            'Turn ON to keep the Switch thumb the same '
+            'size when Switch is ON or OFF. Only available in Material-3 '
+            'mode.\n',
+          ),
+          value:
+              controller.switchThumbFixedSize &&
               controller.useSubThemes &&
               controller.useFlexColorScheme &&
               useMaterial3,
-          onChanged: controller.useSubThemes &&
-                  controller.useFlexColorScheme &&
-                  useMaterial3
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme && useMaterial3
               ? controller.setSwitchThumbFixedSize
               : null,
         ),
@@ -111,7 +107,7 @@ class SwitchCheckRadioPanel extends StatelessWidget {
             'In Material-2 mode this setting has no effect and is thus not '
             'available.\n'
             '\n'
-            // ignore: lines_longer_than_80_chars, string interpolation
+            // ignore: string interpolation
             '${controller.switchAdaptiveCupertinoLike?.describe ?? AdaptiveResponse.off.describe}',
           ),
           value: controller.switchAdaptiveCupertinoLike,
@@ -145,7 +141,8 @@ class SwitchCheckRadioPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Prior to version 3.13 Flutter Checkbox theming '
+                  text:
+                      'Prior to version 3.13 Flutter Checkbox theming '
                       'worked slightly differently concerning how to color '
                       'the outline and filled state. If you had themed them '
                       'before, the Flutter release 3.13 breaks the result. '
@@ -162,7 +159,8 @@ class SwitchCheckRadioPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' for more information. FlexColorScheme 7.3 and later '
+                  text:
+                      ' for more information. FlexColorScheme 7.3 and later '
                       'versions include the needed changes to address this '
                       'minor breaking theming change in Flutter 3.13.\n',
                 ),

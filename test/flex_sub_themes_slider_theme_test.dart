@@ -1,15 +1,14 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.sliderTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Slider tests
     // -------------------------------------------------------------------------
-    test(
-        'Slider FST27.1 light: GIVEN a light default '
+    test('Slider FST27.1 light: GIVEN a light default '
         'FlexSubTheme.sliderTheme() '
         'EXPECT equal to SliderThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -36,8 +35,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Slider FST27.2 light: GIVEN a light custom '
+    test('Slider FST27.2 light: GIVEN a light custom '
         'FlexSubTheme.sliderTheme() '
         'EXPECT equal to SliderThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -74,8 +72,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Slider FST27.3: GIVEN a FlexSubTheme.sliderTheme '
+    test('Slider FST27.3: GIVEN a FlexSubTheme.sliderTheme '
         'EXPECT equal to SliderThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

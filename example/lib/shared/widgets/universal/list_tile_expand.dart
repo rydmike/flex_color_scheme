@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A custom [ListTile] that has a built-in animated custom [trailing] action
 /// that animate expands to show the [child] when clicked.
@@ -175,9 +175,7 @@ class _ListTileExpandState extends State<ListTileExpand> {
               child: child,
             );
           },
-          child: _isOpen
-              ? widget.child ?? const SizedBox.shrink()
-              : const SizedBox.shrink(),
+          child: _isOpen ? widget.child ?? const SizedBox.shrink() : const SizedBox.shrink(),
         ),
       ],
     );

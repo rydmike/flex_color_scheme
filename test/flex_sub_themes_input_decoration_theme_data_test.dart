@@ -1,18 +1,16 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.InputDecorationThemeData ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes InputDecorator tests
     // -------------------------------------------------------------------------
-    test(
-        'InputDecoration FST16.1-M2 light: GIVEN a M2 '
+    test('InputDecoration FST16.1-M2 light: GIVEN a M2 '
         'FlexSubThemes.inputDecorationTheme(tintedDisabled: true) '
-        'EXPECT equal to InputDecorationThemeData() version with same values',
-        () {
+        'EXPECT equal to InputDecorationThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
@@ -64,11 +62,9 @@ void main() {
       // debugPrint('Test primary        : ${colorScheme.primary}');
       // debugPrint('Test surface        : ${colorScheme.surface}');
 
-      final Color usedHover =
-          ThemeData.estimateBrightnessForColor(usedFillColor) ==
-                  Brightness.light
-              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+      final Color usedHover = ThemeData.estimateBrightnessForColor(usedFillColor) == Brightness.light
+          ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+          : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
       expect(
         FlexSubThemes.inputDecorationTheme(
@@ -111,8 +107,7 @@ void main() {
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
+                    color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -215,8 +210,7 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
+                    color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
@@ -251,11 +245,9 @@ void main() {
         ),
       );
     });
-    test(
-        'InputDecoration FST16.1-M3 light: GIVEN a M3 '
+    test('InputDecoration FST16.1-M3 light: GIVEN a M3 '
         'FlexSubThemes.inputDecorationTheme(tintedDisabled: true, filled) '
-        'EXPECT equal to InputDecorationThemeData() version with same values',
-        () {
+        'EXPECT equal to InputDecorationThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
@@ -286,11 +278,9 @@ void main() {
         colorScheme.surfaceContainerHighest.withAlpha(effectiveAlpha),
         colorScheme.surface,
       );
-      final Color usedHover =
-          ThemeData.estimateBrightnessForColor(usedFillColor) ==
-                  Brightness.light
-              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+      final Color usedHover = ThemeData.estimateBrightnessForColor(usedFillColor) == Brightness.light
+          ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+          : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
       final InputDecorationThemeData m = FlexSubThemes.inputDecorationTheme(
         colorScheme: colorScheme,
@@ -335,8 +325,7 @@ void main() {
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
+                    color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -439,8 +428,7 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
+                    color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
@@ -475,8 +463,7 @@ void main() {
         ),
       );
     });
-    test(
-        'InputDecoration FST16.2 light: GIVEN a M2 '
+    test('InputDecoration FST16.2 light: GIVEN a M2 '
         'FlexSubTheme.inputDecorationTheme( '
         'unfocusedBorderIsColored: false, tintedDisabled: true) '
         'EXPECT equal to InputDecorationThemeData() version with same '
@@ -524,11 +511,9 @@ void main() {
           colorScheme.surface,
         );
       });
-      final Color usedHover =
-          ThemeData.estimateBrightnessForColor(usedFillColor) ==
-                  Brightness.light
-              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+      final Color usedHover = ThemeData.estimateBrightnessForColor(usedFillColor) == Brightness.light
+          ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+          : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
       expect(
         FlexSubThemes.inputDecorationTheme(
@@ -572,8 +557,7 @@ void main() {
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
+                    color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -676,8 +660,7 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
+                    color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
@@ -712,11 +695,9 @@ void main() {
         ),
       );
     });
-    test(
-        'InputDecoration FST16.3 dark: GIVEN a M2 '
+    test('InputDecoration FST16.3 dark: GIVEN a M2 '
         'FlexSubTheme.inputDecorationTheme(tintedDisabled: true) '
-        'EXPECT equal to InputDecorationThemeData() version with same values',
-        () {
+        'EXPECT equal to InputDecorationThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.dark,
@@ -760,11 +741,9 @@ void main() {
           colorScheme.surface,
         );
       });
-      final Color usedHover =
-          ThemeData.estimateBrightnessForColor(usedFillColor) ==
-                  Brightness.light
-              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+      final Color usedHover = ThemeData.estimateBrightnessForColor(usedFillColor) == Brightness.light
+          ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+          : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
       expect(
         FlexSubThemes.inputDecorationTheme(
@@ -808,8 +787,7 @@ void main() {
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
+                    color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -912,8 +890,7 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
+                    color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
@@ -948,12 +925,10 @@ void main() {
         ),
       );
     });
-    test(
-        'InputDecoration FST16.4 dark: GIVEN a default M2 '
+    test('InputDecoration FST16.4 dark: GIVEN a default M2 '
         'FlexSubTheme.inputDecorationTheme( '
         'unfocusedBorderIsColored: false, tintedDisabled: true) '
-        'EXPECT equal to InputDecorationThemeData() version with same values',
-        () {
+        'EXPECT equal to InputDecorationThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.dark,
@@ -997,11 +972,9 @@ void main() {
           colorScheme.surface,
         );
       });
-      final Color usedHover =
-          ThemeData.estimateBrightnessForColor(usedFillColor) ==
-                  Brightness.light
-              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+      final Color usedHover = ThemeData.estimateBrightnessForColor(usedFillColor) == Brightness.light
+          ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+          : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
       expect(
         FlexSubThemes.inputDecorationTheme(
@@ -1045,8 +1018,7 @@ void main() {
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
+                    color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -1149,8 +1121,7 @@ void main() {
                 return UnderlineInputBorder(
                   borderRadius: effectiveUnderlineBorder,
                   borderSide: BorderSide(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
+                    color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
@@ -1185,8 +1156,7 @@ void main() {
         ),
       );
     });
-    test(
-        'InputDecoration FST16.5 states: Does Decorator '
+    test('InputDecoration FST16.5 states: Does Decorator '
         'have right material states in M2', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -1200,62 +1170,63 @@ void main() {
       // Floating label focused error style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          tintedDisabled: true,
-          useMaterial3: false,
-        ).floatingLabelStyle as WidgetStateTextStyle?)!
+                  colorScheme: colorScheme,
+                  tintedDisabled: true,
+                  useMaterial3: false,
+                ).floatingLabelStyle
+                as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
         equals(TextStyle(color: colorScheme.error)),
       );
       // Floating label error hovered style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        ).floatingLabelStyle as WidgetStateTextStyle?)!
+                  colorScheme: colorScheme,
+                  useMaterial3: false,
+                ).floatingLabelStyle
+                as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
         equals(TextStyle(color: colorScheme.error)),
       );
       // Floating label unfocused error style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        ).floatingLabelStyle as WidgetStateTextStyle?)!
+                  colorScheme: colorScheme,
+                  useMaterial3: false,
+                ).floatingLabelStyle
+                as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error}),
         equals(
-          TextStyle(
-              color:
-                  colorScheme.error.withValues(alpha: kEnabledBorderOpacity)),
+          TextStyle(color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity)),
         ),
       );
       // Floating label disabled style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          tintedDisabled: true,
-          useMaterial3: false,
-        ).floatingLabelStyle as WidgetStateTextStyle?)!
+                  colorScheme: colorScheme,
+                  tintedDisabled: true,
+                  useMaterial3: false,
+                ).floatingLabelStyle
+                as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(TextStyle(color: tintDisabledColor)),
       );
       // Floating label default style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        ).floatingLabelStyle as WidgetStateTextStyle?)!
+                  colorScheme: colorScheme,
+                  useMaterial3: false,
+                ).floatingLabelStyle
+                as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{}),
         equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
       );
     });
-    test(
-        'InputDecoration FST16.6 light: GIVEN a default M2 '
+    test('InputDecoration FST16.6 light: GIVEN a default M2 '
         'FlexSubTheme.inputDecorationTheme(borderType: '
         'FlexInputBorderType.outline, usedSchemeColor: '
         'FlexUsedColor.secondary, tintedDisabled: true) '
-        'EXPECT equal to InputDecorationThemeData() version with same values',
-        () {
+        'EXPECT equal to InputDecorationThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
@@ -1294,11 +1265,9 @@ void main() {
           colorScheme.surface,
         );
       });
-      final Color usedHover =
-          ThemeData.estimateBrightnessForColor(usedFillColor) ==
-                  Brightness.light
-              ? usedFillColor.darken(kInputDecoratorLightBgDarken)
-              : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
+      final Color usedHover = ThemeData.estimateBrightnessForColor(usedFillColor) == Brightness.light
+          ? usedFillColor.darken(kInputDecoratorLightBgDarken)
+          : usedFillColor.lighten(kInputDecoratorDarkBgLighten);
 
       expect(
         FlexSubThemes.inputDecorationTheme(
@@ -1343,8 +1312,7 @@ void main() {
                 }
                 if (states.contains(WidgetState.hovered)) {
                   return TextStyle(
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
+                    color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
                   );
                 }
                 return TextStyle(color: colorScheme.error);
@@ -1449,8 +1417,7 @@ void main() {
                   borderRadius: effectiveOutlineBorder,
                   borderSide: BorderSide(
                     // TODO(rydmike): INFO: M3 uses error
-                    color: colorScheme.error
-                        .withValues(alpha: kEnabledBorderOpacity),
+                    color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity),
                     width: unfocusedWidth,
                   ),
                 );
@@ -1485,8 +1452,7 @@ void main() {
         ),
       );
     });
-    test(
-        'InputDecoration FST16.7 states: Does Decorator '
+    test('InputDecoration FST16.7 states: Does Decorator '
         'have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -1500,56 +1466,59 @@ void main() {
       // Floating label focused error style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          borderType: FlexInputBorderType.outline,
-          tintedDisabled: true,
-          useMaterial3: false,
-        ).floatingLabelStyle as WidgetStateTextStyle?)!
+                  colorScheme: colorScheme,
+                  borderType: FlexInputBorderType.outline,
+                  tintedDisabled: true,
+                  useMaterial3: false,
+                ).floatingLabelStyle
+                as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error, WidgetState.focused}),
         equals(TextStyle(color: colorScheme.error)),
       );
       // Floating label error hovered style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          borderType: FlexInputBorderType.outline,
-          useMaterial3: false,
-        ).floatingLabelStyle as WidgetStateTextStyle?)!
+                  colorScheme: colorScheme,
+                  borderType: FlexInputBorderType.outline,
+                  useMaterial3: false,
+                ).floatingLabelStyle
+                as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error, WidgetState.hovered}),
         equals(TextStyle(color: colorScheme.error)),
       );
       // Floating label unfocused error style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          borderType: FlexInputBorderType.outline,
-          useMaterial3: false,
-        ).floatingLabelStyle as WidgetStateTextStyle?)!
+                  colorScheme: colorScheme,
+                  borderType: FlexInputBorderType.outline,
+                  useMaterial3: false,
+                ).floatingLabelStyle
+                as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.error}),
         equals(
-          TextStyle(
-              color:
-                  colorScheme.error.withValues(alpha: kEnabledBorderOpacity)),
+          TextStyle(color: colorScheme.error.withValues(alpha: kEnabledBorderOpacity)),
         ),
       );
       // Floating label disabled style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          borderType: FlexInputBorderType.outline,
-          useMaterial3: false,
-          tintedDisabled: true,
-        ).floatingLabelStyle as WidgetStateTextStyle?)!
+                  colorScheme: colorScheme,
+                  borderType: FlexInputBorderType.outline,
+                  useMaterial3: false,
+                  tintedDisabled: true,
+                ).floatingLabelStyle
+                as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(TextStyle(color: tintDisabledColor)),
       );
       // Floating label default style
       expect(
         (FlexSubThemes.inputDecorationTheme(
-          colorScheme: colorScheme,
-          borderType: FlexInputBorderType.outline,
-          useMaterial3: false,
-        ).floatingLabelStyle as WidgetStateTextStyle?)!
+                  colorScheme: colorScheme,
+                  borderType: FlexInputBorderType.outline,
+                  useMaterial3: false,
+                ).floatingLabelStyle
+                as WidgetStateTextStyle?)!
             .resolve(<WidgetState>{}),
         equals(TextStyle(color: Colors.black.withAlpha(kTintHover))),
       );
@@ -1691,8 +1660,7 @@ void main() {
         colorScheme.onSurface,
         colorScheme.secondaryContainer,
       );
-      final OutlineInputBorder ulAct1 =
-          (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+      final OutlineInputBorder ulAct1 = (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
         WidgetState.disabled,
       }) as OutlineInputBorder;
       final OutlineInputBorder ulExp1 = OutlineInputBorder(
@@ -2045,8 +2013,7 @@ void main() {
         colorScheme.onSurface,
         colorScheme.primary,
       );
-      final UnderlineInputBorder ulAct =
-          (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
+      final UnderlineInputBorder ulAct = (m.border as WidgetStateInputBorder?)!.resolve(<WidgetState>{
         WidgetState.disabled,
       }) as UnderlineInputBorder;
       final UnderlineInputBorder ulExp = UnderlineInputBorder(

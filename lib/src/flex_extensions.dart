@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Extensions on [Color] to brighten, lighten, darken and blend colors and
 /// can get a shade for gradients.
@@ -20,7 +20,7 @@ import 'package:flutter/material.dart';
 /// color schemes from a light scheme.
 ///
 /// The [getShadeColor] extension is less frequently used and when used,
-/// typically used to color makes colors shades for gradient AppBars, with
+/// typically used to make color shades for gradient AppBars, with
 /// default setting to not change black and white.
 ///
 /// The color extension also include getting a color's RGB hex code as a string
@@ -31,7 +31,7 @@ import 'package:flutter/material.dart';
 extension FlexColorExtensions on Color {
   /// Brightens the color with the given integer percentage amount.
   /// Defaults to 10%.
-  Color brighten([final int amount = 10]) {
+  Color brighten([int amount = 10]) {
     if (amount <= 0) return this;
     if (amount > 100) return Colors.white;
     final Color color = Color.fromARGB(
@@ -45,7 +45,7 @@ extension FlexColorExtensions on Color {
 
   /// Lightens the color with the given integer percentage amount.
   /// Defaults to 10%.
-  Color lighten([final int amount = 10]) {
+  Color lighten([int amount = 10]) {
     if (amount <= 0) return this;
     if (amount > 100) return Colors.white;
     // HSLColor returns saturation 1 for black, we want 0 instead to be able
@@ -53,20 +53,16 @@ extension FlexColorExtensions on Color {
     final HSLColor hsl = this == const Color(0xFF000000)
         ? HSLColor.fromColor(this).withSaturation(0)
         : HSLColor.fromColor(this);
-    return hsl
-        .withLightness(math.min(1, math.max(0, hsl.lightness + amount / 100)))
-        .toColor();
+    return hsl.withLightness(math.min(1, math.max(0, hsl.lightness + amount / 100))).toColor();
   }
 
   /// Darkens the color with the given integer percentage amount.
   /// Defaults to 10%.
-  Color darken([final int amount = 10]) {
+  Color darken([int amount = 10]) {
     if (amount <= 0) return this;
     if (amount > 100) return Colors.black;
     final HSLColor hsl = HSLColor.fromColor(this);
-    return hsl
-        .withLightness(math.min(1, math.max(0, hsl.lightness - amount / 100)))
-        .toColor();
+    return hsl.withLightness(math.min(1, math.max(0, hsl.lightness - amount / 100))).toColor();
   }
 
   /// Get the right black or white contrasting onColor for a color.
@@ -77,18 +73,13 @@ extension FlexColorExtensions on Color {
   /// Use the function to get black/white color typically used for text and
   /// icons when they are placed on a surface/background using `color` as its
   /// background color.
-  Color get onColor =>
-      ThemeData.estimateBrightnessForColor(this) == Brightness.light
-          ? Colors.black
-          : Colors.white;
+  Color get onColor => ThemeData.estimateBrightnessForColor(this) == Brightness.light ? Colors.black : Colors.white;
 
   /// Returns true if the color's brightness is [Brightness.light], else false.
-  bool get isLight =>
-      ThemeData.estimateBrightnessForColor(this) == Brightness.light;
+  bool get isLight => ThemeData.estimateBrightnessForColor(this) == Brightness.light;
 
   /// Returns true if the color's brightness is [Brightness.dark], else false.
-  bool get isDark =>
-      ThemeData.estimateBrightnessForColor(this) == Brightness.dark;
+  bool get isDark => ThemeData.estimateBrightnessForColor(this) == Brightness.dark;
 
   /// Blend in the given input Color with a percentage of alpha.
   ///
@@ -101,7 +92,7 @@ extension FlexColorExtensions on Color {
   /// by blending in white color with light scheme color.
   ///
   /// Defaults to 10% alpha blend of the passed in Color value.
-  Color blend(final Color input, [final int amount = 10]) {
+  Color blend(Color input, [int amount = 10]) {
     // Skip blending for impossible value and return the instance color value.
     if (amount <= 0) return this;
     // Blend amounts >= 100 results in the input Color.
@@ -121,7 +112,7 @@ extension FlexColorExtensions on Color {
   ///
   /// Defaults to alpha 0x0A alpha blend of the passed in Color value,
   /// which is 10% alpha blend.
-  Color blendAlpha(final Color input, [final int alpha = 0x0A]) {
+  Color blendAlpha(Color input, [int alpha = 0x0A]) {
     // Skip blending for impossible value and return the instance color value.
     if (alpha <= 0) return this;
     // Blend amounts >= 255 results in the input Color.
@@ -146,10 +137,10 @@ extension FlexColorExtensions on Color {
   /// darker, the extension just returns white or black for such attempts, with
   /// a quick exist from the call.
   Color getShadeColor({
-    final int shadeValue = 15,
-    final bool lighten = true,
-    final bool keepBlack = true,
-    final bool keepWhite = true,
+    int shadeValue = 15,
+    bool lighten = true,
+    bool keepBlack = true,
+    bool keepWhite = true,
   }) {
     if (shadeValue <= 0) return this;
     int usedShadeValue = shadeValue;
@@ -185,7 +176,7 @@ extension FlexColorExtensions on Color {
   /// Return uppercase RGB hex code string, with # and no alpha value.
   /// This format is often used in APIs and in CSS color values..
   String get hex {
-    // ignore: lines_longer_than_80_chars, this case clearer on one line.
+    // ignore: this case clearer on one line.
     return '#${value32bit.toRadixString(16).toUpperCase().padLeft(8, '0').substring(2)}';
   }
 }
@@ -215,8 +206,7 @@ extension FlexStringExtensions on String {
     hexColor = hexColor.padLeft(6, '0');
     hexColor = hexColor.padLeft(8, 'F');
     final int length = hexColor.length;
-    return Color(int.tryParse('0x${hexColor.substring(length - 8, length)}') ??
-        0xFF000000);
+    return Color(int.tryParse('0x${hexColor.substring(length - 8, length)}') ?? 0xFF000000);
   }
 
   /// Capitalize the first letter in a string.

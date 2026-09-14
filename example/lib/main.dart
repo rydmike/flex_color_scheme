@@ -1,18 +1,17 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/responsive_scaffold.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_color_scheme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_sub_pages.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_sub_theme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_theme_data_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_center.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/theme_mode_switch.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'shared/const/app.dart';
-import 'shared/widgets/examples/responsive_scaffold.dart';
-import 'shared/widgets/examples/show_color_scheme_colors.dart';
-import 'shared/widgets/examples/show_sub_pages.dart';
-import 'shared/widgets/examples/show_sub_theme_colors.dart';
-import 'shared/widgets/examples/show_theme_data_colors.dart';
-import 'shared/widgets/universal/responsive_center.dart';
-import 'shared/widgets/universal/showcase_material.dart';
-import 'shared/widgets/universal/theme_mode_switch.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// DEFAULT EXAMPLE - Hot Reload Playground
 ///
@@ -62,8 +61,8 @@ void main() => runApp(const DemoApp());
 // but no container or other colors.
 final FlexSchemeColor _schemeLight = FlexSchemeColor.from(
   primary: const Color(0xFF00296B),
-  // If you do not want to define secondary, primaryVariant and
-  // secondaryVariant, error and appBar colors you do not have to,
+  // If you do not want to define secondary, primaryContainer,
+  // secondaryContainer, tertiary, error and appBar colors you do not have to,
   // they will get defined automatically when using the FlexSchemeColor.from()
   // factory. When using FlexSchemeColor.from() you only have to define the
   // primary color, anything not defined will get derived automatically from
@@ -76,7 +75,7 @@ final FlexSchemeColor _schemeLight = FlexSchemeColor.from(
   //
   // Here we define a secondary color, but if you don't it will get a
   // default shade based on the primary color. When you do define a secondary
-  // color, but not a secondaryVariant color, the secondary container will get
+  // color, but not a secondaryContainer color, the secondary container will get
   // derived from the secondary color, instead of from the primary color.
   secondary: const Color(0xFFFF7B00),
   // New in version 5.
@@ -421,7 +420,6 @@ const FlexSubThemesData _subThemesData = FlexSubThemesData(
   // toggle buttons.
   thickBorderWidth: 1.5, // Default is 2.0.
   thinBorderWidth: 1, // Default is 1.0.
-
   // Select the ColorScheme color used for selected TabBar indicator.
   // Defaults to same color as selected tab if not defined.
   // tabBarIndicatorSchemeColor: SchemeColor.secondary,
@@ -513,10 +511,9 @@ class BrandTheme extends ThemeExtension<BrandTheme> {
   @override
   BrandTheme copyWith({
     Color? brandColor,
-  }) =>
-      BrandTheme(
-        brandColor: brandColor ?? this.brandColor,
-      );
+  }) => BrandTheme(
+    brandColor: brandColor ?? this.brandColor,
+  );
 
   // You must override the lerp method.
   @override
@@ -580,7 +577,7 @@ class _DemoAppState extends State<DemoApp> {
         // sub-theming with an existing `ColorScheme`. To use a`ColorScheme`
         // object as color sources for your `FlexColorscheme` just pass it to
         // the `colorScheme` property. The `surfaceMode` and `blendLevel` will
-        // still adjust surface and background colors on surfaces in passed
+        // still adjust surface colors on surfaces in passed
         // `ColorScheme` if they are used. This can be demonstrated here with
         // the default Flutter M2 based light ColorScheme set, if uncommented
         // below.
@@ -602,7 +599,6 @@ class _DemoAppState extends State<DemoApp> {
         // secondary: FlexColor.indigo.light.secondary,
         // secondaryContainer: FlexColor.indigo.light.secondaryContainer,
         // surface: FlexColor.lightSurface,
-        // background: FlexColor.lightBackground,
         // error: FlexColor.materialLightErrorHc,
         // scaffoldBackground: FlexColor.lightScaffoldBackground,
         // dialogBackground: FlexColor.lightSurface,
@@ -613,7 +609,7 @@ class _DemoAppState extends State<DemoApp> {
         // FlexAppBarStyle.primary, results in this too, and is the default in
         // light mode. You can also choose other themed styles. Like
         // FlexAppBarStyle.background, that gets active color blend from used
-        // surfaceMode or surfaceStyle, depending on which one is being used.
+        // surfaceMode.
         // You may often want a different style on the app bar in dark and
         // light theme mode, therefore it was not set via a shared value
         // above in this template.
@@ -672,16 +668,16 @@ class _DemoAppState extends State<DemoApp> {
             // If we use a predefined scheme, then pass, null so we get
             // selected _scheme via the scheme property.
             : _useScheme
-                ? null
-                // If we compute a scheme from our custom data, then use the
-                // toDark() method on our custom light FlexSchemeColor data.
-                // New in version 5:
-                // For better dark mapping of the light color
-                // based values, set parameter swapColor to true in toDark.
-                : _computeDarkTheme
-                    ? _schemeLight.toDark(_toDarkLevel, true)
-                    // And finally, use the defined custom dark colors.
-                    : _schemeDark,
+            ? null
+            // If we compute a scheme from our custom data, then use the
+            // toDark() method on our custom light FlexSchemeColor data.
+            // New in version 5:
+            // For better dark mapping of the light color
+            // based values, set parameter swapColor to true in toDark.
+            : _computeDarkTheme
+            ? _schemeLight.toDark(_toDarkLevel, true)
+            // And finally, use the defined custom dark colors.
+            : _schemeDark,
         // To use a built-in scheme based on enum, don't assign colors above.
         scheme: _scheme,
         swapColors: _swapColors,
@@ -694,9 +690,9 @@ class _DemoAppState extends State<DemoApp> {
         // appBarStyle FlexAppBarStyle.material results in the same color value.
         // It is also the default if you do not define the style.
         // You can also use other themed styles. Here we use background, that
-        // also gets active color blend from used SurfaceMode or SurfaceStyle.
+        // also gets active color blend from used SurfaceMode.
         // You may often want a different style on the AppBar in dark and light
-        // theme mode, therefore it was not set via a shared value value
+        // theme mode, therefore it was not set via a shared value
         // above in this template.
         appBarStyle: null, // Try styles like: FlexAppBarStyle.background,
         appBarElevation: _appBarElevation,
@@ -783,17 +779,17 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    scrollController =
-        ScrollController(keepScrollOffset: true, initialScrollOffset: 0);
+    scrollController = ScrollController(keepScrollOffset: true, initialScrollOffset: 0);
     // Set enabled menu items.
-    menuItemsEnabled =
-        List<bool>.generate(App.menuItems.length, (int i) => false);
+    menuItemsEnabled = List<bool>.generate(App.menuItems.length, (int i) => false);
     menuItemsEnabled[0] = true;
     menuItemsEnabled[1] = true;
     // Set menu icons states to initial states, some are a loaded from
     // persisted values via the theme controller.
     menuItemsIconState = List<ResponsiveMenuItemIconState>.generate(
-        App.menuItems.length, (int i) => ResponsiveMenuItemIconState.primary);
+      App.menuItems.length,
+      (int i) => ResponsiveMenuItemIconState.primary,
+    );
   }
 
   @override
@@ -801,9 +797,7 @@ class _HomePageState extends State<HomePage> {
     super.didChangeDependencies();
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
-    menuItemsIconState[0] = isLight
-        ? ResponsiveMenuItemIconState.primary
-        : ResponsiveMenuItemIconState.secondary;
+    menuItemsIconState[0] = isLight ? ResponsiveMenuItemIconState.primary : ResponsiveMenuItemIconState.secondary;
     menuItemsIconState[1] = theme.useMaterial3
         ? ResponsiveMenuItemIconState.primary
         : ResponsiveMenuItemIconState.secondary;
@@ -822,8 +816,7 @@ class _HomePageState extends State<HomePage> {
     final double margins = App.responsiveInsets(mediaSize.width);
     final double topPadding = mediaPadding.top + kToolbarHeight + margins;
     final double bottomPadding = mediaPadding.bottom + margins;
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint;
     final ThemeData theme = Theme.of(context);
     final TextTheme textTheme = theme.textTheme;
     final TextStyle headlineMedium = textTheme.headlineSmall!;
@@ -831,8 +824,7 @@ class _HomePageState extends State<HomePage> {
 
     // Get our custom brand color from the BrandTheme extension, with a
     // fallback to primary color.
-    final Color brandColor =
-        theme.extension<BrandTheme>()!.brandColor ?? theme.colorScheme.primary;
+    final Color brandColor = theme.extension<BrandTheme>()!.brandColor ?? theme.colorScheme.primary;
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
       // FlexColorScheme contains a static helper that can be use to theme
@@ -867,8 +859,7 @@ class _HomePageState extends State<HomePage> {
         menuTitle: const Text(App.packageName),
         menuLeadingTitle: Text(
           App.title(context),
-          style:
-              theme.textTheme.titleSmall!.copyWith(fontWeight: FontWeight.bold),
+          style: theme.textTheme.titleSmall!.copyWith(fontWeight: FontWeight.bold),
         ),
         menuLeadingSubtitle: const Text('Version ${App.versionMajor}'),
         menuLeadingAvatarLabel: 'FCS',
@@ -900,11 +891,9 @@ class _HomePageState extends State<HomePage> {
           constraints: const BoxConstraints(maxWidth: App.maxBodyWidth),
           child: ListView(
             controller: scrollController,
-            padding: EdgeInsets.fromLTRB(
-                margins, topPadding, margins, bottomPadding),
+            padding: EdgeInsets.fromLTRB(margins, topPadding, margins, bottomPadding),
             children: <Widget>[
-              Text('Theme Extension Colored Header',
-                  style: headlineMedium.copyWith(color: brandColor)),
+              Text('Theme Extension Colored Header', style: headlineMedium.copyWith(color: brandColor)),
               const Text(
                 'This is FlexColorScheme developers Hot Reload '
                 'Playground. It has a large number of property values '
@@ -915,8 +904,10 @@ class _HomePageState extends State<HomePage> {
               ListTile(
                 contentPadding: EdgeInsets.zero,
                 title: const Text('Theme mode'),
-                subtitle: Text('Theme '
-                    '${widget.themeMode.toString().dotTail}'),
+                subtitle: Text(
+                  'Theme '
+                  '${widget.themeMode.toString().dotTail}',
+                ),
                 trailing: ThemeModeSwitch(
                   themeMode: widget.themeMode,
                   onChanged: widget.onThemeModeChanged,

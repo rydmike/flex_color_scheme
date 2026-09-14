@@ -1,7 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
-
-import '../controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A container class with custom application color schemes used in the
 /// examples 4 and 5.
@@ -28,7 +27,7 @@ abstract final class AppColor {
     appBarColor: Color(0xFFC8DCF8),
     swapOnMaterial3: true,
   );
-// Create a corresponding custom flex scheme color for a dark theme.
+  // Create a corresponding custom flex scheme color for a dark theme.
   static const FlexSchemeColor _myScheme1Dark = FlexSchemeColor(
     primary: Color(0xFFB1CFF5),
     primaryContainer: Color(0xFF3873BA),
@@ -133,7 +132,8 @@ abstract final class AppColor {
     // theme that goes together and give it a name and description too.
     const FlexSchemeData(
       name: 'Example Midnight',
-      description: 'Midnight blue theme, created as an in code example by '
+      description:
+          'Midnight blue theme, created as an in code example by '
           'using custom color values for all colors in the scheme',
       // FlexSchemeData holds separate defined color schemes for light and
       // matching dark theme colors. Dark theme colors typically need to be less
@@ -145,7 +145,8 @@ abstract final class AppColor {
     // Do the same for our second custom scheme.
     FlexSchemeData(
       name: 'Example Greens',
-      description: 'Vivid green theme, created as an in code example from one '
+      description:
+          'Vivid green theme, created as an in code example from one '
           'primary color in light mode and another primary for dark mode',
       light: _myScheme2Light,
       dark: _myScheme2Dark,
@@ -154,7 +155,8 @@ abstract final class AppColor {
     // dark colors, from the light FlexSchemeColor with the toDark method.
     FlexSchemeData(
       name: 'Example Red & Blue',
-      description: 'Classic red and blue, created as an in code example from '
+      description:
+          'Classic red and blue, created as an in code example from '
           'only light theme mode primary and secondary colors',
       light: _myScheme3Light,
       // We create the dark desaturated colors from the light scheme.
@@ -204,8 +206,7 @@ abstract final class AppColor {
   /// well almost, we include also the logic for computed dark mode colors and
   /// dark mode seed color behavior, in the schemeAtIndex helper it uses to
   /// get the scheme at an index.
-  static FlexSchemeData scheme(final ThemeController controller) =>
-      schemeAtIndex(controller.schemeIndex, controller);
+  static FlexSchemeData scheme(ThemeController controller) => schemeAtIndex(controller.schemeIndex, controller);
 
   /// Get the FlexSchemeData at current scheme index.
   ///
@@ -218,24 +219,27 @@ abstract final class AppColor {
   /// when controller says we are using that as well, instead of the defined
   /// dark mode scheme. This simplifies our logic in the MaterialApp
   /// of example 5 and we get right dark colors in ThemeSelector and Popup too.
-  static FlexSchemeData schemeAtIndex(
-      final int index, final ThemeController controller) {
+  static FlexSchemeData schemeAtIndex(int index, ThemeController controller) {
     if (index == schemes.length - 1) {
       return controller.customScheme.copyWith(
-          dark: controller.useKeyColors
-              ? controller.customScheme.dark
-              : controller.useToDarkMethod
-                  ? controller.customScheme.light.defaultError.toDark(
-                      controller.toDarkMethodLevel,
-                      controller.toDarkSwapPrimaryAndContainer)
-                  : null);
+        dark: controller.useKeyColors
+            ? controller.customScheme.dark
+            : controller.useToDarkMethod
+            ? controller.customScheme.light.defaultError.toDark(
+                controller.toDarkMethodLevel,
+                controller.toDarkSwapPrimaryAndContainer,
+              )
+            : null,
+      );
     }
     return schemes[index].copyWith(
-        dark: controller.useToDarkMethod
-            ? schemes[index].light.defaultError.toDark(
-                controller.toDarkMethodLevel,
-                controller.toDarkSwapPrimaryAndContainer)
-            : null);
+      dark: controller.useToDarkMethod
+          ? schemes[index].light.defaultError.toDark(
+              controller.toDarkMethodLevel,
+              controller.toDarkSwapPrimaryAndContainer,
+            )
+          : null,
+    );
   }
 
   /// Used by example 5, the Themes Playground.

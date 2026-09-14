@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_color_scheme.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_sub_themes.dart';
+library;
 
-import '../flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
-import 'flex_sub_themes.dart' show FlexSubThemes; // For comment refs.
+import 'package:material_ui/material_ui.dart';
 
 // These constants are not exported by FlexColorScheme, they are only used
 // internally and in some document comments as reference information of
@@ -54,7 +55,7 @@ const double kBottomSheetBorderRadius = 28;
 /// of BottomNavigationBar and NavigationBar to same value in M3.
 const double kBottomNavigationBarElevation = 3;
 
-/// Default elevation of none modal Material 3 [BottomSheet].
+/// Default elevation of non-modal Material 3 [BottomSheet].
 ///
 /// Based https://m3.material.io/components/bottom-sheets/specs
 /// and https://m3.material.io/styles/elevation/tokens
@@ -63,7 +64,7 @@ const double kBottomNavigationBarElevation = 3;
 /// and uses 2 for modal version to make them different.
 const double kBottomSheetElevation = 1;
 
-/// Default elevation of none modal Material 2 [BottomSheet].
+/// Default elevation of non-modal Material 2 [BottomSheet].
 ///
 /// This is FCS default when opting in on opinionated component sub-themes
 /// but not opting in on using Material 3.
@@ -74,7 +75,7 @@ const double kBottomSheetElevationM2 = 4;
 /// Based https://m3.material.io/components/bottom-sheets/specs
 /// and https://m3.material.io/styles/elevation/tokens
 ///
-/// Spec says 1, but FCS uses 2, and uses 1 for none modal
+/// Spec says 1, but FCS uses 2, and uses 1 for non-modal
 /// version.
 const double kBottomSheetModalElevation = 2;
 
@@ -90,10 +91,9 @@ const double kBottomSheetModalElevationM2 = 8;
 /// [ToggleButtons].
 ///
 /// The values results in width 40 and height 40.
-/// The Material guide 3 specifies width 48 and height 40. This is an
+/// The Material 3 guide specifies width 48 and height 40. This is an
 /// opinionated choice in order to make ToggleButtons min size squared.
-const Size kButtonMinSize =
-    Size(kMinInteractiveDimension - 8, kMinInteractiveDimension - 8);
+const Size kButtonMinSize = Size(kMinInteractiveDimension - 8, kMinInteractiveDimension - 8);
 
 /// Default padding on legacy buttons.
 ///

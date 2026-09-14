@@ -1,8 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import 'dark_surface_mode_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/dark_surface_mode_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:material_ui/material_ui.dart';
 
 class DarkSurfaceModeListTile extends StatelessWidget {
   const DarkSurfaceModeListTile({

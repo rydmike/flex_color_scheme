@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/examples/show_sub_theme_colors.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/component_colors_reveal.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/component_colors_reveal.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_sub_theme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Panel used to turn usage ON/OFF usage of opinionated component sub-themes.
 //
@@ -25,7 +24,9 @@ class GeneralPanel extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
-        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+      color: theme.colorScheme.primary,
+      fontWeight: FontWeight.bold,
+    );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -87,8 +88,7 @@ class GeneralPanel extends StatelessWidget {
             'enabled. The same toggle is also available in the sidebar.',
           ),
           value: controller.useSubThemes && controller.useFlexColorScheme,
-          onChanged:
-              controller.useFlexColorScheme ? controller.setUseSubThemes : null,
+          onChanged: controller.useFlexColorScheme ? controller.setUseSubThemes : null,
         ),
         const Divider(),
         SwitchListTileReveal(
@@ -106,11 +106,8 @@ class GeneralPanel extends StatelessWidget {
             'applied to the CupertinoSwitch, only the ColorScheme primary '
             'color is.',
           ),
-          value: controller.applyThemeToAllCupertino &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useFlexColorScheme
-              ? controller.setApplyThemeToAllCupertino
-              : null,
+          value: controller.applyThemeToAllCupertino && controller.useFlexColorScheme,
+          onChanged: controller.useFlexColorScheme ? controller.setApplyThemeToAllCupertino : null,
         ),
         const Divider(),
         SwitchListTileReveal(
@@ -120,7 +117,8 @@ class GeneralPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'In Material-3 the primary color tinted outlineVariant '
+                  text:
+                      'In Material-3 the primary color tinted outlineVariant '
                       'colored Divider may not fit on all background colors. '
                       'The Material-2 style, based on black or white, with '
                       'opacity, always fits. It is also less prominent than '
@@ -139,19 +137,19 @@ class GeneralPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. FCS fixes this issue by default, but if you do not '
+                  text:
+                      '. FCS fixes this issue by default, but if you do not '
                       'use FCS, it is a theming issue to be aware of.\n',
                 ),
               ],
             ),
           ),
-          value: controller.useM2StyleDividerInM3 &&
+          value:
+              controller.useM2StyleDividerInM3 &&
               controller.useSubThemes &&
               useMaterial3 &&
               controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes &&
-                  controller.useFlexColorScheme &&
-                  useMaterial3
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme && useMaterial3
               ? controller.setUseM2StyleDividerInM3
               : null,
         ),
@@ -170,9 +168,7 @@ class GeneralPanel extends StatelessWidget {
             'defined on component themes. This setting applies tinted '
             'disabled style on all components that support it.\n',
           ),
-          value: controller.tintedDisabledControls &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
+          value: controller.tintedDisabledControls && controller.useSubThemes && controller.useFlexColorScheme,
           onChanged: controller.useSubThemes && controller.useFlexColorScheme
               ? controller.setTintedDisabledControls
               : null,
@@ -201,12 +197,8 @@ class GeneralPanel extends StatelessWidget {
             'framework. Their later inclusion in this setting will be '
             'reported as new features, not as style breaking.\n',
           ),
-          value: controller.interactionEffects &&
-              controller.useSubThemes &&
-              controller.useFlexColorScheme,
-          onChanged: controller.useSubThemes && controller.useFlexColorScheme
-              ? controller.setInteractionEffects
-              : null,
+          value: controller.interactionEffects && controller.useSubThemes && controller.useFlexColorScheme,
+          onChanged: controller.useSubThemes && controller.useFlexColorScheme ? controller.setInteractionEffects : null,
         ),
         const Divider(),
         const ComponentColorsReveal(),

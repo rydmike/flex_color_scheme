@@ -1,16 +1,15 @@
 // Copyright 2021 The Flutter team. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-import 'package:flutter/material.dart';
-
-import '../../../../../shared/const/app.dart';
-import '../../../../../shared/controllers/theme_controller.dart';
-import '../../../../../shared/utils/link_text_span.dart';
-import 'color_palettes_screen.dart';
-import 'component_screen.dart';
-import 'constants.dart';
-import 'elevation_screen.dart';
-import 'typography_screen.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/color_palettes_screen.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/component_screen.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/constants.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/elevation_screen.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/typography_screen.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AppExampleMaterial3 extends StatefulWidget {
   const AppExampleMaterial3({super.key, required this.themeController});
@@ -20,8 +19,7 @@ class AppExampleMaterial3 extends StatefulWidget {
   State<AppExampleMaterial3> createState() => _AppExampleMaterial3State();
 }
 
-class _AppExampleMaterial3State extends State<AppExampleMaterial3>
-    with TickerProviderStateMixin {
+class _AppExampleMaterial3State extends State<AppExampleMaterial3> with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   late final AnimationController oneTwoController;
   late final CurvedAnimation oneTwoAnimation;
@@ -76,16 +74,14 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
       showRail = true;
       showMediumSizeLayout = false;
       showLargeSizeLayout = false;
-      if (railStatus != AnimationStatus.forward &&
-          railStatus != AnimationStatus.completed) {
+      if (railStatus != AnimationStatus.forward && railStatus != AnimationStatus.completed) {
         railController.forward();
       }
     } else {
       showRail = false;
       showMediumSizeLayout = false;
       showLargeSizeLayout = false;
-      if (railStatus != AnimationStatus.reverse &&
-          railStatus != AnimationStatus.dismissed) {
+      if (railStatus != AnimationStatus.reverse && railStatus != AnimationStatus.dismissed) {
         railController.reverse();
       }
     }
@@ -102,15 +98,13 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
         showMediumSizeLayout = true;
         showLargeSizeLayout = false;
       }
-      if (oneTwoStatus != AnimationStatus.forward &&
-          oneTwoStatus != AnimationStatus.completed) {
+      if (oneTwoStatus != AnimationStatus.forward && oneTwoStatus != AnimationStatus.completed) {
         oneTwoController.forward();
       }
     } else {
       showMediumSizeLayout = false;
       showLargeSizeLayout = false;
-      if (oneTwoStatus != AnimationStatus.reverse &&
-          oneTwoStatus != AnimationStatus.dismissed) {
+      if (oneTwoStatus != AnimationStatus.reverse && oneTwoStatus != AnimationStatus.dismissed) {
         oneTwoController.reverse();
       }
     }
@@ -127,20 +121,21 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
     });
   }
 
-  Widget createScreenFor(
-      ScreenSelected screenSelected, bool showNavBarExample) {
+  Widget createScreenFor(ScreenSelected screenSelected, bool showNavBarExample) {
     switch (screenSelected) {
       case ScreenSelected.component:
         return Expanded(
           child: OneTwoTransition(
             animation: oneTwoAnimation,
             one: FirstComponentList(
-                showNavBottomBar: showNavBarExample,
-                scaffoldKey: scaffoldKey,
-                showSecondList: showMediumSizeLayout || showLargeSizeLayout),
+              showNavBottomBar: showNavBarExample,
+              scaffoldKey: scaffoldKey,
+              showSecondList: showMediumSizeLayout || showLargeSizeLayout,
+            ),
             two: SecondComponentList(
-                scaffoldKey: scaffoldKey,
-                showSecondList: showMediumSizeLayout || showLargeSizeLayout),
+              scaffoldKey: scaffoldKey,
+              showSecondList: showMediumSizeLayout || showLargeSizeLayout,
+            ),
           ),
         );
       case ScreenSelected.color:
@@ -154,9 +149,7 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
 
   PreferredSizeWidget createAppBar() {
     return AppBar(
-      title: Theme.of(context).useMaterial3
-          ? const Text('Material 3')
-          : const Text('Material 2'),
+      title: Theme.of(context).useMaterial3 ? const Text('Material 3') : const Text('Material 2'),
       leading: const Material3About(useRootNavigator: false),
       actions: !showRail
           ? <Widget>[
@@ -168,58 +161,59 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
   }
 
   Widget _expandedTrailingActions() => Container(
-        constraints: const BoxConstraints.tightFor(width: kRailExpandedWidth),
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+    constraints: const BoxConstraints.tightFor(width: kRailExpandedWidth),
+    padding: const EdgeInsets.symmetric(horizontal: 16),
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget>[
+        Row(
           children: <Widget>[
-            Row(
-              children: <Widget>[
-                const Text('Light'),
-                const Spacer(),
-                Switch(
-                    value: Theme.of(context).brightness == Brightness.light,
-                    onChanged: (bool value) {
-                      if (value) {
-                        widget.themeController.setThemeMode(ThemeMode.light);
-                      } else {
-                        widget.themeController.setThemeMode(ThemeMode.dark);
-                      }
-                    })
-              ],
-            ),
-            Row(
-              children: <Widget>[
-                const Text('Material 3'),
-                const Spacer(),
-                Switch(
-                  value: widget.themeController.useMaterial3,
-                  onChanged: widget.themeController.setUseMaterial3,
-                )
-              ],
+            const Text('Light'),
+            const Spacer(),
+            Switch(
+              value: Theme.of(context).brightness == Brightness.light,
+              onChanged: (bool value) {
+                if (value) {
+                  widget.themeController.setThemeMode(ThemeMode.light);
+                } else {
+                  widget.themeController.setThemeMode(ThemeMode.dark);
+                }
+              },
             ),
           ],
         ),
-      );
+        Row(
+          children: <Widget>[
+            const Text('Material 3'),
+            const Spacer(),
+            Switch(
+              value: widget.themeController.useMaterial3,
+              onChanged: widget.themeController.setUseMaterial3,
+            ),
+          ],
+        ),
+      ],
+    ),
+  );
 
   Widget _trailingActions() => Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          Flexible(
-            child: _BrightnessButton(
-              controller: widget.themeController,
-              showTooltipBelow: false,
-            ),
-          ),
-          Flexible(
-            child: _Material3Button(
-              controller: widget.themeController,
-              showTooltipBelow: false,
-            ),
-          ),
-        ],
-      );
+    mainAxisAlignment: MainAxisAlignment.end,
+    children: <Widget>[
+      Flexible(
+        child: _BrightnessButton(
+          controller: widget.themeController,
+          showTooltipBelow: false,
+        ),
+      ),
+      Flexible(
+        child: _Material3Button(
+          controller: widget.themeController,
+          showTooltipBelow: false,
+        ),
+      ),
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -227,51 +221,48 @@ class _AppExampleMaterial3State extends State<AppExampleMaterial3>
       animation: oneTwoController,
       builder: (BuildContext context, Widget? child) {
         return AnimatedBuilder(
-            animation: railAnimation,
-            builder: (BuildContext context, Widget? child) {
-              return NavigationTransition(
-                scaffoldKey: scaffoldKey,
-                animationController: railController,
-                railAnimation: railAnimation,
-                appBar: createAppBar(),
-                body: createScreenFor(ScreenSelected.values[screenIndex],
-                    railController.value == 1),
-                navigationRail: NavigationRail(
-                  minExtendedWidth: kRailExpandedWidth,
-                  extended: showLargeSizeLayout,
-                  // The Rail is silly, it does not expand if type is something
-                  // else than none, e.g. set via themes.
-                  labelType:
-                      showLargeSizeLayout ? NavigationRailLabelType.none : null,
-                  destinations: navRailDestinations,
-                  selectedIndex: screenIndex,
-                  onDestinationSelected: (int index) {
-                    setState(() {
-                      screenIndex = index;
-                      handleScreenChanged(screenIndex);
-                    });
-                  },
-                  trailing: Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 20),
-                      child: showLargeSizeLayout
-                          ? _expandedTrailingActions()
-                          : _trailingActions(),
-                    ),
+          animation: railAnimation,
+          builder: (BuildContext context, Widget? child) {
+            return NavigationTransition(
+              scaffoldKey: scaffoldKey,
+              animationController: railController,
+              railAnimation: railAnimation,
+              appBar: createAppBar(),
+              body: createScreenFor(ScreenSelected.values[screenIndex], railController.value == 1),
+              navigationRail: NavigationRail(
+                minExtendedWidth: kRailExpandedWidth,
+                extended: showLargeSizeLayout,
+                // The Rail is silly, it does not expand if type is something
+                // else than none, e.g. set via themes.
+                labelType: showLargeSizeLayout ? NavigationRailLabelType.none : null,
+                destinations: navRailDestinations,
+                selectedIndex: screenIndex,
+                onDestinationSelected: (int index) {
+                  setState(() {
+                    screenIndex = index;
+                    handleScreenChanged(screenIndex);
+                  });
+                },
+                trailing: Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 20),
+                    child: showLargeSizeLayout ? _expandedTrailingActions() : _trailingActions(),
                   ),
                 ),
-                navigationBar: NavigationBars(
-                  onSelectItem: (int index) {
-                    setState(() {
-                      screenIndex = index;
-                      handleScreenChanged(screenIndex);
-                    });
-                  },
-                  selectedIndex: screenIndex,
-                  isExampleBar: false,
-                ),
-              );
-            });
+              ),
+              navigationBar: NavigationBars(
+                onSelectItem: (int index) {
+                  setState(() {
+                    screenIndex = index;
+                    handleScreenChanged(screenIndex);
+                  });
+                },
+                selectedIndex: screenIndex,
+                isExampleBar: false,
+              ),
+            );
+          },
+        );
       },
     );
   }
@@ -292,9 +283,7 @@ class _BrightnessButton extends StatelessWidget {
       preferBelow: showTooltipBelow,
       message: isBright ? 'Set to dark' : 'Set to light',
       child: IconButton(
-        icon: isBright
-            ? const Icon(Icons.dark_mode_outlined)
-            : const Icon(Icons.light_mode_outlined),
+        icon: isBright ? const Icon(Icons.dark_mode_outlined) : const Icon(Icons.light_mode_outlined),
         onPressed: () {
           if (isBright) {
             controller.setThemeMode(ThemeMode.dark);
@@ -322,26 +311,26 @@ class _Material3Button extends StatelessWidget {
       preferBelow: showTooltipBelow,
       message: 'Switch to Material ${useMaterial3 ? 2 : 3}',
       child: IconButton(
-          icon: useMaterial3
-              ? const Icon(Icons.looks_two_outlined)
-              : const Icon(Icons.looks_3_outlined),
-          onPressed: () {
-            controller.setUseMaterial3(!controller.useMaterial3);
-          }),
+        icon: useMaterial3 ? const Icon(Icons.looks_two_outlined) : const Icon(Icons.looks_3_outlined),
+        onPressed: () {
+          controller.setUseMaterial3(!controller.useMaterial3);
+        },
+      ),
     );
   }
 }
 
 class NavigationTransition extends StatefulWidget {
-  const NavigationTransition(
-      {super.key,
-      required this.scaffoldKey,
-      required this.animationController,
-      required this.railAnimation,
-      required this.navigationRail,
-      required this.navigationBar,
-      required this.appBar,
-      required this.body});
+  const NavigationTransition({
+    super.key,
+    required this.scaffoldKey,
+    required this.animationController,
+    required this.railAnimation,
+    required this.navigationRail,
+    required this.navigationBar,
+    required this.appBar,
+    required this.body,
+  });
 
   final GlobalKey<ScaffoldState> scaffoldKey;
   final AnimationController animationController;
@@ -425,44 +414,40 @@ final List<NavigationRailDestination> navRailDestinations = appBarDestinations
 
 class SizeAnimation extends CurvedAnimation {
   SizeAnimation(Animation<double> parent)
-      : super(
-          parent: parent,
-          curve: const Interval(
-            0.2,
-            0.8,
-            curve: Curves.easeInOutCubicEmphasized,
-          ),
-          reverseCurve: Interval(
-            0,
-            0.2,
-            curve: Curves.easeInOutCubicEmphasized.flipped,
-          ),
-        );
+    : super(
+        parent: parent,
+        curve: const Interval(
+          0.2,
+          0.8,
+          curve: Curves.easeInOutCubicEmphasized,
+        ),
+        reverseCurve: Interval(
+          0,
+          0.2,
+          curve: Curves.easeInOutCubicEmphasized.flipped,
+        ),
+      );
 }
 
 class OffsetAnimation extends CurvedAnimation {
   OffsetAnimation(Animation<double> parent)
-      : super(
-          parent: parent,
-          curve: const Interval(
-            0.4,
-            1.0,
-            curve: Curves.easeInOutCubicEmphasized,
-          ),
-          reverseCurve: Interval(
-            0,
-            0.2,
-            curve: Curves.easeInOutCubicEmphasized.flipped,
-          ),
-        );
+    : super(
+        parent: parent,
+        curve: const Interval(
+          0.4,
+          1.0,
+          curve: Curves.easeInOutCubicEmphasized,
+        ),
+        reverseCurve: Interval(
+          0,
+          0.2,
+          curve: Curves.easeInOutCubicEmphasized.flipped,
+        ),
+      );
 }
 
 class RailTransition extends StatefulWidget {
-  const RailTransition(
-      {super.key,
-      required this.animation,
-      required this.backgroundColor,
-      required this.child});
+  const RailTransition({super.key, required this.animation, required this.backgroundColor, required this.child});
 
   final Animation<double> animation;
   final Widget child;
@@ -514,11 +499,7 @@ class _RailTransition extends State<RailTransition> {
 }
 
 class BarTransition extends StatefulWidget {
-  const BarTransition(
-      {super.key,
-      required this.animation,
-      required this.backgroundColor,
-      required this.child});
+  const BarTransition({super.key, required this.animation, required this.backgroundColor, required this.child});
 
   final Animation<double> animation;
   final Color backgroundColor;
@@ -612,7 +593,7 @@ class _OneTwoTransitionState extends State<OneTwoTransition> {
               translation: offsetAnimation.value,
               child: widget.two,
             ),
-          )
+          ),
         ],
       ],
     );
@@ -639,13 +620,11 @@ class Material3About extends StatelessWidget {
 
 // This [showAppAboutDialog] function is based on the [AboutDialog] example
 // that exist(ed) in the Flutter Gallery App.
-void showMaterial3AboutDialog(BuildContext context,
-    [bool useRootNavigator = true]) {
+void showMaterial3AboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final ThemeData theme = Theme.of(context);
   final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
   final TextStyle footerStyle = theme.textTheme.bodySmall!;
-  final TextStyle linkStyle =
-      theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
+  final TextStyle linkStyle = theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
 
   final Size mediaSize = MediaQuery.sizeOf(context);
   final double width = mediaSize.width;
@@ -676,7 +655,8 @@ void showMaterial3AboutDialog(BuildContext context,
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'This is a slightly modified version of the '
+                text:
+                    'This is a slightly modified version of the '
                     'official Material 3 demo app found in ',
               ),
               LinkTextSpan(
@@ -686,12 +666,14 @@ void showMaterial3AboutDialog(BuildContext context,
               ),
               TextSpan(
                 style: aboutTextStyle,
-                text: '. It is included here to show the configured theme '
+                text:
+                    '. It is included here to show the configured theme '
                     'using the official Material 3 sample app.\n\n',
               ),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with Flutter ${App.flutterVersion}, '
+                text:
+                    'Built with Flutter ${App.flutterVersion}, '
                     'using ${App.packageName} '
                     '${App.version}\n'
                     'Media size (w:${width.toStringAsFixed(0)}, '

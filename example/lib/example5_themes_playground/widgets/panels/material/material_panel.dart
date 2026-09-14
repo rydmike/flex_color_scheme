@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class MaterialPanel extends StatelessWidget {
   const MaterialPanel({super.key});
@@ -14,9 +13,11 @@ class MaterialPanel extends StatelessWidget {
         SizedBox(height: 8),
         ListTileReveal(
           title: Text('Material'),
-          subtitle: Text('The Material widget can also specify surfaceTint '
-              'color, which is applied when Material is elevated, but only in '
-              'Material-3 mode. It cannot be themed.\n'),
+          subtitle: Text(
+            'The Material widget can also specify surfaceTint '
+            'color, which is applied when Material is elevated, but only in '
+            'Material-3 mode. It cannot be themed.\n',
+          ),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),

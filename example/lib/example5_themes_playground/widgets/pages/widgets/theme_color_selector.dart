@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/header_card.dart';
-import '../../panels/input_colors/input_colors_selector.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/input_colors/input_colors_selector.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/header_card.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Used to select used theme colors, can also turn ON/OFF FlexColorScheme
 /// and component themes.
@@ -24,8 +23,7 @@ class ThemeColorSelector extends StatelessWidget {
     final Size mediaSize = MediaQuery.sizeOf(context);
     final bool isNarrow = mediaSize.width < App.phoneWidthBreakpoint;
     final bool isCompact = controller.compactMode;
-    final bool isPhone =
-        isCompact || isNarrow || mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isPhone = isCompact || isNarrow || mediaSize.height < App.phoneHeightBreakpoint;
     final double margins = App.responsiveInsets(mediaSize.width, isCompact);
     return RepaintBoundary(
       child: HeaderCard(
@@ -48,13 +46,9 @@ class ThemeColorSelector extends StatelessWidget {
                   children: <Widget>[
                     Expanded(
                       child: SwitchListTile(
-                        contentPadding: isPhone
-                            ? const EdgeInsets.symmetric(horizontal: 8)
-                            : null,
+                        contentPadding: isPhone ? const EdgeInsets.symmetric(horizontal: 8) : null,
                         dense: isPhone,
-                        title: isNarrow
-                            ? const Text('M3')
-                            : const Text('Use Material-3'),
+                        title: isNarrow ? const Text('M3') : const Text('Use Material-3'),
                         value: controller.useMaterial3,
                         onChanged: controller.setUseMaterial3,
                       ),
@@ -67,9 +61,7 @@ class ThemeColorSelector extends StatelessWidget {
                                 end: 0,
                               )
                             : null,
-                        title: isNarrow
-                            ? const Text('FCS')
-                            : const Text('Use Flex\u200BColor\u200BScheme'),
+                        title: isNarrow ? const Text('FCS') : const Text('Use Flex\u200BColor\u200BScheme'),
                         dense: isPhone,
                         value: controller.useFlexColorScheme,
                         onChanged: controller.setUseFlexColorScheme,
@@ -77,18 +69,11 @@ class ThemeColorSelector extends StatelessWidget {
                     ),
                     Expanded(
                       child: SwitchListTile(
-                        contentPadding: isPhone
-                            ? const EdgeInsets.symmetric(horizontal: 8)
-                            : null,
+                        contentPadding: isPhone ? const EdgeInsets.symmetric(horizontal: 8) : null,
                         dense: isPhone,
-                        title: isNarrow
-                            ? const Text('Themes')
-                            : const Text('Use component themes'),
-                        value: controller.useSubThemes &&
-                            controller.useFlexColorScheme,
-                        onChanged: controller.useFlexColorScheme
-                            ? controller.setUseSubThemes
-                            : null,
+                        title: isNarrow ? const Text('Themes') : const Text('Use component themes'),
+                        value: controller.useSubThemes && controller.useFlexColorScheme,
+                        onChanged: controller.useFlexColorScheme ? controller.setUseSubThemes : null,
                       ),
                     ),
                   ],

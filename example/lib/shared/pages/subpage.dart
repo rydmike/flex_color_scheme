@@ -1,17 +1,16 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/about.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_color_scheme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_sub_theme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_theme_data_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/responsive_center.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/theme_mode_switch.dart';
 import 'package:flutter/services.dart';
-
-import '../const/app.dart';
-import '../controllers/theme_controller.dart';
-import '../utils/app_scroll_behavior.dart';
-import '../widgets/examples/about.dart';
-import '../widgets/examples/show_color_scheme_colors.dart';
-import '../widgets/examples/show_sub_theme_colors.dart';
-import '../widgets/examples/show_theme_data_colors.dart';
-import '../widgets/universal/responsive_center.dart';
-import '../widgets/universal/showcase_material.dart';
-import '../widgets/universal/theme_mode_switch.dart';
+import 'package:material_ui/material_ui.dart';
 
 // This sub page is used as a demo in the default example and in examples
 // 4 and 5 to show a sub-page using the same FlexColorScheme based theme.
@@ -21,8 +20,7 @@ class SubpageDemo extends StatefulWidget {
   final ThemeController? controller;
 
   // A static convenience function show this screen, as pushed on top.
-  static Future<void> show(BuildContext context,
-      [ThemeController? controller]) async {
+  static Future<void> show(BuildContext context, [ThemeController? controller]) async {
     await Navigator.of(context).push<Widget>(
       MaterialPageRoute<Widget>(
         builder: (BuildContext context) => SubpageDemo(controller: controller),
@@ -53,8 +51,7 @@ class _SubpageDemoState extends State<SubpageDemo> {
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: FlexColorScheme.themedSystemNavigationBar(
         context,
-        systemNavBarStyle: widget.controller?.systemNavBarStyle ??
-            FlexSystemNavBarStyle.background,
+        systemNavBarStyle: widget.controller?.systemNavBarStyle ?? FlexSystemNavBarStyle.background,
         useDivider: widget.controller?.useSystemNavBarDivider ?? false,
         opacity: widget.controller?.systemNavBarOpacity ?? 1,
       ),
@@ -98,8 +95,7 @@ class _SubpageDemoState extends State<SubpageDemo> {
                   if (widget.controller != null)
                     ListTile(
                       title: const Text('Theme mode'),
-                      subtitle:
-                          Text('Theme ${widget.controller!.themeMode.name}'),
+                      subtitle: Text('Theme ${widget.controller!.themeMode.name}'),
                       trailing: ThemeModeSwitch(
                         themeMode: widget.controller!.themeMode,
                         onChanged: widget.controller!.setThemeMode,
@@ -117,18 +113,15 @@ class _SubpageDemoState extends State<SubpageDemo> {
                   // Show all key active theme colors.
                   Text('Theme Colors', style: headlineMedium),
                   const Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
+                    padding: EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
                     child: ShowColorSchemeColors(),
                   ),
                   const Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
+                    padding: EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
                     child: ShowThemeDataColors(),
                   ),
                   const Padding(
-                    padding:
-                        EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
+                    padding: EdgeInsets.symmetric(horizontal: App.edgeInsetsTablet),
                     child: ShowSubThemeColors(),
                   ),
                   const Divider(),

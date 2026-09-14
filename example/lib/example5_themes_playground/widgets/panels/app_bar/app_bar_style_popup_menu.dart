@@ -1,7 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
-
-import '../../shared/color_scheme_box.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_box.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Widget used to select used AppBarStyle using a popup menu.
 ///
@@ -79,19 +78,17 @@ class AppBarStylePopupMenu extends StatelessWidget {
   final bool isBlended;
 
   Color _appBarStyleColor(
-    final FlexAppBarStyle? style,
-    final ColorScheme colorScheme,
-    final Color scaffold,
-    final bool isLight,
-    final bool useMaterial3,
+    FlexAppBarStyle? style,
+    ColorScheme colorScheme,
+    Color scaffold,
+    bool isLight,
+    bool useMaterial3,
   ) {
     switch (style) {
       case FlexAppBarStyle.primary:
         return colorScheme.primary;
       case FlexAppBarStyle.material:
-        return isLight
-            ? FlexColor.materialLightSurface
-            : FlexColor.materialDarkSurface;
+        return isLight ? FlexColor.materialLightSurface : FlexColor.materialDarkSurface;
       case FlexAppBarStyle.surface:
         return colorScheme.surface;
       case FlexAppBarStyle.background:
@@ -116,17 +113,15 @@ class AppBarStylePopupMenu extends StatelessWidget {
   }
 
   String _popupItemLabel(
-    final FlexAppBarStyle? style,
-    final bool isLight,
-    final bool useMaterial3,
+    FlexAppBarStyle? style,
+    bool isLight,
+    bool useMaterial3,
   ) {
     switch (style) {
       case FlexAppBarStyle.primary:
         return 'Primary\n(M2 light default)';
       case FlexAppBarStyle.material:
-        return isLight
-            ? 'Material white\n(M2 light spec)'
-            : 'Material #121212\n(M2 dark spec)';
+        return isLight ? 'Material white\n(M2 light spec)' : 'Material #121212\n(M2 dark spec)';
       case FlexAppBarStyle.surface:
         return 'Surface${isBlended ? '\nwith blend (M3 spec)' : ''}';
       case FlexAppBarStyle.background:
@@ -139,7 +134,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
         {
           if (useMaterial3) {
             return 'Default (surface)${isBlended ? '\n'
-                'with blend ' : '\n'}(M3 spec)';
+                      'with blend ' : '\n'}(M3 spec)';
           } else {
             if (isLight) {
               return 'Default primary\n(M2 spec)';
@@ -160,9 +155,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
     final TextStyle txtStyle = theme.textTheme.labelMedium!;
 
     final String defaultSelectionValuePopupLabel =
-        (enabled ? null : defaultDisabledLabel) ??
-            defaultLabel ??
-            _popupItemLabel(null, isLight, useMaterial3);
+        (enabled ? null : defaultDisabledLabel) ?? defaultLabel ?? _popupItemLabel(null, isLight, useMaterial3);
 
     final String selectedPopupLabel = enabled && value != null
         ? _popupItemLabel(value, isLight, useMaterial3)
@@ -188,9 +181,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
               dense: true,
               contentPadding: EdgeInsets.zero,
               leading: ColorSchemeBox(
-                borderColor: (value?.index ?? -1) + 1 == i
-                    ? theme.colorScheme.onSurface
-                    : theme.dividerColor,
+                borderColor: (value?.index ?? -1) + 1 == i ? theme.colorScheme.onSurface : theme.dividerColor,
                 selected: (value?.index ?? -1) + 1 == i,
                 backgroundColor: i == 0
                     ? _appBarStyleColor(
@@ -212,12 +203,9 @@ class AppBarStylePopupMenu extends StatelessWidget {
               title: i == 0
                   // If first position use default label.
                   ? Text(defaultSelectionValuePopupLabel, style: txtStyle)
-                  : Text(
-                      _popupItemLabel(
-                          FlexAppBarStyle.values[i - 1], isLight, useMaterial3),
-                      style: txtStyle),
+                  : Text(_popupItemLabel(FlexAppBarStyle.values[i - 1], isLight, useMaterial3), style: txtStyle),
             ),
-          )
+          ),
       ],
       child: ListTile(
         enabled: enabled,
@@ -226,7 +214,7 @@ class AppBarStylePopupMenu extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            if (subtitle != null) subtitle!,
+            ?subtitle,
             Text(selectedPopupLabel),
           ],
         ),

@@ -1,15 +1,14 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.segmentedButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes segmentedButtonTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'SegmentedButton FST26.1: GIVEN a FlexSubTheme.segmentedButtonTheme() '
+    test('SegmentedButton FST26.1: GIVEN a FlexSubTheme.segmentedButtonTheme() '
         'EXPECT equal to SegmentedButtonThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

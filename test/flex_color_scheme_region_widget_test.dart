@@ -1,8 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 //****************************************************************************
 // FlexColorScheme themedSystemNavigationBar Widget tests
@@ -16,15 +16,13 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   group('FCS6: WITH FlexColorScheme.themedSystemNavigationBar ', () {
     debugDefaultTargetPlatformOverride = null;
-    testWidgets('FCS6.01: Finds Annotated Region in light themed app',
-        (WidgetTester tester) async {
+    testWidgets('FCS6.01: Finds Annotated Region in light themed app', (WidgetTester tester) async {
       // Create the widget by telling the tester to build it.
       await tester.pumpWidget(const MyWidget(scheme: ColorScheme.light()));
       final Finder region = find.byKey(const ValueKey<String>('region'));
       expect(region, findsOneWidget);
     });
-    testWidgets('FCS6.02: Finds Annotated Region in dark themed app',
-        (WidgetTester tester) async {
+    testWidgets('FCS6.02: Finds Annotated Region in dark themed app', (WidgetTester tester) async {
       // Create the widget by telling the tester to build it.
       await tester.pumpWidget(const MyWidget(scheme: ColorScheme.dark()));
       final Finder region = find.byKey(const ValueKey<String>('region'));

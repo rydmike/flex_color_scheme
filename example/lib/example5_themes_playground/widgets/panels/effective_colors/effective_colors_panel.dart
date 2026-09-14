@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/examples/show_color_scheme_colors.dart';
-import '../../../../shared/widgets/examples/show_sub_theme_colors.dart';
-import '../../../../shared/widgets/examples/show_theme_data_colors.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../shared/component_colors_reveal.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/component_colors_reveal.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_color_scheme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_sub_theme_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/show_theme_data_colors.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Used to show effective theme colors.
 ///
@@ -27,8 +26,7 @@ class EffectiveColorsPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
-    final TextStyle linkStyle =
-        theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.primary);
+    final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.primary);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,7 +61,8 @@ class EffectiveColorsPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Most direct color properties in ThemeData are '
+                  text:
+                      'Most direct color properties in ThemeData are '
                       'planned to be deprecated and removed from Flutter. '
                       'More info in ',
                 ),
@@ -74,7 +73,8 @@ class EffectiveColorsPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '.\n'
+                  text:
+                      '.\n'
                       '\n'
                       'ThemeData colors still matter in Flutter, some widgets '
                       'depend on them for '

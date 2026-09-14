@@ -1,14 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.listTileTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes listTileTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'ListTile FST17.1: GIVEN a default FlexSubTheme.listTileTheme() '
+    test('ListTile FST17.1: GIVEN a default FlexSubTheme.listTileTheme() '
         'ListTileThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -22,8 +21,7 @@ void main() {
         equals(ListTileThemeData(selectedColor: colorScheme.primary)),
       );
     });
-    test(
-        'ListTile FST17.2: GIVEN a custom FlexSubTheme.listTileTheme() '
+    test('ListTile FST17.2: GIVEN a custom FlexSubTheme.listTileTheme() '
         'ListTileThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

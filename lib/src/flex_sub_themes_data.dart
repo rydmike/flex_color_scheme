@@ -1,16 +1,15 @@
-// Cupertino only for comment refs.
-import 'package:flutter/cupertino.dart'
-    show CupertinoAlertDialog, CupertinoSwitch;
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+/// @docImport 'package:cupertino_ui/cupertino_ui.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_color.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_theme_data_extensions.dart';
+library;
 
-import 'flex_adaptive.dart';
-import 'flex_color.dart' show FlexColor; // For comment refs.
-import 'flex_color_scheme.dart';
-import 'flex_constants.dart';
-import 'flex_splash_type.dart';
-import 'flex_sub_themes.dart';
-import 'flex_theme_data_extensions.dart'; // For comment refs.
+import 'package:flex_color_scheme/src/flex_adaptive.dart';
+import 'package:flex_color_scheme/src/flex_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_constants.dart';
+import 'package:flex_color_scheme/src/flex_splash_type.dart';
+import 'package:flex_color_scheme/src/flex_sub_themes.dart';
+import 'package:flutter/foundation.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Parameters used by [FlexColorScheme] to configure its used [FlexSubThemes].
 ///
@@ -43,8 +42,8 @@ import 'flex_theme_data_extensions.dart'; // For comment refs.
 /// * [Scrollbar], rounding on edges of scrollbars are left to platform default.
 /// * The [AppBar] and [BottomAppBar] shape properties are left to defaults.
 /// * The floating [SnackBar] can be themed to also include border radius, but
-///   the none floating one should remain straight. This separation cannot
-///   can be done via current flutter theming features. If you use Material 3
+///   the non-floating one should remain straight. This separation cannot
+///   be done via current Flutter theming features. If you use Material 3
 ///   this may not be problem since an M3 app is not supposed to use the
 ///   fixed style [SnackBar], so if you only use the floating one, you can
 ///   modify its border radius. The M3 guide mentions it should never be
@@ -147,6 +146,11 @@ import 'flex_theme_data_extensions.dart'; // For comment refs.
 /// * [ProgressIndicatorThemeData] for [CircularProgressIndicator] and
 ///   [LinearProgressIndicator] via [FlexSubThemes.progressIndicatorTheme].
 /// * [RadioThemeData] for [Radio] via [FlexSubThemes.radioTheme].
+/// * [SearchBarThemeData] for [SearchBar] via [FlexSubThemes.searchBarTheme].
+/// * [SearchViewThemeData] for [SearchBar] and its open view via
+///   [FlexSubThemes.searchViewTheme].
+/// * [SegmentedButtonThemeData] for [SegmentedButton] via
+///   [FlexSubThemes.segmentedButtonTheme].
 /// * [SliderThemeData] for [Slider] via [FlexSubThemes.sliderTheme].
 /// * [SnackBarThemeData] for [SnackBar] via [FlexSubThemes.snackBarTheme].
 /// * [SwitchThemeData] for [Switch] via [FlexSubThemes.switchTheme].
@@ -534,82 +538,6 @@ class FlexSubThemesData with Diagnosticable {
     this.navigationRailGroupAlignment,
     this.navigationRailMinWidth,
     this.navigationRailMinExtendedWidth,
-    //
-    @Deprecated('This property has been replaced by the more aptly named '
-        'useMaterial3Typography property and no longer has any function '
-        'in V8 and will be removed in v9.0.0.')
-    this.useTextTheme,
-    @Deprecated('The `useFlutterDefaults` is deprecated, it no longer has any '
-        'function and will be removed in v9. FlexColorScheme in M3 mode '
-        'defaults to using mostly Flutter defaults styles. '
-        'For other configurations modify the theme as desired. '
-        'In M2 mode FCS will continue to use its own opinionated defaults for '
-        'as long as M2 exists.')
-    this.useFlutterDefaults,
-    @Deprecated(
-      'The `blendTextTheme` is deprecated, it no longer has any '
-      'function and will be removed in v9. More info below.\n'
-      '\n'
-      'The `blendTextTheme` feature was originally '
-      "made before Material-3's TextTheme was available, before it was fully "
-      'known how it was going to be implemented. It was an approximation of '
-      'the TextStyles that could be seen in early versions of Material-3 '
-      'images. Since the actual Material-3 TextTheme is available, the tinted '
-      'TextTheme feature is no longer needed. While the FCS tinted TextTheme '
-      'did provide an alternative version of the actual tint used in '
-      'Material-3, but the differences were quite subtle. Additionally, '
-      'recent changes in Flutter make using it very verbose and complicated. '
-      'Why it does so, is explained below.\n'
-      '\n'
-      'In Material-3 Typography 2021, the TextTheme and all styles in it are '
-      'fully opaque and use onSurface as color on all TextStyles. '
-      'In a seed generated ColorScheme, the text becomes primary tinted, '
-      'because the onSurface color by default has subtle primary tint. '
-      'With FCS you can modify the onSurface to black or white to avoid this, '
-      'if so preferred.\n'
-      '\n'
-      'In Material-2 Typography 2018 and 2014, some TextStyles '
-      'in their TextThemes use partially transparent white or '
-      'black colors, making them appear tinted '
-      'when placed on lightly colored backgrounds. Such TextStyles also '
-      'have lower contrast. If the Material-3 default text theme is '
-      'used on background colors that are tinted with a color that '
-      'deviates a lot in hue from the hue used as tint color by the TextTheme, '
-      'it may not fit it so well. The Material-2 opacity-based text styles '
-      'do not have this limitation. It is unknown why Material-3 switched to '
-      'a fixed tint color instead of using the opacity-based approach '
-      'used in Material-2, that is more universally '
-      'usable on backgrounds with different tint colors.\n'
-      '\n'
-      'In Material-3, some component themes override the default color the of '
-      'the default TextTheme TextStyles they use with onSurfaceVariant. '
-      'This color has slightly more tint and lower contrast than onSurface. '
-      'This is used for elements that should have less emphasis. Many default '
-      'Material-3 components also override the color in default TextTheme '
-      'TextStyles '
-      'they use with onSurface color, that it actually already has in a '
-      'default TextTheme. These two overrides causes whatever '
-      'color the default TextTheme TextStyles have, to be overridden by '
-      'these ColorScheme colors. Resulting in that any custom colored '
-      'TextTheme is not getting used by such Material-3 components and that '
-      'the custom colors from the meticulously colored custom TextTheme, '
-      'are rarely visible anywhere in a Material-3 application. Material-2 '
-      'component themes do not do this, nor did older Flutter versions of '
-      'Material-3 component themes do this.\n'
-      '\n'
-      'An issue has been raised explaining the challenges this newer approach '
-      'in Flutter causes when using custom colored text themes. If this '
-      'issue is addressed, the tinted TextTheme feature in FCS may '
-      'be brought back, if it is a requested feature.\n'
-      '\n'
-      'In current Flutter versions, using a custom tinted TextTheme is rather '
-      'pointless. You can do it, but it is not enough to just define the '
-      'TextTheme. You also have to pass each tinted TextStyle it has to the '
-      'appropriate TextStyles in ALL component themes that override its '
-      'colors, for it to have any effect. It is typically not '
-      'worth the effort.\n',
-    )
-    this.blendTextTheme = false,
   });
 
   /// Flag used to enable color tinted hover, focus, highlight, selected,
@@ -1012,99 +940,6 @@ class FlexSubThemesData with Diagnosticable {
   /// defined by [splashType].
   final FlexSplashType? splashTypeAdaptive;
 
-  /// Use selection `surfaceMode` and `blendLevel` in [FlexColorScheme.light]
-  /// and [FlexColorScheme.dark] to also blend primary color into text themes
-  /// for both [ThemeData.textTheme] and [ThemeData.primaryTextTheme].
-  ///
-  /// This feature is similar to the slightly colored texts seen in Material 3
-  /// when using "onColor" colored texts.
-  ///
-  /// This feature does not work so well if you need to put text on
-  /// a completely different colored container than the background color.
-  /// Which is why this feature can be opted out of.
-  ///
-  /// M3 has separate on colors for all colorscheme colors that can also
-  /// be used for color matched text on each color. However, this slightly
-  /// primary colored default text works very well for the slight primary
-  /// colored M3 "neutral" surface colors with a primary hint too.
-  ///
-  /// At heavy blend levels it may reduce contrast too much and can
-  /// be turned off if so desired. This feature is a bit experimental in nature
-  /// and will be improved over time. Expect minor changes to the visual result
-  /// when using this option in future versions when actual Material 3 text
-  /// theme Typography becomes available.
-  ///
-  /// Defaults to false.
-  ///
-  /// **Style break info**: In FCS before version 7, the default was true, and
-  /// blended text themes were used by default. Going forward if you want it,
-  /// and also if you had not defined earlier and don't want to break your
-  /// apps past style, set [blendTextTheme] to true.
-  @Deprecated(
-    'The `blendTextTheme` is deprecated, it no longer has any '
-    'function and will be removed in v9. More info below.\n'
-    '\n'
-    'The `blendTextTheme` feature was originally '
-    "made before Material-3's TextTheme was available, before it was fully "
-    'known how it was going to be implemented. It was an approximation of '
-    'the TextStyles that could be seen in early versions of Material-3 '
-    'images. Since the actual Material-3 TextTheme is available, the tinted '
-    'TextTheme feature is no longer needed. While the FCS tinted TextTheme '
-    'did provide an alternative version of the actual tint used in '
-    'Material-3, but the differences were quite subtle. Additionally, '
-    'recent changes in Flutter make using it very verbose and complicated. '
-    'Why it does so, is explained below.\n'
-    '\n'
-    'In Material-3 Typography 2021, the TextTheme and all styles in it are '
-    'fully opaque and use onSurface as color on all TextStyles. '
-    'In a seed generated ColorScheme, the text becomes primary tinted, '
-    'because the onSurface color by default has subtle primary tint. '
-    'With FCS you can modify the onSurface to black or white to avoid this, '
-    'if so preferred.\n'
-    '\n'
-    'In Material-2 Typography 2018 and 2014, some TextStyles '
-    'in their TextThemes use partially transparent white or '
-    'black colors, making them appear tinted '
-    'when placed on lightly colored backgrounds. Such TextStyles also '
-    'have lower contrast. If the Material-3 default text theme is '
-    'used on background colors that are tinted with a color that '
-    'deviates a lot in hue from the hue used as tint color by the TextTheme, '
-    'it may not fit it so well. The Material-2 opacity-based text styles '
-    'do not have this limitation. It is unknown why Material-3 switched to '
-    'a fixed tint color instead of using the opacity-based approach '
-    'used in Material-2, that is more universally '
-    'usable on backgrounds with different tint colors.\n'
-    '\n'
-    'In Material-3, some component themes override the default color the of '
-    'the default TextTheme TextStyles they use with onSurfaceVariant. '
-    'This color has slightly more tint and lower contrast than onSurface. '
-    'This is used for elements that should have less emphasis. Many default '
-    'Material-3 components also override the color in default TextTheme '
-    'TextStyles '
-    'they use with onSurface color, that it actually already has in a '
-    'default TextTheme. These two overrides causes whatever '
-    'color the default TextTheme TextStyles have, to be overridden by '
-    'these ColorScheme colors. Resulting in that any custom colored '
-    'TextTheme is not getting used by such Material-3 components and that '
-    'the custom colors from the meticulously colored custom TextTheme, '
-    'are rarely visible anywhere in a Material-3 application. Material-2 '
-    'component themes do not do this, nor did older Flutter versions of '
-    'Material-3 component themes do this.\n'
-    '\n'
-    'An issue has been raised explaining the challenges this newer approach '
-    'in Flutter causes when using custom colored text themes. If this '
-    'issue is addressed, the tinted TextTheme feature in FCS may '
-    'be brought back, if it is a requested feature.\n'
-    '\n'
-    'In current Flutter versions, using a custom tinted TextTheme is '
-    'rather pointless. You can do it, but is not enough to just define the '
-    'TextTheme. You also have to pass each tinted TextStyle it has to the '
-    'appropriate TextStyles in ALL component themes that override its '
-    'colors, for it to have any effect. It is typically not '
-    'worth the effort.\n',
-  )
-  final bool blendTextTheme;
-
   /// Determines if Material-3 TextTheme and Typography is used.
   ///
   /// When opting in on using component themes, this flag controls if the
@@ -1447,7 +1282,7 @@ class FlexSubThemesData with Diagnosticable {
   /// [ToggleButtons] use as its base theme color.
   ///
   /// Always defines the background color for selected button, and
-  /// it's onColor pair defines the foreground for selected button.
+  /// its onColor pair defines the foreground for selected button.
   ///
   /// If [toggleButtonsUnselectedSchemeColor] is not defined,
   /// [toggleButtonsSchemeColor] is used as foreground color for unselected
@@ -1737,7 +1572,7 @@ class FlexSubThemesData with Diagnosticable {
   /// secondary color is still prominent, you can of course still use it.
   final SchemeColor? radioSchemeColor;
 
-  /// Defines is unselected [Switch], [Checkbox] and [Radio] also use their
+  /// Defines if unselected [Switch], [Checkbox] and [Radio] also use their
   /// themed color.
   ///
   /// Flutter SDK use neutral grey for switches, checkboxes and radio buttons
@@ -1746,9 +1581,9 @@ class FlexSubThemesData with Diagnosticable {
   /// use their themed color also in the unselected state.
   ///
   /// * The [Checkbox] and [Radio] use their theme color in the outline.
-  /// * The [Switch] has just a hint of its themed color in it inactive track.
+  /// * The [Switch] has just a hint of its themed color in its inactive track.
   ///
-  /// Defaults to false, set it to for slightly different style.
+  /// Defaults to false. Set it to true for a slightly different style.
   final bool unselectedToggleIsColored;
 
   /// The ColorScheme based color used on the [Slider] as its overall base
@@ -1941,7 +1776,7 @@ class FlexSubThemesData with Diagnosticable {
   ///
   /// To use the underline style set it to [FlexInputBorderType.underline].
   /// The top of the decorator is still rounded according to overall
-  /// [defaultRadius] also with underline borer type.
+  /// [defaultRadius] also with underline border type.
   ///
   /// To change input decorator's border radius separately define
   /// [inputDecoratorRadius] that will then override [defaultRadius].
@@ -2240,7 +2075,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Always use circular Shape on Floating Actions Button.
   ///
   /// If [fabUseShape] is false the [fabAlwaysCircular] has no effect, FAB will
-  /// be circular in in M2 and rounded with different radii depending on FAB
+  /// be circular in M2 and rounded with different radii depending on FAB
   /// size in M3.
   ///
   /// if [defaultRadius] or [fabRadius] is defined and [fabAlwaysCircular] is
@@ -2831,7 +2666,7 @@ class FlexSubThemesData with Diagnosticable {
   /// Color of the track being filled by the linear indicator.
   ///
   /// If [progressIndicatorLinearTrackSchemeColor] is null then in M2 mode
-  /// the ambient theme's deprecated ColorScheme.background color is used
+  /// the ambient theme's [ColorScheme.surface] color is used.
   /// In M3 mode [ColorScheme.secondaryContainer] is used as default.
   final SchemeColor? progressIndicatorLinearTrackSchemeColor;
 
@@ -3543,7 +3378,7 @@ class FlexSubThemesData with Diagnosticable {
   final SchemeColor? drawerUnselectedItemSchemeColor;
 
   /// Defines which [Theme] based [ColorScheme] based color that the
-  /// [BottomSheet] uses as background color when presented as a none modal
+  /// [BottomSheet] uses as background color when presented as a non-modal
   /// bottom sheet.
   ///
   /// If not defined, defaults to Material 3 default ColorScheme.surface.
@@ -3571,7 +3406,7 @@ class FlexSubThemesData with Diagnosticable {
   /// https://m3.material.io/components/text-fields/specs
   final double? bottomSheetRadius;
 
-  /// Elevation of none modal [BottomSheet].
+  /// Elevation of non-modal [BottomSheet].
   ///
   /// If null, defaults to [kBottomSheetElevation] = 1, if
   /// [FlexColorScheme.useMaterial3]
@@ -4232,557 +4067,392 @@ class FlexSubThemesData with Diagnosticable {
   /// Flutter M2 and M3 use 256 dp as default.
   final double? navigationRailMinExtendedWidth;
 
-  /// **DEPRECATED** and has no function anymore.
-  /// Use [useMaterial3Typography] instead.
-  ///
-  /// Determines if Material-3 TextTheme and Typography is used.
-  ///
-  /// When opting in on using the sub-theming, this flag controls if the
-  /// TextTheme will use the new Material-3 [Typography.material2021]
-  /// as specified in the [Material-3 Design Guide](https://m3.material.io).
-  ///
-  /// If not defined, and [ThemeData.useMaterial3] is true, then it defaults
-  /// to true. If not defined and [ThemeData.useMaterial3] is false, then it
-  /// defaults to false.
-  ///
-  /// This toggle works as an override toggle for using
-  /// [Typography.material2021] in Material-2 mode and for using
-  /// [Typography.material2018] in Material-3 mode.
-  ///
-  /// When using [FlexColorScheme] and [ThemeData.useMaterial3] is false and
-  /// component themes are not used, then default typography is
-  /// [Typography.material2018]. Note that if [FlexColorScheme] is
-  /// not used at all, and your [ThemeData] has [ThemeData.useMaterial3] false,
-  /// then Flutter defaults to using very old poor [Typography.material2014].
-  /// In such cases consider defining your typography manually to
-  /// [Typography.material2018] or why not even [Typography.material2021].
-  ///
-  /// FlexColorScheme fully supports using any custom TextTheme and fonts, just
-  /// like ThemeData. You apply and use them just as you would with ThemeData.
-  /// This text theme is just a convenience Typography toggle.
-  ///
-  /// If you specify a custom typography in [FlexColorScheme.typography] then
-  /// this property has no impact on used typography.
-  ///
-  /// This property was originally used in [FlexColorScheme] to opt-in on using
-  /// a custom text theme defined internally by [FlexColorScheme] to look like
-  /// the typography and text theme used in Material-3, before such a text theme
-  /// and typography existed in Flutter. When Flutter started providing M3
-  /// text theme and typography, this property was converted into toggle to opt
-  /// in and out of using the text theme. Typically, you do not want to
-  /// opt-out of it, but in M2 mode you may want to opt-in and set it to true.
-  @Deprecated('This property has been replaced by the more aptly named '
-      'useMaterial3Typography property and no longer has any function '
-      'in V8 and will be removed in v9.0.0.')
-  final bool? useTextTheme;
-
-  /// **DEPRECATED** and has no function anymore.
-  ///
-  /// Set to true to use Flutter SDK default component theme designs.
-  ///
-  /// Default to false.
-  ///
-  /// Prefer false to use FlexColorScheme (FCS) defaults.
-  ///
-  /// When set to `true`, many color properties that in [FlexSubThemesData] are
-  /// nullable and default to 'null, but that as undefined default to using
-  /// theming choices that differ from Flutter SDK default component theme
-  /// designs, will when this property is set to true default to
-  /// using Flutter SDK defaults, instead of its own opinionated defaults.
-  ///
-  /// When you use this flag you loose many of the harmonizing defaults
-  /// [FlexColorScheme.subThemesData] bring, but it may serve as an optional
-  /// starting point for your own custom component themes with fewer `copyWith`
-  /// overrides needed for its opinionated choices.
-  ///
-  /// The individual [FlexSubThemesData] properties and [FlexSubThemes]
-  /// document their adherence to this setting, they are also listed here:
-  ///
-  /// Impact on [BottomNavigationBarThemeData] sub-theming:
-  ///
-  /// ```text
-  ///                    FCS defaults   Flutter defaults
-  /// useFlutterDefaults false          true
-  /// - background       background     background
-  /// - selected icon    primary        light: theme primary, dark: secondary
-  /// - Selected label   primary        light: theme primary, dark: secondary
-  /// - unselected icon  onSurface      light: black54, dark: white70
-  /// - unSelected label onSurface      light: black54, dark: white70
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [bottomNavigationBarMutedUnselectedIcon] and
-  /// [bottomNavigationBarMutedUnselectedLabel] are true respectively,
-  /// this also applies to undefined color inputs.
-  ///
-  /// When muted unselected options are true, the actual difference to Flutter
-  /// default for unselected items is subtle, FCS has a bit more contrast.
-  ///
-  /// Impact on [NavigationBarThemeData] sub-theming:
-  ///
-  /// ```text
-  ///                    FCS defaults   M2 defaults       useMaterial3:true
-  /// useFlutterDefaults false          true              true
-  /// results in:
-  ///
-  /// - background       surfaceVariant surface with      surface with
-  ///                                   onSurface overlay primary overlay
-  ///                    elev 3         elev 0            elev 3
-  /// - height           80             80                80
-  /// - indicator        primary op24%  secondary op24%   secondaryContainer
-  /// - selected icon    primary        onSurface         onSecondaryContainer
-  /// - unselected icon  onSurface      onSurface         onSurfaceVariant
-  /// - Selected label   primary        onSurface         onSurface
-  /// - unSelected label onSurface      onSurface         onSurfaceVariant
-  /// - TextTheme        labelMedium    overline          labelMedium
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [navigationBarMutedUnselectedIcon] and [navigationBarMutedUnselectedLabel]
-  /// are true respectively, this also applies to undefined color inputs.
-  ///
-  /// Impact on [NavigationRailThemeData] sub-theming:
-  ///
-  /// ```text
-  ///                    FCS defaults    Flutter defaults
-  /// useFlutterDefaults false           true
-  /// - background       background      surface
-  /// - indicator        primary op24%   secondary op24%
-  /// - selected icon    primary         primary
-  /// - Selected label   primary         primary
-  /// - unselected icon  onSurface       onSurface op64%
-  /// - unSelected label onSurface       onSurface op64%
-  /// - TextTheme        FCS.labelMedium default.bodyText1
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [navigationRailMutedUnselectedIcon] and
-  /// are [navigationRailMutedUnselectedLabel] true respectively,
-  /// this also applies to undefined color inputs.
-  ///
-  /// If you want a style that is consistent by default across
-  /// [BottomNavigationBar], [NavigationBar] and [NavigationRail],
-  /// prefer keeping this setting false.
-  ///
-  /// If undefined, defaults to false.
-  @Deprecated('The `useFlutterDefaults` is deprecated, it no longer has any '
-      'function and will be removed in v9. FlexColorScheme in M3 mode '
-      'defaults to using mostly Flutter defaults styles. '
-      'For other configurations modify the theme as desired. '
-      'In M2 mode FCS will continue to use its own opinionated defaults for '
-      'as long as M2 exists.')
-  final bool? useFlutterDefaults;
-
   /// Copy the object with one or more provided properties changed.
   FlexSubThemesData copyWith({
-    final bool? interactionEffects,
-    final bool? tintedDisabledControls,
-    final int? blendOnLevel,
-    final bool? blendOnColors,
+    bool? interactionEffects,
+    bool? tintedDisabledControls,
+    int? blendOnLevel,
+    bool? blendOnColors,
     //
-    final FlexAdaptive? adaptiveRemoveElevationTint,
-    final FlexAdaptive? adaptiveElevationShadowsBack,
-    final FlexAdaptive? adaptiveAppBarScrollUnderOff,
-    final FlexAdaptive? adaptiveRadius,
-    final FlexAdaptive? adaptiveDialogRadius,
-    final FlexAdaptive? adaptiveInputDecoratorRadius,
+    FlexAdaptive? adaptiveRemoveElevationTint,
+    FlexAdaptive? adaptiveElevationShadowsBack,
+    FlexAdaptive? adaptiveAppBarScrollUnderOff,
+    FlexAdaptive? adaptiveRadius,
+    FlexAdaptive? adaptiveDialogRadius,
+    FlexAdaptive? adaptiveInputDecoratorRadius,
     //
-    final FlexAdaptive? adaptiveSplash,
-    final FlexSplashType? splashType,
-    final FlexSplashType? splashTypeAdaptive,
+    FlexAdaptive? adaptiveSplash,
+    FlexSplashType? splashType,
+    FlexSplashType? splashTypeAdaptive,
     //
-    final bool? blendTextTheme,
-    final bool? useMaterial3Typography,
-    final bool? useM2StyleDividerInM3,
+    bool? useMaterial3Typography,
+    bool? useM2StyleDividerInM3,
     //
-    final double? defaultRadius,
-    final double? defaultRadiusAdaptive,
+    double? defaultRadius,
+    double? defaultRadiusAdaptive,
     //
-    final Size? buttonMinSize,
-    final bool? alignedDropdown,
-    final EdgeInsetsGeometry? buttonPadding,
+    Size? buttonMinSize,
+    bool? alignedDropdown,
+    EdgeInsetsGeometry? buttonPadding,
     //
-    final double? thickBorderWidth,
-    final double? thinBorderWidth,
+    double? thickBorderWidth,
+    double? thinBorderWidth,
     //
-    final double? textButtonRadius,
-    final SchemeColor? textButtonSchemeColor,
-    final WidgetStateProperty<TextStyle?>? textButtonTextStyle,
+    double? textButtonRadius,
+    SchemeColor? textButtonSchemeColor,
+    WidgetStateProperty<TextStyle?>? textButtonTextStyle,
     //
-    final double? filledButtonRadius,
-    final SchemeColor? filledButtonSchemeColor,
-    final WidgetStateProperty<TextStyle?>? filledButtonTextStyle,
+    double? filledButtonRadius,
+    SchemeColor? filledButtonSchemeColor,
+    WidgetStateProperty<TextStyle?>? filledButtonTextStyle,
     //
     // TODO(rydmike): Hold for https://github.com/flutter/flutter/issues/115827
     // final double? filledButtonTonalRadius,
     // final SchemeColor? filledButtonTonalSchemeColor,
     // final WidgetStateProperty<TextStyle?>? filledButtonTonalTextStyle,
     //
-    final double? elevatedButtonRadius,
-    final double? elevatedButtonElevation,
-    final SchemeColor? elevatedButtonSchemeColor,
-    final SchemeColor? elevatedButtonSecondarySchemeColor,
-    final WidgetStateProperty<TextStyle?>? elevatedButtonTextStyle,
+    double? elevatedButtonRadius,
+    double? elevatedButtonElevation,
+    SchemeColor? elevatedButtonSchemeColor,
+    SchemeColor? elevatedButtonSecondarySchemeColor,
+    WidgetStateProperty<TextStyle?>? elevatedButtonTextStyle,
     //
-    final double? outlinedButtonRadius,
-    final SchemeColor? outlinedButtonSchemeColor,
-    final SchemeColor? outlinedButtonOutlineSchemeColor,
-    final double? outlinedButtonBorderWidth,
-    final double? outlinedButtonPressedBorderWidth,
-    final WidgetStateProperty<TextStyle?>? outlinedButtonTextStyle,
+    double? outlinedButtonRadius,
+    SchemeColor? outlinedButtonSchemeColor,
+    SchemeColor? outlinedButtonOutlineSchemeColor,
+    double? outlinedButtonBorderWidth,
+    double? outlinedButtonPressedBorderWidth,
+    WidgetStateProperty<TextStyle?>? outlinedButtonTextStyle,
     //
-    final double? toggleButtonsRadius,
-    final SchemeColor? toggleButtonsSchemeColor,
-    final SchemeColor? toggleButtonsSelectedForegroundSchemeColor,
-    final SchemeColor? toggleButtonsUnselectedSchemeColor,
-    final SchemeColor? toggleButtonsBorderSchemeColor,
-    final double? toggleButtonsBorderWidth,
-    final TextStyle? toggleButtonsTextStyle,
+    double? toggleButtonsRadius,
+    SchemeColor? toggleButtonsSchemeColor,
+    SchemeColor? toggleButtonsSelectedForegroundSchemeColor,
+    SchemeColor? toggleButtonsUnselectedSchemeColor,
+    SchemeColor? toggleButtonsBorderSchemeColor,
+    double? toggleButtonsBorderWidth,
+    TextStyle? toggleButtonsTextStyle,
     //
-    final double? segmentedButtonRadius,
-    final SchemeColor? segmentedButtonSchemeColor,
-    final SchemeColor? segmentedButtonSelectedForegroundSchemeColor,
-    final SchemeColor? segmentedButtonUnselectedSchemeColor,
-    final SchemeColor? segmentedButtonUnselectedForegroundSchemeColor,
-    final SchemeColor? segmentedButtonBorderSchemeColor,
-    final double? segmentedButtonBorderWidth,
-    final WidgetStateProperty<TextStyle?>? segmentedButtonTextStyle,
+    double? segmentedButtonRadius,
+    SchemeColor? segmentedButtonSchemeColor,
+    SchemeColor? segmentedButtonSelectedForegroundSchemeColor,
+    SchemeColor? segmentedButtonUnselectedSchemeColor,
+    SchemeColor? segmentedButtonUnselectedForegroundSchemeColor,
+    SchemeColor? segmentedButtonBorderSchemeColor,
+    double? segmentedButtonBorderWidth,
+    WidgetStateProperty<TextStyle?>? segmentedButtonTextStyle,
     //
-    final FlexScaffoldBaseColor? scaffoldBackgroundBaseColor,
-    final SchemeColor? scaffoldBackgroundSchemeColor,
-    final SchemeColor? materialButtonSchemeColor,
+    FlexScaffoldBaseColor? scaffoldBackgroundBaseColor,
+    SchemeColor? scaffoldBackgroundSchemeColor,
+    SchemeColor? materialButtonSchemeColor,
     //
-    final SchemeColor? switchSchemeColor,
-    final SchemeColor? switchThumbSchemeColor,
-    final bool? switchThumbFixedSize,
-    final FlexAdaptive? switchAdaptiveCupertinoLike,
+    SchemeColor? switchSchemeColor,
+    SchemeColor? switchThumbSchemeColor,
+    bool? switchThumbFixedSize,
+    FlexAdaptive? switchAdaptiveCupertinoLike,
     //
-    final SchemeColor? checkboxSchemeColor,
-    final SchemeColor? radioSchemeColor,
-    final bool? unselectedToggleIsColored,
+    SchemeColor? checkboxSchemeColor,
+    SchemeColor? radioSchemeColor,
+    bool? unselectedToggleIsColored,
     //
-    final SchemeColor? sliderBaseSchemeColor,
-    final SchemeColor? sliderThumbSchemeColor,
-    final SchemeColor? sliderIndicatorSchemeColor,
-    final bool? sliderValueTinted,
-    final FlexSliderIndicatorType? sliderValueIndicatorType,
-    final ShowValueIndicator? sliderShowValueIndicator,
-    final double? sliderTrackHeight,
-    final bool? sliderYear2023,
+    SchemeColor? sliderBaseSchemeColor,
+    SchemeColor? sliderThumbSchemeColor,
+    SchemeColor? sliderIndicatorSchemeColor,
+    bool? sliderValueTinted,
+    FlexSliderIndicatorType? sliderValueIndicatorType,
+    ShowValueIndicator? sliderShowValueIndicator,
+    double? sliderTrackHeight,
+    bool? sliderYear2023,
     //
-    final double? inputDecoratorRadius,
-    final double? inputDecoratorRadiusAdaptive,
-    final SchemeColor? inputDecoratorSchemeColor,
-    final EdgeInsetsGeometry? inputDecoratorContentPadding,
-    final bool? inputDecoratorIsDense,
-    final bool? inputDecoratorIsFilled,
-    final Color? inputDecoratorFillColor,
-    final int? inputDecoratorBackgroundAlpha,
-    final SchemeColor? inputDecoratorBorderSchemeColor,
-    final FlexInputBorderType? inputDecoratorBorderType,
-    final bool? inputDecoratorFocusedHasBorder,
-    final bool? inputDecoratorUnfocusedHasBorder,
-    final bool? inputDecoratorUnfocusedBorderIsColored,
-    final double? inputDecoratorBorderWidth,
-    final double? inputDecoratorFocusedBorderWidth,
-    final SchemeColor? inputDecoratorPrefixIconSchemeColor,
-    final SchemeColor? inputDecoratorSuffixIconSchemeColor,
+    double? inputDecoratorRadius,
+    double? inputDecoratorRadiusAdaptive,
+    SchemeColor? inputDecoratorSchemeColor,
+    EdgeInsetsGeometry? inputDecoratorContentPadding,
+    bool? inputDecoratorIsDense,
+    bool? inputDecoratorIsFilled,
+    Color? inputDecoratorFillColor,
+    int? inputDecoratorBackgroundAlpha,
+    SchemeColor? inputDecoratorBorderSchemeColor,
+    FlexInputBorderType? inputDecoratorBorderType,
+    bool? inputDecoratorFocusedHasBorder,
+    bool? inputDecoratorUnfocusedHasBorder,
+    bool? inputDecoratorUnfocusedBorderIsColored,
+    double? inputDecoratorBorderWidth,
+    double? inputDecoratorFocusedBorderWidth,
+    SchemeColor? inputDecoratorPrefixIconSchemeColor,
+    SchemeColor? inputDecoratorSuffixIconSchemeColor,
     //
-    final SchemeColor? inputCursorSchemeColor,
-    final SchemeColor? inputSelectionSchemeColor,
-    final double? inputSelectionOpacity,
-    final SchemeColor? inputSelectionHandleSchemeColor,
+    SchemeColor? inputCursorSchemeColor,
+    SchemeColor? inputSelectionSchemeColor,
+    double? inputSelectionOpacity,
+    SchemeColor? inputSelectionHandleSchemeColor,
     //
-    final SchemeColor? listTileSelectedSchemeColor,
-    final SchemeColor? listTileIconSchemeColor,
-    final SchemeColor? listTileTextSchemeColor,
-    final TextStyle? listTileTitleTextStyle,
-    final TextStyle? listTileSubtitleTextStyle,
-    final TextStyle? listTileLeadingAndTrailingTextStyle,
-    final SchemeColor? listTileTileSchemeColor,
-    final SchemeColor? listTileSelectedTileSchemeColor,
-    final EdgeInsetsGeometry? listTileContentPadding,
-    final double? listTileHorizontalTitleGap,
-    final double? listTileMinVerticalPadding,
-    final ListTileStyle? listTileStyle,
-    final ListTileTitleAlignment? listTileTitleAlignment,
-    final ListTileControlAffinity? listTileControlAffinity,
+    SchemeColor? listTileSelectedSchemeColor,
+    SchemeColor? listTileIconSchemeColor,
+    SchemeColor? listTileTextSchemeColor,
+    TextStyle? listTileTitleTextStyle,
+    TextStyle? listTileSubtitleTextStyle,
+    TextStyle? listTileLeadingAndTrailingTextStyle,
+    SchemeColor? listTileTileSchemeColor,
+    SchemeColor? listTileSelectedTileSchemeColor,
+    EdgeInsetsGeometry? listTileContentPadding,
+    double? listTileHorizontalTitleGap,
+    double? listTileMinVerticalPadding,
+    ListTileStyle? listTileStyle,
+    ListTileTitleAlignment? listTileTitleAlignment,
+    ListTileControlAffinity? listTileControlAffinity,
     //
-    final double? fabRadius,
-    final bool? fabUseShape,
-    final bool? fabAlwaysCircular,
-    final SchemeColor? fabSchemeColor,
-    final SchemeColor? fabForegroundSchemeColor,
-    final TextStyle? fabExtendedTextStyle,
+    double? fabRadius,
+    bool? fabUseShape,
+    bool? fabAlwaysCircular,
+    SchemeColor? fabSchemeColor,
+    SchemeColor? fabForegroundSchemeColor,
+    TextStyle? fabExtendedTextStyle,
     //
-    final double? chipRadius,
-    final bool? chipBlendColors,
-    final SchemeColor? chipSchemeColor,
-    final SchemeColor? chipSelectedSchemeColor,
-    final SchemeColor? chipSecondarySelectedSchemeColor,
-    final SchemeColor? chipDeleteIconSchemeColor,
-    final TextStyle? chipLabelStyle,
-    final TextStyle? chipSecondaryLabelStyle,
-    final double? chipFontSize,
-    final double? chipSecondaryFontSize,
-    final double? chipIconSize,
-    final EdgeInsetsGeometry? chipPadding,
+    double? chipRadius,
+    bool? chipBlendColors,
+    SchemeColor? chipSchemeColor,
+    SchemeColor? chipSelectedSchemeColor,
+    SchemeColor? chipSecondarySelectedSchemeColor,
+    SchemeColor? chipDeleteIconSchemeColor,
+    TextStyle? chipLabelStyle,
+    TextStyle? chipSecondaryLabelStyle,
+    double? chipFontSize,
+    double? chipSecondaryFontSize,
+    double? chipIconSize,
+    EdgeInsetsGeometry? chipPadding,
     //
-    final double? cardRadius,
-    final SchemeColor? cardBackgroundSchemeColor,
-    final SchemeColor? cardBorderSchemeColor,
-    final double? cardBorderWidth,
-    final double? cardElevation,
+    double? cardRadius,
+    SchemeColor? cardBackgroundSchemeColor,
+    SchemeColor? cardBorderSchemeColor,
+    double? cardBorderWidth,
+    double? cardElevation,
     //
-    final double? popupMenuRadius,
-    final double? popupMenuElevation,
-    final SchemeColor? popupMenuSchemeColor,
-    final double? popupMenuOpacity,
+    double? popupMenuRadius,
+    double? popupMenuElevation,
+    SchemeColor? popupMenuSchemeColor,
+    double? popupMenuOpacity,
     //
-    final TextStyle? dropdownMenuTextStyle,
-    final WidgetStateProperty<Size?>? dropdownMenuMaximumSize,
+    TextStyle? dropdownMenuTextStyle,
+    WidgetStateProperty<Size?>? dropdownMenuMaximumSize,
     //
-    final double? menuRadius,
-    final double? menuElevation,
-    final SchemeColor? menuSchemeColor,
-    final double? menuOpacity,
-    final EdgeInsetsGeometry? menuPadding,
-    final WidgetStateProperty<TextStyle?>? menuButtonTextStyle,
+    double? menuRadius,
+    double? menuElevation,
+    SchemeColor? menuSchemeColor,
+    double? menuOpacity,
+    EdgeInsetsGeometry? menuPadding,
+    WidgetStateProperty<TextStyle?>? menuButtonTextStyle,
     //
-    final SchemeColor? menuBarBackgroundSchemeColor,
-    final double? menuBarRadius,
-    final double? menuBarElevation,
-    final Color? menuBarShadowColor,
+    SchemeColor? menuBarBackgroundSchemeColor,
+    double? menuBarRadius,
+    double? menuBarElevation,
+    Color? menuBarShadowColor,
     //
-    final SchemeColor? menuItemBackgroundSchemeColor,
-    final SchemeColor? menuItemForegroundSchemeColor,
-    final SchemeColor? menuIndicatorBackgroundSchemeColor,
-    final SchemeColor? menuIndicatorForegroundSchemeColor,
-    final double? menuIndicatorRadius,
+    SchemeColor? menuItemBackgroundSchemeColor,
+    SchemeColor? menuItemForegroundSchemeColor,
+    SchemeColor? menuIndicatorBackgroundSchemeColor,
+    SchemeColor? menuIndicatorForegroundSchemeColor,
+    double? menuIndicatorRadius,
     //
-    final double? tooltipRadius,
-    final Duration? tooltipWaitDuration,
-    final Duration? tooltipShowDuration,
-    final SchemeColor? tooltipSchemeColor,
-    final double? tooltipOpacity,
+    double? tooltipRadius,
+    Duration? tooltipWaitDuration,
+    Duration? tooltipShowDuration,
+    SchemeColor? tooltipSchemeColor,
+    double? tooltipOpacity,
     //
-    final SchemeColor? progressIndicatorBaseSchemeColor,
-    final SchemeColor? progressIndicatorLinearTrackSchemeColor,
-    final double? progressIndicatorLinearMinHeight,
-    final SchemeColor? progressIndicatorCircularTrackSchemeColor,
-    final SchemeColor? progressIndicatorRefreshBackgroundSchemeColor,
-    final double? progressIndicatorLinearRadius,
-    final SchemeColor? progressIndicatorStopIndicatorSchemeColor,
-    final double? progressIndicatorStopIndicatorRadius,
-    final double? progressIndicatorStrokeWidth,
-    final double? progressIndicatorStrokeAlign,
-    final StrokeCap? progressIndicatorStrokeCap,
-    final BoxConstraints? progressIndicatorConstraints,
-    final double? progressIndicatorTrackGap,
-    final EdgeInsetsGeometry? progressIndicatorCircularTrackPadding,
-    final bool? progressIndicatorYear2023,
+    SchemeColor? progressIndicatorBaseSchemeColor,
+    SchemeColor? progressIndicatorLinearTrackSchemeColor,
+    double? progressIndicatorLinearMinHeight,
+    SchemeColor? progressIndicatorCircularTrackSchemeColor,
+    SchemeColor? progressIndicatorRefreshBackgroundSchemeColor,
+    double? progressIndicatorLinearRadius,
+    SchemeColor? progressIndicatorStopIndicatorSchemeColor,
+    double? progressIndicatorStopIndicatorRadius,
+    double? progressIndicatorStrokeWidth,
+    double? progressIndicatorStrokeAlign,
+    StrokeCap? progressIndicatorStrokeCap,
+    BoxConstraints? progressIndicatorConstraints,
+    double? progressIndicatorTrackGap,
+    EdgeInsetsGeometry? progressIndicatorCircularTrackPadding,
+    bool? progressIndicatorYear2023,
     //
-    final SchemeColor? searchBarBackgroundSchemeColor,
-    final SchemeColor? searchViewBackgroundSchemeColor,
-    final double? searchBarElevation,
-    final double? searchViewElevation,
-    final double? searchBarRadius,
-    final double? searchViewRadius,
-    final bool? searchUseGlobalShape,
-    final double? searchViewHeaderHeight,
-    final WidgetStateProperty<TextStyle?>? searchBarTextStyle,
-    final TextStyle? searchViewHeaderTextStyle,
-    final WidgetStateProperty<TextStyle?>? searchBarHintStyle,
-    final TextStyle? searchViewHeaderHintStyle,
-    final Color? searchViewDividerColor,
-    final Color? searchBarShadowColor,
-    final TextCapitalization? searchBarTextCapitalization,
-    final EdgeInsetsGeometry? searchBarPadding,
-    final BoxConstraints? searchBarConstraints,
-    final BoxConstraints? searchViewConstraints,
+    SchemeColor? searchBarBackgroundSchemeColor,
+    SchemeColor? searchViewBackgroundSchemeColor,
+    double? searchBarElevation,
+    double? searchViewElevation,
+    double? searchBarRadius,
+    double? searchViewRadius,
+    bool? searchUseGlobalShape,
+    double? searchViewHeaderHeight,
+    WidgetStateProperty<TextStyle?>? searchBarTextStyle,
+    TextStyle? searchViewHeaderTextStyle,
+    WidgetStateProperty<TextStyle?>? searchBarHintStyle,
+    TextStyle? searchViewHeaderHintStyle,
+    Color? searchViewDividerColor,
+    Color? searchBarShadowColor,
+    TextCapitalization? searchBarTextCapitalization,
+    EdgeInsetsGeometry? searchBarPadding,
+    BoxConstraints? searchBarConstraints,
+    BoxConstraints? searchViewConstraints,
     //
-    final bool? useInputDecoratorThemeInDialogs,
-    final double? dialogRadius,
-    final double? dialogRadiusAdaptive,
-    final double? dialogElevation,
-    final SchemeColor? dialogBackgroundSchemeColor,
-    final TextStyle? dialogTitleTextStyle,
-    final TextStyle? dialogContentTextStyle,
+    bool? useInputDecoratorThemeInDialogs,
+    double? dialogRadius,
+    double? dialogRadiusAdaptive,
+    double? dialogElevation,
+    SchemeColor? dialogBackgroundSchemeColor,
+    TextStyle? dialogTitleTextStyle,
+    TextStyle? dialogContentTextStyle,
     //
-    final SchemeColor? datePickerHeaderBackgroundSchemeColor,
-    final SchemeColor? datePickerHeaderForegroundSchemeColor,
-    final double? datePickerDialogRadius,
-    final SchemeColor? datePickerDividerSchemeColor,
-    final TextStyle? datePickerHeaderHeadlineStyle,
-    final TextStyle? datePickerHeaderHelpStyle,
-    final TextStyle? datePickerWeekdayStyle,
-    final TextStyle? datePickerDayStyle,
-    final TextStyle? datePickerYearStyle,
-    final TextStyle? datePickerRangePickerHeaderHeadlineStyle,
-    final TextStyle? datePickerRangePickerHeaderHelpStyle,
+    SchemeColor? datePickerHeaderBackgroundSchemeColor,
+    SchemeColor? datePickerHeaderForegroundSchemeColor,
+    double? datePickerDialogRadius,
+    SchemeColor? datePickerDividerSchemeColor,
+    TextStyle? datePickerHeaderHeadlineStyle,
+    TextStyle? datePickerHeaderHelpStyle,
+    TextStyle? datePickerWeekdayStyle,
+    TextStyle? datePickerDayStyle,
+    TextStyle? datePickerYearStyle,
+    TextStyle? datePickerRangePickerHeaderHeadlineStyle,
+    TextStyle? datePickerRangePickerHeaderHelpStyle,
     //
-    final double? timePickerDialogRadius,
-    final double? timePickerElementRadius,
-    final TextStyle? timePickerDayPeriodTextStyle,
-    final TextStyle? timePickerDialTextStyle,
-    final TextStyle? timePickerHelpTextStyle,
-    final TextStyle? timePickerHourMinuteTextStyle,
+    double? timePickerDialogRadius,
+    double? timePickerElementRadius,
+    TextStyle? timePickerDayPeriodTextStyle,
+    TextStyle? timePickerDialTextStyle,
+    TextStyle? timePickerHelpTextStyle,
+    TextStyle? timePickerHourMinuteTextStyle,
     //
-    final double? snackBarRadius,
-    final double? snackBarElevation,
-    final SchemeColor? snackBarBackgroundSchemeColor,
-    final SchemeColor? snackBarActionSchemeColor,
-    final TextStyle? snackBarContentTextStyle,
+    double? snackBarRadius,
+    double? snackBarElevation,
+    SchemeColor? snackBarBackgroundSchemeColor,
+    SchemeColor? snackBarActionSchemeColor,
+    TextStyle? snackBarContentTextStyle,
     //
-    final SchemeColor? appBarBackgroundSchemeColor,
-    final SchemeColor? appBarForegroundSchemeColor,
-    final SchemeColor? appBarIconSchemeColor,
-    final SchemeColor? appBarActionsIconSchemeColor,
-    final bool? appBarCenterTitle,
-    final double? appBarScrolledUnderElevation,
-    final TextStyle? appBarToolbarTextStyle,
-    final TextStyle? appBarTitleTextStyle,
+    SchemeColor? appBarBackgroundSchemeColor,
+    SchemeColor? appBarForegroundSchemeColor,
+    SchemeColor? appBarIconSchemeColor,
+    SchemeColor? appBarActionsIconSchemeColor,
+    bool? appBarCenterTitle,
+    double? appBarScrolledUnderElevation,
+    TextStyle? appBarToolbarTextStyle,
+    TextStyle? appBarTitleTextStyle,
     //
-    final SchemeColor? bottomAppBarSchemeColor,
-    final double? bottomAppBarHeight,
+    SchemeColor? bottomAppBarSchemeColor,
+    double? bottomAppBarHeight,
     //
-    final SchemeColor? tabBarItemSchemeColor,
-    final SchemeColor? tabBarUnselectedItemSchemeColor,
-    final double? tabBarUnselectedItemOpacity,
-    final SchemeColor? tabBarIndicatorSchemeColor,
-    final TabBarIndicatorSize? tabBarIndicatorSize,
-    final double? tabBarIndicatorWeight,
-    final double? tabBarIndicatorTopRadius,
-    final Color? tabBarDividerColor,
-    final TabAlignment? tabBarTabAlignment,
-    final TabIndicatorAnimation? tabBarIndicatorAnimation,
+    SchemeColor? tabBarItemSchemeColor,
+    SchemeColor? tabBarUnselectedItemSchemeColor,
+    double? tabBarUnselectedItemOpacity,
+    SchemeColor? tabBarIndicatorSchemeColor,
+    TabBarIndicatorSize? tabBarIndicatorSize,
+    double? tabBarIndicatorWeight,
+    double? tabBarIndicatorTopRadius,
+    Color? tabBarDividerColor,
+    TabAlignment? tabBarTabAlignment,
+    TabIndicatorAnimation? tabBarIndicatorAnimation,
     //
-    final double? drawerRadius,
-    final double? drawerElevation,
-    final SchemeColor? drawerBackgroundSchemeColor,
-    final double? drawerWidth,
-    final double? drawerIndicatorWidth,
-    final double? drawerIndicatorRadius,
-    final SchemeColor? drawerIndicatorSchemeColor,
-    final double? drawerIndicatorOpacity,
-    final SchemeColor? drawerSelectedItemSchemeColor,
-    final SchemeColor? drawerUnselectedItemSchemeColor,
+    double? drawerRadius,
+    double? drawerElevation,
+    SchemeColor? drawerBackgroundSchemeColor,
+    double? drawerWidth,
+    double? drawerIndicatorWidth,
+    double? drawerIndicatorRadius,
+    SchemeColor? drawerIndicatorSchemeColor,
+    double? drawerIndicatorOpacity,
+    SchemeColor? drawerSelectedItemSchemeColor,
+    SchemeColor? drawerUnselectedItemSchemeColor,
     //
-    final SchemeColor? bottomSheetBackgroundColor,
-    final SchemeColor? bottomSheetModalBackgroundColor,
-    final double? bottomSheetRadius,
-    final double? bottomSheetElevation,
-    final double? bottomSheetModalElevation,
-    final Clip? bottomSheetClipBehavior,
+    SchemeColor? bottomSheetBackgroundColor,
+    SchemeColor? bottomSheetModalBackgroundColor,
+    double? bottomSheetRadius,
+    double? bottomSheetElevation,
+    double? bottomSheetModalElevation,
+    Clip? bottomSheetClipBehavior,
     //
-    final TextStyle? bottomNavigationBarLabelTextStyle,
-    final double? bottomNavigationBarSelectedLabelSize,
-    final double? bottomNavigationBarUnselectedLabelSize,
-    final SchemeColor? bottomNavigationBarSelectedLabelSchemeColor,
-    final SchemeColor? bottomNavigationBarUnselectedLabelSchemeColor,
-    final bool? bottomNavigationBarMutedUnselectedLabel,
-    final double? bottomNavigationBarSelectedIconSize,
-    final double? bottomNavigationBarUnselectedIconSize,
-    final SchemeColor? bottomNavigationBarSelectedIconSchemeColor,
-    final SchemeColor? bottomNavigationBarUnselectedIconSchemeColor,
-    final bool? bottomNavigationBarMutedUnselectedIcon,
-    final SchemeColor? bottomNavigationBarBackgroundSchemeColor,
-    final double? bottomNavigationBarOpacity,
-    final double? bottomNavigationBarElevation,
-    final bool? bottomNavigationBarShowSelectedLabels,
-    final bool? bottomNavigationBarShowUnselectedLabels,
-    final BottomNavigationBarType? bottomNavigationBarType,
-    final BottomNavigationBarLandscapeLayout?
-        bottomNavigationBarLandscapeLayout,
+    TextStyle? bottomNavigationBarLabelTextStyle,
+    double? bottomNavigationBarSelectedLabelSize,
+    double? bottomNavigationBarUnselectedLabelSize,
+    SchemeColor? bottomNavigationBarSelectedLabelSchemeColor,
+    SchemeColor? bottomNavigationBarUnselectedLabelSchemeColor,
+    bool? bottomNavigationBarMutedUnselectedLabel,
+    double? bottomNavigationBarSelectedIconSize,
+    double? bottomNavigationBarUnselectedIconSize,
+    SchemeColor? bottomNavigationBarSelectedIconSchemeColor,
+    SchemeColor? bottomNavigationBarUnselectedIconSchemeColor,
+    bool? bottomNavigationBarMutedUnselectedIcon,
+    SchemeColor? bottomNavigationBarBackgroundSchemeColor,
+    double? bottomNavigationBarOpacity,
+    double? bottomNavigationBarElevation,
+    bool? bottomNavigationBarShowSelectedLabels,
+    bool? bottomNavigationBarShowUnselectedLabels,
+    BottomNavigationBarType? bottomNavigationBarType,
+    BottomNavigationBarLandscapeLayout? bottomNavigationBarLandscapeLayout,
     //
-    final TextStyle? navigationBarLabelTextStyle,
-    final double? navigationBarSelectedLabelSize,
-    final double? navigationBarUnselectedLabelSize,
-    final SchemeColor? navigationBarSelectedLabelSchemeColor,
-    final SchemeColor? navigationBarUnselectedLabelSchemeColor,
-    final bool? navigationBarMutedUnselectedLabel,
-    final double? navigationBarSelectedIconSize,
-    final double? navigationBarUnselectedIconSize,
-    final SchemeColor? navigationBarSelectedIconSchemeColor,
-    final SchemeColor? navigationBarUnselectedIconSchemeColor,
-    final bool? navigationBarMutedUnselectedIcon,
-    final SchemeColor? navigationBarIndicatorSchemeColor,
-    final double? navigationBarIndicatorOpacity,
-    final double? navigationBarIndicatorRadius,
-    final SchemeColor? navigationBarBackgroundSchemeColor,
-    final double? navigationBarOpacity,
-    final double? navigationBarElevation,
-    final double? navigationBarHeight,
-    final NavigationDestinationLabelBehavior? navigationBarLabelBehavior,
-    final FlexAdaptive? adaptiveRemoveNavigationBarTint,
+    TextStyle? navigationBarLabelTextStyle,
+    double? navigationBarSelectedLabelSize,
+    double? navigationBarUnselectedLabelSize,
+    SchemeColor? navigationBarSelectedLabelSchemeColor,
+    SchemeColor? navigationBarUnselectedLabelSchemeColor,
+    bool? navigationBarMutedUnselectedLabel,
+    double? navigationBarSelectedIconSize,
+    double? navigationBarUnselectedIconSize,
+    SchemeColor? navigationBarSelectedIconSchemeColor,
+    SchemeColor? navigationBarUnselectedIconSchemeColor,
+    bool? navigationBarMutedUnselectedIcon,
+    SchemeColor? navigationBarIndicatorSchemeColor,
+    double? navigationBarIndicatorOpacity,
+    double? navigationBarIndicatorRadius,
+    SchemeColor? navigationBarBackgroundSchemeColor,
+    double? navigationBarOpacity,
+    double? navigationBarElevation,
+    double? navigationBarHeight,
+    NavigationDestinationLabelBehavior? navigationBarLabelBehavior,
+    FlexAdaptive? adaptiveRemoveNavigationBarTint,
     //
-    final TextStyle? navigationRailLabelTextStyle,
-    final double? navigationRailSelectedLabelSize,
-    final double? navigationRailUnselectedLabelSize,
-    final SchemeColor? navigationRailSelectedLabelSchemeColor,
-    final SchemeColor? navigationRailUnselectedLabelSchemeColor,
-    final bool? navigationRailMutedUnselectedLabel,
-    final double? navigationRailSelectedIconSize,
-    final double? navigationRailUnselectedIconSize,
-    final SchemeColor? navigationRailSelectedIconSchemeColor,
-    final SchemeColor? navigationRailUnselectedIconSchemeColor,
-    final bool? navigationRailMutedUnselectedIcon,
-    final bool? navigationRailUseIndicator,
-    final SchemeColor? navigationRailIndicatorSchemeColor,
-    final double? navigationRailIndicatorOpacity,
-    final double? navigationRailIndicatorRadius,
-    final SchemeColor? navigationRailBackgroundSchemeColor,
-    final double? navigationRailOpacity,
-    final double? navigationRailElevation,
-    final NavigationRailLabelType? navigationRailLabelType,
-    final double? navigationRailGroupAlignment,
-    final double? navigationRailMinWidth,
-    final double? navigationRailMinExtendedWidth,
-    //
-    @Deprecated('This property has been replaced by the more aptly named '
-        'useMaterial3Typography property and no longer has any function '
-        'in V8 and will be removed in v9.0.0.')
-    final bool? useTextTheme,
-    @Deprecated('The `useFlutterDefaults` is deprecated, it no longer has any '
-        'function and will be removed in v9. FlexColorScheme in M3 mode '
-        'defaults to using mostly Flutter defaults styles. '
-        'For other configurations modify the theme as desired. '
-        'In M2 mode FCS will continue to use its own opinionated defaults for '
-        'as long as M2 exists.')
-    final bool? useFlutterDefaults,
+    TextStyle? navigationRailLabelTextStyle,
+    double? navigationRailSelectedLabelSize,
+    double? navigationRailUnselectedLabelSize,
+    SchemeColor? navigationRailSelectedLabelSchemeColor,
+    SchemeColor? navigationRailUnselectedLabelSchemeColor,
+    bool? navigationRailMutedUnselectedLabel,
+    double? navigationRailSelectedIconSize,
+    double? navigationRailUnselectedIconSize,
+    SchemeColor? navigationRailSelectedIconSchemeColor,
+    SchemeColor? navigationRailUnselectedIconSchemeColor,
+    bool? navigationRailMutedUnselectedIcon,
+    bool? navigationRailUseIndicator,
+    SchemeColor? navigationRailIndicatorSchemeColor,
+    double? navigationRailIndicatorOpacity,
+    double? navigationRailIndicatorRadius,
+    SchemeColor? navigationRailBackgroundSchemeColor,
+    double? navigationRailOpacity,
+    double? navigationRailElevation,
+    NavigationRailLabelType? navigationRailLabelType,
+    double? navigationRailGroupAlignment,
+    double? navigationRailMinWidth,
+    double? navigationRailMinExtendedWidth,
   }) {
     return FlexSubThemesData(
       interactionEffects: interactionEffects ?? this.interactionEffects,
-      tintedDisabledControls:
-          tintedDisabledControls ?? this.tintedDisabledControls,
+      tintedDisabledControls: tintedDisabledControls ?? this.tintedDisabledControls,
       blendOnLevel: blendOnLevel ?? this.blendOnLevel,
       blendOnColors: blendOnColors ?? this.blendOnColors,
       //
-      adaptiveRemoveElevationTint:
-          adaptiveRemoveElevationTint ?? this.adaptiveRemoveElevationTint,
-      adaptiveElevationShadowsBack:
-          adaptiveElevationShadowsBack ?? this.adaptiveElevationShadowsBack,
-      adaptiveAppBarScrollUnderOff:
-          adaptiveAppBarScrollUnderOff ?? this.adaptiveAppBarScrollUnderOff,
+      adaptiveRemoveElevationTint: adaptiveRemoveElevationTint ?? this.adaptiveRemoveElevationTint,
+      adaptiveElevationShadowsBack: adaptiveElevationShadowsBack ?? this.adaptiveElevationShadowsBack,
+      adaptiveAppBarScrollUnderOff: adaptiveAppBarScrollUnderOff ?? this.adaptiveAppBarScrollUnderOff,
       adaptiveRadius: adaptiveRadius ?? this.adaptiveRadius,
       adaptiveDialogRadius: adaptiveDialogRadius ?? this.adaptiveDialogRadius,
-      adaptiveInputDecoratorRadius:
-          adaptiveInputDecoratorRadius ?? this.adaptiveInputDecoratorRadius,
+      adaptiveInputDecoratorRadius: adaptiveInputDecoratorRadius ?? this.adaptiveInputDecoratorRadius,
       //
       adaptiveSplash: adaptiveSplash ?? this.adaptiveSplash,
       splashType: splashType ?? this.splashType,
       splashTypeAdaptive: splashTypeAdaptive ?? this.splashTypeAdaptive,
       //
-      // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-      // blendTextTheme: blendTextTheme ?? this.blendTextTheme,
-      useMaterial3Typography:
-          useMaterial3Typography ?? this.useMaterial3Typography,
-      useM2StyleDividerInM3:
-          useM2StyleDividerInM3 ?? this.useM2StyleDividerInM3,
+      useMaterial3Typography: useMaterial3Typography ?? this.useMaterial3Typography,
+      useM2StyleDividerInM3: useM2StyleDividerInM3 ?? this.useM2StyleDividerInM3,
       //
       defaultRadius: defaultRadius ?? this.defaultRadius,
-      defaultRadiusAdaptive:
-          defaultRadiusAdaptive ?? this.defaultRadiusAdaptive,
+      defaultRadiusAdaptive: defaultRadiusAdaptive ?? this.defaultRadiusAdaptive,
       //
       buttonMinSize: buttonMinSize ?? this.buttonMinSize,
       alignedDropdown: alignedDropdown ?? this.alignedDropdown,
@@ -4792,15 +4462,12 @@ class FlexSubThemesData with Diagnosticable {
       thinBorderWidth: thinBorderWidth ?? this.thinBorderWidth,
       //
       textButtonRadius: textButtonRadius ?? this.textButtonRadius,
-      textButtonSchemeColor:
-          textButtonSchemeColor ?? this.textButtonSchemeColor,
+      textButtonSchemeColor: textButtonSchemeColor ?? this.textButtonSchemeColor,
       textButtonTextStyle: textButtonTextStyle ?? this.textButtonTextStyle,
       //
       filledButtonRadius: filledButtonRadius ?? this.filledButtonRadius,
-      filledButtonSchemeColor:
-          filledButtonSchemeColor ?? this.filledButtonSchemeColor,
-      filledButtonTextStyle:
-          filledButtonTextStyle ?? this.filledButtonTextStyle,
+      filledButtonSchemeColor: filledButtonSchemeColor ?? this.filledButtonSchemeColor,
+      filledButtonTextStyle: filledButtonTextStyle ?? this.filledButtonTextStyle,
       //
       // TODO(rydmike): Hold https://github.com/flutter/flutter/issues/115827
       // filledButtonTonalRadius:
@@ -4811,201 +4478,126 @@ class FlexSubThemesData with Diagnosticable {
       //     filledButtonTonalTextStyle ?? this.filledButtonTonalTextStyle,
       //
       elevatedButtonRadius: elevatedButtonRadius ?? this.elevatedButtonRadius,
-      elevatedButtonElevation:
-          elevatedButtonElevation ?? this.elevatedButtonElevation,
-      elevatedButtonSchemeColor:
-          elevatedButtonSchemeColor ?? this.elevatedButtonSchemeColor,
-      elevatedButtonSecondarySchemeColor: elevatedButtonSecondarySchemeColor ??
-          this.elevatedButtonSecondarySchemeColor,
-      elevatedButtonTextStyle:
-          elevatedButtonTextStyle ?? this.elevatedButtonTextStyle,
+      elevatedButtonElevation: elevatedButtonElevation ?? this.elevatedButtonElevation,
+      elevatedButtonSchemeColor: elevatedButtonSchemeColor ?? this.elevatedButtonSchemeColor,
+      elevatedButtonSecondarySchemeColor: elevatedButtonSecondarySchemeColor ?? this.elevatedButtonSecondarySchemeColor,
+      elevatedButtonTextStyle: elevatedButtonTextStyle ?? this.elevatedButtonTextStyle,
       //
       outlinedButtonRadius: outlinedButtonRadius ?? this.outlinedButtonRadius,
-      outlinedButtonSchemeColor:
-          outlinedButtonSchemeColor ?? this.outlinedButtonSchemeColor,
-      outlinedButtonOutlineSchemeColor: outlinedButtonOutlineSchemeColor ??
-          this.outlinedButtonOutlineSchemeColor,
-      outlinedButtonBorderWidth:
-          outlinedButtonBorderWidth ?? this.outlinedButtonBorderWidth,
-      outlinedButtonPressedBorderWidth: outlinedButtonPressedBorderWidth ??
-          this.outlinedButtonPressedBorderWidth,
-      outlinedButtonTextStyle:
-          outlinedButtonTextStyle ?? this.outlinedButtonTextStyle,
+      outlinedButtonSchemeColor: outlinedButtonSchemeColor ?? this.outlinedButtonSchemeColor,
+      outlinedButtonOutlineSchemeColor: outlinedButtonOutlineSchemeColor ?? this.outlinedButtonOutlineSchemeColor,
+      outlinedButtonBorderWidth: outlinedButtonBorderWidth ?? this.outlinedButtonBorderWidth,
+      outlinedButtonPressedBorderWidth: outlinedButtonPressedBorderWidth ?? this.outlinedButtonPressedBorderWidth,
+      outlinedButtonTextStyle: outlinedButtonTextStyle ?? this.outlinedButtonTextStyle,
       //
       toggleButtonsRadius: toggleButtonsRadius ?? this.toggleButtonsRadius,
-      toggleButtonsSchemeColor:
-          toggleButtonsSchemeColor ?? this.toggleButtonsSchemeColor,
+      toggleButtonsSchemeColor: toggleButtonsSchemeColor ?? this.toggleButtonsSchemeColor,
       toggleButtonsSelectedForegroundSchemeColor:
-          toggleButtonsSelectedForegroundSchemeColor ??
-              this.toggleButtonsSelectedForegroundSchemeColor,
-      toggleButtonsUnselectedSchemeColor: toggleButtonsUnselectedSchemeColor ??
-          this.toggleButtonsUnselectedSchemeColor,
-      toggleButtonsBorderSchemeColor:
-          toggleButtonsBorderSchemeColor ?? this.toggleButtonsBorderSchemeColor,
-      toggleButtonsBorderWidth:
-          toggleButtonsBorderWidth ?? this.toggleButtonsBorderWidth,
-      toggleButtonsTextStyle:
-          toggleButtonsTextStyle ?? this.toggleButtonsTextStyle,
+          toggleButtonsSelectedForegroundSchemeColor ?? this.toggleButtonsSelectedForegroundSchemeColor,
+      toggleButtonsUnselectedSchemeColor: toggleButtonsUnselectedSchemeColor ?? this.toggleButtonsUnselectedSchemeColor,
+      toggleButtonsBorderSchemeColor: toggleButtonsBorderSchemeColor ?? this.toggleButtonsBorderSchemeColor,
+      toggleButtonsBorderWidth: toggleButtonsBorderWidth ?? this.toggleButtonsBorderWidth,
+      toggleButtonsTextStyle: toggleButtonsTextStyle ?? this.toggleButtonsTextStyle,
       //
-      segmentedButtonRadius:
-          segmentedButtonRadius ?? this.segmentedButtonRadius,
-      segmentedButtonSchemeColor:
-          segmentedButtonSchemeColor ?? this.segmentedButtonSchemeColor,
+      segmentedButtonRadius: segmentedButtonRadius ?? this.segmentedButtonRadius,
+      segmentedButtonSchemeColor: segmentedButtonSchemeColor ?? this.segmentedButtonSchemeColor,
       segmentedButtonSelectedForegroundSchemeColor:
-          segmentedButtonSelectedForegroundSchemeColor ??
-              this.segmentedButtonSelectedForegroundSchemeColor,
+          segmentedButtonSelectedForegroundSchemeColor ?? this.segmentedButtonSelectedForegroundSchemeColor,
       segmentedButtonUnselectedSchemeColor:
-          segmentedButtonUnselectedSchemeColor ??
-              this.segmentedButtonUnselectedSchemeColor,
+          segmentedButtonUnselectedSchemeColor ?? this.segmentedButtonUnselectedSchemeColor,
       segmentedButtonUnselectedForegroundSchemeColor:
-          segmentedButtonUnselectedForegroundSchemeColor ??
-              this.segmentedButtonUnselectedForegroundSchemeColor,
-      segmentedButtonBorderSchemeColor: segmentedButtonBorderSchemeColor ??
-          this.segmentedButtonBorderSchemeColor,
-      segmentedButtonBorderWidth:
-          segmentedButtonBorderWidth ?? this.segmentedButtonBorderWidth,
-      segmentedButtonTextStyle:
-          segmentedButtonTextStyle ?? this.segmentedButtonTextStyle,
+          segmentedButtonUnselectedForegroundSchemeColor ?? this.segmentedButtonUnselectedForegroundSchemeColor,
+      segmentedButtonBorderSchemeColor: segmentedButtonBorderSchemeColor ?? this.segmentedButtonBorderSchemeColor,
+      segmentedButtonBorderWidth: segmentedButtonBorderWidth ?? this.segmentedButtonBorderWidth,
+      segmentedButtonTextStyle: segmentedButtonTextStyle ?? this.segmentedButtonTextStyle,
       //
-      scaffoldBackgroundBaseColor:
-          scaffoldBackgroundBaseColor ?? this.scaffoldBackgroundBaseColor,
-      scaffoldBackgroundSchemeColor:
-          scaffoldBackgroundSchemeColor ?? this.scaffoldBackgroundSchemeColor,
-      materialButtonSchemeColor:
-          materialButtonSchemeColor ?? this.materialButtonSchemeColor,
+      scaffoldBackgroundBaseColor: scaffoldBackgroundBaseColor ?? this.scaffoldBackgroundBaseColor,
+      scaffoldBackgroundSchemeColor: scaffoldBackgroundSchemeColor ?? this.scaffoldBackgroundSchemeColor,
+      materialButtonSchemeColor: materialButtonSchemeColor ?? this.materialButtonSchemeColor,
       //
       switchSchemeColor: switchSchemeColor ?? this.switchSchemeColor,
-      switchThumbSchemeColor:
-          switchThumbSchemeColor ?? this.switchThumbSchemeColor,
+      switchThumbSchemeColor: switchThumbSchemeColor ?? this.switchThumbSchemeColor,
       switchThumbFixedSize: switchThumbFixedSize ?? this.switchThumbFixedSize,
-      switchAdaptiveCupertinoLike:
-          switchAdaptiveCupertinoLike ?? this.switchAdaptiveCupertinoLike,
+      switchAdaptiveCupertinoLike: switchAdaptiveCupertinoLike ?? this.switchAdaptiveCupertinoLike,
       //
       checkboxSchemeColor: checkboxSchemeColor ?? this.checkboxSchemeColor,
       radioSchemeColor: radioSchemeColor ?? this.radioSchemeColor,
-      unselectedToggleIsColored:
-          unselectedToggleIsColored ?? this.unselectedToggleIsColored,
+      unselectedToggleIsColored: unselectedToggleIsColored ?? this.unselectedToggleIsColored,
       //
-      sliderBaseSchemeColor:
-          sliderBaseSchemeColor ?? this.sliderBaseSchemeColor,
-      sliderThumbSchemeColor:
-          sliderThumbSchemeColor ?? this.sliderThumbSchemeColor,
-      sliderIndicatorSchemeColor:
-          sliderIndicatorSchemeColor ?? this.sliderIndicatorSchemeColor,
+      sliderBaseSchemeColor: sliderBaseSchemeColor ?? this.sliderBaseSchemeColor,
+      sliderThumbSchemeColor: sliderThumbSchemeColor ?? this.sliderThumbSchemeColor,
+      sliderIndicatorSchemeColor: sliderIndicatorSchemeColor ?? this.sliderIndicatorSchemeColor,
       sliderValueTinted: sliderValueTinted ?? this.sliderValueTinted,
-      sliderValueIndicatorType:
-          sliderValueIndicatorType ?? this.sliderValueIndicatorType,
-      sliderShowValueIndicator:
-          sliderShowValueIndicator ?? this.sliderShowValueIndicator,
+      sliderValueIndicatorType: sliderValueIndicatorType ?? this.sliderValueIndicatorType,
+      sliderShowValueIndicator: sliderShowValueIndicator ?? this.sliderShowValueIndicator,
       sliderTrackHeight: sliderTrackHeight ?? this.sliderTrackHeight,
       sliderYear2023: sliderYear2023 ?? this.sliderYear2023,
       //
       inputDecoratorRadius: inputDecoratorRadius ?? this.inputDecoratorRadius,
-      inputDecoratorRadiusAdaptive:
-          inputDecoratorRadiusAdaptive ?? this.inputDecoratorRadiusAdaptive,
-      inputDecoratorSchemeColor:
-          inputDecoratorSchemeColor ?? this.inputDecoratorSchemeColor,
-      inputDecoratorContentPadding:
-          inputDecoratorContentPadding ?? this.inputDecoratorContentPadding,
-      inputDecoratorIsDense:
-          inputDecoratorIsDense ?? this.inputDecoratorIsDense,
-      inputDecoratorIsFilled:
-          inputDecoratorIsFilled ?? this.inputDecoratorIsFilled,
-      inputDecoratorFillColor:
-          inputDecoratorFillColor ?? this.inputDecoratorFillColor,
-      inputDecoratorBackgroundAlpha:
-          inputDecoratorBackgroundAlpha ?? this.inputDecoratorBackgroundAlpha,
-      inputDecoratorBorderSchemeColor: inputDecoratorBorderSchemeColor ??
-          this.inputDecoratorBorderSchemeColor,
-      inputDecoratorBorderType:
-          inputDecoratorBorderType ?? this.inputDecoratorBorderType,
-      inputDecoratorFocusedHasBorder:
-          inputDecoratorFocusedHasBorder ?? this.inputDecoratorFocusedHasBorder,
-      inputDecoratorUnfocusedHasBorder: inputDecoratorUnfocusedHasBorder ??
-          this.inputDecoratorUnfocusedHasBorder,
+      inputDecoratorRadiusAdaptive: inputDecoratorRadiusAdaptive ?? this.inputDecoratorRadiusAdaptive,
+      inputDecoratorSchemeColor: inputDecoratorSchemeColor ?? this.inputDecoratorSchemeColor,
+      inputDecoratorContentPadding: inputDecoratorContentPadding ?? this.inputDecoratorContentPadding,
+      inputDecoratorIsDense: inputDecoratorIsDense ?? this.inputDecoratorIsDense,
+      inputDecoratorIsFilled: inputDecoratorIsFilled ?? this.inputDecoratorIsFilled,
+      inputDecoratorFillColor: inputDecoratorFillColor ?? this.inputDecoratorFillColor,
+      inputDecoratorBackgroundAlpha: inputDecoratorBackgroundAlpha ?? this.inputDecoratorBackgroundAlpha,
+      inputDecoratorBorderSchemeColor: inputDecoratorBorderSchemeColor ?? this.inputDecoratorBorderSchemeColor,
+      inputDecoratorBorderType: inputDecoratorBorderType ?? this.inputDecoratorBorderType,
+      inputDecoratorFocusedHasBorder: inputDecoratorFocusedHasBorder ?? this.inputDecoratorFocusedHasBorder,
+      inputDecoratorUnfocusedHasBorder: inputDecoratorUnfocusedHasBorder ?? this.inputDecoratorUnfocusedHasBorder,
       inputDecoratorUnfocusedBorderIsColored:
-          inputDecoratorUnfocusedBorderIsColored ??
-              this.inputDecoratorUnfocusedBorderIsColored,
-      inputDecoratorBorderWidth:
-          inputDecoratorBorderWidth ?? this.inputDecoratorBorderWidth,
-      inputDecoratorFocusedBorderWidth: inputDecoratorFocusedBorderWidth ??
-          this.inputDecoratorFocusedBorderWidth,
+          inputDecoratorUnfocusedBorderIsColored ?? this.inputDecoratorUnfocusedBorderIsColored,
+      inputDecoratorBorderWidth: inputDecoratorBorderWidth ?? this.inputDecoratorBorderWidth,
+      inputDecoratorFocusedBorderWidth: inputDecoratorFocusedBorderWidth ?? this.inputDecoratorFocusedBorderWidth,
       inputDecoratorPrefixIconSchemeColor:
-          inputDecoratorPrefixIconSchemeColor ??
-              this.inputDecoratorPrefixIconSchemeColor,
+          inputDecoratorPrefixIconSchemeColor ?? this.inputDecoratorPrefixIconSchemeColor,
       inputDecoratorSuffixIconSchemeColor:
-          inputDecoratorSuffixIconSchemeColor ??
-              this.inputDecoratorSuffixIconSchemeColor,
+          inputDecoratorSuffixIconSchemeColor ?? this.inputDecoratorSuffixIconSchemeColor,
       //
-      inputCursorSchemeColor:
-          inputCursorSchemeColor ?? this.inputCursorSchemeColor,
-      inputSelectionSchemeColor:
-          inputSelectionSchemeColor ?? this.inputSelectionSchemeColor,
-      inputSelectionOpacity:
-          inputSelectionOpacity ?? this.inputSelectionOpacity,
-      inputSelectionHandleSchemeColor: inputSelectionHandleSchemeColor ??
-          this.inputSelectionHandleSchemeColor,
+      inputCursorSchemeColor: inputCursorSchemeColor ?? this.inputCursorSchemeColor,
+      inputSelectionSchemeColor: inputSelectionSchemeColor ?? this.inputSelectionSchemeColor,
+      inputSelectionOpacity: inputSelectionOpacity ?? this.inputSelectionOpacity,
+      inputSelectionHandleSchemeColor: inputSelectionHandleSchemeColor ?? this.inputSelectionHandleSchemeColor,
       //
-      listTileSelectedSchemeColor:
-          listTileSelectedSchemeColor ?? this.listTileSelectedSchemeColor,
-      listTileIconSchemeColor:
-          listTileIconSchemeColor ?? this.listTileIconSchemeColor,
-      listTileTextSchemeColor:
-          listTileTextSchemeColor ?? this.listTileTextSchemeColor,
-      listTileTitleTextStyle:
-          listTileTitleTextStyle ?? this.listTileTitleTextStyle,
-      listTileSubtitleTextStyle:
-          listTileSubtitleTextStyle ?? this.listTileSubtitleTextStyle,
+      listTileSelectedSchemeColor: listTileSelectedSchemeColor ?? this.listTileSelectedSchemeColor,
+      listTileIconSchemeColor: listTileIconSchemeColor ?? this.listTileIconSchemeColor,
+      listTileTextSchemeColor: listTileTextSchemeColor ?? this.listTileTextSchemeColor,
+      listTileTitleTextStyle: listTileTitleTextStyle ?? this.listTileTitleTextStyle,
+      listTileSubtitleTextStyle: listTileSubtitleTextStyle ?? this.listTileSubtitleTextStyle,
       listTileLeadingAndTrailingTextStyle:
-          listTileLeadingAndTrailingTextStyle ??
-              this.listTileLeadingAndTrailingTextStyle,
-      listTileTileSchemeColor:
-          listTileTileSchemeColor ?? this.listTileTileSchemeColor,
-      listTileSelectedTileSchemeColor: listTileSelectedTileSchemeColor ??
-          this.listTileSelectedTileSchemeColor,
-      listTileContentPadding:
-          listTileContentPadding ?? this.listTileContentPadding,
-      listTileHorizontalTitleGap:
-          listTileHorizontalTitleGap ?? this.listTileHorizontalTitleGap,
-      listTileMinVerticalPadding:
-          listTileMinVerticalPadding ?? this.listTileMinVerticalPadding,
+          listTileLeadingAndTrailingTextStyle ?? this.listTileLeadingAndTrailingTextStyle,
+      listTileTileSchemeColor: listTileTileSchemeColor ?? this.listTileTileSchemeColor,
+      listTileSelectedTileSchemeColor: listTileSelectedTileSchemeColor ?? this.listTileSelectedTileSchemeColor,
+      listTileContentPadding: listTileContentPadding ?? this.listTileContentPadding,
+      listTileHorizontalTitleGap: listTileHorizontalTitleGap ?? this.listTileHorizontalTitleGap,
+      listTileMinVerticalPadding: listTileMinVerticalPadding ?? this.listTileMinVerticalPadding,
       listTileStyle: listTileStyle ?? this.listTileStyle,
-      listTileTitleAlignment:
-          listTileTitleAlignment ?? this.listTileTitleAlignment,
-      listTileControlAffinity:
-          listTileControlAffinity ?? this.listTileControlAffinity,
+      listTileTitleAlignment: listTileTitleAlignment ?? this.listTileTitleAlignment,
+      listTileControlAffinity: listTileControlAffinity ?? this.listTileControlAffinity,
       //
       fabRadius: fabRadius ?? this.fabRadius,
       fabUseShape: fabUseShape ?? this.fabUseShape,
       fabAlwaysCircular: fabAlwaysCircular ?? this.fabAlwaysCircular,
       fabSchemeColor: fabSchemeColor ?? this.fabSchemeColor,
-      fabForegroundSchemeColor:
-          fabForegroundSchemeColor ?? this.fabForegroundSchemeColor,
+      fabForegroundSchemeColor: fabForegroundSchemeColor ?? this.fabForegroundSchemeColor,
       fabExtendedTextStyle: fabExtendedTextStyle ?? this.fabExtendedTextStyle,
       //
       chipRadius: chipRadius ?? this.chipRadius,
       chipBlendColors: chipBlendColors ?? this.chipBlendColors,
       chipSchemeColor: chipSchemeColor ?? this.chipSchemeColor,
-      chipSelectedSchemeColor:
-          chipSelectedSchemeColor ?? this.chipSelectedSchemeColor,
-      chipSecondarySelectedSchemeColor: chipSecondarySelectedSchemeColor ??
-          this.chipSecondarySelectedSchemeColor,
-      chipDeleteIconSchemeColor:
-          chipDeleteIconSchemeColor ?? this.chipDeleteIconSchemeColor,
+      chipSelectedSchemeColor: chipSelectedSchemeColor ?? this.chipSelectedSchemeColor,
+      chipSecondarySelectedSchemeColor: chipSecondarySelectedSchemeColor ?? this.chipSecondarySelectedSchemeColor,
+      chipDeleteIconSchemeColor: chipDeleteIconSchemeColor ?? this.chipDeleteIconSchemeColor,
       chipLabelStyle: chipLabelStyle ?? this.chipLabelStyle,
-      chipSecondaryLabelStyle:
-          chipSecondaryLabelStyle ?? this.chipSecondaryLabelStyle,
+      chipSecondaryLabelStyle: chipSecondaryLabelStyle ?? this.chipSecondaryLabelStyle,
       chipFontSize: chipFontSize ?? this.chipFontSize,
-      chipSecondaryFontSize:
-          chipSecondaryFontSize ?? this.chipSecondaryFontSize,
+      chipSecondaryFontSize: chipSecondaryFontSize ?? this.chipSecondaryFontSize,
       chipIconSize: chipIconSize ?? this.chipIconSize,
       chipPadding: chipPadding ?? this.chipPadding,
       //
       cardRadius: cardRadius ?? this.cardRadius,
-      cardBackgroundSchemeColor:
-          cardBackgroundSchemeColor ?? this.cardBackgroundSchemeColor,
-      cardBorderSchemeColor:
-          cardBorderSchemeColor ?? this.cardBorderSchemeColor,
+      cardBackgroundSchemeColor: cardBackgroundSchemeColor ?? this.cardBackgroundSchemeColor,
+      cardBorderSchemeColor: cardBorderSchemeColor ?? this.cardBorderSchemeColor,
       cardBorderWidth: cardBorderWidth ?? this.cardBorderWidth,
       cardElevation: cardElevation ?? this.cardElevation,
       //
@@ -5014,10 +4606,8 @@ class FlexSubThemesData with Diagnosticable {
       popupMenuSchemeColor: popupMenuSchemeColor ?? this.popupMenuSchemeColor,
       popupMenuOpacity: popupMenuOpacity ?? this.popupMenuOpacity,
       //
-      dropdownMenuTextStyle:
-          dropdownMenuTextStyle ?? this.dropdownMenuTextStyle,
-      dropdownMenuMaximumSize:
-          dropdownMenuMaximumSize ?? this.dropdownMenuMaximumSize,
+      dropdownMenuTextStyle: dropdownMenuTextStyle ?? this.dropdownMenuTextStyle,
+      dropdownMenuMaximumSize: dropdownMenuMaximumSize ?? this.dropdownMenuMaximumSize,
       //
       menuRadius: menuRadius ?? this.menuRadius,
       menuElevation: menuElevation ?? this.menuElevation,
@@ -5026,20 +4616,15 @@ class FlexSubThemesData with Diagnosticable {
       menuPadding: menuPadding ?? this.menuPadding,
       menuButtonTextStyle: menuButtonTextStyle ?? this.menuButtonTextStyle,
       //
-      menuBarBackgroundSchemeColor:
-          menuBarBackgroundSchemeColor ?? this.menuBarBackgroundSchemeColor,
+      menuBarBackgroundSchemeColor: menuBarBackgroundSchemeColor ?? this.menuBarBackgroundSchemeColor,
       menuBarRadius: menuBarRadius ?? this.menuBarRadius,
       menuBarElevation: menuBarElevation ?? this.menuBarElevation,
       menuBarShadowColor: menuBarShadowColor ?? this.menuBarShadowColor,
       //
-      menuItemBackgroundSchemeColor:
-          menuItemBackgroundSchemeColor ?? this.menuItemBackgroundSchemeColor,
-      menuItemForegroundSchemeColor:
-          menuItemForegroundSchemeColor ?? this.menuItemForegroundSchemeColor,
-      menuIndicatorBackgroundSchemeColor: menuIndicatorBackgroundSchemeColor ??
-          this.menuIndicatorBackgroundSchemeColor,
-      menuIndicatorForegroundSchemeColor: menuIndicatorForegroundSchemeColor ??
-          this.menuIndicatorForegroundSchemeColor,
+      menuItemBackgroundSchemeColor: menuItemBackgroundSchemeColor ?? this.menuItemBackgroundSchemeColor,
+      menuItemForegroundSchemeColor: menuItemForegroundSchemeColor ?? this.menuItemForegroundSchemeColor,
+      menuIndicatorBackgroundSchemeColor: menuIndicatorBackgroundSchemeColor ?? this.menuIndicatorBackgroundSchemeColor,
+      menuIndicatorForegroundSchemeColor: menuIndicatorForegroundSchemeColor ?? this.menuIndicatorForegroundSchemeColor,
       menuIndicatorRadius: menuIndicatorRadius ?? this.menuIndicatorRadius,
       //
       tooltipRadius: tooltipRadius ?? this.tooltipRadius,
@@ -5048,335 +4633,209 @@ class FlexSubThemesData with Diagnosticable {
       tooltipSchemeColor: tooltipSchemeColor ?? this.tooltipSchemeColor,
       tooltipOpacity: tooltipOpacity ?? this.tooltipOpacity,
       //
-      progressIndicatorBaseSchemeColor: progressIndicatorBaseSchemeColor ??
-          this.progressIndicatorBaseSchemeColor,
+      progressIndicatorBaseSchemeColor: progressIndicatorBaseSchemeColor ?? this.progressIndicatorBaseSchemeColor,
       progressIndicatorLinearTrackSchemeColor:
-          progressIndicatorLinearTrackSchemeColor ??
-              this.progressIndicatorLinearTrackSchemeColor,
-      progressIndicatorLinearMinHeight: progressIndicatorLinearMinHeight ??
-          this.progressIndicatorLinearMinHeight,
+          progressIndicatorLinearTrackSchemeColor ?? this.progressIndicatorLinearTrackSchemeColor,
+      progressIndicatorLinearMinHeight: progressIndicatorLinearMinHeight ?? this.progressIndicatorLinearMinHeight,
       progressIndicatorCircularTrackSchemeColor:
-          progressIndicatorCircularTrackSchemeColor ??
-              this.progressIndicatorCircularTrackSchemeColor,
+          progressIndicatorCircularTrackSchemeColor ?? this.progressIndicatorCircularTrackSchemeColor,
       progressIndicatorRefreshBackgroundSchemeColor:
-          progressIndicatorRefreshBackgroundSchemeColor ??
-              this.progressIndicatorRefreshBackgroundSchemeColor,
-      progressIndicatorLinearRadius:
-          progressIndicatorLinearRadius ?? this.progressIndicatorLinearRadius,
+          progressIndicatorRefreshBackgroundSchemeColor ?? this.progressIndicatorRefreshBackgroundSchemeColor,
+      progressIndicatorLinearRadius: progressIndicatorLinearRadius ?? this.progressIndicatorLinearRadius,
       progressIndicatorStopIndicatorSchemeColor:
-          progressIndicatorStopIndicatorSchemeColor ??
-              this.progressIndicatorStopIndicatorSchemeColor,
+          progressIndicatorStopIndicatorSchemeColor ?? this.progressIndicatorStopIndicatorSchemeColor,
       progressIndicatorStopIndicatorRadius:
-          progressIndicatorStopIndicatorRadius ??
-              this.progressIndicatorStopIndicatorRadius,
-      progressIndicatorStrokeWidth:
-          progressIndicatorStrokeWidth ?? this.progressIndicatorStrokeWidth,
-      progressIndicatorStrokeAlign:
-          progressIndicatorStrokeAlign ?? this.progressIndicatorStrokeAlign,
-      progressIndicatorStrokeCap:
-          progressIndicatorStrokeCap ?? this.progressIndicatorStrokeCap,
-      progressIndicatorConstraints:
-          progressIndicatorConstraints ?? this.progressIndicatorConstraints,
-      progressIndicatorTrackGap:
-          progressIndicatorTrackGap ?? this.progressIndicatorTrackGap,
+          progressIndicatorStopIndicatorRadius ?? this.progressIndicatorStopIndicatorRadius,
+      progressIndicatorStrokeWidth: progressIndicatorStrokeWidth ?? this.progressIndicatorStrokeWidth,
+      progressIndicatorStrokeAlign: progressIndicatorStrokeAlign ?? this.progressIndicatorStrokeAlign,
+      progressIndicatorStrokeCap: progressIndicatorStrokeCap ?? this.progressIndicatorStrokeCap,
+      progressIndicatorConstraints: progressIndicatorConstraints ?? this.progressIndicatorConstraints,
+      progressIndicatorTrackGap: progressIndicatorTrackGap ?? this.progressIndicatorTrackGap,
       progressIndicatorCircularTrackPadding:
-          progressIndicatorCircularTrackPadding ??
-              this.progressIndicatorCircularTrackPadding,
-      progressIndicatorYear2023:
-          progressIndicatorYear2023 ?? this.progressIndicatorYear2023,
+          progressIndicatorCircularTrackPadding ?? this.progressIndicatorCircularTrackPadding,
+      progressIndicatorYear2023: progressIndicatorYear2023 ?? this.progressIndicatorYear2023,
       //
-      searchBarBackgroundSchemeColor:
-          searchBarBackgroundSchemeColor ?? this.searchBarBackgroundSchemeColor,
-      searchViewBackgroundSchemeColor: searchViewBackgroundSchemeColor ??
-          this.searchViewBackgroundSchemeColor,
+      searchBarBackgroundSchemeColor: searchBarBackgroundSchemeColor ?? this.searchBarBackgroundSchemeColor,
+      searchViewBackgroundSchemeColor: searchViewBackgroundSchemeColor ?? this.searchViewBackgroundSchemeColor,
       searchBarElevation: searchBarElevation ?? this.searchBarElevation,
       searchViewElevation: searchViewElevation ?? this.searchViewElevation,
       searchBarRadius: searchBarRadius ?? this.searchBarRadius,
       searchViewRadius: searchViewRadius ?? this.searchViewRadius,
       searchUseGlobalShape: searchUseGlobalShape ?? this.searchUseGlobalShape,
-      searchViewHeaderHeight:
-          searchViewHeaderHeight ?? this.searchViewHeaderHeight,
+      searchViewHeaderHeight: searchViewHeaderHeight ?? this.searchViewHeaderHeight,
       searchBarTextStyle: searchBarTextStyle ?? this.searchBarTextStyle,
-      searchViewHeaderTextStyle:
-          searchViewHeaderTextStyle ?? this.searchViewHeaderTextStyle,
+      searchViewHeaderTextStyle: searchViewHeaderTextStyle ?? this.searchViewHeaderTextStyle,
       searchBarHintStyle: searchBarHintStyle ?? this.searchBarHintStyle,
-      searchViewHeaderHintStyle:
-          searchViewHeaderHintStyle ?? this.searchViewHeaderHintStyle,
-      searchViewDividerColor:
-          searchViewDividerColor ?? this.searchViewDividerColor,
+      searchViewHeaderHintStyle: searchViewHeaderHintStyle ?? this.searchViewHeaderHintStyle,
+      searchViewDividerColor: searchViewDividerColor ?? this.searchViewDividerColor,
       searchBarShadowColor: searchBarShadowColor ?? this.searchBarShadowColor,
-      searchBarTextCapitalization:
-          searchBarTextCapitalization ?? this.searchBarTextCapitalization,
+      searchBarTextCapitalization: searchBarTextCapitalization ?? this.searchBarTextCapitalization,
       searchBarPadding: searchBarPadding ?? this.searchBarPadding,
       searchBarConstraints: searchBarConstraints ?? this.searchBarConstraints,
-      searchViewConstraints:
-          searchViewConstraints ?? this.searchViewConstraints,
+      searchViewConstraints: searchViewConstraints ?? this.searchViewConstraints,
       //
-      useInputDecoratorThemeInDialogs: useInputDecoratorThemeInDialogs ??
-          this.useInputDecoratorThemeInDialogs,
+      useInputDecoratorThemeInDialogs: useInputDecoratorThemeInDialogs ?? this.useInputDecoratorThemeInDialogs,
       dialogRadius: dialogRadius ?? this.dialogRadius,
       dialogRadiusAdaptive: dialogRadiusAdaptive ?? this.dialogRadiusAdaptive,
       dialogElevation: dialogElevation ?? this.dialogElevation,
-      dialogBackgroundSchemeColor:
-          dialogBackgroundSchemeColor ?? this.dialogBackgroundSchemeColor,
+      dialogBackgroundSchemeColor: dialogBackgroundSchemeColor ?? this.dialogBackgroundSchemeColor,
       dialogTitleTextStyle: dialogTitleTextStyle ?? this.dialogTitleTextStyle,
-      dialogContentTextStyle:
-          dialogContentTextStyle ?? this.dialogContentTextStyle,
+      dialogContentTextStyle: dialogContentTextStyle ?? this.dialogContentTextStyle,
       //
       datePickerHeaderBackgroundSchemeColor:
-          datePickerHeaderBackgroundSchemeColor ??
-              this.datePickerHeaderBackgroundSchemeColor,
+          datePickerHeaderBackgroundSchemeColor ?? this.datePickerHeaderBackgroundSchemeColor,
       datePickerHeaderForegroundSchemeColor:
-          datePickerHeaderForegroundSchemeColor ??
-              this.datePickerHeaderForegroundSchemeColor,
-      datePickerDialogRadius:
-          datePickerDialogRadius ?? this.datePickerDialogRadius,
-      datePickerDividerSchemeColor:
-          datePickerDividerSchemeColor ?? this.datePickerDividerSchemeColor,
-      datePickerHeaderHeadlineStyle:
-          datePickerHeaderHeadlineStyle ?? this.datePickerHeaderHeadlineStyle,
-      datePickerHeaderHelpStyle:
-          datePickerHeaderHelpStyle ?? this.datePickerHeaderHelpStyle,
-      datePickerWeekdayStyle:
-          datePickerWeekdayStyle ?? this.datePickerWeekdayStyle,
+          datePickerHeaderForegroundSchemeColor ?? this.datePickerHeaderForegroundSchemeColor,
+      datePickerDialogRadius: datePickerDialogRadius ?? this.datePickerDialogRadius,
+      datePickerDividerSchemeColor: datePickerDividerSchemeColor ?? this.datePickerDividerSchemeColor,
+      datePickerHeaderHeadlineStyle: datePickerHeaderHeadlineStyle ?? this.datePickerHeaderHeadlineStyle,
+      datePickerHeaderHelpStyle: datePickerHeaderHelpStyle ?? this.datePickerHeaderHelpStyle,
+      datePickerWeekdayStyle: datePickerWeekdayStyle ?? this.datePickerWeekdayStyle,
       datePickerDayStyle: datePickerDayStyle ?? this.datePickerDayStyle,
       datePickerYearStyle: datePickerYearStyle ?? this.datePickerYearStyle,
       datePickerRangePickerHeaderHeadlineStyle:
-          datePickerRangePickerHeaderHeadlineStyle ??
-              this.datePickerRangePickerHeaderHeadlineStyle,
+          datePickerRangePickerHeaderHeadlineStyle ?? this.datePickerRangePickerHeaderHeadlineStyle,
       datePickerRangePickerHeaderHelpStyle:
-          datePickerRangePickerHeaderHelpStyle ??
-              this.datePickerRangePickerHeaderHelpStyle,
+          datePickerRangePickerHeaderHelpStyle ?? this.datePickerRangePickerHeaderHelpStyle,
       //
-      timePickerDialogRadius:
-          timePickerDialogRadius ?? this.timePickerDialogRadius,
-      timePickerElementRadius:
-          timePickerElementRadius ?? this.timePickerElementRadius,
-      timePickerDayPeriodTextStyle:
-          timePickerDayPeriodTextStyle ?? this.timePickerDayPeriodTextStyle,
-      timePickerDialTextStyle:
-          timePickerDialTextStyle ?? this.timePickerDialTextStyle,
-      timePickerHelpTextStyle:
-          timePickerHelpTextStyle ?? this.timePickerHelpTextStyle,
-      timePickerHourMinuteTextStyle:
-          timePickerHourMinuteTextStyle ?? this.timePickerHourMinuteTextStyle,
+      timePickerDialogRadius: timePickerDialogRadius ?? this.timePickerDialogRadius,
+      timePickerElementRadius: timePickerElementRadius ?? this.timePickerElementRadius,
+      timePickerDayPeriodTextStyle: timePickerDayPeriodTextStyle ?? this.timePickerDayPeriodTextStyle,
+      timePickerDialTextStyle: timePickerDialTextStyle ?? this.timePickerDialTextStyle,
+      timePickerHelpTextStyle: timePickerHelpTextStyle ?? this.timePickerHelpTextStyle,
+      timePickerHourMinuteTextStyle: timePickerHourMinuteTextStyle ?? this.timePickerHourMinuteTextStyle,
       //
       snackBarRadius: snackBarRadius ?? this.snackBarRadius,
       snackBarElevation: snackBarElevation ?? this.snackBarElevation,
-      snackBarBackgroundSchemeColor:
-          snackBarBackgroundSchemeColor ?? this.snackBarBackgroundSchemeColor,
-      snackBarActionSchemeColor:
-          snackBarActionSchemeColor ?? this.snackBarActionSchemeColor,
-      snackBarContentTextStyle:
-          snackBarContentTextStyle ?? this.snackBarContentTextStyle,
+      snackBarBackgroundSchemeColor: snackBarBackgroundSchemeColor ?? this.snackBarBackgroundSchemeColor,
+      snackBarActionSchemeColor: snackBarActionSchemeColor ?? this.snackBarActionSchemeColor,
+      snackBarContentTextStyle: snackBarContentTextStyle ?? this.snackBarContentTextStyle,
       //
-      appBarBackgroundSchemeColor:
-          appBarBackgroundSchemeColor ?? this.appBarBackgroundSchemeColor,
-      appBarForegroundSchemeColor:
-          appBarForegroundSchemeColor ?? this.appBarForegroundSchemeColor,
-      appBarIconSchemeColor:
-          appBarIconSchemeColor ?? this.appBarIconSchemeColor,
-      appBarActionsIconSchemeColor:
-          appBarActionsIconSchemeColor ?? this.appBarActionsIconSchemeColor,
+      appBarBackgroundSchemeColor: appBarBackgroundSchemeColor ?? this.appBarBackgroundSchemeColor,
+      appBarForegroundSchemeColor: appBarForegroundSchemeColor ?? this.appBarForegroundSchemeColor,
+      appBarIconSchemeColor: appBarIconSchemeColor ?? this.appBarIconSchemeColor,
+      appBarActionsIconSchemeColor: appBarActionsIconSchemeColor ?? this.appBarActionsIconSchemeColor,
       appBarCenterTitle: appBarCenterTitle ?? this.appBarCenterTitle,
-      appBarScrolledUnderElevation:
-          appBarScrolledUnderElevation ?? this.appBarScrolledUnderElevation,
-      appBarToolbarTextStyle:
-          appBarToolbarTextStyle ?? this.appBarToolbarTextStyle,
+      appBarScrolledUnderElevation: appBarScrolledUnderElevation ?? this.appBarScrolledUnderElevation,
+      appBarToolbarTextStyle: appBarToolbarTextStyle ?? this.appBarToolbarTextStyle,
       appBarTitleTextStyle: appBarTitleTextStyle ?? this.appBarTitleTextStyle,
       //
-      bottomAppBarSchemeColor:
-          bottomAppBarSchemeColor ?? this.bottomAppBarSchemeColor,
+      bottomAppBarSchemeColor: bottomAppBarSchemeColor ?? this.bottomAppBarSchemeColor,
       bottomAppBarHeight: bottomAppBarHeight ?? this.bottomAppBarHeight,
       //
-      tabBarItemSchemeColor:
-          tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
-      tabBarUnselectedItemSchemeColor: tabBarUnselectedItemSchemeColor ??
-          this.tabBarUnselectedItemSchemeColor,
-      tabBarUnselectedItemOpacity:
-          tabBarUnselectedItemOpacity ?? this.tabBarUnselectedItemOpacity,
-      tabBarIndicatorSchemeColor:
-          tabBarIndicatorSchemeColor ?? this.tabBarIndicatorSchemeColor,
+      tabBarItemSchemeColor: tabBarItemSchemeColor ?? this.tabBarItemSchemeColor,
+      tabBarUnselectedItemSchemeColor: tabBarUnselectedItemSchemeColor ?? this.tabBarUnselectedItemSchemeColor,
+      tabBarUnselectedItemOpacity: tabBarUnselectedItemOpacity ?? this.tabBarUnselectedItemOpacity,
+      tabBarIndicatorSchemeColor: tabBarIndicatorSchemeColor ?? this.tabBarIndicatorSchemeColor,
       tabBarIndicatorSize: tabBarIndicatorSize ?? this.tabBarIndicatorSize,
-      tabBarIndicatorWeight:
-          tabBarIndicatorWeight ?? this.tabBarIndicatorWeight,
-      tabBarIndicatorTopRadius:
-          tabBarIndicatorTopRadius ?? this.tabBarIndicatorTopRadius,
+      tabBarIndicatorWeight: tabBarIndicatorWeight ?? this.tabBarIndicatorWeight,
+      tabBarIndicatorTopRadius: tabBarIndicatorTopRadius ?? this.tabBarIndicatorTopRadius,
       tabBarDividerColor: tabBarDividerColor ?? this.tabBarDividerColor,
       tabBarTabAlignment: tabBarTabAlignment ?? this.tabBarTabAlignment,
-      tabBarIndicatorAnimation:
-          tabBarIndicatorAnimation ?? this.tabBarIndicatorAnimation,
+      tabBarIndicatorAnimation: tabBarIndicatorAnimation ?? this.tabBarIndicatorAnimation,
       //
       drawerRadius: drawerRadius ?? this.drawerRadius,
       drawerElevation: drawerElevation ?? this.drawerElevation,
-      drawerBackgroundSchemeColor:
-          drawerBackgroundSchemeColor ?? this.drawerBackgroundSchemeColor,
+      drawerBackgroundSchemeColor: drawerBackgroundSchemeColor ?? this.drawerBackgroundSchemeColor,
       drawerWidth: drawerWidth ?? this.drawerWidth,
       drawerIndicatorWidth: drawerIndicatorWidth ?? this.drawerIndicatorWidth,
-      drawerIndicatorRadius:
-          drawerIndicatorRadius ?? this.drawerIndicatorRadius,
-      drawerIndicatorSchemeColor:
-          drawerIndicatorSchemeColor ?? this.drawerIndicatorSchemeColor,
-      drawerIndicatorOpacity:
-          drawerIndicatorOpacity ?? this.drawerIndicatorOpacity,
-      drawerSelectedItemSchemeColor:
-          drawerSelectedItemSchemeColor ?? this.drawerSelectedItemSchemeColor,
-      drawerUnselectedItemSchemeColor: drawerUnselectedItemSchemeColor ??
-          this.drawerUnselectedItemSchemeColor,
+      drawerIndicatorRadius: drawerIndicatorRadius ?? this.drawerIndicatorRadius,
+      drawerIndicatorSchemeColor: drawerIndicatorSchemeColor ?? this.drawerIndicatorSchemeColor,
+      drawerIndicatorOpacity: drawerIndicatorOpacity ?? this.drawerIndicatorOpacity,
+      drawerSelectedItemSchemeColor: drawerSelectedItemSchemeColor ?? this.drawerSelectedItemSchemeColor,
+      drawerUnselectedItemSchemeColor: drawerUnselectedItemSchemeColor ?? this.drawerUnselectedItemSchemeColor,
       //
-      bottomSheetBackgroundColor:
-          bottomSheetBackgroundColor ?? this.bottomSheetBackgroundColor,
-      bottomSheetModalBackgroundColor: bottomSheetModalBackgroundColor ??
-          this.bottomSheetModalBackgroundColor,
+      bottomSheetBackgroundColor: bottomSheetBackgroundColor ?? this.bottomSheetBackgroundColor,
+      bottomSheetModalBackgroundColor: bottomSheetModalBackgroundColor ?? this.bottomSheetModalBackgroundColor,
       bottomSheetRadius: bottomSheetRadius ?? this.bottomSheetRadius,
       bottomSheetElevation: bottomSheetElevation ?? this.bottomSheetElevation,
-      bottomSheetModalElevation:
-          bottomSheetModalElevation ?? this.bottomSheetModalElevation,
-      bottomSheetClipBehavior:
-          bottomSheetClipBehavior ?? this.bottomSheetClipBehavior,
+      bottomSheetModalElevation: bottomSheetModalElevation ?? this.bottomSheetModalElevation,
+      bottomSheetClipBehavior: bottomSheetClipBehavior ?? this.bottomSheetClipBehavior,
       //
-      bottomNavigationBarLabelTextStyle: bottomNavigationBarLabelTextStyle ??
-          this.bottomNavigationBarLabelTextStyle,
+      bottomNavigationBarLabelTextStyle: bottomNavigationBarLabelTextStyle ?? this.bottomNavigationBarLabelTextStyle,
       bottomNavigationBarSelectedLabelSize:
-          bottomNavigationBarSelectedLabelSize ??
-              this.bottomNavigationBarSelectedLabelSize,
+          bottomNavigationBarSelectedLabelSize ?? this.bottomNavigationBarSelectedLabelSize,
       bottomNavigationBarUnselectedLabelSize:
-          bottomNavigationBarUnselectedLabelSize ??
-              this.bottomNavigationBarUnselectedLabelSize,
+          bottomNavigationBarUnselectedLabelSize ?? this.bottomNavigationBarUnselectedLabelSize,
       bottomNavigationBarSelectedLabelSchemeColor:
-          bottomNavigationBarSelectedLabelSchemeColor ??
-              this.bottomNavigationBarSelectedLabelSchemeColor,
+          bottomNavigationBarSelectedLabelSchemeColor ?? this.bottomNavigationBarSelectedLabelSchemeColor,
       bottomNavigationBarUnselectedLabelSchemeColor:
-          bottomNavigationBarUnselectedLabelSchemeColor ??
-              this.bottomNavigationBarUnselectedLabelSchemeColor,
+          bottomNavigationBarUnselectedLabelSchemeColor ?? this.bottomNavigationBarUnselectedLabelSchemeColor,
       bottomNavigationBarMutedUnselectedLabel:
-          bottomNavigationBarMutedUnselectedLabel ??
-              this.bottomNavigationBarMutedUnselectedLabel,
+          bottomNavigationBarMutedUnselectedLabel ?? this.bottomNavigationBarMutedUnselectedLabel,
       bottomNavigationBarSelectedIconSize:
-          bottomNavigationBarSelectedIconSize ??
-              this.bottomNavigationBarSelectedIconSize,
+          bottomNavigationBarSelectedIconSize ?? this.bottomNavigationBarSelectedIconSize,
       bottomNavigationBarUnselectedIconSize:
-          bottomNavigationBarUnselectedIconSize ??
-              this.bottomNavigationBarUnselectedIconSize,
+          bottomNavigationBarUnselectedIconSize ?? this.bottomNavigationBarUnselectedIconSize,
       bottomNavigationBarSelectedIconSchemeColor:
-          bottomNavigationBarSelectedIconSchemeColor ??
-              this.bottomNavigationBarSelectedIconSchemeColor,
+          bottomNavigationBarSelectedIconSchemeColor ?? this.bottomNavigationBarSelectedIconSchemeColor,
       bottomNavigationBarUnselectedIconSchemeColor:
-          bottomNavigationBarUnselectedIconSchemeColor ??
-              this.bottomNavigationBarUnselectedIconSchemeColor,
+          bottomNavigationBarUnselectedIconSchemeColor ?? this.bottomNavigationBarUnselectedIconSchemeColor,
       bottomNavigationBarMutedUnselectedIcon:
-          bottomNavigationBarMutedUnselectedIcon ??
-              this.bottomNavigationBarMutedUnselectedIcon,
+          bottomNavigationBarMutedUnselectedIcon ?? this.bottomNavigationBarMutedUnselectedIcon,
       bottomNavigationBarBackgroundSchemeColor:
-          bottomNavigationBarBackgroundSchemeColor ??
-              this.bottomNavigationBarBackgroundSchemeColor,
-      bottomNavigationBarOpacity:
-          bottomNavigationBarOpacity ?? this.bottomNavigationBarOpacity,
-      bottomNavigationBarElevation:
-          bottomNavigationBarElevation ?? this.bottomNavigationBarElevation,
+          bottomNavigationBarBackgroundSchemeColor ?? this.bottomNavigationBarBackgroundSchemeColor,
+      bottomNavigationBarOpacity: bottomNavigationBarOpacity ?? this.bottomNavigationBarOpacity,
+      bottomNavigationBarElevation: bottomNavigationBarElevation ?? this.bottomNavigationBarElevation,
       bottomNavigationBarShowSelectedLabels:
-          bottomNavigationBarShowSelectedLabels ??
-              this.bottomNavigationBarShowSelectedLabels,
+          bottomNavigationBarShowSelectedLabels ?? this.bottomNavigationBarShowSelectedLabels,
       bottomNavigationBarShowUnselectedLabels:
-          bottomNavigationBarShowUnselectedLabels ??
-              this.bottomNavigationBarShowUnselectedLabels,
-      bottomNavigationBarType:
-          bottomNavigationBarType ?? this.bottomNavigationBarType,
-      bottomNavigationBarLandscapeLayout: bottomNavigationBarLandscapeLayout ??
-          this.bottomNavigationBarLandscapeLayout,
+          bottomNavigationBarShowUnselectedLabels ?? this.bottomNavigationBarShowUnselectedLabels,
+      bottomNavigationBarType: bottomNavigationBarType ?? this.bottomNavigationBarType,
+      bottomNavigationBarLandscapeLayout: bottomNavigationBarLandscapeLayout ?? this.bottomNavigationBarLandscapeLayout,
       //
-      navigationBarLabelTextStyle:
-          navigationBarLabelTextStyle ?? this.navigationBarLabelTextStyle,
-      navigationBarSelectedLabelSize:
-          navigationBarSelectedLabelSize ?? this.navigationBarSelectedLabelSize,
-      navigationBarUnselectedLabelSize: navigationBarUnselectedLabelSize ??
-          this.navigationBarUnselectedLabelSize,
+      navigationBarLabelTextStyle: navigationBarLabelTextStyle ?? this.navigationBarLabelTextStyle,
+      navigationBarSelectedLabelSize: navigationBarSelectedLabelSize ?? this.navigationBarSelectedLabelSize,
+      navigationBarUnselectedLabelSize: navigationBarUnselectedLabelSize ?? this.navigationBarUnselectedLabelSize,
       navigationBarSelectedLabelSchemeColor:
-          navigationBarSelectedLabelSchemeColor ??
-              this.navigationBarSelectedLabelSchemeColor,
+          navigationBarSelectedLabelSchemeColor ?? this.navigationBarSelectedLabelSchemeColor,
       navigationBarUnselectedLabelSchemeColor:
-          navigationBarUnselectedLabelSchemeColor ??
-              this.navigationBarUnselectedLabelSchemeColor,
-      navigationBarMutedUnselectedLabel: navigationBarMutedUnselectedLabel ??
-          this.navigationBarMutedUnselectedLabel,
-      navigationBarSelectedIconSize:
-          navigationBarSelectedIconSize ?? this.navigationBarSelectedIconSize,
-      navigationBarUnselectedIconSize: navigationBarUnselectedIconSize ??
-          this.navigationBarUnselectedIconSize,
+          navigationBarUnselectedLabelSchemeColor ?? this.navigationBarUnselectedLabelSchemeColor,
+      navigationBarMutedUnselectedLabel: navigationBarMutedUnselectedLabel ?? this.navigationBarMutedUnselectedLabel,
+      navigationBarSelectedIconSize: navigationBarSelectedIconSize ?? this.navigationBarSelectedIconSize,
+      navigationBarUnselectedIconSize: navigationBarUnselectedIconSize ?? this.navigationBarUnselectedIconSize,
       navigationBarSelectedIconSchemeColor:
-          navigationBarSelectedIconSchemeColor ??
-              this.navigationBarSelectedIconSchemeColor,
+          navigationBarSelectedIconSchemeColor ?? this.navigationBarSelectedIconSchemeColor,
       navigationBarUnselectedIconSchemeColor:
-          navigationBarUnselectedIconSchemeColor ??
-              this.navigationBarUnselectedIconSchemeColor,
-      navigationBarMutedUnselectedIcon: navigationBarMutedUnselectedIcon ??
-          this.navigationBarMutedUnselectedIcon,
-      navigationBarIndicatorSchemeColor: navigationBarIndicatorSchemeColor ??
-          this.navigationBarIndicatorSchemeColor,
-      navigationBarIndicatorOpacity:
-          navigationBarIndicatorOpacity ?? this.navigationBarIndicatorOpacity,
-      navigationBarIndicatorRadius:
-          navigationBarIndicatorRadius ?? this.navigationBarIndicatorRadius,
-      navigationBarBackgroundSchemeColor: navigationBarBackgroundSchemeColor ??
-          this.navigationBarBackgroundSchemeColor,
+          navigationBarUnselectedIconSchemeColor ?? this.navigationBarUnselectedIconSchemeColor,
+      navigationBarMutedUnselectedIcon: navigationBarMutedUnselectedIcon ?? this.navigationBarMutedUnselectedIcon,
+      navigationBarIndicatorSchemeColor: navigationBarIndicatorSchemeColor ?? this.navigationBarIndicatorSchemeColor,
+      navigationBarIndicatorOpacity: navigationBarIndicatorOpacity ?? this.navigationBarIndicatorOpacity,
+      navigationBarIndicatorRadius: navigationBarIndicatorRadius ?? this.navigationBarIndicatorRadius,
+      navigationBarBackgroundSchemeColor: navigationBarBackgroundSchemeColor ?? this.navigationBarBackgroundSchemeColor,
       navigationBarOpacity: navigationBarOpacity ?? this.navigationBarOpacity,
-      navigationBarElevation:
-          navigationBarElevation ?? this.navigationBarElevation,
+      navigationBarElevation: navigationBarElevation ?? this.navigationBarElevation,
       navigationBarHeight: navigationBarHeight ?? this.navigationBarHeight,
-      navigationBarLabelBehavior:
-          navigationBarLabelBehavior ?? this.navigationBarLabelBehavior,
-      adaptiveRemoveNavigationBarTint: adaptiveRemoveNavigationBarTint ??
-          this.adaptiveRemoveNavigationBarTint,
+      navigationBarLabelBehavior: navigationBarLabelBehavior ?? this.navigationBarLabelBehavior,
+      adaptiveRemoveNavigationBarTint: adaptiveRemoveNavigationBarTint ?? this.adaptiveRemoveNavigationBarTint,
       //
-      navigationRailLabelTextStyle:
-          navigationRailLabelTextStyle ?? this.navigationRailLabelTextStyle,
-      navigationRailSelectedLabelSize: navigationRailSelectedLabelSize ??
-          this.navigationRailSelectedLabelSize,
-      navigationRailUnselectedLabelSize: navigationRailUnselectedLabelSize ??
-          this.navigationRailUnselectedLabelSize,
+      navigationRailLabelTextStyle: navigationRailLabelTextStyle ?? this.navigationRailLabelTextStyle,
+      navigationRailSelectedLabelSize: navigationRailSelectedLabelSize ?? this.navigationRailSelectedLabelSize,
+      navigationRailUnselectedLabelSize: navigationRailUnselectedLabelSize ?? this.navigationRailUnselectedLabelSize,
       navigationRailSelectedLabelSchemeColor:
-          navigationRailSelectedLabelSchemeColor ??
-              this.navigationRailSelectedLabelSchemeColor,
+          navigationRailSelectedLabelSchemeColor ?? this.navigationRailSelectedLabelSchemeColor,
       navigationRailUnselectedLabelSchemeColor:
-          navigationRailUnselectedLabelSchemeColor ??
-              this.navigationRailUnselectedLabelSchemeColor,
-      navigationRailMutedUnselectedLabel: navigationRailMutedUnselectedLabel ??
-          this.navigationRailMutedUnselectedLabel,
-      navigationRailSelectedIconSize:
-          navigationRailSelectedIconSize ?? this.navigationRailSelectedIconSize,
-      navigationRailUnselectedIconSize: navigationRailUnselectedIconSize ??
-          this.navigationRailUnselectedIconSize,
+          navigationRailUnselectedLabelSchemeColor ?? this.navigationRailUnselectedLabelSchemeColor,
+      navigationRailMutedUnselectedLabel: navigationRailMutedUnselectedLabel ?? this.navigationRailMutedUnselectedLabel,
+      navigationRailSelectedIconSize: navigationRailSelectedIconSize ?? this.navigationRailSelectedIconSize,
+      navigationRailUnselectedIconSize: navigationRailUnselectedIconSize ?? this.navigationRailUnselectedIconSize,
       navigationRailSelectedIconSchemeColor:
-          navigationRailSelectedIconSchemeColor ??
-              this.navigationRailSelectedIconSchemeColor,
+          navigationRailSelectedIconSchemeColor ?? this.navigationRailSelectedIconSchemeColor,
       navigationRailUnselectedIconSchemeColor:
-          navigationRailUnselectedIconSchemeColor ??
-              this.navigationRailUnselectedIconSchemeColor,
-      navigationRailMutedUnselectedIcon: navigationRailMutedUnselectedIcon ??
-          this.navigationRailMutedUnselectedIcon,
-      navigationRailUseIndicator:
-          navigationRailUseIndicator ?? this.navigationRailUseIndicator,
-      navigationRailIndicatorSchemeColor: navigationRailIndicatorSchemeColor ??
-          this.navigationRailIndicatorSchemeColor,
-      navigationRailIndicatorOpacity:
-          navigationRailIndicatorOpacity ?? this.navigationRailIndicatorOpacity,
-      navigationRailIndicatorRadius:
-          navigationRailIndicatorRadius ?? this.navigationRailIndicatorRadius,
+          navigationRailUnselectedIconSchemeColor ?? this.navigationRailUnselectedIconSchemeColor,
+      navigationRailMutedUnselectedIcon: navigationRailMutedUnselectedIcon ?? this.navigationRailMutedUnselectedIcon,
+      navigationRailUseIndicator: navigationRailUseIndicator ?? this.navigationRailUseIndicator,
+      navigationRailIndicatorSchemeColor: navigationRailIndicatorSchemeColor ?? this.navigationRailIndicatorSchemeColor,
+      navigationRailIndicatorOpacity: navigationRailIndicatorOpacity ?? this.navigationRailIndicatorOpacity,
+      navigationRailIndicatorRadius: navigationRailIndicatorRadius ?? this.navigationRailIndicatorRadius,
       navigationRailBackgroundSchemeColor:
-          navigationRailBackgroundSchemeColor ??
-              this.navigationRailBackgroundSchemeColor,
-      navigationRailOpacity:
-          navigationRailOpacity ?? this.navigationRailOpacity,
-      navigationRailElevation:
-          navigationRailElevation ?? this.navigationRailElevation,
-      navigationRailLabelType:
-          navigationRailLabelType ?? this.navigationRailLabelType,
-      navigationRailGroupAlignment:
-          navigationRailGroupAlignment ?? this.navigationRailGroupAlignment,
-      navigationRailMinWidth:
-          navigationRailMinWidth ?? this.navigationRailMinWidth,
-      navigationRailMinExtendedWidth:
-          navigationRailMinExtendedWidth ?? this.navigationRailMinExtendedWidth,
+          navigationRailBackgroundSchemeColor ?? this.navigationRailBackgroundSchemeColor,
+      navigationRailOpacity: navigationRailOpacity ?? this.navigationRailOpacity,
+      navigationRailElevation: navigationRailElevation ?? this.navigationRailElevation,
+      navigationRailLabelType: navigationRailLabelType ?? this.navigationRailLabelType,
+      navigationRailGroupAlignment: navigationRailGroupAlignment ?? this.navigationRailGroupAlignment,
+      navigationRailMinWidth: navigationRailMinWidth ?? this.navigationRailMinWidth,
+      navigationRailMinExtendedWidth: navigationRailMinExtendedWidth ?? this.navigationRailMinExtendedWidth,
     );
   }
 
@@ -5402,8 +4861,6 @@ class FlexSubThemesData with Diagnosticable {
         other.splashType == splashType &&
         other.splashTypeAdaptive == splashTypeAdaptive &&
         //
-        // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-        // other.blendTextTheme == blendTextTheme &&
         other.useMaterial3Typography == useMaterial3Typography &&
         other.useM2StyleDividerInM3 == useM2StyleDividerInM3 &&
         //
@@ -5432,40 +4889,30 @@ class FlexSubThemesData with Diagnosticable {
         other.elevatedButtonRadius == elevatedButtonRadius &&
         other.elevatedButtonElevation == elevatedButtonElevation &&
         other.elevatedButtonSchemeColor == elevatedButtonSchemeColor &&
-        other.elevatedButtonSecondarySchemeColor ==
-            elevatedButtonSecondarySchemeColor &&
+        other.elevatedButtonSecondarySchemeColor == elevatedButtonSecondarySchemeColor &&
         other.elevatedButtonTextStyle == elevatedButtonTextStyle &&
         //
         other.outlinedButtonRadius == outlinedButtonRadius &&
         other.outlinedButtonSchemeColor == outlinedButtonSchemeColor &&
-        other.outlinedButtonOutlineSchemeColor ==
-            outlinedButtonOutlineSchemeColor &&
+        other.outlinedButtonOutlineSchemeColor == outlinedButtonOutlineSchemeColor &&
         other.outlinedButtonBorderWidth == outlinedButtonBorderWidth &&
-        other.outlinedButtonPressedBorderWidth ==
-            outlinedButtonPressedBorderWidth &&
+        other.outlinedButtonPressedBorderWidth == outlinedButtonPressedBorderWidth &&
         other.outlinedButtonTextStyle == outlinedButtonTextStyle &&
         //
         other.toggleButtonsRadius == toggleButtonsRadius &&
         other.toggleButtonsSchemeColor == toggleButtonsSchemeColor &&
-        other.toggleButtonsSelectedForegroundSchemeColor ==
-            toggleButtonsSelectedForegroundSchemeColor &&
-        other.toggleButtonsUnselectedSchemeColor ==
-            toggleButtonsUnselectedSchemeColor &&
-        other.toggleButtonsBorderSchemeColor ==
-            toggleButtonsBorderSchemeColor &&
+        other.toggleButtonsSelectedForegroundSchemeColor == toggleButtonsSelectedForegroundSchemeColor &&
+        other.toggleButtonsUnselectedSchemeColor == toggleButtonsUnselectedSchemeColor &&
+        other.toggleButtonsBorderSchemeColor == toggleButtonsBorderSchemeColor &&
         other.toggleButtonsBorderWidth == toggleButtonsBorderWidth &&
         other.toggleButtonsTextStyle == toggleButtonsTextStyle &&
         //
         other.segmentedButtonRadius == segmentedButtonRadius &&
         other.segmentedButtonSchemeColor == segmentedButtonSchemeColor &&
-        other.segmentedButtonSelectedForegroundSchemeColor ==
-            segmentedButtonSelectedForegroundSchemeColor &&
-        other.segmentedButtonUnselectedSchemeColor ==
-            segmentedButtonUnselectedSchemeColor &&
-        other.segmentedButtonUnselectedForegroundSchemeColor ==
-            segmentedButtonUnselectedForegroundSchemeColor &&
-        other.segmentedButtonBorderSchemeColor ==
-            segmentedButtonBorderSchemeColor &&
+        other.segmentedButtonSelectedForegroundSchemeColor == segmentedButtonSelectedForegroundSchemeColor &&
+        other.segmentedButtonUnselectedSchemeColor == segmentedButtonUnselectedSchemeColor &&
+        other.segmentedButtonUnselectedForegroundSchemeColor == segmentedButtonUnselectedForegroundSchemeColor &&
+        other.segmentedButtonBorderSchemeColor == segmentedButtonBorderSchemeColor &&
         other.segmentedButtonBorderWidth == segmentedButtonBorderWidth &&
         other.segmentedButtonTextStyle == segmentedButtonTextStyle &&
         //
@@ -5499,39 +4946,29 @@ class FlexSubThemesData with Diagnosticable {
         other.inputDecoratorIsFilled == inputDecoratorIsFilled &&
         other.inputDecoratorFillColor == inputDecoratorFillColor &&
         other.inputDecoratorBackgroundAlpha == inputDecoratorBackgroundAlpha &&
-        other.inputDecoratorBorderSchemeColor ==
-            inputDecoratorBorderSchemeColor &&
+        other.inputDecoratorBorderSchemeColor == inputDecoratorBorderSchemeColor &&
         other.inputDecoratorBorderType == inputDecoratorBorderType &&
-        other.inputDecoratorFocusedHasBorder ==
-            inputDecoratorFocusedHasBorder &&
-        other.inputDecoratorUnfocusedHasBorder ==
-            inputDecoratorUnfocusedHasBorder &&
-        other.inputDecoratorUnfocusedBorderIsColored ==
-            inputDecoratorUnfocusedBorderIsColored &&
+        other.inputDecoratorFocusedHasBorder == inputDecoratorFocusedHasBorder &&
+        other.inputDecoratorUnfocusedHasBorder == inputDecoratorUnfocusedHasBorder &&
+        other.inputDecoratorUnfocusedBorderIsColored == inputDecoratorUnfocusedBorderIsColored &&
         other.inputDecoratorBorderWidth == inputDecoratorBorderWidth &&
-        other.inputDecoratorFocusedBorderWidth ==
-            inputDecoratorFocusedBorderWidth &&
-        other.inputDecoratorPrefixIconSchemeColor ==
-            inputDecoratorPrefixIconSchemeColor &&
-        other.inputDecoratorSuffixIconSchemeColor ==
-            inputDecoratorSuffixIconSchemeColor &&
+        other.inputDecoratorFocusedBorderWidth == inputDecoratorFocusedBorderWidth &&
+        other.inputDecoratorPrefixIconSchemeColor == inputDecoratorPrefixIconSchemeColor &&
+        other.inputDecoratorSuffixIconSchemeColor == inputDecoratorSuffixIconSchemeColor &&
         //
         other.inputCursorSchemeColor == inputCursorSchemeColor &&
         other.inputSelectionSchemeColor == inputSelectionSchemeColor &&
         other.inputSelectionOpacity == inputSelectionOpacity &&
-        other.inputSelectionHandleSchemeColor ==
-            inputSelectionHandleSchemeColor &&
+        other.inputSelectionHandleSchemeColor == inputSelectionHandleSchemeColor &&
         //
         other.listTileSelectedSchemeColor == listTileSelectedSchemeColor &&
         other.listTileIconSchemeColor == listTileIconSchemeColor &&
         other.listTileTextSchemeColor == listTileTextSchemeColor &&
         other.listTileTitleTextStyle == listTileTitleTextStyle &&
         other.listTileSubtitleTextStyle == listTileSubtitleTextStyle &&
-        other.listTileLeadingAndTrailingTextStyle ==
-            listTileLeadingAndTrailingTextStyle &&
+        other.listTileLeadingAndTrailingTextStyle == listTileLeadingAndTrailingTextStyle &&
         other.listTileTileSchemeColor == listTileTileSchemeColor &&
-        other.listTileSelectedTileSchemeColor ==
-            listTileSelectedTileSchemeColor &&
+        other.listTileSelectedTileSchemeColor == listTileSelectedTileSchemeColor &&
         other.listTileContentPadding == listTileContentPadding &&
         other.listTileHorizontalTitleGap == listTileHorizontalTitleGap &&
         other.listTileMinVerticalPadding == listTileMinVerticalPadding &&
@@ -5550,8 +4987,7 @@ class FlexSubThemesData with Diagnosticable {
         other.chipBlendColors == chipBlendColors &&
         other.chipSchemeColor == chipSchemeColor &&
         other.chipSelectedSchemeColor == chipSelectedSchemeColor &&
-        other.chipSecondarySelectedSchemeColor ==
-            chipSecondarySelectedSchemeColor &&
+        other.chipSecondarySelectedSchemeColor == chipSecondarySelectedSchemeColor &&
         other.chipDeleteIconSchemeColor == chipDeleteIconSchemeColor &&
         other.chipLabelStyle == chipLabelStyle &&
         other.chipSecondaryLabelStyle == chipSecondaryLabelStyle &&
@@ -5588,10 +5024,8 @@ class FlexSubThemesData with Diagnosticable {
         //
         other.menuItemBackgroundSchemeColor == menuItemBackgroundSchemeColor &&
         other.menuItemForegroundSchemeColor == menuItemForegroundSchemeColor &&
-        other.menuIndicatorBackgroundSchemeColor ==
-            menuIndicatorBackgroundSchemeColor &&
-        other.menuIndicatorForegroundSchemeColor ==
-            menuIndicatorForegroundSchemeColor &&
+        other.menuIndicatorBackgroundSchemeColor == menuIndicatorBackgroundSchemeColor &&
+        other.menuIndicatorForegroundSchemeColor == menuIndicatorForegroundSchemeColor &&
         other.menuIndicatorRadius == menuIndicatorRadius &&
         //
         other.tooltipRadius == tooltipRadius &&
@@ -5600,34 +5034,24 @@ class FlexSubThemesData with Diagnosticable {
         other.tooltipSchemeColor == tooltipSchemeColor &&
         other.tooltipOpacity == tooltipOpacity &&
         //
-        other.progressIndicatorBaseSchemeColor ==
-            progressIndicatorBaseSchemeColor &&
-        other.progressIndicatorLinearTrackSchemeColor ==
-            progressIndicatorLinearTrackSchemeColor &&
-        other.progressIndicatorLinearMinHeight ==
-            progressIndicatorLinearMinHeight &&
-        other.progressIndicatorCircularTrackSchemeColor ==
-            progressIndicatorCircularTrackSchemeColor &&
-        other.progressIndicatorRefreshBackgroundSchemeColor ==
-            progressIndicatorRefreshBackgroundSchemeColor &&
+        other.progressIndicatorBaseSchemeColor == progressIndicatorBaseSchemeColor &&
+        other.progressIndicatorLinearTrackSchemeColor == progressIndicatorLinearTrackSchemeColor &&
+        other.progressIndicatorLinearMinHeight == progressIndicatorLinearMinHeight &&
+        other.progressIndicatorCircularTrackSchemeColor == progressIndicatorCircularTrackSchemeColor &&
+        other.progressIndicatorRefreshBackgroundSchemeColor == progressIndicatorRefreshBackgroundSchemeColor &&
         other.progressIndicatorLinearRadius == progressIndicatorLinearRadius &&
-        other.progressIndicatorStopIndicatorSchemeColor ==
-            progressIndicatorStopIndicatorSchemeColor &&
-        other.progressIndicatorStopIndicatorRadius ==
-            progressIndicatorStopIndicatorRadius &&
+        other.progressIndicatorStopIndicatorSchemeColor == progressIndicatorStopIndicatorSchemeColor &&
+        other.progressIndicatorStopIndicatorRadius == progressIndicatorStopIndicatorRadius &&
         other.progressIndicatorStrokeWidth == progressIndicatorStrokeWidth &&
         other.progressIndicatorStrokeAlign == progressIndicatorStrokeAlign &&
         other.progressIndicatorStrokeCap == progressIndicatorStrokeCap &&
         other.progressIndicatorConstraints == progressIndicatorConstraints &&
         other.progressIndicatorTrackGap == progressIndicatorTrackGap &&
-        other.progressIndicatorCircularTrackPadding ==
-            progressIndicatorCircularTrackPadding &&
+        other.progressIndicatorCircularTrackPadding == progressIndicatorCircularTrackPadding &&
         other.progressIndicatorYear2023 == progressIndicatorYear2023 &&
         //
-        other.searchBarBackgroundSchemeColor ==
-            searchBarBackgroundSchemeColor &&
-        other.searchViewBackgroundSchemeColor ==
-            searchViewBackgroundSchemeColor &&
+        other.searchBarBackgroundSchemeColor == searchBarBackgroundSchemeColor &&
+        other.searchViewBackgroundSchemeColor == searchViewBackgroundSchemeColor &&
         other.searchBarElevation == searchBarElevation &&
         other.searchViewElevation == searchViewElevation &&
         other.searchBarRadius == searchBarRadius &&
@@ -5645,8 +5069,7 @@ class FlexSubThemesData with Diagnosticable {
         other.searchBarConstraints == searchBarConstraints &&
         other.searchViewConstraints == searchViewConstraints &&
         //
-        other.useInputDecoratorThemeInDialogs ==
-            useInputDecoratorThemeInDialogs &&
+        other.useInputDecoratorThemeInDialogs == useInputDecoratorThemeInDialogs &&
         other.dialogRadius == dialogRadius &&
         other.dialogRadiusAdaptive == dialogRadiusAdaptive &&
         other.dialogElevation == dialogElevation &&
@@ -5654,10 +5077,8 @@ class FlexSubThemesData with Diagnosticable {
         other.dialogTitleTextStyle == dialogTitleTextStyle &&
         other.dialogContentTextStyle == dialogContentTextStyle &&
         //
-        other.datePickerHeaderBackgroundSchemeColor ==
-            datePickerHeaderBackgroundSchemeColor &&
-        other.datePickerHeaderForegroundSchemeColor ==
-            datePickerHeaderForegroundSchemeColor &&
+        other.datePickerHeaderBackgroundSchemeColor == datePickerHeaderBackgroundSchemeColor &&
+        other.datePickerHeaderForegroundSchemeColor == datePickerHeaderForegroundSchemeColor &&
         other.datePickerDialogRadius == datePickerDialogRadius &&
         other.datePickerDividerSchemeColor == datePickerDividerSchemeColor &&
         other.datePickerHeaderHeadlineStyle == datePickerHeaderHeadlineStyle &&
@@ -5665,10 +5086,8 @@ class FlexSubThemesData with Diagnosticable {
         other.datePickerWeekdayStyle == datePickerWeekdayStyle &&
         other.datePickerDayStyle == datePickerDayStyle &&
         other.datePickerYearStyle == datePickerYearStyle &&
-        other.datePickerRangePickerHeaderHeadlineStyle ==
-            datePickerRangePickerHeaderHeadlineStyle &&
-        other.datePickerRangePickerHeaderHelpStyle ==
-            datePickerRangePickerHeaderHelpStyle &&
+        other.datePickerRangePickerHeaderHeadlineStyle == datePickerRangePickerHeaderHeadlineStyle &&
+        other.datePickerRangePickerHeaderHelpStyle == datePickerRangePickerHeaderHelpStyle &&
         //
         other.timePickerDialogRadius == timePickerDialogRadius &&
         other.timePickerElementRadius == timePickerElementRadius &&
@@ -5696,8 +5115,7 @@ class FlexSubThemesData with Diagnosticable {
         other.bottomAppBarHeight == bottomAppBarHeight &&
         //
         other.tabBarItemSchemeColor == tabBarItemSchemeColor &&
-        other.tabBarUnselectedItemSchemeColor ==
-            tabBarUnselectedItemSchemeColor &&
+        other.tabBarUnselectedItemSchemeColor == tabBarUnselectedItemSchemeColor &&
         other.tabBarUnselectedItemOpacity == tabBarUnselectedItemOpacity &&
         other.tabBarIndicatorSchemeColor == tabBarIndicatorSchemeColor &&
         other.tabBarIndicatorSize == tabBarIndicatorSize &&
@@ -5716,113 +5134,71 @@ class FlexSubThemesData with Diagnosticable {
         other.drawerIndicatorSchemeColor == drawerIndicatorSchemeColor &&
         other.drawerIndicatorOpacity == drawerIndicatorOpacity &&
         other.drawerSelectedItemSchemeColor == drawerSelectedItemSchemeColor &&
-        other.drawerUnselectedItemSchemeColor ==
-            drawerUnselectedItemSchemeColor &&
+        other.drawerUnselectedItemSchemeColor == drawerUnselectedItemSchemeColor &&
         //
         other.bottomSheetBackgroundColor == bottomSheetBackgroundColor &&
-        other.bottomSheetModalBackgroundColor ==
-            bottomSheetModalBackgroundColor &&
+        other.bottomSheetModalBackgroundColor == bottomSheetModalBackgroundColor &&
         other.bottomSheetRadius == bottomSheetRadius &&
         other.bottomSheetElevation == bottomSheetElevation &&
         other.bottomSheetModalElevation == bottomSheetModalElevation &&
         other.bottomSheetClipBehavior == bottomSheetClipBehavior &&
         //
-        other.bottomNavigationBarLabelTextStyle ==
-            bottomNavigationBarLabelTextStyle &&
-        other.bottomNavigationBarSelectedLabelSize ==
-            bottomNavigationBarSelectedLabelSize &&
-        other.bottomNavigationBarUnselectedLabelSize ==
-            bottomNavigationBarUnselectedLabelSize &&
-        other.bottomNavigationBarSelectedLabelSchemeColor ==
-            bottomNavigationBarSelectedLabelSchemeColor &&
-        other.bottomNavigationBarUnselectedLabelSchemeColor ==
-            bottomNavigationBarUnselectedLabelSchemeColor &&
-        other.bottomNavigationBarMutedUnselectedLabel ==
-            bottomNavigationBarMutedUnselectedLabel &&
-        other.bottomNavigationBarSelectedIconSize ==
-            bottomNavigationBarSelectedIconSize &&
-        other.bottomNavigationBarUnselectedIconSize ==
-            bottomNavigationBarUnselectedIconSize &&
-        other.bottomNavigationBarSelectedIconSchemeColor ==
-            bottomNavigationBarSelectedIconSchemeColor &&
-        other.bottomNavigationBarUnselectedIconSchemeColor ==
-            bottomNavigationBarUnselectedIconSchemeColor &&
-        other.bottomNavigationBarMutedUnselectedIcon ==
-            bottomNavigationBarMutedUnselectedIcon &&
-        other.bottomNavigationBarBackgroundSchemeColor ==
-            bottomNavigationBarBackgroundSchemeColor &&
+        other.bottomNavigationBarLabelTextStyle == bottomNavigationBarLabelTextStyle &&
+        other.bottomNavigationBarSelectedLabelSize == bottomNavigationBarSelectedLabelSize &&
+        other.bottomNavigationBarUnselectedLabelSize == bottomNavigationBarUnselectedLabelSize &&
+        other.bottomNavigationBarSelectedLabelSchemeColor == bottomNavigationBarSelectedLabelSchemeColor &&
+        other.bottomNavigationBarUnselectedLabelSchemeColor == bottomNavigationBarUnselectedLabelSchemeColor &&
+        other.bottomNavigationBarMutedUnselectedLabel == bottomNavigationBarMutedUnselectedLabel &&
+        other.bottomNavigationBarSelectedIconSize == bottomNavigationBarSelectedIconSize &&
+        other.bottomNavigationBarUnselectedIconSize == bottomNavigationBarUnselectedIconSize &&
+        other.bottomNavigationBarSelectedIconSchemeColor == bottomNavigationBarSelectedIconSchemeColor &&
+        other.bottomNavigationBarUnselectedIconSchemeColor == bottomNavigationBarUnselectedIconSchemeColor &&
+        other.bottomNavigationBarMutedUnselectedIcon == bottomNavigationBarMutedUnselectedIcon &&
+        other.bottomNavigationBarBackgroundSchemeColor == bottomNavigationBarBackgroundSchemeColor &&
         other.bottomNavigationBarOpacity == bottomNavigationBarOpacity &&
         other.bottomNavigationBarElevation == bottomNavigationBarElevation &&
-        other.bottomNavigationBarShowSelectedLabels ==
-            bottomNavigationBarShowSelectedLabels &&
-        other.bottomNavigationBarShowUnselectedLabels ==
-            bottomNavigationBarShowUnselectedLabels &&
+        other.bottomNavigationBarShowSelectedLabels == bottomNavigationBarShowSelectedLabels &&
+        other.bottomNavigationBarShowUnselectedLabels == bottomNavigationBarShowUnselectedLabels &&
         other.bottomNavigationBarType == bottomNavigationBarType &&
-        other.bottomNavigationBarLandscapeLayout ==
-            bottomNavigationBarLandscapeLayout &&
+        other.bottomNavigationBarLandscapeLayout == bottomNavigationBarLandscapeLayout &&
         //
         other.navigationBarLabelTextStyle == navigationBarLabelTextStyle &&
-        other.navigationBarSelectedLabelSize ==
-            navigationBarSelectedLabelSize &&
-        other.navigationBarUnselectedLabelSize ==
-            navigationBarUnselectedLabelSize &&
-        other.navigationBarSelectedLabelSchemeColor ==
-            navigationBarSelectedLabelSchemeColor &&
-        other.navigationBarUnselectedLabelSchemeColor ==
-            navigationBarUnselectedLabelSchemeColor &&
-        other.navigationBarMutedUnselectedLabel ==
-            navigationBarMutedUnselectedLabel &&
+        other.navigationBarSelectedLabelSize == navigationBarSelectedLabelSize &&
+        other.navigationBarUnselectedLabelSize == navigationBarUnselectedLabelSize &&
+        other.navigationBarSelectedLabelSchemeColor == navigationBarSelectedLabelSchemeColor &&
+        other.navigationBarUnselectedLabelSchemeColor == navigationBarUnselectedLabelSchemeColor &&
+        other.navigationBarMutedUnselectedLabel == navigationBarMutedUnselectedLabel &&
         other.navigationBarSelectedIconSize == navigationBarSelectedIconSize &&
-        other.navigationBarUnselectedIconSize ==
-            navigationBarUnselectedIconSize &&
-        other.navigationBarSelectedIconSchemeColor ==
-            navigationBarSelectedIconSchemeColor &&
-        other.navigationBarUnselectedIconSchemeColor ==
-            navigationBarUnselectedIconSchemeColor &&
-        other.navigationBarMutedUnselectedIcon ==
-            navigationBarMutedUnselectedIcon &&
-        other.navigationBarIndicatorSchemeColor ==
-            navigationBarIndicatorSchemeColor &&
+        other.navigationBarUnselectedIconSize == navigationBarUnselectedIconSize &&
+        other.navigationBarSelectedIconSchemeColor == navigationBarSelectedIconSchemeColor &&
+        other.navigationBarUnselectedIconSchemeColor == navigationBarUnselectedIconSchemeColor &&
+        other.navigationBarMutedUnselectedIcon == navigationBarMutedUnselectedIcon &&
+        other.navigationBarIndicatorSchemeColor == navigationBarIndicatorSchemeColor &&
         other.navigationBarIndicatorOpacity == navigationBarIndicatorOpacity &&
         other.navigationBarIndicatorRadius == navigationBarIndicatorRadius &&
-        other.navigationBarBackgroundSchemeColor ==
-            navigationBarBackgroundSchemeColor &&
+        other.navigationBarBackgroundSchemeColor == navigationBarBackgroundSchemeColor &&
         other.navigationBarOpacity == navigationBarOpacity &&
         other.navigationBarElevation == navigationBarElevation &&
         other.navigationBarHeight == navigationBarHeight &&
         other.navigationBarLabelBehavior == navigationBarLabelBehavior &&
-        other.adaptiveRemoveNavigationBarTint ==
-            adaptiveRemoveNavigationBarTint &&
+        other.adaptiveRemoveNavigationBarTint == adaptiveRemoveNavigationBarTint &&
         //
         other.navigationRailLabelTextStyle == navigationRailLabelTextStyle &&
-        other.navigationRailSelectedLabelSize ==
-            navigationRailSelectedLabelSize &&
-        other.navigationRailUnselectedLabelSize ==
-            navigationRailUnselectedLabelSize &&
-        other.navigationRailSelectedLabelSchemeColor ==
-            navigationRailSelectedLabelSchemeColor &&
-        other.navigationRailUnselectedLabelSchemeColor ==
-            navigationRailUnselectedLabelSchemeColor &&
-        other.navigationRailMutedUnselectedLabel ==
-            navigationRailMutedUnselectedLabel &&
-        other.navigationRailSelectedIconSize ==
-            navigationRailSelectedIconSize &&
-        other.navigationRailUnselectedIconSize ==
-            navigationRailUnselectedIconSize &&
-        other.navigationRailSelectedIconSchemeColor ==
-            navigationRailSelectedIconSchemeColor &&
-        other.navigationRailUnselectedIconSchemeColor ==
-            navigationRailUnselectedIconSchemeColor &&
-        other.navigationRailMutedUnselectedIcon ==
-            navigationRailMutedUnselectedIcon &&
+        other.navigationRailSelectedLabelSize == navigationRailSelectedLabelSize &&
+        other.navigationRailUnselectedLabelSize == navigationRailUnselectedLabelSize &&
+        other.navigationRailSelectedLabelSchemeColor == navigationRailSelectedLabelSchemeColor &&
+        other.navigationRailUnselectedLabelSchemeColor == navigationRailUnselectedLabelSchemeColor &&
+        other.navigationRailMutedUnselectedLabel == navigationRailMutedUnselectedLabel &&
+        other.navigationRailSelectedIconSize == navigationRailSelectedIconSize &&
+        other.navigationRailUnselectedIconSize == navigationRailUnselectedIconSize &&
+        other.navigationRailSelectedIconSchemeColor == navigationRailSelectedIconSchemeColor &&
+        other.navigationRailUnselectedIconSchemeColor == navigationRailUnselectedIconSchemeColor &&
+        other.navigationRailMutedUnselectedIcon == navigationRailMutedUnselectedIcon &&
         other.navigationRailUseIndicator == navigationRailUseIndicator &&
-        other.navigationRailIndicatorSchemeColor ==
-            navigationRailIndicatorSchemeColor &&
-        other.navigationRailIndicatorOpacity ==
-            navigationRailIndicatorOpacity &&
+        other.navigationRailIndicatorSchemeColor == navigationRailIndicatorSchemeColor &&
+        other.navigationRailIndicatorOpacity == navigationRailIndicatorOpacity &&
         other.navigationRailIndicatorRadius == navigationRailIndicatorRadius &&
-        other.navigationRailBackgroundSchemeColor ==
-            navigationRailBackgroundSchemeColor &&
+        other.navigationRailBackgroundSchemeColor == navigationRailBackgroundSchemeColor &&
         other.navigationRailOpacity == navigationRailOpacity &&
         other.navigationRailElevation == navigationRailElevation &&
         other.navigationRailLabelType == navigationRailLabelType &&
@@ -5834,434 +5210,408 @@ class FlexSubThemesData with Diagnosticable {
   /// Override for hashcode, dart.ui Jenkins based.
   @override
   int get hashCode => Object.hashAll(<Object?>[
-        interactionEffects,
-        tintedDisabledControls,
-        blendOnLevel,
-        blendOnColors,
-        //
-        adaptiveRemoveElevationTint,
-        adaptiveElevationShadowsBack,
-        adaptiveAppBarScrollUnderOff,
-        adaptiveRadius,
-        adaptiveDialogRadius,
-        adaptiveInputDecoratorRadius,
-        //
-        adaptiveSplash,
-        splashType,
-        splashTypeAdaptive,
-        //
-        // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-        // blendTextTheme,
-        useMaterial3Typography,
-        useM2StyleDividerInM3,
-        //
-        defaultRadius,
-        defaultRadiusAdaptive,
-        buttonMinSize,
-        alignedDropdown,
-        buttonPadding,
-        //
-        thickBorderWidth,
-        thinBorderWidth,
-        //
-        textButtonRadius,
-        textButtonSchemeColor,
-        textButtonTextStyle,
-        //
-        filledButtonRadius,
-        filledButtonSchemeColor,
-        filledButtonTextStyle,
-        //
-        // TODO(rydmike): Hold https://github.com/flutter/flutter/issues/115827
-        // filledButtonTonalRadius,
-        // filledButtonTonalSchemeColor,
-        // filledButtonTonalTextStyle,
-        //
-        elevatedButtonRadius,
-        elevatedButtonElevation,
-        elevatedButtonSchemeColor,
-        elevatedButtonSecondarySchemeColor,
-        elevatedButtonTextStyle,
-        //
-        outlinedButtonRadius,
-        outlinedButtonSchemeColor,
-        outlinedButtonOutlineSchemeColor,
-        outlinedButtonBorderWidth,
-        outlinedButtonPressedBorderWidth,
-        outlinedButtonTextStyle,
-        //
-        toggleButtonsRadius,
-        toggleButtonsSchemeColor,
-        toggleButtonsSelectedForegroundSchemeColor,
-        toggleButtonsUnselectedSchemeColor,
-        toggleButtonsBorderSchemeColor,
-        toggleButtonsBorderWidth,
-        toggleButtonsTextStyle,
-        //
-        segmentedButtonRadius,
-        segmentedButtonSchemeColor,
-        segmentedButtonSelectedForegroundSchemeColor,
-        segmentedButtonUnselectedSchemeColor,
-        segmentedButtonUnselectedForegroundSchemeColor,
-        segmentedButtonBorderSchemeColor,
-        segmentedButtonBorderWidth,
-        segmentedButtonTextStyle,
-        //
-        scaffoldBackgroundBaseColor,
-        scaffoldBackgroundSchemeColor,
-        materialButtonSchemeColor,
-        //
-        switchSchemeColor,
-        switchThumbSchemeColor,
-        switchThumbFixedSize,
-        switchAdaptiveCupertinoLike,
-        //
-        checkboxSchemeColor,
-        radioSchemeColor,
-        unselectedToggleIsColored,
-        //
-        sliderBaseSchemeColor,
-        sliderThumbSchemeColor,
-        sliderIndicatorSchemeColor,
-        sliderValueTinted,
-        sliderValueIndicatorType,
-        sliderShowValueIndicator,
-        sliderTrackHeight,
-        sliderYear2023,
-        //
-        inputDecoratorRadius,
-        inputDecoratorRadiusAdaptive,
-        inputDecoratorSchemeColor,
-        inputDecoratorContentPadding,
-        inputDecoratorIsDense,
-        inputDecoratorIsFilled,
-        inputDecoratorFillColor,
-        inputDecoratorBackgroundAlpha,
-        inputDecoratorBorderSchemeColor,
-        inputDecoratorBorderType,
-        inputDecoratorFocusedHasBorder,
-        inputDecoratorUnfocusedHasBorder,
-        inputDecoratorUnfocusedBorderIsColored,
-        inputDecoratorBorderWidth,
-        inputDecoratorFocusedBorderWidth,
-        inputDecoratorPrefixIconSchemeColor,
-        inputDecoratorSuffixIconSchemeColor,
-        //
-        inputCursorSchemeColor,
-        inputSelectionSchemeColor,
-        inputSelectionOpacity,
-        inputSelectionHandleSchemeColor,
-        //
-        listTileSelectedSchemeColor,
-        listTileIconSchemeColor,
-        listTileTextSchemeColor,
-        listTileTitleTextStyle,
-        listTileSubtitleTextStyle,
-        listTileLeadingAndTrailingTextStyle,
-        listTileTileSchemeColor,
-        listTileSelectedTileSchemeColor,
-        listTileContentPadding,
-        listTileHorizontalTitleGap,
-        listTileMinVerticalPadding,
-        listTileStyle,
-        listTileTitleAlignment,
-        listTileControlAffinity,
-        //
-        fabRadius,
-        fabUseShape,
-        fabAlwaysCircular,
-        fabSchemeColor,
-        fabForegroundSchemeColor,
-        fabExtendedTextStyle,
-        //
-        chipRadius,
-        chipBlendColors,
-        chipSchemeColor,
-        chipSelectedSchemeColor,
-        chipSecondarySelectedSchemeColor,
-        chipDeleteIconSchemeColor,
-        chipLabelStyle,
-        chipSecondaryLabelStyle,
-        chipFontSize,
-        chipSecondaryFontSize,
-        chipIconSize,
-        chipPadding,
-        //
-        cardRadius,
-        cardBackgroundSchemeColor,
-        cardBorderSchemeColor,
-        cardBorderWidth,
-        cardElevation,
-        //
-        popupMenuRadius,
-        popupMenuElevation,
-        popupMenuSchemeColor,
-        popupMenuOpacity,
-        //
-        dropdownMenuTextStyle,
-        dropdownMenuMaximumSize,
-        //
-        menuRadius,
-        menuElevation,
-        menuSchemeColor,
-        menuOpacity,
-        menuPadding,
-        menuButtonTextStyle,
-        //
-        menuBarBackgroundSchemeColor,
-        menuBarRadius,
-        menuBarElevation,
-        menuBarShadowColor,
-        //
-        menuItemBackgroundSchemeColor,
-        menuItemForegroundSchemeColor,
-        menuIndicatorBackgroundSchemeColor,
-        menuIndicatorForegroundSchemeColor,
-        menuIndicatorRadius,
-        //
-        tooltipRadius,
-        tooltipWaitDuration,
-        tooltipShowDuration,
-        tooltipSchemeColor,
-        tooltipOpacity,
-        //
-        progressIndicatorBaseSchemeColor,
-        progressIndicatorLinearTrackSchemeColor,
-        progressIndicatorLinearMinHeight,
-        progressIndicatorCircularTrackSchemeColor,
-        progressIndicatorRefreshBackgroundSchemeColor,
-        progressIndicatorLinearRadius,
-        progressIndicatorStopIndicatorSchemeColor,
-        progressIndicatorStopIndicatorRadius,
-        progressIndicatorStrokeWidth,
-        progressIndicatorStrokeAlign,
-        progressIndicatorStrokeCap,
-        progressIndicatorConstraints,
-        progressIndicatorTrackGap,
-        progressIndicatorCircularTrackPadding,
-        progressIndicatorYear2023,
-        //
-        searchBarBackgroundSchemeColor,
-        searchViewBackgroundSchemeColor,
-        searchBarElevation,
-        searchViewElevation,
-        searchBarRadius,
-        searchViewRadius,
-        searchUseGlobalShape,
-        searchViewHeaderHeight,
-        searchBarTextStyle,
-        searchViewHeaderTextStyle,
-        searchBarHintStyle,
-        searchViewHeaderHintStyle,
-        searchViewDividerColor,
-        searchBarShadowColor,
-        searchBarTextCapitalization,
-        searchBarPadding,
-        searchBarConstraints,
-        searchViewConstraints,
-        //
-        useInputDecoratorThemeInDialogs,
-        dialogRadius,
-        dialogRadiusAdaptive,
-        dialogElevation,
-        dialogBackgroundSchemeColor,
-        dialogTitleTextStyle,
-        dialogContentTextStyle,
-        //
-        datePickerHeaderBackgroundSchemeColor,
-        datePickerHeaderForegroundSchemeColor,
-        datePickerDialogRadius,
-        datePickerDividerSchemeColor,
-        datePickerHeaderHeadlineStyle,
-        datePickerHeaderHelpStyle,
-        datePickerWeekdayStyle,
-        datePickerDayStyle,
-        datePickerYearStyle,
-        datePickerRangePickerHeaderHeadlineStyle,
-        datePickerRangePickerHeaderHelpStyle,
-        //
-        timePickerDialogRadius,
-        timePickerElementRadius,
-        timePickerDayPeriodTextStyle,
-        timePickerDialTextStyle,
-        timePickerHelpTextStyle,
-        timePickerHourMinuteTextStyle,
-        //
-        snackBarRadius,
-        snackBarElevation,
-        snackBarBackgroundSchemeColor,
-        snackBarActionSchemeColor,
-        snackBarContentTextStyle,
-        //
-        appBarBackgroundSchemeColor,
-        appBarForegroundSchemeColor,
-        appBarIconSchemeColor,
-        appBarActionsIconSchemeColor,
-        appBarCenterTitle,
-        appBarScrolledUnderElevation,
-        appBarToolbarTextStyle,
-        appBarTitleTextStyle,
-        //
-        bottomAppBarSchemeColor,
-        bottomAppBarHeight,
-        //
-        tabBarItemSchemeColor,
-        tabBarUnselectedItemSchemeColor,
-        tabBarUnselectedItemOpacity,
-        tabBarIndicatorSchemeColor,
-        tabBarIndicatorSize,
-        tabBarIndicatorWeight,
-        tabBarIndicatorTopRadius,
-        tabBarDividerColor,
-        tabBarTabAlignment,
-        tabBarIndicatorAnimation,
-        //
-        drawerRadius,
-        drawerElevation,
-        drawerBackgroundSchemeColor,
-        drawerWidth,
-        drawerIndicatorWidth,
-        drawerIndicatorRadius,
-        drawerIndicatorSchemeColor,
-        drawerIndicatorOpacity,
-        drawerSelectedItemSchemeColor,
-        drawerUnselectedItemSchemeColor,
-        //
-        bottomSheetBackgroundColor,
-        bottomSheetModalBackgroundColor,
-        bottomSheetRadius,
-        bottomSheetElevation,
-        bottomSheetModalElevation,
-        bottomSheetClipBehavior,
-        //
-        bottomNavigationBarLabelTextStyle,
-        bottomNavigationBarSelectedLabelSize,
-        bottomNavigationBarUnselectedLabelSize,
-        bottomNavigationBarSelectedLabelSchemeColor,
-        bottomNavigationBarUnselectedLabelSchemeColor,
-        bottomNavigationBarMutedUnselectedLabel,
-        bottomNavigationBarSelectedIconSize,
-        bottomNavigationBarUnselectedIconSize,
-        bottomNavigationBarSelectedIconSchemeColor,
-        bottomNavigationBarUnselectedIconSchemeColor,
-        bottomNavigationBarMutedUnselectedIcon,
-        bottomNavigationBarBackgroundSchemeColor,
-        bottomNavigationBarOpacity,
-        bottomNavigationBarElevation,
-        bottomNavigationBarShowSelectedLabels,
-        bottomNavigationBarShowUnselectedLabels,
-        bottomNavigationBarType,
-        bottomNavigationBarLandscapeLayout,
-        //
-        navigationBarLabelTextStyle,
-        navigationBarSelectedLabelSize,
-        navigationBarUnselectedLabelSize,
-        navigationBarSelectedLabelSchemeColor,
-        navigationBarUnselectedLabelSchemeColor,
-        navigationBarMutedUnselectedLabel,
-        navigationBarSelectedIconSize,
-        navigationBarUnselectedIconSize,
-        navigationBarSelectedIconSchemeColor,
-        navigationBarUnselectedIconSchemeColor,
-        navigationBarMutedUnselectedIcon,
-        navigationBarIndicatorSchemeColor,
-        navigationBarIndicatorOpacity,
-        navigationBarIndicatorRadius,
-        navigationBarBackgroundSchemeColor,
-        navigationBarOpacity,
-        navigationBarElevation,
-        navigationBarHeight,
-        navigationBarLabelBehavior,
-        adaptiveRemoveNavigationBarTint,
-        //
-        navigationRailLabelTextStyle,
-        navigationRailSelectedLabelSize,
-        navigationRailUnselectedLabelSize,
-        navigationRailSelectedLabelSchemeColor,
-        navigationRailUnselectedLabelSchemeColor,
-        navigationRailMutedUnselectedLabel,
-        navigationRailSelectedIconSize,
-        navigationRailUnselectedIconSize,
-        navigationRailSelectedIconSchemeColor,
-        navigationRailUnselectedIconSchemeColor,
-        navigationRailMutedUnselectedIcon,
-        navigationRailUseIndicator,
-        navigationRailIndicatorSchemeColor,
-        navigationRailIndicatorOpacity,
-        navigationRailIndicatorRadius,
-        navigationRailBackgroundSchemeColor,
-        navigationRailOpacity,
-        navigationRailElevation,
-        navigationRailLabelType,
-        navigationRailGroupAlignment,
-        navigationRailMinWidth,
-        navigationRailMinExtendedWidth,
-      ]);
+    interactionEffects,
+    tintedDisabledControls,
+    blendOnLevel,
+    blendOnColors,
+    //
+    adaptiveRemoveElevationTint,
+    adaptiveElevationShadowsBack,
+    adaptiveAppBarScrollUnderOff,
+    adaptiveRadius,
+    adaptiveDialogRadius,
+    adaptiveInputDecoratorRadius,
+    //
+    adaptiveSplash,
+    splashType,
+    splashTypeAdaptive,
+    //
+    useMaterial3Typography,
+    useM2StyleDividerInM3,
+    //
+    defaultRadius,
+    defaultRadiusAdaptive,
+    buttonMinSize,
+    alignedDropdown,
+    buttonPadding,
+    //
+    thickBorderWidth,
+    thinBorderWidth,
+    //
+    textButtonRadius,
+    textButtonSchemeColor,
+    textButtonTextStyle,
+    //
+    filledButtonRadius,
+    filledButtonSchemeColor,
+    filledButtonTextStyle,
+    //
+    // TODO(rydmike): Hold https://github.com/flutter/flutter/issues/115827
+    // filledButtonTonalRadius,
+    // filledButtonTonalSchemeColor,
+    // filledButtonTonalTextStyle,
+    //
+    elevatedButtonRadius,
+    elevatedButtonElevation,
+    elevatedButtonSchemeColor,
+    elevatedButtonSecondarySchemeColor,
+    elevatedButtonTextStyle,
+    //
+    outlinedButtonRadius,
+    outlinedButtonSchemeColor,
+    outlinedButtonOutlineSchemeColor,
+    outlinedButtonBorderWidth,
+    outlinedButtonPressedBorderWidth,
+    outlinedButtonTextStyle,
+    //
+    toggleButtonsRadius,
+    toggleButtonsSchemeColor,
+    toggleButtonsSelectedForegroundSchemeColor,
+    toggleButtonsUnselectedSchemeColor,
+    toggleButtonsBorderSchemeColor,
+    toggleButtonsBorderWidth,
+    toggleButtonsTextStyle,
+    //
+    segmentedButtonRadius,
+    segmentedButtonSchemeColor,
+    segmentedButtonSelectedForegroundSchemeColor,
+    segmentedButtonUnselectedSchemeColor,
+    segmentedButtonUnselectedForegroundSchemeColor,
+    segmentedButtonBorderSchemeColor,
+    segmentedButtonBorderWidth,
+    segmentedButtonTextStyle,
+    //
+    scaffoldBackgroundBaseColor,
+    scaffoldBackgroundSchemeColor,
+    materialButtonSchemeColor,
+    //
+    switchSchemeColor,
+    switchThumbSchemeColor,
+    switchThumbFixedSize,
+    switchAdaptiveCupertinoLike,
+    //
+    checkboxSchemeColor,
+    radioSchemeColor,
+    unselectedToggleIsColored,
+    //
+    sliderBaseSchemeColor,
+    sliderThumbSchemeColor,
+    sliderIndicatorSchemeColor,
+    sliderValueTinted,
+    sliderValueIndicatorType,
+    sliderShowValueIndicator,
+    sliderTrackHeight,
+    sliderYear2023,
+    //
+    inputDecoratorRadius,
+    inputDecoratorRadiusAdaptive,
+    inputDecoratorSchemeColor,
+    inputDecoratorContentPadding,
+    inputDecoratorIsDense,
+    inputDecoratorIsFilled,
+    inputDecoratorFillColor,
+    inputDecoratorBackgroundAlpha,
+    inputDecoratorBorderSchemeColor,
+    inputDecoratorBorderType,
+    inputDecoratorFocusedHasBorder,
+    inputDecoratorUnfocusedHasBorder,
+    inputDecoratorUnfocusedBorderIsColored,
+    inputDecoratorBorderWidth,
+    inputDecoratorFocusedBorderWidth,
+    inputDecoratorPrefixIconSchemeColor,
+    inputDecoratorSuffixIconSchemeColor,
+    //
+    inputCursorSchemeColor,
+    inputSelectionSchemeColor,
+    inputSelectionOpacity,
+    inputSelectionHandleSchemeColor,
+    //
+    listTileSelectedSchemeColor,
+    listTileIconSchemeColor,
+    listTileTextSchemeColor,
+    listTileTitleTextStyle,
+    listTileSubtitleTextStyle,
+    listTileLeadingAndTrailingTextStyle,
+    listTileTileSchemeColor,
+    listTileSelectedTileSchemeColor,
+    listTileContentPadding,
+    listTileHorizontalTitleGap,
+    listTileMinVerticalPadding,
+    listTileStyle,
+    listTileTitleAlignment,
+    listTileControlAffinity,
+    //
+    fabRadius,
+    fabUseShape,
+    fabAlwaysCircular,
+    fabSchemeColor,
+    fabForegroundSchemeColor,
+    fabExtendedTextStyle,
+    //
+    chipRadius,
+    chipBlendColors,
+    chipSchemeColor,
+    chipSelectedSchemeColor,
+    chipSecondarySelectedSchemeColor,
+    chipDeleteIconSchemeColor,
+    chipLabelStyle,
+    chipSecondaryLabelStyle,
+    chipFontSize,
+    chipSecondaryFontSize,
+    chipIconSize,
+    chipPadding,
+    //
+    cardRadius,
+    cardBackgroundSchemeColor,
+    cardBorderSchemeColor,
+    cardBorderWidth,
+    cardElevation,
+    //
+    popupMenuRadius,
+    popupMenuElevation,
+    popupMenuSchemeColor,
+    popupMenuOpacity,
+    //
+    dropdownMenuTextStyle,
+    dropdownMenuMaximumSize,
+    //
+    menuRadius,
+    menuElevation,
+    menuSchemeColor,
+    menuOpacity,
+    menuPadding,
+    menuButtonTextStyle,
+    //
+    menuBarBackgroundSchemeColor,
+    menuBarRadius,
+    menuBarElevation,
+    menuBarShadowColor,
+    //
+    menuItemBackgroundSchemeColor,
+    menuItemForegroundSchemeColor,
+    menuIndicatorBackgroundSchemeColor,
+    menuIndicatorForegroundSchemeColor,
+    menuIndicatorRadius,
+    //
+    tooltipRadius,
+    tooltipWaitDuration,
+    tooltipShowDuration,
+    tooltipSchemeColor,
+    tooltipOpacity,
+    //
+    progressIndicatorBaseSchemeColor,
+    progressIndicatorLinearTrackSchemeColor,
+    progressIndicatorLinearMinHeight,
+    progressIndicatorCircularTrackSchemeColor,
+    progressIndicatorRefreshBackgroundSchemeColor,
+    progressIndicatorLinearRadius,
+    progressIndicatorStopIndicatorSchemeColor,
+    progressIndicatorStopIndicatorRadius,
+    progressIndicatorStrokeWidth,
+    progressIndicatorStrokeAlign,
+    progressIndicatorStrokeCap,
+    progressIndicatorConstraints,
+    progressIndicatorTrackGap,
+    progressIndicatorCircularTrackPadding,
+    progressIndicatorYear2023,
+    //
+    searchBarBackgroundSchemeColor,
+    searchViewBackgroundSchemeColor,
+    searchBarElevation,
+    searchViewElevation,
+    searchBarRadius,
+    searchViewRadius,
+    searchUseGlobalShape,
+    searchViewHeaderHeight,
+    searchBarTextStyle,
+    searchViewHeaderTextStyle,
+    searchBarHintStyle,
+    searchViewHeaderHintStyle,
+    searchViewDividerColor,
+    searchBarShadowColor,
+    searchBarTextCapitalization,
+    searchBarPadding,
+    searchBarConstraints,
+    searchViewConstraints,
+    //
+    useInputDecoratorThemeInDialogs,
+    dialogRadius,
+    dialogRadiusAdaptive,
+    dialogElevation,
+    dialogBackgroundSchemeColor,
+    dialogTitleTextStyle,
+    dialogContentTextStyle,
+    //
+    datePickerHeaderBackgroundSchemeColor,
+    datePickerHeaderForegroundSchemeColor,
+    datePickerDialogRadius,
+    datePickerDividerSchemeColor,
+    datePickerHeaderHeadlineStyle,
+    datePickerHeaderHelpStyle,
+    datePickerWeekdayStyle,
+    datePickerDayStyle,
+    datePickerYearStyle,
+    datePickerRangePickerHeaderHeadlineStyle,
+    datePickerRangePickerHeaderHelpStyle,
+    //
+    timePickerDialogRadius,
+    timePickerElementRadius,
+    timePickerDayPeriodTextStyle,
+    timePickerDialTextStyle,
+    timePickerHelpTextStyle,
+    timePickerHourMinuteTextStyle,
+    //
+    snackBarRadius,
+    snackBarElevation,
+    snackBarBackgroundSchemeColor,
+    snackBarActionSchemeColor,
+    snackBarContentTextStyle,
+    //
+    appBarBackgroundSchemeColor,
+    appBarForegroundSchemeColor,
+    appBarIconSchemeColor,
+    appBarActionsIconSchemeColor,
+    appBarCenterTitle,
+    appBarScrolledUnderElevation,
+    appBarToolbarTextStyle,
+    appBarTitleTextStyle,
+    //
+    bottomAppBarSchemeColor,
+    bottomAppBarHeight,
+    //
+    tabBarItemSchemeColor,
+    tabBarUnselectedItemSchemeColor,
+    tabBarUnselectedItemOpacity,
+    tabBarIndicatorSchemeColor,
+    tabBarIndicatorSize,
+    tabBarIndicatorWeight,
+    tabBarIndicatorTopRadius,
+    tabBarDividerColor,
+    tabBarTabAlignment,
+    tabBarIndicatorAnimation,
+    //
+    drawerRadius,
+    drawerElevation,
+    drawerBackgroundSchemeColor,
+    drawerWidth,
+    drawerIndicatorWidth,
+    drawerIndicatorRadius,
+    drawerIndicatorSchemeColor,
+    drawerIndicatorOpacity,
+    drawerSelectedItemSchemeColor,
+    drawerUnselectedItemSchemeColor,
+    //
+    bottomSheetBackgroundColor,
+    bottomSheetModalBackgroundColor,
+    bottomSheetRadius,
+    bottomSheetElevation,
+    bottomSheetModalElevation,
+    bottomSheetClipBehavior,
+    //
+    bottomNavigationBarLabelTextStyle,
+    bottomNavigationBarSelectedLabelSize,
+    bottomNavigationBarUnselectedLabelSize,
+    bottomNavigationBarSelectedLabelSchemeColor,
+    bottomNavigationBarUnselectedLabelSchemeColor,
+    bottomNavigationBarMutedUnselectedLabel,
+    bottomNavigationBarSelectedIconSize,
+    bottomNavigationBarUnselectedIconSize,
+    bottomNavigationBarSelectedIconSchemeColor,
+    bottomNavigationBarUnselectedIconSchemeColor,
+    bottomNavigationBarMutedUnselectedIcon,
+    bottomNavigationBarBackgroundSchemeColor,
+    bottomNavigationBarOpacity,
+    bottomNavigationBarElevation,
+    bottomNavigationBarShowSelectedLabels,
+    bottomNavigationBarShowUnselectedLabels,
+    bottomNavigationBarType,
+    bottomNavigationBarLandscapeLayout,
+    //
+    navigationBarLabelTextStyle,
+    navigationBarSelectedLabelSize,
+    navigationBarUnselectedLabelSize,
+    navigationBarSelectedLabelSchemeColor,
+    navigationBarUnselectedLabelSchemeColor,
+    navigationBarMutedUnselectedLabel,
+    navigationBarSelectedIconSize,
+    navigationBarUnselectedIconSize,
+    navigationBarSelectedIconSchemeColor,
+    navigationBarUnselectedIconSchemeColor,
+    navigationBarMutedUnselectedIcon,
+    navigationBarIndicatorSchemeColor,
+    navigationBarIndicatorOpacity,
+    navigationBarIndicatorRadius,
+    navigationBarBackgroundSchemeColor,
+    navigationBarOpacity,
+    navigationBarElevation,
+    navigationBarHeight,
+    navigationBarLabelBehavior,
+    adaptiveRemoveNavigationBarTint,
+    //
+    navigationRailLabelTextStyle,
+    navigationRailSelectedLabelSize,
+    navigationRailUnselectedLabelSize,
+    navigationRailSelectedLabelSchemeColor,
+    navigationRailUnselectedLabelSchemeColor,
+    navigationRailMutedUnselectedLabel,
+    navigationRailSelectedIconSize,
+    navigationRailUnselectedIconSize,
+    navigationRailSelectedIconSchemeColor,
+    navigationRailUnselectedIconSchemeColor,
+    navigationRailMutedUnselectedIcon,
+    navigationRailUseIndicator,
+    navigationRailIndicatorSchemeColor,
+    navigationRailIndicatorOpacity,
+    navigationRailIndicatorRadius,
+    navigationRailBackgroundSchemeColor,
+    navigationRailOpacity,
+    navigationRailElevation,
+    navigationRailLabelType,
+    navigationRailGroupAlignment,
+    navigationRailMinWidth,
+    navigationRailMinExtendedWidth,
+  ]);
 
   /// Flutter debug properties override, includes toString.
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(
-        DiagnosticsProperty<bool>('interactionEffects', interactionEffects));
-    properties.add(DiagnosticsProperty<bool>(
-        'tintedDisabledControls', tintedDisabledControls));
+    properties.add(DiagnosticsProperty<bool>('interactionEffects', interactionEffects));
+    properties.add(DiagnosticsProperty<bool>('tintedDisabledControls', tintedDisabledControls));
     properties.add(DiagnosticsProperty<int>('blendOnLevel ', blendOnLevel));
     properties.add(DiagnosticsProperty<bool>('blendOnColors', blendOnColors));
     //
-    properties.add(DiagnosticsProperty<FlexAdaptive>(
-        'adaptiveRemoveElevationTint', adaptiveRemoveElevationTint));
-    properties.add(DiagnosticsProperty<FlexAdaptive>(
-        'adaptiveElevationShadowsBack', adaptiveElevationShadowsBack));
-    properties.add(DiagnosticsProperty<FlexAdaptive>(
-        'adaptiveAppBarScrollUnderOff', adaptiveAppBarScrollUnderOff));
-    properties.add(
-        DiagnosticsProperty<FlexAdaptive>('adaptiveRadius', adaptiveRadius));
-    properties.add(DiagnosticsProperty<FlexAdaptive>(
-        'adaptiveDialogRadius', adaptiveDialogRadius));
-    properties.add(DiagnosticsProperty<FlexAdaptive>(
-        'adaptiveInputDecoratorRadius', adaptiveInputDecoratorRadius));
+    properties.add(DiagnosticsProperty<FlexAdaptive>('adaptiveRemoveElevationTint', adaptiveRemoveElevationTint));
+    properties.add(DiagnosticsProperty<FlexAdaptive>('adaptiveElevationShadowsBack', adaptiveElevationShadowsBack));
+    properties.add(DiagnosticsProperty<FlexAdaptive>('adaptiveAppBarScrollUnderOff', adaptiveAppBarScrollUnderOff));
+    properties.add(DiagnosticsProperty<FlexAdaptive>('adaptiveRadius', adaptiveRadius));
+    properties.add(DiagnosticsProperty<FlexAdaptive>('adaptiveDialogRadius', adaptiveDialogRadius));
+    properties.add(DiagnosticsProperty<FlexAdaptive>('adaptiveInputDecoratorRadius', adaptiveInputDecoratorRadius));
     //
-    properties.add(
-        DiagnosticsProperty<FlexAdaptive>('adaptiveSplash', adaptiveSplash));
+    properties.add(DiagnosticsProperty<FlexAdaptive>('adaptiveSplash', adaptiveSplash));
     properties.add(EnumProperty<FlexSplashType>('splashType', splashType));
-    properties.add(
-        EnumProperty<FlexSplashType>('splashTypeAdaptive', splashTypeAdaptive));
+    properties.add(EnumProperty<FlexSplashType>('splashTypeAdaptive', splashTypeAdaptive));
     //
-    // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-    // properties.add(DiagnosticsProperty<bool>('blendTextTheme',
-    // blendTextTheme));
-    properties.add(DiagnosticsProperty<bool>(
-        'useMaterial3Typography', useMaterial3Typography));
-    properties.add(DiagnosticsProperty<bool>(
-        'useM2StyleDividerInM3', useM2StyleDividerInM3));
+    properties.add(DiagnosticsProperty<bool>('useMaterial3Typography', useMaterial3Typography));
+    properties.add(DiagnosticsProperty<bool>('useM2StyleDividerInM3', useM2StyleDividerInM3));
     //
     properties.add(DiagnosticsProperty<double>('defaultRadius', defaultRadius));
-    properties.add(DiagnosticsProperty<double>(
-        'defaultRadiusAdaptive', defaultRadiusAdaptive));
+    properties.add(DiagnosticsProperty<double>('defaultRadiusAdaptive', defaultRadiusAdaptive));
     properties.add(DiagnosticsProperty<Size>('buttonMinSize', buttonMinSize));
-    properties
-        .add(DiagnosticsProperty<bool>('alignedDropdown', alignedDropdown));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
-        'buttonPadding', buttonPadding));
-    properties
-        .add(DiagnosticsProperty<double>('thickBorderWidth', thickBorderWidth));
-    properties
-        .add(DiagnosticsProperty<double>('thinBorderWidth', thinBorderWidth));
+    properties.add(DiagnosticsProperty<bool>('alignedDropdown', alignedDropdown));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('buttonPadding', buttonPadding));
+    properties.add(DiagnosticsProperty<double>('thickBorderWidth', thickBorderWidth));
+    properties.add(DiagnosticsProperty<double>('thinBorderWidth', thinBorderWidth));
     //
-    properties
-        .add(DiagnosticsProperty<double>('textButtonRadius', textButtonRadius));
-    properties.add(EnumProperty<SchemeColor>(
-        'textButtonSchemeColor', textButtonSchemeColor));
-    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
-        'textButtonTextStyle', textButtonTextStyle));
+    properties.add(DiagnosticsProperty<double>('textButtonRadius', textButtonRadius));
+    properties.add(EnumProperty<SchemeColor>('textButtonSchemeColor', textButtonSchemeColor));
+    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>('textButtonTextStyle', textButtonTextStyle));
     //
+    properties.add(DiagnosticsProperty<double>('filledButtonRadius', filledButtonRadius));
+    properties.add(EnumProperty<SchemeColor>('filledButtonSchemeColor', filledButtonSchemeColor));
     properties.add(
-        DiagnosticsProperty<double>('filledButtonRadius', filledButtonRadius));
-    properties.add(EnumProperty<SchemeColor>(
-        'filledButtonSchemeColor', filledButtonSchemeColor));
-    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
-        'filledButtonTextStyle', filledButtonTextStyle));
+      DiagnosticsProperty<WidgetStateProperty<TextStyle?>>('filledButtonTextStyle', filledButtonTextStyle),
+    );
     //
     // TODO(rydmike): Hold for https://github.com/flutter/flutter/issues/115827
     // properties.add(DiagnosticsProperty<double>(
@@ -6271,642 +5621,467 @@ class FlexSubThemesData with Diagnosticable {
     // properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
     //     'filledButtonTonalTextStyle', filledButtonTonalTextStyle));
     //
-    properties.add(DiagnosticsProperty<double>(
-        'elevatedButtonRadius', elevatedButtonRadius));
-    properties.add(DiagnosticsProperty<double>(
-        'elevatedButtonElevation', elevatedButtonElevation));
-    properties.add(EnumProperty<SchemeColor>(
-        'elevatedButtonSchemeColor', elevatedButtonSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'elevatedButtonSecondarySchemeColor',
-        elevatedButtonSecondarySchemeColor));
-    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
-        'elevatedButtonTextStyle', elevatedButtonTextStyle));
+    properties.add(DiagnosticsProperty<double>('elevatedButtonRadius', elevatedButtonRadius));
+    properties.add(DiagnosticsProperty<double>('elevatedButtonElevation', elevatedButtonElevation));
+    properties.add(EnumProperty<SchemeColor>('elevatedButtonSchemeColor', elevatedButtonSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('elevatedButtonSecondarySchemeColor', elevatedButtonSecondarySchemeColor));
+    properties.add(
+      DiagnosticsProperty<WidgetStateProperty<TextStyle?>>('elevatedButtonTextStyle', elevatedButtonTextStyle),
+    );
     //
-    properties.add(DiagnosticsProperty<double>(
-        'outlinedButtonRadius', outlinedButtonRadius));
-    properties.add(EnumProperty<SchemeColor>(
-        'outlinedButtonSchemeColor', outlinedButtonSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'outlinedButtonOutlineSchemeColor', outlinedButtonOutlineSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'outlinedButtonBorderWidth', outlinedButtonBorderWidth));
-    properties.add(DiagnosticsProperty<double>(
-        'outlinedButtonPressedBorderWidth', outlinedButtonPressedBorderWidth));
-    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
-        'outlinedButtonTextStyle', outlinedButtonTextStyle));
+    properties.add(DiagnosticsProperty<double>('outlinedButtonRadius', outlinedButtonRadius));
+    properties.add(EnumProperty<SchemeColor>('outlinedButtonSchemeColor', outlinedButtonSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('outlinedButtonOutlineSchemeColor', outlinedButtonOutlineSchemeColor));
+    properties.add(DiagnosticsProperty<double>('outlinedButtonBorderWidth', outlinedButtonBorderWidth));
+    properties.add(DiagnosticsProperty<double>('outlinedButtonPressedBorderWidth', outlinedButtonPressedBorderWidth));
+    properties.add(
+      DiagnosticsProperty<WidgetStateProperty<TextStyle?>>('outlinedButtonTextStyle', outlinedButtonTextStyle),
+    );
     //
-    properties.add(DiagnosticsProperty<double>(
-        'toggleButtonsRadius', toggleButtonsRadius));
-    properties.add(EnumProperty<SchemeColor>(
-        'toggleButtonsSchemeColor', toggleButtonsSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
+    properties.add(DiagnosticsProperty<double>('toggleButtonsRadius', toggleButtonsRadius));
+    properties.add(EnumProperty<SchemeColor>('toggleButtonsSchemeColor', toggleButtonsSchemeColor));
+    properties.add(
+      EnumProperty<SchemeColor>(
         'toggleButtonsSelectedForegroundSchemeColor',
-        toggleButtonsSelectedForegroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'toggleButtonsUnselectedSchemeColor',
-        toggleButtonsUnselectedSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'toggleButtonsBorderSchemeColor', toggleButtonsBorderSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'toggleButtonsBorderWidth', toggleButtonsBorderWidth));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'toggleButtonsTextStyle', toggleButtonsTextStyle));
+        toggleButtonsSelectedForegroundSchemeColor,
+      ),
+    );
+    properties.add(EnumProperty<SchemeColor>('toggleButtonsUnselectedSchemeColor', toggleButtonsUnselectedSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('toggleButtonsBorderSchemeColor', toggleButtonsBorderSchemeColor));
+    properties.add(DiagnosticsProperty<double>('toggleButtonsBorderWidth', toggleButtonsBorderWidth));
+    properties.add(DiagnosticsProperty<TextStyle>('toggleButtonsTextStyle', toggleButtonsTextStyle));
     //
-    properties.add(DiagnosticsProperty<double>(
-        'segmentedButtonRadius', segmentedButtonRadius));
-    properties.add(EnumProperty<SchemeColor>(
-        'segmentedButtonSchemeColor', segmentedButtonSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
+    properties.add(DiagnosticsProperty<double>('segmentedButtonRadius', segmentedButtonRadius));
+    properties.add(EnumProperty<SchemeColor>('segmentedButtonSchemeColor', segmentedButtonSchemeColor));
+    properties.add(
+      EnumProperty<SchemeColor>(
         'segmentedButtonSelectedForegroundSchemeColor',
-        segmentedButtonSelectedForegroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'segmentedButtonUnselectedSchemeColor',
-        segmentedButtonUnselectedSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
+        segmentedButtonSelectedForegroundSchemeColor,
+      ),
+    );
+    properties.add(
+      EnumProperty<SchemeColor>('segmentedButtonUnselectedSchemeColor', segmentedButtonUnselectedSchemeColor),
+    );
+    properties.add(
+      EnumProperty<SchemeColor>(
         'segmentedButtonUnselectedForegroundSchemeColor',
-        segmentedButtonUnselectedForegroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'segmentedButtonBorderSchemeColor', segmentedButtonBorderSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'segmentedButtonBorderWidth', segmentedButtonBorderWidth));
-    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
-        'segmentedButtonTextStyle', segmentedButtonTextStyle));
-    //
-    properties.add(EnumProperty<FlexScaffoldBaseColor>(
-        'scaffoldBackgroundBaseColor', scaffoldBackgroundBaseColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'scaffoldBackgroundSchemeColor', scaffoldBackgroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'materialButtonSchemeColor', materialButtonSchemeColor));
-    //
-    properties
-        .add(EnumProperty<SchemeColor>('switchSchemeColor', switchSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'switchThumbSchemeColor', switchThumbSchemeColor));
-    properties.add(DiagnosticsProperty<bool>(
-        'switchThumbFixedSize', switchThumbFixedSize));
-    properties.add(DiagnosticsProperty<FlexAdaptive>(
-        'switchAdaptiveCupertinoLike', switchAdaptiveCupertinoLike));
-    //
+        segmentedButtonUnselectedForegroundSchemeColor,
+      ),
+    );
+    properties.add(EnumProperty<SchemeColor>('segmentedButtonBorderSchemeColor', segmentedButtonBorderSchemeColor));
+    properties.add(DiagnosticsProperty<double>('segmentedButtonBorderWidth', segmentedButtonBorderWidth));
     properties.add(
-        EnumProperty<SchemeColor>('checkboxSchemeColor', checkboxSchemeColor));
-    properties
-        .add(EnumProperty<SchemeColor>('radioSchemeColor', radioSchemeColor));
-    properties.add(DiagnosticsProperty<bool>(
-        'unselectedToggleIsColored', unselectedToggleIsColored));
+      DiagnosticsProperty<WidgetStateProperty<TextStyle?>>('segmentedButtonTextStyle', segmentedButtonTextStyle),
+    );
     //
-    properties.add(EnumProperty<SchemeColor>(
-        'sliderBaseSchemeColor', sliderBaseSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'sliderThumbSchemeColor', sliderThumbSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'sliderIndicatorSchemeColor', sliderIndicatorSchemeColor));
-    properties
-        .add(DiagnosticsProperty<bool>('sliderValueTinted', sliderValueTinted));
-    properties.add(EnumProperty<FlexSliderIndicatorType>(
-        'sliderValueIndicatorType', sliderValueIndicatorType));
-    properties.add(EnumProperty<ShowValueIndicator>(
-        'sliderShowValueIndicator', sliderShowValueIndicator));
-    properties.add(
-        DiagnosticsProperty<double>('sliderTrackHeight', sliderTrackHeight));
+    properties.add(EnumProperty<FlexScaffoldBaseColor>('scaffoldBackgroundBaseColor', scaffoldBackgroundBaseColor));
+    properties.add(EnumProperty<SchemeColor>('scaffoldBackgroundSchemeColor', scaffoldBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('materialButtonSchemeColor', materialButtonSchemeColor));
+    //
+    properties.add(EnumProperty<SchemeColor>('switchSchemeColor', switchSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('switchThumbSchemeColor', switchThumbSchemeColor));
+    properties.add(DiagnosticsProperty<bool>('switchThumbFixedSize', switchThumbFixedSize));
+    properties.add(DiagnosticsProperty<FlexAdaptive>('switchAdaptiveCupertinoLike', switchAdaptiveCupertinoLike));
+    //
+    properties.add(EnumProperty<SchemeColor>('checkboxSchemeColor', checkboxSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('radioSchemeColor', radioSchemeColor));
+    properties.add(DiagnosticsProperty<bool>('unselectedToggleIsColored', unselectedToggleIsColored));
+    //
+    properties.add(EnumProperty<SchemeColor>('sliderBaseSchemeColor', sliderBaseSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('sliderThumbSchemeColor', sliderThumbSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('sliderIndicatorSchemeColor', sliderIndicatorSchemeColor));
+    properties.add(DiagnosticsProperty<bool>('sliderValueTinted', sliderValueTinted));
+    properties.add(EnumProperty<FlexSliderIndicatorType>('sliderValueIndicatorType', sliderValueIndicatorType));
+    properties.add(EnumProperty<ShowValueIndicator>('sliderShowValueIndicator', sliderShowValueIndicator));
+    properties.add(DiagnosticsProperty<double>('sliderTrackHeight', sliderTrackHeight));
     properties.add(DiagnosticsProperty<bool>('sliderYear2023', sliderYear2023));
     //
-    properties.add(DiagnosticsProperty<double>(
-        'inputDecoratorRadius', inputDecoratorRadius));
-    properties.add(DiagnosticsProperty<double>(
-        'inputDecoratorRadiusAdaptive', inputDecoratorRadiusAdaptive));
-    properties.add(EnumProperty<SchemeColor>(
-        'inputDecoratorSchemeColor', inputDecoratorSchemeColor));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
-        'inputDecoratorContentPadding', inputDecoratorContentPadding));
-    properties.add(DiagnosticsProperty<bool>(
-        'inputDecoratorIsDense', inputDecoratorIsDense));
-    properties.add(DiagnosticsProperty<bool>(
-        'inputDecoratorIsFilled', inputDecoratorIsFilled));
-    properties
-        .add(ColorProperty('inputDecoratorFillColor', inputDecoratorFillColor));
-    properties.add(DiagnosticsProperty<int>(
-        'inputDecoratorBackgroundAlpha', inputDecoratorBackgroundAlpha));
-    properties.add(EnumProperty<SchemeColor>(
-        'inputDecoratorBorderSchemeColor', inputDecoratorBorderSchemeColor));
-    properties.add(EnumProperty<FlexInputBorderType>(
-        'inputDecoratorBorderType', inputDecoratorBorderType));
-    properties.add(DiagnosticsProperty<bool>(
-        'inputDecoratorFocusedHasBorder', inputDecoratorFocusedHasBorder));
-    properties.add(DiagnosticsProperty<bool>(
-        'inputDecoratorUnfocusedHasBorder', inputDecoratorUnfocusedHasBorder));
-    properties.add(DiagnosticsProperty<bool>(
-        'inputDecoratorUnfocusedBorderIsColored',
-        inputDecoratorUnfocusedBorderIsColored));
-    properties.add(DiagnosticsProperty<double>(
-        'inputDecoratorBorderWidth', inputDecoratorBorderWidth));
-    properties.add(DiagnosticsProperty<double>(
-        'inputDecoratorFocusedBorderWidth', inputDecoratorFocusedBorderWidth));
-    properties.add(EnumProperty<SchemeColor>(
-        'inputDecoratorPrefixIconSchemeColor',
-        inputDecoratorPrefixIconSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'inputDecoratorSuffixIconSchemeColor',
-        inputDecoratorSuffixIconSchemeColor));
+    properties.add(DiagnosticsProperty<double>('inputDecoratorRadius', inputDecoratorRadius));
+    properties.add(DiagnosticsProperty<double>('inputDecoratorRadiusAdaptive', inputDecoratorRadiusAdaptive));
+    properties.add(EnumProperty<SchemeColor>('inputDecoratorSchemeColor', inputDecoratorSchemeColor));
+    properties.add(
+      DiagnosticsProperty<EdgeInsetsGeometry>('inputDecoratorContentPadding', inputDecoratorContentPadding),
+    );
+    properties.add(DiagnosticsProperty<bool>('inputDecoratorIsDense', inputDecoratorIsDense));
+    properties.add(DiagnosticsProperty<bool>('inputDecoratorIsFilled', inputDecoratorIsFilled));
+    properties.add(ColorProperty('inputDecoratorFillColor', inputDecoratorFillColor));
+    properties.add(DiagnosticsProperty<int>('inputDecoratorBackgroundAlpha', inputDecoratorBackgroundAlpha));
+    properties.add(EnumProperty<SchemeColor>('inputDecoratorBorderSchemeColor', inputDecoratorBorderSchemeColor));
+    properties.add(EnumProperty<FlexInputBorderType>('inputDecoratorBorderType', inputDecoratorBorderType));
+    properties.add(DiagnosticsProperty<bool>('inputDecoratorFocusedHasBorder', inputDecoratorFocusedHasBorder));
+    properties.add(DiagnosticsProperty<bool>('inputDecoratorUnfocusedHasBorder', inputDecoratorUnfocusedHasBorder));
+    properties.add(
+      DiagnosticsProperty<bool>('inputDecoratorUnfocusedBorderIsColored', inputDecoratorUnfocusedBorderIsColored),
+    );
+    properties.add(DiagnosticsProperty<double>('inputDecoratorBorderWidth', inputDecoratorBorderWidth));
+    properties.add(DiagnosticsProperty<double>('inputDecoratorFocusedBorderWidth', inputDecoratorFocusedBorderWidth));
+    properties.add(
+      EnumProperty<SchemeColor>('inputDecoratorPrefixIconSchemeColor', inputDecoratorPrefixIconSchemeColor),
+    );
+    properties.add(
+      EnumProperty<SchemeColor>('inputDecoratorSuffixIconSchemeColor', inputDecoratorSuffixIconSchemeColor),
+    );
     //
-    properties.add(EnumProperty<SchemeColor>(
-        'inputCursorSchemeColor', inputCursorSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'inputSelectionSchemeColor', inputSelectionSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'inputSelectionOpacity', inputSelectionOpacity));
-    properties.add(EnumProperty<SchemeColor>(
-        'inputSelectionHandleSchemeColor', inputSelectionHandleSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('inputCursorSchemeColor', inputCursorSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('inputSelectionSchemeColor', inputSelectionSchemeColor));
+    properties.add(DiagnosticsProperty<double>('inputSelectionOpacity', inputSelectionOpacity));
+    properties.add(EnumProperty<SchemeColor>('inputSelectionHandleSchemeColor', inputSelectionHandleSchemeColor));
     //
-    properties.add(EnumProperty<SchemeColor>(
-        'listTileSelectedSchemeColor', listTileSelectedSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'listTileIconSchemeColor', listTileIconSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'listTileTextSchemeColor', listTileTextSchemeColor));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'listTileTitleTextStyle', listTileTitleTextStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'listTileSubtitleTextStyle', listTileSubtitleTextStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'listTileLeadingAndTrailingTextStyle',
-        listTileLeadingAndTrailingTextStyle));
-    properties.add(EnumProperty<SchemeColor>(
-        'listTileTileSchemeColor', listTileTileSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'listTileSelectedTileSchemeColor', listTileSelectedTileSchemeColor));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
-        'listTileContentPadding', listTileContentPadding));
-    properties.add(DiagnosticsProperty<double>(
-        'listTileHorizontalTitleGap', listTileHorizontalTitleGap));
-    properties.add(DiagnosticsProperty<double>(
-        'listTileMinVerticalPadding', listTileMinVerticalPadding));
+    properties.add(EnumProperty<SchemeColor>('listTileSelectedSchemeColor', listTileSelectedSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('listTileIconSchemeColor', listTileIconSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('listTileTextSchemeColor', listTileTextSchemeColor));
+    properties.add(DiagnosticsProperty<TextStyle>('listTileTitleTextStyle', listTileTitleTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('listTileSubtitleTextStyle', listTileSubtitleTextStyle));
+    properties.add(
+      DiagnosticsProperty<TextStyle>('listTileLeadingAndTrailingTextStyle', listTileLeadingAndTrailingTextStyle),
+    );
+    properties.add(EnumProperty<SchemeColor>('listTileTileSchemeColor', listTileTileSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('listTileSelectedTileSchemeColor', listTileSelectedTileSchemeColor));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('listTileContentPadding', listTileContentPadding));
+    properties.add(DiagnosticsProperty<double>('listTileHorizontalTitleGap', listTileHorizontalTitleGap));
+    properties.add(DiagnosticsProperty<double>('listTileMinVerticalPadding', listTileMinVerticalPadding));
     properties.add(EnumProperty<ListTileStyle>('listTileStyle', listTileStyle));
-    properties.add(EnumProperty<ListTileTitleAlignment>(
-        'listTileTitleAlignment', listTileTitleAlignment));
-    properties.add(EnumProperty<ListTileControlAffinity>(
-        'listTileControlAffinity', listTileControlAffinity));
+    properties.add(EnumProperty<ListTileTitleAlignment>('listTileTitleAlignment', listTileTitleAlignment));
+    properties.add(EnumProperty<ListTileControlAffinity>('listTileControlAffinity', listTileControlAffinity));
     //
     properties.add(DiagnosticsProperty<double>('fabRadius', fabRadius));
     properties.add(DiagnosticsProperty<bool>('fabUseShape', fabUseShape));
-    properties
-        .add(DiagnosticsProperty<bool>('fabAlwaysCircular', fabAlwaysCircular));
+    properties.add(DiagnosticsProperty<bool>('fabAlwaysCircular', fabAlwaysCircular));
     properties.add(EnumProperty<SchemeColor>('fabSchemeColor', fabSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'fabForegroundSchemeColor', fabForegroundSchemeColor));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'fabExtendedTextStyle', fabExtendedTextStyle));
+    properties.add(EnumProperty<SchemeColor>('fabForegroundSchemeColor', fabForegroundSchemeColor));
+    properties.add(DiagnosticsProperty<TextStyle>('fabExtendedTextStyle', fabExtendedTextStyle));
     //
     properties.add(DiagnosticsProperty<double>('chipRadius', chipRadius));
-    properties
-        .add(DiagnosticsProperty<bool>('chipBlendColors', chipBlendColors));
-    properties
-        .add(EnumProperty<SchemeColor>('chipSchemeColor', chipSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'chipSelectedSchemeColor', chipSelectedSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'chipSecondarySelectedSchemeColor', chipSecondarySelectedSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'chipDeleteIconSchemeColor', chipDeleteIconSchemeColor));
-    properties
-        .add(DiagnosticsProperty<TextStyle>('chipLabelStyle', chipLabelStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'chipSecondaryLabelStyle', chipSecondaryLabelStyle));
+    properties.add(DiagnosticsProperty<bool>('chipBlendColors', chipBlendColors));
+    properties.add(EnumProperty<SchemeColor>('chipSchemeColor', chipSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('chipSelectedSchemeColor', chipSelectedSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('chipSecondarySelectedSchemeColor', chipSecondarySelectedSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('chipDeleteIconSchemeColor', chipDeleteIconSchemeColor));
+    properties.add(DiagnosticsProperty<TextStyle>('chipLabelStyle', chipLabelStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('chipSecondaryLabelStyle', chipSecondaryLabelStyle));
     properties.add(DiagnosticsProperty<double>('chipFontSize', chipFontSize));
-    properties.add(DiagnosticsProperty<double>(
-        'chipSecondaryFontSize', chipSecondaryFontSize));
+    properties.add(DiagnosticsProperty<double>('chipSecondaryFontSize', chipSecondaryFontSize));
     properties.add(DiagnosticsProperty<double>('chipIconSize', chipIconSize));
-    properties.add(
-        DiagnosticsProperty<EdgeInsetsGeometry>('chipPadding', chipPadding));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('chipPadding', chipPadding));
     //
     properties.add(DiagnosticsProperty<double>('cardRadius', cardRadius));
-    properties.add(EnumProperty<SchemeColor>(
-        'cardBackgroundSchemeColor', cardBackgroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'cardBorderSchemeColor', cardBorderSchemeColor));
-    properties
-        .add(DiagnosticsProperty<double>('cardBorderWidth', cardBorderWidth));
+    properties.add(EnumProperty<SchemeColor>('cardBackgroundSchemeColor', cardBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('cardBorderSchemeColor', cardBorderSchemeColor));
+    properties.add(DiagnosticsProperty<double>('cardBorderWidth', cardBorderWidth));
     properties.add(DiagnosticsProperty<double>('cardElevation', cardElevation));
     //
-    properties
-        .add(DiagnosticsProperty<double>('popupMenuRadius', popupMenuRadius));
-    properties.add(
-        DiagnosticsProperty<double>('popupMenuElevation', popupMenuElevation));
-    properties.add(EnumProperty<SchemeColor>(
-        'popupMenuSchemeColor', popupMenuSchemeColor));
-    properties
-        .add(DiagnosticsProperty<double>('popupMenuOpacity', popupMenuOpacity));
+    properties.add(DiagnosticsProperty<double>('popupMenuRadius', popupMenuRadius));
+    properties.add(DiagnosticsProperty<double>('popupMenuElevation', popupMenuElevation));
+    properties.add(EnumProperty<SchemeColor>('popupMenuSchemeColor', popupMenuSchemeColor));
+    properties.add(DiagnosticsProperty<double>('popupMenuOpacity', popupMenuOpacity));
     //
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'dropdownMenuTextStyle', dropdownMenuTextStyle));
-    properties.add(DiagnosticsProperty<WidgetStateProperty<Size?>>(
-        'dropdownMenuMaximumSize', dropdownMenuMaximumSize));
+    properties.add(DiagnosticsProperty<TextStyle>('dropdownMenuTextStyle', dropdownMenuTextStyle));
+    properties.add(DiagnosticsProperty<WidgetStateProperty<Size?>>('dropdownMenuMaximumSize', dropdownMenuMaximumSize));
     //
     properties.add(DiagnosticsProperty<double>('menuRadius', menuRadius));
     properties.add(DiagnosticsProperty<double>('menuElevation', menuElevation));
-    properties
-        .add(EnumProperty<SchemeColor>('menuSchemeColor', menuSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('menuSchemeColor', menuSchemeColor));
     properties.add(DiagnosticsProperty<double>('menuOpacity', menuOpacity));
-    properties.add(
-        DiagnosticsProperty<EdgeInsetsGeometry>('menuPadding', menuPadding));
-    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
-        'menuButtonTextStyle', menuButtonTextStyle));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('menuPadding', menuPadding));
+    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>('menuButtonTextStyle', menuButtonTextStyle));
     //
-    properties.add(EnumProperty<SchemeColor>(
-        'menuBarBackgroundSchemeColor', menuBarBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('menuBarBackgroundSchemeColor', menuBarBackgroundSchemeColor));
     properties.add(DiagnosticsProperty<double>('menuBarRadius', menuBarRadius));
-    properties
-        .add(DiagnosticsProperty<double>('menuBarElevation', menuBarElevation));
+    properties.add(DiagnosticsProperty<double>('menuBarElevation', menuBarElevation));
     properties.add(ColorProperty('menuBarShadowColor', menuBarShadowColor));
     //
-    properties.add(EnumProperty<SchemeColor>(
-        'menuItemBackgroundSchemeColor', menuItemBackgroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'menuItemForegroundSchemeColor', menuItemForegroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'menuIndicatorBackgroundSchemeColor',
-        menuIndicatorBackgroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'menuIndicatorForegroundSchemeColor',
-        menuIndicatorForegroundSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'menuIndicatorRadius', menuIndicatorRadius));
+    properties.add(EnumProperty<SchemeColor>('menuItemBackgroundSchemeColor', menuItemBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('menuItemForegroundSchemeColor', menuItemForegroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('menuIndicatorBackgroundSchemeColor', menuIndicatorBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('menuIndicatorForegroundSchemeColor', menuIndicatorForegroundSchemeColor));
+    properties.add(DiagnosticsProperty<double>('menuIndicatorRadius', menuIndicatorRadius));
     //
     properties.add(DiagnosticsProperty<double>('tooltipRadius', tooltipRadius));
-    properties.add(DiagnosticsProperty<Duration>(
-        'tooltipWaitDuration', tooltipWaitDuration));
-    properties.add(DiagnosticsProperty<Duration>(
-        'tooltipShowDuration', tooltipShowDuration));
-    properties.add(
-        EnumProperty<SchemeColor>('tooltipSchemeColor', tooltipSchemeColor));
-    properties
-        .add(DiagnosticsProperty<double>('tooltipOpacity', tooltipOpacity));
+    properties.add(DiagnosticsProperty<Duration>('tooltipWaitDuration', tooltipWaitDuration));
+    properties.add(DiagnosticsProperty<Duration>('tooltipShowDuration', tooltipShowDuration));
+    properties.add(EnumProperty<SchemeColor>('tooltipSchemeColor', tooltipSchemeColor));
+    properties.add(DiagnosticsProperty<double>('tooltipOpacity', tooltipOpacity));
     //
-    properties.add(EnumProperty<SchemeColor>(
-        'progressIndicatorBaseSchemeColor', progressIndicatorBaseSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'progressIndicatorLinearTrackSchemeColor',
-        progressIndicatorLinearTrackSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'progressIndicatorLinearMinHeight', progressIndicatorLinearMinHeight));
-    properties.add(EnumProperty<SchemeColor>(
-        'progressIndicatorCircularTrackSchemeColor',
-        progressIndicatorCircularTrackSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
+    properties.add(EnumProperty<SchemeColor>('progressIndicatorBaseSchemeColor', progressIndicatorBaseSchemeColor));
+    properties.add(
+      EnumProperty<SchemeColor>('progressIndicatorLinearTrackSchemeColor', progressIndicatorLinearTrackSchemeColor),
+    );
+    properties.add(DiagnosticsProperty<double>('progressIndicatorLinearMinHeight', progressIndicatorLinearMinHeight));
+    properties.add(
+      EnumProperty<SchemeColor>('progressIndicatorCircularTrackSchemeColor', progressIndicatorCircularTrackSchemeColor),
+    );
+    properties.add(
+      EnumProperty<SchemeColor>(
         'progressIndicatorRefreshBackgroundSchemeColor',
-        progressIndicatorRefreshBackgroundSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'progressIndicatorLinearRadius', progressIndicatorLinearRadius));
-    properties.add(EnumProperty<SchemeColor>(
-        'progressIndicatorStopIndicatorSchemeColor',
-        progressIndicatorStopIndicatorSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'progressIndicatorStopIndicatorRadius',
-        progressIndicatorStopIndicatorRadius));
-    properties.add(DiagnosticsProperty<double>(
-        'progressIndicatorStrokeWidth', progressIndicatorStrokeWidth));
-    properties.add(DiagnosticsProperty<double>(
-        'progressIndicatorStrokeAlign', progressIndicatorStrokeAlign));
-    properties.add(EnumProperty<StrokeCap>(
-        'progressIndicatorStrokeCap', progressIndicatorStrokeCap));
-    properties.add(DiagnosticsProperty<BoxConstraints>(
-        'progressIndicatorConstraints', progressIndicatorConstraints));
-    properties.add(DiagnosticsProperty<double>(
-        'progressIndicatorTrackGap', progressIndicatorTrackGap));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
+        progressIndicatorRefreshBackgroundSchemeColor,
+      ),
+    );
+    properties.add(DiagnosticsProperty<double>('progressIndicatorLinearRadius', progressIndicatorLinearRadius));
+    properties.add(
+      EnumProperty<SchemeColor>('progressIndicatorStopIndicatorSchemeColor', progressIndicatorStopIndicatorSchemeColor),
+    );
+    properties.add(
+      DiagnosticsProperty<double>('progressIndicatorStopIndicatorRadius', progressIndicatorStopIndicatorRadius),
+    );
+    properties.add(DiagnosticsProperty<double>('progressIndicatorStrokeWidth', progressIndicatorStrokeWidth));
+    properties.add(DiagnosticsProperty<double>('progressIndicatorStrokeAlign', progressIndicatorStrokeAlign));
+    properties.add(EnumProperty<StrokeCap>('progressIndicatorStrokeCap', progressIndicatorStrokeCap));
+    properties.add(DiagnosticsProperty<BoxConstraints>('progressIndicatorConstraints', progressIndicatorConstraints));
+    properties.add(DiagnosticsProperty<double>('progressIndicatorTrackGap', progressIndicatorTrackGap));
+    properties.add(
+      DiagnosticsProperty<EdgeInsetsGeometry>(
         'progressIndicatorCircularTrackPadding',
-        progressIndicatorCircularTrackPadding));
-    properties.add(DiagnosticsProperty<bool>(
-        'progressIndicatorYear2023', progressIndicatorYear2023));
+        progressIndicatorCircularTrackPadding,
+      ),
+    );
+    properties.add(DiagnosticsProperty<bool>('progressIndicatorYear2023', progressIndicatorYear2023));
     //
-    properties.add(EnumProperty<SchemeColor>(
-        'searchBarBackgroundSchemeColor', searchBarBackgroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'searchViewBackgroundSchemeColor', searchViewBackgroundSchemeColor));
-    properties.add(
-        DiagnosticsProperty<double>('searchBarElevation', searchBarElevation));
-    properties.add(DiagnosticsProperty<double>(
-        'searchViewElevation', searchViewElevation));
-    properties
-        .add(DiagnosticsProperty<double>('searchBarRadius', searchBarRadius));
-    properties
-        .add(DiagnosticsProperty<double>('searchViewRadius', searchViewRadius));
-    properties
-        .add(DiagnosticsProperty<bool>('searchUseShape', searchUseGlobalShape));
-    properties.add(DiagnosticsProperty<double>(
-        'searchViewHeaderHeight', searchViewHeaderHeight));
-    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
-        'searchBarTextStyle', searchBarTextStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'searchViewHeaderTextStyle', searchViewHeaderTextStyle));
-    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>(
-        'searchBarHintStyle', searchBarHintStyle));
-    properties.add(DiagnosticsProperty<TextStyle?>(
-        'searchViewHeaderHintStyle', searchViewHeaderHintStyle));
-    properties
-        .add(ColorProperty('searchViewDividerColor', searchViewDividerColor));
+    properties.add(EnumProperty<SchemeColor>('searchBarBackgroundSchemeColor', searchBarBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('searchViewBackgroundSchemeColor', searchViewBackgroundSchemeColor));
+    properties.add(DiagnosticsProperty<double>('searchBarElevation', searchBarElevation));
+    properties.add(DiagnosticsProperty<double>('searchViewElevation', searchViewElevation));
+    properties.add(DiagnosticsProperty<double>('searchBarRadius', searchBarRadius));
+    properties.add(DiagnosticsProperty<double>('searchViewRadius', searchViewRadius));
+    properties.add(DiagnosticsProperty<bool>('searchUseShape', searchUseGlobalShape));
+    properties.add(DiagnosticsProperty<double>('searchViewHeaderHeight', searchViewHeaderHeight));
+    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>('searchBarTextStyle', searchBarTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('searchViewHeaderTextStyle', searchViewHeaderTextStyle));
+    properties.add(DiagnosticsProperty<WidgetStateProperty<TextStyle?>>('searchBarHintStyle', searchBarHintStyle));
+    properties.add(DiagnosticsProperty<TextStyle?>('searchViewHeaderHintStyle', searchViewHeaderHintStyle));
+    properties.add(ColorProperty('searchViewDividerColor', searchViewDividerColor));
     properties.add(ColorProperty('searchBarShadowColor', searchBarShadowColor));
-    properties.add(EnumProperty<TextCapitalization>(
-        'searchBarTextCapitalization', searchBarTextCapitalization));
-    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>(
-        'searchBarPadding', searchBarPadding));
-    properties.add(DiagnosticsProperty<BoxConstraints>(
-        'searchBarConstraints', searchBarConstraints));
-    properties.add(DiagnosticsProperty<BoxConstraints>(
-        'searchViewConstraints', searchViewConstraints));
+    properties.add(EnumProperty<TextCapitalization>('searchBarTextCapitalization', searchBarTextCapitalization));
+    properties.add(DiagnosticsProperty<EdgeInsetsGeometry>('searchBarPadding', searchBarPadding));
+    properties.add(DiagnosticsProperty<BoxConstraints>('searchBarConstraints', searchBarConstraints));
+    properties.add(DiagnosticsProperty<BoxConstraints>('searchViewConstraints', searchViewConstraints));
     //
-    properties.add(DiagnosticsProperty<bool>(
-        'useInputDecoratorThemeInDialogs', useInputDecoratorThemeInDialogs));
+    properties.add(DiagnosticsProperty<bool>('useInputDecoratorThemeInDialogs', useInputDecoratorThemeInDialogs));
     properties.add(DiagnosticsProperty<double>('dialogRadius', dialogRadius));
-    properties.add(DiagnosticsProperty<double>(
-        'dialogRadiusAdaptive', dialogRadiusAdaptive));
-    properties
-        .add(DiagnosticsProperty<double>('dialogElevation', dialogElevation));
-    properties.add(EnumProperty<SchemeColor>(
-        'dialogBackgroundSchemeColor', dialogBackgroundSchemeColor));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'dialogTitleTextStyle', dialogTitleTextStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'dialogContentTextStyle', dialogContentTextStyle));
+    properties.add(DiagnosticsProperty<double>('dialogRadiusAdaptive', dialogRadiusAdaptive));
+    properties.add(DiagnosticsProperty<double>('dialogElevation', dialogElevation));
+    properties.add(EnumProperty<SchemeColor>('dialogBackgroundSchemeColor', dialogBackgroundSchemeColor));
+    properties.add(DiagnosticsProperty<TextStyle>('dialogTitleTextStyle', dialogTitleTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('dialogContentTextStyle', dialogContentTextStyle));
     //
-    properties.add(EnumProperty<SchemeColor>(
-        'datePickerHeaderBackgroundSchemeColor',
-        datePickerHeaderBackgroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'datePickerHeaderForegroundSchemeColor',
-        datePickerHeaderForegroundSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'datePickerDialogRadius', datePickerDialogRadius));
-    properties.add(EnumProperty<SchemeColor>(
-        'datePickerDividerSchemeColor', datePickerDividerSchemeColor));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'datePickerHeaderHeadlineStyle', datePickerHeaderHeadlineStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'datePickerHeaderHelpStyle', datePickerHeaderHelpStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'datePickerWeekdayStyle', datePickerWeekdayStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'datePickerDayStyle', datePickerDayStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'datePickerYearStyle', datePickerYearStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
+    properties.add(
+      EnumProperty<SchemeColor>('datePickerHeaderBackgroundSchemeColor', datePickerHeaderBackgroundSchemeColor),
+    );
+    properties.add(
+      EnumProperty<SchemeColor>('datePickerHeaderForegroundSchemeColor', datePickerHeaderForegroundSchemeColor),
+    );
+    properties.add(DiagnosticsProperty<double>('datePickerDialogRadius', datePickerDialogRadius));
+    properties.add(EnumProperty<SchemeColor>('datePickerDividerSchemeColor', datePickerDividerSchemeColor));
+    properties.add(DiagnosticsProperty<TextStyle>('datePickerHeaderHeadlineStyle', datePickerHeaderHeadlineStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('datePickerHeaderHelpStyle', datePickerHeaderHelpStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('datePickerWeekdayStyle', datePickerWeekdayStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('datePickerDayStyle', datePickerDayStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('datePickerYearStyle', datePickerYearStyle));
+    properties.add(
+      DiagnosticsProperty<TextStyle>(
         'datePickerRangePickerHeaderHeadlineStyle',
-        datePickerRangePickerHeaderHeadlineStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'datePickerRangePickerHeaderHelpStyle',
-        datePickerRangePickerHeaderHelpStyle));
-    //
-    properties.add(DiagnosticsProperty<double>(
-        'timePickerDialogRadius', timePickerDialogRadius));
-    properties.add(DiagnosticsProperty<double>(
-        'timePickerElementRadius', timePickerElementRadius));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'timePickerDayPeriodTextStyle', timePickerDayPeriodTextStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'timePickerDialTextStyle', timePickerDialTextStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'timePickerHelpTextStyle', timePickerHelpTextStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'timePickerHourMinuteTextStyle', timePickerHourMinuteTextStyle));
-    //
-    properties
-        .add(DiagnosticsProperty<double>('snackBarRadius', snackBarRadius));
+        datePickerRangePickerHeaderHeadlineStyle,
+      ),
+    );
     properties.add(
-        DiagnosticsProperty<double>('snackBarElevation', snackBarElevation));
-    properties.add(EnumProperty<SchemeColor>(
-        'snackBarBackgroundSchemeColor', snackBarBackgroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'snackBarActionSchemeColor', snackBarActionSchemeColor));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'snackBarContentTextStyle', snackBarContentTextStyle));
+      DiagnosticsProperty<TextStyle>('datePickerRangePickerHeaderHelpStyle', datePickerRangePickerHeaderHelpStyle),
+    );
     //
-    properties.add(EnumProperty<SchemeColor>(
-        'appBarBackgroundSchemeColor', appBarBackgroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'appBarForegroundSchemeColor', appBarForegroundSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'appBarIconSchemeColor', appBarIconSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'appBarActionsIconSchemeColor', appBarActionsIconSchemeColor));
-    properties
-        .add(DiagnosticsProperty<bool>('appBarCenterTitle', appBarCenterTitle));
-    properties.add(DiagnosticsProperty<double>(
-        'appBarScrolledUnderElevation', appBarScrolledUnderElevation));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'appBarToolbarTextStyle', appBarToolbarTextStyle));
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'appBarTitleTextStyle', appBarTitleTextStyle));
+    properties.add(DiagnosticsProperty<double>('timePickerDialogRadius', timePickerDialogRadius));
+    properties.add(DiagnosticsProperty<double>('timePickerElementRadius', timePickerElementRadius));
+    properties.add(DiagnosticsProperty<TextStyle>('timePickerDayPeriodTextStyle', timePickerDayPeriodTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('timePickerDialTextStyle', timePickerDialTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('timePickerHelpTextStyle', timePickerHelpTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('timePickerHourMinuteTextStyle', timePickerHourMinuteTextStyle));
     //
-    properties.add(EnumProperty<SchemeColor>(
-        'bottomAppBarSchemeColor', bottomAppBarSchemeColor));
-    properties.add(
-        DiagnosticsProperty<double>('bottomAppBarHeight', bottomAppBarHeight));
+    properties.add(DiagnosticsProperty<double>('snackBarRadius', snackBarRadius));
+    properties.add(DiagnosticsProperty<double>('snackBarElevation', snackBarElevation));
+    properties.add(EnumProperty<SchemeColor>('snackBarBackgroundSchemeColor', snackBarBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('snackBarActionSchemeColor', snackBarActionSchemeColor));
+    properties.add(DiagnosticsProperty<TextStyle>('snackBarContentTextStyle', snackBarContentTextStyle));
     //
-    properties.add(EnumProperty<SchemeColor>(
-        'tabBarItemSchemeColor', tabBarItemSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'tabBarUnselectedItemSchemeColor', tabBarUnselectedItemSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'tabBarUnselectedItemOpacity', tabBarUnselectedItemOpacity));
-    properties.add(EnumProperty<SchemeColor>(
-        'tabBarIndicatorSchemeColor', tabBarIndicatorSchemeColor));
-    properties.add(EnumProperty<TabBarIndicatorSize>(
-        'tabBarIndicatorSize', tabBarIndicatorSize));
-    properties.add(DiagnosticsProperty<double>(
-        'tabBarIndicatorWeight', tabBarIndicatorWeight));
-    properties.add(DiagnosticsProperty<double>(
-        'tabBarIndicatorTopRadius', tabBarIndicatorTopRadius));
+    properties.add(EnumProperty<SchemeColor>('appBarBackgroundSchemeColor', appBarBackgroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('appBarForegroundSchemeColor', appBarForegroundSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('appBarIconSchemeColor', appBarIconSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('appBarActionsIconSchemeColor', appBarActionsIconSchemeColor));
+    properties.add(DiagnosticsProperty<bool>('appBarCenterTitle', appBarCenterTitle));
+    properties.add(DiagnosticsProperty<double>('appBarScrolledUnderElevation', appBarScrolledUnderElevation));
+    properties.add(DiagnosticsProperty<TextStyle>('appBarToolbarTextStyle', appBarToolbarTextStyle));
+    properties.add(DiagnosticsProperty<TextStyle>('appBarTitleTextStyle', appBarTitleTextStyle));
+    //
+    properties.add(EnumProperty<SchemeColor>('bottomAppBarSchemeColor', bottomAppBarSchemeColor));
+    properties.add(DiagnosticsProperty<double>('bottomAppBarHeight', bottomAppBarHeight));
+    //
+    properties.add(EnumProperty<SchemeColor>('tabBarItemSchemeColor', tabBarItemSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('tabBarUnselectedItemSchemeColor', tabBarUnselectedItemSchemeColor));
+    properties.add(DiagnosticsProperty<double>('tabBarUnselectedItemOpacity', tabBarUnselectedItemOpacity));
+    properties.add(EnumProperty<SchemeColor>('tabBarIndicatorSchemeColor', tabBarIndicatorSchemeColor));
+    properties.add(EnumProperty<TabBarIndicatorSize>('tabBarIndicatorSize', tabBarIndicatorSize));
+    properties.add(DiagnosticsProperty<double>('tabBarIndicatorWeight', tabBarIndicatorWeight));
+    properties.add(DiagnosticsProperty<double>('tabBarIndicatorTopRadius', tabBarIndicatorTopRadius));
     properties.add(ColorProperty('tabBarDividerColor', tabBarDividerColor));
-    properties.add(
-        EnumProperty<TabAlignment>('tabBarTabAlignment', tabBarTabAlignment));
-    properties.add(EnumProperty<TabIndicatorAnimation>(
-        'tabBarIndicatorAnimation', tabBarIndicatorAnimation));
+    properties.add(EnumProperty<TabAlignment>('tabBarTabAlignment', tabBarTabAlignment));
+    properties.add(EnumProperty<TabIndicatorAnimation>('tabBarIndicatorAnimation', tabBarIndicatorAnimation));
     //
     properties.add(DiagnosticsProperty<double>('drawerRadius', drawerRadius));
-    properties
-        .add(DiagnosticsProperty<double>('drawerElevation', drawerElevation));
-    properties.add(EnumProperty<SchemeColor>(
-        'drawerBackgroundSchemeColor', drawerBackgroundSchemeColor));
+    properties.add(DiagnosticsProperty<double>('drawerElevation', drawerElevation));
+    properties.add(EnumProperty<SchemeColor>('drawerBackgroundSchemeColor', drawerBackgroundSchemeColor));
     properties.add(DiagnosticsProperty<double>('drawerWidth', drawerWidth));
-    properties.add(DiagnosticsProperty<double>(
-        'drawerIndicatorWidth', drawerIndicatorWidth));
-    properties.add(DiagnosticsProperty<double>(
-        'drawerIndicatorRadius', drawerIndicatorRadius));
-    properties.add(EnumProperty<SchemeColor>(
-        'drawerIndicatorSchemeColor', drawerIndicatorSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'drawerIndicatorOpacity', drawerIndicatorOpacity));
-    properties.add(EnumProperty<SchemeColor>(
-        'drawerSelectedItemSchemeColor', drawerSelectedItemSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'drawerUnselectedItemSchemeColor', drawerUnselectedItemSchemeColor));
+    properties.add(DiagnosticsProperty<double>('drawerIndicatorWidth', drawerIndicatorWidth));
+    properties.add(DiagnosticsProperty<double>('drawerIndicatorRadius', drawerIndicatorRadius));
+    properties.add(EnumProperty<SchemeColor>('drawerIndicatorSchemeColor', drawerIndicatorSchemeColor));
+    properties.add(DiagnosticsProperty<double>('drawerIndicatorOpacity', drawerIndicatorOpacity));
+    properties.add(EnumProperty<SchemeColor>('drawerSelectedItemSchemeColor', drawerSelectedItemSchemeColor));
+    properties.add(EnumProperty<SchemeColor>('drawerUnselectedItemSchemeColor', drawerUnselectedItemSchemeColor));
     //
-    properties.add(EnumProperty<SchemeColor>(
-        'bottomSheetBackgroundColor', bottomSheetBackgroundColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'bottomSheetModalBackgroundColor', bottomSheetModalBackgroundColor));
-    properties.add(
-        DiagnosticsProperty<double>('bottomSheetRadius', bottomSheetRadius));
-    properties.add(DiagnosticsProperty<double>(
-        'bottomSheetElevation', bottomSheetElevation));
-    properties.add(DiagnosticsProperty<double>(
-        'bottomSheetModalElevation', bottomSheetModalElevation));
-    properties.add(
-        EnumProperty<Clip>('bottomSheetClipBehavior', bottomSheetClipBehavior));
+    properties.add(EnumProperty<SchemeColor>('bottomSheetBackgroundColor', bottomSheetBackgroundColor));
+    properties.add(EnumProperty<SchemeColor>('bottomSheetModalBackgroundColor', bottomSheetModalBackgroundColor));
+    properties.add(DiagnosticsProperty<double>('bottomSheetRadius', bottomSheetRadius));
+    properties.add(DiagnosticsProperty<double>('bottomSheetElevation', bottomSheetElevation));
+    properties.add(DiagnosticsProperty<double>('bottomSheetModalElevation', bottomSheetModalElevation));
+    properties.add(EnumProperty<Clip>('bottomSheetClipBehavior', bottomSheetClipBehavior));
     //
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'bottomNavigationBarLabelTextStyle',
-        bottomNavigationBarLabelTextStyle));
-    properties.add(DiagnosticsProperty<double>(
-        'bottomNavigationBarSelectedLabelSize',
-        bottomNavigationBarSelectedLabelSize));
-    properties.add(DiagnosticsProperty<double>(
-        'bottomNavigationBarUnselectedLabelSize',
-        bottomNavigationBarUnselectedLabelSize));
-    properties.add(DiagnosticsProperty<SchemeColor>(
+    properties.add(
+      DiagnosticsProperty<TextStyle>('bottomNavigationBarLabelTextStyle', bottomNavigationBarLabelTextStyle),
+    );
+    properties.add(
+      DiagnosticsProperty<double>('bottomNavigationBarSelectedLabelSize', bottomNavigationBarSelectedLabelSize),
+    );
+    properties.add(
+      DiagnosticsProperty<double>('bottomNavigationBarUnselectedLabelSize', bottomNavigationBarUnselectedLabelSize),
+    );
+    properties.add(
+      DiagnosticsProperty<SchemeColor>(
         'bottomNavigationBarSelectedLabelSchemeColor',
-        bottomNavigationBarSelectedLabelSchemeColor));
-    properties.add(DiagnosticsProperty<SchemeColor>(
+        bottomNavigationBarSelectedLabelSchemeColor,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<SchemeColor>(
         'bottomNavigationBarUnselectedLabelSchemeColor',
-        bottomNavigationBarUnselectedLabelSchemeColor));
-    properties.add(DiagnosticsProperty<bool>(
-        'bottomNavigationBarMutedUnselectedLabel',
-        bottomNavigationBarMutedUnselectedLabel));
-    properties.add(DiagnosticsProperty<double>(
-        'bottomNavigationBarSelectedIconSize',
-        bottomNavigationBarSelectedIconSize));
-    properties.add(DiagnosticsProperty<double>(
-        'bottomNavigationBarUnselectedIconSize',
-        bottomNavigationBarUnselectedIconSize));
-    properties.add(EnumProperty<SchemeColor>(
+        bottomNavigationBarUnselectedLabelSchemeColor,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<bool>('bottomNavigationBarMutedUnselectedLabel', bottomNavigationBarMutedUnselectedLabel),
+    );
+    properties.add(
+      DiagnosticsProperty<double>('bottomNavigationBarSelectedIconSize', bottomNavigationBarSelectedIconSize),
+    );
+    properties.add(
+      DiagnosticsProperty<double>('bottomNavigationBarUnselectedIconSize', bottomNavigationBarUnselectedIconSize),
+    );
+    properties.add(
+      EnumProperty<SchemeColor>(
         'bottomNavigationBarSelectedIconSchemeColor',
-        bottomNavigationBarSelectedIconSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
+        bottomNavigationBarSelectedIconSchemeColor,
+      ),
+    );
+    properties.add(
+      EnumProperty<SchemeColor>(
         'bottomNavigationBarUnselectedIconSchemeColor',
-        bottomNavigationBarUnselectedIconSchemeColor));
-    properties.add(DiagnosticsProperty<bool>(
-        'bottomNavigationBarMutedUnselectedIcon',
-        bottomNavigationBarMutedUnselectedIcon));
-    properties.add(DiagnosticsProperty<SchemeColor>(
+        bottomNavigationBarUnselectedIconSchemeColor,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<bool>('bottomNavigationBarMutedUnselectedIcon', bottomNavigationBarMutedUnselectedIcon),
+    );
+    properties.add(
+      DiagnosticsProperty<SchemeColor>(
         'bottomNavigationBarBackgroundSchemeColor',
-        bottomNavigationBarBackgroundSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'bottomNavigationBarOpacity', bottomNavigationBarOpacity));
-    properties.add(DiagnosticsProperty<double>(
-        'bottomNavigationBarElevation', bottomNavigationBarElevation));
-    properties.add(DiagnosticsProperty<bool>(
-        'bottomNavigationBarShowSelectedLabels',
-        bottomNavigationBarShowSelectedLabels));
-    properties.add(DiagnosticsProperty<bool>(
-        'bottomNavigationBarShowUnselectedLabels',
-        bottomNavigationBarShowUnselectedLabels));
-    properties.add(EnumProperty<BottomNavigationBarType>(
-        'bottomNavigationBarType', bottomNavigationBarType));
-    properties.add(EnumProperty<BottomNavigationBarLandscapeLayout>(
+        bottomNavigationBarBackgroundSchemeColor,
+      ),
+    );
+    properties.add(DiagnosticsProperty<double>('bottomNavigationBarOpacity', bottomNavigationBarOpacity));
+    properties.add(DiagnosticsProperty<double>('bottomNavigationBarElevation', bottomNavigationBarElevation));
+    properties.add(
+      DiagnosticsProperty<bool>('bottomNavigationBarShowSelectedLabels', bottomNavigationBarShowSelectedLabels),
+    );
+    properties.add(
+      DiagnosticsProperty<bool>('bottomNavigationBarShowUnselectedLabels', bottomNavigationBarShowUnselectedLabels),
+    );
+    properties.add(EnumProperty<BottomNavigationBarType>('bottomNavigationBarType', bottomNavigationBarType));
+    properties.add(
+      EnumProperty<BottomNavigationBarLandscapeLayout>(
         'bottomNavigationBarLandscapeLayout',
-        bottomNavigationBarLandscapeLayout));
+        bottomNavigationBarLandscapeLayout,
+      ),
+    );
     //
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'navigationBarLabelTextStyle', navigationBarLabelTextStyle));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationBarSelectedLabelSize', navigationBarSelectedLabelSize));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationBarUnselectedLabelSize', navigationBarUnselectedLabelSize));
-    properties.add(DiagnosticsProperty<SchemeColor>(
-        'navigationBarSelectedLabelSchemeColor',
-        navigationBarSelectedLabelSchemeColor));
-    properties.add(DiagnosticsProperty<SchemeColor>(
+    properties.add(DiagnosticsProperty<TextStyle>('navigationBarLabelTextStyle', navigationBarLabelTextStyle));
+    properties.add(DiagnosticsProperty<double>('navigationBarSelectedLabelSize', navigationBarSelectedLabelSize));
+    properties.add(DiagnosticsProperty<double>('navigationBarUnselectedLabelSize', navigationBarUnselectedLabelSize));
+    properties.add(
+      DiagnosticsProperty<SchemeColor>('navigationBarSelectedLabelSchemeColor', navigationBarSelectedLabelSchemeColor),
+    );
+    properties.add(
+      DiagnosticsProperty<SchemeColor>(
         'navigationBarUnselectedLabelSchemeColor',
-        navigationBarUnselectedLabelSchemeColor));
-    properties.add(DiagnosticsProperty<bool>(
-        'navigationBarMutedUnselectedLabel',
-        navigationBarMutedUnselectedLabel));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationBarSelectedIconSize', navigationBarSelectedIconSize));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationBarUnselectedIconSize', navigationBarUnselectedIconSize));
-    properties.add(EnumProperty<SchemeColor>(
-        'navigationBarSelectedIconSchemeColor',
-        navigationBarSelectedIconSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'navigationBarUnselectedIconSchemeColor',
-        navigationBarUnselectedIconSchemeColor));
-    properties.add(DiagnosticsProperty<bool>(
-        'navigationBarMutedUnselectedIcon', navigationBarMutedUnselectedIcon));
-    properties.add(EnumProperty<SchemeColor>(
-        'navigationBarIndicatorSchemeColor',
-        navigationBarIndicatorSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationBarIndicatorOpacity', navigationBarIndicatorOpacity));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationBarIndicatorRadius', navigationBarIndicatorRadius));
-    properties.add(EnumProperty<SchemeColor>(
-        'navigationBarBackgroundSchemeColor',
-        navigationBarBackgroundSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationBarOpacity', navigationBarOpacity));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationBarElevation', navigationBarElevation));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationBarHeight', navigationBarHeight));
-    properties.add(EnumProperty<NavigationDestinationLabelBehavior>(
-        'navigationBarLabelBehavior', navigationBarLabelBehavior));
-    properties.add(DiagnosticsProperty<FlexAdaptive>(
-        'adaptiveRemoveNavigationBarTint', adaptiveRemoveNavigationBarTint));
+        navigationBarUnselectedLabelSchemeColor,
+      ),
+    );
+    properties.add(DiagnosticsProperty<bool>('navigationBarMutedUnselectedLabel', navigationBarMutedUnselectedLabel));
+    properties.add(DiagnosticsProperty<double>('navigationBarSelectedIconSize', navigationBarSelectedIconSize));
+    properties.add(DiagnosticsProperty<double>('navigationBarUnselectedIconSize', navigationBarUnselectedIconSize));
+    properties.add(
+      EnumProperty<SchemeColor>('navigationBarSelectedIconSchemeColor', navigationBarSelectedIconSchemeColor),
+    );
+    properties.add(
+      EnumProperty<SchemeColor>('navigationBarUnselectedIconSchemeColor', navigationBarUnselectedIconSchemeColor),
+    );
+    properties.add(DiagnosticsProperty<bool>('navigationBarMutedUnselectedIcon', navigationBarMutedUnselectedIcon));
+    properties.add(EnumProperty<SchemeColor>('navigationBarIndicatorSchemeColor', navigationBarIndicatorSchemeColor));
+    properties.add(DiagnosticsProperty<double>('navigationBarIndicatorOpacity', navigationBarIndicatorOpacity));
+    properties.add(DiagnosticsProperty<double>('navigationBarIndicatorRadius', navigationBarIndicatorRadius));
+    properties.add(EnumProperty<SchemeColor>('navigationBarBackgroundSchemeColor', navigationBarBackgroundSchemeColor));
+    properties.add(DiagnosticsProperty<double>('navigationBarOpacity', navigationBarOpacity));
+    properties.add(DiagnosticsProperty<double>('navigationBarElevation', navigationBarElevation));
+    properties.add(DiagnosticsProperty<double>('navigationBarHeight', navigationBarHeight));
+    properties.add(
+      EnumProperty<NavigationDestinationLabelBehavior>('navigationBarLabelBehavior', navigationBarLabelBehavior),
+    );
+    properties.add(
+      DiagnosticsProperty<FlexAdaptive>('adaptiveRemoveNavigationBarTint', adaptiveRemoveNavigationBarTint),
+    );
     //
-    properties.add(DiagnosticsProperty<TextStyle>(
-        'navigationRailLabelTextStyle', navigationRailLabelTextStyle));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailSelectedLabelSize', navigationRailSelectedLabelSize));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailUnselectedLabelSize',
-        navigationRailUnselectedLabelSize));
-    properties.add(DiagnosticsProperty<SchemeColor>(
+    properties.add(DiagnosticsProperty<TextStyle>('navigationRailLabelTextStyle', navigationRailLabelTextStyle));
+    properties.add(DiagnosticsProperty<double>('navigationRailSelectedLabelSize', navigationRailSelectedLabelSize));
+    properties.add(DiagnosticsProperty<double>('navigationRailUnselectedLabelSize', navigationRailUnselectedLabelSize));
+    properties.add(
+      DiagnosticsProperty<SchemeColor>(
         'navigationRailSelectedLabelSchemeColor',
-        navigationRailSelectedLabelSchemeColor));
-    properties.add(DiagnosticsProperty<SchemeColor>(
+        navigationRailSelectedLabelSchemeColor,
+      ),
+    );
+    properties.add(
+      DiagnosticsProperty<SchemeColor>(
         'navigationRailUnselectedLabelSchemeColor',
-        navigationRailUnselectedLabelSchemeColor));
-    properties.add(DiagnosticsProperty<bool>(
-        'navigationRailMutedUnselectedLabel',
-        navigationRailMutedUnselectedLabel));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailSelectedIconSize', navigationRailSelectedIconSize));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailUnselectedIconSize', navigationRailUnselectedIconSize));
-    properties.add(EnumProperty<SchemeColor>(
-        'navigationRailSelectedIconSchemeColor',
-        navigationRailSelectedIconSchemeColor));
-    properties.add(EnumProperty<SchemeColor>(
-        'navigationRailUnselectedIconSchemeColor',
-        navigationRailUnselectedIconSchemeColor));
-    properties.add(DiagnosticsProperty<bool>(
-        'navigationRailMutedUnselectedIcon',
-        navigationRailMutedUnselectedIcon));
-    properties.add(DiagnosticsProperty<bool>(
-        'navigationRailUseIndicator', navigationRailUseIndicator));
-    properties.add(DiagnosticsProperty<SchemeColor>(
-        'navigationRailIndicatorSchemeColor',
-        navigationRailIndicatorSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailIndicatorOpacity', navigationRailIndicatorOpacity));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailIndicatorRadius', navigationRailIndicatorRadius));
-    properties.add(DiagnosticsProperty<SchemeColor>(
-        'navigationRailBackgroundSchemeColor',
-        navigationRailBackgroundSchemeColor));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailOpacity', navigationRailOpacity));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailElevation', navigationRailElevation));
-    properties.add(EnumProperty<NavigationRailLabelType>(
-        'navigationRailLabelType', navigationRailLabelType));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailGroupAlignment', navigationRailGroupAlignment));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailMinWidth', navigationRailMinWidth));
-    properties.add(DiagnosticsProperty<double>(
-        'navigationRailMinExtendedWidth', navigationRailMinExtendedWidth));
+        navigationRailUnselectedLabelSchemeColor,
+      ),
+    );
+    properties.add(DiagnosticsProperty<bool>('navigationRailMutedUnselectedLabel', navigationRailMutedUnselectedLabel));
+    properties.add(DiagnosticsProperty<double>('navigationRailSelectedIconSize', navigationRailSelectedIconSize));
+    properties.add(DiagnosticsProperty<double>('navigationRailUnselectedIconSize', navigationRailUnselectedIconSize));
+    properties.add(
+      EnumProperty<SchemeColor>('navigationRailSelectedIconSchemeColor', navigationRailSelectedIconSchemeColor),
+    );
+    properties.add(
+      EnumProperty<SchemeColor>('navigationRailUnselectedIconSchemeColor', navigationRailUnselectedIconSchemeColor),
+    );
+    properties.add(DiagnosticsProperty<bool>('navigationRailMutedUnselectedIcon', navigationRailMutedUnselectedIcon));
+    properties.add(DiagnosticsProperty<bool>('navigationRailUseIndicator', navigationRailUseIndicator));
+    properties.add(
+      DiagnosticsProperty<SchemeColor>('navigationRailIndicatorSchemeColor', navigationRailIndicatorSchemeColor),
+    );
+    properties.add(DiagnosticsProperty<double>('navigationRailIndicatorOpacity', navigationRailIndicatorOpacity));
+    properties.add(DiagnosticsProperty<double>('navigationRailIndicatorRadius', navigationRailIndicatorRadius));
+    properties.add(
+      DiagnosticsProperty<SchemeColor>('navigationRailBackgroundSchemeColor', navigationRailBackgroundSchemeColor),
+    );
+    properties.add(DiagnosticsProperty<double>('navigationRailOpacity', navigationRailOpacity));
+    properties.add(DiagnosticsProperty<double>('navigationRailElevation', navigationRailElevation));
+    properties.add(EnumProperty<NavigationRailLabelType>('navigationRailLabelType', navigationRailLabelType));
+    properties.add(DiagnosticsProperty<double>('navigationRailGroupAlignment', navigationRailGroupAlignment));
+    properties.add(DiagnosticsProperty<double>('navigationRailMinWidth', navigationRailMinWidth));
+    properties.add(DiagnosticsProperty<double>('navigationRailMinExtendedWidth', navigationRailMinExtendedWidth));
   }
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A custom [SwitchListTile] that has a built-in animated custom action
 /// as a part of [title] that reveals the [subtitleReveal] when clicked.
@@ -148,12 +148,9 @@ class _SwitchListTileRevealState extends State<SwitchListTileReveal> {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: <Widget>[
               if (widget.title != null) widget.title!,
-              if (widget.subtitleReveal != null &&
-                  (widget.enabled || widget.allowRevealWhenDisabled))
+              if (widget.subtitleReveal != null && (widget.enabled || widget.allowRevealWhenDisabled))
                 InkWell(
-                  onTap: widget.enabled || widget.allowRevealWhenDisabled
-                      ? _handleTap
-                      : null,
+                  onTap: widget.enabled || widget.allowRevealWhenDisabled ? _handleTap : null,
                   borderRadius: BorderRadius.circular(28),
                   child: SizedBox.square(
                     dimension: 28,
@@ -176,9 +173,7 @@ class _SwitchListTileRevealState extends State<SwitchListTileReveal> {
               child: child,
             );
           },
-          child: (_isOpen &&
-                  widget.subtitleReveal != null &&
-                  (widget.enabled || widget.allowRevealWhenDisabled))
+          child: (_isOpen && widget.subtitleReveal != null && (widget.enabled || widget.allowRevealWhenDisabled))
               ? ListTile(
                   dense: widget.revealDense ?? true,
                   subtitle: widget.subtitleReveal,

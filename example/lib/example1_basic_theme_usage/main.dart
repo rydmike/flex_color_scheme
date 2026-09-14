@@ -1,8 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example1_basic_theme_usage/home_page.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
-import 'home_page.dart';
+import 'package:material_ui/material_ui.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 1 - Basic Theme Usage
@@ -12,7 +11,7 @@ import 'home_page.dart';
 // and then how to switch between the light and dark mode.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/basictheme-latest
+// https://rydmike.com/flexcolorscheme/basictheme-v9-0
 // -----------------------------------------------------------------------------
 void main() => runApp(const DemoApp());
 

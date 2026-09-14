@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/nullable_bool_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/nullable_bool_toggle_buttons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class AppBarCenterTitleToggleButtons extends StatelessWidget {
   const AppBarCenterTitleToggleButtons({
@@ -20,7 +19,7 @@ class AppBarCenterTitleToggleButtons extends StatelessWidget {
   /// and `EdgeInsetsDirectional.only(start: 16.0, end: 24.0)` in M3.
   final EdgeInsetsGeometry? contentPadding;
 
-  String _explainLabelStyle(final bool? value) {
+  String _explainLabelStyle(bool? value) {
     switch (value) {
       case true:
         return 'Always center title (true)';
@@ -38,20 +37,18 @@ class AppBarCenterTitleToggleButtons extends StatelessWidget {
       enabled: controller.useFlexColorScheme && controller.useSubThemes,
       title: const Text('Center title'),
       subtitle: Text(_explainLabelStyle(controller.appBarCenterTitle)),
-      subtitleReveal: const Text('When default undefined "null" value is used, '
-          'Flutter has built-in platform adaptive logic to center the title '
-          'when running on iOs or macOS and to start align on other platforms. '
-          'If two or more action icons are present, the title will be start '
-          'aligned on all platforms when the value is null.'),
+      subtitleReveal: const Text(
+        'When default undefined "null" value is used, '
+        'Flutter has built-in platform adaptive logic to center the title '
+        'when running on iOs or macOS and to start align on other platforms. '
+        'If two or more action icons are present, the title will be start '
+        'aligned on all platforms when the value is null.',
+      ),
       trailing: Padding(
         padding: const EdgeInsetsDirectional.only(end: 2.0),
         child: NullableBoolToggleButtons(
-          value: controller.useFlexColorScheme && controller.useSubThemes
-              ? controller.appBarCenterTitle
-              : null,
-          onChanged: controller.useFlexColorScheme && controller.useSubThemes
-              ? controller.setAppBarCenterTitle
-              : null,
+          value: controller.useFlexColorScheme && controller.useSubThemes ? controller.appBarCenterTitle : null,
+          onChanged: controller.useFlexColorScheme && controller.useSubThemes ? controller.setAppBarCenterTitle : null,
         ),
       ),
       onTap: () {

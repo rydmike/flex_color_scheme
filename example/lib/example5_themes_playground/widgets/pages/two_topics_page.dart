@@ -1,11 +1,10 @@
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/widgets/theme_color_selector_header_delegate.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/widgets/topic_selector.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/widgets/vertical_panel_view.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
-import '../../../shared/const/app.dart';
-import '../../../shared/controllers/theme_controller.dart';
-import 'widgets/theme_color_selector_header_delegate.dart';
-import 'widgets/topic_selector.dart';
-import 'widgets/vertical_panel_view.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
@@ -45,8 +44,7 @@ class TwoTopicsPage extends StatefulWidget {
   State<TwoTopicsPage> createState() => _TwoTopicsPageState();
 }
 
-class _TwoTopicsPageState extends State<TwoTopicsPage>
-    with TickerProviderStateMixin {
+class _TwoTopicsPageState extends State<TwoTopicsPage> with TickerProviderStateMixin {
   late final ScrollController scrollController;
   late int previousSchemeIndex;
   late bool previousUseFlexColorScheme;
@@ -105,25 +103,19 @@ class _TwoTopicsPageState extends State<TwoTopicsPage>
 
     final bool isCompact = widget.controller.compactMode;
     final bool isPinned = mediaSize.height >= App.pinnedSelector;
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint ||
-        isCompact;
+    final bool isPhone =
+        mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint || isCompact;
     final double phoneReduce = isPhone ? App.colorButtonPhoneReduce : 0;
     final double margins = App.responsiveInsets(mediaSize.width, isCompact);
     // The height diff of the switch = dense - normal.
-    final double phoneSwitchReduce =
-        isPhone ? _kHeightDenseListTile - _kHeightNormaListTile : 0;
+    final double phoneSwitchReduce = isPhone ? _kHeightDenseListTile - _kHeightNormaListTile : 0;
     // The height diff with switches removed.
     final double switchRemove = isCompact ? -_kHeightDenseListTile : 0;
     // All the above is so we can below calculate how high the
     // [ThemeColorSelectorHeaderDelegate] extent should be in different modes,
     // compact and phone responsive layouts.
-    final double headerExtent = _kHeightSelector +
-        mediaPadding.top +
-        margins * 3 +
-        phoneReduce +
-        phoneSwitchReduce +
-        switchRemove;
+    final double headerExtent =
+        _kHeightSelector + mediaPadding.top + margins * 3 + phoneReduce + phoneSwitchReduce + switchRemove;
     // It was tricky to figure out all the extent details, these helped.
     if (_debug) {
       debugPrint('headerExtent ............ : $headerExtent');

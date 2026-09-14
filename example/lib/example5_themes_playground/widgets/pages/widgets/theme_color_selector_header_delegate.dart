@@ -1,11 +1,10 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/widgets/theme_color_selector.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
 import 'package:flutter/rendering.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import 'theme_color_selector.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// [ThemeColorSelectorHeaderDelegate] for used custom [SliverPersistentHeader].
 ///
@@ -29,8 +28,7 @@ class ThemeColorSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
   final bool updateDelegate;
 
   @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
     return _ThemeColorSelectorDelegateWrapper(controller);
   }
 
@@ -42,14 +40,11 @@ class ThemeColorSelectorHeaderDelegate extends SliverPersistentHeaderDelegate {
 
   @override
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
-    return oldDelegate.maxExtent != maxExtent ||
-        oldDelegate.minExtent != minExtent ||
-        updateDelegate;
+    return oldDelegate.maxExtent != maxExtent || oldDelegate.minExtent != minExtent || updateDelegate;
   }
 
   @override
-  FloatingHeaderSnapConfiguration? get snapConfiguration =>
-      FloatingHeaderSnapConfiguration();
+  FloatingHeaderSnapConfiguration? get snapConfiguration => FloatingHeaderSnapConfiguration();
 }
 
 /// A wrapper for the [ThemeColorSelector] when it is used via a

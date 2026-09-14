@@ -2,6 +2,75 @@
 
 All changes to the **FlexColorScheme** (FCS) package are documented here.
 
+## 9.0.0
+
+**September 14, 2026**
+
+The version requires Flutter 3.47.0 or higher. Offers support for SDK decoupled Material and Cupertino libraries.
+
+> Except for removing deprecated APIs that were no longer had any function in version 8.4, and fixing one package bug and one Themes Playground bug, this release is a maintenance release to bring the package up to date with the latest Flutter SDK and other packages. Most notably full support for the standalone `material_ui` and `cupertino_ui` packages. 
+> 
+> Now that Material UI development is no longer on hold and moving forward, development of new features and improvements to the package will resume. This version deliberately avoids any new features to ensure it is an easy upgrade from version 8.4, with main focus on support for the new standalone `material_ui` and `cupertino_ui` packages.
+
+### Package
+
+**BREAKING**
+- This version requires Flutter 3.47.0 or higher
+- It also opts in on Dart 3.13.0 language features and lints.
+- This release brings full support for the standalone `material_ui` and `cupertino_ui` packages.
+- Per **Flutter's official recommendation** the package is released as a **major breaking** release.
+- Seeded **light** themes now default `FlexKeyColors.useExpressiveOnContainerColors` to `true` when undefined, matching Flutter 3.47 `ColorScheme.fromSeed` and FlexSeedScheme 5 (MCU 0.13 tone **30** on-container colors). This changes `onPrimaryContainer`, `onSecondaryContainer`, `onTertiaryContainer` and `onErrorContainer` in light mode. Dark on-container tones were already tone **90** and do not change. Opt out with `useExpressiveOnContainerColors: false` to keep the older higher-contrast tone **10** light on-container colors. Flutter's `ColorScheme.fromSeed` has no such opt-out.
+- Removed no-op ColorScheme leftovers deprecated since v8. Use `surface` / `onSurface` instead of `background` / `onBackground` on `FlexColorScheme`, `FlexThemeData`, `FlexSchemeOnColors`, and `FlexSchemeSurfaceColors`. `surfaceVariant` was also removed from `FlexSchemeSurfaceColors`. Matching unused alpha fields were removed from `FlexAlphaValues`.
+- Removed no-op `FlexSubThemesData` flags `useTextTheme`, `useFlutterDefaults`, and `blendTextTheme`. Use `useMaterial3Typography` instead of `useTextTheme`.
+- Removed unused `useFlutterDefaults` from `FlexSubThemes.bottomNavigationBarTheme`, and unused `useMaterial3` / `useFlutterDefaults` from `navigationBarTheme` and `navigationRailTheme`. `bottomNavigationBarTheme` still uses `useMaterial3`.
+- Removed the `FlexSubThemes.bottomNavigationBar` pass-through alias. Use `FlexSubThemes.bottomNavigationBarTheme`.
+- Removed `FlexColorScheme.createPrimarySwatch`. Use `ColorTools.createPrimarySwatch` in package `flex_color_picker`.
+
+**FIX**
+- In beta feature Shadcn colors, the shadZinc scheme was not included in the schemesList, it has been added.
+
+**DOCS**
+- Setup package for agentic development and usage use with git worktrees.
+- Added a skill for agents that consume this package, see `.agents/skills/flex-color-scheme/SKILL.md`.
+- Function and factory parameter documentation now lives in the callable body as `## [param]` sections so dartdoc links resolve. Parameter-level comments are short summaries that use backticks instead of `[Symbol]` references.
+- Remaining dartdoc `comment_references` are resolved with `@docImport` on library directives, `[Class.member]` qualification, and backticks for literals, GoogleFonts, and removed APIs such as `surfaceStyle` / `FlexSurface`.
+- Reviewed and updated all docs.
+
+**CHORE**
+- Bump package version to 9.0.0.
+- Bump packages to latest versions.
+- Align `.gitignore` and `.pubignore` after adopting the shared Flex package ignore files: stop tracking Flutter-generated desktop plugin registrant files that those ignores already exclude, ignore Android `.kotlin/` compiler session files, and keep internal `docs/` out of the published archive so pub does not treat it as package documentation.
+- CI: bumped `actions/checkout` to v4 and `codecov/codecov-action` from end-of-life v3 to v5. Codecov now uses `files:` (the v3 `file:` input is ignored), `fail_ci_if_error: true`, and `disable_search: true`. The Test workflow runs on pull requests and pushes to `master`. The Deploy workflow sets `override_branch: master` so GitHub release uploads attach to the default branch.
+- Production web example deploys use a shared `WEB_VERSION` slug in `.github/web-deploy.env` (currently `v9-0`) instead of `-latest`. `deploy.yml` and `deploy_playground.yml` also publish the Themes Playground WASM GC build to Netlify.
+
+### Test
+
+**FIX**
+- Temp test fix: Refactored `flex_color_scheme_to_theme_test.dart` use the new `textThemeFromGoogleFonts` adapter function from `google_fonts_text_theme.dart` file. Needed because`google_fonts` still types `TextTheme` against `package:flutter/material.dart`, which is a different class than `package:material_ui`'s `TextTheme`. The `TextStyle` is shared, so copying the styles is type-safe. This will be removed when `google_fonts` is updated to use `package:material_ui`'s `TextTheme`.
+- Updated seeded `ColorScheme.fromSeed` parity tests for MCU 0.13 expressive light on-container colors. Added a lock that `useExpressiveOnContainerColors: false` still produces the legacy tone 10 colors.
+
+### Themes Playground
+
+**NEW**
+- Add showing textBaseline and leadingDistribution to TextStyle details.
+
+**CHANGE**
+- The **Expressive containers** switch now defaults ON, matching FCS 9.0 and Flutter 3.47 `ColorScheme.fromSeed`. Generated theme code omits `useExpressiveOnContainerColors` when on (the new default) and emits `useExpressiveOnContainerColors: false` when off.
+- Removed leftover `blendTextTheme` Playground persistence and code-generation comments. The TextTheme panel keeps a short notice that tinted TextTheme was removed in 9.0.
+
+**FIX**
+- Make cancel custom color selection work correctly.
+- Generated theme setup now imports `package:material_ui/material_ui.dart` and `package:cupertino_ui/cupertino_ui.dart` instead of `package:flutter/material.dart` and `package:flutter/cupertino.dart`.
+
+**DOCS**
+- Latest live Themes Playground is the WASM GC build at [https://playground.flexcolorscheme.com/](https://playground.flexcolorscheme.com/). GitHub Pages now hosts versioned JS builds (`themesplayground-v9-0` and older frozen paths). The `-latest` path is no longer used for new deploys.
+
+**CHORE**
+- Bump version to 9.0.0.
+- Bump packages to latest versions.
+- Example iOS and macOS host projects (shared by all five example entrypoints) now use Swift Package Manager only. CocoaPods integration, Podfiles, and lockfiles were removed.
+- Example Android host project (shared by all five example entrypoints) now uses Flutter 3.47 Gradle 9.3.1, AGP 9.1.0, and Kotlin 2.4.0 so device and emulator builds succeed.
+
 ## 8.4.0
 
 **November 30, 2025**

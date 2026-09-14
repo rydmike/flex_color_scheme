@@ -1,9 +1,10 @@
-import 'package:flutter/cupertino.dart'; // For comment refs.
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart'; // For comment refs.
+/// @docImport 'package:cupertino_ui/cupertino_ui.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_color_scheme.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_sub_themes_data.dart';
+/// @docImport 'package:material_ui/material_ui.dart';
+library;
 
-import 'flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
-import 'flex_sub_themes_data.dart'; // For comment refs.
+import 'package:flutter/foundation.dart';
 
 /// The [FlexAdaptive] class is used to define on what platforms
 /// [FlexColorScheme] generated [ThemeData] platform adaptive theming
@@ -19,7 +20,7 @@ import 'flex_sub_themes_data.dart'; // For comment refs.
 /// use case is removing Material-3 design features that may be too opinionated
 /// on e.g. iOS and desktop platforms, but you want to keep them on Android.
 ///
-/// Each platform adaptive theming response can be configure to what platform it
+/// Each platform adaptive theming response can be configured to what platform it
 /// applies to. You can even define it so you get a different theme on the
 /// device native build and when using a web build of the same app, on the same
 /// device. The swapping between the default none adaptive theme and the
@@ -57,7 +58,7 @@ import 'flex_sub_themes_data.dart'; // For comment refs.
 /// as the curvature of the border radius. It would then be possible to use it
 /// adaptively on desired platforms. When this adaptive feature is enabled
 /// all Material components that use [ShapeBorder] will use Squircle curvature
-/// instead of circular borer radius, on selected platforms. The Squircle is
+/// instead of circular border radius, on selected platforms. The Squircle is
 /// the border curvature shape used on Apple devices. Adding this feature
 /// is a bit on hold since there is currently no consensus or built-in support
 /// in Flutter to draw an iOS correct Squircle. See issue:
@@ -485,20 +486,20 @@ class FlexAdaptive with Diagnosticable {
   /// Override for hashcode, dart.ui Jenkins based.
   @override
   int get hashCode => Object.hashAll(<Object?>[
-        android,
-        androidWeb,
-        fuchsia,
-        fuchsiaWeb,
-        iOS,
-        iOSWeb,
-        linux,
-        linuxWeb,
-        macOS,
-        macOSWeb,
-        windows,
-        windowsWeb,
-        overrideIsWeb,
-      ]);
+    android,
+    androidWeb,
+    fuchsia,
+    fuchsiaWeb,
+    iOS,
+    iOSWeb,
+    linux,
+    linuxWeb,
+    macOS,
+    macOSWeb,
+    windows,
+    windowsWeb,
+    overrideIsWeb,
+  ]);
 
   /// Flutter debug properties override, includes toString.
   @override

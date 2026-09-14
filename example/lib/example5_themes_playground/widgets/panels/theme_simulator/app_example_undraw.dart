@@ -1,17 +1,16 @@
 import 'dart:math';
 
-import 'package:flutter/material.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/const/app_images.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/app_scroll_behavior.dart';
-import '../../../../shared/utils/breakpoint.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/utils/random_color.dart';
-import '../../../../shared/widgets/universal/svg_asset_image.dart';
-import '../../../../shared/widgets/universal/svg_asset_image_switcher.dart';
-import '../../shared/theme_mode_switch_list_tile.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/theme_mode_switch_list_tile.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app_images.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
+import 'package:flex_color_scheme_example/shared/utils/breakpoint.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/utils/random_color.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/svg_asset_image.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/svg_asset_image_switcher.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// An example that show what an app using the theme might look like
 class AppExampleUndraw extends StatefulWidget {
@@ -36,8 +35,7 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
     // So we will get a new random colored image list, but only every time
     // we rebuild the screen, not as we scroll it back and forth or rescale it,
     // that could be done too, but it feels a bit too random.
-    imageColors = List<MaterialColor>.generate(
-        _maxTiles, (int index) => RandomColor().randomMaterialColor());
+    imageColors = List<MaterialColor>.generate(_maxTiles, (int index) => RandomColor().randomMaterialColor());
   }
 
   @override
@@ -109,8 +107,7 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                     ),
                   ),
                   SliverPadding(
-                    padding: EdgeInsetsDirectional.only(
-                        start: 16, end: 16, bottom: 90 + safeArea.bottom),
+                    padding: EdgeInsetsDirectional.only(start: 16, end: 16, bottom: 90 + safeArea.bottom),
                     sliver: SliverGrid(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: breakpoint.columns ~/ 2,
@@ -128,7 +125,7 @@ class _AppExampleUndrawState extends State<AppExampleUndraw> {
                         childCount: imageColors.length,
                       ),
                     ),
-                  )
+                  ),
                 ],
               );
             },
@@ -186,9 +183,7 @@ class RandomImageWidget extends StatelessWidget {
       elevation: 0,
       clipBehavior: Clip.antiAlias,
       shape: RoundedRectangleBorder(
-        side: BorderSide(
-            color: isLight ? imageColor[700]! : imageColor[200]!,
-            width: borderWidth),
+        side: BorderSide(color: isLight ? imageColor[700]! : imageColor[200]!, width: borderWidth),
         borderRadius: BorderRadius.all(Radius.circular(radius)),
       ),
       child: SvgAssetImageSwitcher(
@@ -279,8 +274,7 @@ class AppExampleNavigationBar extends StatefulWidget {
   const AppExampleNavigationBar({super.key});
 
   @override
-  State<AppExampleNavigationBar> createState() =>
-      _AppExampleNavigationBarState();
+  State<AppExampleNavigationBar> createState() => _AppExampleNavigationBarState();
 }
 
 class _AppExampleNavigationBarState extends State<AppExampleNavigationBar> {
@@ -459,13 +453,11 @@ class UndrawAbout extends StatelessWidget {
 
 /// This [showUndrawAboutDialog] function is based on the [AboutDialog] example
 /// that exist(ed) in the Flutter Gallery App.
-void showUndrawAboutDialog(BuildContext context,
-    [bool useRootNavigator = true]) {
+void showUndrawAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final ThemeData theme = Theme.of(context);
   final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
   final TextStyle footerStyle = theme.textTheme.bodySmall!;
-  final TextStyle linkStyle =
-      theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
+  final TextStyle linkStyle = theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
 
   final Size mediaSize = MediaQuery.sizeOf(context);
   final double width = mediaSize.width;
@@ -496,7 +488,8 @@ void showUndrawAboutDialog(BuildContext context,
             children: <TextSpan>[
               TextSpan(
                 style: aboutTextStyle,
-                text: 'Shows how to use Undraw images '
+                text:
+                    'Shows how to use Undraw images '
                     'and color them dynamically in a Flutter app. '
                     'Also demonstrates the NavigationBar and '
                     'NavigationDrawer in an app.\n'
@@ -515,7 +508,8 @@ void showUndrawAboutDialog(BuildContext context,
               ),
               TextSpan(
                 style: footerStyle,
-                text: 'Built with Flutter ${App.flutterVersion}, '
+                text:
+                    'Built with Flutter ${App.flutterVersion}, '
                     'using ${App.packageName} '
                     '${App.version}\n'
                     'Media size (w:${width.toStringAsFixed(0)}, '

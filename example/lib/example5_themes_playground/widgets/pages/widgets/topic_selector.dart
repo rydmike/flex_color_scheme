@@ -1,11 +1,10 @@
 import 'dart:ui';
 
-import 'package:flutter/material.dart';
-
-import '../../../../shared/const/app.dart';
-import '../../../../shared/utils/app_scroll_behavior.dart';
-import '../../../../shared/utils/colors_are_close.dart';
-import '../model/theme_topic.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/pages/model/theme_topic.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
+import 'package:flex_color_scheme_example/shared/utils/colors_are_close.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Horizontal panel selector of active theme topic to view.
 ///
@@ -24,8 +23,7 @@ class TopicSelectorHorizontal extends StatefulWidget {
   final double buttonWidth;
 
   @override
-  State<TopicSelectorHorizontal> createState() =>
-      _TopicSelectorHorizontalState();
+  State<TopicSelectorHorizontal> createState() => _TopicSelectorHorizontalState();
 }
 
 class _TopicSelectorHorizontalState extends State<TopicSelectorHorizontal> {
@@ -59,9 +57,7 @@ class _TopicSelectorHorizontalState extends State<TopicSelectorHorizontal> {
     if (selectedPage != widget.page) {
       selectedPage = widget.page;
       scrollOffset = widget.buttonWidth * selectedPage;
-      scrollController.animateTo(scrollOffset,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOutCubic);
+      scrollController.animateTo(scrollOffset, duration: const Duration(milliseconds: 300), curve: Curves.easeOutCubic);
     }
   }
 
@@ -69,14 +65,11 @@ class _TopicSelectorHorizontalState extends State<TopicSelectorHorizontal> {
   Widget build(BuildContext context) {
     final Size mediaSize = MediaQuery.sizeOf(context);
     final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint ||
-        widget.isCompact;
-    final double margins =
-        App.responsiveInsets(mediaSize.width, widget.isCompact);
-    final double effectiveHeight = App.panelButtonHeight +
-        margins * 2 +
-        (isPhone ? App.panelButtonPhoneHeightReduce : 0);
+    final bool isPhone =
+        mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint || widget.isCompact;
+    final double margins = App.responsiveInsets(mediaSize.width, widget.isCompact);
+    final double effectiveHeight =
+        App.panelButtonHeight + margins * 2 + (isPhone ? App.panelButtonPhoneHeightReduce : 0);
     final double topPadding = mediaPadding.top;
     final double buttonHorizontalMargin = isPhone ? 2 : 4;
 
@@ -87,8 +80,7 @@ class _TopicSelectorHorizontalState extends State<TopicSelectorHorizontal> {
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Padding(
-              padding:
-                  EdgeInsets.only(top: topPadding + margins, bottom: margins),
+              padding: EdgeInsets.only(top: topPadding + margins, bottom: margins),
               child: SizedBox(
                 height: effectiveHeight - margins,
                 child: Row(
@@ -159,12 +151,9 @@ class _TopicSelectorVerticalState extends State<TopicSelectorVertical> {
   late int selectedPage;
   late double scrollOffset;
 
-  static const double buttonWidth =
-      App.panelButtonWidth + App.panelButtonPhoneWidthReduce - 4;
-  static const double buttonHeight = App.panelButtonHeight +
-      App.edgeInsetsPhone * 2 +
-      App.panelButtonPhoneHeightReduce -
-      12;
+  static const double buttonWidth = App.panelButtonWidth + App.panelButtonPhoneWidthReduce - 4;
+  static const double buttonHeight =
+      App.panelButtonHeight + App.edgeInsetsPhone * 2 + App.panelButtonPhoneHeightReduce - 12;
   static const double buttonMargin = 4;
 
   static const double heightReduce = 10;
@@ -197,9 +186,7 @@ class _TopicSelectorVerticalState extends State<TopicSelectorVertical> {
       final double compactHeight = widget.isCompact ? heightReduce : 0;
       scrollOffset = (buttonHeight - compactHeight) * selectedPage;
       scrollOffset = buttonHeight * selectedPage;
-      scrollController.animateTo(scrollOffset,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeOutCubic);
+      scrollController.animateTo(scrollOffset, duration: const Duration(milliseconds: 300), curve: Curves.easeOutCubic);
     }
   }
 
@@ -207,17 +194,14 @@ class _TopicSelectorVerticalState extends State<TopicSelectorVertical> {
   Widget build(BuildContext context) {
     final Size mediaSize = MediaQuery.sizeOf(context);
     final EdgeInsets mediaPadding = MediaQuery.paddingOf(context);
-    final double margins =
-        App.responsiveInsets(mediaSize.width, widget.isCompact);
-    final double topPadding =
-        widget.addTopPadding ? mediaPadding.top + margins : 0;
+    final double margins = App.responsiveInsets(mediaSize.width, widget.isCompact);
+    final double topPadding = widget.addTopPadding ? mediaPadding.top + margins : 0;
     final double compactWidth = widget.isCompact ? widthReduce : 0;
     final double compactHeight = widget.isCompact ? heightReduce : 0;
 
     return FocusTraversalGroup(
       child: ConstrainedBox(
-        constraints: BoxConstraints.tightFor(
-            width: buttonWidth + margins - compactWidth),
+        constraints: BoxConstraints.tightFor(width: buttonWidth + margins - compactWidth),
         child: ScrollConfiguration(
           behavior: const DragScrollBehavior(),
           child: ListView.builder(
@@ -301,18 +285,17 @@ class _TopicButtonState extends State<_TopicButton> {
   @override
   Widget build(BuildContext context) {
     final Size mediaSize = MediaQuery.sizeOf(context);
-    final bool isPhoneSize = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isPhoneSize = mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint;
     final bool isPhone = isPhoneSize || widget.isCompact;
     final double textSize = isPhoneSize || widget.isCompact
         ? widget.isSmall ?? false
-            ? 8
-            : 10
+              ? 8
+              : 10
         : 11;
     final double iconSize = isPhoneSize || widget.isCompact
         ? widget.isSmall ?? false
-            ? 24
-            : 28
+              ? 24
+              : 28
         : 45;
     final double borderWidth = isPhone ? 3 : 5;
     final double verticalPadding = isPhone ? 6 : 10;
@@ -322,16 +305,14 @@ class _TopicButtonState extends State<_TopicButton> {
     final Color cardColor = theme.cardColor;
     final Color scaffoldBackground = theme.scaffoldBackgroundColor;
     final bool isLight = theme.brightness == Brightness.light;
-    final Color background =
-        isLight ? scheme.surfaceContainerLow : scheme.surfaceContainerHigh;
-    final Color iconColor =
-        widget.item.group.color(context); //_onColor(background);
+    final Color background = isLight ? scheme.surfaceContainerLow : scheme.surfaceContainerHigh;
+    final Color iconColor = widget.item.group.color(context); //_onColor(background);
     final Color textColor = theme.colorScheme.onSurface.withAlpha(0xCC);
     final Color unselectedColor =
         colorsAreClose(background, scaffoldBackground, isLight) ||
-                colorsAreClose(cardColor, scaffoldBackground, isLight)
-            ? theme.dividerColor
-            : Colors.transparent;
+            colorsAreClose(cardColor, scaffoldBackground, isLight)
+        ? theme.dividerColor
+        : Colors.transparent;
 
     // Get the card's ShapeBorder from the theme card shape
     ShapeBorder? shapeBorder = theme.cardTheme.shape;
@@ -341,9 +322,7 @@ class _TopicButtonState extends State<_TopicButton> {
     // If we had one shape, copy in a border side to it.
     if (shapeBorder is RoundedRectangleBorder) {
       shapeBorder = shapeBorder.copyWith(
-        side: widget.selected
-            ? BorderSide(color: iconColor, width: borderWidth)
-            : BorderSide(color: unselectedColor),
+        side: widget.selected ? BorderSide(color: iconColor, width: borderWidth) : BorderSide(color: unselectedColor),
       );
     } else {
       // If border was null, make one matching Card default, but with a
@@ -352,9 +331,7 @@ class _TopicButtonState extends State<_TopicButton> {
       // RoundedRectangleBorder, we don't know what it was, just let it be.
       shapeBorder ??= RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(useMaterial3 ? 12 : 4)),
-        side: widget.selected
-            ? BorderSide(color: iconColor, width: borderWidth)
-            : BorderSide(color: unselectedColor),
+        side: widget.selected ? BorderSide(color: iconColor, width: borderWidth) : BorderSide(color: unselectedColor),
       );
     }
     return SizedBox(

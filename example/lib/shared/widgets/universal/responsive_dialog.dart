@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 const Size _kDialogSize = Size(570, 850);
 const double _kWidthForFullScreenDialog = 720;
@@ -23,8 +23,7 @@ class ResponsiveDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        if (constraints.maxWidth < _kDialogSize.width ||
-            constraints.maxHeight < _kDialogSize.height) {
+        if (constraints.maxWidth < _kDialogSize.width || constraints.maxHeight < _kDialogSize.height) {
           return child;
         } else {
           final ThemeData theme = Theme.of(context);
@@ -34,21 +33,22 @@ class ResponsiveDialog extends StatelessWidget {
               child: AspectRatio(
                 aspectRatio: 1,
                 child: Material(
-                    elevation: theme.dialogTheme.elevation ??
-                        (theme.useMaterial3 ? 6 : 24),
-                    color: Colors.transparent,
-                    surfaceTintColor: theme.colorScheme.surfaceTint,
-                    shadowColor: theme.colorScheme.shadow,
-                    shape: theme.dialogTheme.shape ??
-                        const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(4),
-                          ),
+                  elevation: theme.dialogTheme.elevation ?? (theme.useMaterial3 ? 6 : 24),
+                  color: Colors.transparent,
+                  surfaceTintColor: theme.colorScheme.surfaceTint,
+                  shadowColor: theme.colorScheme.shadow,
+                  shape:
+                      theme.dialogTheme.shape ??
+                      const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(4),
                         ),
-                    // This clip is expensive, but the other ones don't
-                    // look as pretty as all as this one.
-                    clipBehavior: Clip.antiAliasWithSaveLayer,
-                    child: child),
+                      ),
+                  // This clip is expensive, but the other ones don't
+                  // look as pretty as all as this one.
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
+                  child: child,
+                ),
               ),
             ),
           );

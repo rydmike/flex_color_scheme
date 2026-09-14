@@ -1,6 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
+
 import 'helpers/tint_alpha_factor.dart';
 
 void main() {
@@ -8,8 +9,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes FloatingActionButton tests
     // -------------------------------------------------------------------------
-    test(
-        'FAB FST14.1: GIVEN a default '
+    test('FAB FST14.1: GIVEN a default '
         'FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
@@ -26,8 +26,7 @@ void main() {
         ),
       );
     });
-    test(
-        'FST14.2: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+    test('FST14.2: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       expect(
@@ -44,8 +43,7 @@ void main() {
         ),
       );
     });
-    test(
-        'FAB FST14.3: GIVEN a circular '
+    test('FAB FST14.3: GIVEN a circular '
         'FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same Shape', () {
@@ -58,8 +56,7 @@ void main() {
         equals(const FloatingActionButtonThemeData(shape: StadiumBorder())),
       );
     });
-    test(
-        'FAB FST14.4: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+    test('FAB FST14.4: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -80,8 +77,7 @@ void main() {
         ),
       );
     });
-    test(
-        'FAB FST14.5: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+    test('FAB FST14.5: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -99,8 +95,7 @@ void main() {
         ),
       );
     });
-    test(
-        'FAB FST14.6: GIVEN a null shape '
+    test('FAB FST14.6: GIVEN a null shape '
         'FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with default shape values and colors', () {
@@ -120,8 +115,7 @@ void main() {
         ),
       );
     });
-    test(
-        'FST14.7: GIVEN a null shape FlexSubTheme.floatingActionButtonTheme() '
+    test('FST14.7: GIVEN a null shape FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with default shape values and colors', () {
       const ColorScheme colorScheme = ColorScheme.dark();
@@ -142,8 +136,7 @@ void main() {
         ),
       );
     });
-    test(
-        'FAB FST14.8: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+    test('FAB FST14.8: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -164,8 +157,7 @@ void main() {
         ),
       );
     });
-    test(
-        'FAB FST14.9: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
+    test('FAB FST14.9: GIVEN a custom FlexSubTheme.floatingActionButtonTheme() '
         'EXPECT equal to FloatingActionButtonThemeData() version '
         'with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();

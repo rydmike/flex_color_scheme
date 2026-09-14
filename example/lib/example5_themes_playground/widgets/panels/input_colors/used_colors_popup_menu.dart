@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Popup used to select the number of input colors to use when making
 /// the FlexColorScheme.
@@ -109,7 +108,7 @@ class UsedColorsPopupMenu extends StatelessWidget {
               leading: CircleAvatar(child: Text(_avText(i))),
               title: Text(_selectColors(i), style: txtStyle),
             ),
-          )
+          ),
       ],
       child: ListTileReveal(
         enabled: enabled,

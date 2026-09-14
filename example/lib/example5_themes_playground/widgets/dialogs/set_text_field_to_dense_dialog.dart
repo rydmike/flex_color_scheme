@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import '../../../shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Dialog to confirm if user wants to set TextField to Outlined example.
 class SetTextFieldToDenseDialog extends StatelessWidget {
@@ -12,20 +11,24 @@ class SetTextFieldToDenseDialog extends StatelessWidget {
       title: const Text('Set TextField to Dense?'),
       content: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: App.maxAlertDialogWidth),
-        child: const Text('Set the text field settings to an example '
-            'using dense text field and no outline border?'),
+        child: const Text(
+          'Set the text field settings to an example '
+          'using dense text field and no outline border?',
+        ),
       ),
       actions: <Widget>[
         TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: const Text('Cancel')),
+          onPressed: () {
+            Navigator.of(context).pop(false);
+          },
+          child: const Text('Cancel'),
+        ),
         TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: const Text('Set to dense')),
+          onPressed: () {
+            Navigator.of(context).pop(true);
+          },
+          child: const Text('Set to dense'),
+        ),
       ],
     );
   }

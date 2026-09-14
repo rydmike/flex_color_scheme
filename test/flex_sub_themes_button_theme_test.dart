@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.buttonTheme ', () {
@@ -9,8 +9,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes old material buttons theme tests
     // -------------------------------------------------------------------------
-    test(
-        'ButtonTheme FST5.1: light GIVEN a default FlexSubTheme.buttonTheme() '
+    test('ButtonTheme FST5.1: light GIVEN a default FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -53,8 +52,7 @@ void main() {
         ),
       );
     });
-    test(
-        'ButtonTheme FST5.2: dark GIVEN a custom FlexSubTheme.buttonTheme() '
+    test('ButtonTheme FST5.2: dark GIVEN a custom FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -100,8 +98,7 @@ void main() {
         ),
       );
     });
-    test(
-        'ButtonTheme FST5.3 base-color: GIVEN a default '
+    test('ButtonTheme FST5.3 base-color: GIVEN a default '
         'FlexSubTheme.buttonTheme() '
         'EXPECT equal to ButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(

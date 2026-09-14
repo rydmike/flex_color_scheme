@@ -1,92 +1,147 @@
 part of '../flex_sub_themes.dart';
 
 /// An opinionated [SearchBarThemeData] theme for the [SearchBar].
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also use for your [ThemeData].
+///
+/// ## [backgroundSchemeColor]
+///
+/// The search bar's background fill color.
+///
+/// If null, the default value is [ColorScheme.surfaceContainerHigh].
+///
+/// ## [elevation]
+///
+/// The elevation of the search bar's [Material].
+///
+/// If null, default value is 6.0.
+///
+/// ## [shadowColor]
+///
+/// The shadow color of the search bar's [Material].
+///
+/// If null, the default value is [ColorScheme.shadow].
+///
+/// ## [radius]
+///
+/// The border radius of the search bar's underlying [Material].
+///
+/// If not defined defaults to Stadium shape.
+///
+/// ## [padding]
+///
+/// The padding between the search bar's boundary and its contents.
+///
+/// If null, then the default value is 16.0 horizontally.
+///
+/// ## [textStyle]
+///
+/// The style to use for the text being edited.
+///
+/// If null, defaults to the [TextTheme.bodyLarge] text style from the current
+/// [Theme]. The default text color is [ColorScheme.onSurface].
+///
+/// ## [hintStyle]
+///
+/// The style to use for the [SearchBar.hintText].
+///
+/// If null, defaults to [TextTheme.bodyLarge] text style from the current [Theme].
+/// The default text color is [ColorScheme.onSurfaceVariant].
+///
+/// ## [constraints]
+///
+/// Optional size constraints for the search bar.
+///
+/// If null, the value of [SearchBarThemeData.constraints] will be used. If
+/// this is also null, then the constraints defaults to:
+///
+/// ```dart
+/// const BoxConstraints(minWidth: 360.0, maxWidth: 800.0, minHeight: 56.0)
+/// ```
+///
+/// ## [textCapitalization]
+///
+/// Configures how the platform keyboard will select an uppercase or
+/// lowercase keyboard.
+///
+/// Only supports text keyboards, other keyboard types will ignore this
+/// configuration. Capitalization is locale-aware.
+///
+/// If not defined, defaults to [TextCapitalization.none]
+///
+/// ## [tintedInteractions]
+///
+/// Defines if the theme uses tinted interaction effects.
+///
+/// If undefined, defaults to false.
+///
+/// ## [tintedDisabled]
+///
+/// Defines if the theme uses tinted disabled color.
+///
+/// If undefined, defaults to false.
 SearchBarThemeData _searchBarTheme({
-  /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  /// Typically the same `ColorScheme` that is also use for your `ThemeData`.
+  required ColorScheme colorScheme,
 
   /// The search bar's background fill color.
   ///
   /// If null, the default value is `surfaceContainerHigh`.
-  final SchemeColor? backgroundSchemeColor,
+  SchemeColor? backgroundSchemeColor,
 
-  /// The elevation of the search bar's [Material].
+  /// The elevation of the search bar's `Material`.
   ///
   /// If null, default value is 6.0.
-  final double? elevation,
+  double? elevation,
 
-  /// The shadow color of the search bar's [Material].
+  /// The shadow color of the search bar's `Material`.
   ///
-  /// If null, the default value is [ColorScheme.shadow].
-  final Color? shadowColor,
+  /// If null, the default value is `ColorScheme.shadow`.
+  Color? shadowColor,
 
-  /// The border radius of the search bar's underlying [Material].
+  /// The border radius of the search bar's underlying `Material`.
   ///
   /// If not defined defaults to Stadium shape.
-  final double? radius,
-
-  // TODO(rydmike): Doing just a radius for now. Shapes later
-  // The color and weight of the search bar's outline.
-  //
-  // This value is combined with [shape] to create a shape decorated
-  // with an outline.
-  //
-  // If null, the search bar doesn't have a side by default.
-  // final WidgetStateProperty<BorderSide?>? side,
-  //
-  // The shape of the search bar's underlying [Material].
-  //
-  // This shape is combined with [side] to create a shape decorated
-  // with an outline.
-  //
-  // If null, defaults to [StadiumBorder].
-  // final WidgetStateProperty<OutlinedBorder?>? shape,
+  double? radius,
 
   /// The padding between the search bar's boundary and its contents.
   ///
   /// If null, then the default value is 16.0 horizontally.
-  final EdgeInsetsGeometry? padding,
+  EdgeInsetsGeometry? padding,
 
   /// The style to use for the text being edited.
   ///
   /// If null, defaults to the `bodyLarge` text style from the current
-  /// [Theme]. The default text color is [ColorScheme.onSurface].
-  final WidgetStateProperty<TextStyle?>? textStyle,
+  /// `Theme`. The default text color is `ColorScheme.onSurface`.
+  WidgetStateProperty<TextStyle?>? textStyle,
 
-  /// The style to use for the [hintText].
+  /// The style to use for the `hintText`.
   ///
-  /// If null, defaults to `bodyLarge` text style from the current [Theme].
-  /// The default text color is [ColorScheme.onSurfaceVariant].
-  final WidgetStateProperty<TextStyle?>? hintStyle,
+  /// If null, defaults to `bodyLarge` text style from the current `Theme`.
+  /// The default text color is `ColorScheme.onSurfaceVariant`.
+  WidgetStateProperty<TextStyle?>? hintStyle,
 
   /// Optional size constraints for the search bar.
   ///
-  /// If null, the value of [SearchBarThemeData.constraints] will be used. If
+  /// If null, the value of `SearchBarThemeData.constraints` will be used. If
   /// this is also null, then the constraints defaults to:
-  ///
-  /// ```dart
-  /// const BoxConstraints(minWidth: 360.0, maxWidth: 800.0, minHeight: 56.0)
-  /// ```
-  final BoxConstraints? constraints,
+  BoxConstraints? constraints,
 
   /// Configures how the platform keyboard will select an uppercase or
   /// lowercase keyboard.
-  ///
-  /// Only supports text keyboards, other keyboard types will ignore this
-  /// configuration. Capitalization is locale-aware.
-  ///
-  /// If not defined, defaults to [TextCapitalization.none]
   TextCapitalization? textCapitalization,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? tintedInteractions,
+  bool? tintedInteractions,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? tintedDisabled,
+  bool? tintedDisabled,
 }) {
   final bool tintInteract = tintedInteractions ?? false;
   final bool tintDisable = tintedDisabled ?? false;
@@ -106,28 +161,26 @@ SearchBarThemeData _searchBarTheme({
   // of the search bar.
   final bool isLight = colorScheme.brightness == Brightness.light;
   // Get brightness of the SearchBar background color.
-  final bool buttonBgIsLight =
-      ThemeData.estimateBrightnessForColor(backgroundColor) == Brightness.light;
+  final bool buttonBgIsLight = ThemeData.estimateBrightnessForColor(backgroundColor) == Brightness.light;
   // For tint color use the one that is more likely to give a colored effect.
   final Color tint = isLight
       ? buttonBgIsLight
-          ? onBackgroundColor
-          : backgroundColor
+            ? onBackgroundColor
+            : backgroundColor
       : buttonBgIsLight
-          ? backgroundColor
-          : onBackgroundColor;
+      ? backgroundColor
+      : onBackgroundColor;
   // The reverse color is used for overlay
   final Color overlay = isLight
       ? buttonBgIsLight
-          ? backgroundColor
-          : onBackgroundColor
+            ? backgroundColor
+            : onBackgroundColor
       : buttonBgIsLight
-          ? onBackgroundColor
-          : backgroundColor;
+      ? onBackgroundColor
+      : backgroundColor;
   // We use surface mode tint factor, if it is light theme and background
   // is light OR if it is a dark theme and background is dark.
-  final bool surfaceMode =
-      (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
+  final bool surfaceMode = (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
   final double factor = FlexSubThemes._tintAlphaFactor(
     tint,
     colorScheme.brightness,
@@ -135,9 +188,7 @@ SearchBarThemeData _searchBarTheme({
   );
 
   return SearchBarThemeData(
-    backgroundColor: backgroundSchemeColor != null
-        ? WidgetStatePropertyAll<Color?>(backgroundColor)
-        : null,
+    backgroundColor: backgroundSchemeColor != null ? WidgetStatePropertyAll<Color?>(backgroundColor) : null,
     elevation: WidgetStatePropertyAll<double?>(elevation),
     shadowColor: WidgetStatePropertyAll<Color?>(shadowColor),
     shape: radius != null

@@ -12,120 +12,187 @@ part of '../flex_sub_themes.dart';
 ///
 /// The adjustable button corner [radius] defaults to 20. This is the new
 /// default in M3, Flutter SDK M2 defaults to 4.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also used for your [ThemeData].
+///
+/// ## [baseSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the main
+/// color for the button.
+///
+/// If [useMaterial3] is false, the [baseSchemeColor] is used as button
+/// background color in M2 style, and if it is true, it is used as the
+/// button foreground color for text and icon.
+///
+/// All colors in the color scheme are not good choices, but some work well.
+///
+/// If not defined, [ColorScheme.primary] will be used.
+///
+/// ## [onBaseSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the
+/// secondary color, or on color for for the button.
+///
+/// If [useMaterial3] is false, the [onBaseSchemeColor] is used as button
+/// foreground color in M2 style, and if it is true, it is used as the
+/// button background color..
+///
+/// All colors in the color scheme are not good choices, but some work well.
+///
+/// If not defined, the [baseSchemeColor] on color will be used if
+/// [useMaterial3] is false, if it is true, then
+/// [ColorScheme.surfaceContainerLow] will be used.
+///
+/// ## [radius]
+///
+/// The button corner radius.
+///
+/// If not defined, defaults to [kButtonRadius] 40dp in M2. When using
+/// M3 it defaults to Stadium border based on
+/// https://m3.material.io/components/buttons/specs
+///
+/// ## [elevation]
+///
+/// The button elevation.
+///
+/// If null and passed in [useMaterial3] is false then it defaults to using
+/// [kElevatedButtonElevation] 1 with [ElevatedButton.styleFrom], making it
+/// a bit more flat in its elevation state than Flutter M2, that defaults
+/// to 2.
+///
+/// If null and passed in [useMaterial3] is true, then it defaults to using
+/// the M3 elevation defaults by keeping elevation null and using default
+/// M3 elevated button style. This requires that the ambient theme also uses
+/// Material 3.
+///
+/// If a value is passed in, the [ElevatedButton.styleFrom] constructor used
+/// for M2 style elevation is used with the passed in value in M2 mode. In
+/// M3 the given elevation value is used as baseline, with M3 state
+/// modifiers, this means disabled is fat, zero elevation, and pressed is
+/// elevation + 2, other states are at given elevation.
+///
+/// ## [padding]
+///
+/// Padding for the button theme.
+///
+/// Defaults to null and uses [ElevatedButton.styleFrom] constructors default padding.
+///
+/// M3 has more horizontal padding 24dp, but the tighter default padding
+/// in M2 that is 16dp looks fine as well when using stadium borders
+/// as in M3.
+///
+/// If null and [useMaterial3] is true in the context, the correct M3
+/// button theme default computed button padding for M3 will be used.
+///
+/// ## [minButtonSize]
+///
+/// Minimum button size.
+///
+/// If null, defaults to [kButtonMinSize] (`const Size(64.0, 40.0)`) when
+/// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
+/// [useMaterial3] is true.
+///
+/// ## [textStyle]
+///
+/// The style for the button's [Text] widget descendants.
+///
+/// The color of the [textStyle] is typically not used directly, the
+/// [ButtonStyle.foregroundColor] is used instead.
+///
+/// ## [useTintedInteraction]
+///
+/// Defines if the theme uses tinted interaction effects.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useTintedDisable]
+///
+/// Defines if the theme uses tinted disabled color.
+///
+/// If undefined, defaults to false.
+///
+/// ## [splashFactory]
+///
+/// Creates the [InkWell] splash factory, which defines the appearance of
+/// "ink" splashes that occur in response to taps.
+///
+/// In M2 mode FlexColorScheme passes in the effective splashFactory
+/// from splashFactory override value or the result from
+/// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
+/// null and the default comes via ThemeData.splashFactory, that is has
+/// also defined.
+///
+/// ## [useMaterial3]
+///
+/// A temporary flag used to disable Material-3 design and use legacy
+/// Material-2 design instead. Material-3 design is the default.
+/// Material-2 will be deprecated in Flutter.
+///
+/// If set to true, the theme will use Material3 default styles when
+/// properties are undefined, if false defaults will use FlexColorScheme's
+/// own opinionated default values.
+///
+/// The M2/M3 defaults will only be used for properties that are not
+/// defined, if defined they keep their defined values.
+///
+/// If undefined, defaults to true.
 ElevatedButtonThemeData _elevatedButtonTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as the main
   /// color for the button.
-  ///
-  /// If [useMaterial3] is false, the [baseSchemeColor] is used as button
-  /// background color in M2 style, and if it is true, it is used as the
-  /// button foreground color for text and icon.
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// If not defined, [colorScheme.primary] will be used.
-  final SchemeColor? baseSchemeColor,
+  SchemeColor? baseSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the
   /// secondary color, or on color for for the button.
-  ///
-  /// If [useMaterial3] is false, the [onBaseSchemeColor] is used as button
-  /// foreground color in M2 style, and if it is true, it is used as the
-  /// button background color..
-  ///
-  /// All colors in the color scheme are not good choices, but some work well.
-  ///
-  /// If not defined, the [baseSchemeColor] on color will be used if
-  /// [useMaterial3] is false, if it is true, then
-  /// [colorScheme.surfaceContainerLow] will be used.
-  final SchemeColor? onBaseSchemeColor,
+  SchemeColor? onBaseSchemeColor,
 
   /// The button corner radius.
   ///
-  /// If not defined, defaults to [kButtonRadius] 40dp in M2. When using
+  /// If not defined, defaults to `kButtonRadius` 40dp in M2. When using
   /// M3 it defaults to Stadium border based on
   /// https://m3.material.io/components/buttons/specs
-  final double? radius,
+  double? radius,
 
   /// The button elevation.
-  ///
-  /// If null and passed in [useMaterial3] is false then it defaults to using
-  /// [kElevatedButtonElevation] 1 with [ElevatedButton.styleFrom], making it
-  /// a bit more flat in its elevation state than Flutter M2, that defaults
-  /// to 2.
-  ///
-  /// If null and passed in [useMaterial3] is true, then it defaults to using
-  /// the M3 elevation defaults by keeping elevation null and using default
-  /// M3 elevated button style. This requires that the ambient theme also uses
-  /// Material 3.
-  ///
-  /// If a value is passed in, the [ElevatedButton.styleFrom] constructor used
-  /// for M2 style elevation is used with the passed in value in M2 mode. In
-  /// M3 the given elevation value is used as baseline, with M3 state
-  /// modifiers, this means disabled is fat, zero elevation, and pressed is
-  /// elevation + 2, other states are at given elevation.
-  final double? elevation,
+  double? elevation,
 
   /// Padding for the button theme.
   ///
   /// Defaults to null and uses `styleFrom` constructors default padding.
-  ///
-  /// M3 has more horizontal padding 24dp, but the tighter default padding
-  /// in M2 that is 16dp looks fine as well when using stadium borders
-  /// as in M3.
-  ///
-  /// If null and [useMaterial3] is true in the context, the correct M3
-  /// button theme default computed button padding for M3 will be used.
-  final EdgeInsetsGeometry? padding,
+  EdgeInsetsGeometry? padding,
 
   /// Minimum button size.
   ///
-  /// If null, defaults to [kButtonMinSize] (`const Size(64.0, 40.0)`) when
-  /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
-  /// [useMaterial3] is true.
-  final Size? minButtonSize,
+  /// If null, defaults to `kButtonMinSize` (`const Size(64.0, 40.0)`) when
+  /// `useMaterial3` is false and to `const Size(64.0, 40.0)` when
+  /// `useMaterial3` is true.
+  Size? minButtonSize,
 
-  /// The style for the button's [Text] widget descendants.
-  ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [foregroundColor] is used instead.
-  final WidgetStateProperty<TextStyle?>? textStyle,
+  /// The style for the button's `Text` widget descendants.
+  WidgetStateProperty<TextStyle?>? textStyle,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 
-  /// Creates the [InkWell] splash factory, which defines the appearance of
+  /// Creates the `InkWell` splash factory, which defines the appearance of
   /// "ink" splashes that occur in response to taps.
-  ///
-  /// In M2 mode FlexColorScheme passes in the effective splashFactory
-  /// from splashFactory override value or the result from
-  /// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
-  /// null and the default comes via ThemeData.splashFactory, that is has
-  /// also defined.
-  final InteractiveInkFeatureFactory? splashFactory,
+  InteractiveInkFeatureFactory? splashFactory,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
   /// Material-2 will be deprecated in Flutter.
-  ///
-  /// If set to true, the theme will use Material3 default styles when
-  /// properties are undefined, if false defaults will use FlexColorScheme's
-  /// own opinionated default values.
-  ///
-  /// The M2/M3 defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   final bool tintDisable = useTintedDisable ?? false;
@@ -136,9 +203,8 @@ ElevatedButtonThemeData _elevatedButtonTheme({
   // On color logic for M2 and M3 are different. Elevated button is a mess.
   final Color onBaseColor = onBaseSchemeColor == null
       ? useM3
-          ? FlexSubThemes.schemeColor(
-              SchemeColor.surfaceContainerLow, colorScheme)
-          : FlexSubThemes.schemeColorPair(baseScheme, colorScheme)
+            ? FlexSubThemes.schemeColor(SchemeColor.surfaceContainerLow, colorScheme)
+            : FlexSubThemes.schemeColorPair(baseScheme, colorScheme)
       : FlexSubThemes.schemeColor(onBaseSchemeColor, colorScheme);
 
   // To not mess up let's define button foreground and background colors.
@@ -154,28 +220,26 @@ ElevatedButtonThemeData _elevatedButtonTheme({
   // We are using a light colorScheme.
   final bool isLight = colorScheme.brightness == Brightness.light;
   // Get brightness of button background color.
-  final bool buttonBgIsLight =
-      ThemeData.estimateBrightnessForColor(background) == Brightness.light;
+  final bool buttonBgIsLight = ThemeData.estimateBrightnessForColor(background) == Brightness.light;
   // For tint color use the one that is more likely to give a colored effect.
   final Color tint = isLight
       ? buttonBgIsLight
-          ? foreground
-          : background
+            ? foreground
+            : background
       : buttonBgIsLight
-          ? background
-          : foreground;
+      ? background
+      : foreground;
   // The reverse color is used for overlay
   final Color overlay = isLight
       ? buttonBgIsLight
-          ? background
-          : foreground
+            ? background
+            : foreground
       : buttonBgIsLight
-          ? foreground
-          : background;
+      ? foreground
+      : background;
   // We use surface mode tint factor, if it is light theme and background
   // is light OR if it is a dark theme and background is dark.
-  final bool surfaceMode =
-      (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
+  final bool surfaceMode = (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
   final double factor = FlexSubThemes._tintAlphaFactor(
     tint,
     colorScheme.brightness,
@@ -184,8 +248,9 @@ ElevatedButtonThemeData _elevatedButtonTheme({
 
   // We are using FCS M2 buttons, styled in M3 fashion by FCS.
   if (!useM3) {
-    final WidgetStateProperty<Color> foregroundColor =
-        WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
+    final WidgetStateProperty<Color> foregroundColor = WidgetStateProperty.resolveWith<Color>((
+      Set<WidgetState> states,
+    ) {
       if (states.contains(WidgetState.disabled)) {
         if (tintDisable) {
           return FlexSubThemes.tintedDisable(colorScheme.onSurface, tint);
@@ -195,58 +260,59 @@ ElevatedButtonThemeData _elevatedButtonTheme({
       return foreground;
     });
     return ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        splashFactory: splashFactory,
-        minimumSize: minButtonSize ?? kButtonMinSize,
-        padding: padding,
-        elevation: elevation ?? kElevatedButtonElevation,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-            Radius.circular(radius ?? kButtonRadius),
+      style:
+          ElevatedButton.styleFrom(
+            splashFactory: splashFactory,
+            minimumSize: minButtonSize ?? kButtonMinSize,
+            padding: padding,
+            elevation: elevation ?? kElevatedButtonElevation,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(
+                Radius.circular(radius ?? kButtonRadius),
+              ),
+            ), //buttonShape,
+          ).copyWith(
+            textStyle: textStyle,
+            foregroundColor: foregroundColor,
+            iconColor: foregroundColor,
+            backgroundColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.disabled)) {
+                if (tintDisable) {
+                  return FlexSubThemes.tintedDisable(
+                    colorScheme.onSurface,
+                    tint,
+                  ).withAlpha(kAlphaVeryLowDisabled);
+                }
+                return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
+              }
+              return background;
+            }),
+            overlayColor: WidgetStateProperty.resolveWith<Color>((
+              Set<WidgetState> states,
+            ) {
+              if (states.contains(WidgetState.hovered)) {
+                if (tintInteract) {
+                  return FlexSubThemes.tintedHovered(overlay, tint, factor);
+                }
+                return overlay.withAlpha(kAlphaHovered);
+              }
+              if (states.contains(WidgetState.focused)) {
+                if (tintInteract) {
+                  return FlexSubThemes.tintedFocused(overlay, tint, factor);
+                }
+                return overlay.withAlpha(kAlphaFocused);
+              }
+              if (states.contains(WidgetState.pressed)) {
+                if (tintInteract) {
+                  return FlexSubThemes.tintedPressed(overlay, tint, factor);
+                }
+                return overlay.withAlpha(kAlphaPressed);
+              }
+              return Colors.transparent;
+            }),
           ),
-        ), //buttonShape,
-      ).copyWith(
-        textStyle: textStyle,
-        foregroundColor: foregroundColor,
-        iconColor: foregroundColor,
-        backgroundColor: WidgetStateProperty.resolveWith<Color>((
-          Set<WidgetState> states,
-        ) {
-          if (states.contains(WidgetState.disabled)) {
-            if (tintDisable) {
-              return FlexSubThemes.tintedDisable(
-                colorScheme.onSurface,
-                tint,
-              ).withAlpha(kAlphaVeryLowDisabled);
-            }
-            return colorScheme.onSurface.withAlpha(kAlphaVeryLowDisabled);
-          }
-          return background;
-        }),
-        overlayColor: WidgetStateProperty.resolveWith<Color>((
-          Set<WidgetState> states,
-        ) {
-          if (states.contains(WidgetState.hovered)) {
-            if (tintInteract) {
-              return FlexSubThemes.tintedHovered(overlay, tint, factor);
-            }
-            return overlay.withAlpha(kAlphaHovered);
-          }
-          if (states.contains(WidgetState.focused)) {
-            if (tintInteract) {
-              return FlexSubThemes.tintedFocused(overlay, tint, factor);
-            }
-            return overlay.withAlpha(kAlphaFocused);
-          }
-          if (states.contains(WidgetState.pressed)) {
-            if (tintInteract) {
-              return FlexSubThemes.tintedPressed(overlay, tint, factor);
-            }
-            return overlay.withAlpha(kAlphaPressed);
-          }
-          return Colors.transparent;
-        }),
-      ),
     );
   } else {
     //

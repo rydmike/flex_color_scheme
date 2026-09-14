@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import '../../../shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Dialog to confirm if user wants to set TextField to Playground defaults.
 class SetTextFieldToDefaultsDialog extends StatelessWidget {
@@ -12,20 +11,24 @@ class SetTextFieldToDefaultsDialog extends StatelessWidget {
       title: const Text('Set TextField to Defaults?'),
       content: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: App.maxAlertDialogWidth),
-        child: const Text('Set the text field settings back to the '
-            "Playground's default values?"),
+        child: const Text(
+          'Set the text field settings back to the '
+          "Playground's default values?",
+        ),
       ),
       actions: <Widget>[
         TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: const Text('Cancel')),
+          onPressed: () {
+            Navigator.of(context).pop(false);
+          },
+          child: const Text('Cancel'),
+        ),
         TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: const Text('Set to defaults')),
+          onPressed: () {
+            Navigator.of(context).pop(true);
+          },
+          child: const Text('Set to defaults'),
+        ),
       ],
     );
   }

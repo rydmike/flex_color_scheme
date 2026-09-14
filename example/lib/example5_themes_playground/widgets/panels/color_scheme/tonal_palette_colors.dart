@@ -1,10 +1,9 @@
 import 'dart:async';
 
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/copy_color_to_clipboard.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/palette_color_box.dart';
 import 'package:flex_seed_scheme/flex_seed_scheme.dart';
-import 'package:flutter/material.dart';
-
-import '../../shared/copy_color_to_clipboard.dart';
-import '../../shared/palette_color_box.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// TonalPaletteColors widget.
 class TonalPaletteColors extends StatelessWidget {
@@ -38,12 +37,9 @@ class TonalPaletteColors extends StatelessWidget {
       : FlexTonalPalette.extendedTones[index].toString();
 
   static Color _onColor(Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light
-          ? Colors.black
-          : Colors.white;
+      ThemeData.estimateBrightnessForColor(color) == Brightness.light ? Colors.black : Colors.white;
 
-  static bool _isLight(Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+  static bool _isLight(Color color) => ThemeData.estimateBrightnessForColor(color) == Brightness.light;
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +55,7 @@ class TonalPaletteColors extends StatelessWidget {
                 color: Color(tonalPalette[i]),
                 height: height,
                 onTap: () {
-                  unawaited(
-                      copyColorToClipboard(context, Color(tonalPalette[i])));
+                  unawaited(copyColorToClipboard(context, Color(tonalPalette[i])));
                 },
                 child: Center(
                   child: Stack(
@@ -82,8 +77,7 @@ class TonalPaletteColors extends StatelessWidget {
                             size: height - 6,
                             color: _onColor(
                               Color(tonalPalette[i]),
-                            ).withAlpha(
-                                _isLight(Color(tonalPalette[i])) ? 0x33 : 0x66),
+                            ).withAlpha(_isLight(Color(tonalPalette[i])) ? 0x33 : 0x66),
                           ),
                         ),
                     ],

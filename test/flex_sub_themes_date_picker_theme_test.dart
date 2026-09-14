@@ -1,14 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.datePickerTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes DatePicker tests
     // -------------------------------------------------------------------------
-    test(
-        'DatePicker FST9a.1: GIVEN a default FlexSubTheme.dialogTheme() '
+    test('DatePicker FST9a.1: GIVEN a default FlexSubTheme.dialogTheme() '
         'EXPECT equal to DatePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
       expect(
@@ -27,8 +26,7 @@ void main() {
         ),
       );
     });
-    test(
-        'DatePicker FST9a.2 background-based-a: GIVEN a '
+    test('DatePicker FST9a.2 background-based-a: GIVEN a '
         'FlexSubTheme.datePickerTheme with no '
         'colorScheme, but with backgroundSchemeColor and backgroundColor '
         'EXPECT equal to DatePickerThemeData with backgroundColor', () {
@@ -52,8 +50,7 @@ void main() {
         ),
       );
     });
-    test(
-        'DatePicker FST9a.3 background-based-b: GIVEN a '
+    test('DatePicker FST9a.3 background-based-b: GIVEN a '
         'FlexSubTheme.datePickerTheme '
         'with no backgroundSchemeColor and backgroundColor '
         'EXPECT equal to DatePickerThemeData with backgroundColor', () {
@@ -134,8 +131,7 @@ void main() {
         );
       },
     );
-    test(
-        'DatePicker FST9a.5 custom: GIVEN a custom '
+    test('DatePicker FST9a.5 custom: GIVEN a custom '
         'FlexSubTheme.datePickerTheme '
         'EXPECT equal to DatePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.dark();
@@ -157,8 +153,7 @@ void main() {
         ),
       );
     });
-    test(
-        'DatePicker FST9a.6 custom: GIVEN a custom '
+    test('DatePicker FST9a.6 custom: GIVEN a custom '
         'FlexSubTheme.datePickerTheme with light ColorScheme '
         'EXPECT equal to DatePickerThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -255,8 +250,7 @@ void main() {
         ),
       );
     });
-    test(
-        'DatePicker FST9a.6 custom: GIVEN a custom '
+    test('DatePicker FST9a.6 custom: GIVEN a custom '
         'FlexSubTheme.datePickerTheme with dark ColorScheme '
         'EXPECT equal to DatePickerThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(

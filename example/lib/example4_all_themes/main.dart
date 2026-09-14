@@ -1,13 +1,12 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/example4_all_themes/home_page.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service_hive.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
-import '../shared/const/app.dart';
-import '../shared/const/app_color.dart';
-import '../shared/controllers/theme_controller.dart';
-import '../shared/services/theme_service.dart';
-import '../shared/services/theme_service_hive.dart';
-import 'home_page.dart';
+import 'package:material_ui/material_ui.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 4 - All Themes
@@ -43,7 +42,7 @@ import 'home_page.dart';
 // in AppColor.schemes.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/allthemes-latest
+// https://rydmike.com/flexcolorscheme/allthemes-v9-0
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {
@@ -68,8 +67,7 @@ Future<void> main() async {
 
   // The ThemeServiceHive constructor requires a box name, the others do not.
   // The box name is just a file name for the file that stores the settings.
-  final ThemeService themeService =
-      ThemeServiceHive('flex_color_scheme_v5_box_4');
+  final ThemeService themeService = ThemeServiceHive('flex_color_scheme_v5_box_4');
   // Initialize the theme service.
   await themeService.init();
   // Create a ThemeController that uses the ThemeService.
@@ -163,8 +161,7 @@ class DemoApp extends StatelessWidget {
               keepTertiary: themeController.keepTertiary,
             ),
             // Used ColorScheme seed generation variant.
-            variant:
-                FlexSchemeVariant.values[themeController.usedFlexToneSetup],
+            variant: FlexSchemeVariant.values[themeController.usedFlexToneSetup],
             // In this example we use the values for visual density and font
             // from a single static source, so we can change it easily there.
             visualDensity: App.visualDensity,
@@ -194,8 +191,7 @@ class DemoApp extends StatelessWidget {
               keepTertiary: themeController.keepDarkTertiary,
             ),
             // Used ColorScheme seed generation variant.
-            variant:
-                FlexSchemeVariant.values[themeController.usedFlexToneSetup],
+            variant: FlexSchemeVariant.values[themeController.usedFlexToneSetup],
             subThemesData: themeController.useSubThemes
                 ? FlexSubThemesData(
                     defaultRadius: themeController.defaultRadius,

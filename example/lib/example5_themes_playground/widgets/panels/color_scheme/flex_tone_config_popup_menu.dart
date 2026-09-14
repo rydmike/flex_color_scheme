@@ -1,8 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
-
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../shared/color_scheme_box.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_box.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Widget used to select used [FlexTones] with a popup menu.
 ///
@@ -30,10 +29,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
     final TextStyle txtStyle = theme.textTheme.labelLarge!;
     // Value less than 0, or index over range disables the control.
-    final bool disabled = index < 0 ||
-        index >= FlexSchemeVariant.values.length ||
-        onChanged == null ||
-        !enabled;
+    final bool disabled = index < 0 || index >= FlexSchemeVariant.values.length || onChanged == null || !enabled;
 
     return PopupMenuButton<int>(
       popUpAnimationStyle: AnimationStyle.noAnimation,
@@ -44,8 +40,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
       tooltip: '',
       padding: EdgeInsets.zero,
       onSelected: (int index) {
-        onChanged?.call(
-            index >= FlexSchemeVariant.values.length || index < 0 ? 0 : index);
+        onChanged?.call(index >= FlexSchemeVariant.values.length || index < 0 ? 0 : index);
       },
       enabled: !disabled,
       itemBuilder: (BuildContext context) => <PopupMenuItem<int>>[
@@ -61,17 +56,14 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
                 child: ColorSchemeBox(
                   optionIcon: FlexSchemeVariant.values[i].icon,
                   backgroundColor: FlexSchemeVariant.values[i].shade < 0
-                      ? colorScheme.primary
-                          .lighten(FlexSchemeVariant.values[i].shade * -1)
-                      : colorScheme.primary
-                          .darken(FlexSchemeVariant.values[i].shade),
+                      ? colorScheme.primary.lighten(FlexSchemeVariant.values[i].shade * -1)
+                      : colorScheme.primary.darken(FlexSchemeVariant.values[i].shade),
                   borderColor: Colors.transparent,
                 ),
               ),
-              title: Text(FlexSchemeVariant.values[i].variantName,
-                  style: txtStyle),
+              title: Text(FlexSchemeVariant.values[i].variantName, style: txtStyle),
             ),
-          )
+          ),
       ],
       child: ListTileReveal(
         enabled: !disabled,
@@ -102,9 +94,7 @@ class FlexToneConfigPopupMenu extends StatelessWidget {
                 ? const Text('MCU', style: TextStyle(fontSize: 8))
                 : const Text('FSS', style: TextStyle(fontSize: 8)),
             child: ColorSchemeBox(
-              backgroundColor: disabled
-                  ? colorScheme.surfaceContainerHighest
-                  : colorScheme.primary,
+              backgroundColor: disabled ? colorScheme.surfaceContainerHighest : colorScheme.primary,
               foregroundColor: disabled ? theme.dividerColor : null,
               borderColor: disabled ? theme.dividerColor : Colors.transparent,
               defaultOption: disabled,

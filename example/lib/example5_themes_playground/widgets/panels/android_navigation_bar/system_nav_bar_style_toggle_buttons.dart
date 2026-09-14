@@ -1,5 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Widget used to change the used app bar style mode in example 5.
 class SystemNavBarStyleToggleButtons extends StatelessWidget {
@@ -32,8 +32,7 @@ class SystemNavBarStyleToggleButtons extends StatelessWidget {
       },
       children: <Widget>[
         Tooltip(
-          message:
-              isLight ? 'Android default\n(White)' : 'Android default\n(Black)',
+          message: isLight ? 'Android default\n(White)' : 'Android default\n(Black)',
           child: Icon(
             Icons.lens,
             color: isLight ? Colors.white : Colors.black,
@@ -75,8 +74,7 @@ class SystemNavBarStyleToggleButtons extends StatelessWidget {
           message: 'Themed NavigationBar background color',
           child: Icon(
             Icons.lens,
-            color: theme.navigationBarTheme.backgroundColor ??
-                colorScheme.surfaceContainer,
+            color: theme.navigationBarTheme.backgroundColor ?? colorScheme.surfaceContainer,
             size: 30,
           ),
         ),
@@ -123,9 +121,7 @@ class SystemNavBarStyleSegmentedButton extends StatelessWidget {
         ButtonSegment<FlexSystemNavBarStyle>(
           value: FlexSystemNavBarStyle.system,
           icon: Tooltip(
-            message: isLight
-                ? 'Android default\n(White)'
-                : 'Android default\n(Black)',
+            message: isLight ? 'Android default\n(White)' : 'Android default\n(Black)',
             child: Icon(
               Icons.lens,
               color: isLight ? Colors.white : Colors.black,
@@ -183,8 +179,7 @@ class SystemNavBarStyleSegmentedButton extends StatelessWidget {
             message: 'Themed NavigationBar background color',
             child: Icon(
               Icons.lens,
-              color: theme.navigationBarTheme.backgroundColor ??
-                  colorScheme.surfaceContainer,
+              color: theme.navigationBarTheme.backgroundColor ?? colorScheme.surfaceContainer,
               size: 30,
             ),
           ),

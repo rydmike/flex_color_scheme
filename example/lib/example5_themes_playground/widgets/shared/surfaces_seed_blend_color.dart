@@ -1,13 +1,13 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_picker_inkwell.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_box.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
-import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/universal/list_tile_reveal.dart';
-import 'color_picker_inkwell.dart';
-import 'color_scheme_box.dart';
-
-const String _revealText = 'The surface blend and tint color is used as '
+const String _revealText =
+    'The surface blend and tint color is used as '
     'seed key color for neutral and neutralVariant seed generated palettes.\n '
     '\n'
     'Surface Color Blends use it as the color to blend into surfaces at '
@@ -61,17 +61,13 @@ class SurfacesSeedBlendColorLight extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
 
     // Default color is in use, make a light label to use in custom color.
-    final String defaultTintLightLabel =
-        controller.surfaceTintLight == null ? 'Default primary ' : '';
+    final String defaultTintLightLabel = controller.surfaceTintLight == null ? 'Default primary ' : '';
     // Current light tint color
     final Color? previousTintLight = controller.surfaceTintLight;
-    final Color effectiveTintLight =
-        controller.surfaceTintLight ?? colorScheme.surfaceTint;
+    final Color effectiveTintLight = controller.surfaceTintLight ?? colorScheme.surfaceTint;
     // Names for the light tint colors.
-    final String materialNameLight =
-        ColorTools.materialName(effectiveTintLight);
-    final String nameThatColorLight =
-        ColorTools.nameThatColor(effectiveTintLight);
+    final String materialNameLight = ColorTools.materialName(effectiveTintLight);
+    final String nameThatColorLight = ColorTools.nameThatColor(effectiveTintLight);
     final String spaceLight = materialNameLight == '' ? '' : ' ';
 
     return ColorPickerInkWellDialog(
@@ -88,24 +84,25 @@ class SurfacesSeedBlendColorLight extends StatelessWidget {
       child: ListTileReveal(
         dense: dense,
         enabled: enabled,
-        title:
-            const Text('Neutrals seed, surfaces blend and SurfaceTint color'),
-        subtitle: Text('$defaultTintLightLabel'
-            '#${effectiveTintLight.hexCode} '
-            '$nameThatColorLight $materialNameLight$spaceLight'),
+        title: const Text('Neutrals seed, surfaces blend and SurfaceTint color'),
+        subtitle: Text(
+          '$defaultTintLightLabel'
+          '#${effectiveTintLight.hexCode} '
+          '$nameThatColorLight $materialNameLight$spaceLight',
+        ),
         subtitleReveal: const Text(_revealText),
         leading: Tooltip(
-          message: controller.surfaceTintLight != null
-              ? 'Reset to default,\nprimary color'
-              : '',
+          message: controller.surfaceTintLight != null ? 'Reset to default,\nprimary color' : '',
           child: IconButton.filled(
             isSelected: controller.surfaceTintLight != null,
-            icon: Icon(Icons.refresh,
-                color: controller.surfaceTintLight != null
-                    ? useMaterial3
+            icon: Icon(
+              Icons.refresh,
+              color: controller.surfaceTintLight != null
+                  ? useMaterial3
                         ? colorScheme.onPrimary
                         : colorScheme.primary
-                    : null),
+                  : null,
+            ),
             onPressed: controller.surfaceTintLight != null
                 ? () {
                     controller.setSurfaceTintLight(null);
@@ -155,16 +152,13 @@ class SurfacesSeedBlendColorDark extends StatelessWidget {
     final ColorScheme colorScheme = theme.colorScheme;
 
     // Default color is in use, make a dark label to use in custom color.
-    final String defaultTintDarkLabel =
-        controller.surfaceTintDark == null ? 'Default primary ' : '';
+    final String defaultTintDarkLabel = controller.surfaceTintDark == null ? 'Default primary ' : '';
     // Current dark tint color.
     final Color? previousTintDark = controller.surfaceTintDark;
-    final Color effectiveTintDark =
-        controller.surfaceTintDark ?? colorScheme.surfaceTint;
+    final Color effectiveTintDark = controller.surfaceTintDark ?? colorScheme.surfaceTint;
     // Names for the dark tint colors.
     final String materialNameDark = ColorTools.materialName(effectiveTintDark);
-    final String nameThatColorDark =
-        ColorTools.nameThatColor(effectiveTintDark);
+    final String nameThatColorDark = ColorTools.nameThatColor(effectiveTintDark);
     final String spaceDark = materialNameDark == '' ? '' : ' ';
 
     return ColorPickerInkWellDialog(
@@ -181,24 +175,25 @@ class SurfacesSeedBlendColorDark extends StatelessWidget {
       child: ListTileReveal(
         enabled: enabled,
         dense: dense,
-        title:
-            const Text('Neutrals seed, surfaces blend and SurfaceTint color'),
-        subtitle: Text('$defaultTintDarkLabel'
-            '#${effectiveTintDark.hexCode} '
-            '$nameThatColorDark $materialNameDark$spaceDark'),
+        title: const Text('Neutrals seed, surfaces blend and SurfaceTint color'),
+        subtitle: Text(
+          '$defaultTintDarkLabel'
+          '#${effectiveTintDark.hexCode} '
+          '$nameThatColorDark $materialNameDark$spaceDark',
+        ),
         subtitleReveal: const Text(_revealText),
         leading: Tooltip(
-          message: controller.surfaceTintDark != null
-              ? 'Reset to default,\nprimary color'
-              : '',
+          message: controller.surfaceTintDark != null ? 'Reset to default,\nprimary color' : '',
           child: IconButton.filled(
             isSelected: controller.surfaceTintDark != null,
-            icon: Icon(Icons.refresh,
-                color: controller.surfaceTintDark != null
-                    ? useMaterial3
+            icon: Icon(
+              Icons.refresh,
+              color: controller.surfaceTintDark != null
+                  ? useMaterial3
                         ? colorScheme.onPrimary
                         : colorScheme.primary
-                    : null),
+                  : null,
+            ),
             onPressed: controller.surfaceTintDark != null
                 ? () {
                     controller.setSurfaceTintDark(null);

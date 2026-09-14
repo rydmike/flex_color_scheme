@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import '../../../shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Dialog to confirm if user wants to set TextField to M3.
 class SetTextFieldToM3Dialog extends StatelessWidget {
@@ -12,20 +11,24 @@ class SetTextFieldToM3Dialog extends StatelessWidget {
       title: const Text('Set TextField to Material-3?'),
       content: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: App.maxAlertDialogWidth),
-        child: const Text('Set the text field settings to values that '
-            'match Material-3 defaults?'),
+        child: const Text(
+          'Set the text field settings to values that '
+          'match Material-3 defaults?',
+        ),
       ),
       actions: <Widget>[
         TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: const Text('Cancel')),
+          onPressed: () {
+            Navigator.of(context).pop(false);
+          },
+          child: const Text('Cancel'),
+        ),
         TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: const Text('Set to M3')),
+          onPressed: () {
+            Navigator.of(context).pop(true);
+          },
+          child: const Text('Set to M3'),
+        ),
       ],
     );
   }

@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import '../../controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// ToggleButtons used to change usage of key colors for ColorScheme generation.
 ///
@@ -47,7 +46,8 @@ class UseKeyColorsButtons extends StatelessWidget {
       },
       children: <Widget>[
         const Tooltip(
-          message: 'Use light theme Primary color\n'
+          message:
+              'Use light theme Primary color\n'
               'as key color to seed your ColorScheme',
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -60,7 +60,8 @@ class UseKeyColorsButtons extends StatelessWidget {
           maintainState: true,
           maintainAnimation: true,
           child: const Tooltip(
-            message: 'Use light theme Secondary color\n'
+            message:
+                'Use light theme Secondary color\n'
                 'as key color to seed your ColorScheme',
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -74,7 +75,8 @@ class UseKeyColorsButtons extends StatelessWidget {
           maintainState: true,
           maintainAnimation: true,
           child: const Tooltip(
-            message: 'Use light theme Tertiary color\n'
+            message:
+                'Use light theme Tertiary color\n'
                 'as key color to seed your ColorScheme',
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.0),
@@ -89,7 +91,8 @@ class UseKeyColorsButtons extends StatelessWidget {
             maintainState: true,
             maintainAnimation: true,
             child: const Tooltip(
-              message: 'Use light theme Error color\n'
+              message:
+                  'Use light theme Error color\n'
                   'as key color to seed your ColorScheme',
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8.0),

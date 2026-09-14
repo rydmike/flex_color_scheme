@@ -1,14 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.textButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes TextButton tests
     // -------------------------------------------------------------------------
-    test(
-        'TextButton FST31.1 M2: GIVEN a default M2 '
+    test('TextButton FST31.1 M2: GIVEN a default M2 '
         'FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -33,8 +32,7 @@ void main() {
         ),
       );
     });
-    test(
-        'TextButton FST31.2 M2-base: GIVEN a custom '
+    test('TextButton FST31.2 M2-base: GIVEN a custom '
         'FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same color', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -90,8 +88,7 @@ void main() {
         ),
       );
     });
-    test(
-        'TextButton FST31.3 M3: GIVEN a default M3 '
+    test('TextButton FST31.3 M3: GIVEN a default M3 '
         'FlexSubTheme.textButtonTheme() '
         'EXPECT equal to TextButtonThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -110,8 +107,7 @@ void main() {
         ),
       );
     });
-    test(
-        'TextButton FST31.4 M2-states: Does TextButton '
+    test('TextButton FST31.4 M2-states: Does TextButton '
         'have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF7142E7),
@@ -162,8 +158,7 @@ void main() {
         equals(null),
       );
     });
-    test(
-        'TextButton FST31.5 M2-tint-states: Does M2 '
+    test('TextButton FST31.5 M2-tint-states: Does M2 '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF7142E7),
@@ -218,8 +213,7 @@ void main() {
         equals(null),
       );
     });
-    test(
-        'TextButton FST31.6 M3-states: Does '
+    test('TextButton FST31.6 M3-states: Does '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -281,8 +275,7 @@ void main() {
         ),
       );
     });
-    test(
-        'TextButton FST31.7 M3-custom-states: Does light '
+    test('TextButton FST31.7 M3-custom-states: Does light '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -347,8 +340,7 @@ void main() {
         ),
       );
     });
-    test(
-        'TextButton FST31.8 M3-custom-states: Does light '
+    test('TextButton FST31.8 M3-custom-states: Does light '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -413,8 +405,7 @@ void main() {
         ),
       );
     });
-    test(
-        'TextButton FST31.9 M3-custom-states: Does dark '
+    test('TextButton FST31.9 M3-custom-states: Does dark '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -479,8 +470,7 @@ void main() {
         ),
       );
     });
-    test(
-        'TextButton FST31.10 M3-custom-states: Does dark '
+    test('TextButton FST31.10 M3-custom-states: Does dark '
         'TextButton have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

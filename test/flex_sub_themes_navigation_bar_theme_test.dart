@@ -1,14 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.navigationBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes NavigationBar tests
     // -------------------------------------------------------------------------
-    test(
-        'NavigationBar FST21.1: GIVEN a default '
+    test('NavigationBar FST21.1: GIVEN a default '
         'FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
@@ -58,8 +57,7 @@ void main() {
       );
     });
 
-    test(
-        'NavigationBar FST21.2 custom1: GIVEN a custom1 '
+    test('NavigationBar FST21.2 custom1: GIVEN a custom1 '
         'FlexSubTheme.navigationBarTheme() '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
@@ -70,8 +68,7 @@ void main() {
         platform: TargetPlatform.android,
         colorScheme: colorScheme,
       ).black;
-      final NavigationBarThemeData navBarTheme =
-          FlexSubThemes.navigationBarTheme(
+      final NavigationBarThemeData navBarTheme = FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
         elevation: 3,
         selectedIconSchemeColor: SchemeColor.secondary,
@@ -111,9 +108,7 @@ void main() {
                 return textTheme.labelSmall!.copyWith(color: colorScheme.error);
               }
               return textTheme.labelSmall!.copyWith(
-                color: colorScheme.error
-                    .blendAlpha(colorScheme.error, 0x66)
-                    .withAlpha(0xA5),
+                color: colorScheme.error.blendAlpha(colorScheme.error, 0x66).withAlpha(0xA5),
               );
             }),
             iconTheme: WidgetStateProperty.resolveWith<IconThemeData>((
@@ -124,9 +119,7 @@ void main() {
               }
               return IconThemeData(
                 size: 24,
-                color: colorScheme.onSurface
-                    .blendAlpha(colorScheme.onSurface, 0x66)
-                    .withAlpha(0xA5),
+                color: colorScheme.onSurface.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0xA5),
               );
             }),
           ).toString(),
@@ -142,9 +135,7 @@ void main() {
       expect(
         navBarTheme.iconTheme!.resolve(<WidgetState>{})?.color,
         equals(
-          colorScheme.onSurface
-              .blendAlpha(colorScheme.onSurface, 0x66)
-              .withAlpha(0xA5),
+          colorScheme.onSurface.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0xA5),
         ),
       );
       expect(
@@ -156,14 +147,11 @@ void main() {
       expect(
         navBarTheme.labelTextStyle!.resolve(<WidgetState>{})?.color,
         equals(
-          colorScheme.onSurface
-              .blendAlpha(colorScheme.onSurface, 0x66)
-              .withAlpha(0xA5),
+          colorScheme.onSurface.blendAlpha(colorScheme.onSurface, 0x66).withAlpha(0xA5),
         ),
       );
     });
-    test(
-        'NavigationBar FST21.3 custom2: GIVEN a custom1 '
+    test('NavigationBar FST21.3 custom2: GIVEN a custom1 '
         'FlexSubTheme.navigationBarTheme() in M2 settings '
         'EXPECT equal to NavigationBarThemeData() version '
         'with same values', () {
@@ -174,8 +162,7 @@ void main() {
         platform: TargetPlatform.android,
         colorScheme: colorScheme,
       ).black;
-      final NavigationBarThemeData navBarTheme =
-          FlexSubThemes.navigationBarTheme(
+      final NavigationBarThemeData navBarTheme = FlexSubThemes.navigationBarTheme(
         colorScheme: colorScheme,
         labelTextStyle: textTheme.bodySmall,
         selectedIconSchemeColor: SchemeColor.secondaryContainer,

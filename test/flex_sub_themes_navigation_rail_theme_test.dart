@@ -1,14 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.navigationRailTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes NavigationRail tests
     // -------------------------------------------------------------------------
-    test(
-        'NavigationRail FST22.2 light-flutter default: GIVEN a default '
+    test('NavigationRail FST22.2 light-flutter default: GIVEN a default '
         'FlexSubTheme.navigationRailTheme() that uses Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -45,8 +44,7 @@ void main() {
         ),
       );
     });
-    test(
-        'NavigationRail FST22.3 dark-flutter default: GIVEN a default '
+    test('NavigationRail FST22.3 dark-flutter default: GIVEN a default '
         'FlexSubTheme.navigationRailTheme() that uses Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -84,8 +82,7 @@ void main() {
         ),
       );
     });
-    test(
-        'NavigationRail FST22.4 light-flutter default: GIVEN a default '
+    test('NavigationRail FST22.4 light-flutter default: GIVEN a default '
         'FlexSubTheme.navigationRailTheme() with opacity '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -126,8 +123,7 @@ void main() {
         ),
       );
     });
-    test(
-        'NavigationRail FST22.5 dark-flutter default: GIVEN a default '
+    test('NavigationRail FST22.5 dark-flutter default: GIVEN a default '
         'FlexSubTheme.navigationRailTheme() that NOT use Flutter defaults '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -169,8 +165,7 @@ void main() {
         ),
       );
     });
-    test(
-        'NavigationRail FST22.6 custom: GIVEN a custom '
+    test('NavigationRail FST22.6 custom: GIVEN a custom '
         'FlexSubTheme.navigationRailTheme() '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values', () {
@@ -210,15 +205,11 @@ void main() {
               fontSize: 12,
             ),
             unselectedLabelTextStyle: TextStyle(
-              color: colorScheme.onSurface
-                  .blendAlpha(colorScheme.onSurface, 0xFA)
-                  .withAlpha(0x45),
+              color: colorScheme.onSurface.blendAlpha(colorScheme.onSurface, 0xFA).withAlpha(0x45),
               fontSize: 12,
             ),
             unselectedIconTheme: IconThemeData(
-              color: colorScheme.tertiary
-                  .blendAlpha(colorScheme.tertiary, 0xFA)
-                  .withAlpha(0x45),
+              color: colorScheme.tertiary.blendAlpha(colorScheme.tertiary, 0xFA).withAlpha(0x45),
               size: 24,
               opacity: 1,
             ),
@@ -233,8 +224,7 @@ void main() {
         ),
       );
     });
-    test(
-        'NavigationRail FST22.7 custom: GIVEN a custom '
+    test('NavigationRail FST22.7 custom: GIVEN a custom '
         'FlexSubTheme.navigationRailTheme() '
         'EXPECT equal to NavigationRailThemeData() version '
         'with same values Icons Size test', () {
@@ -276,15 +266,11 @@ void main() {
               fontSize: 12,
             ),
             unselectedLabelTextStyle: TextStyle(
-              color: colorScheme.onSurface
-                  .blendAlpha(colorScheme.onSurface, 0xFA)
-                  .withAlpha(0x45),
+              color: colorScheme.onSurface.blendAlpha(colorScheme.onSurface, 0xFA).withAlpha(0x45),
               fontSize: 12,
             ),
             unselectedIconTheme: IconThemeData(
-              color: colorScheme.tertiary
-                  .blendAlpha(colorScheme.tertiary, 0xFA)
-                  .withAlpha(0x45),
+              color: colorScheme.tertiary.blendAlpha(colorScheme.tertiary, 0xFA).withAlpha(0x45),
               size: 30,
               opacity: 1,
             ),

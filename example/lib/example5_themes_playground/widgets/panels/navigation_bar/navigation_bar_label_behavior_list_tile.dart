@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/navigation_bar_label_behavior_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/navigation_bar_label_behavior_toggle_buttons.dart';
+import 'package:material_ui/material_ui.dart';
 
 class NavigationBarLabelBehaviorListTile extends StatelessWidget {
   const NavigationBarLabelBehaviorListTile({
@@ -36,10 +35,13 @@ class NavigationBarLabelBehaviorListTile extends StatelessWidget {
       contentPadding: contentPadding,
       enabled: controller.useSubThemes && controller.useFlexColorScheme,
       title: const Text('Label behavior'),
-      subtitle: Text(_explainLabelStyle(
+      subtitle: Text(
+        _explainLabelStyle(
           controller.useSubThemes && controller.useFlexColorScheme
               ? controller.navigationBarLabelBehavior
-              : NavigationDestinationLabelBehavior.alwaysShow)),
+              : NavigationDestinationLabelBehavior.alwaysShow,
+        ),
+      ),
       trailing: NavigationBarLabelBehaviorToggleButtons(
         labelBehavior: controller.useSubThemes && controller.useFlexColorScheme
             ? controller.navigationBarLabelBehavior
@@ -49,17 +51,12 @@ class NavigationBarLabelBehaviorListTile extends StatelessWidget {
             : null,
       ),
       onTap: () {
-        if (controller.navigationBarLabelBehavior ==
-            NavigationDestinationLabelBehavior.alwaysHide) {
-          controller.setNavigationBarLabelBehavior(
-              NavigationDestinationLabelBehavior.onlyShowSelected);
-        } else if (controller.navigationBarLabelBehavior ==
-            NavigationDestinationLabelBehavior.onlyShowSelected) {
-          controller.setNavigationBarLabelBehavior(
-              NavigationDestinationLabelBehavior.alwaysShow);
+        if (controller.navigationBarLabelBehavior == NavigationDestinationLabelBehavior.alwaysHide) {
+          controller.setNavigationBarLabelBehavior(NavigationDestinationLabelBehavior.onlyShowSelected);
+        } else if (controller.navigationBarLabelBehavior == NavigationDestinationLabelBehavior.onlyShowSelected) {
+          controller.setNavigationBarLabelBehavior(NavigationDestinationLabelBehavior.alwaysShow);
         } else {
-          controller.setNavigationBarLabelBehavior(
-              NavigationDestinationLabelBehavior.alwaysHide);
+          controller.setNavigationBarLabelBehavior(NavigationDestinationLabelBehavior.alwaysHide);
         }
       },
     );

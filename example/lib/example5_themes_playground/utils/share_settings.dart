@@ -2,18 +2,16 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:archive/archive.dart';
-import 'package:flutter/material.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
 import 'package:flutter/services.dart';
-
-import '../../shared/const/app.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A container class with helpers for making a URL for sharing settings.
 abstract final class ShareSettings {
   // Compress JSON string
   static String _compressJsonString(String jsonString) {
     final List<int> jsonBytes = utf8.encode(jsonString);
-    final List<int> compressedBytes =
-        const GZipEncoder().encode(Uint8List.fromList(jsonBytes));
+    final List<int> compressedBytes = const GZipEncoder().encode(Uint8List.fromList(jsonBytes));
     return base64UrlEncode(compressedBytes);
   }
 
@@ -21,7 +19,7 @@ abstract final class ShareSettings {
   ///
   /// Takes a JSON string [jsonString] with the playground settings
   /// and compresses it to a URL safe string.
-  static Future<String> makeUrl(final String jsonString) async {
+  static Future<String> makeUrl(String jsonString) async {
     if (jsonString.isNotEmpty) {
       final String compressedConfig = _compressJsonString(jsonString);
       final String url = '${App.playgroundURL}?config=$compressedConfig';

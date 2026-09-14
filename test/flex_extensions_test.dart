@@ -1,6 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   //****************************************************************************
@@ -223,8 +223,7 @@ void main() {
     const Color col3 = Color(0xFFCF6679);
     const Color white = Color(0xFFFFFFFF);
     const Color black = Color(0xFF000000);
-    test(
-        'FCE4a.01: GIVEN blendAlpha(color) EXPECT default '
+    test('FCE4a.01: GIVEN blendAlpha(color) EXPECT default '
         'blendAlpha(color, 0x0A).', () {
       expect(col1.blendAlpha(white), col1.blendAlpha(white, 0x0A));
     });
@@ -330,62 +329,46 @@ void main() {
     const Color col1 = Color(0xFFB00020);
     const Color white = Color(0xFFFFFFFF);
     const Color black = Color(0xFF000000);
-    test(
-        'FCE7.01: GIVEN color.getShadeColor() EXPECT '
+    test('FCE7.01: GIVEN color.getShadeColor() EXPECT '
         'color.getShadeColor(shadeValue: 15, lighten: true, keepBlack: true, '
         'keepWhite: true)))', () {
-      expect(
-          col1.getShadeColor(),
-          col1.getShadeColor(
-              shadeValue: 15, lighten: true, keepBlack: true, keepWhite: true));
+      expect(col1.getShadeColor(), col1.getShadeColor(shadeValue: 15, lighten: true, keepBlack: true, keepWhite: true));
     });
-    test(
-        'FCE7.02: GIVEN color.getShadeColor(shadeValue: null, lighten: null, '
+    test('FCE7.02: GIVEN color.getShadeColor(shadeValue: null, lighten: null, '
         'keepBlack: null, keepWhite: null) EXPECT '
         'color.getShadeColor(shadeValue: 15, lighten: true, keepBlack: true, '
         'keepWhite: true)))', () {
-      expect(
-          col1.getShadeColor(),
-          col1.getShadeColor(
-              shadeValue: 15, lighten: true, keepBlack: true, keepWhite: true));
+      expect(col1.getShadeColor(), col1.getShadeColor(shadeValue: 15, lighten: true, keepBlack: true, keepWhite: true));
     });
     test('FCE7.03: GIVEN $white.getShadeColor() EXPECT $white.', () {
       expect(white.getShadeColor(), white);
     });
-    test(
-        'FCE7.04: GIVEN $white.getShadeColor(lighten: false) '
+    test('FCE7.04: GIVEN $white.getShadeColor(lighten: false) '
         'EXPECT $white.', () {
       expect(white.getShadeColor(lighten: false), white);
     });
-    test(
-        'FCE7.05: GIVEN $white.getShadeColor(lighten: false) '
+    test('FCE7.05: GIVEN $white.getShadeColor(lighten: false) '
         'EXPECT Color(0xffd9d9d9).', () {
-      expect(white.getShadeColor(lighten: false, keepWhite: false),
-          const Color(0xffd9d9d9));
+      expect(white.getShadeColor(lighten: false, keepWhite: false), const Color(0xffd9d9d9));
     });
     test('FCE7.06: GIVEN $black.getShadeColor() EXPECT $black.', () {
       expect(black.getShadeColor(), black);
     });
-    test(
-        'FCE7.07: GIVEN $black.getShadeColor(lighten: false) '
+    test('FCE7.07: GIVEN $black.getShadeColor(lighten: false) '
         'EXPECT $black.', () {
       expect(black.getShadeColor(lighten: false), black);
     });
-    test(
-        'FCE7.08: GIVEN $black.getShadeColor(keepBlack: false) '
+    test('FCE7.08: GIVEN $black.getShadeColor(keepBlack: false) '
         'EXPECT Color(0xff262626).', () {
       expect(black.getShadeColor(keepBlack: false), const Color(0xff262626));
     });
-    test(
-        'FCE7.09: GIVEN $col1.getShadeColor(shadeValue: 20) '
+    test('FCE7.09: GIVEN $col1.getShadeColor(shadeValue: 20) '
         'EXPECT Color(0xffff1741).', () {
       expect(col1.getShadeColor(shadeValue: 20), const Color(0xffff1741));
     });
-    test(
-        'FCE7.10: GIVEN $col1.getShadeColor(shadeValue: 20, lighten: false) '
+    test('FCE7.10: GIVEN $col1.getShadeColor(shadeValue: 20, lighten: false) '
         'EXPECT Color(0xff4a000d).', () {
-      expect(col1.getShadeColor(shadeValue: 20, lighten: false),
-          const Color(0xff4a000d));
+      expect(col1.getShadeColor(shadeValue: 20, lighten: false), const Color(0xff4a000d));
     });
   });
 

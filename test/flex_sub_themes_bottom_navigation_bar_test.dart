@@ -1,14 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
-  group('WITH: FlexSubThemes.bottomNavigationBar ', () {
+  group('WITH: FlexSubThemes.bottomNavigationBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes BottomNavigationBar tests
     // -------------------------------------------------------------------------
-    test(
-        'BottomNavigationBar FST3.1 flutter-default-light: GIVEN a LIGHT '
+    test('BottomNavigationBar FST3.1 flutter-default-light: GIVEN a LIGHT '
         'default '
         'FlexSubTheme.bottomNavigationBar() with FlutterDefault '
         'EXPECT equal to BottomNavigationBarThemeData() version '
@@ -52,8 +51,7 @@ void main() {
         ),
       );
     });
-    test(
-        'BottomNavigationBar FST3.2 flutter-default-dark: GIVEN a DARK '
+    test('BottomNavigationBar FST3.2 flutter-default-dark: GIVEN a DARK '
         'default '
         'FlexSubTheme.bottomNavigationBar() with FlutterDefault '
         'EXPECT equal to BottomNavigationBarThemeData() version '
@@ -97,8 +95,7 @@ void main() {
         ),
       );
     });
-    test(
-        'BottomNavigationBar FST3.3 fcs-default-light: GIVEN a default LIGHT '
+    test('BottomNavigationBar FST3.3 fcs-default-light: GIVEN a default LIGHT '
         'FlexSubTheme.bottomNavigationBar() with FCS default '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -138,8 +135,7 @@ void main() {
         ),
       );
     });
-    test(
-        'BottomNavigationBar FST3.4 fcs-default-dark: GIVEN a default DARK '
+    test('BottomNavigationBar FST3.4 fcs-default-dark: GIVEN a default DARK '
         'FlexSubTheme.bottomNavigationBar() with FCS default '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -180,8 +176,7 @@ void main() {
         ),
       );
     });
-    test(
-        'BottomNavigationBar FST3.5 custom: GIVEN a custom '
+    test('BottomNavigationBar FST3.5 custom: GIVEN a custom '
         'FlexSubTheme.bottomNavigationBar() '
         'EXPECT equal to BottomNavigationBarThemeData() version '
         'with same values', () {
@@ -220,35 +215,17 @@ void main() {
               fontSize: 14,
             ),
             unselectedLabelStyle: TextStyle(
-              color: colorScheme.onSurface
-                  .blendAlpha(colorScheme.onSurface, 0xFA)
-                  .withAlpha(0x45),
+              color: colorScheme.onSurface.blendAlpha(colorScheme.onSurface, 0xFA).withAlpha(0x45),
               fontSize: 12,
             ),
-            unselectedItemColor: colorScheme.onSurface
-                .blendAlpha(colorScheme.onSurface, 0xFA)
-                .withAlpha(0x45),
+            unselectedItemColor: colorScheme.onSurface.blendAlpha(colorScheme.onSurface, 0xFA).withAlpha(0x45),
             unselectedIconTheme: IconThemeData(
-              color: colorScheme.tertiary
-                  .blendAlpha(colorScheme.tertiary, 0xFA)
-                  .withAlpha(0x45),
+              color: colorScheme.tertiary.blendAlpha(colorScheme.tertiary, 0xFA).withAlpha(0x45),
               size: 27,
               opacity: 1,
             ),
           ),
         ),
-      );
-    });
-    test(
-        'BottomNavigationBar FST3.6: Given a deprecated bottomNavigationBar '
-        'EXPECT bottomNavigationBarTheme', () {
-      final ColorScheme colorScheme = ColorScheme.fromSeed(
-        seedColor: const Color(0xFF79E742),
-        brightness: Brightness.light,
-      );
-      expect(
-        FlexSubThemes.bottomNavigationBarTheme(colorScheme: colorScheme),
-        equals(FlexSubThemes.bottomNavigationBar(colorScheme: colorScheme)),
       );
     });
   });

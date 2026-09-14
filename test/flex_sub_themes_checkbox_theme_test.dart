@@ -1,15 +1,14 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.checkboxTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Checkbox tests
     // -------------------------------------------------------------------------
-    test(
-        'Checkbox FST7.1 light: GIVEN a light default M2 '
+    test('Checkbox FST7.1 light: GIVEN a light default M2 '
         'FlexSubTheme.checkboxTheme() '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -68,18 +67,12 @@ void main() {
             }),
             overlayColor: WidgetStateProperty<Color>.fromMap(
               <WidgetStatesConstraint, Color>{
-                WidgetState.selected & WidgetState.pressed:
-                    colorScheme.onSurface.withAlpha(kAlphaPressed),
-                WidgetState.selected & WidgetState.hovered:
-                    colorScheme.primary.withAlpha(kAlphaHovered),
-                WidgetState.selected & WidgetState.focused:
-                    colorScheme.primary.withAlpha(kAlphaFocused),
-                WidgetState.pressed:
-                    colorScheme.primary.withAlpha(kAlphaPressed),
-                WidgetState.hovered:
-                    colorScheme.onSurface.withAlpha(kAlphaHovered),
-                WidgetState.focused:
-                    colorScheme.onSurface.withAlpha(kAlphaFocused),
+                WidgetState.selected & WidgetState.pressed: colorScheme.onSurface.withAlpha(kAlphaPressed),
+                WidgetState.selected & WidgetState.hovered: colorScheme.primary.withAlpha(kAlphaHovered),
+                WidgetState.selected & WidgetState.focused: colorScheme.primary.withAlpha(kAlphaFocused),
+                WidgetState.pressed: colorScheme.primary.withAlpha(kAlphaPressed),
+                WidgetState.hovered: colorScheme.onSurface.withAlpha(kAlphaHovered),
+                WidgetState.focused: colorScheme.onSurface.withAlpha(kAlphaFocused),
                 WidgetState.any: Colors.transparent,
               },
             ),
@@ -87,8 +80,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Checkbox FST7.2 light-states: Does '
+    test('Checkbox FST7.2 light-states: Does '
         'Checkbox M2 have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -99,19 +91,21 @@ void main() {
       // Side: Disabled and selected
       expect(
         (FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        ).side as WidgetStateBorderSide?)!
+                  colorScheme: colorScheme,
+                  useMaterial3: false,
+                ).side
+                as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
       );
       // Side: Disabled, tinted
       expect(
         (FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          useTintedDisable: true,
-          useMaterial3: false,
-        ).side as WidgetStateBorderSide?)!
+                  colorScheme: colorScheme,
+                  useTintedDisable: true,
+                  useMaterial3: false,
+                ).side
+                as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           BorderSide(
@@ -126,9 +120,10 @@ void main() {
       // Side: disabled
       expect(
         (FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        ).side as WidgetStateBorderSide?)!
+                  colorScheme: colorScheme,
+                  useMaterial3: false,
+                ).side
+                as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           BorderSide(
@@ -140,28 +135,31 @@ void main() {
       // Side: selected
       expect(
         (FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        ).side as WidgetStateBorderSide?)!
+                  colorScheme: colorScheme,
+                  useMaterial3: false,
+                ).side
+                as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.selected}),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
       );
       // Side: default stated, tinted
       expect(
         (FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          unselectedIsColored: true,
-          useMaterial3: false,
-        ).side as WidgetStateBorderSide?)!
+                  colorScheme: colorScheme,
+                  unselectedIsColored: true,
+                  useMaterial3: false,
+                ).side
+                as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{}),
         equals(BorderSide(width: 2.0, color: colorScheme.primary)),
       );
       // Side: default stated, tinted
       expect(
         (FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        ).side as WidgetStateBorderSide?)!
+                  colorScheme: colorScheme,
+                  useMaterial3: false,
+                ).side
+                as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{}),
         equals(const BorderSide(width: 2.0, color: Colors.black54)),
       );
@@ -240,8 +238,7 @@ void main() {
     });
     //
     //
-    test(
-        'Checkbox FST7.3 light-M3-states: Does '
+    test('Checkbox FST7.3 light-M3-states: Does '
         'Checkbox have right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -572,8 +569,7 @@ void main() {
       );
     });
 
-    test(
-        'CheckBox FST7.4 dark: GIVEN an M2 dark default '
+    test('CheckBox FST7.4 dark: GIVEN an M2 dark default '
         'FlexSubTheme.checkboxTheme() '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -633,18 +629,12 @@ void main() {
             }),
             overlayColor: WidgetStateProperty<Color>.fromMap(
               <WidgetStatesConstraint, Color>{
-                WidgetState.selected & WidgetState.pressed:
-                    colorScheme.onSurface.withAlpha(kAlphaPressed),
-                WidgetState.selected & WidgetState.hovered:
-                    colorScheme.primary.withAlpha(kAlphaHovered),
-                WidgetState.selected & WidgetState.focused:
-                    colorScheme.primary.withAlpha(kAlphaFocused),
-                WidgetState.pressed:
-                    colorScheme.primary.withAlpha(kAlphaPressed),
-                WidgetState.hovered:
-                    colorScheme.onSurface.withAlpha(kAlphaHovered),
-                WidgetState.focused:
-                    colorScheme.onSurface.withAlpha(kAlphaFocused),
+                WidgetState.selected & WidgetState.pressed: colorScheme.onSurface.withAlpha(kAlphaPressed),
+                WidgetState.selected & WidgetState.hovered: colorScheme.primary.withAlpha(kAlphaHovered),
+                WidgetState.selected & WidgetState.focused: colorScheme.primary.withAlpha(kAlphaFocused),
+                WidgetState.pressed: colorScheme.primary.withAlpha(kAlphaPressed),
+                WidgetState.hovered: colorScheme.onSurface.withAlpha(kAlphaHovered),
+                WidgetState.focused: colorScheme.onSurface.withAlpha(kAlphaFocused),
                 WidgetState.any: Colors.transparent,
               },
             ),
@@ -652,8 +642,7 @@ void main() {
         ),
       );
     });
-    test(
-        'CheckBox FST7.5 dark-states: Does CheckBox M2 have '
+    test('CheckBox FST7.5 dark-states: Does CheckBox M2 have '
         'right material states', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),
@@ -664,19 +653,21 @@ void main() {
       // Side: Disabled and selected
       expect(
         (FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        ).side as WidgetStateBorderSide?)!
+                  colorScheme: colorScheme,
+                  useMaterial3: false,
+                ).side
+                as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled, WidgetState.selected}),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
       );
       // Side: Disabled, tinted
       expect(
         (FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          useTintedDisable: true,
-          useMaterial3: false,
-        ).side as WidgetStateBorderSide?)!
+                  colorScheme: colorScheme,
+                  useTintedDisable: true,
+                  useMaterial3: false,
+                ).side
+                as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           BorderSide(
@@ -691,9 +682,10 @@ void main() {
       // Side: disabled
       expect(
         (FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        ).side as WidgetStateBorderSide?)!
+                  colorScheme: colorScheme,
+                  useMaterial3: false,
+                ).side
+                as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.disabled}),
         equals(
           BorderSide(
@@ -705,28 +697,31 @@ void main() {
       // Side: selected
       expect(
         (FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        ).side as WidgetStateBorderSide?)!
+                  colorScheme: colorScheme,
+                  useMaterial3: false,
+                ).side
+                as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{WidgetState.selected}),
         equals(const BorderSide(width: 2.0, color: Colors.transparent)),
       );
       // Side: default stated, tinted
       expect(
         (FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          unselectedIsColored: true,
-          useMaterial3: false,
-        ).side as WidgetStateBorderSide?)!
+                  colorScheme: colorScheme,
+                  unselectedIsColored: true,
+                  useMaterial3: false,
+                ).side
+                as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{}),
         equals(BorderSide(width: 2.0, color: colorScheme.primary)),
       );
       // Side: default stated, tinted
       expect(
         (FlexSubThemes.checkboxTheme(
-          colorScheme: colorScheme,
-          useMaterial3: false,
-        ).side as WidgetStateBorderSide?)!
+                  colorScheme: colorScheme,
+                  useMaterial3: false,
+                ).side
+                as WidgetStateBorderSide?)!
             .resolve(<WidgetState>{}),
         equals(const BorderSide(width: 2.0, color: Colors.white70)),
       );
@@ -804,8 +799,7 @@ void main() {
         equals(colorScheme.onPrimary),
       );
     });
-    test(
-        'CheckBox FST7.6 custom-light: GIVEN a light '
+    test('CheckBox FST7.6 custom-light: GIVEN a light '
         'custom FlexSubTheme.checkboxTheme '
         'EXPECT equal to CheckboxThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -866,18 +860,12 @@ void main() {
             }),
             overlayColor: WidgetStateProperty<Color>.fromMap(
               <WidgetStatesConstraint, Color>{
-                WidgetState.selected & WidgetState.pressed:
-                    colorScheme.onSurface.withAlpha(kAlphaPressed),
-                WidgetState.selected & WidgetState.hovered:
-                    colorScheme.tertiary.withAlpha(kAlphaHovered),
-                WidgetState.selected & WidgetState.focused:
-                    colorScheme.tertiary.withAlpha(kAlphaFocused),
-                WidgetState.pressed:
-                    colorScheme.tertiary.withAlpha(kAlphaPressed),
-                WidgetState.hovered:
-                    colorScheme.onSurface.withAlpha(kAlphaHovered),
-                WidgetState.focused:
-                    colorScheme.onSurface.withAlpha(kAlphaFocused),
+                WidgetState.selected & WidgetState.pressed: colorScheme.onSurface.withAlpha(kAlphaPressed),
+                WidgetState.selected & WidgetState.hovered: colorScheme.tertiary.withAlpha(kAlphaHovered),
+                WidgetState.selected & WidgetState.focused: colorScheme.tertiary.withAlpha(kAlphaFocused),
+                WidgetState.pressed: colorScheme.tertiary.withAlpha(kAlphaPressed),
+                WidgetState.hovered: colorScheme.onSurface.withAlpha(kAlphaHovered),
+                WidgetState.focused: colorScheme.onSurface.withAlpha(kAlphaFocused),
                 WidgetState.any: Colors.transparent,
               },
             ),

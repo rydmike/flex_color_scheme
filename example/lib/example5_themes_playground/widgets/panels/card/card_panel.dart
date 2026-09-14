@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../../theme/theme_values.dart';
-import '../../shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/slider_list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 class CardPanel extends StatelessWidget {
   const CardPanel(this.controller, {super.key});
@@ -22,29 +21,26 @@ class CardPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
     final bool useMaterial3 = theme.useMaterial3;
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     // Get effective platform default global radius.
     final double? effectiveRadius = ThemeValues.effectiveRadius(controller);
-    final String cardRadiusDefaultLabel =
-        controller.cardBorderRadius == null && effectiveRadius == null
-            ? '12 dp'
-            : controller.cardBorderRadius == null && effectiveRadius != null
-                ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
-                : '';
+    final String cardRadiusDefaultLabel = controller.cardBorderRadius == null && effectiveRadius == null
+        ? '12 dp'
+        : controller.cardBorderRadius == null && effectiveRadius != null
+        ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
+        : '';
     final String cardElevationDefaultLabel = controller.cardElevation == null
         ? useMaterial3
-            ? 'Card 1/variants 0'
-            : '1'
+              ? 'Card 1/variants 0'
+              : '1'
         : '';
 
     return Column(
@@ -87,8 +83,7 @@ class CardPanel extends StatelessWidget {
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Background color'),
-          defaultLabel:
-              useMaterial3 ? 'surfaceContainerLow' : 'ThemeData.cardColor',
+          defaultLabel: useMaterial3 ? 'surfaceContainerLow' : 'ThemeData.cardColor',
           value: controller.cardBackgroundSchemeColor,
           onChanged: controller.setCardBackgroundSchemeColor,
           subtitleReveal: const Text(
@@ -104,8 +99,7 @@ class CardPanel extends StatelessWidget {
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Border color'),
-          defaultLabel:
-              useMaterial3 ? 'outlineVariant only Card.outlined' : 'none',
+          defaultLabel: useMaterial3 ? 'outlineVariant only Card.outlined' : 'none',
           value: controller.cardBorderSchemeColor,
           onChanged: controller.setCardBorderSchemeColor,
           subtitleReveal: const Text(
@@ -129,8 +123,8 @@ class CardPanel extends StatelessWidget {
           valueUnitLabel: ' dp',
           valueDefaultLabel: controller.cardBorderWidth == null
               ? useMaterial3
-                  ? '1.0 only Card.outlined'
-                  : 'none'
+                    ? '1.0 only Card.outlined'
+                    : 'none'
               : '',
           subtitleReveal: const Text(
             'Defines the border width for Cards. Only used if a border color '
@@ -173,7 +167,8 @@ class CardPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'You cannot theme the M3 Card variants separately. If '
+                  text:
+                      'You cannot theme the M3 Card variants separately. If '
                       'you change the border radius from the default radius, '
                       'the outline will be removed from the themed '
                       'Card.outlined if radius is not 12.\n'

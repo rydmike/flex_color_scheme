@@ -1,15 +1,14 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.tabBarTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes tabBarTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'TabBar FST30.1: GIVEN a FlexSubTheme.tabBarTheme() '
+    test('TabBar FST30.1: GIVEN a FlexSubTheme.tabBarTheme() '
         'EXPECT equal to TabBarTheme with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),

@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-
-import '../../controllers/theme_controller.dart';
-import '../../pages/page_examples.dart';
-import '../universal/header_card_stateful.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/pages/page_examples.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/header_card_stateful.dart';
+import 'package:material_ui/material_ui.dart';
 
 // StatefulHeaderCard wrapper of PageExamples.
 //
@@ -21,10 +20,8 @@ class ShowSubPages extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
     final bool isLight = theme.brightness == Brightness.light;
     final Color iconColor = isLight
-        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99),
-            theme.colorScheme.onSurface)
-        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F),
-            theme.colorScheme.onSurface);
+        ? Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x99), theme.colorScheme.onSurface)
+        : Color.alphaBlend(theme.colorScheme.primary.withAlpha(0x7F), theme.colorScheme.onSurface);
     return HeaderCardStateful(
       leading: Icon(Icons.article_outlined, color: iconColor),
       title: const Text('Page Examples'),

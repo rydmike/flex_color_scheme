@@ -1,14 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.iconButtonTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes iconButtonTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'IconButton 15.1: GIVEN a FlexSubTheme.iconButtonTheme() '
+    test('IconButton 15.1: GIVEN a FlexSubTheme.iconButtonTheme() '
         'EXPECT equal to ...', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),

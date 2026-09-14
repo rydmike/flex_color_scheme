@@ -1,13 +1,12 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../shared/controllers/theme_controller.dart';
-import '../shared/services/theme_service.dart';
+import 'package:flex_color_scheme_example/example2_custom_theme/home_page.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service.dart';
 // import '../shared/services/theme_service_hive.dart';
-import '../shared/services/theme_service_mem.dart';
-import 'home_page.dart';
+import 'package:flex_color_scheme_example/shared/services/theme_service_mem.dart';
+import 'package:flutter/foundation.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:material_ui/material_ui.dart';
 
 // -----------------------------------------------------------------------------
 // EXAMPLE 2 - Custom Theme
@@ -27,7 +26,7 @@ import 'home_page.dart';
 // opting in and out of FlexColorScheme's opinionated sub-themes.
 //
 // You can try this app as a web app at:
-// https://rydmike.com/flexcolorscheme/customtheme-latest
+// https://rydmike.com/flexcolorscheme/customtheme-v9-0
 // -----------------------------------------------------------------------------
 
 Future<void> main() async {
@@ -51,7 +50,7 @@ Future<void> main() async {
   // SharedPreferences service is only used for example 3. You can swap in
   // the Hive based one here as well, if you want to try it and save settings
   // for this simple example as well.
-  // This also demonstrates how swap used persistence implementation.
+  // This also demonstrates how to swap the used persistence implementation.
   final ThemeService themeService = ThemeServiceMem();
   // To swap to hive use this instead:
   // final ThemeService themeService =
@@ -79,7 +78,7 @@ Future<void> main() async {
 // want to bundle your custom color values in a class as static const values.
 // In later examples 4 and 5 we do so.
 //
-// These colors were was just some colors I chose on a whim, but dang this
+// These colors were just some colors I chose on a whim, but dang this
 // theme actually looks pretty good! :)
 const FlexSchemeData _myFlexScheme = FlexSchemeData(
   name: 'Midnight blue',
@@ -116,74 +115,71 @@ class DemoApp extends StatelessWidget {
     // the nature that the entire App UI needs to be redrawn, so this approach
     // works well for this use case.
     return ListenableBuilder(
-        listenable: themeController,
-        builder: (BuildContext context, Widget? child) {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: 'Custom Theme',
-            // Define FlexThemeData.light() theme using above custom colors.
-            theme: FlexThemeData.light(
-              useMaterial3: themeController.useMaterial3,
-              // We could have stored the light scheme in a FlexSchemeColor
-              // and used it for the colors, but we will use both the light and
-              // dark colors also on the HomePage for the theme switch widget
-              // and to display its name, where we pass it as a FlexSchemeData
-              // object that contains both the light and dark scheme and its
-              // name and description.
-              colors: _myFlexScheme.light,
-              // Opt in/out on FlexColorScheme sub-themes with theme controller.
-              subThemesData: themeController.useSubThemes
-                  ? const FlexSubThemesData()
-                  : null,
-              // Use very low elevation light theme mode. On light colored
-              // AppBars this show up as a nice thin underline effect.
-              appBarElevation: 0.5,
-              // Here we want the large default visual density on all platforms.
-              // Like Flutter SDK it default to
-              // VisualDensity.adaptivePlatformDensity, which uses standard on
-              // devices, but compact on desktops, compact is very compact,
-              // maybe even a bit too compact
-              visualDensity: VisualDensity.standard,
-              // You can add a font via just a fontFamily from e.g. GoogleFonts.
-              // For better results, prefer defining complete TextThemes,
-              // using a font and its different styles, potentially even
-              // more then one font, and then assign the TextTheme to the
-              // textTheme and primaryTextTheme in FlexThemeData. This is
-              // just how you would use it with ThemeData too.
-              fontFamily: GoogleFonts.notoSans().fontFamily,
-              // We use the nicer Material 3 Typography in both M2 and M3 mode.
-              typography: Typography.material2021(
-                platform: defaultTargetPlatform,
-              ),
+      listenable: themeController,
+      builder: (BuildContext context, Widget? child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'Custom Theme',
+          // Define FlexThemeData.light() theme using above custom colors.
+          theme: FlexThemeData.light(
+            useMaterial3: themeController.useMaterial3,
+            // We could have stored the light scheme in a FlexSchemeColor
+            // and used it for the colors, but we will use both the light and
+            // dark colors also on the HomePage for the theme switch widget
+            // and to display its name, where we pass it as a FlexSchemeData
+            // object that contains both the light and dark scheme and its
+            // name and description.
+            colors: _myFlexScheme.light,
+            // Opt in/out on FlexColorScheme sub-themes with theme controller.
+            subThemesData: themeController.useSubThemes ? const FlexSubThemesData() : null,
+            // Use very low elevation light theme mode. On light colored
+            // AppBars this show up as a nice thin underline effect.
+            appBarElevation: 0.5,
+            // Here we want the large default visual density on all platforms.
+            // Like Flutter SDK it default to
+            // VisualDensity.adaptivePlatformDensity, which uses standard on
+            // devices, but compact on desktops, compact is very compact,
+            // maybe even a bit too compact
+            visualDensity: VisualDensity.standard,
+            // You can add a font via just a fontFamily from e.g. GoogleFonts.
+            // For better results, prefer defining complete TextThemes,
+            // using a font and its different styles, potentially even
+            // more than one font, and then assign the TextTheme to the
+            // textTheme and primaryTextTheme in FlexThemeData. This is
+            // just how you would use it with ThemeData too.
+            fontFamily: GoogleFonts.notoSans().fontFamily,
+            // We use the nicer Material 3 Typography in both M2 and M3 mode.
+            typography: Typography.material2021(
+              platform: defaultTargetPlatform,
             ),
-            // Same setup for the dark theme, but using FlexThemeData.dark().
-            darkTheme: FlexThemeData.dark(
-              useMaterial3: themeController.useMaterial3,
-              colors: _myFlexScheme.dark,
-              subThemesData: themeController.useSubThemes
-                  ? const FlexSubThemesData()
-                  : null,
-              appBarElevation: 1,
-              visualDensity: VisualDensity.standard,
-              fontFamily: GoogleFonts.notoSans().fontFamily,
-              // We use the nicer Material 3 Typography in both M2 and M3 mode.
-              typography: Typography.material2021(
-                platform: defaultTargetPlatform,
-              ),
+          ),
+          // Same setup for the dark theme, but using FlexThemeData.dark().
+          darkTheme: FlexThemeData.dark(
+            useMaterial3: themeController.useMaterial3,
+            colors: _myFlexScheme.dark,
+            subThemesData: themeController.useSubThemes ? const FlexSubThemesData() : null,
+            appBarElevation: 1,
+            visualDensity: VisualDensity.standard,
+            fontFamily: GoogleFonts.notoSans().fontFamily,
+            // We use the nicer Material 3 Typography in both M2 and M3 mode.
+            typography: Typography.material2021(
+              platform: defaultTargetPlatform,
             ),
-            // Use the dark or light theme, based on theme controller setting.
-            themeMode: themeController.themeMode,
-            home: HomePage(
-              // Pass in the FlexSchemeData we used for the active theme. Not
-              // needed to use FlexColorScheme, but we use it to
-              // show the active theme's name, description and colors in the
-              // demo. It is also used by the theme mode switch that shows the
-              // theme's colors in the different theme modes.
-              flexSchemeData: _myFlexScheme,
-              // Pass in the theme controller to the home page.
-              controller: themeController,
-            ),
-          );
-        });
+          ),
+          // Use the dark or light theme, based on theme controller setting.
+          themeMode: themeController.themeMode,
+          home: HomePage(
+            // Pass in the FlexSchemeData we used for the active theme. Not
+            // needed to use FlexColorScheme, but we use it to
+            // show the active theme's name, description and colors in the
+            // demo. It is also used by the theme mode switch that shows the
+            // theme's colors in the different theme modes.
+            flexSchemeData: _myFlexScheme,
+            // Pass in the theme controller to the home page.
+            controller: themeController,
+          ),
+        );
+      },
+    );
   }
 }

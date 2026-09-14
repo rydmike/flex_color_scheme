@@ -1,8 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import 'light_surface_mode_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/light_surface_mode_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:material_ui/material_ui.dart';
 
 class LightSurfaceModeListTile extends StatelessWidget {
   const LightSurfaceModeListTile({
@@ -31,8 +30,7 @@ class LightSurfaceModeListTile extends StatelessWidget {
         if (mode.index + 1 >= FlexSurfaceMode.values.length - 1) {
           controller.setSurfaceModeLight(FlexSurfaceMode.values[0]);
         } else {
-          controller
-              .setSurfaceModeLight(FlexSurfaceMode.values[mode.index + 1]);
+          controller.setSurfaceModeLight(FlexSurfaceMode.values[mode.index + 1]);
         }
       },
     );

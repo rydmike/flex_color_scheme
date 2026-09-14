@@ -1,11 +1,10 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/slider_list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 class SnackBarMaterialBannerPanel extends StatelessWidget {
   const SnackBarMaterialBannerPanel(this.controller, {super.key});
@@ -21,16 +20,14 @@ class SnackBarMaterialBannerPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData theme = Theme.of(context);
-    final TextStyle spanTextStyle = theme.textTheme.bodySmall!
-        .copyWith(color: theme.colorScheme.onSurfaceVariant);
+    final TextStyle spanTextStyle = theme.textTheme.bodySmall!.copyWith(color: theme.colorScheme.onSurfaceVariant);
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
       color: theme.colorScheme.primary,
       fontWeight: FontWeight.bold,
     );
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,10 +35,11 @@ class SnackBarMaterialBannerPanel extends StatelessWidget {
         const SizedBox(height: 8),
         const ListTileReveal(
           title: Text('SnackBar'),
-          subtitleReveal:
-              Text('The SnackBar comes with two behaviors, fixed and '
-                  'floating. When using M3, prefer using the floating '
-                  'behavior.\n'),
+          subtitleReveal: Text(
+            'The SnackBar comes with two behaviors, fixed and '
+            'floating. When using M3, prefer using the floating '
+            'behavior.\n',
+          ),
         ),
         const SizedBox(height: 8),
         const SnackBarShowcase(),
@@ -53,7 +51,8 @@ class SnackBarMaterialBannerPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'The SnackBar border radius '
+                  text:
+                      'The SnackBar border radius '
                       'for fixed and floating variants cannot be changed '
                       'separately via themes. The fixed style should always '
                       'by straight, the floating one may have border radius.\n'
@@ -68,7 +67,8 @@ class SnackBarMaterialBannerPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' for more information.\n'
+                  text:
+                      ' for more information.\n'
                       '\n'
                       'Due to this issue and because '
                       'the M3 design spec states one should avoid large '
@@ -112,13 +112,11 @@ class SnackBarMaterialBannerPanel extends StatelessWidget {
         ColorSchemePopupMenu(
           enabled: enableControl,
           title: const Text('Background color'),
-          subtitleReveal:
-              const Text('Set to inverseSurface for default Material-3 style'),
+          subtitleReveal: const Text('Set to inverseSurface for default Material-3 style'),
           defaultLabel: 'onSurface with 45% primary blend and 93% opacity',
           defaultLabelDark: 'onSurface with 39% primary blend and 95% opacity',
           defaultDisabledLabel: 'inverseSurface',
-          defaultDisabledLabelM2:
-              'onSurface opacity 80%, alpha blend with surface',
+          defaultDisabledLabelM2: 'onSurface opacity 80%, alpha blend with surface',
           defaultDisabledLabelDarkM2: 'onSurface',
           value: controller.snackBarSchemeColor,
           onChanged: controller.setSnackBarSchemeColor,
@@ -134,9 +132,11 @@ class SnackBarMaterialBannerPanel extends StatelessWidget {
         const Divider(),
         const ListTileReveal(
           title: Text('MaterialBanner'),
-          subtitleReveal: Text('No theme settings in current version of '
-              'FlexColorScheme. Only included here to demonstrates its style '
-              'with current theme and used ColorScheme.\n'),
+          subtitleReveal: Text(
+            'No theme settings in current version of '
+            'FlexColorScheme. Only included here to demonstrates its style '
+            'with current theme and used ColorScheme.\n',
+          ),
         ),
         const MaterialBannerShowcase(),
         const SizedBox(height: 8),

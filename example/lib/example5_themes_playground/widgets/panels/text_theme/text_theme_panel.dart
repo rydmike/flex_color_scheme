@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import 'use_app_font_switch_list_tile.dart';
-import 'use_material3_typography.dart';
-import 'use_tinted_text_theme.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/text_theme/use_app_font_switch_list_tile.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/text_theme/use_material3_typography.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/text_theme/use_tinted_text_theme.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:material_ui/material_ui.dart';
 
 class TextThemePanel extends StatefulWidget {
   const TextThemePanel(this.controller, {super.key});
@@ -24,7 +23,7 @@ class _TextThemePanelState extends State<TextThemePanel> {
       children: <Widget>[
         const SizedBox(height: 8),
         UseMaterial3Typography(controller: widget.controller),
-        UseTinted3TextTheme(controller: widget.controller),
+        const UseTinted3TextTheme(),
         const Divider(),
         UseAppFontSwitchLisTile(controller: widget.controller),
         SwitchListTile(

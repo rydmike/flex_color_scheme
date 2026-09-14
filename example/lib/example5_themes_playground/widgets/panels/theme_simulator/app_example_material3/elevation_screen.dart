@@ -1,11 +1,10 @@
 // Copyright 2021 The Flutter team. All rights reserved.
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
-import 'package:flutter/material.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/theme_simulator/app_example_material3/constants.dart';
+import 'package:flex_color_scheme_example/shared/utils/app_scroll_behavior.dart';
 import 'package:flutter/rendering.dart';
-
-import '../../../../../shared/utils/app_scroll_behavior.dart';
-import 'constants.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ElevationScreen extends StatelessWidget {
   const ElevationScreen({super.key});
@@ -77,8 +76,7 @@ class ElevationGrid extends StatelessWidget {
   final Color? shadowColor;
   final Color? surfaceTintColor;
 
-  List<ElevationCard> elevationCards(
-      Color? shadowColor, Color? surfaceTintColor) {
+  List<ElevationCard> elevationCards(Color? shadowColor, Color? surfaceTintColor) {
     return elevations
         .map(
           (ElevationInfo elevationInfo) => ElevationCard(
@@ -95,26 +93,26 @@ class ElevationGrid extends StatelessWidget {
     return SliverPadding(
       padding: const EdgeInsets.all(8),
       sliver: SliverLayoutBuilder(
-          builder: (BuildContext context, SliverConstraints constraints) {
-        if (constraints.crossAxisExtent < kNarrowScreenWidthThreshold) {
-          return SliverGrid.count(
-            crossAxisCount: 3,
-            children: elevationCards(shadowColor, surfaceTintColor),
-          );
-        } else {
-          return SliverGrid.count(
-            crossAxisCount: 6,
-            children: elevationCards(shadowColor, surfaceTintColor),
-          );
-        }
-      }),
+        builder: (BuildContext context, SliverConstraints constraints) {
+          if (constraints.crossAxisExtent < kNarrowScreenWidthThreshold) {
+            return SliverGrid.count(
+              crossAxisCount: 3,
+              children: elevationCards(shadowColor, surfaceTintColor),
+            );
+          } else {
+            return SliverGrid.count(
+              crossAxisCount: 6,
+              children: elevationCards(shadowColor, surfaceTintColor),
+            );
+          }
+        },
+      ),
     );
   }
 }
 
 class ElevationCard extends StatefulWidget {
-  const ElevationCard(
-      {super.key, required this.info, this.shadowColor, this.surfaceTint});
+  const ElevationCard({super.key, required this.info, this.shadowColor, this.surfaceTint});
 
   final ElevationInfo info;
   final Color? shadowColor;

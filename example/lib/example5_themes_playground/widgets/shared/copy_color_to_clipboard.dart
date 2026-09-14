@@ -1,7 +1,7 @@
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Copy the color value as a String to the Clipboard in Flutter Dart format.
 ///
@@ -26,12 +26,14 @@ Future<void> copyColorToClipboard(BuildContext context, Color color) async {
               elevation: 0.5,
               child: Padding(
                 padding: const EdgeInsets.all(8),
-                child: Text('#${color.hexCode}',
-                    style: TextStyle(
-                        color: ThemeData.estimateBrightnessForColor(color) ==
-                                Brightness.light
-                            ? Colors.black
-                            : Colors.white)),
+                child: Text(
+                  '#${color.hexCode}',
+                  style: TextStyle(
+                    color: ThemeData.estimateBrightnessForColor(color) == Brightness.light
+                        ? Colors.black
+                        : Colors.white,
+                  ),
+                ),
               ),
             ),
             const SizedBox(width: 8),

@@ -1,8 +1,9 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_color_scheme.dart';
+library;
 
-import 'flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
-import 'flex_instant_splash.dart';
+import 'package:flex_color_scheme/src/flex_instant_splash.dart';
+import 'package:flutter/foundation.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// An enum for easy configuration and selection of ink splash effect.
 ///
@@ -26,7 +27,7 @@ enum FlexSplashType {
 
   /// A new faster Material-3 version of [inkSplash].
   ///
-  /// By default used by Material-3 on none Android builds and also on all
+  /// By default used by Material-3 on non-Android builds and also on all
   /// web builds.
   ///
   /// A circular ink feature whose origin starts at the input touch point and
@@ -64,8 +65,7 @@ enum FlexSplashType {
   ///
   /// Type [defaultSplash] returns null the type selection should be handled
   /// by [ThemeData] factory defaults or caller.
-  InteractiveInkFeatureFactory? splashFactory(
-      [bool useMaterial3 = true, bool mockIsWeb = false]) {
+  InteractiveInkFeatureFactory? splashFactory([bool useMaterial3 = true, bool mockIsWeb = false]) {
     switch (this) {
       case FlexSplashType.defaultSplash:
         return null;
@@ -76,8 +76,8 @@ enum FlexSplashType {
       case FlexSplashType.inkSparkle:
         return kIsWeb || mockIsWeb
             ? useMaterial3
-                ? InkRipple.splashFactory
-                : InkSplash.splashFactory
+                  ? InkRipple.splashFactory
+                  : InkSplash.splashFactory
             : InkSparkle.splashFactory;
       case FlexSplashType.noSplash:
         return NoSplash.splashFactory;

@@ -1,6 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// SplashPageOne splash example page.
 class SplashPageOne extends StatelessWidget {
@@ -13,12 +13,10 @@ class SplashPageOne extends StatelessWidget {
   final bool invertStatusIcons;
 
   /// A static convenience function show this screen.
-  static Future<void> show(
-      BuildContext context, bool invisibleStatusIcons) async {
+  static Future<void> show(BuildContext context, bool invisibleStatusIcons) async {
     await Navigator.of(context).push(
       MaterialPageRoute<Widget>(
-        builder: (BuildContext context) =>
-            SplashPageOne(invertStatusIcons: invisibleStatusIcons),
+        builder: (BuildContext context) => SplashPageOne(invertStatusIcons: invisibleStatusIcons),
       ),
     );
   }
@@ -63,21 +61,17 @@ class SplashPageOne extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Splash!',
-                  style: theme.textTheme.displayMedium!
-                      .copyWith(color: theme.colorScheme.primary),
+                  style: theme.textTheme.displayMedium!.copyWith(color: theme.colorScheme.primary),
                 ),
                 const SizedBox(height: 20),
                 const Text('A clean splash screen'),
                 const SizedBox(height: 8),
                 if (invertStatusIcons)
-                  const Text('No status bar scrim and inverted status icons',
-                      textAlign: TextAlign.center)
+                  const Text('No status bar scrim and inverted status icons', textAlign: TextAlign.center)
                 else
-                  const Text('No status bar scrim and normal status icons',
-                      textAlign: TextAlign.center),
+                  const Text('No status bar scrim and normal status icons', textAlign: TextAlign.center),
                 const SizedBox(height: 30),
-                Text('Tap screen to close',
-                    style: TextStyle(color: theme.colorScheme.secondary)),
+                Text('Tap screen to close', style: TextStyle(color: theme.colorScheme.secondary)),
               ],
             ),
           ),

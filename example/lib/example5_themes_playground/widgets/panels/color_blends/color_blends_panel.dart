@@ -1,17 +1,16 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/color_scheme_popup_menu.dart';
-import '../../shared/scaffold_base_popup_menu.dart';
-import '../../shared/surfaces_seed_blend_color.dart';
-import 'dark_surface_mode_list_tile.dart';
-import 'dark_surface_mode_popup_menu.dart';
-import 'light_surface_mode_list_tile.dart';
-import 'light_surface_mode_popup_menu.dart';
-import 'on_colors.dart';
-import 'surface_colors.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/dark_surface_mode_list_tile.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/dark_surface_mode_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/light_surface_mode_list_tile.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/light_surface_mode_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/on_colors.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/surface_colors.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/scaffold_base_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/surfaces_seed_blend_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Panel used to define how primary color is blended into surfaces and
 // onColors.
@@ -134,8 +133,7 @@ class ColorBlendsPanel extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -171,8 +169,7 @@ class ColorBlendsPanel extends StatelessWidget {
                   ),
                   Text(
                     '${controller.blendLevelLight}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -207,8 +204,7 @@ class ColorBlendsPanel extends StatelessWidget {
                   ),
                   Text(
                     '${controller.blendLevelDark}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -249,13 +245,13 @@ class ColorBlendsPanel extends StatelessWidget {
             defaultLabel: 'not used',
             defaultDisabledLabel: controller.useFlexColorScheme
                 ? controller.scaffoldLightIsWhite
-                    ? 'White'
-                    : 'surfaceContainerLowest'
+                      ? 'White'
+                      : 'surfaceContainerLowest'
                 : 'surface',
             defaultDisabledLabelM2: controller.useFlexColorScheme
                 ? controller.scaffoldLightIsWhite
-                    ? 'White'
-                    : 'surface'
+                      ? 'White'
+                      : 'surface'
                 : 'grey50',
             value: controller.scaffoldBackgroundLightSchemeColor,
             onChanged: controller.setScaffoldBackgroundLightSchemeColor,
@@ -289,13 +285,13 @@ class ColorBlendsPanel extends StatelessWidget {
             defaultLabel: 'not used',
             defaultDisabledLabel: controller.useFlexColorScheme
                 ? controller.scaffoldDarkIsTrueBlack
-                    ? 'Black'
-                    : 'surfaceContainerLowest'
+                      ? 'Black'
+                      : 'surfaceContainerLowest'
                 : 'surface',
             defaultDisabledLabelM2: controller.useFlexColorScheme
                 ? controller.scaffoldDarkIsTrueBlack
-                    ? 'Black'
-                    : 'surface'
+                      ? 'Black'
+                      : 'surface'
                 : 'grey850',
             value: controller.scaffoldBackgroundDarkSchemeColor,
             onChanged: controller.setScaffoldBackgroundDarkSchemeColor,
@@ -340,8 +336,7 @@ class ColorBlendsPanel extends StatelessWidget {
               max: 40,
               divisions: 40,
               label: controller.blendOnLevelLight.toString(),
-              value:
-                  enableControl ? controller.blendOnLevelLight.toDouble() : 0,
+              value: enableControl ? controller.blendOnLevelLight.toDouble() : 0,
               onChanged: enableControl
                   ? (double value) {
                       controller.setBlendOnLevelLight(value.toInt());
@@ -358,10 +353,9 @@ class ColorBlendsPanel extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   Text(
-                    // ignore: lines_longer_than_80_chars, string interpolation
+                    // ignore: string interpolation
                     '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelLight : ""}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
@@ -416,10 +410,9 @@ class ColorBlendsPanel extends StatelessWidget {
                     style: theme.textTheme.bodySmall,
                   ),
                   Text(
-                    // ignore: lines_longer_than_80_chars, string interpolation
+                    // ignore: string interpolation
                     '${controller.useSubThemes && controller.useFlexColorScheme ? controller.blendOnLevelDark : ""}',
-                    style: theme.textTheme.bodySmall!
-                        .copyWith(fontWeight: FontWeight.bold),
+                    style: theme.textTheme.bodySmall!.copyWith(fontWeight: FontWeight.bold),
                   ),
                 ],
               ),

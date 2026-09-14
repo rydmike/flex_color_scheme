@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-
-import '../../../shared/const/app_color.dart';
-import '../../../shared/controllers/theme_controller.dart';
-import '../../../shared/widgets/universal/switch_list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 class CustomUsesDarkColorsForSeedSwitch extends StatelessWidget {
   const CustomUsesDarkColorsForSeedSwitch({
@@ -15,8 +14,7 @@ class CustomUsesDarkColorsForSeedSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     return SwitchListTileReveal(
       dense: true,
-      enabled: controller.useKeyColors &&
-          controller.schemeIndex == AppColor.schemes.length - 1,
+      enabled: controller.useKeyColors && controller.schemeIndex == AppColor.schemes.length - 1,
       title: const Text('Custom dark uses its own colors as seeds'),
       subtitleReveal: const Text(
         'Turn ON to use the custom dark input colors as seed keys '

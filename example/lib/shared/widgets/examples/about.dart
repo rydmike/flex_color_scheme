@@ -1,9 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
-import '../../const/app.dart';
-import '../../utils/link_text_span.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// An about icon button used on the example's app app bar.
 class AboutIconButton extends StatelessWidget {
@@ -34,8 +33,7 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
   final ThemeData theme = Theme.of(context);
   final TextStyle aboutTextStyle = theme.textTheme.bodyLarge!;
   final TextStyle footerStyle = theme.textTheme.bodySmall!;
-  final TextStyle linkStyle =
-      theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
+  final TextStyle linkStyle = theme.textTheme.bodyLarge!.copyWith(color: theme.colorScheme.primary);
 
   final Size mediaSize = MediaQuery.sizeOf(context);
   final double width = mediaSize.width;
@@ -86,7 +84,8 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
               children: <TextSpan>[
                 TextSpan(
                   style: aboutTextStyle,
-                  text: 'The ${App.title(context)} application demonstrates '
+                  text:
+                      'The ${App.title(context)} application demonstrates '
                       'features '
                       'of the ${App.packageName} Flutter theming package.\n\n'
                       'To learn more, check out the package on ',
@@ -98,12 +97,14 @@ void showAppAboutDialog(BuildContext context, [bool useRootNavigator = true]) {
                 ),
                 TextSpan(
                   style: aboutTextStyle,
-                  text: '. It also includes the source code '
+                  text:
+                      '. It also includes the source code '
                       'of this application.\n\n',
                 ),
                 TextSpan(
                   style: footerStyle,
-                  text: 'Built with Flutter ${App.flutterVersion}, '
+                  text:
+                      'Built with Flutter ${App.flutterVersion}, '
                       'using ${App.packageName} '
                       '${App.version}. '
                       'Media size (w:${width.toStringAsFixed(0)}, '

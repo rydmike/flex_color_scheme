@@ -1,5 +1,5 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A [ThemeExtension] for code highlight color properties used by code viewer.
 class CodeTheme extends ThemeExtension<CodeTheme> {
@@ -33,17 +33,16 @@ class CodeTheme extends ThemeExtension<CodeTheme> {
     Color? punctuationColor,
     Color? classColor,
     Color? constantColor,
-  }) =>
-      CodeTheme(
-        baseColor: baseColor ?? this.baseColor,
-        numberColor: numberColor ?? this.numberColor,
-        commentColor: commentColor ?? this.commentColor,
-        keywordColor: keywordColor ?? this.keywordColor,
-        stringColor: stringColor ?? this.stringColor,
-        punctuationColor: punctuationColor ?? this.punctuationColor,
-        classColor: classColor ?? this.classColor,
-        constantColor: constantColor ?? this.constantColor,
-      );
+  }) => CodeTheme(
+    baseColor: baseColor ?? this.baseColor,
+    numberColor: numberColor ?? this.numberColor,
+    commentColor: commentColor ?? this.commentColor,
+    keywordColor: keywordColor ?? this.keywordColor,
+    stringColor: stringColor ?? this.stringColor,
+    punctuationColor: punctuationColor ?? this.punctuationColor,
+    classColor: classColor ?? this.classColor,
+    constantColor: constantColor ?? this.constantColor,
+  );
 
   /// Must override the lerp method.
   @override

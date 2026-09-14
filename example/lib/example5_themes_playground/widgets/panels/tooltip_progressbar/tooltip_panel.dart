@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import '../../shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/slider_list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 class TooltipPanel extends StatelessWidget {
   const TooltipPanel(this.controller, {super.key});
@@ -28,55 +27,54 @@ class TooltipPanel extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     final String opacityDefaultLabel = !controller.useFlexColorScheme
         ? isLight
-            ? '90 %'
-            : '90 %'
+              ? '90 %'
+              : '90 %'
         : controller.useSubThemes && controller.tooltipSchemeColor != null
-            ? '100 %'
-            : controller.tooltipsMatchBackground
-                ? controller.useSubThemes
-                    ? isLight
-                        ? '95 %'
-                        : '95 %'
-                    : isLight
-                        ? '94 %'
-                        : '93 %'
-                : controller.useSubThemes
-                    ? isLight
-                        ? '95 %'
-                        : '95 %'
-                    : isLight
-                        ? '90 %'
-                        : '90 %';
+        ? '100 %'
+        : controller.tooltipsMatchBackground
+        ? controller.useSubThemes
+              ? isLight
+                    ? '95 %'
+                    : '95 %'
+              : isLight
+              ? '94 %'
+              : '93 %'
+        : controller.useSubThemes
+        ? isLight
+              ? '95 %'
+              : '95 %'
+        : isLight
+        ? '90 %'
+        : '90 %';
 
     final String toolTipDefaultColorLabel = !controller.useFlexColorScheme
         ? isLight
-            ? 'Grey700'
-            : 'White'
+              ? 'Grey700'
+              : 'White'
         : controller.tooltipsMatchBackground
-            ? controller.useSubThemes
-                ? isLight
+        ? controller.useSubThemes
+              ? isLight
                     ? 'White + 4% primary alpha blend'
                     : 'Dark grey #111111 + 16% primary alpha blend'
-                : isLight
-                    ? 'Almost white #FCFCFC'
-                    : 'Grey #444444'
-            : controller.useSubThemes
-                ? isLight
-                    ? 'Dark grey #111111 + 45% primary alpha blend'
-                    : 'White + 39% primary alpha blend'
-                : isLight
-                    ? 'Grey700'
-                    : 'White';
+              : isLight
+              ? 'Almost white #FCFCFC'
+              : 'Grey #444444'
+        : controller.useSubThemes
+        ? isLight
+              ? 'Dark grey #111111 + 45% primary alpha blend'
+              : 'White + 39% primary alpha blend'
+        : isLight
+        ? 'Grey700'
+        : 'White';
 
     final String tooltipDefaultRadiusLabel = controller.tooltipRadius == null
         ? controller.useSubThemes
-            ? '8 dp'
-            : '4 dp'
+              ? '8 dp'
+              : '4 dp'
         : '';
 
     return Column(
@@ -91,13 +89,12 @@ class TooltipPanel extends StatelessWidget {
             "OFF theme mode inverted, common on Web. Android's default.\n"
             'ON theme mode brightness, like Windows\n',
           ),
-          value: controller.tooltipsMatchBackground &&
+          value:
+              controller.tooltipsMatchBackground &&
               controller.useFlexColorScheme &&
-              (controller.tooltipSchemeColor == null ||
-                  !controller.useSubThemes),
-          onChanged: controller.useFlexColorScheme &&
-                  (controller.tooltipSchemeColor == null ||
-                      !controller.useSubThemes)
+              (controller.tooltipSchemeColor == null || !controller.useSubThemes),
+          onChanged:
+              controller.useFlexColorScheme && (controller.tooltipSchemeColor == null || !controller.useSubThemes)
               ? controller.setTooltipsMatchBackground
               : null,
         ),
@@ -158,8 +155,7 @@ class TooltipPanel extends StatelessWidget {
           title: const Text('Wait duration before shown'),
           value: controller.tooltipWaitDuration?.toDouble(),
           onChanged: (double? value) {
-            controller.setTooltipWaitDuration(
-                value == null || value <= 0 ? null : value.toInt());
+            controller.setTooltipWaitDuration(value == null || value <= 0 ? null : value.toInt());
           },
           min: 100,
           max: 2000,
@@ -171,12 +167,13 @@ class TooltipPanel extends StatelessWidget {
         ),
         SliderListTileReveal(
           enabled: enableControl,
-          title: const Text('Show duration, after tap&long press or '
-              'mouse exit'),
+          title: const Text(
+            'Show duration, after tap&long press or '
+            'mouse exit',
+          ),
           value: controller.tooltipShowDuration?.toDouble(),
           onChanged: (double? value) {
-            controller.setTooltipShowDuration(
-                value == null || value <= 0 ? null : value.toInt());
+            controller.setTooltipShowDuration(value == null || value <= 0 ? null : value.toInt());
           },
           min: 100,
           max: 2000,

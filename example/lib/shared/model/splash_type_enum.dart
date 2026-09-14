@@ -1,6 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// An enum for easy configuration and selection of ink splash effect in
 /// the Themes Playground.
@@ -15,7 +15,8 @@ enum SplashTypeEnum {
   /// This logic is built into the [ThemeData] factory.
   defaultSplash(
     label: 'DefaultSplash',
-    describe: 'In Material-2 the InkSplash effect is used. In Material-3 '
+    describe:
+        'In Material-2 the InkSplash effect is used. In Material-3 '
         'on Android platform, the InkSparkle effect is used, but on any other '
         'platform or web, the InkRipple effect is used in Material-3 mode.\n',
     code: 'FlexSplashType.defaultSplash',
@@ -28,7 +29,8 @@ enum SplashTypeEnum {
   /// and whose radius expands from zero.
   inkSplash(
     label: 'InkSplash',
-    describe: 'The classic and default ink effect used in Material-2. '
+    describe:
+        'The classic and default ink effect used in Material-2. '
         'A circular ink feature that starts at the touch point '
         'and radius expands from zero.\n',
     code: 'FlexSplashType.inkSplash',
@@ -45,7 +47,8 @@ enum SplashTypeEnum {
   /// animates from the center of its tap/click.
   inkRipple(
     label: 'InkRipple',
-    describe: 'A new faster Material-3 version of InkSplash. This is default '
+    describe:
+        'A new faster Material-3 version of InkSplash. This is default '
         'in Material-3 on none Android builds and also on M3 web builds. '
         'It uses a circular ink feature that starts at the input touch '
         'point and radius that expands from 60% of the final radius.\n',
@@ -62,7 +65,8 @@ enum SplashTypeEnum {
   /// Used by default on Android builds in Material-3 mode.
   inkSparkle(
     label: 'InkSparkle',
-    describe: 'Material-3 ink sparkling glitter ripple, starts from tap '
+    describe:
+        'Material-3 ink sparkling glitter ripple, starts from tap '
         'position. Used by default on Android builds in Material-3 mode. '
         'This effect relies on a shader and is not available on Flutter '
         'Web builds. If selected and the app is built for web, the used '
@@ -81,7 +85,8 @@ enum SplashTypeEnum {
   /// utilizes the splash color as an immediate ink.
   noSplash(
     label: 'NoSplash',
-    describe: 'Removes the ink splash effect. Use this to defeat all '
+    describe:
+        'Removes the ink splash effect. Use this to defeat all '
         'ink splashes. Only the pressed highlight remains, which is usually '
         'subtle due to used highlight color. For a more prominent immediate '
         'click splash, use InstantSplash that utilizes the splash color as '
@@ -97,7 +102,8 @@ enum SplashTypeEnum {
   /// immediate splash effect, instead of animated splash color based ink.
   instantSplash(
     label: 'InstantSplash',
-    describe: 'A custom immediate ink splash effect. Uses an immediate '
+    describe:
+        'A custom immediate ink splash effect. Uses an immediate '
         'highlight ink splash color feature whose origin starts at the '
         'input touch point and expands from touch point using almost ZERO '
         'duration. '
@@ -109,7 +115,7 @@ enum SplashTypeEnum {
   ),
   ;
 
-  const SplashTypeEnum({
+  SplashTypeEnum({
     required this.label,
     required this.describe,
     required this.code,
@@ -131,8 +137,8 @@ enum SplashTypeEnum {
       case SplashTypeEnum.defaultSplash:
         return (useMockWeb ?? false) || kIsWeb
             ? useMaterial3
-                ? FlexSplashType.inkRipple
-                : FlexSplashType.inkSplash
+                  ? FlexSplashType.inkRipple
+                  : FlexSplashType.inkSplash
             : FlexSplashType.defaultSplash;
       case SplashTypeEnum.inkSplash:
         return FlexSplashType.inkSplash;
@@ -141,8 +147,8 @@ enum SplashTypeEnum {
       case SplashTypeEnum.inkSparkle:
         return (useMockWeb ?? false) || kIsWeb
             ? useMaterial3
-                ? FlexSplashType.inkRipple
-                : FlexSplashType.inkSplash
+                  ? FlexSplashType.inkRipple
+                  : FlexSplashType.inkSplash
             : FlexSplashType.inkSparkle;
       case SplashTypeEnum.noSplash:
         return FlexSplashType.noSplash;

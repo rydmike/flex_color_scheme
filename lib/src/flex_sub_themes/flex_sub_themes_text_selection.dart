@@ -5,43 +5,76 @@ part of '../flex_sub_themes.dart';
 /// Requires a [ColorScheme], the color scheme would
 /// typically be equal the color scheme also used to define the color scheme
 /// for your app theme.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also used for your [ThemeData].
+///
+/// ## [cursorSchemeColor]
+///
+/// The [SchemeColor] based color of the cursor in the text field.
+///
+/// The cursor indicates the current location of text insertion point in
+/// the field.
+///
+/// If not defined, [ColorScheme.primary] is used.
+///
+/// ## [selectionSchemeColor]
+///
+/// The [SchemeColor] based background color of selected text.
+///
+/// If not defined, [ColorScheme.primary] is used.
+///
+/// ## [selectionOpacity]
+///
+/// The opacity applied to [selectionSchemeColor].
+///
+/// If not defined, default to [kTextSelectionOpacity] = 0.4 (40%).
+/// Same as Flutter SDK default.
+///
+/// ## [selectionHandleSchemeColor]
+///
+/// The [SchemeColor] based color of the selection handles on the
+/// text field.
+///
+/// Selection handles are used to indicate the bounds of the selected text,
+/// or as a handle to drag the cursor to a new location in the text.
+///
+/// If not defined, [ColorScheme.primary] is used.
+///
+/// ## [selectionHandleCustomColor]
+///
+/// A custom override color that
+/// [TextSelectionThemeData.selectionHandleColor] will use if it is defined.
+///
+/// If not defined, the result from [selectionHandleSchemeColor] is used.
 TextSelectionThemeData _textSelectionTheme({
   /// Typically the same `ColorScheme` that is also used for your `ThemeData`.
-  required final ColorScheme colorScheme,
+  required ColorScheme colorScheme,
 
-  /// The [SchemeColor] based color of the cursor in the text field.
-  ///
-  /// The cursor indicates the current location of text insertion point in
-  /// the field.
-  ///
-  /// If not defined, [colorScheme.primary] is used.
-  final SchemeColor? cursorSchemeColor,
+  /// The `SchemeColor` based color of the cursor in the text field.
+  SchemeColor? cursorSchemeColor,
 
-  /// The [SchemeColor] based background color of selected text.
+  /// The `SchemeColor` based background color of selected text.
   ///
-  /// If not defined, [colorScheme.primary] is used.
-  final SchemeColor? selectionSchemeColor,
+  /// If not defined, `colorScheme.primary` is used.
+  SchemeColor? selectionSchemeColor,
 
-  /// The opacity applied to [selectionSchemeColor].
+  /// The opacity applied to `selectionSchemeColor`.
   ///
-  /// If not defined, default to [kTextSelectionOpacity] = 0.4 (40%).
+  /// If not defined, default to `kTextSelectionOpacity` = 0.4 (40%).
   /// Same as Flutter SDK default.
-  final double? selectionOpacity,
+  double? selectionOpacity,
 
-  /// The [SchemeColor] based color of the selection handles on the
+  /// The `SchemeColor` based color of the selection handles on the
   /// text field.
-  ///
-  /// Selection handles are used to indicate the bounds of the selected text,
-  /// or as a handle to drag the cursor to a new location in the text.
-  ///
-  /// If not defined, [colorScheme.primary] is used.
-  final SchemeColor? selectionHandleSchemeColor,
+  SchemeColor? selectionHandleSchemeColor,
 
   /// A custom override color that
-  /// [TextSelectionThemeData.selectionHandleColor] will use if it is defined.
+  /// `TextSelectionThemeData.selectionHandleColor` will use if it is defined.
   ///
-  /// If not defined, the result from [selectionHandleSchemeColor] is used.
-  final Color? selectionHandleCustomColor,
+  /// If not defined, the result from `selectionHandleSchemeColor` is used.
+  Color? selectionHandleCustomColor,
 }) {
   // Get used cursorColor, defaults to primary.
   final Color cursorColor = FlexSubThemes.schemeColor(
@@ -57,7 +90,8 @@ TextSelectionThemeData _textSelectionTheme({
   ).withValues(alpha: selectionOpacity ?? kTextSelectionOpacity);
 
   // Get used selectionHandleColor, defaults to primary.
-  final Color selectionHandleColor = selectionHandleCustomColor ??
+  final Color selectionHandleColor =
+      selectionHandleCustomColor ??
       FlexSubThemes.schemeColor(
         selectionHandleSchemeColor ?? SchemeColor.primary,
         colorScheme,

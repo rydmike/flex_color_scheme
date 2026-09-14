@@ -5,14 +5,12 @@
 // found in the LICENSE file.
 
 import 'package:flex_color_scheme/src/flex_instant_splash.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
-  testWidgets(
-      'InkWell with NoSplash.splashFactory paints nothing AND '
-      'InkWell FlexHighlightSplash paints one Circle quickly.',
-      (WidgetTester tester) async {
+  testWidgets('InkWell with NoSplash.splashFactory paints nothing AND '
+      'InkWell FlexHighlightSplash paints one Circle quickly.', (WidgetTester tester) async {
     Widget buildFrame({InteractiveInkFeatureFactory? splashFactory}) {
       return MaterialApp(
         theme: ThemeData(useMaterial3: false),
@@ -33,10 +31,8 @@ void main() {
     // NoSplash.splashFactory, no splash circles drawn
     await tester.pumpWidget(buildFrame(splashFactory: NoSplash.splashFactory));
     {
-      final TestGesture gesture =
-          await tester.startGesture(tester.getCenter(find.text('test')));
-      final MaterialInkController material =
-          Material.of(tester.element(find.text('test')));
+      final TestGesture gesture = await tester.startGesture(tester.getCenter(find.text('test')));
+      final MaterialInkController material = Material.of(tester.element(find.text('test')));
       await tester.pump(const Duration(milliseconds: 200));
       expect(material, paintsExactlyCountTimes(#drawCircle, 0));
       await gesture.up();
@@ -44,13 +40,10 @@ void main() {
     }
 
     // FlexHighlightSplash.splashFactory, one splash circle drawn quickly.
-    await tester
-        .pumpWidget(buildFrame(splashFactory: FlexInstantSplash.splashFactory));
+    await tester.pumpWidget(buildFrame(splashFactory: FlexInstantSplash.splashFactory));
     {
-      final TestGesture gesture =
-          await tester.startGesture(tester.getCenter(find.text('test')));
-      final MaterialInkController material =
-          Material.of(tester.element(find.text('test')));
+      final TestGesture gesture = await tester.startGesture(tester.getCenter(find.text('test')));
+      final MaterialInkController material = Material.of(tester.element(find.text('test')));
       await tester.pump(const Duration(milliseconds: 1));
       expect(material, paintsExactlyCountTimes(#drawCircle, 1));
       await gesture.up();

@@ -24,282 +24,345 @@ part of '../flex_sub_themes.dart';
 /// use. It instead exposes properties for the usable states.
 ///
 /// It can also set an [opacity] on the background color.
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also use for your [ThemeData].
+///
+/// ## [labelTextStyle]
+///
+/// Optional text style for the [NavigationBar] labels.
+///
+/// The size and colors defined in any of the text size and color properties
+/// are applied as overrides on the text style.
+///
+/// ## [selectedLabelSize]
+///
+/// The size of the text label on selected [NavigationBar] item.
+///
+/// If defined, it overrides the font size on effective label TextStyle
+/// on selected item, 12 is used as fallback if needed.
+///
+/// ## [unselectedLabelSize]
+///
+/// The size of the text label on unselected [NavigationBar] items.
+///
+/// If defined, it overrides the font size on effective label TextStyle
+/// on unselected items, 12 is used as fallback if needed.
+///
+/// ## [selectedLabelSchemeColor]
+///
+/// Select which color from the passed in [ColorScheme] to use for
+/// the [NavigationBar]'s label text color.
+///
+/// When undefined, if [backgroundSchemeColor] is defined, its
+/// contrasting on color will be used, if it is also undefined
+/// [SchemeColor.onSurface] will be used.
+///
+/// Flutter is default is onSurface.
+///
+/// ## [unselectedLabelSchemeColor]
+///
+/// Select which color from the theme's [ColorScheme] to for
+/// the [NavigationBar]'s unselected label text color.
+///
+/// When undefined, if [backgroundSchemeColor] is
+/// using any of the surface colors, the default on pair used will be
+/// [SchemeColor.onSurfaceVariant], instead of [SchemeColor.onSurface]
+/// that is the typical contrast color for surface colors.
+/// This is to make the unselected labels and icons look more muted.
+///
+/// If other [backgroundSchemeColor] colors are used,
+/// while this value is undefined, their default contrasting onColor will
+/// be used. If the [backgroundSchemeColor] is also undefined,
+/// then this defaults to [SchemeColor.onSurfaceVariant].
+///
+/// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and
+/// [ColorScheme.onSurfaceVariant] in M3 mode.
+///
+/// ## [mutedUnselectedLabel]
+///
+/// If true, the unselected label in the [NavigationBar] use a more
+/// muted color version of the color defined by
+/// [unselectedLabelSchemeColor].
+///
+/// The muting is unselected color with
+/// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
+/// and withAlpha([kUnselectedAlphaBlend]).
+///
+/// If undefined, defaults to false.
+///
+/// ## [selectedIconSize]
+///
+/// The size of the icon on selected [NavigationBar] item.
+///
+/// If undefined, defaults to 24.
+///
+/// ## [unselectedIconSize]
+///
+/// The size of the icons on unselected [NavigationBar] items.
+///
+/// If null, defaults to [selectedIconSize].
+///
+/// ## [selectedIconSchemeColor]
+///
+/// Select which color from the theme's [ColorScheme] to use for
+/// the [NavigationBar]'s selected item icon color.
+///
+/// If undefined, and [indicatorSchemeColor] is also
+/// undefined, then defaults to [SchemeColor.onSecondaryContainer].
+/// If undefined, but [indicatorSchemeColor] is defined, then
+/// it defaults to the contrast onColor pair of the indicator color
+/// [indicatorSchemeColor]
+///
+/// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and
+/// [ColorScheme.onSecondaryContainer] in M3.
+///
+/// ## [unselectedIconSchemeColor]
+///
+/// Select which color from the theme's [ColorScheme] to use for
+/// the [NavigationBar]'s unselected item icon color.
+///
+/// When undefined, if [backgroundSchemeColor] is
+/// using any of the surface colors, the default on pair used will be
+/// [SchemeColor.onSurfaceVariant], instead of [SchemeColor.onSurface]
+/// that is the typical contrast color for surface colors.
+/// This is to make the unselected labels and icons look more muted.
+///
+/// If other [backgroundSchemeColor] colors are used,
+/// while this value is undefined, their default contrasting onColor will
+/// be used. If the [backgroundSchemeColor] is also undefined,
+/// then this defaults to [SchemeColor.onSurfaceVariant].
+///
+/// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and to
+/// [ColorScheme.onSurfaceVariant] in M3 mode.
+///
+/// ## [mutedUnselectedIcon]
+///
+/// If true, the unselected icon in the [NavigationBar] use a more muted
+/// color version of the color defined by [unselectedIconSchemeColor].
+///
+/// The muting is unselected color with
+/// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
+/// and withAlpha([kUnselectedAlphaBlend]).
+///
+/// If undefined, defaults to false.
+///
+/// ## [indicatorSchemeColor]
+///
+/// Select which color from the theme [ColorScheme] to use as base for
+/// the [NavigationBar]'s selected item indicator.
+///
+/// If undefined, defaults to [SchemeColor.secondaryContainer].
+///
+/// Flutter SDK defaults to secondaryContainer in M3 mode and to
+/// secondary in M2 mode with opacity 24%.
+///
+/// ## [backgroundSchemeColor]
+///
+/// Select which color from the theme's [ColorScheme] to use as background
+/// color for the [NavigationBar].
+///
+/// If undefined, defaults to [SchemeColor.surfaceContainer]
+///
+/// Flutter SDK defaults to surfaceContainer in M3 and in M2 mode to
+/// surface color, with a color overlay using onSurface at
+/// fixed elevation 3.
+///
+/// ## [opacity]
+///
+/// NavigationBar background opacity.
+///
+/// If undefined, defaults to 1, fully opaque.
+///
+/// ## [elevation]
+///
+/// NavigationBar elevation.
+///
+/// If undefined, defaults to default in M3 mode which is 3 and in
+/// M2 mode 0.
+///
+/// In M2 mode it defaults [kBottomNavigationBarElevation] = 3.
+///
+/// ## [surfaceTintColor]
+///
+/// Overrides the default value of [NavigationBar.surfaceTintColor].
+///
+/// ## [shadowColor]
+///
+/// Overrides the default value of [NavigationBar.shadowColor].
+///
+/// ## [height]
+///
+/// Height of the container for the Material 3 [NavigationBar].
+///
+/// If undefined defaults to M3 spec 80dp.
+///
+/// ## [labelBehavior]
+///
+/// Specifies when each [NavigationDestination]'s label should appear.
+///
+/// This is used to determine the behavior of NavigationBar's destinations.
+///
+/// If null, theme behavior defaults to
+/// [NavigationDestinationLabelBehavior.alwaysShow] via Flutter SDK default.
+///
+/// ## [indicatorAlpha]
+///
+/// The alpha value used on selection color of the selection indicator on
+/// the [NavigationBar].
+///
+/// If not defined, defaults to is 0xFF, or opacity 1.
+///
+/// Flutter SDK uses 24% in M2 and 100% in M3,
+///
+/// ## [indicatorRadius]
+///
+/// Border radius of the selection indicator on the [NavigationBar].
+///
+/// If not defined, defaults to [StadiumBorder].
+///
+/// FCS default, follows the Material M3 guide:
+/// https://m3.material.io/components/navigation-bar/specs
+///
+/// ## [unselectedAlphaBlend]
+///
+/// The icon color alpha blend value for unselected items, used on icon when
+/// [mutedUnselectedIcon] is true and on label when
+/// [mutedUnselectedLabel] is true.
+///
+/// Defaults to [kUnselectedBackgroundPrimaryAlphaBlend], which is
+/// 0x66 = 102 = 40%.
+///
+/// This setting is not exposed via [FlexSubThemesData], but can be if
+/// needed later.
+///
+/// ## [unselectedAlpha]
+///
+/// The icon alpha value for unselected item, used on icon when
+/// [mutedUnselectedIcon] is true and on label when
+/// [mutedUnselectedLabel] is true.
+///
+/// Defaults to [kUnselectedAlphaBlend], which is
+/// 0xA5 = 165 = 65%
+///
+/// This setting is not exposed via [FlexSubThemesData], but can be if
+/// needed later.
 NavigationBarThemeData _navigationBarTheme({
-  /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  /// Typically the same `ColorScheme` that is also use for your `ThemeData`.
+  required ColorScheme colorScheme,
 
-  /// Optional text style for the [NavigationBar] labels.
-  ///
-  /// The size and colors defined in any of the text size and color properties
-  /// are applied as overrides on the text style.
-  final TextStyle? labelTextStyle,
+  /// Optional text style for the `NavigationBar` labels.
+  TextStyle? labelTextStyle,
 
-  /// The size of the text label on selected [NavigationBar] item.
-  ///
-  /// If defined, it overrides the font size on effective label TextStyle
-  /// on selected item, 12 is used as fallback if needed.
-  final double? selectedLabelSize,
+  /// The size of the text label on selected `NavigationBar` item.
+  double? selectedLabelSize,
 
-  /// The size of the text label on unselected [NavigationBar] items.
-  ///
-  /// If defined, it overrides the font size on effective label TextStyle
-  /// on unselected items, 12 is used as fallback if needed.
-  final double? unselectedLabelSize,
+  /// The size of the text label on unselected `NavigationBar` items.
+  double? unselectedLabelSize,
 
-  /// Select which color from the passed in [ColorScheme] to use for
-  /// the [NavigationBar]'s label text color.
-  ///
-  /// When undefined, if [backgroundSchemeColor] is defined, its
-  /// contrasting on color will be used, if it is also undefined
-  /// [SchemeColor.onSurface] will be used.
-  ///
-  /// Flutter is default is onSurface.
-  final SchemeColor? selectedLabelSchemeColor,
+  /// Select which color from the passed in `ColorScheme` to use for
+  /// the `NavigationBar`'s label text color.
+  SchemeColor? selectedLabelSchemeColor,
 
-  /// Select which color from the theme's [ColorScheme] to for
-  /// the [NavigationBar]'s unselected label text color.
-  ///
-  /// When undefined, if [backgroundSchemeColor] is
-  /// using any of the surface colors, the default on pair used will be
-  /// [SchemeColor.onSurfaceVariant], instead of [SchemeColor.onSurface]
-  /// that is the typical contrast color for surface colors.
-  /// This is to make the unselected labels and icons look more muted.
-  ///
-  /// If other [backgroundSchemeColor] colors are used,
-  /// while this value is undefined, their default contrasting onColor will
-  /// be used. If the [backgroundSchemeColor] is also undefined,
-  /// then this defaults to [SchemeColor.onSurfaceVariant].
-  ///
-  /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and
-  /// [ColorScheme.onSurfaceVariant] in M3 mode.
-  final SchemeColor? unselectedLabelSchemeColor,
+  /// Select which color from the theme's `ColorScheme` to for
+  /// the `NavigationBar`'s unselected label text color.
+  SchemeColor? unselectedLabelSchemeColor,
 
-  // TODO(rydmike): Commented as part of deprecation of blendTextTheme.
-  //
-  // An alternative unselected item color.
-  //
-  // It is used as fallback if [unselectedIconSchemeColor] is not specified,
-  // before its normal default fallbacks.
-  //
-  // The color is typically used to provide the color created by blended or
-  // tinted text theme, when it is being used by FlexColorScheme as an
-  // `onSurfaceVariant` equivalent style, but a bit more primary tinted.
-  //
-  // FlexColorScheme passes in its `onSurfaceVariantBlendedTextStyle` when
-  // a blended TextTheme is being used.
-  // final Color? altUnselectedColor,
-
-  /// If true, the unselected label in the [NavigationBar] use a more
+  /// If true, the unselected label in the `NavigationBar` use a more
   /// muted color version of the color defined by
-  /// [unselectedLabelSchemeColor].
-  ///
-  /// The muting is unselected color with
-  /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
-  /// and withAlpha([kUnselectedAlphaBlend]).
-  ///
-  /// If undefined, defaults to false.
-  final bool? mutedUnselectedLabel,
+  /// `unselectedLabelSchemeColor`.
+  bool? mutedUnselectedLabel,
 
-  /// The size of the icon on selected [NavigationBar] item.
+  /// The size of the icon on selected `NavigationBar` item.
   ///
   /// If undefined, defaults to 24.
-  final double? selectedIconSize,
+  double? selectedIconSize,
 
-  /// The size of the icons on unselected [NavigationBar] items.
+  /// The size of the icons on unselected `NavigationBar` items.
   ///
-  /// If null, defaults to [selectedIconSize].
-  final double? unselectedIconSize,
+  /// If null, defaults to `selectedIconSize`.
+  double? unselectedIconSize,
 
-  /// Select which color from the theme's [ColorScheme] to use for
-  /// the [NavigationBar]'s selected item icon color.
-  ///
-  /// If undefined, and [indicatorSchemeColor] is also
-  /// undefined, then defaults to [SchemeColor.onSecondaryContainer].
-  /// If undefined, but [indicatorSchemeColor] is defined, then
-  /// it defaults to the contrast onColor pair of the indicator color
-  /// [indicatorSchemeColor]
-  ///
-  /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and
-  /// [ColorScheme.onSecondaryContainer] in M3.
-  final SchemeColor? selectedIconSchemeColor,
+  /// Select which color from the theme's `ColorScheme` to use for
+  /// the `NavigationBar`'s selected item icon color.
+  SchemeColor? selectedIconSchemeColor,
 
-  /// Select which color from the theme's [ColorScheme] to use for
-  /// the [NavigationBar]'s unselected item icon color.
-  ///
-  /// When undefined, if [backgroundSchemeColor] is
-  /// using any of the surface colors, the default on pair used will be
-  /// [SchemeColor.onSurfaceVariant], instead of [SchemeColor.onSurface]
-  /// that is the typical contrast color for surface colors.
-  /// This is to make the unselected labels and icons look more muted.
-  ///
-  /// If other [backgroundSchemeColor] colors are used,
-  /// while this value is undefined, their default contrasting onColor will
-  /// be used. If the [backgroundSchemeColor] is also undefined,
-  /// then this defaults to [SchemeColor.onSurfaceVariant].
-  ///
-  /// Flutter SDK defaults to [ColorScheme.onSurface] in M2 mode and to
-  /// [ColorScheme.onSurfaceVariant] in M3 mode.
-  final SchemeColor? unselectedIconSchemeColor,
+  /// Select which color from the theme's `ColorScheme` to use for
+  /// the `NavigationBar`'s unselected item icon color.
+  SchemeColor? unselectedIconSchemeColor,
 
-  /// If true, the unselected icon in the [NavigationBar] use a more muted
-  /// color version of the color defined by [unselectedIconSchemeColor].
-  ///
-  /// The muting is unselected color with
-  /// blendAlpha(unselected color, [kUnselectedBackgroundPrimaryAlphaBlend])
-  /// and withAlpha([kUnselectedAlphaBlend]).
-  ///
-  /// If undefined, defaults to false.
-  final bool? mutedUnselectedIcon,
+  /// If true, the unselected icon in the `NavigationBar` use a more muted
+  /// color version of the color defined by `unselectedIconSchemeColor`.
+  bool? mutedUnselectedIcon,
 
-  /// Select which color from the theme [ColorScheme] to use as base for
-  /// the [NavigationBar]'s selected item indicator.
+  /// Select which color from the theme `ColorScheme` to use as base for
+  /// the `NavigationBar`'s selected item indicator.
   ///
-  /// If undefined, defaults to [SchemeColor.secondaryContainer].
-  ///
-  /// Flutter SDK defaults to secondaryContainer in M3 mode and to
-  /// secondary in M2 mode with opacity 24%.
-  final SchemeColor? indicatorSchemeColor,
+  /// If undefined, defaults to `SchemeColor.secondaryContainer`.
+  SchemeColor? indicatorSchemeColor,
 
-  /// Select which color from the theme's [ColorScheme] to use as background
-  /// color for the [NavigationBar].
+  /// Select which color from the theme's `ColorScheme` to use as background
+  /// color for the `NavigationBar`.
   ///
-  /// If undefined, defaults to [SchemeColor.surfaceContainer]
-  ///
-  /// Flutter SDK defaults to surfaceContainer in M3 and in M2 mode to
-  /// surface color, with a color overlay using onSurface at
-  /// fixed elevation 3.
-  final SchemeColor? backgroundSchemeColor,
+  /// If undefined, defaults to `SchemeColor.surfaceContainer`
+  SchemeColor? backgroundSchemeColor,
 
   /// NavigationBar background opacity.
   ///
   /// If undefined, defaults to 1, fully opaque.
-  final double? opacity,
+  double? opacity,
 
   /// NavigationBar elevation.
   ///
   /// If undefined, defaults to default in M3 mode which is 3 and in
   /// M2 mode 0.
-  ///
-  /// In M2 mode it defaults [kBottomNavigationBarElevation] = 3.
-  final double? elevation,
+  double? elevation,
 
-  /// Overrides the default value of [NavigationBar.surfaceTintColor].
-  final Color? surfaceTintColor,
+  /// Overrides the default value of `NavigationBar.surfaceTintColor`.
+  Color? surfaceTintColor,
 
-  /// Overrides the default value of [NavigationBar.shadowColor].
-  final Color? shadowColor,
+  /// Overrides the default value of `NavigationBar.shadowColor`.
+  Color? shadowColor,
 
-  /// Height of the container for the Material 3 [NavigationBar].
+  /// Height of the container for the Material 3 `NavigationBar`.
   ///
   /// If undefined defaults to M3 spec 80dp.
-  final double? height,
+  double? height,
 
-  /// Specifies when each [NavigationDestination]'s label should appear.
-  ///
-  /// This is used to determine the behavior of NavigationBar's destinations.
-  ///
-  /// If null, theme behavior defaults to
-  /// `NavigationDestinationLabelBehavior.alwaysShow` via Flutter SDK default.
-  final NavigationDestinationLabelBehavior? labelBehavior,
+  /// Specifies when each `NavigationDestination`'s label should appear.
+  NavigationDestinationLabelBehavior? labelBehavior,
 
   /// The alpha value used on selection color of the selection indicator on
-  /// the [NavigationBar].
+  /// the `NavigationBar`.
   ///
   /// If not defined, defaults to is 0xFF, or opacity 1.
-  ///
-  /// Flutter SDK uses 24% in M2 and 100% in M3,
-  final int? indicatorAlpha,
+  int? indicatorAlpha,
 
-  /// Border radius of the selection indicator on the [NavigationBar].
+  /// Border radius of the selection indicator on the `NavigationBar`.
   ///
-  /// If not defined, defaults to [StadiumBorder].
-  ///
-  /// FCS default, follows the Material M3 guide:
-  /// https://m3.material.io/components/navigation-bar/specs
-  final double? indicatorRadius,
+  /// If not defined, defaults to `StadiumBorder`.
+  double? indicatorRadius,
 
   /// The icon color alpha blend value for unselected items, used on icon when
-  /// [mutedUnselectedIcon] is true and on label when
-  /// [mutedUnselectedLabel] is true.
+  /// `mutedUnselectedIcon` is true and on label when
+  /// `mutedUnselectedLabel` is true.
   ///
-  /// Defaults to [kUnselectedBackgroundPrimaryAlphaBlend], which is
+  /// Defaults to `kUnselectedBackgroundPrimaryAlphaBlend`, which is
   /// 0x66 = 102 = 40%.
-  ///
-  /// This setting is not exposed via [FlexSubThemesData], but can be if
-  /// needed later.
-  final int unselectedAlphaBlend = kUnselectedBackgroundPrimaryAlphaBlend,
+  int unselectedAlphaBlend = kUnselectedBackgroundPrimaryAlphaBlend,
 
   /// The icon alpha value for unselected item, used on icon when
-  /// [mutedUnselectedIcon] is true and on label when
-  /// [mutedUnselectedLabel] is true.
+  /// `mutedUnselectedIcon` is true and on label when
+  /// `mutedUnselectedLabel` is true.
   ///
-  /// Defaults to [kUnselectedAlphaBlend], which is
+  /// Defaults to `kUnselectedAlphaBlend`, which is
   /// 0xA5 = 165 = 65%
-  ///
-  /// This setting is not exposed via [FlexSubThemesData], but can be if
-  /// needed later.
-  final int unselectedAlpha = kUnselectedAlphaBlend,
-
-  /// A temporary flag used to disable Material-3 design and use legacy
-  /// Material-2 design instead. Material-3 design is the default.
-  /// Material-2 will be deprecated in Flutter.
-  ///
-  /// The M2/M3 SDK defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
-  @Deprecated(
-    'The useMaterial3 flag no longer has any function in this '
-    'component theme and is deprecated here. It will be removed in v9',
-  )
-  final bool? useMaterial3,
-
-  /// Set to true to use Flutter SDK defaults for [NavigationBar]
-  /// theme when its properties are undefined (null), instead of using
-  /// FlexColorScheme's own opinionated defaults.
-  ///
-  /// Recommend keeping it **false** for a more color harmonized component
-  /// theme starting point. This flag can be helpful if you want to create
-  /// custom sub-themes starting from less opinionated settings.
-  ///
-  /// When all required properties are undefined and flag is false or true,
-  /// the effective default styles for undefined inputs become:
-  ///
-  /// ```text
-  ///                    FCS defaults   M2 defaults       useMaterial3:true
-  /// useFlutterDefaults false          true              true
-  /// results in:
-  ///
-  /// - background       surfaceVariant surface with      surface with
-  ///                                   onSurface overlay primary overlay
-  ///                    elev 3         elev 0            elev 3
-  /// - height           80             80                80
-  /// - indicator        primary op24%  secondary op24%   secondaryContainer
-  /// - selected icon    primary        onSurface         onSecondaryContainer
-  /// - unselected icon  onSurface      onSurface         onSurfaceVariant
-  /// - Selected label   primary        onSurface         onSurface
-  /// - unSelected label onSurface      onSurface         onSurfaceVariant
-  /// - TextTheme        labelMedium    overline          labelMedium
-  /// ```
-  /// FCS further applies both an alpha blend and slight opacity to
-  /// unselected icon and unselected label, but only if
-  /// [FlexSubThemesData.navigationBarMutedUnselectedIcon] and
-  /// [FlexSubThemesData.navigationBarMutedUnselectedLabel] are true
-  /// respectively, this also applies to undefined color inputs.
-  @Deprecated(
-    'The `useFlutterDefaults` is deprecated, it no longer has any '
-    'function and will be removed in v9. FlexColorScheme in M3 mode '
-    'defaults to using mostly Flutter defaults styles. '
-    'For other configurations modify the theme as desired. '
-    'In M2 mode FCS will continue to use its own opinionated defaults for '
-    'as long as M2 exists.',
-  )
-  final bool? useFlutterDefaults,
+  int unselectedAlpha = kUnselectedAlphaBlend,
 }) {
   // Background color, when using normal default, falls back to
   // surfaceContainer.
-  final Color backgroundColor = (opacity ?? 1.0) != 1.0 &&
-          backgroundSchemeColor != SchemeColor.transparent
+  final Color backgroundColor = (opacity ?? 1.0) != 1.0 && backgroundSchemeColor != SchemeColor.transparent
       ? FlexSubThemes.schemeColor(
           backgroundSchemeColor ?? SchemeColor.surfaceContainer,
           colorScheme,
@@ -388,9 +451,7 @@ NavigationBarThemeData _navigationBarTheme({
       return textStyle.copyWith(
         fontSize: effectiveUnselectedLabelSize,
         color: (mutedUnselectedLabel ?? false)
-            ? unselectedLabelColor
-                .blendAlpha(unselectedLabelColor, unselectedAlphaBlend)
-                .withAlpha(unselectedAlpha)
+            ? unselectedLabelColor.blendAlpha(unselectedLabelColor, unselectedAlphaBlend).withAlpha(unselectedAlpha)
             : unselectedLabelColor,
       );
     }),
@@ -403,9 +464,7 @@ NavigationBarThemeData _navigationBarTheme({
       return IconThemeData(
         size: effectiveUnselectedIconSize,
         color: (mutedUnselectedIcon ?? false)
-            ? unselectedIconColor
-                .blendAlpha(unselectedIconColor, unselectedAlphaBlend)
-                .withAlpha(unselectedAlpha)
+            ? unselectedIconColor.blendAlpha(unselectedIconColor, unselectedAlphaBlend).withAlpha(unselectedAlpha)
             : unselectedIconColor,
       );
     }),

@@ -1,8 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
-
-import '../../../shared/widgets/universal/list_tile_reveal.dart';
-import 'color_scheme_box.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_box.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Widget used to select ColorScheme based colors via a [SchemeColor] enum.
 ///
@@ -187,27 +186,21 @@ class ColorSchemePopupMenu extends StatelessWidget {
     final String usedLabel = defaultLabel ?? 'unknown';
     final String usedLabelM2 = defaultLabelM2 ?? usedLabel;
     final String usedLabelDark = defaultLabelDark ?? usedLabel;
-    final String usedLabelDarkM2 =
-        defaultLabelDarkM2 ?? defaultLabelM2 ?? defaultLabelDark ?? usedLabel;
+    final String usedLabelDarkM2 = defaultLabelDarkM2 ?? defaultLabelM2 ?? defaultLabelDark ?? usedLabel;
 
     final String resolvedEnabledLabel = useMaterial3
         ? isLight
-            ? usedLabel
-            : usedLabelDark
+              ? usedLabel
+              : usedLabelDark
         : isLight
-            ? usedLabelM2
-            : usedLabelDarkM2;
+        ? usedLabelM2
+        : usedLabelDarkM2;
 
     final String disabledLabel = defaultDisabledLabel ?? usedLabel;
-    final String disabledLabelDark = defaultDisabledLabelDark ??
-        defaultDisabledLabel ??
-        defaultLabelDark ??
-        usedLabel;
-    final String disabledLabelM2 = defaultDisabledLabelM2 ??
-        defaultDisabledLabel ??
-        defaultLabelM2 ??
-        usedLabel;
-    final String disabledLabelDarkM2 = defaultDisabledLabelDarkM2 ??
+    final String disabledLabelDark = defaultDisabledLabelDark ?? defaultDisabledLabel ?? defaultLabelDark ?? usedLabel;
+    final String disabledLabelM2 = defaultDisabledLabelM2 ?? defaultDisabledLabel ?? defaultLabelM2 ?? usedLabel;
+    final String disabledLabelDarkM2 =
+        defaultDisabledLabelDarkM2 ??
         defaultDisabledLabelM2 ??
         defaultDisabledLabelDark ??
         defaultDisabledLabel ??
@@ -217,26 +210,23 @@ class ColorSchemePopupMenu extends StatelessWidget {
 
     final String resolvedDisabledLabel = useMaterial3
         ? isLight
-            ? disabledLabel
-            : disabledLabelDark
+              ? disabledLabel
+              : disabledLabelDark
         : isLight
-            ? disabledLabelM2
-            : disabledLabelDarkM2;
+        ? disabledLabelM2
+        : disabledLabelDarkM2;
 
-    final String resolvedLabel =
-        enabled ? resolvedEnabledLabel : resolvedDisabledLabel;
+    final String resolvedLabel = enabled ? resolvedEnabledLabel : resolvedDisabledLabel;
 
-    final String effectiveDefaultLabel =
-        wrapWithDefaultLabel ? 'default ($resolvedLabel)' : resolvedLabel;
+    final String effectiveDefaultLabel = wrapWithDefaultLabel ? 'default ($resolvedLabel)' : resolvedLabel;
 
-    final String selectedLabel =
-        enabled && value != null ? value?.name ?? '' : effectiveDefaultLabel;
+    final String selectedLabel = enabled && value != null ? value?.name ?? '' : effectiveDefaultLabel;
 
     return Theme(
       data: Theme.of(context).copyWith(
         scrollbarTheme: Theme.of(context).scrollbarTheme.copyWith(
-              thumbVisibility: WidgetStateProperty.all<bool>(true),
-            ),
+          thumbVisibility: WidgetStateProperty.all<bool>(true),
+        ),
       ),
       child: PopupMenuButton<int>(
         popUpAnimationStyle: AnimationStyle.noAnimation,
@@ -264,10 +254,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
                 leading: ColorSchemeBox(
                   foregroundColor: i <= 0
                       ? colorScheme.onSurface
-                      : FlexSubThemes.schemeColor(
-                          FlexSubThemes.onSchemeColor(
-                              SchemeColor.values[i - 1]),
-                          colorScheme),
+                      : FlexSubThemes.schemeColor(FlexSubThemes.onSchemeColor(SchemeColor.values[i - 1]), colorScheme),
                   backgroundColor: i <= 0
                       ? colorScheme.surface
                       : FlexSubThemes.schemeColor(
@@ -275,16 +262,14 @@ class ColorSchemePopupMenu extends StatelessWidget {
                           colorScheme,
                         ),
                   selected: (value?.index ?? -1) + 1 == i,
-                  borderColor: (value?.index ?? -1) + 1 == i
-                      ? theme.colorScheme.onSurface
-                      : theme.colorScheme.outline,
+                  borderColor: (value?.index ?? -1) + 1 == i ? theme.colorScheme.onSurface : theme.colorScheme.outline,
                   defaultOption: i <= 0,
                 ),
                 title: i <= 0
                     ? Text(effectiveDefaultLabel, style: txtStyle)
                     : Text(SchemeColor.values[i - 1].name, style: txtStyle),
               ),
-            )
+            ),
         ],
         child: ListTileReveal(
           enabled: enabled,
@@ -296,7 +281,7 @@ class ColorSchemePopupMenu extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text('$colorPrefix$selectedLabel$colorSuffix'),
-              if (subtitle != null) subtitle!,
+              ?subtitle,
             ],
           ),
           subtitleReveal: subtitleReveal,
@@ -304,16 +289,12 @@ class ColorSchemePopupMenu extends StatelessWidget {
             padding: const EdgeInsetsDirectional.only(end: 5.0),
             child: ColorSchemeBox(
               foregroundColor: enabled && value != null
-                  ? FlexSubThemes.schemeColor(
-                      FlexSubThemes.onSchemeColor(value ?? SchemeColor.primary),
-                      colorScheme)
+                  ? FlexSubThemes.schemeColor(FlexSubThemes.onSchemeColor(value ?? SchemeColor.primary), colorScheme)
                   : colorScheme.onSurface.withValues(alpha: enabled ? 1 : 0.5),
               backgroundColor: enabled && value != null
-                  ? FlexSubThemes.schemeColor(
-                      value ?? SchemeColor.primary, colorScheme)
+                  ? FlexSubThemes.schemeColor(value ?? SchemeColor.primary, colorScheme)
                   : colorScheme.surface,
-              borderColor:
-                  colorScheme.outline.withValues(alpha: enabled ? 1 : 0.5),
+              borderColor: colorScheme.outline.withValues(alpha: enabled ? 1 : 0.5),
               defaultOption: value == null,
             ),
           ),

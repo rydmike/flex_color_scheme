@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A panel with all the widgets using effective theming in a column layout.
 ///

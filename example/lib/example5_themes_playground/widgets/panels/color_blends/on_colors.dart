@@ -1,9 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../utils/effective_flex_tones.dart';
-import '../../shared/color_name_value.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/effective_flex_tones.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_name_value.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Display all scheme main and surface onColors in currently selected
 // color scheme, including their name and color code.
@@ -16,12 +15,10 @@ class OnColors extends StatelessWidget {
   final ThemeController controller;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  bool _isLight(final Color color) =>
-      FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
+  bool _isLight(Color color) => FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
 
   // On color used when a theme color property does not have a theme onColor.
-  Color _onColor(final Color color) =>
-      _isLight(color) ? Colors.black : Colors.white;
+  Color _onColor(Color color) => _isLight(color) ? Colors.black : Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +38,7 @@ class OnColors extends StatelessWidget {
     // Get effective tones and chroma setup, for FSS based schemes.
     final FlexTones tones = effectiveFlexTones(controller, context);
     // Should we even show the tone? We show them only when, seeding is on.
-    final bool showTones =
-        controller.useKeyColors && controller.useFlexColorScheme;
+    final bool showTones = controller.useKeyColors && controller.useFlexColorScheme;
 
     // Grab the card border from the theme card shape
     ShapeBorder? border = theme.cardTheme.shape;
@@ -99,8 +95,10 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.onSurface,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur onSurface '
-                              '${colorScheme.onSurface}'),
+                          key: ValueKey<String>(
+                            'sur onSurface '
+                            '${colorScheme.onSurface}',
+                          ),
                           color: colorScheme.onSurface,
                           textColor: colorScheme.surface,
                           label: 'onSurface',
@@ -114,8 +112,10 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.onSurfaceVariant,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur onSurfaceVariant '
-                              '${colorScheme.onSurfaceVariant}'),
+                          key: ValueKey<String>(
+                            'sur onSurfaceVariant '
+                            '${colorScheme.onSurfaceVariant}',
+                          ),
                           color: colorScheme.onSurfaceVariant,
                           textColor: colorScheme.surfaceContainerHighest,
                           label: 'onSurface\u200BVariant',
@@ -146,8 +146,10 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.onInverseSurface,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur onInverseSurface '
-                              '${colorScheme.onInverseSurface}'),
+                          key: ValueKey<String>(
+                            'sur onInverseSurface '
+                            '${colorScheme.onInverseSurface}',
+                          ),
                           color: colorScheme.onInverseSurface,
                           textColor: colorScheme.inverseSurface,
                           label: 'onInverse\u200BSurface',
@@ -178,8 +180,7 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.outline,
                         child: ColorNameValue(
-                          key: ValueKey<String>(
-                              'cnv outline ${colorScheme.outline}'),
+                          key: ValueKey<String>('cnv outline ${colorScheme.outline}'),
                           color: colorScheme.outline,
                           textColor: _onColor(colorScheme.outline),
                           label: 'outline',
@@ -193,8 +194,10 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.outlineVariant,
                         child: ColorNameValue(
-                          key: ValueKey<String>('cnv outlineVariant '
-                              '${colorScheme.outlineVariant}'),
+                          key: ValueKey<String>(
+                            'cnv outlineVariant '
+                            '${colorScheme.outlineVariant}',
+                          ),
                           color: colorScheme.outlineVariant,
                           textColor: _onColor(colorScheme.outlineVariant),
                           label: 'outline\u200BVariant',
@@ -225,8 +228,10 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.onPrimaryContainer,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur onPrimaryContainer '
-                              '${colorScheme.onPrimaryContainer}'),
+                          key: ValueKey<String>(
+                            'sur onPrimaryContainer '
+                            '${colorScheme.onPrimaryContainer}',
+                          ),
                           color: colorScheme.onPrimaryContainer,
                           textColor: colorScheme.primaryContainer,
                           label: 'onPrimaryContainer',
@@ -239,8 +244,10 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.onPrimary,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur onPrimary '
-                              '${colorScheme.onPrimary}'),
+                          key: ValueKey<String>(
+                            'sur onPrimary '
+                            '${colorScheme.onPrimary}',
+                          ),
                           color: colorScheme.onPrimary,
                           textColor: colorScheme.primary,
                           label: 'onPrimary',
@@ -271,8 +278,10 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.onSecondaryContainer,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur onSecondaryContainer '
-                              '${colorScheme.onSecondaryContainer}'),
+                          key: ValueKey<String>(
+                            'sur onSecondaryContainer '
+                            '${colorScheme.onSecondaryContainer}',
+                          ),
                           color: colorScheme.onSecondaryContainer,
                           textColor: colorScheme.secondaryContainer,
                           label: 'onSecondary\nContainer',
@@ -285,8 +294,10 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.onSecondary,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur onSecondary '
-                              '${colorScheme.onSecondary}'),
+                          key: ValueKey<String>(
+                            'sur onSecondary '
+                            '${colorScheme.onSecondary}',
+                          ),
                           color: colorScheme.onSecondary,
                           textColor: colorScheme.secondary,
                           label: 'onSecondary',
@@ -317,8 +328,10 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.onTertiaryContainer,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur onTertiaryContainer '
-                              '${colorScheme.onTertiaryContainer}'),
+                          key: ValueKey<String>(
+                            'sur onTertiaryContainer '
+                            '${colorScheme.onTertiaryContainer}',
+                          ),
                           color: colorScheme.onTertiaryContainer,
                           textColor: colorScheme.tertiaryContainer,
                           label: 'onTertiaryContainer',
@@ -331,8 +344,10 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.onTertiary,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur onTertiary '
-                              '${colorScheme.onTertiary}'),
+                          key: ValueKey<String>(
+                            'sur onTertiary '
+                            '${colorScheme.onTertiary}',
+                          ),
                           color: colorScheme.onTertiary,
                           textColor: colorScheme.tertiary,
                           label: 'onTertiary',
@@ -363,8 +378,10 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.onErrorContainer,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur onErrorContainer '
-                              '${colorScheme.onErrorContainer}'),
+                          key: ValueKey<String>(
+                            'sur onErrorContainer '
+                            '${colorScheme.onErrorContainer}',
+                          ),
                           color: colorScheme.onErrorContainer,
                           textColor: colorScheme.errorContainer,
                           label: 'onErrorContainer',
@@ -377,8 +394,10 @@ class OnColors extends StatelessWidget {
                       child: Material(
                         color: colorScheme.onError,
                         child: ColorNameValue(
-                          key: ValueKey<String>('sur onError '
-                              '${colorScheme.onError}'),
+                          key: ValueKey<String>(
+                            'sur onError '
+                            '${colorScheme.onError}',
+                          ),
                           color: colorScheme.onError,
                           textColor: colorScheme.error,
                           label: 'onError',

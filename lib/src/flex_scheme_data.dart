@@ -1,15 +1,16 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show ThemeData; // For comment refs.
+/// @docImport 'package:flex_color_scheme/src/flex_color.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_scheme.dart';
+/// @docImport 'package:material_ui/material_ui.dart';
+library;
 
-import '../flex_color_scheme.dart' show FlexScheme; // For comment refs.
-import 'flex_color.dart' show FlexColor; // For comment refs.
-import 'flex_scheme_color.dart';
+import 'package:flex_color_scheme/src/flex_scheme_color.dart';
+import 'package:flutter/foundation.dart';
 
 /// Immutable data class that holds [name] and [description] string scheme
 /// descriptions, [light] and [dark], [FlexSchemeColor] definitions.
 ///
 /// The [FlexSchemeData] bundles together a [FlexSchemeColor] pair suitable
-/// for light and dark theme mode, that can used by the FlexColorScheme.light
+/// for light and dark theme mode, that can be used by the FlexColorScheme.light
 /// and FlexColorScheme.dark factories to create a FlexColorScheme and
 /// corresponding [ThemeData] from it.
 ///
@@ -46,10 +47,10 @@ class FlexSchemeData with Diagnosticable {
 
   /// Copy the object with one or more provided properties changed.
   FlexSchemeData copyWith({
-    final String? name,
-    final String? description,
-    final FlexSchemeColor? light,
-    final FlexSchemeColor? dark,
+    String? name,
+    String? description,
+    FlexSchemeColor? light,
+    FlexSchemeColor? dark,
   }) {
     return FlexSchemeData(
       name: name ?? this.name,
@@ -74,11 +75,11 @@ class FlexSchemeData with Diagnosticable {
   /// Override for hashcode, dart.ui Jenkins based.
   @override
   int get hashCode => Object.hash(
-        name,
-        description,
-        light,
-        dark,
-      );
+    name,
+    description,
+    light,
+    dark,
+  );
 
   /// Flutter debug properties override, includes toString.
   @override

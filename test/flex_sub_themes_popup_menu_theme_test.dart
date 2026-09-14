@@ -1,7 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.popupMenuTheme ', () {
@@ -12,16 +12,14 @@ void main() {
       seedColor: const Color(0xFF42AEE7),
       brightness: Brightness.light,
     );
-    test(
-        'PopupMenu FST24.1: GIVEN a default FlexSubTheme.popupMenuTheme() '
+    test('PopupMenu FST24.1: GIVEN a default FlexSubTheme.popupMenuTheme() '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
         FlexSubThemes.popupMenuTheme(),
         equals(const PopupMenuThemeData()),
       );
     });
-    test(
-        'PopupMenu FST24.2 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
+    test('PopupMenu FST24.2 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       expect(
         FlexSubThemes.popupMenuTheme(
@@ -54,8 +52,7 @@ void main() {
         ),
       );
     });
-    test(
-        'PopupMenu FST24.3 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
+    test('PopupMenu FST24.3 custom: GIVEN a custom FlexSubTheme.popupMenuTheme '
         'EXPECT equal to PopupMenuThemeData() version with same values', () {
       final PopupMenuThemeData m = FlexSubThemes.popupMenuTheme(
         colorScheme: colorScheme,

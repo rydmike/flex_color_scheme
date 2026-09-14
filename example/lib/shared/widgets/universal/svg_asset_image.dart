@@ -1,9 +1,9 @@
 import 'dart:async' show Future;
 
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Displays an Undraw SVG image provided in the applications asset bundle.
 ///
@@ -52,8 +52,7 @@ class _SvgAssetImageState extends State<SvgAssetImage> {
 
   Future<SvgPicture> _coloredUndrawImage(bool load, Color color) async {
     // Convert the color to a HEX RGB string without the alpha value.
-    final String valueString =
-        color.value32bit.toRadixString(16).padLeft(8, '0').substring(2);
+    final String valueString = color.value32bit.toRadixString(16).padLeft(8, '0').substring(2);
     if (load) assetSvgString = await rootBundle.loadString(widget.assetName);
     // Find the default image 'theme' color in the Undraw SVG, and replace
     // the color with another color string value we want to use instead.
@@ -86,19 +85,17 @@ class _SvgAssetImageState extends State<SvgAssetImage> {
   @override
   void didUpdateWidget(covariant SvgAssetImage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    if (widget.color != oldWidget.color ||
-        widget.assetName != oldWidget.assetName) {
+    if (widget.color != oldWidget.color || widget.assetName != oldWidget.assetName) {
       final bool loadSvgAsset = widget.assetName != oldWidget.assetName;
       svgImage = _coloredUndrawImage(loadSvgAsset, widget.color);
     }
   }
 
   @override
-  Widget build(final BuildContext context) {
+  Widget build(BuildContext context) {
     return FutureBuilder<SvgPicture>(
       future: svgImage,
-      builder:
-          (final BuildContext context, final AsyncSnapshot<Widget> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
         if (snapshot.hasData) {
           return Padding(
             padding: widget.padding ?? const EdgeInsets.all(16),
@@ -111,8 +108,7 @@ class _SvgAssetImageState extends State<SvgAssetImage> {
               width: widget.width,
             ),
             child: Center(
-              child: widget.errorWidget ??
-                  const Text('Could not load asset image!'),
+              child: widget.errorWidget ?? const Text('Could not load asset image!'),
             ),
           );
         } else {

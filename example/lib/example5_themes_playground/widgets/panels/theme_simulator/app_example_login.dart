@@ -1,11 +1,10 @@
 import 'dart:math';
 
 import 'package:confetti/confetti.dart';
+import 'package:flex_color_scheme_example/shared/const/app_images.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/svg_asset_image.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-
-import '../../../../shared/const/app_images.dart';
-import '../../../../shared/widgets/universal/svg_asset_image.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Set the bool flag to true to show debug prints. Even if it is forgotten
 // to set it to false, debug prints will not show in release builds.
@@ -40,8 +39,7 @@ class _LoginColumnState extends State<LoginColumn> {
   @override
   void initState() {
     super.initState();
-    _confettiController =
-        ConfettiController(duration: const Duration(seconds: 3));
+    _confettiController = ConfettiController(duration: const Duration(seconds: 3));
   }
 
   @override
@@ -66,10 +64,11 @@ class _LoginColumnState extends State<LoginColumn> {
     path.moveTo(size.width, halfWidth);
 
     for (double step = 0; step < fullAngle; step += degreesPerStep) {
-      path.lineTo(halfWidth + externalRadius * cos(step),
-          halfWidth + externalRadius * sin(step));
-      path.lineTo(halfWidth + internalRadius * cos(step + halfDegreesPerStep),
-          halfWidth + internalRadius * sin(step + halfDegreesPerStep));
+      path.lineTo(halfWidth + externalRadius * cos(step), halfWidth + externalRadius * sin(step));
+      path.lineTo(
+        halfWidth + internalRadius * cos(step + halfDegreesPerStep),
+        halfWidth + internalRadius * sin(step + halfDegreesPerStep),
+      );
     }
     path.close();
     return path;
@@ -111,8 +110,7 @@ class _LoginColumnState extends State<LoginColumn> {
                       Spacer(flex: useTwoColumns ? 1 : 2),
                       Text(
                         'Sign In',
-                        style: textTheme.headlineLarge!
-                            .copyWith(fontWeight: FontWeight.bold),
+                        style: textTheme.headlineLarge!.copyWith(fontWeight: FontWeight.bold),
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -160,8 +158,7 @@ class _LoginColumnState extends State<LoginColumn> {
                             child: ConfettiWidget(
                               confettiController: _confettiController,
                               numberOfParticles: 20,
-                              blastDirectionality:
-                                  BlastDirectionality.explosive,
+                              blastDirectionality: BlastDirectionality.explosive,
                               shouldLoop: false,
                               colors: const <Color>[
                                 Colors.green,
@@ -170,14 +167,13 @@ class _LoginColumnState extends State<LoginColumn> {
                                 Colors.red,
                                 Colors.indigo,
                                 Colors.orange,
-                                Colors.purple
+                                Colors.purple,
                               ],
                               createParticlePath: drawStar,
                               canvas: Size.infinite,
                               child: Text(
                                 'Sign In',
-                                style: textTheme.titleMedium!.copyWith(
-                                    color: theme.colorScheme.onPrimary),
+                                style: textTheme.titleMedium!.copyWith(color: theme.colorScheme.onPrimary),
                               ),
                             ),
                           ),

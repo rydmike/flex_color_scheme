@@ -1,12 +1,11 @@
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/showcase_material.dart';
-import '../../../../shared/widgets/universal/slider_list_tile_reveal.dart';
-import '../../../theme/theme_values.dart';
-import '../../shared/color_scheme_popup_menu.dart';
-import '../../shared/enum_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/theme_values.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_scheme_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/enum_popup_menu.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/showcase_material.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/slider_list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 class BottomSheetPanel extends StatelessWidget {
   const BottomSheetPanel(this.controller, {super.key});
@@ -37,18 +36,15 @@ class BottomSheetPanel extends StatelessWidget {
     // );
 
     // The most common logic for enabling Playground controls.
-    final bool enableControl =
-        controller.useSubThemes && controller.useFlexColorScheme;
+    final bool enableControl = controller.useSubThemes && controller.useFlexColorScheme;
 
     // Get effective platform default global radius.
     final double? effectiveRadius = ThemeValues.effectiveRadius(controller);
-    final String sheetRadiusDefaultLabel = controller.bottomSheetBorderRadius ==
-                null &&
-            effectiveRadius == null
+    final String sheetRadiusDefaultLabel = controller.bottomSheetBorderRadius == null && effectiveRadius == null
         ? '28 dp'
         : controller.bottomSheetBorderRadius == null && effectiveRadius != null
-            ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
-            : '';
+        ? 'global ${effectiveRadius.toStringAsFixed(0)} dp'
+        : '';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -56,10 +52,11 @@ class BottomSheetPanel extends StatelessWidget {
         const ListTileReveal(
           title: Text('BottomSheet'),
           subtitleReveal: Text(
-              'The BottomSheet comes in two variants, normal and '
-              'modal version. Some of their properties can be themed '
-              'individually, but not all of them. The border radius only has '
-              'one the property shared by both variants.\n'),
+            'The BottomSheet comes in two variants, normal and '
+            'modal version. Some of their properties can be themed '
+            'individually, but not all of them. The border radius only has '
+            'one the property shared by both variants.\n',
+          ),
         ),
         SliderListTileReveal(
           enabled: enableControl,
@@ -79,10 +76,12 @@ class BottomSheetPanel extends StatelessWidget {
           enabled: enableControl,
           values: Clip.values,
           title: const Text('Content clip behavior'),
-          subtitleReveal: const Text('Controls how the content is clipped '
-              'inside the BottomSheet. Clip is needed if you have content '
-              'in the bottom sheet that would overlap its rounded top '
-              'corners. See known issues below for more info.\n'),
+          subtitleReveal: const Text(
+            'Controls how the content is clipped '
+            'inside the BottomSheet. Clip is needed if you have content '
+            'in the bottom sheet that would overlap its rounded top '
+            'corners. See known issues below for more info.\n',
+          ),
           value: controller.bottomSheetClipBehavior,
           onChanged: controller.setBottomSheetClipBehavior,
         ),

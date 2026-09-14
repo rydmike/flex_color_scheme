@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_color_scheme.dart';
 import 'package:flutter/widgets.dart';
-
-import 'shad_color_scheme.dart';
+import 'package:material_ui/material_ui.dart';
 
 // The Shadcn features are still beta nd not included in test coverage.
 // coverage:ignore-file

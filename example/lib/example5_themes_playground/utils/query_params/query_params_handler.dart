@@ -1,4 +1,4 @@
-import 'query_params_handler_interface.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/query_params/query_params_handler_interface.dart';
 
 /// A dummy stub implementation of query params handler.
 ///

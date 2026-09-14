@@ -1,8 +1,7 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import 'surface_mode_popup_menu.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/color_blends/surface_mode_popup_menu.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Toggle the surface mode of the application for Dark theme mode.
 @immutable
@@ -13,10 +12,11 @@ class DarkSurfaceModePopupMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SurfaceModePopupMenu(
-        title: const Text('Surface colors blend mode'),
-        index: controller.surfaceModeDark.index,
-        onChanged: (int index) {
-          controller.setSurfaceModeDark(FlexSurfaceMode.values[index]);
-        });
+      title: const Text('Surface colors blend mode'),
+      index: controller.surfaceModeDark.index,
+      onChanged: (int index) {
+        controller.setSurfaceModeDark(FlexSurfaceMode.values[index]);
+      },
+    );
   }
 }

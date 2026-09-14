@@ -1,25 +1,23 @@
-import 'package:flutter/material.dart';
-
-import '../../shared/const/app.dart';
-import '../../shared/controllers/theme_controller.dart';
-import '../../shared/utils/color_string.dart';
-import '../theme/flex_theme_dark.dart';
-import '../theme/flex_theme_light.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/flex_theme_dark.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/theme/flex_theme_light.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/color_string.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Function that returns the current light and dark ColorScheme as
 /// a Dart Flutter code String.
 String generateColorSchemeDartCode(
   ThemeController controller,
 ) {
-  final ColorScheme lightScheme =
-      flexColorSchemeLight(controller, Colors.black).toScheme;
+  final ColorScheme lightScheme = flexColorSchemeLight(controller, Colors.black).toScheme;
 
-  final ColorScheme darkScheme =
-      flexColorSchemeDark(controller, Colors.black).toScheme;
+  final ColorScheme darkScheme = flexColorSchemeDark(controller, Colors.black).toScheme;
 
-  final String code = '''
+  final String code =
+      '''
 /// Light [ColorScheme] made with FlexColorScheme v${App.version}.
-/// Requires Flutter 3.22.0 or later.
+/// Requires Flutter 3.47.0 or later.
 const ColorScheme lightColorScheme = ColorScheme(
   brightness: ${lightScheme.brightness},
   primary: ${lightScheme.primary.toColorString()},
@@ -71,7 +69,7 @@ const ColorScheme lightColorScheme = ColorScheme(
 );
 
 /// Dark [ColorScheme] made with FlexColorScheme v${App.version}.
-/// Requires Flutter 3.22.0 or later.
+/// Requires Flutter 3.47.0 or later.
 const ColorScheme darkColorScheme = ColorScheme(
   brightness: ${darkScheme.brightness},
   primary: ${darkScheme.primary.toColorString()},

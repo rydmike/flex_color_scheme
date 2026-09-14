@@ -1,11 +1,10 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
-
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/utils/link_text_span.dart';
-import '../../../../shared/widgets/universal/list_tile_reveal.dart';
-import '../../../../shared/widgets/universal/switch_list_tile_reveal.dart';
-import 'system_nav_bar_style_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/panels/android_navigation_bar/system_nav_bar_style_toggle_buttons.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/utils/link_text_span.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/switch_list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Panel used to control the themed Android system navigation bar on Android.
 //
@@ -39,12 +38,10 @@ class AndroidNavigationBarPanel extends StatelessWidget {
     fragment: 'themed-system-navigation-bar-in-android',
   );
 
-  String explainStyle(final FlexSystemNavBarStyle style, final bool isLight) {
+  String explainStyle(FlexSystemNavBarStyle style, bool isLight) {
     switch (style) {
       case FlexSystemNavBarStyle.system:
-        return isLight
-            ? 'System, white with opacity in light mode'
-            : 'System, black with opacity in dark mode';
+        return isLight ? 'System, white with opacity in light mode' : 'System, black with opacity in dark mode';
       case FlexSystemNavBarStyle.surface:
         return 'Surface, with opacity & alpha blend';
       case FlexSystemNavBarStyle.background:
@@ -64,7 +61,9 @@ class AndroidNavigationBarPanel extends StatelessWidget {
     final bool isLight = theme.brightness == Brightness.light;
     final TextStyle spanTextStyle = theme.textTheme.bodySmall!;
     final TextStyle linkStyle = theme.textTheme.bodySmall!.copyWith(
-        color: theme.colorScheme.primary, fontWeight: FontWeight.bold);
+      color: theme.colorScheme.primary,
+      fontWeight: FontWeight.bold,
+    );
     final double navBarOpacity = controller.systemNavBarOpacity;
     return Column(
       children: <Widget>[
@@ -76,7 +75,8 @@ class AndroidNavigationBarPanel extends StatelessWidget {
               children: <TextSpan>[
                 TextSpan(
                   style: spanTextStyle,
-                  text: 'Settings below only have any effect if you '
+                  text:
+                      'Settings below only have any effect if you '
                       'build this application for an Android device. They then '
                       'demonstrates the usage and effects of the '
                       'AnnotatedRegion helper '
@@ -96,7 +96,8 @@ class AndroidNavigationBarPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: '. There are some Android version limitations '
+                  text:
+                      '. There are some Android version limitations '
                       'and issues concerning styling the system navigation '
                       'bar. You can read more about them in Flutter SDK ',
                 ),
@@ -116,7 +117,8 @@ class AndroidNavigationBarPanel extends StatelessWidget {
                 ),
                 TextSpan(
                   style: spanTextStyle,
-                  text: ' impacted the FlexColorScheme annotated region helper '
+                  text:
+                      ' impacted the FlexColorScheme annotated region helper '
                       'to the degree that divider support was removed. The '
                       'issue has been fixed and the divider feature restored '
                       'in FCS v7 and later.',
@@ -130,18 +132,13 @@ class AndroidNavigationBarPanel extends StatelessWidget {
           subtitle: Text('System navigation bar opacity'),
         ),
         ListTile(
-          enabled:
-              controller.systemNavBarStyle != FlexSystemNavBarStyle.transparent,
+          enabled: controller.systemNavBarStyle != FlexSystemNavBarStyle.transparent,
           title: Slider(
             max: 100,
             divisions: 100,
             label: (navBarOpacity * 100).toStringAsFixed(0),
-            value: controller.systemNavBarStyle ==
-                    FlexSystemNavBarStyle.transparent
-                ? 0
-                : navBarOpacity * 100,
-            onChanged: controller.systemNavBarStyle !=
-                    FlexSystemNavBarStyle.transparent
+            value: controller.systemNavBarStyle == FlexSystemNavBarStyle.transparent ? 0 : navBarOpacity * 100,
+            onChanged: controller.systemNavBarStyle != FlexSystemNavBarStyle.transparent
                 ? (double value) {
                     controller.setSystemNavBarOpacity(value / 100);
                   }
@@ -157,8 +154,7 @@ class AndroidNavigationBarPanel extends StatelessWidget {
                   style: TextStyle(fontSize: 11),
                 ),
                 Text(
-                  controller.systemNavBarStyle ==
-                          FlexSystemNavBarStyle.transparent
+                  controller.systemNavBarStyle == FlexSystemNavBarStyle.transparent
                       ? '0 %'
                       : '${(navBarOpacity * 100).toStringAsFixed(0)} %',
                   textAlign: TextAlign.center,
@@ -174,8 +170,10 @@ class AndroidNavigationBarPanel extends StatelessWidget {
         const SizedBox(height: 8),
         ListTile(
           title: const Text('Android system navigation bar style'),
-          subtitle: Text('Using themedSystemNavigationBar\n'
-              '${explainStyle(controller.systemNavBarStyle, isLight)}'),
+          subtitle: Text(
+            'Using themedSystemNavigationBar\n'
+            '${explainStyle(controller.systemNavBarStyle, isLight)}',
+          ),
         ),
         ListTile(
           trailing: Padding(
@@ -186,26 +184,25 @@ class AndroidNavigationBarPanel extends StatelessWidget {
             ),
           ),
           onTap: () {
-            if (controller.systemNavBarStyle.index + 1 >=
-                FlexSystemNavBarStyle.values.length) {
+            if (controller.systemNavBarStyle.index + 1 >= FlexSystemNavBarStyle.values.length) {
               controller.setSystemNavBarStyle(FlexSystemNavBarStyle.values[0]);
             } else {
-              controller.setSystemNavBarStyle(FlexSystemNavBarStyle
-                  .values[controller.systemNavBarStyle.index + 1]);
+              controller.setSystemNavBarStyle(FlexSystemNavBarStyle.values[controller.systemNavBarStyle.index + 1]);
             }
           },
         ),
         SwitchListTileReveal(
           title: const Text('System navigation bar divider'),
           subtitleReveal: const Text(
-              'There is an extra system built-in scrim on '
-              'the system navigation bar when the divider is enabled.\n'
-              '\n'
-              'The divider is actually not a divider, it is another colored '
-              'partially transparent black color that is behind the system '
-              'navigation bar that is one pixel taller than the foreground '
-              'bar. This then also becomes a scrim when using transparent '
-              'color on the foreground.\n'),
+            'There is an extra system built-in scrim on '
+            'the system navigation bar when the divider is enabled.\n'
+            '\n'
+            'The divider is actually not a divider, it is another colored '
+            'partially transparent black color that is behind the system '
+            'navigation bar that is one pixel taller than the foreground '
+            'bar. This then also becomes a scrim when using transparent '
+            'color on the foreground.\n',
+          ),
           value: controller.useSystemNavBarDivider,
           onChanged: controller.setUseSystemNavBarDivider,
         ),

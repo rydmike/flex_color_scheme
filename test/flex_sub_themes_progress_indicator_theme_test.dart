@@ -1,22 +1,20 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.progressIndicatorTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes progressIndicatorTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'ProgressIndicator FST25PI.1: GIVEN a default '
+    test('ProgressIndicator FST25PI.1: GIVEN a default '
         'FlexSubTheme.progressIndicatorTheme() '
         'ProgressIndicatorThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
       );
-      final ProgressIndicatorThemeData progressTheme =
-          FlexSubThemes.progressIndicatorTheme(
+      final ProgressIndicatorThemeData progressTheme = FlexSubThemes.progressIndicatorTheme(
         colorScheme: colorScheme,
       );
       expect(
@@ -28,16 +26,14 @@ void main() {
         ),
       );
     });
-    test(
-        'ProgressIndicator FST25PI.2: GIVEN a custom '
+    test('ProgressIndicator FST25PI.2: GIVEN a custom '
         'FlexSubTheme.progressIndicatorTheme() '
         'ProgressIndicatorThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
         brightness: Brightness.light,
       );
-      final ProgressIndicatorThemeData progressTheme =
-          FlexSubThemes.progressIndicatorTheme(
+      final ProgressIndicatorThemeData progressTheme = FlexSubThemes.progressIndicatorTheme(
         colorScheme: colorScheme,
         baseSchemeColor: SchemeColor.secondary,
         linearTrackSchemeColor: SchemeColor.onSecondaryContainer,

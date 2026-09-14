@@ -1,21 +1,20 @@
-import 'package:flutter/material.dart';
-
-import 'flex_extensions.dart';
-import 'flex_scheme.dart';
-import 'flex_scheme_color.dart';
-import 'flex_scheme_data.dart';
-import 'flex_shad_colors/shad_blue_color_scheme.dart';
-import 'flex_shad_colors/shad_gray_color_scheme.dart';
-import 'flex_shad_colors/shad_green_color_scheme.dart';
-import 'flex_shad_colors/shad_neutral_color_scheme.dart';
-import 'flex_shad_colors/shad_orange_color_scheme.dart';
-import 'flex_shad_colors/shad_red_color_scheme.dart';
-import 'flex_shad_colors/shad_rose_color_scheme.dart';
-import 'flex_shad_colors/shad_slate_color_scheme.dart';
-import 'flex_shad_colors/shad_stone_color_scheme.dart';
-import 'flex_shad_colors/shad_violet_color_scheme.dart';
-import 'flex_shad_colors/shad_yellow_color_scheme.dart';
-import 'flex_shad_colors/shad_zinc_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_extensions.dart';
+import 'package:flex_color_scheme/src/flex_scheme.dart';
+import 'package:flex_color_scheme/src/flex_scheme_color.dart';
+import 'package:flex_color_scheme/src/flex_scheme_data.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_blue_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_gray_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_green_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_neutral_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_orange_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_red_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_rose_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_slate_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_stone_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_violet_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_yellow_color_scheme.dart';
+import 'package:flex_color_scheme/src/flex_shad_colors/shad_zinc_color_scheme.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Defines colors, names and color schemes used to make maps and a list of
 /// predefined [FlexSchemeData] objects that can be used by FlexColorScheme.
@@ -211,8 +210,7 @@ abstract final class FlexColor {
   static const Color materialLightOnError = Colors.white;
 
   /// Light error container color computer from given light error color.
-  static Color lightErrorContainer(Color lightError) =>
-      lightError.brighten(25).blend(const Color(0xFFFFFFFF), 80);
+  static Color lightErrorContainer(Color lightError) => lightError.brighten(25).blend(const Color(0xFFFFFFFF), 80);
 
   /// Material 2 standard light on error container color.
   static const Color materialLightOnErrorContainer = Colors.black;
@@ -222,7 +220,7 @@ abstract final class FlexColor {
   /// INFO: v0.1.5 of material_color_utilities changed this color.
   /// Before version 0.1.5. the color value was:
   /// static const Color material3LightError = Color(0xFFBA1B1B);
-  /// In version 0.1.5 and due to a small braking algo change, it is:
+  /// In version 0.1.5 and due to a small breaking algo change, it is:
   static const Color material3LightError = Color(0xFFBA1A1A);
 
   /// Material 3 standard light onError color.
@@ -233,7 +231,7 @@ abstract final class FlexColor {
   /// INFO: v0.1.5 of material_color_utilities changed this color.
   /// Before version 0.1.5. the color value was:
   /// static const Color material3LightErrorContainer = Color(0xFFFFDAD4);
-  /// In version 0.1.5 and due to a small braking algo change, it is:
+  /// In version 0.1.5 and due to a small breaking algo change, it is:
   static const Color material3LightErrorContainer = Color(0xFFFFDAD6);
 
   /// Material 3 standard light on error container color.
@@ -302,8 +300,7 @@ abstract final class FlexColor {
   static const String materialName = 'Material 2 default';
 
   /// English description of the standard Material theme.
-  static const String materialDescription =
-      'Default Material 2 color theme, used in the design guide';
+  static const String materialDescription = 'Default Material 2 color theme, used in the design guide';
 
   /// Material 2 standard default color for light primary color.
   static const Color materialLightPrimary = Color(0xff6200ee);
@@ -311,7 +308,7 @@ abstract final class FlexColor {
   /// Material 2 standard default color for light primary container color.
   static const Color materialLightPrimaryContainer = Color(0xffbb86fc);
 
-  /// Material 2 standard default color for light primary container color.
+  /// Material 2 standard default color for light primary variant color.
   ///
   /// Old Material 2 color system, prefer [materialLightPrimaryContainer].
   static const Color materialLightPrimaryVariant = Color(0xff3700b3);
@@ -325,7 +322,7 @@ abstract final class FlexColor {
   /// Material 2 standard default color for light tertiary color.
   static const Color materialLightTertiary = Color(0xff018786);
 
-  /// Material 2 standard default color for light tertiary color.
+  /// Material 2 standard default color for light tertiary container color.
   static const Color materialLightTertiaryContainer = Color(0xFFA4F1EF);
 
   /// Material 2 standard default color for light secondary variant color.
@@ -355,7 +352,7 @@ abstract final class FlexColor {
   /// color value is same as the light secondary color.
   static const Color materialDarkTertiary = Color(0xff03dac6);
 
-  /// Material 2 dark secondary container
+  /// Material 2 dark tertiary container.
   static const Color materialDarkTertiaryContainer = Color(0xFF003E3E);
 
   /// Material 2 standard default color for dark secondary variant color, the
@@ -371,8 +368,7 @@ abstract final class FlexColor {
   static const String materialHcName = 'Material high contrast';
 
   /// English description of the material high contrast theme.
-  static const String materialHcDescription =
-      'High contrast Material 2 design guide theme';
+  static const String materialHcDescription = 'High contrast Material 2 design guide theme';
 
   /// Material high contrast color for light primary color.
   static const Color materialLightPrimaryHc = Color(0xff0000ba);
@@ -413,7 +409,7 @@ abstract final class FlexColor {
   /// Old Material 2 color system, prefer [materialDarkPrimaryContainerHc].
   static const Color materialDarkPrimaryVariantHc = Color(0xffbe9eff);
 
-  ///Material 2 high contrast color for dark secondary color.
+  /// Material 2 high contrast color for dark secondary color.
   static const Color materialDarkSecondaryHc = Color(0xff66fff9);
 
   /// Material 2 high contrast color for dark secondary container color.
@@ -436,7 +432,8 @@ abstract final class FlexColor {
   static const String blueName = 'Blue delight';
 
   /// English description of the blue theme.
-  static const String blueDescription = 'Blue color theme, based on '
+  static const String blueDescription =
+      'Blue color theme, based on '
       'Material blue and light blue colors';
 
   /// Blue theme color for light primary color.
@@ -501,7 +498,8 @@ abstract final class FlexColor {
   static const String indigoName = 'Indigo nights';
 
   /// English description of the indigo theme.
-  static const String indigoDescription = 'Indigo color theme, based on '
+  static const String indigoDescription =
+      'Indigo color theme, based on '
       'Material indigo and deep purple colors';
 
   /// Indigo theme color for light primary color.
@@ -568,7 +566,8 @@ abstract final class FlexColor {
   static const String hippieBlueName = 'Hippie blue';
 
   /// English description of the hippie blue theme.
-  static const String hippieBlueDescription = 'Hippie blue with surfie green '
+  static const String hippieBlueDescription =
+      'Hippie blue with surfie green '
       'and chock coral pink theme';
 
   /// Hippie blue theme color for light primary color.
@@ -695,7 +694,8 @@ abstract final class FlexColor {
   static const String brandBlueName = 'Brand blues';
 
   /// English description of the brand blue colors theme.
-  static const String brandBlueDescription = 'Blue colors used in well known '
+  static const String brandBlueDescription =
+      'Blue colors used in well known '
       'brand themes';
 
   /// Brand blues theme color for light primary color.
@@ -824,7 +824,8 @@ abstract final class FlexColor {
   static const String sakuraName = 'Pink sakura';
 
   /// English description of the pink sakura inspired theme.
-  static const String sakuraDescription = 'Pink color theme, based on sakura '
+  static const String sakuraDescription =
+      'Pink color theme, based on sakura '
       'cherry blossom like colors';
 
   /// Sakura theme color for light primary color.
@@ -890,8 +891,7 @@ abstract final class FlexColor {
   static const String mandyRedName = 'Oh Mandy red';
 
   /// English description of the pink mandyRed inspired theme.
-  static const String mandyRedDescription =
-      'Mandy red and Viking blue inspired red theme';
+  static const String mandyRedDescription = 'Mandy red and Viking blue inspired red theme';
 
   /// Mandy red theme color for light primary color.
   static const Color mandyRedLightPrimary = Color(0xFFCD5758);
@@ -954,7 +954,8 @@ abstract final class FlexColor {
   static const String redName = 'Red tornado';
 
   /// English description of the red theme.
-  static const String redDescription = 'Red color theme, based on '
+  static const String redDescription =
+      'Red color theme, based on '
       'Material red and pink colors';
 
   /// Red theme color for light primary color.
@@ -1022,7 +1023,8 @@ abstract final class FlexColor {
   static const String redWineName = 'Red red wine';
 
   /// English description of the red wine theme.
-  static const String redWineDescription = 'Red color theme, based on '
+  static const String redWineDescription =
+      'Red color theme, based on '
       'red wine like colors';
 
   /// Red wine theme color for light primary color.
@@ -1088,7 +1090,8 @@ abstract final class FlexColor {
   static const String purpleBrownName = 'Purple brown';
 
   /// English description of the purple brown theme.
-  static const String purpleBrownDescription = 'Purple brown tinted aubergine '
+  static const String purpleBrownDescription =
+      'Purple brown tinted aubergine '
       'and eggplant colored theme';
 
   /// Purple brown theme color for light primary color.
@@ -1117,8 +1120,7 @@ abstract final class FlexColor {
   /// Purple brown theme color for light secondary variant color.
   ///
   /// Old Material 2 color system, prefer [purpleBrownLightTertiary].
-  static const Color purpleBrownLightSecondaryVariant =
-      purpleBrownLightTertiary;
+  static const Color purpleBrownLightSecondaryVariant = purpleBrownLightTertiary;
 
   /// Purple brown theme color for dark primary color.
   static const Color purpleBrownDarkPrimary = Color(0xFFA98085);
@@ -1154,7 +1156,8 @@ abstract final class FlexColor {
   static const String greenName = 'Green forest';
 
   /// English description of the green theme.
-  static const String greenDescription = 'Green color theme, based on '
+  static const String greenDescription =
+      'Green color theme, based on '
       'Material green and cyan colors';
 
   /// Green theme color for light primary color.
@@ -1221,7 +1224,8 @@ abstract final class FlexColor {
   static const String moneyName = 'Green money';
 
   /// English description of the green money theme.
-  static const String moneyDescription = 'Green money and finance style '
+  static const String moneyDescription =
+      'Green money and finance style '
       'color theme';
 
   /// Money green theme color for light primary color.
@@ -1287,7 +1291,8 @@ abstract final class FlexColor {
   static const String jungleName = 'Green jungle';
 
   /// English description of the lush green jungle theme.
-  static const String jungleDescription = 'Green jungle and rain forest '
+  static const String jungleDescription =
+      'Green jungle and rain forest '
       'color theme';
 
   /// Jungle green theme color for light primary color.
@@ -1353,7 +1358,8 @@ abstract final class FlexColor {
   static const String greyLawName = 'Grey law';
 
   /// English description of the grey law theme.
-  static const String greyLawDescription = 'Material blue grey and ultra dark '
+  static const String greyLawDescription =
+      'Material blue grey and ultra dark '
       'purple color theme, law firm style';
 
   /// Grey law theme color for light primary color.
@@ -1419,7 +1425,8 @@ abstract final class FlexColor {
   static const String wasabiName = 'Willow and wasabi';
 
   /// English description of the Wild Willow and wasabi green theme.
-  static const String wasabiDescription = 'Wild Willow and wasabi green '
+  static const String wasabiDescription =
+      'Wild Willow and wasabi green '
       'with orchid purple inspired colors';
 
   /// Willow and wasabi green theme color for light primary color.
@@ -1486,7 +1493,8 @@ abstract final class FlexColor {
   static const String goldName = 'Gold sunset';
 
   /// English description of the gold sunset theme.
-  static const String goldDescription = 'Gold sunset color theme, based on '
+  static const String goldDescription =
+      'Gold sunset color theme, based on '
       'orange like colors';
 
   /// Gold sunset theme color for light primary color.
@@ -1552,7 +1560,8 @@ abstract final class FlexColor {
   static const String mangoName = 'Mango mojito';
 
   /// English description of the mango mojito theme.
-  static const String mangoDescription = 'Orange and green Mango mojito '
+  static const String mangoDescription =
+      'Orange and green Mango mojito '
       'color theme';
 
   /// Mango mojito theme color for light primary color.
@@ -1684,8 +1693,7 @@ abstract final class FlexColor {
   static const String vesuviusBurnName = 'Vesuvius burned';
 
   /// English description of the vesuvius burned orange theme.
-  static const String vesuviusBurnDescription =
-      'Vesuvius burned orange and eden green theme';
+  static const String vesuviusBurnDescription = 'Vesuvius burned orange and eden green theme';
 
   /// Vesuvius burned theme color for light primary color.
   static const Color vesuviusBurnLightPrimary = Color(0xFFA6400F);
@@ -1713,8 +1721,7 @@ abstract final class FlexColor {
   /// Vesuvius burned theme color for light secondary variant color.
   ///
   /// Old Material 2 color system, prefer [vesuviusBurnLightTertiary].
-  static const Color vesuviusBurnLightSecondaryVariant =
-      vesuviusBurnLightTertiary;
+  static const Color vesuviusBurnLightSecondaryVariant = vesuviusBurnLightTertiary;
 
   /// Vesuvius burned theme color for dark primary color.
   static const Color vesuviusBurnDarkPrimary = Color(0xFFD17D53);
@@ -1742,8 +1749,7 @@ abstract final class FlexColor {
   /// Vesuvius burned theme color for dark secondary variant color.
   ///
   /// Old Material 2 color system, prefer [vesuviusBurnDarkTertiary].
-  static const Color vesuviusBurnDarkSecondaryVariant =
-      vesuviusBurnDarkTertiary;
+  static const Color vesuviusBurnDarkSecondaryVariant = vesuviusBurnDarkTertiary;
 
   // Material deepPurple and light blue accent colors based scheme.
 
@@ -1751,15 +1757,15 @@ abstract final class FlexColor {
   static const String deepPurpleName = 'Deep purple';
 
   /// English description of the deepPurple theme.
-  static const String deepPurpleDescription = 'Deep purple daisy bush theme, '
+  static const String deepPurpleDescription =
+      'Deep purple daisy bush theme, '
       'based on Material deepPurple and lightBlueAccent colors';
 
   /// Indigo theme color for light primary color.
   static const Color deepPurpleLightPrimary = Color(0xFF4527A0); // dp800
 
   /// Indigo theme color for light primary container color.
-  static const Color deepPurpleLightPrimaryContainer =
-      Color(0xFFD1C4E9); //dp200
+  static const Color deepPurpleLightPrimaryContainer = Color(0xFFD1C4E9); //dp200
 
   /// Indigo theme color for light primary variant color.
   ///
@@ -1818,8 +1824,7 @@ abstract final class FlexColor {
   static const String ebonyClayName = 'Ebony clay';
 
   /// English description of the Ebony clay theme.
-  static const String ebonyClayDescription =
-      'Ebony clay dark blue-grey and watercourse green colored theme';
+  static const String ebonyClayDescription = 'Ebony clay dark blue-grey and watercourse green colored theme';
 
   /// Ebony clay theme color for light primary color.
   static const Color ebonyClayLightPrimary = Color(0xFF202541);
@@ -1884,8 +1889,7 @@ abstract final class FlexColor {
   static const String barossaName = 'Barossa';
 
   /// English description of the Barossa theme.
-  static const String barossaDescription =
-      'Barossa red and cardin green colored theme';
+  static const String barossaDescription = 'Barossa red and cardin green colored theme';
 
   /// Barossa theme color for light primary color.
   static const Color barossaLightPrimary = Color(0xFF4E0029);
@@ -1950,8 +1954,7 @@ abstract final class FlexColor {
   static const String sharkName = 'Shark and orange';
 
   /// English description of the Shark ecstasy theme.
-  static const String sharkDescription =
-      'Shark grey and orange ecstasy colored theme';
+  static const String sharkDescription = 'Shark grey and orange ecstasy colored theme';
 
   /// Shark ecstasy theme color for light primary color.
   static const Color sharkLightPrimary = Color(0xFF1D2228);
@@ -2016,8 +2019,7 @@ abstract final class FlexColor {
   static const String bigStoneName = 'Big stone tulip';
 
   /// English description of the Big stone tulip yellow theme.
-  static const String bigStoneDescription =
-      'Big stone blue and tulip tree yellow colored theme';
+  static const String bigStoneDescription = 'Big stone blue and tulip tree yellow colored theme';
 
   /// Big stone theme color for light primary color.
   static const Color bigStoneLightPrimary = Color(0xFF1A2C42);
@@ -2082,8 +2084,7 @@ abstract final class FlexColor {
   static const String damaskName = 'Damask and lunar';
 
   /// English description of the damask theme.
-  static const String damaskDescription =
-      'Damask red and lunar green colored theme';
+  static const String damaskDescription = 'Damask red and lunar green colored theme';
 
   /// Damask theme color for light primary color.
   static const Color damaskLightPrimary = Color(0xFFC96646);
@@ -2149,8 +2150,7 @@ abstract final class FlexColor {
   static const String bahamaBlueName = 'Bahama and trinidad';
 
   /// English description of the bahamaBlue theme.
-  static const String bahamaBlueDescription =
-      'Bahama blue and trinidad orange colored theme';
+  static const String bahamaBlueDescription = 'Bahama blue and trinidad orange colored theme';
 
   /// Bahama blue theme color for light primary color.
   static const Color bahamaBlueLightPrimary = Color(0xFF095D9E);
@@ -2215,8 +2215,7 @@ abstract final class FlexColor {
   static const String mallardGreenName = 'Mallard and valencia';
 
   /// English description of the mallardGreen theme.
-  static const String mallardGreenDescription =
-      'Mallard green and Valencia pink colored theme';
+  static const String mallardGreenDescription = 'Mallard green and Valencia pink colored theme';
 
   /// Mallard green theme color for light primary color.
   static const Color mallardGreenLightPrimary = Color(0xFF2D4421);
@@ -2244,8 +2243,7 @@ abstract final class FlexColor {
   /// Mallard green theme color for light secondary variant color.
   ///
   /// Old Material 2 color system, prefer [mallardGreenLightTertiary].
-  static const Color mallardGreenLightSecondaryVariant =
-      mallardGreenLightTertiary;
+  static const Color mallardGreenLightSecondaryVariant = mallardGreenLightTertiary;
 
   /// Mallard green theme color for dark primary color.
   static const Color mallardGreenDarkPrimary = Color(0xFF808E79);
@@ -2273,8 +2271,7 @@ abstract final class FlexColor {
   /// Mallard green theme color for dark secondary variant color.
   ///
   /// Old Material 2 color system, prefer [mallardGreenDarkTertiary].
-  static const Color mallardGreenDarkSecondaryVariant =
-      mallardGreenDarkTertiary;
+  static const Color mallardGreenDarkSecondaryVariant = mallardGreenDarkTertiary;
 
   // Espresso dark brown and crema scheme.
   // Colors and scheme named by "name that color" library for the light colors.
@@ -2284,8 +2281,7 @@ abstract final class FlexColor {
   static const String espressoName = 'Espresso and crema';
 
   /// English description of the espresso theme.
-  static const String espressoDescription =
-      'Espresso dark brown and crema colored theme';
+  static const String espressoDescription = 'Espresso dark brown and crema colored theme';
 
   /// Espresso theme color for light primary color.
   ///
@@ -2359,8 +2355,7 @@ abstract final class FlexColor {
   static const String outerSpaceName = 'Outer space stage';
 
   /// English description of the outerSpace theme.
-  static const String outerSpaceDescription =
-      'Outer space dark blue-grey and stage red theme';
+  static const String outerSpaceDescription = 'Outer space dark blue-grey and stage red theme';
 
   /// Outer Space theme color for light primary color.
   static const Color outerSpaceLightPrimary = Color(0xFF1F3339);
@@ -2426,8 +2421,7 @@ abstract final class FlexColor {
   static const String blueWhaleName = 'Blue whale';
 
   /// English description of the blueWhale theme.
-  static const String blueWhaleDescription =
-      'Blue whale, jungle green and outrageous tango orange theme';
+  static const String blueWhaleDescription = 'Blue whale, jungle green and outrageous tango orange theme';
 
   /// Blue whale theme color for light primary color.
   static const Color blueWhaleLightPrimary = Color(0xFF023047);
@@ -2492,8 +2486,7 @@ abstract final class FlexColor {
   static const String sanJuanBlueName = 'San Juan blue';
 
   /// English description of the sanJuanBlue theme.
-  static const String sanJuanBlueDescription =
-      'San Juan blue and pink salmon theme';
+  static const String sanJuanBlueDescription = 'San Juan blue and pink salmon theme';
 
   /// San Juan blue theme color for light primary color.
   static const Color sanJuanBlueLightPrimary = Color(0xFF375778);
@@ -2521,8 +2514,7 @@ abstract final class FlexColor {
   /// San Juan blue theme color for light secondary variant color.
   ///
   /// Old Material 2 color system, prefer [sanJuanBlueLightTertiary].
-  static const Color sanJuanBlueLightSecondaryVariant =
-      sanJuanBlueLightTertiary;
+  static const Color sanJuanBlueLightSecondaryVariant = sanJuanBlueLightTertiary;
 
   /// San Juan blue theme color for dark primary color.
   static const Color sanJuanBlueDarkPrimary = Color(0xFF5E7691);
@@ -2559,8 +2551,7 @@ abstract final class FlexColor {
   static const String rosewoodName = 'Rosewood';
 
   /// English description of the rosewood theme.
-  static const String rosewoodDescription =
-      'Rosewood red, with horses neck and driftwood theme';
+  static const String rosewoodDescription = 'Rosewood red, with horses neck and driftwood theme';
 
   /// Rosewood theme color for light primary color.
   static const Color rosewoodLightPrimary = Color(0xFF5C000E);
@@ -2625,8 +2616,7 @@ abstract final class FlexColor {
   static const String blumineBlueName = 'Blumine';
 
   /// English description of the blumine blue theme.
-  static const String blumineBlueDescription =
-      'Blumine, easter blue and saffron mango theme';
+  static const String blumineBlueDescription = 'Blumine, easter blue and saffron mango theme';
 
   /// Blumine blue green theme color for light primary color.
   static const Color blumineBlueLightPrimary = Color(0xFF19647E);
@@ -2654,8 +2644,7 @@ abstract final class FlexColor {
   /// Blumine blue green theme color for light secondary variant color.
   ///
   /// Old Material 2 color system, prefer [blumineBlueLightTertiary].
-  static const Color blumineBlueLightSecondaryVariant =
-      blumineBlueLightTertiary;
+  static const Color blumineBlueLightSecondaryVariant = blumineBlueLightTertiary;
 
   /// Blumine blue green theme color for dark primary color.
   static const Color blumineBlueDarkPrimary = Color(0xFF82BACE);
@@ -2693,8 +2682,7 @@ abstract final class FlexColor {
   static const String dashBlueName = 'Flutter Dash';
 
   /// English description of the dash blue theme.
-  static const String dashBlueDescription =
-      'Flutter Dash wallpaper based theme';
+  static const String dashBlueDescription = 'Flutter Dash wallpaper based theme';
 
   /// Dash blue theme color for light primary color.
   static const Color dashBlueLightPrimary = Color(0xFF4496E0);
@@ -2738,8 +2726,7 @@ abstract final class FlexColor {
   static const String materialBaselineName = 'Material 3 purple';
 
   /// English description of the Material 3 baseline theme.
-  static const String materialBaselineDescription =
-      'Material 3 guide and default purple theme';
+  static const String materialBaselineDescription = 'Material 3 guide and default purple theme';
 
   /// MaterialBaseline theme color for light primary color.
   static const Color materialBaselineLightPrimary = Color(0xFF6750A4);
@@ -2751,8 +2738,7 @@ abstract final class FlexColor {
   static const Color materialBaselineLightSecondary = Color(0xFF625B71);
 
   /// MaterialBaseline theme color for light secondary container color.
-  static const Color materialBaselineLightSecondaryContainer =
-      Color(0xFFE8DEF8);
+  static const Color materialBaselineLightSecondaryContainer = Color(0xFFE8DEF8);
 
   /// MaterialBaseline theme color for light tertiary color.
   static const Color materialBaselineLightTertiary = Color(0xFF7D5260);
@@ -2786,8 +2772,7 @@ abstract final class FlexColor {
   static const String verdunHemlockName = 'Verdun green';
 
   /// English description of the VerdunHemlock green theme.
-  static const String verdunHemlockDescription =
-      'Material guide 3 verdun and mineral green with hemlock';
+  static const String verdunHemlockDescription = 'Material guide 3 verdun and mineral green with hemlock';
 
   /// VerdunHemlock theme color for light primary color.
   static const Color verdunHemlockLightPrimary = Color(0xFF616200);
@@ -2833,8 +2818,7 @@ abstract final class FlexColor {
   static const String dellGenoaGreenName = 'Dell genoa green';
 
   /// English description of the DellGenoaGreen green theme.
-  static const String dellGenoaGreenDescription =
-      'Material guide 3 theme with dell, axolotl and genoa greens';
+  static const String dellGenoaGreenDescription = 'Material guide 3 theme with dell, axolotl and genoa greens';
 
   /// DellGenoaGreen theme color for light primary color.
   static const Color dellGenoaGreenLightPrimary = Color(0xFF386A20);
@@ -2876,8 +2860,7 @@ abstract final class FlexColor {
   static const String redM3Name = 'Thunderbird red';
 
   /// English description of the red M3 theme.
-  static const String redM3Description =
-      'Thunderbird red based Material 3 theme';
+  static const String redM3Description = 'Thunderbird red based Material 3 theme';
 
   /// Red M3 theme color for light primary color.
   ///
@@ -2921,8 +2904,7 @@ abstract final class FlexColor {
   static const String pinkM3Name = 'Lipstick pink';
 
   /// English description of the pink M3 theme.
-  static const String pinkM3Description =
-      'Lipstick pink based Material 3 theme';
+  static const String pinkM3Description = 'Lipstick pink based Material 3 theme';
 
   /// Pink M3 theme color for light primary color.
   ///
@@ -2966,8 +2948,7 @@ abstract final class FlexColor {
   static const String purpleM3Name = 'Eggplant purple';
 
   /// English description of the purple M3 theme.
-  static const String purpleM3Description =
-      'Eggplant purple based Material 3 theme';
+  static const String purpleM3Description = 'Eggplant purple based Material 3 theme';
 
   /// Purple M3 theme color for light primary color.
   ///
@@ -3013,8 +2994,7 @@ abstract final class FlexColor {
   /// English description of the indigo M3 theme.
   ///
   /// This is primary color you get when you seed from M2 [Colors.indigo].
-  static const String indigoM3Description =
-      'Indigo San Marino based Material 3 theme';
+  static const String indigoM3Description = 'Indigo San Marino based Material 3 theme';
 
   /// Indigo M3 theme color for light primary color.
   static const Color indigoM3LightPrimary = Color(0xFF4355B9);
@@ -3056,8 +3036,7 @@ abstract final class FlexColor {
   static const String blueM3Name = 'Endeavour blue';
 
   /// English description of the blue M3 theme.
-  static const String blueM3Description =
-      'Endeavour blue based Material 3 theme';
+  static const String blueM3Description = 'Endeavour blue based Material 3 theme';
 
   /// Blue M3 theme color for light primary color.
   ///
@@ -3145,8 +3124,7 @@ abstract final class FlexColor {
   static const String tealM3Name = 'Blue stone teal';
 
   /// English description of the teal M3 theme.
-  static const String tealM3Description =
-      'Blue stone teal based Material 3 theme';
+  static const String tealM3Description = 'Blue stone teal based Material 3 theme';
 
   /// Teal M3 theme color for light primary color.
   ///
@@ -3190,8 +3168,7 @@ abstract final class FlexColor {
   static const String greenM3Name = 'Camarone green';
 
   /// English description of the green M3 theme.
-  static const String greenM3Description =
-      'Camarone green based Material 3 theme';
+  static const String greenM3Description = 'Camarone green based Material 3 theme';
 
   /// Green M3 theme color for light primary color.
   ///
@@ -3285,8 +3262,7 @@ abstract final class FlexColor {
   static const String yellowM3Name = 'Yukon gold yellow';
 
   /// English description of the yellow M3 theme.
-  static const String yellowM3Description =
-      'Yukon gold yellow based Material 3 theme';
+  static const String yellowM3Description = 'Yukon gold yellow based Material 3 theme';
 
   /// Yellow M3 theme color for light primary color.
   ///
@@ -3330,8 +3306,7 @@ abstract final class FlexColor {
   static const String orangeM3Name = 'Brown orange';
 
   /// English description of the orange M3 theme.
-  static const String orangeM3Description =
-      'Brown orange based Material 3 theme';
+  static const String orangeM3Description = 'Brown orange based Material 3 theme';
 
   /// Orange M3 theme color for light primary color.
   ///
@@ -3375,8 +3350,7 @@ abstract final class FlexColor {
   static const String deepOrangeM3Name = 'Rust deep orange';
 
   /// English description of the deepOrange M3 theme.
-  static const String deepOrangeM3Description =
-      'Rust deep orange based Material 3 theme';
+  static const String deepOrangeM3Description = 'Rust deep orange based Material 3 theme';
 
   /// Deep orange M3 theme color for light primary color.
   ///
@@ -3420,7 +3394,8 @@ abstract final class FlexColor {
   static const String blackWhiteName = 'Black and white';
 
   /// English description of the blackWhite theme.
-  static const String blackWhiteDescription = 'Black or white primary, '
+  static const String blackWhiteDescription =
+      'Black or white primary, '
       'secondary and tertiary colors, with monochrome grey containers';
 
   /// Black theme color for light primary color.
@@ -3505,8 +3480,7 @@ abstract final class FlexColor {
   static const String sepiaName = 'Sepia';
 
   /// English description of the sepia  theme.
-  static const String sepiaDescription =
-      'Sepia, a warm slight brown yellow tinted neutral theme';
+  static const String sepiaDescription = 'Sepia, a warm slight brown yellow tinted neutral theme';
 
   /// Sepia theme color for light primary color.
   static const Color sepiaLightPrimary = Color(0xFF413d32);
@@ -5828,8 +5802,7 @@ abstract final class FlexColor {
   ///
   /// Note: All Shadcn schemes, starting with name shad are still beta and
   /// not included in test coverage. Their styles may change in future versions.
-  static const Map<FlexScheme, FlexSchemeData> schemes =
-      <FlexScheme, FlexSchemeData>{
+  static const Map<FlexScheme, FlexSchemeData> schemes = <FlexScheme, FlexSchemeData>{
     FlexScheme.material: material,
     FlexScheme.materialHc: materialHc,
     FlexScheme.blue: blue,
@@ -5913,8 +5886,7 @@ abstract final class FlexColor {
   /// You can make your own color schemes as well. This list can serve as an
   /// example on how to define your own [FlexSchemeData] schemes that you can
   /// use instead.
-  static const Map<FlexScheme, FlexSchemeData> schemesWithCustom =
-      <FlexScheme, FlexSchemeData>{
+  static const Map<FlexScheme, FlexSchemeData> schemesWithCustom = <FlexScheme, FlexSchemeData>{
     ...schemes,
     // This custom color set has same colors as the material default theme.
     // It is up to the implementation to provide custom colors or provide

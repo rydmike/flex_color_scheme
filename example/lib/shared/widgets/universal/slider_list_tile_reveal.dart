@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import 'list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// A discrete [Slider] that is nullable and uses [ListTileReveal] for title
 /// and additional expanded guide content.
@@ -45,11 +44,12 @@ class SliderListTileReveal extends StatefulWidget {
     this.valueDefaultLabel = 'default',
     this.valueUnitLabel = '',
     this.valueDefaultDisabledLabel,
-  })  : assert(min < max, 'Min $min must be smaller than max $max'),
-        assert(
-            (value == null) || (value >= min && value <= max),
-            'Value $value is not null or not between '
-            'minimum $min and maximum $max');
+  }) : assert(min < max, 'Min $min must be smaller than max $max'),
+       assert(
+         (value == null) || (value >= min && value <= max),
+         'Value $value is not null or not between '
+         'minimum $min and maximum $max',
+       );
 
   /// The currently selected value for this slider.
   ///
@@ -186,12 +186,10 @@ class _SliderListTileRevealState extends State<SliderListTileReveal> {
   //     }
   //   }
   // }
-
   @override
   Widget build(BuildContext context) {
     // The value of a discrete step.
-    final double step = (widget.max - widget.min) /
-        (widget.divisions <= 0 ? 1 : widget.divisions);
+    final double step = (widget.max - widget.min) / (widget.divisions <= 0 ? 1 : widget.divisions);
     // THe effective min value, one step below given min, this value is used
     // to show default label and return null when selected.
     final double effectiveMin = widget.min - step;
@@ -213,12 +211,10 @@ class _SliderListTileRevealState extends State<SliderListTileReveal> {
             divisions: widget.divisions + 1,
             label: widget.enabled
                 ? widget.value == null ||
-                        (widget.value ??
-                                effectiveMin * widget.valueDisplayScale) <
-                            widget.min * widget.valueDisplayScale
-                    ? widget.valueDefaultLabel
-                    : (widget.value! * widget.valueDisplayScale)
-                        .toStringAsFixed(widget.valueDecimalPlaces)
+                          (widget.value ?? effectiveMin * widget.valueDisplayScale) <
+                              widget.min * widget.valueDisplayScale
+                      ? widget.valueDefaultLabel
+                      : (widget.value! * widget.valueDisplayScale).toStringAsFixed(widget.valueDecimalPlaces)
                 : widget.valueDefaultDisabledLabel ?? widget.valueDefaultLabel,
             value: widget.value == null || !widget.enabled
                 ? effectiveMin * widget.valueDisplayScale
@@ -226,9 +222,8 @@ class _SliderListTileRevealState extends State<SliderListTileReveal> {
             onChanged: widget.enabled
                 ? (double value) {
                     widget.onChanged(
-                        value < widget.min * widget.valueDisplayScale
-                            ? null
-                            : value / widget.valueDisplayScale);
+                      value < widget.min * widget.valueDisplayScale ? null : value / widget.valueDisplayScale,
+                    );
                   }
                 : null,
           ),
@@ -250,13 +245,12 @@ class _SliderListTileRevealState extends State<SliderListTileReveal> {
               Text(
                 widget.enabled
                     ? widget.value == null ||
-                            (widget.value ??
-                                    effectiveMin * widget.valueDisplayScale) <
-                                widget.min * widget.valueDisplayScale
-                        ? 'default\n${widget.valueDefaultLabel}'
-                        // ignore: lines_longer_than_80_chars, str interpolation
-                        : '${(widget.value! * widget.valueDisplayScale).toStringAsFixed(widget.valueDecimalPlaces)}${widget.valueUnitLabel}'
-                    // ignore: lines_longer_than_80_chars, string interpolation
+                              (widget.value ?? effectiveMin * widget.valueDisplayScale) <
+                                  widget.min * widget.valueDisplayScale
+                          ? 'default\n${widget.valueDefaultLabel}'
+                          // ignore: str interpolation
+                          : '${(widget.value! * widget.valueDisplayScale).toStringAsFixed(widget.valueDecimalPlaces)}${widget.valueUnitLabel}'
+                    // ignore: string interpolation
                     : 'default\n${widget.valueDefaultDisabledLabel ?? widget.valueDefaultLabel}',
                 textAlign: TextAlign.center,
                 style: const TextStyle(

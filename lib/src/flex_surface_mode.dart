@@ -1,4 +1,5 @@
-import 'flex_scheme_surface_colors.dart'; // For comment refs.
+/// @docImport 'package:flex_color_scheme/src/flex_scheme_surface_colors.dart';
+library;
 
 /// Enum for using predefined surface blend modes for all surfaces and scaffold
 /// background colors in FlexColorScheme based themes.
@@ -23,7 +24,7 @@ enum FlexSurfaceMode {
   /// > in FCS 8.0 and Flutter 3.22, sets surface and dialog blends to 2x
   /// > so that it represents the "high background" style as before, but done
   /// > via surface. Without this breaking change this mode would produce the
-  /// > same result [levelSurfacesLowScaffold] and be redundant.
+  /// > same result as [levelSurfacesLowScaffold] and be redundant.
   highBackgroundLowScaffold,
 
   /// Decreasing blend level in order high surface, low scaffold.
@@ -42,7 +43,7 @@ enum FlexSurfaceMode {
   /// * Surface & dialogs (1/2x)
   highScaffoldLowSurface,
 
-  /// Decreasing blend level in order very high scaffold, levl surface.
+  /// Decreasing blend level in order very high scaffold, level surface.
   ///
   /// The blend level decreases on surfaces in this order:
   ///

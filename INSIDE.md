@@ -15,10 +15,13 @@ It still applies to version 4, it will be updated and more inside documentation
 added when this document is merged and included in a separate documentation site.
 
 # Contents
+- [Inside FlexColorScheme](#inside-flexcolorscheme)
+  - [Version 4 Notice](#version-4-notice)
+- [Contents](#contents)
 - [Introduction](#introduction)
-- [None null sub-themes](#none-null-sub-themes)
-- [ThemeData modifications](#themedata-modifications)
-- [Additional optional widget sub-theming](#additional-optional-widget-sub-theming)
+- [None Null Sub-Themes](#none-null-sub-themes)
+- [ThemeData Modifications](#themedata-modifications)
+- [Additional Optional Widget Sub-Theming](#additional-optional-widget-sub-theming)
 
 # Introduction 
 
@@ -517,4 +520,4 @@ You can find more information about available sub-theme
 helpers
 [here](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/FlexSubThemes-class.html).
 You can also use these static sub-theme helpers to manually define widget
-sub-theme and even modify them using `copywith`.
+sub-theme and even modify them using `copyWith`.

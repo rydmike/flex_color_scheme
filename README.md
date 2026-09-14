@@ -2,11 +2,15 @@
 
 # FlexColorScheme
 
-[<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true?" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
+[<img src="https://github.com/rydmike/flex_color_scheme_docs/blob/master/docs/images/flutter-favorite-logo.png?raw=true" alt="flutter favorite logo" width="170"/>](https://docs.flutter.dev/development/packages-and-plugins/favorites)
 
-Use **FlexColorScheme** to make beautiful Flutter Material Design themes. Apply optional surface blends and use Material-3 seed generated ColorSchemes. The returned themes are standard `ThemeData` objects, but **very** sophisticated. They are based on the same idea as Flutter's `ThemeData.from(ColorScheme)` and `ThemeData(colorSchemeSeed)` themes, but with many additional features. Choose from pre-made designs or make your own and quickly configure component themes to your liking.
+**FlexColorScheme** 9.x builds matched light and dark `ThemeData` for Flutter 3.47+, with full support for the SDK-decoupled [`material_ui`](https://pub.dev/packages/material_ui) and [`cupertino_ui`](https://pub.dev/packages/cupertino_ui) packages.
 
-Use the **Themes Playground** WEB app to visually configure your themes and get the needed **FlexColorScheme** API code to use in your Flutter app.
+Version 9.0 is a major release because Flutter's UI libraries left the SDK. Theming features are otherwise an easy step from 8.4. Breaking API and seed-tone details are in the [changelog](https://pub.dev/packages/flex_color_scheme/changelog) and at [docs.flexcolorscheme.com](https://docs.flexcolorscheme.com/).
+
+Use it to make Material Design themes with optional surface blends, seed-generated `ColorScheme`s, and quick component settings. The result is standard `ThemeData`, with more complete `ColorScheme` wiring than Flutter's `ThemeData.from` / `colorSchemeSeed` factories.
+
+Configure visually in the **[Themes Playground](https://playground.flexcolorscheme.com/)** and copy the API setup into your app.
 
 <table>
   <tr>
@@ -17,11 +21,7 @@ Use the **Themes Playground** WEB app to visually configure your themes and get 
   </tr>
 </table>
 
-When you theme a Flutter application **in the intended manner**, all built-in widgets use the colors of the `ColorScheme` in your theme. However, Flutter's `ThemeData` factories misses a few details when it comes to direct color properties in `ThemeData` itself. This applies in particular if you still use legacy Material-2 mode in Flutter. When you use the current default Material-3 mode, the color results and styles are much more consistent by default, with only a few colors in `ThemeData` not matching the defined `ColorScheme` colors. 
-
-**FlexColorScheme** ensures that all Flutter SDK UI components get themed completely by its `ColorScheme` and custom colors you provide. It also applies the `ColorScheme` colors to all legacy color properties in `ThemeData`. This guarantees that all the direct colors properties in `ThemeData` match your `ColorScheme`. There are no surprising colors in `ThemeData` that do not match your `ColorScheme`. This applies regardless of if you use Material-2 or Material-3 mode.
-
-You can also opt in on using FlexColorScheme's component theme customization features. By doing so, you can, for example, adjust the border radius on all UI widgets with a single property value. 
+**FlexColorScheme** themes all Flutter SDK UI components from your `ColorScheme` and custom colors, including legacy `ThemeData` color properties, in Material 2 or Material 3 mode. Opt in on component themes to adjust shared styles, for example border radius on many widgets with one property.
 
 <table>
   <tr>
@@ -32,13 +32,9 @@ You can also opt in on using FlexColorScheme's component theme customization fea
   </tr>
 </table>
 
-When you enable component themes in Material-2 mode, the border radius on components defaults to the Material-3 more rounded design. In Material-3, the radius varies by widget type, as specified by the [Material-3 Guide](https://m3.material.io/). You can keep this or set the shared global widget radius to a value you prefer. You can also set the themed border radius per widget and override the defaults or the global radius value you defined. 
+### Material 3
 
-### Material-3
-
-As in Flutter's `ThemeData`, Material-3 mode is enabled by default in **FlexColorScheme** Version 8 and later. The **FlexColorscheme** Material-3 mode component theme defaults are far less opinionated than the Material-2 defaults. In **FlexColorScheme** V8 and later, enabling component themes use almost only Material-3 defaults as starting points for component styles and seeded `ColorScheme` generation. With the component theme settings, you can quickly customize Material-3 to fit your application's design goals.
-
-Since Flutter **3.7 and later**, using Material-3 design is production ready. Some minor issues may always exist. Please refer to the FlexColorScheme docs [known issues](https://docs.flexcolorscheme.com/known_issues) chapter for more information on the status of known **theming** issues in Flutter, and to which versions they apply.
+Material 3 is the default since **FlexColorScheme** v8, matching Flutter's `ThemeData`. Component theme defaults follow Material 3, including per-widget radii from the [Material 3 Guide](https://m3.material.io/). Keep those defaults, set a shared global radius, or override radius per widget.
 
 <table>
   <tr>
@@ -49,7 +45,7 @@ Since Flutter **3.7 and later**, using Material-3 design is production ready. So
   </tr>
 </table>
 
-**FlexColorScheme** has many advanced coloring features, like using surface alpha blends. It also fully supports Material-3 based color schemes, including seed generated `ColorSchemes`. It offers many advanced configuration options that you can use when you generate your `ColorScheme` from seed colors. You can e.g., make more saturated seed generated themes with higher contrast. FlexColorScheme's advanced seeded `ColorScheme` offer features that are not available in Flutter directly. This includes using multiple colors as seed colors, custom minimum chroma levels and customized tone mapping to `ColorScheme` colors.
+Surface alpha blends and seed-generated `ColorScheme`s go beyond Flutter's seed factory: multiple seed colors, custom minimum chroma, and custom tone mapping.
 
 <table>
   <tr>
@@ -60,40 +56,33 @@ Since Flutter **3.7 and later**, using Material-3 design is production ready. So
   </tr>
 </table>
 
-With **FlexColorScheme** component themes, you use simple flat property values. No need for verbose Flutter SDK component themes, for example `ShapeBorder` definitions on multiple widget themes to change their border radius. Component theming provides a large number of easy-to-configure options via direct properties. In most cases you can avoid using complicated and sometimes confusing `WidgetState` theming properties.
-
+Component themes use simple flat properties. You can skip verbose SDK `ShapeBorder` and `WidgetState` theme objects for common cases.
 
 ## Getting Started
 
-To use **FlexColorScheme** in your project, add the `flex_color_scheme` package to `pubspec.yaml`:
+Requires Flutter **3.47** or later. FlexColorScheme depends on `material_ui` and `cupertino_ui`; your app still needs a direct `material_ui` import for `MaterialApp` and widgets.
 
-`dart pub add flex_color_scheme` or `flutter pub add flex_color_scheme`
-
-Import the package to use it:
+```sh
+flutter pub add flex_color_scheme
+```
 
 ```dart
 import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:material_ui/material_ui.dart';
 ```
 
-You can now start using **FlexColorScheme** based color schemes and theming in your application. A quick way to do so is to try one of the **66** built-in color schemes. They have enum values that you use to select which one to use as the theme for your application.
-
-The package **default example** offers a heavily commented code guide on how to use key features in FlexColorScheme. The [**Examples**](https://docs.flexcolorscheme.com/examples) chapter shows you how to try it. In the [**Tutorial**](https://docs.flexcolorscheme.com/tutorial1) you can learn more via five additional examples of increasing complexity.
+Start with a built-in `FlexScheme` palette, or define your own colors. The package **default example** is a heavily commented guide. See [Examples](https://docs.flexcolorscheme.com/examples) and the [Tutorial](https://docs.flexcolorscheme.com/tutorial1).
 
 ## FlexColorScheme Counter App
 
-Let's first setup FlexColorScheme in the default Flutter counter app. Create a new Flutter project, giving you the default counter-application. Add the FlexColorScheme import, after that we change one line of code, and add two lines to enable it in the default counter-application.
-
-Here we use the **Oh Mandy red** color scheme, it is represented by `enum` value `FlexScheme.mandyRed`. Set the `MaterialApp.themeMode` to `ThemeMode.system` so that the device can control if the app uses its light or dark theme mode. You can then toggle the theme mode by changing mode on the used device.
-
-Assign `FlexThemeData.light` to the app's `theme` property, which is the application's light theme definition property, and `FlexThemeData.dark` to `darkTheme`.
-
-For both `FlexThemeData` dark and light we set the `scheme` property to `FlexScheme.mandyRed` to use the same **Oh Mandy red** predefined `scheme` colors in both theme modes. We then get matching light and dark themes based on the built-in scheme's color definitions.
-
-The three line modified `MaterialApp`, of the Flutter default counter-application becomes:
+Create a new Flutter project and theme the default counter app with **Oh Mandy red** (`FlexScheme.mandyRed`). `ThemeMode.system` follows the device light/dark setting.
 
 ```dart
+import 'package:flex_color_scheme/flex_color_scheme.dart';
+import 'package:material_ui/material_ui.dart';
+
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -110,7 +99,7 @@ class MyApp extends StatelessWidget {
 }
 ```
 
-This gives us a counter-application that looks like this:
+This gives a counter application that looks like this:
 
 <table>
   <tr>
@@ -119,84 +108,52 @@ This gives us a counter-application that looks like this:
   </tr>
 </table>
 
-*FlexColorScheme in Material-2 mode applied to the standard Flutter counter template*
+*FlexColorScheme applied to the standard Flutter counter template*
 
-
-Not as exciting as the images shown above. That is because the basic counter-application uses very few features and widgets, so it does not present the results very well.
-
-The included examples contain placeholder user interface to better demonstrate the results. The used UI demonstration code in the examples is not relevant to using FlexColorScheme, it is only there to present the results.
+The counter app uses few widgets, so it does not show the theme well. The package examples use placeholder UI only to present results; that demo UI is not part of using FlexColorScheme.
 
 ## Documentation
 
-For more information and tutorials on how to use **FlexColorScheme**, please see its documentation site at [**docs.flexcolorscheme.com**](https://docs.flexcolorscheme.com/). It contains additional getting started info, extensive tutorials, key API walkthrough and even general Flutter theming advice and guidance. The documentation site is powered by [docs.page](https://docs.page/) from [Invertase](https://invertase.io/). 
-Complete generated package [**API documentation**](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/flex_color_scheme-library.html) is also available. 
+Tutorials, API walkthroughs, and Flutter theming guidance: [**docs.flexcolorscheme.com**](https://docs.flexcolorscheme.com/). Generated [**API documentation**](https://pub.dev/documentation/flex_color_scheme/latest/flex_color_scheme/flex_color_scheme-library.html) is on pub.dev. The documentation site is powered by [docs.page](https://docs.page/) from [Invertase](https://invertase.io/).
 
 ## Themes Playground
 
-To make it even easier to configure and setup **FlexColorScheme**, it comes with a WEB companion app called the [**Themes Playground**](https://rydmike.com/flexcolorscheme/themesplayground-latest).
+The [**Themes Playground**](https://playground.flexcolorscheme.com/) is a web companion that generates **FlexColorScheme** setup code for the active theme. The app itself, and the demos in its theme simulator, show the result of that code. Settings persist; reset them if you get lost. It is bundled as [example 5](https://github.com/rydmike/flex_color_scheme/tree/master/example/lib/example5_themes_playground), the last [tutorial](https://docs.flexcolorscheme.com/tutorial1) step.
 
-The **Themes Playground** is a useful tool to find **FlexColorScheme** themes and settings you like. You can use it to discover what you can do with FlexColorScheme. The playground persists all its settings. You can reset settings back to their default values, so you can always start over if you get lost in all the configuration possibilities.
+[<img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/themes_playground_7_2.png" alt="Themes Playground Image"/>](https://playground.flexcolorscheme.com/)
 
-The most useful and popular feature of the **Playground** is that it can generate **FlexColorScheme API** setup code needed to produce the shown active theme configuration. The themed style of the app itself, and the same styled demo apps shown in its theme simulator, is what you get when you copy the theme config code to your app, and use it with the **FlexColorScheme** package. 
+*In [Themes Playground](https://playground.flexcolorscheme.com/) you can visually configure your theme and copy its setup code.*
 
-[<img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/themes_playground_7_2.png" alt="Themes Playround Image"/>](https://rydmike.com/flexcolorscheme/themesplayground-latest)
+Open the code view beside the controls to watch the API update as you change settings.
 
-*In [Themes Playground](https://rydmike.com/flexcolorscheme/themesplayground-latest) you can visually configure your theme and copy its setup code.*
+[<img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/themes_playground_7_2_dark_code.png" alt="Themes Playground Image"/>](https://playground.flexcolorscheme.com/)
 
-If you use the code view panel side-by-side, as you change settings, the Playground modifies the code as you change settings. This is a fun way to get familiar with the API.
+*Viewing API configuration and its updates as you change settings in [Themes Playground](https://playground.flexcolorscheme.com/).*
 
-[<img src="https://raw.githubusercontent.com/rydmike/flex_color_scheme_docs/master/docs/images/themes_playground_7_2_dark_code.png" alt="Themes Playround Image"/>](https://rydmike.com/flexcolorscheme/themesplayground-latest)
+Latest live build (WASM GC, with JS fallback): [playground.flexcolorscheme.com](https://playground.flexcolorscheme.com/). Usage notes: [Playground chapter](https://docs.flexcolorscheme.com/playground). Use the same major version of Themes Playground as your `flex_color_scheme` package, and for versions 7, 8, and 9 prefer matching the minor version too. GitHub Pages JS builds are in the table below.
 
-*Viewing API configuration and its updates as you change setting in [Themes Playground](https://rydmike.com/flexcolorscheme/themesplayground-latest).*
-
-The latest **Themes Playground** build can be used as a [web app here](https://rydmike.com/flexcolorscheme/themesplayground-latest). For guidance on how to use the Themes Playground, please read the [Themes Playground chapter](https://docs.flexcolorscheme.com/playground) available in the documentation site.
-
-Beware, fiddling with all the different themes and settings can be quite fun and addictive, happy theming! 💙
-
-### Experimental Playground WASM GC build
-
-There is also an experimental version of the **Themes Playground** that uses a WASM GC build to run with WASM in the browser. It is available for the latest version of **FlexColorScheme**, you can find it here [WASM Playground](https://playground.flexcolorscheme.com/). This build may run smoother than the above JS build in Chromium-based browsers on desktops and Android. If your browser does not support WASM GC, it will automatically fall back to the JS build.
-
-The plan is to move the **Themes Playground** latest version link to this WASM GC build and offer older versions as JS builds.
-
-The WASM build was first publicly shared with the v8.3.0 release of **FlexColorScheme**.
-
-### Open Source
-
-The **Themes Playground** application is open source and bundled with the `FlexColorScheme` package in the example folder. In its GitHub repository you can find it [here](https://github.com/rydmike/flex_color_scheme/tree/master/example/lib/example5_themes_playground).
-
-The Playground app is also the last step in the package tutorial series. The [tutorial](https://docs.flexcolorscheme.com/tutorial1) goes through its main used features that are relevant to using `FlexColorScheme`, and features that differ from the previous examples. It does not go through all the details of the application. You are welcome to study its source code for more insights and inspiration. It is on purposes a bit excessively commented. The tutorial also briefly talks about its background, design choices and limitations.
+Happy theming! 💙
 
 ### Available Themes Playground Versions
 
-There are **Theme Playground** version builds corresponding to the last major releases of the **FlexColorScheme** package available. For Version 7 there are also Playground builds for the different minor releases.
+| Name         | Version        | Link                                                      |
+| ------------ | -------------- | --------------------------------------------------------- |
+| V9.0 WASM+JS | V9.0.0         | https://playground.flexcolorscheme.com/                   |
+| V9.0 JS      | V9.0.0         | https://rydmike.com/flexcolorscheme/themesplayground-v9-0 |
+| V8.4         | V8.4.0         | https://rydmike.com/flexcolorscheme/themesplayground-v8-4 |
+| V8.2 & V8.3  | V8.2.0, V8.3.x | https://rydmike.com/flexcolorscheme/themesplayground-v8-3 |
+| V8.1         | V8.1.1         | https://rydmike.com/flexcolorscheme/themesplayground-v8-1 |
+| V8.0         | V8.0.2         | https://rydmike.com/flexcolorscheme/themesplayground-v8-0 |
+| V7.3         | V7.3.1         | https://rydmike.com/flexcolorscheme/themesplayground-v7-3 |
+| V7.2         | V7.2.0         | https://rydmike.com/flexcolorscheme/themesplayground-v7-2 |
+| V7.1         | V7.1.2         | https://rydmike.com/flexcolorscheme/themesplayground-v7-1 |
+| V7.0         | V7.0.5         | https://rydmike.com/flexcolorscheme/themesplayground-v7   |
+| V6           | V6.1.1         | https://rydmike.com/flexcolorscheme/themesplayground-v6   |
+| V5           | V5.1.0         | https://rydmike.com/flexcolorscheme/themesplayground-v5   |
+| V4           | V4.2.0         | https://rydmike.com/flexcolorschemeV4Tut5                 |
 
-You should use the same major version of **Themes Playground** as the `flex_color_scheme` package you are using. With version 7 and 8, you should prefer to match the minor version too.
-
-| Name        | Version        | Link                                                        |
-|-------------|----------------|-------------------------------------------------------------| 
-| V8.4        | V8.4.0         | https://rydmike.com/flexcolorscheme/themesplayground-latest |
-| V8.2 & V8.3 | V8.2.0, V8.3.x | https://rydmike.com/flexcolorscheme/themesplayground-v8-3   |
-| V8.1        | V8.1.1         | https://rydmike.com/flexcolorscheme/themesplayground-v8-1   |
-| V8.0        | V8.0.2         | https://rydmike.com/flexcolorscheme/themesplayground-v8-0   |
-| V7.3        | V7.3.1         | https://rydmike.com/flexcolorscheme/themesplayground-v7-3   |
-| V7.2        | V7.2.0         | https://rydmike.com/flexcolorscheme/themesplayground-v7-2   |
-| V7.1        | V7.1.2         | https://rydmike.com/flexcolorscheme/themesplayground-v7-1   |
-| V7.0        | V7.0.5         | https://rydmike.com/flexcolorscheme/themesplayground-v7     |
-| V6          | V6.1.1         | https://rydmike.com/flexcolorscheme/themesplayground-v6     |
-| V5          | V5.1.0         | https://rydmike.com/flexcolorscheme/themesplayground-v5     |
-| V4          | V4.2.0         | https://rydmike.com/flexcolorschemeV4Tut5                   |
-
-
-> **NOTE!**  
-> If you use a higher version of a WEB build and try to load a lower version again with the same browser, it will most likely fail and not load. This happens because older and newer builds run on the same domain and share the same browser local storage file. This allows newer versions to load data configured in older versions. However, older versions may not understand some data stored and inserted by the newer versions and they will fail. You can get the web build for an older version to start again by clearing stored browser data:  
->"Settings" → "Delete browsing data..." → "Cookies and other site data".  
-> You do of course lose any config you had used then. This issue could be fixed, but would require updating rebuilding the old builds and there are currently no plans to do so.  
-> Version 8.0.0 and later uses a new local storage name to avoid this issue, so it will not conflict with V7 and older versions. There are few storage settings in V8 that are backwards compatible anyway.
-> 
+> **NOTE!** Older and newer web builds on this domain share browser storage. Loading a newer Playground, then an older one, can fail until you clear site data (Settings → Delete browsing data → Cookies and other site data). You lose saved config. Version 8.0.0 and later uses a different storage name, so it does not conflict with V7 and older.
 
 ### Themes Playground as a Desktop App
 
-You can also build Windows, macOS or Linux desktop versions of the **Themes Playground**. This is highly recommended, as it runs much smoother and nicer than the WEB build. The **Themes Playground** app is bundled with the package GitHub repository as **Example 5**.
-
-If you need a Themes Playground companion build for a specific older FlexColorScheme version, you can download a ZIP bundle from the GitHub repo for any past [release here](https://github.com/rydmike/flex_color_scheme/releases).
+A Windows, macOS, or Linux build of **Example 5** is smoother than the web app. For an older package version, download a ZIP from the GitHub [releases](https://github.com/rydmike/flex_color_scheme/releases).

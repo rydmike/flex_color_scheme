@@ -1,9 +1,8 @@
-import 'package:flutter/material.dart';
-
-import '../controllers/theme_controller.dart';
-import 'splash_page_one.dart';
-import 'splash_page_two.dart';
-import 'subpage.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/pages/splash_page_one.dart';
+import 'package:flex_color_scheme_example/shared/pages/splash_page_two.dart';
+import 'package:flex_color_scheme_example/shared/pages/subpage.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// All the sub demo pages wrapped in a header card.
 class PageExamples extends StatelessWidget {

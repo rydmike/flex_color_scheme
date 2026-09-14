@@ -1,7 +1,8 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
+
 import 'helpers/tint_alpha_factor.dart';
 
 void main() {
@@ -9,8 +10,7 @@ void main() {
     // -------------------------------------------------------------------------
     // FlexSubThemes searchBarTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'SearchBar FST25SB.1: GIVEN a default FlexSubTheme.searchBarTheme() '
+    test('SearchBar FST25SB.1: GIVEN a default FlexSubTheme.searchBarTheme() '
         'SearchBarThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -68,8 +68,7 @@ void main() {
         equals(Colors.transparent),
       );
     });
-    test(
-        'SearchBar FST25SB.2: GIVEN a custom FlexSubTheme.searchBarTheme() '
+    test('SearchBar FST25SB.2: GIVEN a custom FlexSubTheme.searchBarTheme() '
         'SearchBarThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF79E742),
@@ -98,27 +97,24 @@ void main() {
       final Color onBackgroundColor = colorScheme.onSurface;
       final bool isLight = colorScheme.brightness == Brightness.light;
       // Get brightness of the SearchBar background color.
-      final bool buttonBgIsLight =
-          ThemeData.estimateBrightnessForColor(backgroundColor) ==
-              Brightness.light;
+      final bool buttonBgIsLight = ThemeData.estimateBrightnessForColor(backgroundColor) == Brightness.light;
       // For tint color use the one that is more likely to give a colored effect
       final Color tint = isLight
           ? buttonBgIsLight
-              ? onBackgroundColor
-              : backgroundColor
+                ? onBackgroundColor
+                : backgroundColor
           : buttonBgIsLight
-              ? backgroundColor
-              : onBackgroundColor;
+          ? backgroundColor
+          : onBackgroundColor;
       // The reverse color is used for overlay
       final Color overlay = isLight
           ? buttonBgIsLight
-              ? backgroundColor
-              : onBackgroundColor
+                ? backgroundColor
+                : onBackgroundColor
           : buttonBgIsLight
-              ? onBackgroundColor
-              : backgroundColor;
-      final bool surfaceMode =
-          (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
+          ? onBackgroundColor
+          : backgroundColor;
+      final bool surfaceMode = (isLight && buttonBgIsLight) || (!isLight && !buttonBgIsLight);
       final double factor = tintAlphaFactor(
         tint,
         colorScheme.brightness,

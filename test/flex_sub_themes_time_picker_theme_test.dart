@@ -1,15 +1,14 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.timePickerTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes TimePicker tests
     // -------------------------------------------------------------------------
-    test(
-        'TimePicker FST33.1 default: GIVEN a default M2 '
+    test('TimePicker FST33.1 default: GIVEN a default M2 '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -43,8 +42,7 @@ void main() {
       );
     });
 
-    test(
-        'TimePicker FST33.2 scheme-based: GIVEN a default M2 '
+    test('TimePicker FST33.2 scheme-based: GIVEN a default M2 '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -80,8 +78,7 @@ void main() {
       );
     });
 
-    test(
-        'TimePicker FST33.3 background-a: GIVEN a default M2 '
+    test('TimePicker FST33.3 background-a: GIVEN a default M2 '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -106,19 +103,19 @@ void main() {
             dayPeriodShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(8)),
             ),
-            inputDecorationTheme: const InputDecorationThemeData(
-              filled: true,
-            ).copyWith(
-              contentPadding: EdgeInsets.zero,
-              errorStyle: const TextStyle(fontSize: 0, height: 0),
-            ),
+            inputDecorationTheme:
+                const InputDecorationThemeData(
+                  filled: true,
+                ).copyWith(
+                  contentPadding: EdgeInsets.zero,
+                  errorStyle: const TextStyle(fontSize: 0, height: 0),
+                ),
           ),
         ),
       );
     });
 
-    test(
-        'TimePicker FST33.4 background-b: GIVEN a custom '
+    test('TimePicker FST33.4 background-b: GIVEN a custom '
         'FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() version with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
@@ -147,18 +144,18 @@ void main() {
             dayPeriodShape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(12)),
             ),
-            inputDecorationTheme: const InputDecorationThemeData(
-              filled: true,
-            ).copyWith(
-              contentPadding: EdgeInsets.zero,
-              errorStyle: const TextStyle(fontSize: 0, height: 0),
-            ),
+            inputDecorationTheme:
+                const InputDecorationThemeData(
+                  filled: true,
+                ).copyWith(
+                  contentPadding: EdgeInsets.zero,
+                  errorStyle: const TextStyle(fontSize: 0, height: 0),
+                ),
           ),
         ),
       );
     });
-    test(
-        'TimePicker FST33.5 GIVEN a custom FlexSubTheme.timePickerTheme() '
+    test('TimePicker FST33.5 GIVEN a custom FlexSubTheme.timePickerTheme() '
         'EXPECT equal to TimePickerThemeData() with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF345234),

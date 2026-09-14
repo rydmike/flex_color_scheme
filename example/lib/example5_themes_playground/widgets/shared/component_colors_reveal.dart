@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import '../../../shared/widgets/universal/list_tile_reveal.dart';
+import 'package:flex_color_scheme_example/shared/widgets/universal/list_tile_reveal.dart';
+import 'package:material_ui/material_ui.dart';
 
 class ComponentColorsReveal extends StatelessWidget {
   const ComponentColorsReveal({
@@ -11,10 +10,12 @@ class ComponentColorsReveal extends StatelessWidget {
   Widget build(BuildContext context) {
     return const ListTileReveal(
       title: Text('Component theme colors'),
-      subtitleReveal: Text('Component theme colors are defined in each '
-          "component's settings panel. Below default or currently selected "
-          'ColorScheme based color for important components and their '
-          'main ColorScheme based color.\n'),
+      subtitleReveal: Text(
+        'Component theme colors are defined in each '
+        "component's settings panel. Below default or currently selected "
+        'ColorScheme based color for important components and their '
+        'main ColorScheme based color.\n',
+      ),
     );
   }
 }

@@ -1,107 +1,199 @@
 part of '../flex_sub_themes.dart';
 
 /// An opinionated [SegmentedButtonThemeData] theme for the [SegmentedButton].
+///
+/// ## [colorScheme]
+///
+/// Typically the same [ColorScheme] that is also use for your [ThemeData].
+///
+/// ## [selectedSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as background
+/// color for the selected button.
+///
+/// Defines the background color for selected button, and
+/// its onColor pair defines the foreground for selected button.
+///
+/// If not defined, secondaryContainer will be used.
+///
+/// ## [selectedForegroundSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the
+/// foreground color for the selected [SegmentedButton].
+///
+/// If not defined, contrast color pair to [selectedSchemeColor]
+/// will be used.
+///
+/// ## [unselectedSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the
+/// background color for unselected segmented button.
+///
+/// If not defined, transparent will be used.
+///
+/// ## [unselectedForegroundSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the
+/// foreground color for unselected segmented button.
+///
+/// If not defined, contrast color pair to [unselectedSchemeColor]
+/// will be used, for transparent it is onSurface.
+///
+/// ## [borderSchemeColor]
+///
+/// Selects which color from the passed in colorScheme to use as the border
+/// color for the toggle buttons.
+///
+/// If not defined, [ColorScheme.outline] will be the effective result.
+///
+/// ## [radius]
+///
+/// The button corner radius.
+///
+/// If not defined, defaults to defaults to Stadium border.
+///
+/// ## [borderWidth]
+///
+/// The width of the borders around the segmented button.
+///
+/// If null, defaults to [kThinBorderWidth] = 1.0.
+///
+/// ## [padding]
+///
+/// Padding for the individual segment buttons.
+///
+/// Defaults to null and uses M3's default scaled padding function.
+///
+/// ## [minButtonSize]
+///
+/// Minimum button size.
+///
+/// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
+/// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
+/// [useMaterial3] is true, via M3 built in defaults.
+///
+/// ## [useTintedInteraction]
+///
+/// Defines if the theme uses tinted interaction effects.
+///
+/// If undefined, defaults to false.
+///
+/// ## [useTintedDisable]
+///
+/// Defines if the theme uses tinted disabled color.
+///
+/// If undefined, defaults to false.
+///
+/// ## [splashFactory]
+///
+/// Creates the [InkWell] splash factory, which defines the appearance of
+/// "ink" splashes that occur in response to taps.
+///
+/// In M2 mode FlexColorScheme passes in the effective splashFactory
+/// from splashFactory override value or the result from
+/// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
+/// null and the default comes via ThemeData.splashFactory, that is has
+/// also defined.
+///
+/// ## [textStyle]
+///
+/// The style for the segmented button's [Text] widget descendants.
+///
+/// The color of the [textStyle] is typically not used directly, the
+/// [selectedSchemeColor] and [unselectedForegroundSchemeColor] are
+/// used instead.
+///
+/// ## [useMaterial3]
+///
+/// A temporary flag used to disable Material-3 design and use legacy
+/// Material-2 design instead. Material-3 design is the default.
+/// Material-2 will be deprecated in Flutter.
+///
+/// If set to true, the theme will use Material3 default styles when
+/// properties are undefined, if false defaults will use FlexColorScheme's
+/// own opinionated default values.
+///
+/// The M2/M3 defaults will only be used for properties that are not
+/// defined, if defined they keep their defined values.
+///
+/// If undefined, defaults to true.
 SegmentedButtonThemeData _segmentedButtonTheme({
-  /// Typically the same [ColorScheme] that is also use for your [ThemeData].
-  required final ColorScheme colorScheme,
+  /// Typically the same `ColorScheme` that is also use for your `ThemeData`.
+  required ColorScheme colorScheme,
 
   /// Selects which color from the passed in colorScheme to use as background
   /// color for the selected button.
-  ///
-  /// Defines the background color for selected button, and
-  /// it's onColor pair defines the foreground for selected button.
-  ///
-  /// If not defined, secondaryContainer will be used.
-  final SchemeColor? selectedSchemeColor,
+  SchemeColor? selectedSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the
-  /// foreground color for the selected [SegmentedButton].
+  /// foreground color for the selected `SegmentedButton`.
   ///
-  /// If not defined, contrast color pair to [selectedSchemeColor]
+  /// If not defined, contrast color pair to `selectedSchemeColor`
   /// will be used.
-  final SchemeColor? selectedForegroundSchemeColor,
+  SchemeColor? selectedForegroundSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the
   /// background color for unselected segmented button.
   ///
   /// If not defined, transparent will be used.
-  final SchemeColor? unselectedSchemeColor,
+  SchemeColor? unselectedSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the
   /// foreground color for unselected segmented button.
   ///
-  /// If not defined, contrast color pair to [unselectedSchemeColor]
+  /// If not defined, contrast color pair to `unselectedSchemeColor`
   /// will be used, for transparent it is onSurface.
-  final SchemeColor? unselectedForegroundSchemeColor,
+  SchemeColor? unselectedForegroundSchemeColor,
 
   /// Selects which color from the passed in colorScheme to use as the border
   /// color for the toggle buttons.
   ///
-  /// If not defined, [ColorScheme.outline] will be the effective result.
-  final SchemeColor? borderSchemeColor,
+  /// If not defined, `ColorScheme.outline` will be the effective result.
+  SchemeColor? borderSchemeColor,
 
   /// The button corner radius.
   ///
   /// If not defined, defaults to defaults to Stadium border.
-  final double? radius,
+  double? radius,
 
   /// The width of the borders around the segmented button.
   ///
-  /// If null, defaults to [kThinBorderWidth] = 1.0.
-  final double? borderWidth,
+  /// If null, defaults to `kThinBorderWidth` = 1.0.
+  double? borderWidth,
 
   /// Padding for the individual segment buttons.
   ///
   /// Defaults to null and uses M3's default scaled padding function.
-  final EdgeInsetsGeometry? padding,
+  EdgeInsetsGeometry? padding,
 
   /// Minimum button size.
   ///
-  /// If null, defaults to [kButtonMinSize] (`const Size(40.0, 40.0)`) when
-  /// [useMaterial3] is false and to `const Size(64.0, 40.0)` when
-  /// [useMaterial3] is true, via M3 built in defaults.
-  final Size? minButtonSize,
+  /// If null, defaults to `kButtonMinSize` (`const Size(40.0, 40.0)`) when
+  /// `useMaterial3` is false and to `const Size(64.0, 40.0)` when
+  /// `useMaterial3` is true, via M3 built in defaults.
+  Size? minButtonSize,
 
   /// Defines if the theme uses tinted interaction effects.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedInteraction,
+  bool? useTintedInteraction,
 
   /// Defines if the theme uses tinted disabled color.
   ///
   /// If undefined, defaults to false.
-  final bool? useTintedDisable,
+  bool? useTintedDisable,
 
-  /// Creates the [InkWell] splash factory, which defines the appearance of
+  /// Creates the `InkWell` splash factory, which defines the appearance of
   /// "ink" splashes that occur in response to taps.
-  ///
-  /// In M2 mode FlexColorScheme passes in the effective splashFactory
-  /// from splashFactory override value or the result from
-  /// [FlexSubThemesData] adaptive splash settings. In M3 mode it is kept
-  /// null and the default comes via ThemeData.splashFactory, that is has
-  /// also defined.
-  final InteractiveInkFeatureFactory? splashFactory,
+  InteractiveInkFeatureFactory? splashFactory,
 
-  /// The style for the segmented button's [Text] widget descendants.
-  ///
-  /// The color of the [textStyle] is typically not used directly, the
-  /// [selectedSchemeColor] and [unselectedForegroundSchemeColor] are
-  /// used instead.
-  final WidgetStateProperty<TextStyle?>? textStyle,
+  /// The style for the segmented button's `Text` widget descendants.
+  WidgetStateProperty<TextStyle?>? textStyle,
 
   /// A temporary flag used to disable Material-3 design and use legacy
   /// Material-2 design instead. Material-3 design is the default.
   /// Material-2 will be deprecated in Flutter.
-  ///
-  /// If set to true, the theme will use Material3 default styles when
-  /// properties are undefined, if false defaults will use FlexColorScheme's
-  /// own opinionated default values.
-  ///
-  /// The M2/M3 defaults will only be used for properties that are not
-  /// defined, if defined they keep their defined values.
-  ///
-  /// If undefined, defaults to true.
-  final bool? useMaterial3,
+  bool? useMaterial3,
 }) {
   final bool useM3 = useMaterial3 ?? true;
   final bool tintInteract = useTintedInteraction ?? false;
@@ -110,10 +202,9 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   final bool isLight = colorScheme.brightness == Brightness.light;
 
   // Get selected background color, defaults to secondaryContainer.
-  final SchemeColor selectedScheme = selectedSchemeColor ??
-      (useM3 ? SchemeColor.secondaryContainer : SchemeColor.primary);
-  final Color selectedColor =
-      FlexSubThemes.schemeColor(selectedScheme, colorScheme);
+  final SchemeColor selectedScheme =
+      selectedSchemeColor ?? (useM3 ? SchemeColor.secondaryContainer : SchemeColor.primary);
+  final Color selectedColor = FlexSubThemes.schemeColor(selectedScheme, colorScheme);
 
   final Color onSelectedColor = selectedForegroundSchemeColor != null
       ? FlexSubThemes.schemeColor(selectedForegroundSchemeColor, colorScheme)
@@ -124,9 +215,7 @@ SegmentedButtonThemeData _segmentedButtonTheme({
     colorScheme,
   );
   final Color onUnselectedColor = FlexSubThemes.schemeColor(
-    unselectedForegroundSchemeColor ??
-        FlexSubThemes.onSchemeColor(
-            unselectedSchemeColor ?? SchemeColor.surface),
+    unselectedForegroundSchemeColor ?? FlexSubThemes.onSchemeColor(unselectedSchemeColor ?? SchemeColor.surface),
     colorScheme,
   );
 
@@ -135,12 +224,10 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   final Color overlay = onSelectedColor;
   final Color tint = selectedColor;
   // Get brightness of selectedColor color.
-  final bool selectedBgIsLight =
-      ThemeData.estimateBrightnessForColor(selectedColor) == Brightness.light;
+  final bool selectedBgIsLight = ThemeData.estimateBrightnessForColor(selectedColor) == Brightness.light;
   // We use surface mode tint factor, if it is light theme and selectedColor
   // is light OR if it is a dark theme and background is dark.
-  final bool selectedSurfaceMode =
-      (isLight && selectedBgIsLight) || (!isLight && !selectedBgIsLight);
+  final bool selectedSurfaceMode = (isLight && selectedBgIsLight) || (!isLight && !selectedBgIsLight);
   final double factor = FlexSubThemes._tintAlphaFactor(
     tint,
     colorScheme.brightness,
@@ -148,25 +235,21 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   );
 
   final Color unOverlay = unselectedColor;
-  final Color unTint = unselectedSchemeColor == null ||
-          unselectedSchemeColor == SchemeColor.surface
+  final Color unTint = unselectedSchemeColor == null || unselectedSchemeColor == SchemeColor.surface
       ? selectedColor
       : onUnselectedColor;
   // Get brightness of unselectedColor color.
-  final bool unSelectedBgIsLight =
-      ThemeData.estimateBrightnessForColor(unselectedColor) == Brightness.light;
+  final bool unSelectedBgIsLight = ThemeData.estimateBrightnessForColor(unselectedColor) == Brightness.light;
   // We use surface mode tint factor, if it is light theme and unselectedColor
   // is light OR if it is a dark theme and background is dark.
-  final bool unSelectedSurfaceMode =
-      (isLight && unSelectedBgIsLight) || (!isLight && !unSelectedBgIsLight);
+  final bool unSelectedSurfaceMode = (isLight && unSelectedBgIsLight) || (!isLight && !unSelectedBgIsLight);
   final double unFactor = FlexSubThemes._tintAlphaFactor(
     unTint,
     colorScheme.brightness,
     unSelectedSurfaceMode,
   );
 
-  final Color disableTint = unselectedSchemeColor == null ||
-          unselectedSchemeColor == SchemeColor.surface
+  final Color disableTint = unselectedSchemeColor == null || unselectedSchemeColor == SchemeColor.surface
       ? selectedColor
       : onUnselectedColor;
 
@@ -177,16 +260,13 @@ SegmentedButtonThemeData _segmentedButtonTheme({
   // Effective border width.
   final double effectiveWidth = borderWidth ?? kThinBorderWidth;
 
-  final Color disableBorderTint = (borderSchemeColor == null && useM3) ||
-          unselectedSchemeColor == SchemeColor.outline
+  final Color disableBorderTint = (borderSchemeColor == null && useM3) || unselectedSchemeColor == SchemeColor.outline
       ? selectedColor
       : borderColor;
 
-  final Color disabledForeground =
-      unselectedSchemeColor == null ? colorScheme.onSurface : onUnselectedColor;
+  final Color disabledForeground = unselectedSchemeColor == null ? colorScheme.onSurface : onUnselectedColor;
 
-  final WidgetStateProperty<Color> foregroundColor =
-      WidgetStateProperty.resolveWith((Set<WidgetState> states) {
+  final WidgetStateProperty<Color> foregroundColor = WidgetStateProperty.resolveWith((Set<WidgetState> states) {
     if (states.contains(WidgetState.disabled)) {
       if (tintDisable) {
         return FlexSubThemes.tintedDisable(disabledForeground, disableTint);

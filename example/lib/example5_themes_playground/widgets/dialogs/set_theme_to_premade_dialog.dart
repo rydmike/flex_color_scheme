@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
-
-import '../../../shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Dialog to confirm if user wants to set theme to a premade setup.
 class SetThemeToPremadeDialog extends StatelessWidget {
@@ -13,20 +12,24 @@ class SetThemeToPremadeDialog extends StatelessWidget {
       title: Text('Use "$selectedOption" premade setup?'),
       content: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: App.maxAlertDialogWidth),
-        child: const Text('Your current configuration will be overwritten, '
-            'but any used and defined custom colors will be kept.'),
+        child: const Text(
+          'Your current configuration will be overwritten, '
+          'but any used and defined custom colors will be kept.',
+        ),
       ),
       actions: <Widget>[
         TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: const Text('Cancel')),
+          onPressed: () {
+            Navigator.of(context).pop(false);
+          },
+          child: const Text('Cancel'),
+        ),
         TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: const Text('Use theme')),
+          onPressed: () {
+            Navigator.of(context).pop(true);
+          },
+          child: const Text('Use theme'),
+        ),
       ],
     );
   }

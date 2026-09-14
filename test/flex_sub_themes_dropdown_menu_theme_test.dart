@@ -1,6 +1,6 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.dropdownMenuTheme ', () {
@@ -12,8 +12,7 @@ void main() {
     // InputDecoratorTheme and via the MenuTheme. This is mostly here to
     // provide a stub for future individual theming of the the container
     // for the DropdownMenu.
-    test(
-        'DropdownMenu 11.1: GIVEN a FlexSubTheme.dropdownMenuTheme() '
+    test('DropdownMenu 11.1: GIVEN a FlexSubTheme.dropdownMenuTheme() '
         'EXPECT equal to DropdownMenuThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),

@@ -24,14 +24,14 @@ export 'src/flex_color_scheme.dart';
 /// Extensions for `Color` and `String` to assist with color
 /// manipulation and information.
 ///
-/// These extensions are used by FlexColorScheme, and may also useful if you
+/// These extensions are used by FlexColorScheme, and may also be useful if you
 /// are making custom color schemes and surface colors.
 /// These extensions can also be used generally.
 export 'src/flex_extensions.dart';
 
 /// Immutable configuration class for using seed color generated themes.
 ///
-/// Seed generated color schemes are based on the Material Guide 3 color system.
+/// Seed generated color schemes are based on the Material 3 color system.
 export 'src/flex_key_color.dart';
 
 /// Enum that can be used to lookup predefined `FlexSchemeData` color scheme
@@ -47,12 +47,11 @@ export 'src/flex_scheme_color.dart';
 export 'src/flex_scheme_data.dart';
 
 /// Immutable data class used to create on colors for displaying text
-/// and icons on the surface, background, error colors and the primary,
+/// and icons on the surface, error colors and the primary,
 /// secondary and tertiary colors.
 export 'src/flex_scheme_on_colors.dart';
 
-/// Immutable data class used to make the six different surface colors in a
-/// FlexColorScheme.
+/// Immutable data class used to make surface colors in a FlexColorScheme.
 export 'src/flex_scheme_surface_colors.dart';
 
 /// Enum used to select ink effect in a FlexSubThemesData configuration.
@@ -70,7 +69,7 @@ export 'src/flex_sub_themes_data.dart';
 export 'src/flex_surface_mode.dart';
 
 /// Extensions on ThemeData used to return a ThemeData object defined
-/// by a FlexColorScheme object and its toTheme method.
+/// by a FlexColorScheme object and its `FlexColorScheme.toTheme` getter.
 export 'src/flex_theme_data_extensions.dart';
 
 /// A theme-mode 3-way switch widget that uses `FlexSchemeData` as colors to

@@ -1,14 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.bottomSheetTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes BottomSheet tests
     // -------------------------------------------------------------------------
-    test(
-        'BottomSheet FST4.1:  GIVEN a default FlexSubTheme.bottomSheetTheme() '
+    test('BottomSheet FST4.1:  GIVEN a default FlexSubTheme.bottomSheetTheme() '
         'EXPECT equal to BottomSheetThemeData() version with same values', () {
       expect(
         FlexSubThemes.bottomSheetTheme(),
@@ -26,8 +25,7 @@ void main() {
         ),
       );
     });
-    test(
-        'BottomSheet FST4.2 custom: GIVEN a custom '
+    test('BottomSheet FST4.2 custom: GIVEN a custom '
         'FlexSubTheme.bottomSheetTheme() '
         'EXPECT equal to BottomSheetThemeData() version with same values', () {
       expect(

@@ -1,12 +1,11 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
-
-import '../../../../shared/const/app_color.dart';
-import '../../../../shared/controllers/theme_controller.dart';
-import '../../../../shared/controllers/tone_indicator_controller.dart';
-import '../../../utils/effective_flex_tones.dart';
-import '../../shared/color_name_value.dart';
-import '../../shared/color_picker_inkwell.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/utils/effective_flex_tones.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_name_value.dart';
+import 'package:flex_color_scheme_example/example5_themes_playground/widgets/shared/color_picker_inkwell.dart';
+import 'package:flex_color_scheme_example/shared/const/app_color.dart';
+import 'package:flex_color_scheme_example/shared/controllers/theme_controller.dart';
+import 'package:flex_color_scheme_example/shared/controllers/tone_indicator_controller.dart';
+import 'package:material_ui/material_ui.dart';
 
 // Display the all scheme colors in currently selected color scheme, including
 // their name and color code.
@@ -24,17 +23,13 @@ class SchemeColors extends StatelessWidget {
   final ToneIndicatorController toneC;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  bool _isLight(final Color color) =>
-      FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
+  bool _isLight(Color color) => FlexSchemeOnColors.estimateErrorBrightness(color) == Brightness.light;
 
   // On color used when a theme color property does not have a theme onColor.
-  Color _onColor(final Color color) =>
-      _isLight(color) ? Colors.black : Colors.white;
+  Color _onColor(Color color) => _isLight(color) ? Colors.black : Colors.white;
 
   bool _locked(bool isLight, bool keepLight, bool keepDark) =>
-      tc.useKeyColors &&
-      tc.useFlexColorScheme &&
-      ((isLight && keepLight) || (!isLight && keepDark));
+      tc.useKeyColors && tc.useFlexColorScheme && ((isLight && keepLight) || (!isLight && keepDark));
 
   @override
   Widget build(BuildContext context) {
@@ -69,17 +64,15 @@ class SchemeColors extends StatelessWidget {
         : AppColor.scheme(tc).dark;
 
     // But error input dark mode colors also when we use toDark
-    final FlexSchemeColor inputErrColor =
-        isLight ? AppColor.scheme(tc).light : AppColor.scheme(tc).dark;
+    final FlexSchemeColor inputErrColor = isLight ? AppColor.scheme(tc).light : AppColor.scheme(tc).dark;
 
     // Input errorColors
-    final Color inputErrorColor = inputErrColor.error ??
-        (isLight ? FlexColor.materialLightError : FlexColor.materialDarkError);
+    final Color inputErrorColor =
+        inputErrColor.error ?? (isLight ? FlexColor.materialLightError : FlexColor.materialDarkError);
     final Color inputOnErrorColor = _onColor(inputErrorColor);
-    final Color inputErrorContainerColor = inputErrColor.errorContainer ??
-        (isLight
-            ? FlexColor.lightErrorContainer(inputErrorColor)
-            : FlexColor.darkErrorContainer(inputErrorColor));
+    final Color inputErrorContainerColor =
+        inputErrColor.errorContainer ??
+        (isLight ? FlexColor.lightErrorContainer(inputErrorColor) : FlexColor.darkErrorContainer(inputErrorColor));
     final Color inputOnErrorContainerColor = _onColor(inputErrorContainerColor);
 
     // These color values are used if picking is cancelled to restore
@@ -168,13 +161,9 @@ class SchemeColors extends StatelessWidget {
                             color: colorScheme.primary,
                             onChanged: (Color color) {
                               if (isLight) {
-                                swapLight
-                                    ? tc.setCustomSecondaryLight(color)
-                                    : tc.setCustomPrimaryLight(color);
+                                swapLight ? tc.setCustomSecondaryLight(color) : tc.setCustomPrimaryLight(color);
                               } else {
-                                swapDark
-                                    ? tc.setCustomSecondaryDark(color)
-                                    : tc.setCustomPrimaryDark(color);
+                                swapDark ? tc.setCustomSecondaryDark(color) : tc.setCustomPrimaryDark(color);
                               }
                             },
                             recentColors: tc.recentColors,
@@ -182,13 +171,9 @@ class SchemeColors extends StatelessWidget {
                             wasCancelled: (bool cancelled) {
                               if (cancelled) {
                                 if (isLight) {
-                                  swapLight
-                                      ? tc.setCustomSecondaryLight(primary)
-                                      : tc.setCustomPrimaryLight(primary);
+                                  swapLight ? tc.setCustomSecondaryLight(primary) : tc.setCustomPrimaryLight(primary);
                                 } else {
-                                  swapDark
-                                      ? tc.setCustomSecondaryDark(primary)
-                                      : tc.setCustomPrimaryDark(primary);
+                                  swapDark ? tc.setCustomSecondaryDark(primary) : tc.setCustomPrimaryDark(primary);
                                 }
                               }
                             },
@@ -202,14 +187,12 @@ class SchemeColors extends StatelessWidget {
                               inputColor: inputColor.primary,
                               inputTextColor: _onColor(inputColor.primary),
                               tone: tones.primaryTone,
-                              showTone: _locked(isLight, !tc.keepPrimary,
-                                  !tc.keepDarkPrimary),
-                              isLocked: _locked(
-                                  isLight, tc.keepPrimary, tc.keepDarkPrimary),
+                              showTone: _locked(isLight, !tc.keepPrimary, !tc.keepDarkPrimary),
+                              isLocked: _locked(isLight, tc.keepPrimary, tc.keepDarkPrimary),
                               onLocked: tc.useKeyColors && tc.useFlexColorScheme
                                   ? isLight
-                                      ? tc.setKeepPrimary
-                                      : tc.setKeepDarkPrimary
+                                        ? tc.setKeepPrimary
+                                        : tc.setKeepDarkPrimary
                                   : null,
                             ),
                           ),
@@ -230,13 +213,11 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onPrimary,
                           child: ColorNameValue(
-                            key: ValueKey<String>(
-                                'cnv onPrimary ${colorScheme.onPrimary}'),
+                            key: ValueKey<String>('cnv onPrimary ${colorScheme.onPrimary}'),
                             color: colorScheme.onPrimary,
                             textColor: colorScheme.primary,
                             label: 'onPrimary',
-                            showTone: _locked(
-                                isLight, !tc.keepPrimary, !tc.keepDarkPrimary),
+                            showTone: _locked(isLight, !tc.keepPrimary, !tc.keepDarkPrimary),
                             tone: tones.onPrimaryTone,
                           ),
                         ),
@@ -292,43 +273,34 @@ class SchemeColors extends StatelessWidget {
                               if (cancelled) {
                                 if (isLight) {
                                   swapLight
-                                      ? tc.setCustomSecondaryContainerLight(
-                                          primaryContainer)
-                                      : tc.setCustomPrimaryContainerLight(
-                                          primaryContainer);
+                                      ? tc.setCustomSecondaryContainerLight(primaryContainer)
+                                      : tc.setCustomPrimaryContainerLight(primaryContainer);
                                 } else {
                                   swapDark
-                                      ? tc.setCustomSecondaryContainerDark(
-                                          primaryContainer)
-                                      : tc.setCustomPrimaryContainerDark(
-                                          primaryContainer);
+                                      ? tc.setCustomSecondaryContainerDark(primaryContainer)
+                                      : tc.setCustomPrimaryContainerDark(primaryContainer);
                                 }
                               }
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
-                              key: ValueKey<String>('cnv primaryContainer '
-                                  '${colorScheme.primaryContainer}'),
+                              key: ValueKey<String>(
+                                'cnv primaryContainer '
+                                '${colorScheme.primaryContainer}',
+                              ),
                               color: colorScheme.primaryContainer,
                               textColor: colorScheme.onPrimaryContainer,
                               label: 'primary\u200BContainer',
                               showInputColor: showInputColor,
                               inputColor: inputColor.primaryContainer,
-                              inputTextColor:
-                                  _onColor(inputColor.primaryContainer),
+                              inputTextColor: _onColor(inputColor.primaryContainer),
                               tone: tones.primaryContainerTone,
-                              showTone: _locked(
-                                  isLight,
-                                  !tc.keepPrimaryContainer,
-                                  !tc.keepDarkPrimaryContainer),
-                              isLocked: _locked(
-                                  isLight,
-                                  tc.keepPrimaryContainer,
-                                  tc.keepDarkPrimaryContainer),
+                              showTone: _locked(isLight, !tc.keepPrimaryContainer, !tc.keepDarkPrimaryContainer),
+                              isLocked: _locked(isLight, tc.keepPrimaryContainer, tc.keepDarkPrimaryContainer),
                               onLocked: tc.useKeyColors && tc.useFlexColorScheme
                                   ? isLight
-                                      ? tc.setKeepPrimaryContainer
-                                      : tc.setKeepDarkPrimaryContainer
+                                        ? tc.setKeepPrimaryContainer
+                                        : tc.setKeepDarkPrimaryContainer
                                   : null,
                             ),
                           ),
@@ -349,14 +321,15 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onPrimaryContainer,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv onPrimaryContainer '
-                                '${colorScheme.onPrimaryContainer}'),
+                            key: ValueKey<String>(
+                              'cnv onPrimaryContainer '
+                              '${colorScheme.onPrimaryContainer}',
+                            ),
                             color: colorScheme.onPrimaryContainer,
                             textColor: colorScheme.primaryContainer,
                             label: 'onPrimary\u200BContainer',
                             tone: tones.onPrimaryContainerTone,
-                            showTone: _locked(isLight, !tc.keepPrimaryContainer,
-                                !tc.keepDarkPrimaryContainer),
+                            showTone: _locked(isLight, !tc.keepPrimaryContainer, !tc.keepDarkPrimaryContainer),
                           ),
                         ),
                       ),
@@ -393,8 +366,7 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.primaryFixed,
                           child: ColorNameValue(
-                            key: ValueKey<String>(
-                                'cnv primaryFixed ${colorScheme.primaryFixed}'),
+                            key: ValueKey<String>('cnv primaryFixed ${colorScheme.primaryFixed}'),
                             color: colorScheme.primaryFixed,
                             textColor: colorScheme.onPrimaryFixed,
                             label: 'primaryFixed',
@@ -418,8 +390,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onPrimaryFixed,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv onPrimaryFixed '
-                                '${colorScheme.onPrimaryFixed}'),
+                            key: ValueKey<String>(
+                              'cnv onPrimaryFixed '
+                              '${colorScheme.onPrimaryFixed}',
+                            ),
                             color: colorScheme.onPrimaryFixed,
                             textColor: colorScheme.primaryFixed,
                             label: 'onPrimaryFixed',
@@ -461,8 +435,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.primaryFixedDim,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv primaryFixed '
-                                '${colorScheme.primaryFixedDim}'),
+                            key: ValueKey<String>(
+                              'cnv primaryFixed '
+                              '${colorScheme.primaryFixedDim}',
+                            ),
                             color: colorScheme.primaryFixedDim,
                             textColor: colorScheme.onPrimaryFixedVariant,
                             label: 'primaryFixedDim',
@@ -486,8 +462,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onPrimaryFixedVariant,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv onPrimaryFixedVariant '
-                                '${colorScheme.onPrimaryFixedVariant}'),
+                            key: ValueKey<String>(
+                              'cnv onPrimaryFixedVariant '
+                              '${colorScheme.onPrimaryFixedVariant}',
+                            ),
                             color: colorScheme.onPrimaryFixedVariant,
                             textColor: colorScheme.primaryFixedDim,
                             label: 'onPrimaryFixed\nVariant',
@@ -532,13 +510,9 @@ class SchemeColors extends StatelessWidget {
                             color: colorScheme.secondary,
                             onChanged: (Color color) {
                               if (isLight) {
-                                swapLight
-                                    ? tc.setCustomPrimaryLight(color)
-                                    : tc.setCustomSecondaryLight(color);
+                                swapLight ? tc.setCustomPrimaryLight(color) : tc.setCustomSecondaryLight(color);
                               } else {
-                                swapDark
-                                    ? tc.setCustomPrimaryDark(color)
-                                    : tc.setCustomSecondaryDark(color);
+                                swapDark ? tc.setCustomPrimaryDark(color) : tc.setCustomSecondaryDark(color);
                               }
                             },
                             recentColors: tc.recentColors,
@@ -550,16 +524,13 @@ class SchemeColors extends StatelessWidget {
                                       ? tc.setCustomPrimaryLight(secondary)
                                       : tc.setCustomSecondaryLight(secondary);
                                 } else {
-                                  swapDark
-                                      ? tc.setCustomPrimaryDark(secondary)
-                                      : tc.setCustomSecondaryDark(secondary);
+                                  swapDark ? tc.setCustomPrimaryDark(secondary) : tc.setCustomSecondaryDark(secondary);
                                 }
                               }
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
-                              key: ValueKey<String>(
-                                  'cnv secondary ${colorScheme.secondary}'),
+                              key: ValueKey<String>('cnv secondary ${colorScheme.secondary}'),
                               color: colorScheme.secondary,
                               textColor: colorScheme.onSecondary,
                               label: 'secondary',
@@ -567,14 +538,12 @@ class SchemeColors extends StatelessWidget {
                               inputColor: inputColor.secondary,
                               inputTextColor: _onColor(inputColor.secondary),
                               tone: tones.secondaryTone,
-                              showTone: _locked(isLight, !tc.keepSecondary,
-                                  !tc.keepDarkSecondary),
-                              isLocked: _locked(isLight, tc.keepSecondary,
-                                  tc.keepDarkSecondary),
+                              showTone: _locked(isLight, !tc.keepSecondary, !tc.keepDarkSecondary),
+                              isLocked: _locked(isLight, tc.keepSecondary, tc.keepDarkSecondary),
                               onLocked: tc.useKeyColors && tc.useFlexColorScheme
                                   ? isLight
-                                      ? tc.setKeepSecondary
-                                      : tc.setKeepDarkSecondary
+                                        ? tc.setKeepSecondary
+                                        : tc.setKeepDarkSecondary
                                   : null,
                             ),
                           ),
@@ -595,14 +564,12 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onSecondary,
                           child: ColorNameValue(
-                            key: ValueKey<String>(
-                                'cnv onSecondary ${colorScheme.onSecondary}'),
+                            key: ValueKey<String>('cnv onSecondary ${colorScheme.onSecondary}'),
                             color: colorScheme.onSecondary,
                             textColor: colorScheme.secondary,
                             label: 'onSecondary',
                             tone: tones.onSecondaryTone,
-                            showTone: _locked(isLight, !tc.keepSecondary,
-                                !tc.keepDarkSecondary),
+                            showTone: _locked(isLight, !tc.keepSecondary, !tc.keepDarkSecondary),
                           ),
                         ),
                       ),
@@ -644,8 +611,7 @@ class SchemeColors extends StatelessWidget {
                               if (isLight) {
                                 swapLight
                                     ? tc.setCustomPrimaryContainerLight(color)
-                                    : tc.setCustomSecondaryContainerLight(
-                                        color);
+                                    : tc.setCustomSecondaryContainerLight(color);
                               } else {
                                 swapDark
                                     ? tc.setCustomPrimaryContainerDark(color)
@@ -658,43 +624,34 @@ class SchemeColors extends StatelessWidget {
                               if (cancelled) {
                                 if (isLight) {
                                   swapLight
-                                      ? tc.setCustomPrimaryContainerLight(
-                                          secondaryContainer)
-                                      : tc.setCustomSecondaryContainerLight(
-                                          secondaryContainer);
+                                      ? tc.setCustomPrimaryContainerLight(secondaryContainer)
+                                      : tc.setCustomSecondaryContainerLight(secondaryContainer);
                                 } else {
                                   swapDark
-                                      ? tc.setCustomPrimaryContainerDark(
-                                          secondaryContainer)
-                                      : tc.setCustomSecondaryContainerDark(
-                                          secondaryContainer);
+                                      ? tc.setCustomPrimaryContainerDark(secondaryContainer)
+                                      : tc.setCustomSecondaryContainerDark(secondaryContainer);
                                 }
                               }
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
-                              key: ValueKey<String>('cnv secondaryContainer '
-                                  '${colorScheme.secondaryContainer}'),
+                              key: ValueKey<String>(
+                                'cnv secondaryContainer '
+                                '${colorScheme.secondaryContainer}',
+                              ),
                               color: colorScheme.secondaryContainer,
                               textColor: colorScheme.onSecondaryContainer,
                               label: 'secondary\u200BContainer',
                               showInputColor: showInputColor,
                               inputColor: inputColor.secondaryContainer,
-                              inputTextColor:
-                                  _onColor(inputColor.secondaryContainer),
+                              inputTextColor: _onColor(inputColor.secondaryContainer),
                               tone: tones.secondaryContainerTone,
-                              showTone: _locked(
-                                  isLight,
-                                  !tc.keepSecondaryContainer,
-                                  !tc.keepDarkSecondaryContainer),
-                              isLocked: _locked(
-                                  isLight,
-                                  tc.keepSecondaryContainer,
-                                  tc.keepDarkSecondaryContainer),
+                              showTone: _locked(isLight, !tc.keepSecondaryContainer, !tc.keepDarkSecondaryContainer),
+                              isLocked: _locked(isLight, tc.keepSecondaryContainer, tc.keepDarkSecondaryContainer),
                               onLocked: tc.useKeyColors && tc.useFlexColorScheme
                                   ? isLight
-                                      ? tc.setKeepSecondaryContainer
-                                      : tc.setKeepDarkSecondaryContainer
+                                        ? tc.setKeepSecondaryContainer
+                                        : tc.setKeepDarkSecondaryContainer
                                   : null,
                             ),
                           ),
@@ -715,16 +672,15 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onSecondaryContainer,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv onSecondaryContainer '
-                                '${colorScheme.onSecondaryContainer}'),
+                            key: ValueKey<String>(
+                              'cnv onSecondaryContainer '
+                              '${colorScheme.onSecondaryContainer}',
+                            ),
                             color: colorScheme.onSecondaryContainer,
                             textColor: colorScheme.secondaryContainer,
                             label: 'onSecondary\u200BContainer',
                             tone: tones.onSecondaryContainerTone,
-                            showTone: _locked(
-                                isLight,
-                                !tc.keepSecondaryContainer,
-                                !tc.keepDarkSecondaryContainer),
+                            showTone: _locked(isLight, !tc.keepSecondaryContainer, !tc.keepDarkSecondaryContainer),
                           ),
                         ),
                       ),
@@ -761,8 +717,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.secondaryFixed,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv secondaryFixed '
-                                '${colorScheme.secondaryFixed}'),
+                            key: ValueKey<String>(
+                              'cnv secondaryFixed '
+                              '${colorScheme.secondaryFixed}',
+                            ),
                             color: colorScheme.secondaryFixed,
                             textColor: colorScheme.onSecondaryFixed,
                             label: 'secondaryFixed',
@@ -786,8 +744,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onSecondaryFixed,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv onSecondaryFixed '
-                                '${colorScheme.onSecondaryFixed}'),
+                            key: ValueKey<String>(
+                              'cnv onSecondaryFixed '
+                              '${colorScheme.onSecondaryFixed}',
+                            ),
                             color: colorScheme.onSecondaryFixed,
                             textColor: colorScheme.secondaryFixed,
                             label: 'onSecondaryFixed',
@@ -829,8 +789,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.secondaryFixedDim,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv secondaryFixed '
-                                '${colorScheme.secondaryFixedDim}'),
+                            key: ValueKey<String>(
+                              'cnv secondaryFixed '
+                              '${colorScheme.secondaryFixedDim}',
+                            ),
                             color: colorScheme.secondaryFixedDim,
                             textColor: colorScheme.onSecondaryFixedVariant,
                             label: 'secondaryFixedDim',
@@ -854,8 +816,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onSecondaryFixedVariant,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv onSecondaryFixedVariant '
-                                '${colorScheme.onSecondaryFixedVariant}'),
+                            key: ValueKey<String>(
+                              'cnv onSecondaryFixedVariant '
+                              '${colorScheme.onSecondaryFixedVariant}',
+                            ),
                             color: colorScheme.onSecondaryFixedVariant,
                             textColor: colorScheme.secondaryFixedDim,
                             label: 'onSecondaryFixed\nVariant',
@@ -918,8 +882,7 @@ class SchemeColors extends StatelessWidget {
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
-                              key: ValueKey<String>(
-                                  'cnv tertiary ${colorScheme.tertiary}'),
+                              key: ValueKey<String>('cnv tertiary ${colorScheme.tertiary}'),
                               color: colorScheme.tertiary,
                               textColor: colorScheme.onTertiary,
                               label: 'tertiary',
@@ -927,14 +890,12 @@ class SchemeColors extends StatelessWidget {
                               inputColor: inputColor.tertiary,
                               inputTextColor: _onColor(inputColor.tertiary),
                               tone: tones.tertiaryTone,
-                              showTone: _locked(isLight, !tc.keepTertiary,
-                                  !tc.keepDarkTertiary),
-                              isLocked: _locked(isLight, tc.keepTertiary,
-                                  tc.keepDarkTertiary),
+                              showTone: _locked(isLight, !tc.keepTertiary, !tc.keepDarkTertiary),
+                              isLocked: _locked(isLight, tc.keepTertiary, tc.keepDarkTertiary),
                               onLocked: tc.useKeyColors && tc.useFlexColorScheme
                                   ? isLight
-                                      ? tc.setKeepTertiary
-                                      : tc.setKeepDarkTertiary
+                                        ? tc.setKeepTertiary
+                                        : tc.setKeepDarkTertiary
                                   : null,
                             ),
                           ),
@@ -955,14 +916,12 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onTertiary,
                           child: ColorNameValue(
-                            key: ValueKey<String>(
-                                'cnv onTertiary ${colorScheme.onTertiary}'),
+                            key: ValueKey<String>('cnv onTertiary ${colorScheme.onTertiary}'),
                             color: colorScheme.onTertiary,
                             textColor: colorScheme.tertiary,
                             label: 'onTertiary',
                             tone: tones.onTertiaryTone,
-                            showTone: _locked(isLight, !tc.keepTertiary,
-                                !tc.keepDarkTertiary),
+                            showTone: _locked(isLight, !tc.keepTertiary, !tc.keepDarkTertiary),
                           ),
                         ),
                       ),
@@ -1012,38 +971,31 @@ class SchemeColors extends StatelessWidget {
                             wasCancelled: (bool cancelled) {
                               if (cancelled) {
                                 if (isLight) {
-                                  tc.setCustomTertiaryContainerLight(
-                                      tertiaryContainer);
+                                  tc.setCustomTertiaryContainerLight(tertiaryContainer);
                                 } else {
-                                  tc.setCustomTertiaryContainerDark(
-                                      tertiaryContainer);
+                                  tc.setCustomTertiaryContainerDark(tertiaryContainer);
                                 }
                               }
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
-                              key: ValueKey<String>('cnv tertiaryContainer '
-                                  '${colorScheme.tertiaryContainer}'),
+                              key: ValueKey<String>(
+                                'cnv tertiaryContainer '
+                                '${colorScheme.tertiaryContainer}',
+                              ),
                               color: colorScheme.tertiaryContainer,
                               textColor: colorScheme.onTertiaryContainer,
                               label: 'tertiary\u200BContainer',
                               showInputColor: showInputColor,
                               inputColor: inputColor.tertiaryContainer,
-                              inputTextColor:
-                                  _onColor(inputColor.tertiaryContainer),
+                              inputTextColor: _onColor(inputColor.tertiaryContainer),
                               tone: tones.tertiaryContainerTone,
-                              showTone: _locked(
-                                  isLight,
-                                  !tc.keepTertiaryContainer,
-                                  !tc.keepDarkTertiaryContainer),
-                              isLocked: _locked(
-                                  isLight,
-                                  tc.keepTertiaryContainer,
-                                  tc.keepDarkTertiaryContainer),
+                              showTone: _locked(isLight, !tc.keepTertiaryContainer, !tc.keepDarkTertiaryContainer),
+                              isLocked: _locked(isLight, tc.keepTertiaryContainer, tc.keepDarkTertiaryContainer),
                               onLocked: tc.useKeyColors && tc.useFlexColorScheme
                                   ? isLight
-                                      ? tc.setKeepTertiaryContainer
-                                      : tc.setKeepDarkTertiaryContainer
+                                        ? tc.setKeepTertiaryContainer
+                                        : tc.setKeepDarkTertiaryContainer
                                   : null,
                             ),
                           ),
@@ -1064,16 +1016,15 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onTertiaryContainer,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv onTertiaryContainer '
-                                '${colorScheme.onTertiaryContainer}'),
+                            key: ValueKey<String>(
+                              'cnv onTertiaryContainer '
+                              '${colorScheme.onTertiaryContainer}',
+                            ),
                             color: colorScheme.onTertiaryContainer,
                             textColor: colorScheme.tertiaryContainer,
                             label: 'onTertiary\u200BContainer',
                             tone: tones.onTertiaryContainerTone,
-                            showTone: _locked(
-                                isLight,
-                                !tc.keepTertiaryContainer,
-                                !tc.keepDarkTertiaryContainer),
+                            showTone: _locked(isLight, !tc.keepTertiaryContainer, !tc.keepDarkTertiaryContainer),
                           ),
                         ),
                       ),
@@ -1110,8 +1061,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.tertiaryFixed,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv tertiaryFixed '
-                                '${colorScheme.tertiaryFixed}'),
+                            key: ValueKey<String>(
+                              'cnv tertiaryFixed '
+                              '${colorScheme.tertiaryFixed}',
+                            ),
                             color: colorScheme.tertiaryFixed,
                             textColor: colorScheme.onTertiaryFixed,
                             label: 'tertiaryFixed',
@@ -1135,8 +1088,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onTertiaryFixed,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv onTertiaryFixed '
-                                '${colorScheme.onTertiaryFixed}'),
+                            key: ValueKey<String>(
+                              'cnv onTertiaryFixed '
+                              '${colorScheme.onTertiaryFixed}',
+                            ),
                             color: colorScheme.onTertiaryFixed,
                             textColor: colorScheme.tertiaryFixed,
                             label: 'onTertiaryFixed',
@@ -1178,8 +1133,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.tertiaryFixedDim,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv tertiaryFixed '
-                                '${colorScheme.tertiaryFixedDim}'),
+                            key: ValueKey<String>(
+                              'cnv tertiaryFixed '
+                              '${colorScheme.tertiaryFixedDim}',
+                            ),
                             color: colorScheme.tertiaryFixedDim,
                             textColor: colorScheme.onTertiaryFixedVariant,
                             label: 'tertiaryFixedDim',
@@ -1203,8 +1160,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onTertiaryFixedVariant,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv onTertiaryFixedVariant '
-                                '${colorScheme.onTertiaryFixedVariant}'),
+                            key: ValueKey<String>(
+                              'cnv onTertiaryFixedVariant '
+                              '${colorScheme.onTertiaryFixedVariant}',
+                            ),
                             color: colorScheme.onTertiaryFixedVariant,
                             textColor: colorScheme.tertiaryFixedDim,
                             label: 'onTertiaryFixed\nVariant',
@@ -1267,8 +1226,7 @@ class SchemeColors extends StatelessWidget {
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
-                              key: ValueKey<String>(
-                                  'cnv error ${colorScheme.error}'),
+                              key: ValueKey<String>('cnv error ${colorScheme.error}'),
                               color: colorScheme.error,
                               textColor: colorScheme.onError,
                               label: 'error',
@@ -1276,14 +1234,12 @@ class SchemeColors extends StatelessWidget {
                               inputColor: inputErrorColor,
                               inputTextColor: inputOnErrorColor,
                               tone: tones.errorTone,
-                              showTone: _locked(
-                                  isLight, !tc.keepError, !tc.keepDarkError),
-                              isLocked: _locked(
-                                  isLight, tc.keepError, tc.keepDarkError),
+                              showTone: _locked(isLight, !tc.keepError, !tc.keepDarkError),
+                              isLocked: _locked(isLight, tc.keepError, tc.keepDarkError),
                               onLocked: tc.useKeyColors && tc.useFlexColorScheme
                                   ? isLight
-                                      ? tc.setKeepError
-                                      : tc.setKeepDarkError
+                                        ? tc.setKeepError
+                                        : tc.setKeepDarkError
                                   : null,
                             ),
                           ),
@@ -1304,8 +1260,7 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onError,
                           child: ColorNameValue(
-                            key: ValueKey<String>(
-                                'cnv onError ${colorScheme.onError}'),
+                            key: ValueKey<String>('cnv onError ${colorScheme.onError}'),
                             color: colorScheme.onError,
                             textColor: colorScheme.error,
                             label: 'onError',
@@ -1360,18 +1315,18 @@ class SchemeColors extends StatelessWidget {
                             wasCancelled: (bool cancelled) {
                               if (cancelled) {
                                 if (isLight) {
-                                  tc.setCustomErrorContainerLight(
-                                      errorContainer);
+                                  tc.setCustomErrorContainerLight(errorContainer);
                                 } else {
-                                  tc.setCustomErrorContainerDark(
-                                      errorContainer);
+                                  tc.setCustomErrorContainerDark(errorContainer);
                                 }
                               }
                             },
                             enabled: isCustomTheme,
                             child: ColorNameValue(
-                              key: ValueKey<String>('cnv errorContainer '
-                                  '${colorScheme.errorContainer}'),
+                              key: ValueKey<String>(
+                                'cnv errorContainer '
+                                '${colorScheme.errorContainer}',
+                              ),
                               color: colorScheme.errorContainer,
                               textColor: colorScheme.onErrorContainer,
                               label: 'error\u200BContainer',
@@ -1379,14 +1334,12 @@ class SchemeColors extends StatelessWidget {
                               inputColor: inputErrorContainerColor,
                               inputTextColor: inputOnErrorContainerColor,
                               tone: tones.errorContainerTone,
-                              showTone: _locked(isLight, !tc.keepErrorContainer,
-                                  !tc.keepDarkErrorContainer),
-                              isLocked: _locked(isLight, tc.keepErrorContainer,
-                                  tc.keepDarkErrorContainer),
+                              showTone: _locked(isLight, !tc.keepErrorContainer, !tc.keepDarkErrorContainer),
+                              isLocked: _locked(isLight, tc.keepErrorContainer, tc.keepDarkErrorContainer),
                               onLocked: tc.useKeyColors && tc.useFlexColorScheme
                                   ? isLight
-                                      ? tc.setKeepErrorContainer
-                                      : tc.setKeepDarkErrorContainer
+                                        ? tc.setKeepErrorContainer
+                                        : tc.setKeepDarkErrorContainer
                                   : null,
                             ),
                           ),
@@ -1407,8 +1360,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onErrorContainer,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv onErrorContainer '
-                                '${colorScheme.onErrorContainer}'),
+                            key: ValueKey<String>(
+                              'cnv onErrorContainer '
+                              '${colorScheme.onErrorContainer}',
+                            ),
                             color: colorScheme.onErrorContainer,
                             textColor: colorScheme.errorContainer,
                             label: 'onError\u200BContainer',
@@ -1450,8 +1405,7 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.surface,
                           child: ColorNameValue(
-                            key: ValueKey<String>(
-                                'cnv surface ${colorScheme.surface}'),
+                            key: ValueKey<String>('cnv surface ${colorScheme.surface}'),
                             color: colorScheme.surface,
                             textColor: colorScheme.onSurface,
                             label: 'surface',
@@ -1475,8 +1429,7 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onSurface,
                           child: ColorNameValue(
-                            key: ValueKey<String>(
-                                'cnv onSurface ${colorScheme.onSurface}'),
+                            key: ValueKey<String>('cnv onSurface ${colorScheme.onSurface}'),
                             color: colorScheme.onSurface,
                             textColor: colorScheme.surface,
                             label: 'onSurface',
@@ -1518,8 +1471,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.surfaceDim,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv surfaceDim '
-                                '${colorScheme.surfaceDim}'),
+                            key: ValueKey<String>(
+                              'cnv surfaceDim '
+                              '${colorScheme.surfaceDim}',
+                            ),
                             color: colorScheme.surfaceDim,
                             textColor: colorScheme.onSurface,
                             label: 'surface\u200BDim',
@@ -1543,8 +1498,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.surfaceBright,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv surfaceBright '
-                                '${colorScheme.surfaceBright}'),
+                            key: ValueKey<String>(
+                              'cnv surfaceBright '
+                              '${colorScheme.surfaceBright}',
+                            ),
                             color: colorScheme.surfaceBright,
                             textColor: colorScheme.onSurface,
                             label: 'surface\u200BBright',
@@ -1586,8 +1543,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.surfaceContainerLowest,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv surfaceContainerLowest '
-                                '${colorScheme.surfaceContainerLowest}'),
+                            key: ValueKey<String>(
+                              'cnv surfaceContainerLowest '
+                              '${colorScheme.surfaceContainerLowest}',
+                            ),
                             color: colorScheme.surfaceContainerLowest,
                             textColor: colorScheme.onSurface,
                             label: 'surface\u200BContainer\u200BLowest',
@@ -1611,8 +1570,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.surfaceContainerLow,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv surfaceContainerLow '
-                                '${colorScheme.surfaceContainerLow}'),
+                            key: ValueKey<String>(
+                              'cnv surfaceContainerLow '
+                              '${colorScheme.surfaceContainerLow}',
+                            ),
                             color: colorScheme.surfaceContainerLow,
                             textColor: colorScheme.onSurface,
                             label: 'surface\u200BContainer\u200BLow',
@@ -1654,8 +1615,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.surfaceContainer,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv surfaceContainer '
-                                '${colorScheme.surfaceContainer}'),
+                            key: ValueKey<String>(
+                              'cnv surfaceContainer '
+                              '${colorScheme.surfaceContainer}',
+                            ),
                             color: colorScheme.surfaceContainer,
                             textColor: colorScheme.onSurface,
                             label: 'surface\u200BContainer',
@@ -1679,8 +1642,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onSurfaceVariant,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv onSurfaceVariant '
-                                '${colorScheme.onSurfaceVariant}'),
+                            key: ValueKey<String>(
+                              'cnv onSurfaceVariant '
+                              '${colorScheme.onSurfaceVariant}',
+                            ),
                             color: colorScheme.onSurfaceVariant,
                             textColor: colorScheme.surfaceContainerHighest,
                             label: 'onSurface\u200BVariant',
@@ -1722,8 +1687,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.surfaceContainerHigh,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv surfaceContainerLowest '
-                                '${colorScheme.surfaceContainerHigh}'),
+                            key: ValueKey<String>(
+                              'cnv surfaceContainerLowest '
+                              '${colorScheme.surfaceContainerHigh}',
+                            ),
                             color: colorScheme.surfaceContainerHigh,
                             textColor: colorScheme.onSurface,
                             label: 'surface\u200BContainer\u200BHigh',
@@ -1747,8 +1714,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.surfaceContainerHighest,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv surfaceContainerHighest '
-                                '${colorScheme.surfaceContainerHighest}'),
+                            key: ValueKey<String>(
+                              'cnv surfaceContainerHighest '
+                              '${colorScheme.surfaceContainerHighest}',
+                            ),
                             color: colorScheme.surfaceContainerHighest,
                             textColor: colorScheme.onSurface,
                             label: 'surface\u200BContainer\u200BHighest',
@@ -1790,8 +1759,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.inverseSurface,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv inverseSurface '
-                                '${colorScheme.inverseSurface}'),
+                            key: ValueKey<String>(
+                              'cnv inverseSurface '
+                              '${colorScheme.inverseSurface}',
+                            ),
                             color: colorScheme.inverseSurface,
                             textColor: colorScheme.onInverseSurface,
                             label: 'inverse\u200BSurface',
@@ -1815,8 +1786,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.onInverseSurface,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv onInverseSurface '
-                                '${colorScheme.onInverseSurface}'),
+                            key: ValueKey<String>(
+                              'cnv onInverseSurface '
+                              '${colorScheme.onInverseSurface}',
+                            ),
                             color: colorScheme.onInverseSurface,
                             textColor: colorScheme.inverseSurface,
                             label: 'onInverse\u200BSurface',
@@ -1857,8 +1830,7 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.outline,
                           child: ColorNameValue(
-                            key: ValueKey<String>(
-                                'cnv outline ${colorScheme.outline}'),
+                            key: ValueKey<String>('cnv outline ${colorScheme.outline}'),
                             color: colorScheme.outline,
                             textColor: _onColor(colorScheme.outline),
                             label: 'outline',
@@ -1881,8 +1853,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.outlineVariant,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv outlineVariant '
-                                '${colorScheme.outlineVariant}'),
+                            key: ValueKey<String>(
+                              'cnv outlineVariant '
+                              '${colorScheme.outlineVariant}',
+                            ),
                             color: colorScheme.outlineVariant,
                             textColor: _onColor(colorScheme.outlineVariant),
                             label: 'outline\u200BVariant',
@@ -1922,8 +1896,7 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.shadow,
                           child: ColorNameValue(
-                            key: ValueKey<String>(
-                                'cnv shadow ${colorScheme.shadow}'),
+                            key: ValueKey<String>('cnv shadow ${colorScheme.shadow}'),
                             color: colorScheme.shadow,
                             textColor: _onColor(colorScheme.shadow),
                             label: 'shadow',
@@ -1947,8 +1920,7 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.scrim,
                           child: ColorNameValue(
-                            key: ValueKey<String>(
-                                'cnv scrim ${colorScheme.scrim}'),
+                            key: ValueKey<String>('cnv scrim ${colorScheme.scrim}'),
                             color: colorScheme.scrim,
                             textColor: _onColor(colorScheme.scrim),
                             label: 'scrim',
@@ -1989,8 +1961,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.inversePrimary,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv inversePrimary '
-                                '${colorScheme.inversePrimary}'),
+                            key: ValueKey<String>(
+                              'cnv inversePrimary '
+                              '${colorScheme.inversePrimary}',
+                            ),
                             color: colorScheme.inversePrimary,
                             textColor: colorScheme.inverseSurface,
                             label: 'inverse\u200BPrimary',
@@ -2013,8 +1987,10 @@ class SchemeColors extends StatelessWidget {
                         child: Material(
                           color: colorScheme.surfaceTint,
                           child: ColorNameValue(
-                            key: ValueKey<String>('cnv surfaceTint '
-                                '${colorScheme.surfaceTint}'),
+                            key: ValueKey<String>(
+                              'cnv surfaceTint '
+                              '${colorScheme.surfaceTint}',
+                            ),
                             color: colorScheme.surfaceTint,
                             textColor: _onColor(colorScheme.surfaceTint),
                             label: 'surfaceTint',

@@ -1,10 +1,11 @@
-import 'package:flex_seed_scheme/flex_seed_scheme.dart'; // For comment refs.
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_color_scheme.dart';
+/// @docImport 'package:flex_color_scheme/src/flex_theme_data_extensions.dart';
+/// @docImport 'package:flex_seed_scheme/flex_seed_scheme.dart';
+library;
 
-import 'flex_color_scheme.dart' show FlexColorScheme; // For comment refs.
-import 'flex_scheme.dart' show FlexScheme;
-import 'flex_theme_data_extensions.dart' show FlexThemeData; // For comment refs
+import 'package:flex_color_scheme/src/flex_scheme.dart' show FlexScheme;
+import 'package:flutter/foundation.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Immutable data class that configures if and how [FlexColorScheme] uses
 /// key colors to populate the Material-3 [ColorScheme] it creates and uses
@@ -20,24 +21,24 @@ import 'flex_theme_data_extensions.dart' show FlexThemeData; // For comment refs
 /// [FlexKeyColors.useKeyColors] set to true.
 ///
 /// By default `keyColors` is null and key colors are not used. To activate
-/// the feature pass you can in a default [FlexKeyColors] instance,
+/// the feature you can pass in a default [FlexKeyColors] instance,
 /// its [useKeyColors] defaults to true.
 ///
 /// The default constructor creates a setup that creates
 /// a seeded generated [ColorScheme] for the active [FlexColorScheme] using its
-/// current primary color as key in a [ColorScheme.fromSeed] equivalent.
+/// current primary color as key in a [SeedColorScheme.fromSeeds] equivalent.
 /// If the default [ColorScheme.fromSeed] result is suitable, no further
 /// configuration is required. You can however further customize its behavior
-/// by adjusting the properties/ in [FlexKeyColors].
+/// by adjusting the properties in [FlexKeyColors].
 ///
 /// Flutter standard [ColorScheme] only offers color scheme creation from one
 /// single input color using [ColorScheme.fromSeed]. With [FlexColorScheme]
 /// you can use its effective color value for primary, secondary, tertiary and
 /// error colors to generate the seeded [TonalPalette] for primary, secondary,
-/// tertiary and error colors in the [ColorScheme], by using wn key seed input
+/// tertiary and error colors in the [ColorScheme], by using own key seed input
 /// colors for them.
 /// To do so also set properties [useSecondary] and [useTertiary] to true.
-/// You will then get tonal palette's for secondary and tertiary colors that
+/// You will then get tonal palettes for secondary and tertiary colors that
 /// depend on these key colors and not on only the primary color.
 ///
 /// If you use factory [FlexColorScheme.light] and parameter `scheme`, to
@@ -49,7 +50,7 @@ import 'flex_theme_data_extensions.dart' show FlexThemeData; // For comment refs
 /// colors from the light theme color definitions will be used as key color
 /// inputs to generate the tonal palettes for dark mode ColorScheme. This is
 /// because the light and dark theme mode colors should use
-/// the same [TonalPalette], and only use different in M3 guide standardized
+/// the same [TonalPalette], and only use different Material 3 standardized
 /// tones from the same [TonalPalette]. Hence, the same base color is used to
 /// generate the tonal palette for both light and dark theme to adhere to this
 /// design principle.
@@ -88,7 +89,7 @@ import 'flex_theme_data_extensions.dart' show FlexThemeData; // For comment refs
 @immutable
 class FlexKeyColors with Diagnosticable {
   /// Used to configure how key colors are used when generating a key color
-  /// seeded [ColorScheme] for FlexColorScheme,
+  /// seeded [ColorScheme] for FlexColorScheme.
   ///
   /// Use [useKeyColors] to enable it (enabled by default), and [useSecondary],
   /// [useTertiary] and [useError] to define if secondary and tertiary colors in
@@ -98,7 +99,7 @@ class FlexKeyColors with Diagnosticable {
   /// The defaults in the unnamed constructor creates a setup that is
   /// equivalent to using [ColorScheme.fromSeed] with primary color as key.
   ///
-  /// Primary color is always used as a key for the seed generate tonal palettes
+  /// Primary color is always used as a key for the seed generated tonal palettes
   /// when seed generated [ColorScheme] is used in FlexColorScheme.
   ///
   /// You can also use the secondary, tertiary and error colors as key to
@@ -107,7 +108,7 @@ class FlexKeyColors with Diagnosticable {
   ///
   /// The property [useKeyColors] will if set to false disable using seed
   /// generated [ColorScheme], even if you pass a [FlexKeyColors] instance to
-  /// the `keyColors? parameter in [FlexColorScheme.light] or
+  /// the `keyColors` parameter in [FlexColorScheme.light] or
   /// [FlexColorScheme.dark] factories. The property is true by default, it
   /// exists mainly for debugging and to enable easier construction of
   /// configurable toggles to enable and disable using seed generated
@@ -449,14 +450,16 @@ class FlexKeyColors with Diagnosticable {
   /// This comes at the cost of their contrast level and accessibility.
   ///
   /// The value has no impact on dark mode [ColorScheme] colors. Expressive
-  /// onColors for container colors have always been used in dark mode in
-  /// Material-3 design and they have good contrast and accessibility.
+  /// on-colors for container colors have always been used in dark mode in
+  /// Material-3 design (tone **90**) and they have good contrast and
+  /// accessibility. The flag is still forwarded in [FlexColorScheme.dark]
+  /// for API consistency.
   ///
   /// Setting the [useExpressiveOnContainerColors] to `true` will make the
   /// onContainer colors of all scheme variants and [FlexTones] based schemes
   /// use the new expressive tone, if the currently used tone is 10. If a scheme
   /// already uses an intentionally customized tone, the new expressive tone
-  /// will not be used for those tones, even when this settings is true.
+  /// will not be used for those tones, even when this setting is true.
   ///
   /// Schemes that contain such on container tones are:
   /// - Fidelity
@@ -466,7 +469,8 @@ class FlexKeyColors with Diagnosticable {
   /// - Candy pop
   /// - Chroma
   ///
-  /// Defaults to `false` if undefined.
+  /// Defaults to `true` if undefined, matching Flutter 3.47+
+  /// [ColorScheme.fromSeed] and Material Color Utilities (MCU) 0.13.
   ///
   /// The Material design spec for the tones used by the colors
   /// [ColorScheme.onPrimaryContainer], [ColorScheme.onSecondaryContainer],
@@ -477,23 +481,15 @@ class FlexKeyColors with Diagnosticable {
   /// ContrastCurve(3.0, 4.5, 7.0, 11.0), making min contrast for normal
   /// contrast 4.5 instead of past 7.0.
   ///
-  /// The expressive light container tone is not yet used in the Flutter SDK
-  /// (Mar 22, 2025), but it is in the Material-3 design spec and also in
-  /// MCU v0.12.0. This is a breaking change in MCU 0.12.0 compared to 0.11.1
-  /// used in Flutter 3.24 and it will change the light mode color schemes
-  /// produced by all DynamicColor based Material color schemes.
-  ///
-  /// When this change lands in stable Flutter, it will be made
-  /// `true` by default in FCS too when undefined. You you will still be able
-  /// to opt out of using it, by setting it `false`. Flutter SDK and MCU will
-  /// not contain such an opt-out feature. This
+  /// Flutter 3.38 still used MCU 0.11.1 tone **10**. Flutter 3.47 uses MCU
+  /// 0.13.0 tone **30**. FlexColorScheme 9.0 defaults this flag to `true`
+  /// when undefined so seeded light themes match [ColorScheme.fromSeed].
+  /// Flutter SDK and MCU do not offer an opt-out. Set this to `false` to
+  /// keep the older higher-contrast light on-container tones.
   ///
   /// The new **on** color tones for containers in light mode make them more
   /// color expressive, but they also reduce their contrast level and
-  /// accessibility. We recommend keeping them at the higher contrast level,
-  /// by setting [useExpressiveOnContainerColors] to `false`. With it set to
-  /// `false`, you will also keep this preference when Flutter SDK
-  /// defaults to using the expressive tones.
+  /// accessibility. Prefer `false` if you need the previous contrast.
   final bool? useExpressiveOnContainerColors;
 
   /// Set this to `true` to use the legacy behavior for monochrome seed colors.
@@ -510,7 +506,7 @@ class FlexKeyColors with Diagnosticable {
   /// where Red, Green and Blue values are all equal.
   ///
   /// If you require the old style seed result for monochrome seed colors,
-  /// set [useLegacyMonochromeSeedBehavior] to `true.
+  /// set [useLegacyMonochromeSeedBehavior] to `true`.
   ///
   /// Defaults to `false`.
   ///
@@ -538,30 +534,30 @@ class FlexKeyColors with Diagnosticable {
 
   /// Copy the object with one or more provided properties changed.
   FlexKeyColors copyWith({
-    final bool? useKeyColors,
+    bool? useKeyColors,
     //
-    final Color? keyPrimary,
-    final bool? keepPrimary,
-    final bool? keepPrimaryContainer,
+    Color? keyPrimary,
+    bool? keepPrimary,
+    bool? keepPrimaryContainer,
     //
-    final Color? keySecondary,
-    final bool? useSecondary,
-    final bool? keepSecondary,
-    final bool? keepSecondaryContainer,
+    Color? keySecondary,
+    bool? useSecondary,
+    bool? keepSecondary,
+    bool? keepSecondaryContainer,
     //
-    final Color? keyTertiary,
-    final bool? useTertiary,
-    final bool? keepTertiary,
-    final bool? keepTertiaryContainer,
+    Color? keyTertiary,
+    bool? useTertiary,
+    bool? keepTertiary,
+    bool? keepTertiaryContainer,
     //
-    final Color? keyError,
-    final bool? useError,
-    final bool? keepError,
-    final bool? keepErrorContainer,
+    Color? keyError,
+    bool? useError,
+    bool? keepError,
+    bool? keepErrorContainer,
     //
-    final double? contrastLevel,
-    final bool? useExpressiveOnContainerColors,
-    final bool? useLegacyMonochromeSeedBehavior,
+    double? contrastLevel,
+    bool? useExpressiveOnContainerColors,
+    bool? useLegacyMonochromeSeedBehavior,
   }) {
     return FlexKeyColors(
       useKeyColors: useKeyColors ?? this.useKeyColors,
@@ -573,14 +569,12 @@ class FlexKeyColors with Diagnosticable {
       keySecondary: keySecondary ?? this.keySecondary,
       useSecondary: useSecondary ?? this.useSecondary,
       keepSecondary: keepSecondary ?? this.keepSecondary,
-      keepSecondaryContainer:
-          keepSecondaryContainer ?? this.keepSecondaryContainer,
+      keepSecondaryContainer: keepSecondaryContainer ?? this.keepSecondaryContainer,
       //
       keyTertiary: keyTertiary ?? this.keyTertiary,
       useTertiary: useTertiary ?? this.useTertiary,
       keepTertiary: keepTertiary ?? this.keepTertiary,
-      keepTertiaryContainer:
-          keepTertiaryContainer ?? this.keepTertiaryContainer,
+      keepTertiaryContainer: keepTertiaryContainer ?? this.keepTertiaryContainer,
       //
       keyError: keyError ?? this.keyError,
       useError: useError ?? this.useError,
@@ -588,10 +582,8 @@ class FlexKeyColors with Diagnosticable {
       keepErrorContainer: keepErrorContainer ?? this.keepErrorContainer,
       //
       contrastLevel: contrastLevel ?? this.contrastLevel,
-      useExpressiveOnContainerColors:
-          useExpressiveOnContainerColors ?? this.useExpressiveOnContainerColors,
-      useLegacyMonochromeSeedBehavior: useLegacyMonochromeSeedBehavior ??
-          this.useLegacyMonochromeSeedBehavior,
+      useExpressiveOnContainerColors: useExpressiveOnContainerColors ?? this.useExpressiveOnContainerColors,
+      useLegacyMonochromeSeedBehavior: useLegacyMonochromeSeedBehavior ?? this.useLegacyMonochromeSeedBehavior,
       //
     );
   }
@@ -624,40 +616,38 @@ class FlexKeyColors with Diagnosticable {
         other.keepErrorContainer == keepErrorContainer &&
         //
         other.contrastLevel == contrastLevel &&
-        other.useExpressiveOnContainerColors ==
-            useExpressiveOnContainerColors &&
-        other.useLegacyMonochromeSeedBehavior ==
-            useLegacyMonochromeSeedBehavior;
+        other.useExpressiveOnContainerColors == useExpressiveOnContainerColors &&
+        other.useLegacyMonochromeSeedBehavior == useLegacyMonochromeSeedBehavior;
   }
 
   /// Override for hashcode, dart.ui Jenkins based.
   @override
   int get hashCode => Object.hash(
-        useKeyColors,
-        //
-        keyPrimary,
-        keepPrimary,
-        keepPrimaryContainer,
-        //
-        keySecondary,
-        useSecondary,
-        keepSecondary,
-        keepSecondaryContainer,
-        //
-        keyTertiary,
-        useTertiary,
-        keepTertiary,
-        keepTertiaryContainer,
-        //
-        keyError,
-        useError,
-        keepError,
-        keepErrorContainer,
-        //
-        contrastLevel,
-        useExpressiveOnContainerColors,
-        useLegacyMonochromeSeedBehavior,
-      );
+    useKeyColors,
+    //
+    keyPrimary,
+    keepPrimary,
+    keepPrimaryContainer,
+    //
+    keySecondary,
+    useSecondary,
+    keepSecondary,
+    keepSecondaryContainer,
+    //
+    keyTertiary,
+    useTertiary,
+    keepTertiary,
+    keepTertiaryContainer,
+    //
+    keyError,
+    useError,
+    keepError,
+    keepErrorContainer,
+    //
+    contrastLevel,
+    useExpressiveOnContainerColors,
+    useLegacyMonochromeSeedBehavior,
+  );
 
   /// Flutter debug properties override, includes toString.
   @override
@@ -667,31 +657,25 @@ class FlexKeyColors with Diagnosticable {
     //
     properties.add(ColorProperty('keyPrimary', keyPrimary));
     properties.add(DiagnosticsProperty<bool>('keepPrimary', keepPrimary));
-    properties.add(DiagnosticsProperty<bool>(
-        'keepPrimaryContainer', keepPrimaryContainer));
+    properties.add(DiagnosticsProperty<bool>('keepPrimaryContainer', keepPrimaryContainer));
     //
     properties.add(ColorProperty('keySecondary', keySecondary));
     properties.add(DiagnosticsProperty<bool>('useSecondary', useSecondary));
     properties.add(DiagnosticsProperty<bool>('keepSecondary', keepSecondary));
-    properties.add(DiagnosticsProperty<bool>(
-        'keepSecondaryContainer', keepSecondaryContainer));
+    properties.add(DiagnosticsProperty<bool>('keepSecondaryContainer', keepSecondaryContainer));
     //
     properties.add(ColorProperty('keyTertiary', keyPrimary));
     properties.add(DiagnosticsProperty<bool>('keyTertiary', useTertiary));
     properties.add(DiagnosticsProperty<bool>('keepTertiary', keepTertiary));
-    properties.add(DiagnosticsProperty<bool>(
-        'keepTertiaryContainer', keepTertiaryContainer));
+    properties.add(DiagnosticsProperty<bool>('keepTertiaryContainer', keepTertiaryContainer));
     //
     properties.add(ColorProperty('keyError', keyPrimary));
     properties.add(DiagnosticsProperty<bool>('keyError', useError));
     properties.add(DiagnosticsProperty<bool>('keepError', keepError));
-    properties.add(
-        DiagnosticsProperty<bool>('keepErrorContainer', keepErrorContainer));
+    properties.add(DiagnosticsProperty<bool>('keepErrorContainer', keepErrorContainer));
     //
     properties.add(DiagnosticsProperty<double>('contrastLevel', contrastLevel));
-    properties.add(DiagnosticsProperty<bool>(
-        'useExpressiveOnContainerColors', useExpressiveOnContainerColors));
-    properties.add(DiagnosticsProperty<bool>(
-        'useLegacyMonochromeSeedBehavior', useLegacyMonochromeSeedBehavior));
+    properties.add(DiagnosticsProperty<bool>('useExpressiveOnContainerColors', useExpressiveOnContainerColors));
+    properties.add(DiagnosticsProperty<bool>('useLegacyMonochromeSeedBehavior', useLegacyMonochromeSeedBehavior));
   }
 }

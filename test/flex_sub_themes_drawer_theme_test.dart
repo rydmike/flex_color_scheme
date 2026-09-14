@@ -1,15 +1,14 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flex_color_scheme/src/flex_constants.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.drawerTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes drawerTheme tests
     // -------------------------------------------------------------------------
-    test(
-        'Drawer FST10.1: GIVEN a FlexSubTheme.drawerTheme() '
+    test('Drawer FST10.1: GIVEN a FlexSubTheme.drawerTheme() '
         'EXPECT equal to DrawerThemeData with same values', () {
       final ColorScheme colorScheme = ColorScheme.fromSeed(
         seedColor: const Color(0xFF6750A4),

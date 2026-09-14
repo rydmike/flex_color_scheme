@@ -1,14 +1,13 @@
 import 'package:flex_color_scheme/flex_color_scheme.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:material_ui/material_ui.dart';
 
 void main() {
   group('WITH: FlexSubThemes.dialogTheme ', () {
     // -------------------------------------------------------------------------
     // FlexSubThemes Dialog tests
     // -------------------------------------------------------------------------
-    test(
-        'Dialog FST9.1: GIVEN a default FlexSubTheme.dialogTheme() '
+    test('Dialog FST9.1: GIVEN a default FlexSubTheme.dialogTheme() '
         'EXPECT equal to DialogTheme() version with same values', () {
       expect(
         FlexSubThemes.dialogTheme(),
@@ -27,8 +26,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Dialog FST9.2 background-based-a: GIVEN a FlexSubTheme.dialogTheme '
+    test('Dialog FST9.2 background-based-a: GIVEN a FlexSubTheme.dialogTheme '
         'with no '
         'colorScheme, but with backgroundSchemeColor and backgroundColor '
         'EXPECT equal to DialogTheme with backgroundColor', () {
@@ -54,8 +52,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Dialog FST9.3 background-based-b: GIVEN a FlexSubTheme.dialogTheme '
+    test('Dialog FST9.3 background-based-b: GIVEN a FlexSubTheme.dialogTheme '
         'with no backgroundSchemeColor and backgroundColor '
         'EXPECT equal to DialogTheme with backgroundColor', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -81,8 +78,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Dialog FST9.4 scheme-based: GIVEN a FlexSubTheme.dialogTheme '
+    test('Dialog FST9.4 scheme-based: GIVEN a FlexSubTheme.dialogTheme '
         'with backgroundSchemeColor and no backgroundColor '
         'EXPECT equal to DialogTheme with backgroundSchemeColor', () {
       const ColorScheme colorScheme = ColorScheme.light();
@@ -108,8 +104,7 @@ void main() {
         ),
       );
     });
-    test(
-        'Dialog FST9.5 custom: GIVEN a custom FlexSubTheme.dialogTheme() '
+    test('Dialog FST9.5 custom: GIVEN a custom FlexSubTheme.dialogTheme() '
         'EXPECT equal to DialogTheme() version with same values', () {
       expect(
         FlexSubThemes.dialogTheme(

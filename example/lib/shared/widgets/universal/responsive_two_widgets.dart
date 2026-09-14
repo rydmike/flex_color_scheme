@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// The minimum width for a double column Layout to be used by the
 /// [RowOrColumn] widget.
@@ -18,16 +18,18 @@ class ResponsiveTwoWidgets extends StatelessWidget {
   final Widget Function(
     BuildContext context,
     bool isRow,
-  ) builder;
+  )
+  builder;
 
   final double minWidth;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints boxConstraints) {
-      return builder(context, boxConstraints.maxWidth >= minWidth);
-    });
+      builder: (BuildContext context, BoxConstraints boxConstraints) {
+        return builder(context, boxConstraints.maxWidth >= minWidth);
+      },
+    );
   }
 }
 

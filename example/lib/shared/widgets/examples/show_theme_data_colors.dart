@@ -1,7 +1,6 @@
-import 'package:flutter/material.dart';
-
-import '../../const/app.dart';
-import 'color_card.dart';
+import 'package:flex_color_scheme_example/shared/const/app.dart';
+import 'package:flex_color_scheme_example/shared/widgets/examples/color_card.dart';
+import 'package:material_ui/material_ui.dart';
 
 /// Draw a number of boxes showing the colors of key theme color properties
 /// in the ColorScheme of the inherited ThemeData and some of its key color
@@ -39,18 +38,14 @@ class ShowThemeDataColors extends StatelessWidget {
   final bool showTitle;
 
   // Return true if the color is light, meaning it needs dark text for contrast.
-  static bool _isLight(final Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.light;
+  static bool _isLight(Color color) => ThemeData.estimateBrightnessForColor(color) == Brightness.light;
 
   // Return true if the color is dark, meaning it needs light text for contrast.
-  static bool _isDark(final Color color) =>
-      ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
+  static bool _isDark(Color color) => ThemeData.estimateBrightnessForColor(color) == Brightness.dark;
 
   // On color used when a theme color property does not have a theme onColor.
-  static Color _onColor(final Color color, final Color background) =>
-      _isLight(Color.alphaBlend(color, background))
-          ? Colors.black
-          : Colors.white;
+  static Color _onColor(Color color, Color background) =>
+      _isLight(Color.alphaBlend(color, background)) ? Colors.black : Colors.white;
 
   @override
   Widget build(BuildContext context) {
@@ -60,8 +55,7 @@ class ShowThemeDataColors extends StatelessWidget {
     final bool useMaterial3 = theme.useMaterial3;
 
     final Size mediaSize = MediaQuery.sizeOf(context);
-    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint ||
-        mediaSize.height < App.phoneHeightBreakpoint;
+    final bool isPhone = mediaSize.width < App.phoneWidthBreakpoint || mediaSize.height < App.phoneHeightBreakpoint;
     final double spacing = isPhone ? 3 : 6;
 
     // Grab the card border from the theme card shape
@@ -87,34 +81,33 @@ class ShowThemeDataColors extends StatelessWidget {
     }
 
     // Get effective background color.
-    final Color background =
-        onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
+    final Color background = onBackgroundColor ?? theme.cardTheme.color ?? theme.cardColor;
 
     // Warning label for scaffold background when it uses to much blend.
     final String scaffoldTooHigh = isDark
         ? _isLight(theme.scaffoldBackgroundColor)
-            ? '\nTOO HIGH'
-            : ''
+              ? '\nTOO HIGH'
+              : ''
         : _isDark(theme.scaffoldBackgroundColor)
-            ? '\nTOO HIGH'
-            : '';
+        ? '\nTOO HIGH'
+        : '';
     // Warning label for scaffold background when it uses to much blend.
     final String surfaceTooHigh = isDark
         ? _isLight(theme.colorScheme.surface)
-            ? '\nTOO HIGH'
-            : ''
+              ? '\nTOO HIGH'
+              : ''
         : _isDark(theme.colorScheme.surface)
-            ? '\nTOO HIGH'
-            : '';
+        ? '\nTOO HIGH'
+        : '';
 
     // Warning label for scaffold background when it uses to much blend.
     final String backTooHigh = isDark
         ? _isLight(theme.colorScheme.surface)
-            ? '\nTOO HIGH'
-            : ''
+              ? '\nTOO HIGH'
+              : ''
         : _isDark(theme.colorScheme.surface)
-            ? '\nTOO HIGH'
-            : '';
+        ? '\nTOO HIGH'
+        : '';
 
     // Wrap this widget branch in a custom theme where card has a border outline
     // if it did not have one, but retains in ambient themed border radius.
