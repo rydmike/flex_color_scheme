@@ -24,7 +24,7 @@ on:
       - "**.md"
   release:
     branches: [none]
-    types: [published]
+    types: [none]
 
 jobs:
   flutter_tests:
